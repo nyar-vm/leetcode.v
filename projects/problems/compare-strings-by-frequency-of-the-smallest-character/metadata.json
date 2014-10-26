@@ -1,0 +1,855 @@
+{
+    "id": "compare-strings-by-frequency-of-the-smallest-character",
+    "questionId": 1170,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String", "Binary Search", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "queries": ["ccc"],
+                "words": ["a", "bb", "ccc", "dddd"]
+            },
+            "expected": [1]
+        },
+        {
+            "args": {
+                "queries": ["a", "b", "c"],
+                "words": ["d", "e", "f", "g"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abc", "def"],
+                "words": ["ghi", "jkl"]
+            },
+            "expected": [0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz"],
+                "words": ["aaa", "bbb", "ccc"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "queries": ["abc", "bcd"],
+                "words": ["def", "ghi"]
+            },
+            "expected": [0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aaa", "bbb", "ccc"],
+                "words": ["ddd", "eee", "fff"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["a", "aa", "aaa"],
+                "words": ["b", "bb", "bbb", "bbbb"]
+            },
+            "expected": [3, 2, 1]
+        },
+        {
+            "args": {
+                "queries": ["cbd"],
+                "words": ["zaaaz"]
+            },
+            "expected": [1]
+        },
+        {
+            "args": {
+                "queries": ["bbb", "cc"],
+                "words": ["a", "aa", "aaa", "aaaa"]
+            },
+            "expected": [1, 2]
+        },
+        {
+            "args": {
+                "queries": ["a"],
+                "words": ["b", "c", "d"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "queries": ["abc", "bcd"],
+                "words": ["cde", "def", "efg"]
+            },
+            "expected": [0, 0]
+        },
+        {
+            "args": {
+                "queries": ["xyz"],
+                "words": ["aaa", "bbb", "ccc", "ddd", "eee"]
+            },
+            "expected": [5]
+        },
+        {
+            "args": {
+                "queries": ["a", "aa"],
+                "words": ["b", "bb", "bbb"]
+            },
+            "expected": [2, 1]
+        },
+        {
+            "args": {
+                "queries": ["xyz"],
+                "words": ["abc", "def", "ghi"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "queries": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "words": ["k", "l", "m", "n", "o", "p", "q", "r", "s", "t"]
+            },
+            "expected": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zz", "zaz", "zzz"],
+                "words": ["aaa", "aa", "a", "aaaaa", "aaaa", "aaaab"]
+            },
+            "expected": [4, 5, 3]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "ddeeff", "gghhii"],
+                "words": ["jjkkll", "mmnnoo", "ppqqrr", "ssttuu"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aaa", "aab", "aac"],
+                "words": ["bbb", "bbc", "bba", "abb", "aba", "aab"]
+            },
+            "expected": [0, 1, 1]
+        },
+        {
+            "args": {
+                "queries": ["ab", "bc", "cd"],
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "dcba", "abcd", "dcba"],
+                "words": ["abcd", "dcba", "abcd", "dcba", "abcd", "dcba"]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abdc", "acdb"],
+                "words": ["bcde", "cdef", "defg", "efgh"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aaaa", "bbb", "cc"],
+                "words": ["zzzz", "zzz", "zz", "z"]
+            },
+            "expected": [0, 1, 2]
+        },
+        {
+            "args": {
+                "queries": ["a", "b", "c", "d", "e", "f"],
+                "words": ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p"]
+            },
+            "expected": [0, 0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdabcd", "bcdbcd", "cdcdcd"],
+                "words": ["ddd", "dddd", "ddddd"]
+            },
+            "expected": [3, 3, 2]
+        },
+        {
+            "args": {
+                "queries": ["a", "a", "a", "a"],
+                "words": ["b", "b", "b", "b"]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcde", "bcdef", "cdefg"],
+                "words": ["defgh", "efghi", "fghij", "ghijk", "hijkl", "ijklm"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzzzzzz", "zzzzzz", "zzzzz", "zzzz", "zzz"],
+                "words": ["zzzz", "zzz", "zz", "z", "a"]
+            },
+            "expected": [0, 0, 0, 0, 1]
+        },
+        {
+            "args": {
+                "queries": ["hello", "world"],
+                "words": ["python", "java", "csharp", "ruby", "swift"]
+            },
+            "expected": [1, 1]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "ab", "abc"],
+                "words": ["abcd", "abc", "ab", "a"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["x", "xx", "xxx", "xxxx", "xxxxx"],
+                "words": ["y", "yy", "yyy", "yyyy", "yyyyy", "yyyyyy"]
+            },
+            "expected": [5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "queries": ["xyxzyz", "yzyzyx", "zxzyxz"],
+                "words": ["zxyzxy", "xyzxyz", "yzxyzx", "zyxzyz"]
+            },
+            "expected": [0, 3, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "bcdefghijk", "cdefghijkl"],
+                "words": [
+                    "defghijklm",
+                    "efghijklmn",
+                    "fghijklmno",
+                    "ghijklmnop",
+                    "hijklmnopq",
+                    "ijklmnopqr"
+                ]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["xyz", "xyzz", "xyzzz"],
+                "words": ["wxyz", "wwxyz", "wwwxyz", "wwwwxyz"]
+            },
+            "expected": [3, 3, 3]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"],
+                "words": ["qwertyuiopasdfghjklzxcvbnm", "mnbvcxzasdfghjklpoiuytrewq"]
+            },
+            "expected": [0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzzzzz", "yyyyyy", "xxxxxx"],
+                "words": ["wwwwww", "vvvvvv", "uuuuuu", "tttttt"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "bbccdd", "ccddee", "ddeeff", "eeffgg"],
+                "words": ["ffgghh", "gghhiijj", "hhiijjkk", "iijjkkll", "jjkkllmm"]
+            },
+            "expected": [0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "bcdefg", "cdefgh"],
+                "words": ["defghi", "efghij", "fghijk", "ghijkl", "hijklm", "ijklmn"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "zzzz"],
+                "words": ["aaaaa", "aaa", "aa", "a"]
+            },
+            "expected": [1, 1]
+        },
+        {
+            "args": {
+                "queries": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "words": ["z", "zz", "zzz", "zzzz", "zzzzz", "zzzzzz"]
+            },
+            "expected": [5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "queries": ["zzzzz", "zzzz", "zzz", "zz", "z"],
+                "words": ["zzzzzz", "zzzzz", "zzzz", "zzz", "zz", "z", "a"]
+            },
+            "expected": [1, 2, 3, 4, 5]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "zz", "z"],
+                "words": ["aaa", "aa", "a", "aaaa"]
+            },
+            "expected": [1, 2, 3]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "bbaacc", "ccaabb"],
+                "words": ["aabbb", "bbccc", "ccaaa", "abcabc", "aabbccaa"]
+            },
+            "expected": [2, 2, 2]
+        },
+        {
+            "args": {
+                "queries": ["aab", "abb", "abc"],
+                "words": ["aab", "abb", "abc", "acc", "bac", "bca", "cab", "cba", "cca"]
+            },
+            "expected": [0, 1, 1]
+        },
+        {
+            "args": {
+                "queries": ["aaaaab", "aaaabb", "aaabbb", "aabbbb", "abbbbb"],
+                "words": ["bbbbb", "bbbb", "bbb", "bb", "b"]
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "queries": ["apple", "banana", "cherry"],
+                "words": [
+                    "date",
+                    "elderberry",
+                    "fig",
+                    "grape",
+                    "kiwi",
+                    "lemon",
+                    "mango",
+                    "nectarine",
+                    "orange",
+                    "papaya"
+                ]
+            },
+            "expected": [2, 0, 2]
+        },
+        {
+            "args": {
+                "queries": ["apple", "banana", "cherry"],
+                "words": ["date", "fig", "grape", "kiwi"]
+            },
+            "expected": [1, 0, 1]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "bbaacc", "ccaabb"],
+                "words": ["aabbc", "bbccc", "ccaab", "aaabb", "bbcca", "ccaab"]
+            },
+            "expected": [1, 1, 1]
+        },
+        {
+            "args": {
+                "queries": ["apple", "banana", "cherry"],
+                "words": ["date", "elderberry", "fig", "grape"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzzzz", "zzzz", "zzz", "zz", "z"],
+                "words": ["aaaaa", "aaaa", "aaa", "aa", "a"]
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "queries": ["mnopqr", "nopqrs", "opqrst"],
+                "words": ["pqrsqt", "qrstuv", "rstuvw", "stuvwx", "tuvwxy", "uvwxyx"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "yyy", "xxx"],
+                "words": ["www", "vvv", "uuu", "ttt", "ss"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "bbccdd", "ccddeeff"],
+                "words": ["abc", "bcd", "cde", "def", "efg", "fgh", "ghi", "hij"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abc", "ab"],
+                "words": ["zzzz", "zzz", "zz", "z"]
+            },
+            "expected": [3, 3, 3]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "bbccdd", "ccddaa"],
+                "words": ["ddeeff", "eeffgg", "ffgghh"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aab", "aabbb", "aabbbb"],
+                "words": ["b", "bb", "bbb", "bbbb", "bbbbb", "bbbbbb", "bbbbbbb"]
+            },
+            "expected": [5, 5, 5]
+        },
+        {
+            "args": {
+                "queries": ["leetcode", "challenge", "python"],
+                "words": [
+                    "programming",
+                    "interview",
+                    "solution",
+                    "difficulty",
+                    "easy",
+                    "hard",
+                    "medium"
+                ]
+            },
+            "expected": [1, 1, 1]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abcde", "abcdef"],
+                "words": ["bcdefg", "cdefgh", "defghi", "efghij"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abdc", "adcb"],
+                "words": ["bcde", "dcbe", "debc", "edcb"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["mississippi", "delaware", "kentucky"],
+                "words": [
+                    "alabama",
+                    "missouri",
+                    "georgia",
+                    "texas",
+                    "california",
+                    "arizona",
+                    "wyoming"
+                ]
+            },
+            "expected": [0, 1, 4]
+        },
+        {
+            "args": {
+                "queries": ["abcdefg", "hijklmn", "opqrstu", "vwxyzab"],
+                "words": ["cdefghi", "defghij", "efghijk", "fghijkl", "ghijklm"]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr"],
+                "words": ["stuvwx", "yzabcd", "efghij", "klmnop", "qrstuv"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["apple", "banana", "cherry"],
+                "words": ["date", "fig", "grape", "kiwi", "lemon", "mango"]
+            },
+            "expected": [1, 0, 1]
+        },
+        {
+            "args": {
+                "queries": ["hello", "world"],
+                "words": ["python", "java", "c++", "ruby"]
+            },
+            "expected": [1, 1]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abdc", "aabc"],
+                "words": ["aaa", "aaab", "baaab", "baaabbb"]
+            },
+            "expected": [4, 4, 4]
+        },
+        {
+            "args": {
+                "queries": ["a"],
+                "words": [
+                    "aaaaaaaaaab",
+                    "aaaaaaaaaa",
+                    "aaaaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaa",
+                    "aaaaaa",
+                    "aaaaa",
+                    "aaaa",
+                    "aaa",
+                    "aa",
+                    "a"
+                ]
+            },
+            "expected": [10]
+        },
+        {
+            "args": {
+                "queries": ["a", "b", "c", "d", "e", "f"],
+                "words": ["g", "h", "i", "j", "k", "l", "m"]
+            },
+            "expected": [0, 0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "zzzz", "zzzzz"],
+                "words": ["zzzzzz", "zzzzzzz", "zzzzzzzz", "zzzzzzzzz"]
+            },
+            "expected": [4, 4, 4]
+        },
+        {
+            "args": {
+                "queries": ["zzzzzz", "zzzzz", "zzzz", "zzz", "zz", "z"],
+                "words": ["aaaaaa", "aaaaa", "aaaa", "aaa", "aa", "a"]
+            },
+            "expected": [0, 1, 2, 3, 4, 5]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "bcdefg", "cdefgh"],
+                "words": ["defghi", "efghij", "fghijk", "ghijkl", "hijklm"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["xylophone", "guitar", "piano"],
+                "words": [
+                    "flute",
+                    "harmonica",
+                    "trumpet",
+                    "violin",
+                    "cello",
+                    "saxophone",
+                    "trombone",
+                    "tuba"
+                ]
+            },
+            "expected": [2, 2, 2]
+        },
+        {
+            "args": {
+                "queries": ["zz", "yy", "xx"],
+                "words": ["ww", "vv", "uu", "tt", "ss", "rr", "qq", "pp", "oo", "nn"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcxyz", "zzzz", "uvw"],
+                "words": ["mnop", "qrst", "xyz", "aabbcc"]
+            },
+            "expected": [1, 0, 1]
+        },
+        {
+            "args": {
+                "queries": ["mnop", "qrst", "uvwx", "yzab", "cdef"],
+                "words": ["efgh", "ghij", "ijkl", "klmn", "lmno"]
+            },
+            "expected": [0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "yyy", "xxx"],
+                "words": ["www", "vvv", "uuu", "ttt"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["xyzz", "zzyx", "zzyy"],
+                "words": ["zzzz", "zzyz", "zyzz", "zzzy", "zyyz", "zyzy", "zyzz", "zzzyz"]
+            },
+            "expected": [3, 3, 1]
+        },
+        {
+            "args": {
+                "queries": ["a", "b", "c", "d", "e"],
+                "words": ["f", "g", "h", "i", "j", "k", "l", "m", "n", "o"]
+            },
+            "expected": [0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "zzzz", "zzzzz"],
+                "words": ["zzzzzz", "zzzzzzz", "zzzzzzzz", "zzzzzzzzz", "zzzzzzzzzz"]
+            },
+            "expected": [5, 5, 5]
+        },
+        {
+            "args": {
+                "queries": ["aaaaa", "bbb", "cccc"],
+                "words": ["ddd", "eee", "ffff", "ggggg"]
+            },
+            "expected": [0, 2, 1]
+        },
+        {
+            "args": {
+                "queries": ["mnop", "qrst", "uvwx", "yzab"],
+                "words": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yzab"]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdabcd", "abcdeabcde", "abcdefabcdef"],
+                "words": ["bcdefgbcdefg", "cdefghcdefgh", "defghidefghi"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzzz", "yyyy", "xxxx", "wwww"],
+                "words": [
+                    "vvvv",
+                    "uuuu",
+                    "tttt",
+                    "ssss",
+                    "rrrr",
+                    "qqqq",
+                    "pppp",
+                    "oooo",
+                    "nnnn",
+                    "mmmm"
+                ]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["applepie", "bananabread", "cherrypie"],
+                "words": ["strawberry", "blueberry", "raspberry"]
+            },
+            "expected": [1, 0, 1]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abcde", "abcdef"],
+                "words": ["bcde", "bcdef", "bcdefg", "bcdefgh", "bcdefghi", "bcdefghij"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzz", "yyy", "xxx"],
+                "words": ["www", "vvv", "uuu", "ttt", "sss"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abc", "abcd", "abcde", "abcdef"],
+                "words": ["bcde", "cdef", "defg", "efgh", "fghi", "ghij", "hijk", "ijkl"]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["xyz", "xyzz", "xyzzz"],
+                "words": ["uvw", "uvwv", "uvwvv", "uvwvvv", "uvwvvvv", "uvwvvvvv"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "bbccdd", "ccddee"],
+                "words": ["ddeeff", "eeffgg", "ffgghh", "gghhii"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["zzzzz", "yyyyy", "xxxxx"],
+                "words": ["wwwww", "vvvvv", "uuuuu", "ttttt", "sssss"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "hgfedcba", "fedcbahg"],
+                "words": [
+                    "ghfedcba",
+                    "ahgfedcb",
+                    "bahgfedc",
+                    "cbahgfed",
+                    "dcbahegf",
+                    "efgdcba",
+                    "gfedcba",
+                    "hgfedcb",
+                    "abcdefgh"
+                ]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdabcd", "bcdbcd", "cdab"],
+                "words": [
+                    "ababcdabcd",
+                    "bcdbcdabcd",
+                    "cdababcd",
+                    "abcdabcdabcd",
+                    "bcdabcd",
+                    "cdabcd",
+                    "abcd"
+                ]
+            },
+            "expected": [2, 2, 3]
+        },
+        {
+            "args": {
+                "queries": ["ab", "abc", "abcd"],
+                "words": ["bc", "bcd", "bcde", "bcdef", "bcdefg", "bcdefgh"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzz",
+                    "zzzzzzzz",
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z"
+                ],
+                "words": [
+                    "aaaaaaaaaa",
+                    "aaaaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaa",
+                    "aaaaaa",
+                    "aaaaa",
+                    "aaaa",
+                    "aaa",
+                    "aa",
+                    "a"
+                ]
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        },
+        {
+            "args": {
+                "queries": ["zz", "yy", "xx", "ww", "vv"],
+                "words": ["uu", "tt", "ss", "rr", "qq", "pp", "oo", "nn", "mm", "ll"]
+            },
+            "expected": [0, 0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr"],
+                "words": ["stuvwx", "yzabcd", "efghij", "klmnop"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["mmmmmm", "nnnnnn", "oooooo", "pppppp"],
+                "words": ["qqqqqq", "rrrrrr", "ssssss", "tttttt"]
+            },
+            "expected": [0, 0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["qwerty", "asdfgh", "zxcvbn"],
+                "words": ["poiuyt", "lkjhgf", "mnbvcx", "tyuiop", "ghjklcvbnm"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["xyz", "zyx", "yxz"],
+                "words": ["qrs", "rsq", "srq"]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["aaaaaaaa", "bbbbbbbb", "cccccccc"],
+                "words": [
+                    "dddddddd",
+                    "eeeeeeee",
+                    "ffffffff",
+                    "gggggggg",
+                    "hhhhhhhh",
+                    "iiiiiiii",
+                    "jjjjjjjj",
+                    "kkkkkkkk",
+                    "llllllll"
+                ]
+            },
+            "expected": [0, 0, 0]
+        },
+        {
+            "args": {
+                "queries": ["ab", "bc", "cd", "de", "ef"],
+                "words": [
+                    "zz",
+                    "zy",
+                    "yx",
+                    "xw",
+                    "vw",
+                    "uv",
+                    "tu",
+                    "ts",
+                    "sr",
+                    "rq",
+                    "qp",
+                    "po",
+                    "on",
+                    "nm",
+                    "ml",
+                    "lk",
+                    "kj",
+                    "ji",
+                    "ih",
+                    "hg",
+                    "gf",
+                    "fe",
+                    "ed",
+                    "dc",
+                    "cb",
+                    "ba"
+                ]
+            },
+            "expected": [1, 1, 1, 1, 1]
+        },
+        {
+            "args": {
+                "queries": ["apple", "banana", "cherry"],
+                "words": ["date", "elderberry", "fig", "grape", "honeydew"]
+            },
+            "expected": [0, 0, 0]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numSmallerByFrequency",
+        "typescript": "Solution().numSmallerByFrequency"
+    }
+}

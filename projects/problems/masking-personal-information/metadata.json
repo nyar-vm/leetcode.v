@@ -1,0 +1,1134 @@
+{
+    "id": "masking-personal-information",
+    "questionId": 831,
+    "difficulty": "Medium",
+    "tags": ["String"],
+    "tests": [
+        {
+            "args": {
+                "s": "12345678901"
+            },
+            "expected": "+*-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "+11234567890"
+            },
+            "expected": "+*-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "123 456 7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+1-800-555-0199"
+            },
+            "expected": "+*-***-***-0199"
+        },
+        {
+            "args": {
+                "s": "9876543210"
+            },
+            "expected": "***-***-3210"
+        },
+        {
+            "args": {
+                "s": "123456789012"
+            },
+            "expected": "+**-***-***-9012"
+        },
+        {
+            "args": {
+                "s": "123.456.7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "jane.doe@domain.co"
+            },
+            "expected": "j*****e@domain.co"
+        },
+        {
+            "args": {
+                "s": "1234567890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "John.Doe@example.com"
+            },
+            "expected": "j*****e@example.com"
+        },
+        {
+            "args": {
+                "s": "alice@leetcode.com"
+            },
+            "expected": "a*****e@leetcode.com"
+        },
+        {
+            "args": {
+                "s": "LeetCode@LeetCode.com"
+            },
+            "expected": "l*****e@leetcode.com"
+        },
+        {
+            "args": {
+                "s": "AB@qq.com"
+            },
+            "expected": "a*****b@qq.com"
+        },
+        {
+            "args": {
+                "s": "0-213-321-2345"
+            },
+            "expected": "+*-***-***-2345"
+        },
+        {
+            "args": {
+                "s": "+91(123) 456-7890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+123(123) 456-7890"
+            },
+            "expected": "+***-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "abcdef@gmail.com"
+            },
+            "expected": "a*****f@gmail.com"
+        },
+        {
+            "args": {
+                "s": "+111234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+1-234-567-890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+1234567890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "a@leetcode.com"
+            },
+            "expected": "a*****a@leetcode.com"
+        },
+        {
+            "args": {
+                "s": "+1111234567890"
+            },
+            "expected": "+***-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "john.doe@example.co.uk"
+            },
+            "expected": "j*****e@example.co.uk"
+        },
+        {
+            "args": {
+                "s": "+1-123-456-7890"
+            },
+            "expected": "+*-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+12(123) 456-7890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "1234567890123"
+            },
+            "expected": "+***-***-***-0123"
+        },
+        {
+            "args": {
+                "s": "+(123)-456-7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "bob.cathy@leetcode.com"
+            },
+            "expected": "b*****y@leetcode.com"
+        },
+        {
+            "args": {
+                "s": "a.b@c.com"
+            },
+            "expected": "a*****b@c.com"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk@leetcode.com"
+            },
+            "expected": "a*****k@leetcode.com"
+        },
+        {
+            "args": {
+                "s": "aBcD@eFgHiJ.com"
+            },
+            "expected": "a*****d@efghij.com"
+        },
+        {
+            "args": {
+                "s": "1(234)567-890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+49 176 2345 6789"
+            },
+            "expected": "+***-***-***-6789"
+        },
+        {
+            "args": {
+                "s": "+49(123) 456-7890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "ABCDE@FGHI.JKL"
+            },
+            "expected": "a*****e@fghi.jkl"
+        },
+        {
+            "args": {
+                "s": "+442079460958"
+            },
+            "expected": "+**-***-***-0958"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz@abc.def.ghijklmnopqrstuvwxyz"
+            },
+            "expected": "a*****z@abc.def.ghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "Annie.Marie@service.org"
+            },
+            "expected": "a*****e@service.org"
+        },
+        {
+            "args": {
+                "s": "+91-8765432109"
+            },
+            "expected": "+**-***-***-2109"
+        },
+        {
+            "args": {
+                "s": "+1-800-MY-BANK"
+            },
+            "expected": "+-***-***-1800"
+        },
+        {
+            "args": {
+                "s": "+911234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890 ext. 1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "user@website.co"
+            },
+            "expected": "u*****r@website.co"
+        },
+        {
+            "args": {
+                "s": "john.doe@EXAMPLE.COM"
+            },
+            "expected": "j*****e@example.com"
+        },
+        {
+            "args": {
+                "s": "+91 (123) 456 7890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+91 (123) 456-7890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(+123) 456-7890123"
+            },
+            "expected": "+***-***-***-0123"
+        },
+        {
+            "args": {
+                "s": "001234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+44 20 7946 0958"
+            },
+            "expected": "+**-***-***-0958"
+        },
+        {
+            "args": {
+                "s": "(012) 345 6789"
+            },
+            "expected": "***-***-6789"
+        },
+        {
+            "args": {
+                "s": "user@domain.c"
+            },
+            "expected": "u*****r@domain.c"
+        },
+        {
+            "args": {
+                "s": "ABC.DEF@GMAIL.COM"
+            },
+            "expected": "a*****f@gmail.com"
+        },
+        {
+            "args": {
+                "s": "A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.Z@domain.com"
+            },
+            "expected": "a*****z@domain.com"
+        },
+        {
+            "args": {
+                "s": "Alice.Bob.Charlie@example.co.uk"
+            },
+            "expected": "a*****e@example.co.uk"
+        },
+        {
+            "args": {
+                "s": "+31(0)123456789"
+            },
+            "expected": "+**-***-***-6789"
+        },
+        {
+            "args": {
+                "s": "+1 800 555 0199"
+            },
+            "expected": "+*-***-***-0199"
+        },
+        {
+            "args": {
+                "s": "+0 1234 5678901"
+            },
+            "expected": "+**-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "An.Extremely.Long.Name@subdomain.example.com"
+            },
+            "expected": "a*****e@subdomain.example.com"
+        },
+        {
+            "args": {
+                "s": "John_Doe@domain.com"
+            },
+            "expected": "j*****e@domain.com"
+        },
+        {
+            "args": {
+                "s": "John-Doe@Example.com"
+            },
+            "expected": "j*****e@example.com"
+        },
+        {
+            "args": {
+                "s": "foo-bar@baz-qux.org"
+            },
+            "expected": "f*****r@baz-qux.org"
+        },
+        {
+            "args": {
+                "s": "FirstName.LastName@domain.co.uk"
+            },
+            "expected": "f*****e@domain.co.uk"
+        },
+        {
+            "args": {
+                "s": "+01-123-456-7890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "PhoneNumber123@domain.com"
+            },
+            "expected": "p*****3@domain.com"
+        },
+        {
+            "args": {
+                "s": "+1234-567-8901"
+            },
+            "expected": "+*-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "user@domain"
+            },
+            "expected": "u*****r@domain"
+        },
+        {
+            "args": {
+                "s": "abcdefghij@klmno.pqr"
+            },
+            "expected": "a*****j@klmno.pqr"
+        },
+        {
+            "args": {
+                "s": "Alice.Bob-Charlie.D@example.co.uk"
+            },
+            "expected": "a*****d@example.co.uk"
+        },
+        {
+            "args": {
+                "s": "+1-234-567-89012"
+            },
+            "expected": "+**-***-***-9012"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890; 123-456-7891; 123-456-7892"
+            },
+            "expected": "+********************-***-***-7892"
+        },
+        {
+            "args": {
+                "s": "+44 (0) 1234 567890"
+            },
+            "expected": "+***-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz@abc.def"
+            },
+            "expected": "a*****z@abc.def"
+        },
+        {
+            "args": {
+                "s": "1-800-555-0199"
+            },
+            "expected": "+*-***-***-0199"
+        },
+        {
+            "args": {
+                "s": "0012345678901"
+            },
+            "expected": "+***-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "+1234567890123"
+            },
+            "expected": "+***-***-***-0123"
+        },
+        {
+            "args": {
+                "s": "user@domain.com"
+            },
+            "expected": "u*****r@domain.com"
+        },
+        {
+            "args": {
+                "s": "abcdefg@hijklmnopqrstuvwxyz.co"
+            },
+            "expected": "a*****g@hijklmnopqrstuvwxyz.co"
+        },
+        {
+            "args": {
+                "s": "+1 (234) 567-8901"
+            },
+            "expected": "+*-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "Nina.Nightly-Owl@Mailbox.ORG"
+            },
+            "expected": "n*****l@mailbox.org"
+        },
+        {
+            "args": {
+                "s": "Name@Domain.co"
+            },
+            "expected": "n*****e@domain.co"
+        },
+        {
+            "args": {
+                "s": "+91 12345 67890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+33123456789"
+            },
+            "expected": "+*-***-***-6789"
+        },
+        {
+            "args": {
+                "s": "user.name@sub.domain.co.uk"
+            },
+            "expected": "u*****e@sub.domain.co.uk"
+        },
+        {
+            "args": {
+                "s": "234-567-8901"
+            },
+            "expected": "***-***-8901"
+        },
+        {
+            "args": {
+                "s": "+358 (0)10 123 4567"
+            },
+            "expected": "+***-***-***-4567"
+        },
+        {
+            "args": {
+                "s": "+1 (123) 456-7890x1234"
+            },
+            "expected": "+*****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "user.name@sub.domain.com"
+            },
+            "expected": "u*****e@sub.domain.com"
+        },
+        {
+            "args": {
+                "s": "123-4567-890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+33 (0)1 23 45 67 89"
+            },
+            "expected": "+**-***-***-6789"
+        },
+        {
+            "args": {
+                "s": "+91-1234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(+12) 123 456-7890x1234"
+            },
+            "expected": "+******-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "+44 1234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "A.B.C.D.E.F@domain.com"
+            },
+            "expected": "a*****f@domain.com"
+        },
+        {
+            "args": {
+                "s": "(+1) 123 456 7890"
+            },
+            "expected": "+*-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+1 800-555-0199 ext. 1234"
+            },
+            "expected": "+*****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "+33 1 23 45 67 89"
+            },
+            "expected": "+*-***-***-6789"
+        },
+        {
+            "args": {
+                "s": "++44-1234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "EMail+Address@domain.com"
+            },
+            "expected": "e*****s@domain.com"
+        },
+        {
+            "args": {
+                "s": "abc-def@ghi.jkl.mno"
+            },
+            "expected": "a*****f@ghi.jkl.mno"
+        },
+        {
+            "args": {
+                "s": "@domain.com"
+            },
+            "expected": "+-***-***-"
+        },
+        {
+            "args": {
+                "s": "VeryLongFirstName.Last@website.org"
+            },
+            "expected": "v*****t@website.org"
+        },
+        {
+            "args": {
+                "s": "+31 (6) 1234 5678"
+            },
+            "expected": "+*-***-***-5678"
+        },
+        {
+            "args": {
+                "s": "(123) 4567 89012"
+            },
+            "expected": "+**-***-***-9012"
+        },
+        {
+            "args": {
+                "s": "12345678901234567890"
+            },
+            "expected": "+**********-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+123 (456) 7890-1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "++1-123-456-7890"
+            },
+            "expected": "+*-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "John_Doe-123@website.net"
+            },
+            "expected": "j*****3@website.net"
+        },
+        {
+            "args": {
+                "s": "+44 1234 567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890x1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "(+12) 345-678-9012"
+            },
+            "expected": "+**-***-***-9012"
+        },
+        {
+            "args": {
+                "s": "McDonalds.Restaurant@domain.co.in"
+            },
+            "expected": "m*****t@domain.co.in"
+        },
+        {
+            "args": {
+                "s": "+55(11)1234-5678"
+            },
+            "expected": "+**-***-***-5678"
+        },
+        {
+            "args": {
+                "s": "(123)4567890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "123-456-7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "a.b.c.d.e@f.com"
+            },
+            "expected": "a*****e@f.com"
+        },
+        {
+            "args": {
+                "s": "++33 6 12 34 56 78"
+            },
+            "expected": "+*-***-***-5678"
+        },
+        {
+            "args": {
+                "s": "FOO@BAR.COM"
+            },
+            "expected": "f*****o@bar.com"
+        },
+        {
+            "args": {
+                "s": "Elizabeth-II@royal.gov.uk"
+            },
+            "expected": "e*****i@royal.gov.uk"
+        },
+        {
+            "args": {
+                "s": "+1 (123) 456-7890 ext 1234"
+            },
+            "expected": "+*****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "++++1234567890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456 7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890, 123-456-7891, 123-456-7892"
+            },
+            "expected": "+********************-***-***-7892"
+        },
+        {
+            "args": {
+                "s": "alice+bob.cathy@leetcode.com"
+            },
+            "expected": "a*****y@leetcode.com"
+        },
+        {
+            "args": {
+                "s": "001 415 796 2345"
+            },
+            "expected": "+***-***-***-2345"
+        },
+        {
+            "args": {
+                "s": "aBCdE@fGh.iJk"
+            },
+            "expected": "a*****e@fgh.ijk"
+        },
+        {
+            "args": {
+                "s": "user.name+tag+sorting@example.com"
+            },
+            "expected": "u*****g@example.com"
+        },
+        {
+            "args": {
+                "s": "+123-456-7890123"
+            },
+            "expected": "+***-***-***-0123"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890, 123-456-7891"
+            },
+            "expected": "+**********-***-***-7891"
+        },
+        {
+            "args": {
+                "s": "1234567890123456"
+            },
+            "expected": "+******-***-***-3456"
+        },
+        {
+            "args": {
+                "s": "(123)456-789012"
+            },
+            "expected": "+**-***-***-9012"
+        },
+        {
+            "args": {
+                "s": "++44 1234 567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "first.last@sub.domain.com"
+            },
+            "expected": "f*****t@sub.domain.com"
+        },
+        {
+            "args": {
+                "s": "a.b.c@domain.com"
+            },
+            "expected": "a*****c@domain.com"
+        },
+        {
+            "args": {
+                "s": "(012)-34567890"
+            },
+            "expected": "+*-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "firstname.lastname@sub.domain.co.uk"
+            },
+            "expected": "f*****e@sub.domain.co.uk"
+        },
+        {
+            "args": {
+                "s": "++44(0)1234 567890"
+            },
+            "expected": "+***-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+49 1234 5678901"
+            },
+            "expected": "+***-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "+49-89-636-48018"
+            },
+            "expected": "+**-***-***-8018"
+        },
+        {
+            "args": {
+                "s": "john.doe@mywebsite.net"
+            },
+            "expected": "j*****e@mywebsite.net"
+        },
+        {
+            "args": {
+                "s": "a@b.c"
+            },
+            "expected": "a*****a@b.c"
+        },
+        {
+            "args": {
+                "s": "(123)-456-78901"
+            },
+            "expected": "+*-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "John.Doe123@example.co"
+            },
+            "expected": "j*****3@example.co"
+        },
+        {
+            "args": {
+                "s": "(+44)1234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+123 456 7890123"
+            },
+            "expected": "+***-***-***-0123"
+        },
+        {
+            "args": {
+                "s": "eMail@Company.com"
+            },
+            "expected": "e*****l@company.com"
+        },
+        {
+            "args": {
+                "s": "+1 (415) 796 2345"
+            },
+            "expected": "+*-***-***-2345"
+        },
+        {
+            "args": {
+                "s": "Abc@xyz.co"
+            },
+            "expected": "a*****c@xyz.co"
+        },
+        {
+            "args": {
+                "s": "(+12) 123 456-7890 ext 1234"
+            },
+            "expected": "+******-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890 (ext. 1234)"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "Email@Subdomain.MyDomain.co.uk"
+            },
+            "expected": "e*****l@subdomain.mydomain.co.uk"
+        },
+        {
+            "args": {
+                "s": "12345678901234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "user@.com"
+            },
+            "expected": "u*****r@.com"
+        },
+        {
+            "args": {
+                "s": "USER.NAME@DOMAIN.COM"
+            },
+            "expected": "u*****e@domain.com"
+        },
+        {
+            "args": {
+                "s": "123456789012345"
+            },
+            "expected": "+*****-***-***-2345"
+        },
+        {
+            "args": {
+                "s": "FirstName.LastName@sub.domain.com"
+            },
+            "expected": "f*****e@sub.domain.com"
+        },
+        {
+            "args": {
+                "s": "+86 123 4567 8901"
+            },
+            "expected": "+***-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "Foo@bar.com"
+            },
+            "expected": "f*****o@bar.com"
+        },
+        {
+            "args": {
+                "s": "Alice.Bob.Clarke@mydomain.org"
+            },
+            "expected": "a*****e@mydomain.org"
+        },
+        {
+            "args": {
+                "s": "Alice.Bob-Carol@domain.co.uk"
+            },
+            "expected": "a*****l@domain.co.uk"
+        },
+        {
+            "args": {
+                "s": "++++1-234-567-8901"
+            },
+            "expected": "+*-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "FIRST.Last@domain.com"
+            },
+            "expected": "f*****t@domain.com"
+        },
+        {
+            "args": {
+                "s": "user@sub.domain.com"
+            },
+            "expected": "u*****r@sub.domain.com"
+        },
+        {
+            "args": {
+                "s": "++44 1234567890"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "Alice.Bob-Jones@company.org"
+            },
+            "expected": "a*****s@company.org"
+        },
+        {
+            "args": {
+                "s": "001-123-456-7890"
+            },
+            "expected": "+***-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+358101234567"
+            },
+            "expected": "+**-***-***-4567"
+        },
+        {
+            "args": {
+                "s": "987654321098765"
+            },
+            "expected": "+*****-***-***-8765"
+        },
+        {
+            "args": {
+                "s": "(123)-456-7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+49-123-456789-0"
+            },
+            "expected": "+**-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "-123-456-7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "+44(0)1234-567890"
+            },
+            "expected": "+***-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "9876543210123"
+            },
+            "expected": "+***-***-***-0123"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890 x1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "Alice.Bob-Carol@domain.co"
+            },
+            "expected": "a*****l@domain.co"
+        },
+        {
+            "args": {
+                "s": "A.B.C.D.E.F.G.H@subdomain.example.com"
+            },
+            "expected": "a*****h@subdomain.example.com"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890; 123-456-7891"
+            },
+            "expected": "+**********-***-***-7891"
+        },
+        {
+            "args": {
+                "s": "name@sub.sub.domain.com"
+            },
+            "expected": "n*****e@sub.sub.domain.com"
+        },
+        {
+            "args": {
+                "s": "(123)456-7890"
+            },
+            "expected": "***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890-1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "(123)456-7890-1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "valid.email@sub.domain.co.uk"
+            },
+            "expected": "v*****l@sub.domain.co.uk"
+        },
+        {
+            "args": {
+                "s": "++1-234-567-8901"
+            },
+            "expected": "+*-***-***-8901"
+        },
+        {
+            "args": {
+                "s": "+1 (123) 456-7890"
+            },
+            "expected": "+*-***-***-7890"
+        },
+        {
+            "args": {
+                "s": "(123) 456-7890 ext 1234"
+            },
+            "expected": "+****-***-***-1234"
+        },
+        {
+            "args": {
+                "s": "123456789012123"
+            },
+            "expected": "+*****-***-***-2123"
+        },
+        {
+            "args": {
+                "s": "123-456-7890-1234"
+            },
+            "expected": "+****-***-***-1234"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maskPII",
+        "typescript": "Solution().maskPII"
+    }
+}

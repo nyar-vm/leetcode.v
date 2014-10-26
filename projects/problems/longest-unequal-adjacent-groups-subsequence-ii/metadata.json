@@ -1,0 +1,2205 @@
+{
+    "id": "longest-unequal-adjacent-groups-subsequence-ii",
+    "questionId": 2901,
+    "difficulty": "Medium",
+    "tags": ["Array", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "words": ["abc", "bac", "bca", "cab", "cba", "acb"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "same"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["same", "sane", "same"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "best", "rest"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["test", "best", "rest"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hexlo"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abgf", "abgh"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hbllo", "hillo"],
+                "groups": [1, 1, 2, 3]
+            },
+            "expected": ["hello", "hbllo", "hillo"]
+        },
+        {
+            "args": {
+                "words": ["bab", "dab", "cab"],
+                "groups": [1, 2, 2]
+            },
+            "expected": ["bab", "dab"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "wore", "core"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["word", "worm", "wore", "core"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "tame", "game"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["same", "tame", "game"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["a", "b", "c", "d"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "appel"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["apple", "appla"]
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["zzz", "zzx", "zzw", "zzv"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["zzz", "zzx", "zzw", "zzv"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tost", "test"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test", "tast", "tost", "test"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["word", "wird", "word", "wird"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["word", "wird", "word", "wird"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abb", "aba", "aaa", "aab"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["abc", "abb", "aba", "aaa", "aab"]
+        },
+        {
+            "args": {
+                "words": ["aabb", "abab", "abba", "baab"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["aabb"]
+        },
+        {
+            "args": {
+                "words": ["aabb", "abab", "babb", "baab"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["babb", "baab"]
+        },
+        {
+            "args": {
+                "words": ["cat", "cot", "dog", "dot", "log"],
+                "groups": [1, 2, 1, 2, 3]
+            },
+            "expected": ["cat", "cot"]
+        },
+        {
+            "args": {
+                "words": ["abc", "acb", "bac", "bca", "cab", "cba"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["xyz", "xyw", "xyv", "xyu"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["xyz", "xyw", "xyv", "xyu"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aabb", "abbb", "bbbb"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["aaaa", "aaab", "aabb", "abbb", "bbbb"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bac", "cab", "bca", "acb", "cba"],
+                "groups": [1, 2, 3, 1, 2, 3]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abcg"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abce", "abcf", "abcg"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acd", "bcd", "ace"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["abc", "abd", "acd", "bcd"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdf", "abef", "acdf", "acef", "bcdf", "bcef"],
+                "groups": [1, 2, 1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["abcd", "abcf", "abdf", "abef"]
+        },
+        {
+            "args": {
+                "words": ["code", "codd", "cods", "coex", "coey"],
+                "groups": [1, 2, 2, 3, 3]
+            },
+            "expected": ["code", "codd"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def", "efg"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apples", "appl", "app"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["apple"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "groups": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sate", "site"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["same", "sane", "sate", "site"]
+        },
+        {
+            "args": {
+                "words": ["abcde", "abfde", "abcfe", "abcef"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcde", "abfde"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acd", "bcd", "bce", "bde"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["abc", "abd", "acd", "bcd", "bce", "bde"]
+        },
+        {
+            "args": {
+                "words": ["mnop", "mnoq", "mnrp", "mnsp", "mntp"],
+                "groups": [1, 2, 3, 2, 1]
+            },
+            "expected": ["mnop", "mnrp", "mnsp", "mntp"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "appla", "appla"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["apple", "apply", "appla"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "abaa", "acaa", "aada", "aada", "aadd"],
+                "groups": [1, 2, 3, 1, 2, 3]
+            },
+            "expected": ["aaaa", "abaa", "acaa"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cog", "dag", "dog", "dig"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["dag", "dog", "dig"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "wirm", "wirm", "wirn"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["word", "worm", "wirm", "wirn"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tost", "test", "teat"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["test", "tast", "tost", "test", "teat"]
+        },
+        {
+            "args": {
+                "words": ["aaaaa", "aaaba", "aaaca", "aaada"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["aaaaa", "aaaba", "aaaca", "aaada"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "tat"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["cat", "bat", "rat", "tat"]
+        },
+        {
+            "args": {
+                "words": ["abcde", "abcdf", "abcgf", "abchg", "abchf"],
+                "groups": [1, 2, 3, 4, 3]
+            },
+            "expected": ["abcde", "abcdf", "abcgf"]
+        },
+        {
+            "args": {
+                "words": ["abcde", "abcdf", "abcef", "abcag"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abcde", "abcdf", "abcef"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "appla", "applb", "applc"],
+                "groups": [1, 2, 2, 3, 3]
+            },
+            "expected": ["apple", "appla", "applb"]
+        },
+        {
+            "args": {
+                "words": ["abc", "acc", "bcd", "bce", "bde"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["bcd", "bce", "bde"]
+        },
+        {
+            "args": {
+                "words": ["start", "starr", "statr", "strat", "strot"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["start", "starr", "statr"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdg", "abef"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf", "abef"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aaba", "abaa", "baaa"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["aaaa", "aaab"]
+        },
+        {
+            "args": {
+                "words": ["kitten", "sitten", "bitten", "bitter", "bitter"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["kitten", "sitten", "bitten", "bitter"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hella", "hellu"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abcg", "abch", "abcx"],
+                "groups": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": ["abcd", "abce", "abcf", "abcg", "abch", "abcx"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hxllo", "hexlo", "helxo"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["hello", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["aabb", "abab", "baba", "bbaa"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["aabb"]
+        },
+        {
+            "args": {
+                "words": ["apple", "abble", "abble", "abble"],
+                "groups": [1, 2, 3, 2]
+            },
+            "expected": ["apple"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abcg", "abch", "abci"],
+                "groups": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": ["abcd", "abce", "abcf", "abcg", "abch", "abci"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "abe", "bcd", "bce"],
+                "groups": [1, 1, 2, 2, 3]
+            },
+            "expected": ["abc", "abe"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abcd", "abcf"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abcd", "abcf", "abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abcd", "abdf"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf", "abcd"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "acbd", "abzd", "abxc"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abzd"]
+        },
+        {
+            "args": {
+                "words": ["same", "same", "same", "same"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["same"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc", "bcd"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "zeara", "zeraa", "zerar"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["zebra", "zeara"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abdc", "acdb", "adcb", "bacd", "bcad", "bdac", "bdca"],
+                "groups": [1, 2, 1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["abcd"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "spoke", "slope"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["apple", "apply"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdc", "abcf"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hella", "hillo"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["hello", "hallo", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hella", "hell"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["test", "tset", "sett", "stet"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "wore", "core", "cord", "cred"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["word", "worm", "wore", "core", "cord"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "zera", "zeraa", "zeara"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["zebra", "zeara"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "zebra", "zebra", "zebra"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["zebra"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abca"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abce", "abcf", "abca"]
+        },
+        {
+            "args": {
+                "words": ["dog", "dig", "dug", "dot"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["dog", "dig", "dug"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abde", "abdc"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hella", "hellu"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdg", "abeg"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acd", "bcd", "ace", "bce", "abe", "bde", "cde", "abc"],
+                "groups": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": ["abc", "abd", "acd", "bcd", "bce", "bde", "cde"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["word", "wird", "wurd", "wurd", "wurk"],
+                "groups": [1, 2, 1, 2, 3]
+            },
+            "expected": ["word", "wird", "wurd", "wurk"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sane", "sane", "same"],
+                "groups": [1, 2, 2, 3, 3]
+            },
+            "expected": ["same", "sane", "same"]
+        },
+        {
+            "args": {
+                "words": ["abc", "acb", "bac", "bca", "cab", "cba", "abc"],
+                "groups": [1, 2, 1, 2, 1, 2, 1]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abde", "abce", "abcd"],
+                "groups": [1, 2, 3, 4, 1]
+            },
+            "expected": ["abcd", "abcf", "abce", "abcd"]
+        },
+        {
+            "args": {
+                "words": ["xyza", "xyzb", "xyzc", "xyzd"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["xyza", "xyzb", "xyzc", "xyzd"]
+        },
+        {
+            "args": {
+                "words": ["abc", "acd", "bcd", "bed"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["acd", "bcd", "bed"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "zera", "zeraa", "zerab", "zercb"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["zeraa", "zerab", "zercb"]
+        },
+        {
+            "args": {
+                "words": ["code", "kode", "coke", "cide"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["code", "kode"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "bcd", "bce"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "worn", "word"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["word", "worm", "worn", "word"]
+        },
+        {
+            "args": {
+                "words": ["python", "phyton", "phthon", "pyhton"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["python"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hillo", "hella", "hellb"],
+                "groups": [1, 2, 2, 3, 3]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tost", "test"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["test", "tast", "tost", "test"]
+        },
+        {
+            "args": {
+                "words": ["abc", "aabb", "abbb", "babb", "bbcc"],
+                "groups": [1, 2, 2, 3, 3]
+            },
+            "expected": ["aabb", "babb"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdf", "acdf"],
+                "groups": [1, 2, 3, 1]
+            },
+            "expected": ["abcd", "abcf", "abdf", "acdf"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hella"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["hello", "hallo", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aabb", "abbb"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["aaab", "aabb"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abdd", "acdd", "acdd", "acde", "acdf"],
+                "groups": [1, 2, 3, 1, 2, 3]
+            },
+            "expected": ["abcd", "abdd", "acdd", "acde", "acdf"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl", "mno"],
+                "groups": [1, 1, 1, 1, 1]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["aabb", "abab", "abba", "baab", "baba", "bbaa"],
+                "groups": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": ["aabb"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hillo", "hollo"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["hello", "hillo"]
+        },
+        {
+            "args": {
+                "words": ["aabb", "aacc", "aadd", "aabb", "aacc"],
+                "groups": [1, 2, 3, 1, 2]
+            },
+            "expected": ["aabb"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "acdf", "bcdf"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "thr", "fou", "fiv"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applb", "applc", "appld"],
+                "groups": [1, 2, 2, 2, 3]
+            },
+            "expected": ["apple", "appla", "appld"]
+        },
+        {
+            "args": {
+                "words": ["graph", "grapf", "graph", "grapt", "grapt"],
+                "groups": [1, 2, 3, 2, 1]
+            },
+            "expected": ["graph", "grapf", "graph", "grapt"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abcd"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abcd", "abce", "abcf", "abcd"]
+        },
+        {
+            "args": {
+                "words": ["aaab", "abab", "abba", "baaa"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["aaab", "abab"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hexlo", "hexxo"],
+                "groups": [1, 2, 2, 3, 3]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "bce", "bde", "bdf"],
+                "groups": [1, 2, 2, 3, 4]
+            },
+            "expected": ["bce", "bde", "bdf"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abde", "abce"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf", "abce"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abcg", "abch"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["abcd", "abce", "abcf", "abcg", "abch"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abdg", "abdh"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["abcd", "abce", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "abe", "ace", "adf", "aeg"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["abc", "abd", "abe", "ace"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "mat"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["cat", "bat", "rat", "mat"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apble", "appla", "applb", "applc"],
+                "groups": [1, 2, 3, 2, 1]
+            },
+            "expected": ["apple", "appla", "applb", "applc"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aaba", "abaa"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["aaaa", "aaab"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf", "abci", "abcj"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["abcd", "abce", "abcf", "abci", "abcj"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hexlo", "hexxo"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "cap", "car"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["cat", "bat", "rat"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "abaa", "acaa", "aada"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["aaaa", "acaa"]
+        },
+        {
+            "args": {
+                "words": ["apple", "abble", "abble", "abble", "abble"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["apple"]
+        },
+        {
+            "args": {
+                "words": ["zzzz", "zzzw", "zzzx", "zzzy"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["zzzz", "zzzw", "zzzx", "zzzy"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcc", "abcb", "abca"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abcd", "abcc", "abcb", "abca"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "abaa", "acaa", "adab", "adac"],
+                "groups": [1, 2, 3, 1, 2]
+            },
+            "expected": ["aaaa", "abaa", "acaa"]
+        },
+        {
+            "args": {
+                "words": ["xylo", "xyxo", "xyxo", "xylo", "xylo"],
+                "groups": [1, 2, 3, 2, 1]
+            },
+            "expected": ["xylo", "xyxo", "xylo"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaba", "abaa", "abba", "acaa", "acba"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["aaaa", "aaba"]
+        },
+        {
+            "args": {
+                "words": ["zzzz", "zzzy", "zzzx", "zzxw"],
+                "groups": [5, 4, 3, 2]
+            },
+            "expected": ["zzzz", "zzzy", "zzzx"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abdc", "acdb", "adcb"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abcd"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aaba", "abaa", "aaaa"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["aaaa", "aaab", "aaaa"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hillo", "hillo"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["hello", "hallo", "hillo"]
+        },
+        {
+            "args": {
+                "words": ["abcde", "abxde", "abxde", "abcye"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["abcde", "abxde"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "abaa", "acaa", "aada", "aada", "aadd", "aadd", "aade"],
+                "groups": [1, 2, 1, 2, 3, 3, 4, 4]
+            },
+            "expected": ["aaaa", "aada", "aadd", "aade"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "abble", "abble"],
+                "groups": [1, 2, 3, 2]
+            },
+            "expected": ["apple", "appla"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hellu"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tost", "test", "tast", "tost", "test"],
+                "groups": [1, 2, 1, 2, 1, 2, 1]
+            },
+            "expected": ["test", "tast", "tost", "test", "tast", "tost", "test"]
+        },
+        {
+            "args": {
+                "words": ["zzzz", "zzzy", "zzzx", "zzxw"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["zzzz", "zzzy", "zzzx"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "appla", "applu"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["apple", "apply", "appla", "applu"]
+        },
+        {
+            "args": {
+                "words": ["word", "ward", "wird", "wrod", "wore", "core"],
+                "groups": [1, 2, 1, 2, 1, 2]
+            },
+            "expected": ["word", "ward", "wird"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "womb", "womb"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["word", "worm"]
+        },
+        {
+            "args": {
+                "words": ["dog", "dot", "lot", "log", "cog"],
+                "groups": [1, 2, 2, 3, 4]
+            },
+            "expected": ["dog", "log", "cog"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hellp"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sane", "same"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["same", "sane", "same"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acd", "bcd"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abc", "abd", "acd", "bcd"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc", "bcd"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["abc", "acc"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "abc", "abe"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abc", "abd", "abc", "abe"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hellu"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["hello", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl"],
+                "groups": [1, 1, 1, 1]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaa",
+                    "aaab",
+                    "aaba",
+                    "abaa",
+                    "abab",
+                    "abba",
+                    "bbaa",
+                    "bbab",
+                    "bbba",
+                    "bbbb"
+                ],
+                "groups": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": ["aaaa"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "bcd", "ace"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["loop", "loap", "leep", "leap"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["loop", "loap", "leap"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hexlo"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["word", "ward", "wear", "ware"],
+                "groups": [1, 2, 3, 2]
+            },
+            "expected": ["word", "ward"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aac", "aba", "abb"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["aaa", "aab", "aac"]
+        },
+        {
+            "args": {
+                "words": ["fun", "sun", "tun", "fum"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["fun", "sun", "tun"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdc"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["word", "woro", "work"],
+                "groups": [3, 3, 4]
+            },
+            "expected": ["word", "work"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tist", "best"],
+                "groups": [1, 2, 3, 1]
+            },
+            "expected": ["test", "tast", "tist"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "car"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["cat", "bat", "rat"]
+        },
+        {
+            "args": {
+                "words": ["test", "text", "tast", "tect"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test", "text"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applb", "applc"],
+                "groups": [3, 3, 4, 4]
+            },
+            "expected": ["apple", "applb"]
+        },
+        {
+            "args": {
+                "words": ["zero", "hero", "hero", "hero"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["zero", "hero"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "car"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["cat", "bat", "rat"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abgd"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["word", "work", "worm", "worn"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["word", "work", "worm", "worn"]
+        },
+        {
+            "args": {
+                "words": ["word", "wird", "word", "wird"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["word", "wird", "word", "wird"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "zebra", "zebra"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["zebra"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hellp", "hxllo"],
+                "groups": [5, 5, 6, 7]
+            },
+            "expected": ["hello", "hellp"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hella"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hexlo"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["hello", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["hello", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["dog", "dot", "lot", "log"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["dog", "dot", "lot", "log"]
+        },
+        {
+            "args": {
+                "words": ["test", "text", "tast", "tuxt"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["star", "tart", "kart", "tars"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["tart", "kart"]
+        },
+        {
+            "args": {
+                "words": ["tiny", "tint", "tint", "tank"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["tiny", "tint"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aaa",
+                    "aab",
+                    "aac",
+                    "aba",
+                    "aca",
+                    "baa",
+                    "bab",
+                    "bac",
+                    "caa",
+                    "cab",
+                    "cac"
+                ],
+                "groups": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+            },
+            "expected": ["aaa", "aab", "aac", "bac", "cac"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applu", "appli"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["apple", "appla", "applu", "appli"]
+        },
+        {
+            "args": {
+                "words": ["java", "lava", "slava", "flava"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["java", "lava"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "tame", "game"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["same", "sane"]
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "groups": [1, 2, 3, 4, 5]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hellp"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["hello", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["word", "wird", "word", "wird"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["word", "wird"]
+        },
+        {
+            "args": {
+                "words": ["zzz", "zyz", "zxy", "zyx"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["zzz", "zyz", "zyx"]
+        },
+        {
+            "args": {
+                "words": ["xyz", "xyx", "yzz", "zzy"],
+                "groups": [3, 2, 3, 2]
+            },
+            "expected": ["xyz", "xyx"]
+        },
+        {
+            "args": {
+                "words": ["test", "text", "tset", "best"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["test", "text"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applb", "applc"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["apple", "appla", "applb", "applc"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "pxllo"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo", "hxllo", "pxllo"]
+        },
+        {
+            "args": {
+                "words": ["code", "kode", "kode"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["code", "kode"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hellp"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "west", "lest"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "car"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["cat", "rat"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc", "bcd"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "dec"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "fest", "best"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aba", "baa", "bbb"],
+                "groups": [1, 2, 3, 2, 1]
+            },
+            "expected": ["aaa", "aab"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hellp", "herlo"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["hello", "hellp"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tist"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["test", "tast", "tist"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [1, 1, 1, 1]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aaba", "abaa"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["aaaa", "aaab"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hella"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["hello", "hallo"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tist", "teat"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test", "tast", "tist"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tast"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc", "acd"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abc", "abd", "acd"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abce"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["abcd", "abce"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apble", "aagle", "apgle", "applu"],
+                "groups": [1, 2, 1, 2, 1]
+            },
+            "expected": ["apple", "apble"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hell"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hella", "hellu"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["hello", "hella", "hellu"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sane", "same"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["same", "sane"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applb", "applc"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["apple", "appla", "applb", "applc"]
+        },
+        {
+            "args": {
+                "words": ["code", "cide", "codi", "coie"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["code", "codi"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["zoom", "boom", "boon", "boom"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["zoom", "boom", "boon", "boom"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abef", "abeg"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf", "abef", "abeg"]
+        },
+        {
+            "args": {
+                "words": ["keep", "peek", "peel"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["peek", "peel"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "worn"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["word", "worm", "worn"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applb", "applc"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["apple", "appla", "applc"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aac", "aad"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["aaa", "aab", "aac", "aad"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def"],
+                "groups": [1, 1, 2, 3]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aac"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["aaa", "aab", "aac"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tist", "tast"],
+                "groups": [1, 2, 3, 1]
+            },
+            "expected": ["test", "tast", "tist", "tast"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tekt"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["abcd", "abce", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["word", "wore", "word", "worn"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["word", "wore", "word", "worn"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "thr"],
+                "groups": [1, 1, 1]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hellp"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["code", "coed", "cdeo"],
+                "groups": [2, 2, 3]
+            },
+            "expected": ["code"]
+        },
+        {
+            "args": {
+                "words": ["loop", "lopo", "leep"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["loop"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "safe"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["same", "safe"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "spoil", "spied"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["apple"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "pxllo"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["hello", "hallo", "hxllo", "pxllo"]
+        },
+        {
+            "args": {
+                "words": ["test", "text", "tast", "tast"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["test", "text"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdf", "abef"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf", "abdf", "abef"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "ton", "oen"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["word", "wird", "word", "wond"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["wird", "word"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "ttst"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["test", "tast", "ttst"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aac"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["aaa", "aab", "aac"]
+        },
+        {
+            "args": {
+                "words": ["dog", "dot", "lot", "log"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["dog", "dot", "lot", "log"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "teat"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "same", "sane"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["same", "sane", "same", "sane"]
+        },
+        {
+            "args": {
+                "words": ["apple", "bpple", "cppld"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["apple", "bpple"]
+        },
+        {
+            "args": {
+                "words": ["xyz", "xyx", "xzx", "xxz"],
+                "groups": [1, 1, 1, 1]
+            },
+            "expected": ["xyz"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "bpple", "appea"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["apple", "appla", "appea"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applp"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["apple", "appla", "applp"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abce", "abdc"],
+                "groups": [1, 1, 2, 1]
+            },
+            "expected": ["abcd", "abce"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sale", "tale"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["same", "sane", "sale", "tale"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tost", "fest"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["test", "tast", "tost"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "hat"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["cat", "rat"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "pxllo"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["hello", "hxllo", "pxllo"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sane", "same"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["same", "sane", "same"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "applu", "applp"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["apple", "applu"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "safe", "same"],
+                "groups": [1, 2, 3, 1]
+            },
+            "expected": ["same", "sane", "safe", "same"]
+        },
+        {
+            "args": {
+                "words": ["xyz", "xyw", "xzz", "xyx"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["xyz", "xyw"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "bat"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["cat", "bat"]
+        },
+        {
+            "args": {
+                "words": ["word", "ward", "cord", "card"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["word", "ward", "card"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sake"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["same", "sane", "sake"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc", "aba"],
+                "groups": [1, 2, 3, 2]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["apple", "appla", "abble", "abble"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["apple", "appla"]
+        },
+        {
+            "args": {
+                "words": ["test", "text", "tast"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["test", "text"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdf"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["abcf", "abdf"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "wirm", "wirt"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["word", "worm", "wirm", "wirt"]
+        },
+        {
+            "args": {
+                "words": ["code", "kode", "cide", "coke"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["code", "kode"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "worn"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["word", "worm", "worn"]
+        },
+        {
+            "args": {
+                "words": ["xyz", "xyw", "xzz", "xyy"],
+                "groups": [2, 3, 2, 3]
+            },
+            "expected": ["xyz", "xyw"]
+        },
+        {
+            "args": {
+                "words": ["xyz", "xyx", "xyy", "xyw"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["xyz", "xyx", "xyy", "xyw"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "tame", "game"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["same", "tame", "game"]
+        },
+        {
+            "args": {
+                "words": ["tree", "trex", "trey", "gree"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["tree", "trex", "trey"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["test", "tets", "tast", "tast"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdg"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["abcd", "abcf"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["hello", "hallo", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "game", "tame"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["same", "sane"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "teat", "teet"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["test", "teat", "teet"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["code", "cide", "kode", "coda"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["code", "cide"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "game"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["same", "game"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo", "hexlo"],
+                "groups": [10, 20, 10, 30]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "acc", "bcd"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hellp"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["hello", "hallo", "hullo"]
+        },
+        {
+            "args": {
+                "words": ["play", "plby", "plya", "plax"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["play", "plax"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tost", "tett"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["test", "tast", "tost"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sage", "page"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["same", "sage"]
+        },
+        {
+            "args": {
+                "words": ["test", "tast", "tell", "tall"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["test", "tast"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "sale", "male"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["same", "sane", "sale", "male"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "abdf", "acdf"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["abcd", "abcf", "abdf", "acdf"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "spork"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["apple", "apply"]
+        },
+        {
+            "args": {
+                "words": ["test", "text", "tast", "best"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["test", "text"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hxllo"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abd", "bcd", "bce"],
+                "groups": [1, 2, 2, 3]
+            },
+            "expected": ["abc", "abd"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["same", "sane", "safe", "sale"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["same", "sane", "safe", "sale"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cog", "rog"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["dog", "cog", "rog"]
+        },
+        {
+            "args": {
+                "words": ["five", "fife", "five", "five"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["five", "fife", "five"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "efg"],
+                "groups": [1, 1, 2, 2]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aba", "abb", "baa", "bab", "bba", "bbb"],
+                "groups": [1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            "expected": ["aaa", "aab", "abb", "bbb"]
+        },
+        {
+            "args": {
+                "words": ["zzz", "zzy", "zyy", "yyy"],
+                "groups": [1, 2, 1, 2]
+            },
+            "expected": ["zzz", "zzy", "zyy", "yyy"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "worn", "word"],
+                "groups": [1, 2, 1, 3]
+            },
+            "expected": ["word", "worm", "worn", "word"]
+        },
+        {
+            "args": {
+                "words": ["code", "mode", "mroe"],
+                "groups": [1, 2, 1]
+            },
+            "expected": ["code", "mode"]
+        },
+        {
+            "args": {
+                "words": ["word", "worm", "worn"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["word", "worn"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "appla"],
+                "groups": [1, 1, 2]
+            },
+            "expected": ["apple", "appla"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "hat"],
+                "groups": [1, 2, 3, 4]
+            },
+            "expected": ["cat", "bat", "rat", "hat"]
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde"],
+                "groups": [1, 1, 1]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "hat"],
+                "groups": [1, 1, 1, 2]
+            },
+            "expected": ["cat", "hat"]
+        },
+        {
+            "args": {
+                "words": ["word", "wird", "wordy"],
+                "groups": [1, 2, 3]
+            },
+            "expected": ["word", "wird"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().getWordsInLongestSubsequence",
+        "typescript": "Solution().getWordsInLongestSubsequence"
+    }
+}

@@ -1,0 +1,474 @@
+{
+    "id": "minimum-number-of-keypresses",
+    "questionId": 2268,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Hash Table", "String", "Counting", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "s": "mmmmmmmmmmmmmmmm"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "mississippi"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "s": "banana"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 102
+        },
+        {
+            "args": {
+                "s": "abcdefghijkl"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "hello世界"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "programming"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "s": "apple"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "s": "thequickbrownfoxjumpsoverthelazydog"
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "optimization"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "aabbbccccdddd"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmanycharactersandletters"
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "s": "allthesametheallthesametheallthesamethe"
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "s": "exampleofaverylongstringthatneedsmanykeypresses"
+            },
+            "expected": 61
+        },
+        {
+            "args": {
+                "s": "datastructuresandalgorithms"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "s": "verylongstringwithvariouscharactersandfrequencies"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "s": "algorithmoptimization"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "bananaananabay"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "averylongstringthatincludesmanylettersrepeatedmultipletimes"
+            },
+            "expected": 73
+        },
+        {
+            "args": {
+                "s": "shortstring"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbcccccccc"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "oneoneonetwoonetwoonethreeoneoneonetwoonetwothree"
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "s": "frequencydistribution"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "zzzaaayyxbbbxxccc"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "s": "abracadabra"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "s": "cloudcomputingisthemostmodernwayofdeliveringservices"
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "s": "uniquecharactersarespecialtoo"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "s": "keypadmappingoptimization"
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 153
+        },
+        {
+            "args": {
+                "s": "occurrencesoflettersareirrelevant"
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "s": "complexityanalysiscomplexityanalysis"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "s": "frequencydistributionoflettersinenglish"
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "s": "equalfrequencyaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 117
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbccccccccdddddddd"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "s": "abcdefghijkabcdefghijkabcdefghijkabcdefghijkabcdefghijk"
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithrepeatedcharacters"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "hellohellohellohellohellohellohellohellohellohello"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "frequenciesoffrequentelementsandcharacters"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "frequencydistributionofcharacters"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "s": "repeatedlettersllllllllllllllll"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "pythonprogrammingchallenge"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "s": "uniquenesschecking"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 102
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzz"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "s": "algorithms"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 398
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg"
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatweneedtotestthealgorithm"
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "s": "repeatedcharactersrepeatedcharactersrepeatedcharacters"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatcontainsmanycharactersandshouldrequiremultiplekeypresses"
+            },
+            "expected": 106
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "optimizationiskeytoefficientcoding"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "s": "xylophoneisamusicalinstrument"
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "s": "pressingbuttonsforlongstrings"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "pythonprogrammingisfun"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "s": "mississippiissimississippi"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaabbbbbbbbccccccccddddddd"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "s": "toimpressyourinterviewerwithcomplexstrings"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "bananaananabana"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "algorithmsanddatastructures"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmanycharacters"
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "s": "thequickbrownfoxjumpsoverthelazydogthequickbrownfoxjumpsoverthelazydog"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "s": "pythonisaveryversatilelanguage"
+            },
+            "expected": 38
+        },
+        {
+            "args": {
+                "s": "optimizationofthekeypadlayout"
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 28
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimumKeypresses",
+        "typescript": "Solution().minimumKeypresses"
+    }
+}

@@ -1,0 +1,852 @@
+{
+    "id": "maximize-palindrome-length-from-subsequences",
+    "questionId": 1771,
+    "difficulty": "Hard",
+    "tags": ["String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "word1": "race",
+                "word2": "car"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "a",
+                "word2": "a"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word1": "aabb",
+                "word2": "bbcc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word1": "race",
+                "word2": "care"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "abcde",
+                "word2": "edcba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "madam",
+                "word2": "madam"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "aabb",
+                "word2": "bbaa"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "xyz",
+                "word2": "zyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "palindrome",
+                "word2": "emordnilap"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "abcabc",
+                "word2": "cbacba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "aa",
+                "word2": "bb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "hello",
+                "word2": "world"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word1": "abcdxyz",
+                "word2": "zyxcba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "cacb",
+                "word2": "cbba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word1": "mnop",
+                "word2": "pqrs"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word1": "noon",
+                "word2": "noon"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "level",
+                "word2": "deified"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word1": "a",
+                "word2": "b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "noon",
+                "word2": "moon"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "abcba",
+                "word2": "abcba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "abcd",
+                "word2": "dcba"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "abc",
+                "word2": "def"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "ab",
+                "word2": "ab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word1": "xyzzxyzzxyzz",
+                "word2": "zzzyzxzzzyzxzzzyx"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "word1": "abcdefghijklmnopqrstuvwxyz",
+                "word2": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "word1": "abacax",
+                "word2": "xcabab"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "deeee",
+                "word2": "eee"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "abcdefghij",
+                "word2": "jihgfedcbajihgfedcba"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "word1": "madam",
+                "word2": "rotor"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "aabbccddeeff",
+                "word2": "ffeeddccbbaa"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "word1": "level",
+                "word2": "leve"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "palindrome",
+                "word2": "emordnilapracecar"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "longestpalindrome",
+                "word2": "emordnilapstgnol"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "word1": "racecar",
+                "word2": "level"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word1": "step on no pets",
+                "word2": "step on no pets"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "word1": "aabbaa",
+                "word2": "ccddeee"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "abc",
+                "word2": "cba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "xyzzyx",
+                "word2": "zyxzyz"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "abcdxyz",
+                "word2": "zyxcdb"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "xyx",
+                "word2": "xyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "abcdefghij",
+                "word2": "jihgfedcba"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "racecar",
+                "word2": "racecar"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word1": "b",
+                "word2": "b"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word1": "abcdefgh",
+                "word2": "hgfedcba"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word1": "level",
+                "word2": "level"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "aabbccddeeffgg",
+                "word2": "ggffeeddccbbaa"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "word1": "aabaaa",
+                "word2": "aaabaa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "abacaxaba",
+                "word2": "xyzzyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "abcdefg",
+                "word2": "gfedcba"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word1": "uniqueletters",
+                "word2": "stretteleunik"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "aaa",
+                "word2": "bbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "abcxyz",
+                "word2": "zyxcba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "abacdfgdcaba",
+                "word2": "abacdfgdcaba"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "word1": "abcdabcdabcd",
+                "word2": "dcbaabcdabcd"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word1": "aabbaa",
+                "word2": "aaabba"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "word1": "aabbccdd",
+                "word2": "ddccbbaa"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word1": "aaaaaa",
+                "word2": "bbbbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "ababababab",
+                "word2": "bababababa"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "step",
+                "word2": "onests"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "abcd",
+                "word2": "zyxw"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "ababab",
+                "word2": "bababa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "abacaba",
+                "word2": "bcbcbcb"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word1": "palindromeconstruction",
+                "word2": "noitcitsnocemordnilap"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "word1": "abcd",
+                "word2": "dcbaabcd"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "racecar",
+                "word2": "car"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "deified",
+                "word2": "deified"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word1": "abcdefg",
+                "word2": "hgfedcba"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "word1": "complexstring",
+                "word2": "gnirtsxlpmoc"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "word1": "noonnoon",
+                "word2": "noonnoon"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word1": "thisisatest",
+                "word2": "tsetasitisth"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "word1": "abcdxyz",
+                "word2": "zyxwvut"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "mnopqr",
+                "word2": "rstuvw"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word1": "racecar",
+                "word2": "carrace"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word1": "aabbccdd",
+                "word2": "aabbccdd"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "abababa",
+                "word2": "bababab"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "word1": "aaaaabbbbb",
+                "word2": "bbbbbbaaaa"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "word1": "xyzz",
+                "word2": "zzxy"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "abcabcabcabc",
+                "word2": "cbacbacbacba"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "word1": "ab",
+                "word2": "bbaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word1": "qwertyuiop",
+                "word2": "poiuytrewq"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "aaaaabbbbb",
+                "word2": "bbbbbbaaaaa"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "word1": "zzzz",
+                "word2": "zzzz"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "xyx",
+                "word2": "yxy"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word1": "repaper",
+                "word2": "repaper"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word1": "reviled",
+                "word2": "devil"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "abcdef",
+                "word2": "fedcbaxyz"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "mississippi",
+                "word2": "ississippim"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "word1": "abcdabc",
+                "word2": "cbadcbad"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word1": "rotor",
+                "word2": "rotor"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "abcdabc",
+                "word2": "cbadacb"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "zyxwvutsrqponmlkjihgfedcba",
+                "word2": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "word1": "aabbccddeeffgg",
+                "word2": "ggffeeddccbaa"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "word1": "xxyyzz",
+                "word2": "zzxyyx"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "xyzyx",
+                "word2": "xzyyx"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "aabbcc",
+                "word2": "ccbbaa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "word2": "sinoconiovacolcosilicropicoviscounmoneup"
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "word1": "aaaabbbb",
+                "word2": "bbbbcccc"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word1": "pqrstu",
+                "word2": "utsrqp"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "mamad",
+                "word2": "adam"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word1": "abcabcabc",
+                "word2": "cbacbacba"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "word1": "abacabadabacaba",
+                "word2": "abacabadabacaba"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "word1": "refer",
+                "word2": "refer"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word1": "redder",
+                "word2": "redder"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "abacdfgdcaba",
+                "word2": "gfdcbba"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "word1": "abcdefghijk",
+                "word2": "kjihgfedcba"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "word1": "mnopqr",
+                "word2": "rqponm"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "aabbaa",
+                "word2": "bbccbb"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "thisisaverylongwordtoseetifthelongestpalindrome",
+                "word2": "emordnilapelongethtofeesavaloydnevasiht"
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "word1": "xyzzxy",
+                "word2": "zyxzyxzyx"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "word1": "overlappingword",
+                "word2": "drowgnalppero"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word1": "ab",
+                "word2": "ba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word1": "zxcvbnmasdfghjkl",
+                "word2": "lkjhgfdsamnbvcxz"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "word1": "aaaaa",
+                "word2": "bbbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word1": "racecar",
+                "word2": "civic"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word1": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "word2": "zz yy xx ww vv uu tt ss rr qq pp oo nn mm ll kk jj ii hh gg ff ee dd cc bb aa"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "word1": "abcdef",
+                "word2": "fedcba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word1": "pqr",
+                "word2": "rstuv"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word1": "xyz",
+                "word2": "zyxcba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word1": "c",
+                "word2": "c"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word1": "abcabcabcabcabc",
+                "word2": "cbacbacbacbacba"
+            },
+            "expected": 30
+        }
+    ],
+    "invoke": {
+        "python": "Solution().longestPalindrome",
+        "typescript": "Solution().longestPalindrome"
+    }
+}

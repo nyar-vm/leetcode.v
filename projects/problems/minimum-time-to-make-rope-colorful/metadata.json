@@ -1,0 +1,750 @@
+{
+    "id": "minimum-time-to-make-rope-colorful",
+    "questionId": 1578,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Array", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "colors": "abcabc",
+                "neededTime": [1, 2, 3, 1, 2, 3]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaaaa",
+                "neededTime": [5, 4, 3, 2, 1]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "colors": "abacabadabacaba",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabaa",
+                "neededTime": [1, 2, 3, 4, 1]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "colors": "zzzz",
+                "neededTime": [1, 1, 1, 1]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "colors": "aaaa",
+                "neededTime": [10, 5, 4, 2]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "colors": "abcdef",
+                "neededTime": [1, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abaac",
+                "neededTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "colors": "abc",
+                "neededTime": [1, 2, 3]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abcdefg",
+                "neededTime": [1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaabbb",
+                "neededTime": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "colors": "aabbcc",
+                "neededTime": [1, 2, 3, 1, 2, 3]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "colors": "abcd",
+                "neededTime": [4, 3, 2, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "bbbaaa",
+                "neededTime": [4, 9, 3, 8, 8, 9]
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "colors": "ababab",
+                "neededTime": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "a",
+                "neededTime": [5]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabab",
+                "neededTime": [3, 5, 10, 7, 5]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "colors": "aaabbb",
+                "neededTime": [3, 5, 10, 7, 5, 3]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "colors": "a",
+                "neededTime": [1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "zzzz",
+                "neededTime": [10, 1, 1, 100]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabc",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "ababababab",
+                "neededTime": [1, 10, 2, 9, 3, 8, 4, 7, 5, 6]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaaaaaaaaabbbbbbbbbb",
+                "neededTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10]
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "colors": "aaabbbcccdddeee",
+                "neededTime": [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "colors": "aaabaaaabaaaaaaaabaa",
+                "neededTime": [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeaabbccddeeaabbccddeeaabbccdd",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2,
+                    3, 4, 5, 1, 2, 3, 4, 5
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
+                    43, 44, 45, 46, 47, 48, 49, 50
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "ababaababaaba",
+                "neededTime": [1, 3, 5, 2, 4, 6, 3, 5, 7, 4, 6, 8, 5]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "colors": "aabbaa",
+                "neededTime": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "colors": "aaaabbbbccccdddd",
+                "neededTime": [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "colors": "abacabadabacabadabacabadabacabadabacabad",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
+                    43, 44, 45, 46, 47, 48, 49, 50
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabbbcccdddeeefff",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "aabaaabbaaaabaaa",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "colors": "aaaabbbbcccc",
+                "neededTime": [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "colors": "abababababab",
+                "neededTime": [5, 4, 3, 2, 1, 5, 4, 3, 2, 1, 5, 4]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeff",
+                "neededTime": [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "colors": "aabccbaa",
+                "neededTime": [3, 5, 10, 7, 5, 3, 5, 3]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "neededTime": [
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgg",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "colors": "aaaaaaaaaa",
+                "neededTime": [1, 10, 100, 1000, 10000, 1, 10, 100, 1000, 10000]
+            },
+            "expected": 12222
+        },
+        {
+            "args": {
+                "colors": "zzzzzzzzzz",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "colors": "bbbaaabbb",
+                "neededTime": [10, 1, 1, 1, 10, 10, 1, 1, 10]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "colors": "xyzzzyx",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "colors": "aaaaaaaaaaaa",
+                "neededTime": [
+                    10000, 9999, 9998, 9997, 9996, 9995, 9994, 9993, 9992, 9991, 9990, 9989
+                ]
+            },
+            "expected": 109934
+        },
+        {
+            "args": {
+                "colors": "aabbbaaabbbaaa",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "colors": "aabacaa",
+                "neededTime": [10, 1, 1, 10, 1, 10]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                "neededTime": [
+                    1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3,
+                    4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6,
+                    7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                ]
+            },
+            "expected": 180
+        },
+        {
+            "args": {
+                "colors": "abccbaabccba",
+                "neededTime": [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "colors": "aabbbaaa",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "bbbaaaaccc",
+                "neededTime": [2, 2, 2, 1, 1, 1, 3, 3, 3]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "aabbaa",
+                "neededTime": [10, 5, 1, 1, 5, 10]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "colors": "abcabcabc",
+                "neededTime": [9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abcdefghij",
+                "neededTime": [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgghhiijjkk",
+                "neededTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabc",
+                "neededTime": [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaabbbcccddd",
+                "neededTime": [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgghhiijjkk",
+                "neededTime": [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "aaaabbbb",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
+                    43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+                ]
+            },
+            "expected": 676
+        },
+        {
+            "args": {
+                "colors": "abababababababababab",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabccbaabccbaabc",
+                "neededTime": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2, 3, 4, 5, 4, 3, 2, 1]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "colors": "aaaaabbbbbcccc",
+                "neededTime": [5, 4, 3, 2, 1, 5, 4, 3, 2, 1, 5, 4, 3]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabcabcabcabc",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abababababababababab",
+                "neededTime": [1, 9, 2, 8, 3, 7, 4, 6, 5, 5, 4, 6, 3, 7, 2, 8, 1, 9, 1, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabaaaaba",
+                "neededTime": [1, 2, 1, 1, 1, 1, 1, 2, 1]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "colors": "ababababab",
+                "neededTime": [5, 4, 5, 4, 5, 4, 5, 4, 5, 4]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabbaa",
+                "neededTime": [10, 1, 10, 2, 10, 3]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabc",
+                "neededTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 10, 9, 8, 7, 6, 5, 4, 3]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "ababaababa",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabcabcabc",
+                "neededTime": [
+                    6, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaaabbbbccccdddd",
+                "neededTime": [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgg",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgg",
+                "neededTime": [9, 8, 7, 6, 5, 4, 3, 2, 1, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "colors": "aaaaaaaaaabbbbbbbbbb",
+                "neededTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10]
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "colors": "aabbaabbcc",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "colors": "aaabaaaaba",
+                "neededTime": [5, 5, 5, 1, 1, 5, 5, 1, 1, 5]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "colors": "zzzzzzzzz",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "colors": "abcdabcde",
+                "neededTime": [1, 2, 3, 4, 1, 2, 3, 4, 5]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abcdefghijklmnopqrstuvwxyz",
+                "neededTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                    23, 24, 25, 26
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aaabaaaabaaab",
+                "neededTime": [3, 2, 1, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "colors": "abcdeffedcba",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "colors": "aabbaaabbbaaa",
+                "neededTime": [1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "colors": "zzzzzzzzzz",
+                "neededTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabc",
+                "neededTime": [10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "ababababab",
+                "neededTime": [100, 1, 100, 1, 100, 1, 100, 1, 100, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abababababab",
+                "neededTime": [1, 9, 2, 8, 3, 7, 4, 6, 5, 10, 6, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabcabcabcabcabcabcabc",
+                "neededTime": [
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabbbcccaabbcc",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "colors": "aabbaabbaabb",
+                "neededTime": [10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40]
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeff",
+                "neededTime": [10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "colors": "abcabcabcabc",
+                "neededTime": [2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "zzzzz",
+                "neededTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeffgg",
+                "neededTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "colors": "zzzzzzzzzz",
+                "neededTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "colors": "aabacbacba",
+                "neededTime": [1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "colors": "abcdabcda",
+                "neededTime": [1, 2, 3, 4, 1, 2, 3, 4, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "colors": "aabbccddeeff",
+                "neededTime": [1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "colors": "aaaabbbb",
+                "neededTime": [1, 2, 3, 4, 1, 2, 3, 4]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "colors": "abcdefghij",
+                "neededTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minCost",
+        "typescript": "Solution().minCost"
+    }
+}

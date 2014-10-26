@@ -1,0 +1,984 @@
+{
+    "id": "push-dominoes",
+    "questionId": 838,
+    "difficulty": "Medium",
+    "tags": ["Two Pointers", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "dominoes": "R..L"
+            },
+            "expected": "RRLL"
+        },
+        {
+            "args": {
+                "dominoes": "..R......L.."
+            },
+            "expected": "..RRRRLLLL.."
+        },
+        {
+            "args": {
+                "dominoes": "RRRRRRRRRR"
+            },
+            "expected": "RRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "L........R"
+            },
+            "expected": "L........R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R...R.L"
+            },
+            "expected": "L.RRRRR.L"
+        },
+        {
+            "args": {
+                "dominoes": "LLLLL"
+            },
+            "expected": "LLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "LLRRLLRRLL"
+            },
+            "expected": "LLRRLLRRLL"
+        },
+        {
+            "args": {
+                "dominoes": "LLLLLLLLLL"
+            },
+            "expected": "LLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "LLRRLLRR"
+            },
+            "expected": "LLRRLLRR"
+        },
+        {
+            "args": {
+                "dominoes": "RRRRR"
+            },
+            "expected": "RRRRR"
+        },
+        {
+            "args": {
+                "dominoes": ".L.R...LR..L.."
+            },
+            "expected": "LL.RR.LLRRLL.."
+        },
+        {
+            "args": {
+                "dominoes": "........"
+            },
+            "expected": "........"
+        },
+        {
+            "args": {
+                "dominoes": "R........"
+            },
+            "expected": "RRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "RRRRRRRRR"
+            },
+            "expected": "RRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "R....L"
+            },
+            "expected": "RRRLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L"
+            },
+            "expected": "LLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R"
+            },
+            "expected": "R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "R......L"
+            },
+            "expected": "RRRRLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L"
+            },
+            "expected": "L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "LR.LR.LR.LR"
+            },
+            "expected": "LR.LR.LR.LR"
+        },
+        {
+            "args": {
+                "dominoes": "R........L"
+            },
+            "expected": "RRRRRLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "....."
+            },
+            "expected": "....."
+        },
+        {
+            "args": {
+                "dominoes": "R.R.L.L.R"
+            },
+            "expected": "RRR.LLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "R......R.L"
+            },
+            "expected": "RRRRRRRR.L"
+        },
+        {
+            "args": {
+                "dominoes": "RR.L"
+            },
+            "expected": "RR.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.R.L.L.R.L.R.L.L.R.L.R.L.L.R.L.R.L"
+            },
+            "expected": "L.RRR.LLL.R.L.R.LLL.R.L.R.LLL.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "........L"
+            },
+            "expected": "LLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "RLRLRLRL"
+            },
+            "expected": "RLRLRLRL"
+        },
+        {
+            "args": {
+                "dominoes": "R.....L"
+            },
+            "expected": "RRR.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.L"
+            },
+            "expected": "RRR.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L"
+            },
+            "expected": "L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "......."
+            },
+            "expected": "......."
+        },
+        {
+            "args": {
+                "dominoes": "L.R.R.L.L.R"
+            },
+            "expected": "L.RRR.LLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "LLLLLLLLL"
+            },
+            "expected": "LLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "............R.L..........."
+            },
+            "expected": "............R.L..........."
+        },
+        {
+            "args": {
+                "dominoes": "R.....L.....R.....L"
+            },
+            "expected": "RRR.LLL.....RRR.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "L...R...L...R...L"
+            },
+            "expected": "L...RR.LL...RR.LL"
+        },
+        {
+            "args": {
+                "dominoes": "L...R.L...R.L...R.L"
+            },
+            "expected": "L...R.L...R.L...R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "R......L.R.L......R"
+            },
+            "expected": "RRRRLLLL.R.L......R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.R"
+            },
+            "expected": "L.R.L.R.L.R.L.RRR"
+        },
+        {
+            "args": {
+                "dominoes": "L.....R.L.....R.L.....R"
+            },
+            "expected": "L.....R.L.....R.L.....R"
+        },
+        {
+            "args": {
+                "dominoes": "...R...L...R...L..."
+            },
+            "expected": "...RR.LL...RR.LL..."
+        },
+        {
+            "args": {
+                "dominoes": "R...L...R...L...R...L"
+            },
+            "expected": "RR.LL...RR.LL...RR.LL"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": ".......L........R"
+            },
+            "expected": "LLLLLLLL........R"
+        },
+        {
+            "args": {
+                "dominoes": "R...L.L...R.R...L"
+            },
+            "expected": "RR.LLLL...RRRR.LL"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.L.L.L"
+            },
+            "expected": "LLLLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.L.L.L.L.L"
+            },
+            "expected": "RRRRRRRRRRRRR.LLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "...R.L.L.R.L.L.R.L..."
+            },
+            "expected": "...R.LLL.R.LLL.R.L..."
+        },
+        {
+            "args": {
+                "dominoes": "LLLLLLLLLLRRRRRRRRRR"
+            },
+            "expected": "LLLLLLLLLLRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "L........R........L"
+            },
+            "expected": "L........RRRRRLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L......R.R......L.L......R"
+            },
+            "expected": "L......RRRRRRLLLLLL......R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.R.L.L.R.R.L.L"
+            },
+            "expected": "L.RRR.LLL.RRR.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R"
+            },
+            "expected": "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.RRR.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.......L.L.......R.R.......L"
+            },
+            "expected": "RRRR.LLLLLL.......RRRRRR.LLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.R...L.R.L.R.L"
+            },
+            "expected": "L.RRRR.LL.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "RL.R.L.RL.R.L.RL"
+            },
+            "expected": "RL.R.L.RL.R.L.RL"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.R"
+            },
+            "expected": "RRRRRRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "RLRLRLRLRLRLRLRLRL"
+            },
+            "expected": "RLRLRLRLRLRLRLRLRL"
+        },
+        {
+            "args": {
+                "dominoes": "R....L.R.L....L"
+            },
+            "expected": "RRRLLL.R.LLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "RRRR.L.L.R..L.RR.L"
+            },
+            "expected": "RRRR.LLL.RRLL.RR.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "R.L...L.R.R...L.L.R.L...L"
+            },
+            "expected": "R.LLLLL.RRRR.LLLL.R.LLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "RR.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "RR.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "R.....L.R.....L.R.....L"
+            },
+            "expected": "RRR.LLL.RRR.LLL.RRR.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R...L.R...L"
+            },
+            "expected": "RR.LL.RR.LL"
+        },
+        {
+            "args": {
+                "dominoes": "R.........L"
+            },
+            "expected": "RRRRR.LLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "R...............................L"
+            },
+            "expected": "RRRRRRRRRRRRRRRR.LLLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "R...L.R...L.R...L.R.L"
+            },
+            "expected": "RR.LL.RR.LL.RR.LL.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.L.L.L.L"
+            },
+            "expected": "LLLLLLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "LLRRRR.LLLLLRRR.L.L.L.L.L.R"
+            },
+            "expected": "LLRRRR.LLLLLRRR.LLLLLLLLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "RRRRRR.....LLLLL"
+            },
+            "expected": "RRRRRRRR.LLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": ".......R.L......."
+            },
+            "expected": ".......R.L......."
+        },
+        {
+            "args": {
+                "dominoes": "..R.L..R.L..R.L.."
+            },
+            "expected": "..R.L..R.L..R.L.."
+        },
+        {
+            "args": {
+                "dominoes": "......R.L......"
+            },
+            "expected": "......R.L......"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "RR.LL.RR.LL.RR.LL"
+            },
+            "expected": "RR.LL.RR.LL.RR.LL"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "RR...L.L.L.R...RR"
+            },
+            "expected": "RRR.LLLLLL.RRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "LRLRLRLRLRLRLRLRLR"
+            },
+            "expected": "LRLRLRLRLRLRLRLRLR"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.L.L.L.L.L.L.L.L.R"
+            },
+            "expected": "R.LLLLLLLLLLLLLLLLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "RR.LLLLLRRRR.LLLLLRRRR.LLLLL"
+            },
+            "expected": "RR.LLLLLRRRR.LLLLLRRRR.LLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.R.R.R.R.R"
+            },
+            "expected": "LLLLLLLLL.RRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "L...R...L...R...L...R"
+            },
+            "expected": "L...RR.LL...RR.LL...R"
+        },
+        {
+            "args": {
+                "dominoes": "RR.LRR.LRR.LRR.L"
+            },
+            "expected": "RR.LRR.LRR.LRR.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "...R.L...L.R...R.L..."
+            },
+            "expected": "...R.LLLLL.RRRRR.L..."
+        },
+        {
+            "args": {
+                "dominoes": "........L...R"
+            },
+            "expected": "LLLLLLLLL...R"
+        },
+        {
+            "args": {
+                "dominoes": "L...R.L...R.L...R.L...R.L...R.L...R.L...R.L...R.L...R.L"
+            },
+            "expected": "L...R.L...R.L...R.L...R.L...R.L...R.L...R.L...R.L...R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.L"
+            },
+            "expected": "R.L.R.L.R.L.R.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "R.L....L.R.R.L"
+            },
+            "expected": "R.LLLLLL.RRR.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.R.R.L.L.R.R.L.L"
+            },
+            "expected": "LLL.RRR.LLL.RRR.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.L.L"
+            },
+            "expected": "LLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "R......L.L......R.R......L"
+            },
+            "expected": "RRRRLLLLLL......RRRRRRLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "......................................."
+            },
+            "expected": "......................................."
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.R.R.R.R.R"
+            },
+            "expected": "LLLLLLLLLLL.RRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "....R.L.....R.L...."
+            },
+            "expected": "....R.L.....R.L...."
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.L.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.LLL.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "RRRRLLLLLLLL"
+            },
+            "expected": "RRRRLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L...R.L...R.L...R"
+            },
+            "expected": "L...R.L...R.L...R"
+        },
+        {
+            "args": {
+                "dominoes": "RRRRRRRRRRLLLLLLLLLL"
+            },
+            "expected": "RRRRRRRRRRLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "RRRR.LLLLL.LLLLL.RRRR"
+            },
+            "expected": "RRRR.LLLLLLLLLLL.RRRR"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "L.....R.R...L.L.R.L"
+            },
+            "expected": "L.....RRRR.LLLL.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R........L......."
+            },
+            "expected": "RRRRRLLLLL......."
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.LLL.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.....R.....L.....R"
+            },
+            "expected": "L.....RRR.LLL.....R"
+        },
+        {
+            "args": {
+                "dominoes": "LR.LR.LR.LR.LR.LR"
+            },
+            "expected": "LR.LR.LR.LR.LR.LR"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.R.L.L.R.R.L.L.R"
+            },
+            "expected": "L.RRR.LLL.RRR.LLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.LLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "........L...R........"
+            },
+            "expected": "LLLLLLLLL...RRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R.R"
+            },
+            "expected": "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.L.R"
+            },
+            "expected": "R.L.R.L.R.L.R.LLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "........L.R........"
+            },
+            "expected": "LLLLLLLLL.RRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "..............R..............L.............."
+            },
+            "expected": "..............RRRRRRRRLLLLLLLL.............."
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.L.L.L.L.L"
+            },
+            "expected": "RRRRRRRRR.LLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": ".RR.L.L.R.R.L.L"
+            },
+            "expected": ".RR.LLL.RRR.LLL"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L"
+            },
+            "expected": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "R.L...........R"
+            },
+            "expected": "R.L...........R"
+        },
+        {
+            "args": {
+                "dominoes": ".............................."
+            },
+            "expected": ".............................."
+        },
+        {
+            "args": {
+                "dominoes": "LRR.LL.R..R.L.L...R"
+            },
+            "expected": "LRR.LL.RRRR.LLL...R"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.R.R.R"
+            },
+            "expected": "RRRRRRRRRRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "LLLLL.....RRRRR"
+            },
+            "expected": "LLLLL.....RRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.L...R...L...R.L"
+            },
+            "expected": "R.L...RR.LL...R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.R.R"
+            },
+            "expected": "RRRRRRRRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "R.R.R.R.R.R.R.R.R.R.R"
+            },
+            "expected": "RRRRRRRRRRRRRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "...R.L.R.L.R.L.R.L.R.L..."
+            },
+            "expected": "...R.L.R.L.R.L.R.L.R.L..."
+        },
+        {
+            "args": {
+                "dominoes": "........LR........"
+            },
+            "expected": "LLLLLLLLLRRRRRRRRR"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "..R...L...R...L...R"
+            },
+            "expected": "..RR.LL...RR.LL...R"
+        },
+        {
+            "args": {
+                "dominoes": "RR.L.L.R.R.L.L.R"
+            },
+            "expected": "RR.LLL.RRR.LLL.R"
+        },
+        {
+            "args": {
+                "dominoes": "R.L....R.L"
+            },
+            "expected": "R.L....R.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.L.L.L.L.L"
+            },
+            "expected": "LLLLLLLLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "RR.R.L.LRR"
+            },
+            "expected": "RRRR.LLLRR"
+        },
+        {
+            "args": {
+                "dominoes": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "R....L.R.L.R....L"
+            },
+            "expected": "RRRLLL.R.L.RRRLLL"
+        },
+        {
+            "args": {
+                "dominoes": "..R.R.L.L.R..L.L.R.."
+            },
+            "expected": "..RRR.LLL.RRLLLL.RRR"
+        },
+        {
+            "args": {
+                "dominoes": "L.R...L...R...L"
+            },
+            "expected": "L.RR.LL...RR.LL"
+        },
+        {
+            "args": {
+                "dominoes": "R.............L"
+            },
+            "expected": "RRRRRRR.LLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "R........L........R"
+            },
+            "expected": "RRRRRLLLLL........R"
+        },
+        {
+            "args": {
+                "dominoes": "LLLLRRRRLLLLRRRRLLLLRRRRLLLL"
+            },
+            "expected": "LLLLRRRRLLLLRRRRLLLLRRRRLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L...R...L...R.L"
+            },
+            "expected": "L...RR.LL...R.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.R.L.R.L.R.L.R.L"
+            },
+            "expected": "L.R.L.R.L.R.L.R.L"
+        },
+        {
+            "args": {
+                "dominoes": "L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L"
+            },
+            "expected": "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+        },
+        {
+            "args": {
+                "dominoes": "L...R.L...R.L...R.L.R"
+            },
+            "expected": "L...R.L...R.L...R.L.R"
+        },
+        {
+            "args": {
+                "dominoes": "L.R...R.L.L...R.R.L.L...R"
+            },
+            "expected": "L.RRRRR.LLL...RRR.LLL...R"
+        },
+        {
+            "args": {
+                "dominoes": "L...R....L...R"
+            },
+            "expected": "L...RRRLLL...R"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().pushDominoes",
+        "typescript": "Solution().pushDominoes"
+    }
+}

@@ -1,0 +1,901 @@
+{
+    "id": "coin-change",
+    "questionId": 322,
+    "difficulty": "Medium",
+    "tags": ["Breadth-First Search", "Array", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "coins": [186, 419, 83, 408],
+                "amount": 6249
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "coins": [3, 7, 405, 436],
+                "amount": 8839
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "coins": [3, 7, 405],
+                "amount": 8839
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 1],
+                "amount": 27
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5],
+                "amount": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4, 5],
+                "amount": 7
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "coins": [1],
+                "amount": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "coins": [5, 7, 8],
+                "amount": 100
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4],
+                "amount": 6
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "coins": [4, 2, 1],
+                "amount": 11
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4],
+                "amount": 6
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5],
+                "amount": 11
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5],
+                "amount": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "coins": [2],
+                "amount": 3
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [70, 171, 358, 439, 286],
+                "amount": 9963
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "coins": [3, 7, 405, 88, 43],
+                "amount": 6803
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "coins": [5, 7],
+                "amount": 15
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "coins": [18, 27, 41],
+                "amount": 987
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "coins": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
+                "amount": 4095
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "coins": [5, 15, 25, 50],
+                "amount": 3000
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "coins": [1, 2, 4, 8, 16],
+                "amount": 2048
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "coins": [10, 20, 30, 40, 50, 60],
+                "amount": 1234
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [3, 5, 7, 9, 11],
+                "amount": 9876
+            },
+            "expected": 898
+        },
+        {
+            "args": {
+                "coins": [18, 24, 28],
+                "amount": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "coins": [17, 29, 31, 37, 41, 43],
+                "amount": 5000
+            },
+            "expected": 118
+        },
+        {
+            "args": {
+                "coins": [3, 5],
+                "amount": 11
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "coins": [17, 29, 41, 53, 65],
+                "amount": 8300
+            },
+            "expected": 136
+        },
+        {
+            "args": {
+                "coins": [11, 22, 33, 44, 55],
+                "amount": 6600
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "coins": [34, 7, 23, 32, 5, 62],
+                "amount": 9999
+            },
+            "expected": 164
+        },
+        {
+            "args": {
+                "coins": [1, 5, 25, 50],
+                "amount": 9999
+            },
+            "expected": 208
+        },
+        {
+            "args": {
+                "coins": [2, 3, 7, 10],
+                "amount": 500
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "coins": [7, 14, 21, 28, 35, 42, 49, 56],
+                "amount": 1000
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [3, 6, 9, 12, 15],
+                "amount": 1000
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 25, 50],
+                "amount": 78
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "coins": [10, 20, 30, 40, 50],
+                "amount": 9999
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [1, 7, 11],
+                "amount": 100
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "coins": [2, 3, 6, 12, 24, 48],
+                "amount": 500
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "coins": [1, 2, 4, 8, 16, 32, 64],
+                "amount": 1023
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "coins": [1],
+                "amount": 10000
+            },
+            "expected": 10000
+        },
+        {
+            "args": {
+                "coins": [7, 14, 30, 50, 80],
+                "amount": 287
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "coins": [2, 4, 8, 16, 32, 64, 128],
+                "amount": 1023
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10, 20, 50, 100, 200],
+                "amount": 10002
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "coins": [2, 3, 5, 7, 11, 13],
+                "amount": 5000
+            },
+            "expected": 386
+        },
+        {
+            "args": {
+                "coins": [3, 5, 7, 9, 11],
+                "amount": 10000
+            },
+            "expected": 910
+        },
+        {
+            "args": {
+                "coins": [7],
+                "amount": 100
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 25, 50, 100],
+                "amount": 99999
+            },
+            "expected": 1007
+        },
+        {
+            "args": {
+                "coins": [1, 2, 3, 5, 10],
+                "amount": 5000
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "coins": [3, 6, 9, 12, 15],
+                "amount": 444
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "coins": [3, 5, 7, 11, 13],
+                "amount": 997
+            },
+            "expected": 77
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31],
+                "amount": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "coins": [7, 15, 23, 31],
+                "amount": 750
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "coins": [23, 14, 5, 12],
+                "amount": 5000
+            },
+            "expected": 220
+        },
+        {
+            "args": {
+                "coins": [11, 23, 37, 41, 43, 47, 53],
+                "amount": 12345
+            },
+            "expected": 235
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 25, 50, 100],
+                "amount": 357
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "coins": [18, 24, 27, 36, 50],
+                "amount": 999
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 25, 50],
+                "amount": 9999
+            },
+            "expected": 206
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10, 20, 50, 100, 200],
+                "amount": 9999
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 25],
+                "amount": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "coins": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
+                "amount": 1048575
+            },
+            "expected": 522
+        },
+        {
+            "args": {
+                "coins": [7, 15, 23, 42],
+                "amount": 999
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "coins": [7, 17, 23, 29, 31],
+                "amount": 1000
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4, 6, 8, 10],
+                "amount": 450
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 20, 50, 100],
+                "amount": 10001
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "coins": [2, 3, 7],
+                "amount": 100
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "coins": [5, 11, 23, 37, 41, 43, 61, 71, 73, 79, 83, 89],
+                "amount": 999
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "coins": [1, 10, 100, 1000],
+                "amount": 9999
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "coins": [1, 10, 25, 50, 100],
+                "amount": 12345
+            },
+            "expected": 126
+        },
+        {
+            "args": {
+                "coins": [186, 419, 83, 408],
+                "amount": 6249
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "coins": [2, 3, 7],
+                "amount": 27
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "coins": [3, 6, 9, 12, 15],
+                "amount": 9000
+            },
+            "expected": 600
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10, 20, 50, 100],
+                "amount": 9999
+            },
+            "expected": 105
+        },
+        {
+            "args": {
+                "coins": [5, 9, 12, 27, 31],
+                "amount": 1276
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "coins": [2, 3, 7, 11, 19, 23],
+                "amount": 987
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "coins": [10, 25, 50, 100],
+                "amount": 9876
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [2, 6, 10, 14],
+                "amount": 9999
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [10, 22, 35],
+                "amount": 1000
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "coins": [2, 5, 11, 17, 23],
+                "amount": 1000
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "coins": [23, 37, 41, 53, 67, 71],
+                "amount": 8675309
+            },
+            "expected": 122189
+        },
+        {
+            "args": {
+                "coins": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "amount": 12
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "coins": [1, 6, 10],
+                "amount": 111
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "coins": [7, 14, 33, 19, 100],
+                "amount": 12345
+            },
+            "expected": 126
+        },
+        {
+            "args": {
+                "coins": [13, 21, 34, 55, 89, 144],
+                "amount": 6765
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10],
+                "amount": 27
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "coins": [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
+                "amount": 8000
+            },
+            "expected": 277
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 25],
+                "amount": 99
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "coins": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
+                "amount": 1023
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "coins": [10, 15, 20],
+                "amount": 120
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "coins": [1, 2, 3, 4, 5],
+                "amount": 10000
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "coins": [1, 11, 21, 31],
+                "amount": 10000
+            },
+            "expected": 330
+        },
+        {
+            "args": {
+                "coins": [1, 3, 5, 7, 9],
+                "amount": 10000
+            },
+            "expected": 1112
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10, 20, 50, 100, 200],
+                "amount": 399
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "coins": [13, 19, 23, 29, 31, 37, 41],
+                "amount": 9998
+            },
+            "expected": 246
+        },
+        {
+            "args": {
+                "coins": [1, 6, 13, 37, 150],
+                "amount": 9999
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "coins": [10, 20, 50, 100, 200],
+                "amount": 10000
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "coins": [1, 5, 10, 25, 50],
+                "amount": 87
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "coins": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "amount": 10000
+            },
+            "expected": 1000
+        },
+        {
+            "args": {
+                "coins": [100, 200, 300, 400, 500],
+                "amount": 9999
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4, 5],
+                "amount": 150
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 20],
+                "amount": 98
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10, 25],
+                "amount": 9999
+            },
+            "expected": 403
+        },
+        {
+            "args": {
+                "coins": [10, 25, 50],
+                "amount": 9999
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [11, 17, 29, 31],
+                "amount": 10000
+            },
+            "expected": 324
+        },
+        {
+            "args": {
+                "coins": [7, 14, 28, 29],
+                "amount": 10000
+            },
+            "expected": 345
+        },
+        {
+            "args": {
+                "coins": [10, 25, 50],
+                "amount": 99
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4, 5, 7],
+                "amount": 10000
+            },
+            "expected": 1429
+        },
+        {
+            "args": {
+                "coins": [100, 50, 20, 10, 5, 1],
+                "amount": 19876
+            },
+            "expected": 202
+        },
+        {
+            "args": {
+                "coins": [1, 3, 4, 5],
+                "amount": 15
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 20, 50, 100],
+                "amount": 9999
+            },
+            "expected": 105
+        },
+        {
+            "args": {
+                "coins": [13, 17, 19],
+                "amount": 1234
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "coins": [1, 2, 5, 10, 20, 50, 100],
+                "amount": 3689
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "coins": [335, 23, 102, 75, 402],
+                "amount": 9783
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 20, 50],
+                "amount": 399
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "coins": [17, 29, 31, 37, 41, 43],
+                "amount": 8942
+            },
+            "expected": 208
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 20, 50, 100],
+                "amount": 363
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "coins": [12, 25, 50, 100, 200],
+                "amount": 3678
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "coins": [13, 23, 33, 43, 53],
+                "amount": 888
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "coins": [3, 6, 9, 12, 15, 18],
+                "amount": 100
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [11, 17, 23],
+                "amount": 457
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "coins": [2, 5, 10, 25],
+                "amount": 9999
+            },
+            "expected": 403
+        },
+        {
+            "args": {
+                "coins": [29, 81, 135, 50, 1],
+                "amount": 2101
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "coins": [33, 37, 41, 43, 47, 53, 59],
+                "amount": 10000
+            },
+            "expected": 170
+        },
+        {
+            "args": {
+                "coins": [5, 11, 13],
+                "amount": 10000
+            },
+            "expected": 770
+        },
+        {
+            "args": {
+                "coins": [10, 20, 50, 100],
+                "amount": 345
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [5, 10, 20, 50, 100],
+                "amount": 4321
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "coins": [13, 112, 197, 84, 205],
+                "amount": 4873
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "coins": [33, 77, 111, 155],
+                "amount": 8500
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "coins": [7, 15, 23],
+                "amount": 1000
+            },
+            "expected": 48
+        }
+    ],
+    "invoke": {
+        "python": "Solution().coinChange",
+        "typescript": "Solution().coinChange"
+    }
+}

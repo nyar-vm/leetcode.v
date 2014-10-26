@@ -1,0 +1,34 @@
+# Swap For Longest Repeated Character Substring
+
+- **LeetCode**：[#1156 Swap For Longest Repeated Character Substring](https://leetcode.com/problems/swap-for-longest-repeated-character-substring/)
+- **难度**：Medium
+- **标签**：Hash Table · String · Sliding Window
+
+## 题目
+
+You are given a string text. You can swap two of the characters in the text.
+Return the length of the longest substring with repeated characters.
+
+**Example 1**：
+
+**Input**：text = "ababa"
+**Output**：3
+**Explanation**：We can swap the first 'b' with the last 'a', or the last 'b' with the first 'a'. Then, the longest repeated character substring is "aaa" with length 3.
+
+**Example 2**：
+
+**Input**：text = "aaabaaa"
+**Output**：6
+**Explanation**：Swap 'b' with the last 'a' (or the first 'a'), and we get longest repeated character substring "aaaaaa" with length 6.
+
+**Example 3**：
+
+**Input**：text = "aaaaa"
+**Output**：5
+**Explanation**：No need to swap, longest repeated character substring is "aaaaa" with length is 5.
+
+
+**Constraints**：
+
+1 $\le \mathrm{len}(text)$ $\le 2$ * 104
+text consist of lowercase English characters only.

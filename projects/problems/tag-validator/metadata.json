@@ -1,0 +1,1398 @@
+{
+    "id": "tag-validator",
+    "questionId": 591,
+    "difficulty": "Hard",
+    "tags": ["Stack", "String"],
+    "tests": [
+        {
+            "args": {
+                "code": "<A>abc</A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[wahaha]]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[CDATA]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "This is the first line <DIV></DIV>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<![CDATA[CDATA_CONTENT]]>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B></A></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A> <B> <C></C> </B> </A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "This is the first line <DIV> [CDATA[CDATA_CONTENT]] </DIV>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": ">>  ![cdata[]] <div>]>]]>>]"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[CDATA]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "This is the first line <DIV><SPAN></SPAN></DIV>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A></A><B></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><A><A></A></A></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><TAG></TAG></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><A>456</A>  <A> 123  <B> <C>  123 </C> <B></B> </A></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<![CDATA[CDATA_CONTENT]]></DIV>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "      "
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A>text <![CDATA[CDATA_CONTENT]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[unmatched < > ]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A>abc<![CDATA[CDATA]]>def</A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><TAG>sometext</TAG></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<![CDATA[]]]]><TAG>sometext</TAG>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[CDATA_CONTENT]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A></A><A></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><A>abc</A></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[unmatched < > ]]><TAG></TAG>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<![CDATA[wahaha]]]><TAG>sometext</TAG>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B></B></A><A></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[CDATA_CONTENT]]></CDATA>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<VALID><![CDATA[<INVALID></INVALID>]]></VALID>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A>content<![CDATA[<B>content</B>]]></A><C>content</C><![CDATA[content]]></C>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><![CDATA[ignore <F> here]]></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<S><E><![CDATA[<INVALID></INVALID>]]></E></S>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<NESTEDCDATA><CDATA><![CDATA[Nested CDATA]]></CDATA>]]></NESTEDCDATA>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[unmatched <]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<UNBALANCED></UNBALANCED></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<P><![CDATA[<P><P><P><P><P><P><P>many</P></P></P></P></P></P></P>]]></P>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[abc]]></B><![CDATA[def]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><H><I><J><K></K></J></I></H></G></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B>></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><H><I><![CDATA[</I></H></G></F></E></D></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[TEXT]]></C></B><D><![CDATA[TEXT]]></D></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<B>]]></A></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[TEXT]]></B><![CDATA[TEXT]]></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[ignore <B><C></C></B> here]]><B></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<A>content</A>]]><A>content</A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[</]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<NINECHARS><INNER><INNERMOST></INNERMOST></INNER></NINECHARS>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></D>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[</A><B>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG><![CDATA[<TAG>data</TAG>]]></TAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<A>content</A>]]><B>content<![CDATA[<C>content</C>]]></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A></A>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A><B></B></A>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<AA><BB><CC><DD><![CDATA[DDDD]]></DD></CC></BB></AA>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<A>content</A>]]><B><![CDATA[<C>content</C>]]></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[TEXT]]></B><B><![CDATA[TEXT]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D><E>deep</E></D>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG><INNER><CDATA><TAG>invalid</TAG></CDATA></INNER></TAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[This is a <tag> inside CDATA]]></CDATA><TAG></TAG>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A><B></B>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG>Some text <![CDATA[<TAG>more text</TAG>]]> even more text</TAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></C>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[wahaha]]></C></B></D>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<![CDATA[ignore <A><B><C> here]]></A></B></C>]]>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><H><I><![CDATA[CDATA]]></I></H></G></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[wahaha]]></B></C></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[ignore <D></D> here]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[CDATA]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<CODE><CODE><![CDATA[CODE]]></CODE></CODE>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<T><![CDATA[This is a ]]><![CDATA[CDATA section]]></T>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A>content<![CDATA[<>]]>content</A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<LONGTAG><SHORT><LONGER></LONGER></SHORT></LONGTAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<X><Y><Z><![CDATA[X]]></Z></Y></X>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[TEXT]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D></D>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A>content<![CDATA[<B>content</B>]]>content</A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B></B>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<WRONG><TAG></WRONG></TAG>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<TAG><![CDATA[<TAG>content</TAG>]]></TAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D><E>INNER</E></D>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B>]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><![CDATA[<E>]]></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><![CDATA[FGHIJKL]]></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<MULTIPLECDATA><![CDATA[First CDATA]]></MULTIPLECDATA><![CDATA[Second CDATA]]></MULTIPLECDATA>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[wahaha]]></B></A><C></C>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<NEST><INNER1><INNER2></INNER2></INNER1></NEST>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<XYZ><XYZ><![CDATA[XYZ]]></XYZ></XYZ>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><H><I></I></H></G></F></E></D></C></B>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<OUTER><INNER><![CDATA[<OUTER><INNER>]]></INNER></OUTER>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[wahaha>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<NOTATAG><INSIDECDATA>]]></NOTATAG>]<A></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B></B></A><![CDATA[abc<def>ghi]]>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<X><![CDATA[<Y><Z></Z></Y>]]></X>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E><F><![CDATA[CDATA]]></F><G><![CDATA[CDATA]]></G><H><![CDATA[CDATA]]></H><I><![CDATA[CDATA]]></I>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A>content<![CDATA[<B>content</B>]]></A><C><![CDATA[content]]></C>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<X1><X2><X3></X3><X4><X5><X6></X6></X5></X4></X2></X1>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D>></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<INVALID><INNER></INNER></OUTER>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[abc<def>ghi]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<SINGLE><CDATA></CDATA></SINGLE><![CDATA[<![CDATA[<SINGLE>]]></SINGLE>]]>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[abc]]></B><![CDATA[def]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B></B><C></C><D></D><E></E></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<NESTED><INSIDE><MOREINSIDE>content</MOREINSIDE></INSIDE></NESTED>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<Z><Z></Z></Z><Z><Z></Z></Z>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<UNBALANCED>data</C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[wahaha>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<X><Y><Z></Z></Y></X> <![CDATA[DATA]]></X>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B>![CDATA[wahaha]]]>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG1><TAG2><![CDATA[valid CDATA]]></TAG2><TAG3>content</TAG3></TAG1>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E><F><![CDATA[CDATA]]></F>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><![CDATA[wahaha]]]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F>></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E>CDATA</E></D></C></B>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[ignore <B><C></C></B> here]]></A><B></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<UNBALANCED></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[ignore <D> here]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[ignore <B><C></C></B> here]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<A><B><C></C></B></A>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG>some <TAG> nested <TAG></TAG> tags</TAG></TAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B>content</B>]]></A><B>content</B><![CDATA[content]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<MAIN><SUB1><SUB2>data</SUB2></SUB1></MAIN>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><![CDATA[<C>content</C>]]></B>]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C>></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B>></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<VALID><INNER> <![CDATA[<INNER>CDATA_CONTENT</INNER>]]> </INNER></VALID>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<NESTED><INNER>CONTENT</INNER></NESTED>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<PARENT><CHILD><GRANDCHILD></GRANDCHILD></CHILD></PARENT><![CDATA[<PARENT><CHILD></CHILD></PARENT>]]></PARENT>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<ROOT><CHILD><![CDATA[<DIV>unparsed</DIV>]]></CHILD></ROOT>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D></E>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A></B>]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A>></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<X><Y><![CDATA[<Z>]]></X></Y></Z>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C></B></A><![CDATA[<D>]]></D>]><A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C></B><![CDATA[TEXT]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<VALID><INNER>TEXT<![CDATA[CDATA_CONTENT]]></INNER></VALID>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[CDATA]]></B></A><C><D><![CDATA[CDATA]]></D></C><E><F><![CDATA[CDATA]]></F></E><G><H><![CDATA[CDATA]]></H></G><I><J><![CDATA[CDATA]]></J></I>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C></D></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<MAIN><SUB1><SUB2></SUB2></SUB1></MAIN>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[content]]></A><B>content</B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[TEXT]]></A><![CDATA[TEXT]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<ROOT><CHILD1><GRANDCHILD></GRANDCHILD></CHILD1><CHILD2></CHILD2></ROOT>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<C></D>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<ROOT><![CDATA[<A></A>]]></ROOT>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[wahaha]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<C><D></C>]]></D></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[content]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[ignore <TAG> and </TAG> here]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<P><A><![CDATA[<BR>]]></A><SPAN>text</SPAN></P>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<OUTER><MID><![CDATA[<INNER></INNER>]]></MID></OUTER>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG1><TAG2><TAG3>CONTENT</TAG3></TAG2></TAG1>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D><E>CDATA</E></D>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[unmatched </]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha>]]></G></F></E></D></C></B>]]></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<T><T><![CDATA[<T><T>INNER</T></T>]]></T></T>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[ignore <A><B><C></C></B></A> here]]>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<TAG><![CDATA[<TAG><![CDATA[CDATA_CONTENT]]></TAG>]]></TAG>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<HELLO><WORLD><![CDATA[<HELLO>world</WORLD>]]></HELLO>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[not <CLOSING]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E>></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[TEXT]]></C><D><![CDATA[TEXT]]></D></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[</]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D><E><![CDATA[CONTENT]]></E></D>]]></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G></G></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[CDATA]]></A><B><![CDATA[CDATA]]></B><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E><F><![CDATA[CDATA]]></F><G><![CDATA[CDATA]]></G>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><H><I></I></H></G></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A>]]><C></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><![CDATA[<E><F></F>]]></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C></B><D><![CDATA[TEXT]]></D></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<NEST><INNER><![CDATA[<NEST><INNER><![CDATA[CDATA_CONTENT]]></INNER></NEST>]]></INNER></NEST>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<CORRECT><INSIDE></INSIDE></CORRECT>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><H><I><J><K><L><M><N><O><P><Q><R><S><T><U><V><W><X><Y><Z></Z></Y></X></W></V></U></T></S></R></Q></P></O></N></M></L></K></J></I></H></G></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<D><E><![CDATA[CDATA_CONTENT]]></E></D>]]></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></F></E></D></C></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B>content<![CDATA[<C>content</C>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<NOTATAG>data</NOTATAG>]]><VALID></VALID>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<LAYER1><LAYER2><LAYER3></LAYER3></LAYER2></LAYER1>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<TAG><INNER><![CDATA[<INNER>CDATA_CONTENT</INNER>]]> <![CDATA[TEXT]]></INNER></TAG>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C><![CDATA[TEXT]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[<Z><Z></Z></Z><Z><Z></Z></Z>]]></Z>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B>content</B>]]></A><C><![CDATA[content]]></C><D>content</D>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<OUTER><MID><INNER>TEXT</INNER> <![CDATA[TEXT]]></MID></OUTER>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><![CDATA[ABCDE]]></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[&]][CDATA[]]><B></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B>content</B>]]></A><C><![CDATA[content]]></C>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[content]]></A><![CDATA[morecontent]]>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<NEST><LVL1><LVL2><LVL3><![CDATA[<NEST><LVL1>deep</LVL1></NEST>]]></LVL3></LVL2></LVL1></NEST>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B>content</B><![CDATA[content]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><![CDATA[ignore <F></F> here]]></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[<A><B><C>]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<!CDATA[CDATA_CONTENT]]]]><B></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[This is a <C></C> test]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<C></C>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<OUTER><INNER><![CDATA[<INNER>CDATA</INNER>]]></INNER></OUTER>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[ignore <TAG> tags <INSIDE> </INSIDE> </TAG> ]]>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C><D><![CDATA[TEXT]]></D></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C><D></D></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<![CDATA[ignore <A><B><C></C></B></A> here]]><A></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<C><D></D></C>]]></B><C><D><![CDATA[<E><F></F></E>]]></D></C></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<ALMOST><INNER><![CDATA[</INNER>]]></ALMOST>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[unmatched ]]></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><![CDATA[wahaha>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<X><Y><![CDATA[Not a tag>]]></Y></X>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[This is some text <B></B> with CDATA]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C></C></B></A><D></D>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<A></A>]]></B></A><C><D><![CDATA[<E></E>]]></D></C>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B>content<![CDATA[<C>content</C>]]></B><![CDATA[content]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A>></B>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><C><![CDATA[wahaha]]></C></D></B></A>"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "code": "<A><B><![CDATA[<B></C>]]></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha]]></G>></F></E></D></C></B></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A>content<![CDATA[<B>content</B>]]></A>"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "code": "<A><B><C><D><E><F><G><![CDATA[wahaha>]]></F></E></D></C></B></A>"
+            },
+            "expected": false
+        }
+    ],
+    "invoke": {
+        "python": "Solution().isValid",
+        "typescript": "Solution().isValid"
+    }
+}

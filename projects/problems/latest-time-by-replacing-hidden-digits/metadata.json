@@ -1,0 +1,642 @@
+{
+    "id": "latest-time-by-replacing-hidden-digits",
+    "questionId": 1736,
+    "difficulty": "Easy",
+    "tags": ["Greedy", "String"],
+    "tests": [
+        {
+            "args": {
+                "time": "?3:?0"
+            },
+            "expected": "23:50"
+        },
+        {
+            "args": {
+                "time": "1?:22"
+            },
+            "expected": "19:22"
+        },
+        {
+            "args": {
+                "time": "?:59"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "1?:??"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "0?:59"
+            },
+            "expected": "09:59"
+        },
+        {
+            "args": {
+                "time": "23:?9"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "00:?0"
+            },
+            "expected": "00:50"
+        },
+        {
+            "args": {
+                "time": "2?:5?"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "2?:?0"
+            },
+            "expected": "23:50"
+        },
+        {
+            "args": {
+                "time": "?:?:??"
+            },
+            "expected": "2:?:9?"
+        },
+        {
+            "args": {
+                "time": "00:??"
+            },
+            "expected": "00:59"
+        },
+        {
+            "args": {
+                "time": "1?:?5"
+            },
+            "expected": "19:55"
+        },
+        {
+            "args": {
+                "time": "?9:5?"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "??:??"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "?:00"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "12:3?"
+            },
+            "expected": "12:39"
+        },
+        {
+            "args": {
+                "time": "??:00"
+            },
+            "expected": "23:00"
+        },
+        {
+            "args": {
+                "time": "0?:3?"
+            },
+            "expected": "09:39"
+        },
+        {
+            "args": {
+                "time": "1?:?9"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "00:?5"
+            },
+            "expected": "00:55"
+        },
+        {
+            "args": {
+                "time": "?9:59"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "2?:59"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "12:?5"
+            },
+            "expected": "12:55"
+        },
+        {
+            "args": {
+                "time": "1?:3?"
+            },
+            "expected": "19:39"
+        },
+        {
+            "args": {
+                "time": "20:??"
+            },
+            "expected": "20:59"
+        },
+        {
+            "args": {
+                "time": "?4:2?"
+            },
+            "expected": "14:29"
+        },
+        {
+            "args": {
+                "time": "2?:3?"
+            },
+            "expected": "23:39"
+        },
+        {
+            "args": {
+                "time": "??:45"
+            },
+            "expected": "23:45"
+        },
+        {
+            "args": {
+                "time": "23:?0"
+            },
+            "expected": "23:50"
+        },
+        {
+            "args": {
+                "time": "??:09"
+            },
+            "expected": "23:09"
+        },
+        {
+            "args": {
+                "time": "0?:2?"
+            },
+            "expected": "09:29"
+        },
+        {
+            "args": {
+                "time": "?4:?4"
+            },
+            "expected": "14:54"
+        },
+        {
+            "args": {
+                "time": "23:?5"
+            },
+            "expected": "23:55"
+        },
+        {
+            "args": {
+                "time": "23:?7"
+            },
+            "expected": "23:57"
+        },
+        {
+            "args": {
+                "time": "20:?9"
+            },
+            "expected": "20:59"
+        },
+        {
+            "args": {
+                "time": "?:23"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "?3:?2"
+            },
+            "expected": "23:52"
+        },
+        {
+            "args": {
+                "time": "0?:?4"
+            },
+            "expected": "09:54"
+        },
+        {
+            "args": {
+                "time": "?3:?8"
+            },
+            "expected": "23:58"
+        },
+        {
+            "args": {
+                "time": "???:59"
+            },
+            "expected": "23?:59"
+        },
+        {
+            "args": {
+                "time": "2??:5?"
+            },
+            "expected": "23?:5?"
+        },
+        {
+            "args": {
+                "time": "2?:1?"
+            },
+            "expected": "23:19"
+        },
+        {
+            "args": {
+                "time": "22:?8"
+            },
+            "expected": "22:58"
+        },
+        {
+            "args": {
+                "time": "0?:?9"
+            },
+            "expected": "09:59"
+        },
+        {
+            "args": {
+                "time": "2?:??"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "0?:?2"
+            },
+            "expected": "09:52"
+        },
+        {
+            "args": {
+                "time": "02:?7"
+            },
+            "expected": "02:57"
+        },
+        {
+            "args": {
+                "time": "1?:?8"
+            },
+            "expected": "19:58"
+        },
+        {
+            "args": {
+                "time": "09:?5"
+            },
+            "expected": "09:55"
+        },
+        {
+            "args": {
+                "time": "???:??"
+            },
+            "expected": "23?:9?"
+        },
+        {
+            "args": {
+                "time": "09:?3"
+            },
+            "expected": "09:53"
+        },
+        {
+            "args": {
+                "time": "?2:?7"
+            },
+            "expected": "22:57"
+        },
+        {
+            "args": {
+                "time": "1?:4?"
+            },
+            "expected": "19:49"
+        },
+        {
+            "args": {
+                "time": "2?:0?"
+            },
+            "expected": "23:09"
+        },
+        {
+            "args": {
+                "time": "??:59"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "23:?4"
+            },
+            "expected": "23:54"
+        },
+        {
+            "args": {
+                "time": "2??:3?"
+            },
+            "expected": "23?:3?"
+        },
+        {
+            "args": {
+                "time": "0??:30"
+            },
+            "expected": "09?:30"
+        },
+        {
+            "args": {
+                "time": "0?:?5"
+            },
+            "expected": "09:55"
+        },
+        {
+            "args": {
+                "time": "0?:4?"
+            },
+            "expected": "09:49"
+        },
+        {
+            "args": {
+                "time": "?:11"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "09:5?"
+            },
+            "expected": "09:59"
+        },
+        {
+            "args": {
+                "time": "1?:?0"
+            },
+            "expected": "19:50"
+        },
+        {
+            "args": {
+                "time": "?:3?"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "?:22"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "00:?9"
+            },
+            "expected": "00:59"
+        },
+        {
+            "args": {
+                "time": "2?:?5"
+            },
+            "expected": "23:55"
+        },
+        {
+            "args": {
+                "time": "1?:5?"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "19:?9"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "1?:?4"
+            },
+            "expected": "19:54"
+        },
+        {
+            "args": {
+                "time": "1?:0?"
+            },
+            "expected": "19:09"
+        },
+        {
+            "args": {
+                "time": "2?:4?"
+            },
+            "expected": "23:49"
+        },
+        {
+            "args": {
+                "time": "?0:?5"
+            },
+            "expected": "20:55"
+        },
+        {
+            "args": {
+                "time": "??:?9"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "???:00"
+            },
+            "expected": "23?:00"
+        },
+        {
+            "args": {
+                "time": "?9:?8"
+            },
+            "expected": "19:58"
+        },
+        {
+            "args": {
+                "time": "?3:?9"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "0?:5?"
+            },
+            "expected": "09:59"
+        },
+        {
+            "args": {
+                "time": "2?:?4"
+            },
+            "expected": "23:54"
+        },
+        {
+            "args": {
+                "time": "?9:?9"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "2?:00"
+            },
+            "expected": "23:00"
+        },
+        {
+            "args": {
+                "time": "?:4?"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "?2:3?"
+            },
+            "expected": "22:39"
+        },
+        {
+            "args": {
+                "time": "0?:??"
+            },
+            "expected": "09:59"
+        },
+        {
+            "args": {
+                "time": "?4:?8"
+            },
+            "expected": "14:58"
+        },
+        {
+            "args": {
+                "time": "?:?5"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "0?:?0"
+            },
+            "expected": "09:50"
+        },
+        {
+            "args": {
+                "time": "20:?4"
+            },
+            "expected": "20:54"
+        },
+        {
+            "args": {
+                "time": "1?:59"
+            },
+            "expected": "19:59"
+        },
+        {
+            "args": {
+                "time": "0?:0?"
+            },
+            "expected": "09:09"
+        },
+        {
+            "args": {
+                "time": "23:??"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "?0:?0"
+            },
+            "expected": "20:50"
+        },
+        {
+            "args": {
+                "time": "0?:1?"
+            },
+            "expected": "09:19"
+        },
+        {
+            "args": {
+                "time": "1?:2?"
+            },
+            "expected": "19:29"
+        },
+        {
+            "args": {
+                "time": "0?:?8"
+            },
+            "expected": "09:58"
+        },
+        {
+            "args": {
+                "time": "19:?8"
+            },
+            "expected": "19:58"
+        },
+        {
+            "args": {
+                "time": "?2:?5"
+            },
+            "expected": "22:55"
+        },
+        {
+            "args": {
+                "time": "0?:45"
+            },
+            "expected": "09:45"
+        },
+        {
+            "args": {
+                "time": "2?:?9"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "?3:5?"
+            },
+            "expected": "23:59"
+        },
+        {
+            "args": {
+                "time": "?:?9"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "time": "23:?8"
+            },
+            "expected": "23:58"
+        },
+        {
+            "args": {
+                "time": "09:??"
+            },
+            "expected": "09:59"
+        },
+        {
+            "args": {
+                "time": "2?:?8"
+            },
+            "expected": "23:58"
+        },
+        {
+            "args": {
+                "time": "2?:2?"
+            },
+            "expected": "23:29"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maximumTime",
+        "typescript": "Solution().maximumTime"
+    }
+}

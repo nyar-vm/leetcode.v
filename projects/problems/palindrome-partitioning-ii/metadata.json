@@ -1,0 +1,960 @@
+{
+    "id": "palindrome-partitioning-ii",
+    "questionId": 132,
+    "difficulty": "Hard",
+    "tags": ["String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "s": "abcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "ab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "noonnoon"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "racecar"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "abc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abccba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcbm"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aabbcc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "mississippi"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "leet"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdefg"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "ababcbabcba"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abacdcbaabcdeedcba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abacdfgdcabaedcba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "aabcbabcbabcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abaaabaaabaaab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "abcdeedcbaeedcba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "acbbccaaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabaaabaaabaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcbaabcba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aabbababaabbaabb"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abacba"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aaaaabaaaabaaabaaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcbaabcbaabcbaabcba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abacdcbaabcdeedcbaabcdeedcba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aaaabaaaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "noonmoonnoon"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abccbaabccba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacabacaba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abbbabbabbbabbabbbabbabbbabbbabbb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abbaabbabbabba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "noonnoonnoonnoon"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdcbe"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "ababbbababbbaba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacaba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "madamracecar"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcbac"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdedcbafedcbabcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aaaabaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabbaabb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abbbabbabbbabbabbbabbabbb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcbaababcba"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abbabbaabbabba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadabacabadabacaba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdcbaefghfeabcdcba"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "racecarabcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "xyzyxzyxyzyx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aabbccddeeeffffggg"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "levelup"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abababababababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdeedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "ababababababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "noon"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "xyxzyzyxzyxzyx"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abababababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "deeee"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcbaabcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "xyzyxzyzyxzyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abcdeedcbaabcdeedcbaabcdeedcbaabcdeedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zyxxyzyxyzyx"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "level"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bananaabananabana"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcdefghiijihgfedcba"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "aabaabaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcbaabcbaabcbaab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcd"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "madam"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abbbba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "ababababcba"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "rotorcarcarecat"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abababa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefffggg"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "ababbabaababbabaababbab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcbaabcbaabcba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abbabbabb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abbbabbbbabb"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcbabcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "banana"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcbddcba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abcbaeabcdedcba"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcbabcbabcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcbabbc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "ababababababababababababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "anana"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aababababababababababababababababababababababababababababababababababababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgg"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abbacdcba"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abaca"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abacdbacaba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "madamimadam"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghij"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcbaabcbaabcbaabcbaabcbaabcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "aabbabba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "bananaabananabananaabananabanana"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefffgggbbb"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcbaab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "racecarannakayak"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "amanaplanacanalpanama"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "noonracecar"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "noonnoonnoon"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacdbacabcba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "noonmoonnoonnoonnoonnoonnoon"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcdedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdeedcbabacdcba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "mamad"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbbccccccccc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdefgfedcbamnoponmabcdedcba"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "noonhighnoon"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "racecarlevelmadamracecar"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abacdfgdcaba"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "aabaaabbaabbaabb"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdabcabcde"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "ababababab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdedcbaabcdedcbaabcdedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "rotor"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcadacbdb"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "xyzzazxzyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aabba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabc"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "s": "ababbbababbbababb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefff"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abacdbacabcbaabcbaabcbaab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abcdcbabcdcbabcdcbabcdcb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefffggghhhhiiiii"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abacdcaba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbccccc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aabbababab"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "xyxzyzyx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abbab"
+            },
+            "expected": 1
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minCut",
+        "typescript": "Solution().minCut"
+    }
+}

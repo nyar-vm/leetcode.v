@@ -1,0 +1,1946 @@
+{
+    "id": "group-anagrams",
+    "questionId": 49,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "strs": ["a", "b", "c", "d", "e"]
+            },
+            "expected": [["a"], ["b"], ["c"], ["d"], ["e"]]
+        },
+        {
+            "args": {
+                "strs": ["abc", "bca", "cab", "xyz", "zyx", "yxz"]
+            },
+            "expected": [["abc", "bca", "cab"], ["xyz", "zyx", "yxz"]]
+        },
+        {
+            "args": {
+                "strs": ["abc", "def", "ghi", "jkl"]
+            },
+            "expected": [["abc"], ["def"], ["ghi"], ["jkl"]]
+        },
+        {
+            "args": {
+                "strs": ["abc", "acb", "bac", "bca", "cab", "cba"]
+            },
+            "expected": [["abc", "acb", "bac", "bca", "cab", "cba"]]
+        },
+        {
+            "args": {
+                "strs": ["eat", "tea", "tan", "ate", "nat", "bat"]
+            },
+            "expected": [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
+        },
+        {
+            "args": {
+                "strs": ["listen", "silent", "enlist"]
+            },
+            "expected": [["listen", "silent", "enlist"]]
+        },
+        {
+            "args": {
+                "strs": ["a"]
+            },
+            "expected": [["a"]]
+        },
+        {
+            "args": {
+                "strs": ["aabb", "bbaa", "abab", "baab", "baba", "abba", "aaaa", "bbbb"]
+            },
+            "expected": [["aabb", "bbaa", "abab", "baab", "baba", "abba"], ["aaaa"], ["bbbb"]]
+        },
+        {
+            "args": {
+                "strs": ["listen", "silent", "enlist", "google", "gooegl"]
+            },
+            "expected": [["listen", "silent", "enlist"], ["google", "gooegl"]]
+        },
+        {
+            "args": {
+                "strs": ["listen", "silent", "enlist", "google", "gooegl", "rat", "tar", "art"]
+            },
+            "expected": [
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["rat", "tar", "art"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["abc", "bac", "cab", "bca", "acb", "cba"]
+            },
+            "expected": [["abc", "bac", "cab", "bca", "acb", "cba"]]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dormitory",
+                    "dirtyroom",
+                    "conversation",
+                    "voicesranton",
+                    "listen",
+                    "silent"
+                ]
+            },
+            "expected": [
+                ["dormitory", "dirtyroom"],
+                ["conversation", "voicesranton"],
+                ["listen", "silent"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+            },
+            "expected": [["a"], ["b"], ["c"], ["d"], ["e"], ["f"], ["g"], ["h"], ["i"], ["j"]]
+        },
+        {
+            "args": {
+                "strs": ["hello", "world", "hold", "olelh", "dlrow", "owrld"]
+            },
+            "expected": [["hello", "olelh"], ["world", "dlrow", "owrld"], ["hold"]]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dormitory",
+                    "dirtyroom",
+                    "conversation",
+                    "voicesranton",
+                    "schoolmaster",
+                    "theclassroom"
+                ]
+            },
+            "expected": [
+                ["dormitory", "dirtyroom"],
+                ["conversation", "voicesranton"],
+                ["schoolmaster", "theclassroom"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["hello", "bello", "olelh", "world", "dlrow", "dlorw", "droll"]
+            },
+            "expected": [["hello", "olelh"], ["bello"], ["world", "dlrow", "dlorw"], ["droll"]]
+        },
+        {
+            "args": {
+                "strs": [""]
+            },
+            "expected": [[""]]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "cba",
+                    "bca",
+                    "bac",
+                    "acb",
+                    "cab",
+                    "abc"
+                ]
+            },
+            "expected": [
+                ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"],
+                ["cba", "bca", "bac", "acb", "cab", "abc"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abc",
+                    "abcd",
+                    "abdc",
+                    "bacd",
+                    "badc",
+                    "cabd",
+                    "cadb",
+                    "dcba",
+                    "dcab",
+                    "abcd",
+                    "abdc",
+                    "bacd",
+                    "badc",
+                    "cabd",
+                    "cadb",
+                    "dcba",
+                    "dcab",
+                    "abcd",
+                    "abdc",
+                    "bacd",
+                    "badc",
+                    "cabd",
+                    "cadb",
+                    "dcba",
+                    "dcab"
+                ]
+            },
+            "expected": [
+                ["abc"],
+                [
+                    "abcd",
+                    "abdc",
+                    "bacd",
+                    "badc",
+                    "cabd",
+                    "cadb",
+                    "dcba",
+                    "dcab",
+                    "abcd",
+                    "abdc",
+                    "bacd",
+                    "badc",
+                    "cabd",
+                    "cadb",
+                    "dcba",
+                    "dcab",
+                    "abcd",
+                    "abdc",
+                    "bacd",
+                    "badc",
+                    "cabd",
+                    "cadb",
+                    "dcba",
+                    "dcab"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "mnopqrstuvwxyzabcdefghijkl",
+                    "qrstuvwxyzaabcdefghijklmnop",
+                    "hgfedcbazyxwvutsrqponmlkjijklmnopqrstuvwxyzabcde"
+                ]
+            },
+            "expected": [
+                [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "mnopqrstuvwxyzabcdefghijkl"
+                ],
+                ["qrstuvwxyzaabcdefghijklmnop"],
+                ["hgfedcbazyxwvutsrqponmlkjijklmnopqrstuvwxyzabcde"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "child",
+                    "brink",
+                    "drink",
+                    "crimp",
+                    "crimp",
+                    "stick",
+                    "smirk",
+                    "smirk",
+                    "smith",
+                    "tinsy",
+                    "stint"
+                ]
+            },
+            "expected": [
+                ["dusty", "study"],
+                ["night", "thing"],
+                ["child"],
+                ["brink"],
+                ["drink"],
+                ["crimp", "crimp"],
+                ["stick"],
+                ["smirk", "smirk"],
+                ["smith"],
+                ["tinsy"],
+                ["stint"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "abab",
+                    "baba",
+                    "baab",
+                    "abba",
+                    "bbaa",
+                    "aabb",
+                    "abab",
+                    "baba",
+                    "baab",
+                    "abba",
+                    "bbaa"
+                ]
+            },
+            "expected": [
+                [
+                    "aabb",
+                    "abab",
+                    "baba",
+                    "baab",
+                    "abba",
+                    "bbaa",
+                    "aabb",
+                    "abab",
+                    "baba",
+                    "baab",
+                    "abba",
+                    "bbaa"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "apple",
+                    "pepal",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe",
+                    "appel",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe"
+                ]
+            },
+            "expected": [
+                [
+                    "apple",
+                    "pepal",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe",
+                    "appel",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe",
+                    "ppale",
+                    "pplea",
+                    "ppela",
+                    "elppa",
+                    "ppael",
+                    "palpe"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "delta",
+                    "tigon",
+                    "state",
+                    "taste",
+                    "date",
+                    "rated"
+                ]
+            },
+            "expected": [
+                ["dusty", "study"],
+                ["night", "thing"],
+                ["delta"],
+                ["tigon"],
+                ["state", "taste"],
+                ["date"],
+                ["rated"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["aabbcc", "abcabc", "baccab", "acbbac", "cabbaa", "aabbcc", "abcabc"]
+            },
+            "expected": [["aabbcc", "abcabc", "baccab", "acbbac", "aabbcc", "abcabc"], ["cabbaa"]]
+        },
+        {
+            "args": {
+                "strs": [
+                    "rat",
+                    "car",
+                    "tar",
+                    "arc",
+                    "cat",
+                    "tac",
+                    "act",
+                    "rat",
+                    "car",
+                    "tar",
+                    "arc",
+                    "cat",
+                    "tac",
+                    "act"
+                ]
+            },
+            "expected": [
+                ["rat", "tar", "rat", "tar"],
+                ["car", "arc", "car", "arc"],
+                ["cat", "tac", "act", "cat", "tac", "act"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaabc",
+                    "cababc",
+                    "aabbcc",
+                    "ccbaab",
+                    "abcabc",
+                    "baccab",
+                    "bacabc",
+                    "cababc",
+                    "abcabc"
+                ]
+            },
+            "expected": [
+                [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaabc",
+                    "cababc",
+                    "aabbcc",
+                    "ccbaab",
+                    "abcabc",
+                    "baccab",
+                    "bacabc",
+                    "cababc",
+                    "abcabc"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "abab",
+                    "bbaa",
+                    "abba",
+                    "baab",
+                    "aaba",
+                    "baba",
+                    "bbba",
+                    "baaa",
+                    "aaaa",
+                    "bbbb"
+                ]
+            },
+            "expected": [
+                ["aabb", "abab", "bbaa", "abba", "baab", "baba"],
+                ["aaba", "baaa"],
+                ["bbba"],
+                ["aaaa"],
+                ["bbbb"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "ab",
+                    "ba",
+                    "ac",
+                    "ca",
+                    "ad",
+                    "da",
+                    "bc",
+                    "cb",
+                    "ef",
+                    "fe",
+                    "gh",
+                    "hg",
+                    "ij",
+                    "ji",
+                    "kl",
+                    "lk",
+                    "mnop",
+                    "nopm",
+                    "opmn",
+                    "pmno",
+                    "qrst",
+                    "srqt",
+                    "tqrs",
+                    "qrst",
+                    "stqr",
+                    "qrstuv",
+                    "rstquv",
+                    "tsrquv",
+                    "uvqrst",
+                    "vqrstu",
+                    "wxyz",
+                    "xyzw",
+                    "yzwx",
+                    "zwxy"
+                ]
+            },
+            "expected": [
+                ["ab", "ba"],
+                ["ac", "ca"],
+                ["ad", "da"],
+                ["bc", "cb"],
+                ["ef", "fe"],
+                ["gh", "hg"],
+                ["ij", "ji"],
+                ["kl", "lk"],
+                ["mnop", "nopm", "opmn", "pmno"],
+                ["qrst", "srqt", "tqrs", "qrst", "stqr"],
+                ["qrstuv", "rstquv", "tsrquv", "uvqrst", "vqrstu"],
+                ["wxyz", "xyzw", "yzwx", "zwxy"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "listen",
+                    "silent",
+                    "enlist",
+                    "google",
+                    "gooegl",
+                    "rat",
+                    "tar",
+                    "art",
+                    "arc",
+                    "car",
+                    "arc"
+                ]
+            },
+            "expected": [
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["rat", "tar", "art"],
+                ["arc", "car", "arc"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "listen",
+                    "silent",
+                    "enlist",
+                    "google",
+                    "gooegl",
+                    "abc",
+                    "cab",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cba"
+                ]
+            },
+            "expected": [
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["abc", "cab", "bac", "bca", "acb", "cba"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzz",
+                    "zazaz",
+                    "zzzzz",
+                    "zz",
+                    "z",
+                    "za",
+                    "az",
+                    "zzzz",
+                    "zazaz",
+                    "zzzzz",
+                    "zz",
+                    "z",
+                    "za",
+                    "az"
+                ]
+            },
+            "expected": [
+                ["zzzz", "zzzz"],
+                ["zazaz", "zazaz"],
+                ["zzzzz", "zzzzz"],
+                ["zz", "zz"],
+                ["z", "z"],
+                ["za", "az", "za", "az"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "bbaa",
+                    "abab",
+                    "abba",
+                    "baab",
+                    "baba",
+                    "aaaa",
+                    "bbbb",
+                    "aabbcc",
+                    "ccbaab",
+                    "aabbc",
+                    "abbac",
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "zzz",
+                    "zzzz",
+                    "zzzzz"
+                ]
+            },
+            "expected": [
+                ["aabb", "bbaa", "abab", "abba", "baab", "baba"],
+                ["aaaa"],
+                ["bbbb"],
+                ["aabbcc", "ccbaab"],
+                ["aabbc", "abbac"],
+                ["abc", "acb", "bac", "bca", "cab", "cba"],
+                ["zzz"],
+                ["zzzz"],
+                ["zzzzz"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaabc",
+                    "cababc",
+                    "aabbcc",
+                    "ccbaab",
+                    "abcabc",
+                    "baccab",
+                    "bacabc",
+                    "cababc",
+                    "abcabc",
+                    "xyz",
+                    "zyx",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "zyx",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "zyx",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "yzx",
+                    "zyx",
+                    "xyz"
+                ]
+            },
+            "expected": [
+                [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaabc",
+                    "cababc",
+                    "aabbcc",
+                    "ccbaab",
+                    "abcabc",
+                    "baccab",
+                    "bacabc",
+                    "cababc",
+                    "abcabc"
+                ],
+                [
+                    "xyz",
+                    "zyx",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "zyx",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "zyx",
+                    "yzx",
+                    "zyx",
+                    "xyz",
+                    "yzx",
+                    "zyx",
+                    "xyz"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "python",
+                    "typhon",
+                    "hypton",
+                    "pythno",
+                    "ypthon",
+                    "thypno",
+                    "hypnot",
+                    "hypnotize",
+                    "notphyno",
+                    "nothpyin",
+                    " hypnot",
+                    "hypnotic",
+                    "hypnothize",
+                    "hypnothise",
+                    "notthpyin",
+                    "pythonic",
+                    "typhonian",
+                    "pythongod",
+                    "hypno",
+                    "hypnosis",
+                    "hypnotherapy",
+                    "hypnagogia",
+                    "hypnoid"
+                ]
+            },
+            "expected": [
+                ["python", "typhon", "hypton", "pythno", "ypthon", "thypno", "hypnot"],
+                ["hypnotize"],
+                ["notphyno"],
+                ["nothpyin"],
+                [" hypnot"],
+                ["hypnotic", "pythonic"],
+                ["hypnothize"],
+                ["hypnothise"],
+                ["notthpyin"],
+                ["typhonian"],
+                ["pythongod"],
+                ["hypno"],
+                ["hypnosis"],
+                ["hypnotherapy"],
+                ["hypnagogia"],
+                ["hypnoid"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "bacde",
+                    "cabde",
+                    "eabcd",
+                    "acbde",
+                    "dbcea",
+                    "adbce"
+                ]
+            },
+            "expected": [
+                [
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "bacde",
+                    "cabde",
+                    "eabcd",
+                    "acbde",
+                    "dbcea",
+                    "adbce"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed"
+                ]
+            },
+            "expected": [
+                [
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed",
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decba",
+                    "edbac",
+                    "acbed"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "adbc",
+                    "cbad",
+                    "abcd",
+                    "bcda",
+                    "abcd",
+                    "dcba",
+                    "adbc",
+                    "cbad",
+                    "abcd",
+                    "bcda",
+                    "abcd",
+                    "dcba",
+                    "adbc",
+                    "cbad",
+                    "abcd",
+                    "bcda",
+                    "abcd",
+                    "dcba"
+                ]
+            },
+            "expected": [
+                [
+                    "abcd",
+                    "dcba",
+                    "adbc",
+                    "cbad",
+                    "abcd",
+                    "bcda",
+                    "abcd",
+                    "dcba",
+                    "adbc",
+                    "cbad",
+                    "abcd",
+                    "bcda",
+                    "abcd",
+                    "dcba",
+                    "adbc",
+                    "cbad",
+                    "abcd",
+                    "bcda",
+                    "abcd",
+                    "dcba"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "cabd",
+                    "badc",
+                    "dacb",
+                    "cdab",
+                    "bcad",
+                    "bcda",
+                    "acbd",
+                    "cadb",
+                    "acdb",
+                    "abdc"
+                ]
+            },
+            "expected": [
+                [
+                    "abcd",
+                    "dcba",
+                    "cabd",
+                    "badc",
+                    "dacb",
+                    "cdab",
+                    "bcad",
+                    "bcda",
+                    "acbd",
+                    "cadb",
+                    "acdb",
+                    "abdc"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dormitory",
+                    "dirtyroom",
+                    "listen",
+                    "silent",
+                    "enlist",
+                    "google",
+                    "gooegl",
+                    "abc",
+                    "cab",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cba",
+                    "zzz",
+                    "zzzz",
+                    "zzzzz",
+                    "zzzzzz"
+                ]
+            },
+            "expected": [
+                ["dormitory", "dirtyroom"],
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["abc", "cab", "bac", "bca", "acb", "cba"],
+                ["zzz"],
+                ["zzzz"],
+                ["zzzzz"],
+                ["zzzzzz"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "cdab",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "abcd",
+                    "dcba",
+                    "abcd"
+                ]
+            },
+            "expected": [
+                ["abcd", "dcba", "abcd", "cdab", "bdac", "cabd", "bacd", "abcd", "dcba", "abcd"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "abab",
+                    "bbaa",
+                    "abba",
+                    "aaaa",
+                    "aaab",
+                    "baaa",
+                    "baba",
+                    "abba",
+                    "aabb",
+                    "abab",
+                    "bbaa",
+                    "aaaa"
+                ]
+            },
+            "expected": [
+                ["aabb", "abab", "bbaa", "abba", "baba", "abba", "aabb", "abab", "bbaa"],
+                ["aaaa", "aaaa"],
+                ["aaab", "baaa"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb",
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb",
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb",
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb"
+                ]
+            },
+            "expected": [
+                [
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb",
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb",
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb",
+                    "abcd",
+                    "dcba",
+                    "adcb",
+                    "cbad",
+                    "bdac",
+                    "cabd",
+                    "bacd",
+                    "acbd",
+                    "dbca",
+                    "bcad",
+                    "cadb"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "anagram",
+                    "nagaram",
+                    "margana",
+                    "anagrama",
+                    "anagram",
+                    "anagram",
+                    "granama",
+                    "nagaramm"
+                ]
+            },
+            "expected": [
+                ["anagram", "nagaram", "margana", "anagram", "anagram", "granama"],
+                ["anagrama"],
+                ["nagaramm"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc"
+                ]
+            },
+            "expected": [
+                ["aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa"],
+                ["bbb", "bbb", "bbb", "bbb", "bbb", "bbb", "bbb", "bbb"],
+                ["ccc", "ccc", "ccc", "ccc", "ccc", "ccc", "ccc", "ccc"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "bbaa",
+                    "abab",
+                    "baba",
+                    "abba",
+                    "baab",
+                    "abc",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cba",
+                    "zzz",
+                    "zzzz",
+                    "zzzzz",
+                    "zzzzzz",
+                    "zzzzzzz",
+                    "zzzzzzzz",
+                    "zzzzzzzzz"
+                ]
+            },
+            "expected": [
+                ["aabb", "bbaa", "abab", "baba", "abba", "baab"],
+                ["abc", "bac", "bca", "acb", "cba"],
+                ["zzz"],
+                ["zzzz"],
+                ["zzzzz"],
+                ["zzzzzz"],
+                ["zzzzzzz"],
+                ["zzzzzzzz"],
+                ["zzzzzzzzz"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "gnhit",
+                    "inthe",
+                    "night",
+                    "thing",
+                    "night",
+                    "thing",
+                    "night"
+                ]
+            },
+            "expected": [
+                ["dusty", "study"],
+                ["night", "thing", "gnhit", "night", "thing", "night", "thing", "night"],
+                ["inthe"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac"
+                ]
+            },
+            "expected": [
+                [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac",
+                    "abcabc",
+                    "bcaacb",
+                    "cababc",
+                    "bcacab",
+                    "bacbac",
+                    "aabbcc",
+                    "aabbcc",
+                    "aabcbc",
+                    "bcaabc",
+                    "abacbc",
+                    "babcac"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaabc",
+                    "cababc",
+                    "abccba",
+                    "acbbac",
+                    "baccab",
+                    "bcacab",
+                    "bacbac",
+                    "acbacb",
+                    "bacbac",
+                    "bacbac",
+                    "bacbac",
+                    "bacbac",
+                    "bacbac"
+                ]
+            },
+            "expected": [
+                [
+                    "aabbcc",
+                    "abcabc",
+                    "bcaabc",
+                    "cababc",
+                    "abccba",
+                    "acbbac",
+                    "baccab",
+                    "bcacab",
+                    "bacbac",
+                    "acbacb",
+                    "bacbac",
+                    "bacbac",
+                    "bacbac",
+                    "bacbac",
+                    "bacbac"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "eight",
+                    "gnite",
+                    "inthe",
+                    "front",
+                    "trofn",
+                    "gnhet",
+                    "gfno",
+                    "gnfoe",
+                    "thingo",
+                    "niothg",
+                    "ightn"
+                ]
+            },
+            "expected": [
+                ["dusty", "study"],
+                ["night", "thing", "ightn"],
+                ["eight"],
+                ["gnite"],
+                ["inthe"],
+                ["front", "trofn"],
+                ["gnhet"],
+                ["gfno"],
+                ["gnfoe"],
+                ["thingo", "niothg"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "rat",
+                    "car",
+                    "tar",
+                    "arc",
+                    "arc",
+                    "rta",
+                    "cat",
+                    "tac",
+                    "act",
+                    "cta",
+                    "tca",
+                    "atc"
+                ]
+            },
+            "expected": [
+                ["rat", "tar", "rta"],
+                ["car", "arc", "arc"],
+                ["cat", "tac", "act", "cta", "tca", "atc"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "fghij",
+                    "jihgf",
+                    "mnopq",
+                    "qponm",
+                    "rstuv",
+                    "vutsr",
+                    "wxyz",
+                    "zyxw",
+                    "aaaaa",
+                    "bbbbb",
+                    "ccccc",
+                    "ddddd",
+                    "eeeee",
+                    "zzzzz"
+                ]
+            },
+            "expected": [
+                ["abcde", "edcba"],
+                ["fghij", "jihgf"],
+                ["mnopq", "qponm"],
+                ["rstuv", "vutsr"],
+                ["wxyz", "zyxw"],
+                ["aaaaa"],
+                ["bbbbb"],
+                ["ccccc"],
+                ["ddddd"],
+                ["eeeee"],
+                ["zzzzz"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "listen",
+                    "silent",
+                    "enlist",
+                    "google",
+                    "gooegl",
+                    "inlets",
+                    "banana",
+                    "anabna",
+                    "xyz",
+                    "zyx"
+                ]
+            },
+            "expected": [
+                ["listen", "silent", "enlist", "inlets"],
+                ["google", "gooegl"],
+                ["banana", "anabna"],
+                ["xyz", "zyx"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba", "abcd", "abcd", "dcba", "abcd", "dcba", "abcd", "abcd"]
+            },
+            "expected": [["abcd", "dcba", "abcd", "abcd", "dcba", "abcd", "dcba", "abcd", "abcd"]]
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z",
+                    "aaaa",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "bbbb",
+                    "bbb",
+                    "bb",
+                    "b",
+                    "cccc",
+                    "ccc",
+                    "cc",
+                    "c",
+                    "dddd",
+                    "ddd",
+                    "dd",
+                    "d",
+                    "eeee",
+                    "eee",
+                    "ee",
+                    "e"
+                ]
+            },
+            "expected": [
+                ["zzzz"],
+                ["zzz"],
+                ["zz"],
+                ["z"],
+                ["aaaa"],
+                ["aaa"],
+                ["aa"],
+                ["a"],
+                ["bbbb"],
+                ["bbb"],
+                ["bb"],
+                ["b"],
+                ["cccc"],
+                ["ccc"],
+                ["cc"],
+                ["c"],
+                ["dddd"],
+                ["ddd"],
+                ["dd"],
+                ["d"],
+                ["eeee"],
+                ["eee"],
+                ["ee"],
+                ["e"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "listen",
+                    "silent",
+                    "enlist",
+                    "google",
+                    "gooegl",
+                    "rat",
+                    "tar",
+                    "art",
+                    "elbow",
+                    "below"
+                ]
+            },
+            "expected": [
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["rat", "tar", "art"],
+                ["elbow", "below"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["listen", "silent", "enlist", "google", "gooegl", "abc", "cab", "bac"]
+            },
+            "expected": [
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["abc", "cab", "bac"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "xyz",
+                    "zyx",
+                    "yxz",
+                    "xzy",
+                    "zyx",
+                    "yzy",
+                    "xyx",
+                    "xxy",
+                    "xyy",
+                    "yxx",
+                    "yyx",
+                    "yyy",
+                    "xxx"
+                ]
+            },
+            "expected": [
+                ["xyz", "zyx", "yxz", "xzy", "zyx"],
+                ["yzy"],
+                ["xyx", "xxy", "yxx"],
+                ["xyy", "yyx"],
+                ["yyy"],
+                ["xxx"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "enlist",
+                    "google",
+                    "gogole",
+                    "inlets",
+                    "abc",
+                    "cba",
+                    "bac",
+                    "zyx",
+                    "xyz",
+                    "xyzzyx",
+                    "zyxzyx"
+                ]
+            },
+            "expected": [
+                ["dusty", "study"],
+                ["night", "thing"],
+                ["enlist", "inlets"],
+                ["google", "gogole"],
+                ["abc", "cba", "bac"],
+                ["zyx", "xyz"],
+                ["xyzzyx", "zyxzyx"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "hello",
+                    "ohell",
+                    "lohel",
+                    "ollhe",
+                    "elohl",
+                    "",
+                    "",
+                    "",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a"
+                ]
+            },
+            "expected": [
+                ["hello", "ohell", "lohel", "ollhe", "elohl"],
+                ["", "", ""],
+                ["a", "a", "a", "a", "a"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "listen",
+                    "silent",
+                    "enlist",
+                    "google",
+                    "gooegl",
+                    "rat",
+                    "tar",
+                    "art",
+                    "rom",
+                    "mor",
+                    "arm",
+                    "rmo"
+                ]
+            },
+            "expected": [
+                ["listen", "silent", "enlist"],
+                ["google", "gooegl"],
+                ["rat", "tar", "art"],
+                ["rom", "mor", "rmo"],
+                ["arm"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "abcabc",
+                    "aabbbc",
+                    "aacbbc",
+                    "aabcc",
+                    "abcacb",
+                    "abacbc",
+                    "bbaacc",
+                    "abccba",
+                    "bcaacb"
+                ]
+            },
+            "expected": [
+                ["aabbcc", "abcabc", "aacbbc", "abcacb", "abacbc", "bbaacc", "abccba", "bcaacb"],
+                ["aabbbc"],
+                ["aabcc"]
+            ]
+        },
+        {
+            "args": {
+                "strs": ["listen", "silent", "enlist", "google", "gooegl", "inlets", "banana"]
+            },
+            "expected": [["listen", "silent", "enlist", "inlets"], ["google", "gooegl"], ["banana"]]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decab",
+                    "cabed",
+                    "edbac",
+                    "baced",
+                    "deabc",
+                    "ebadc",
+                    "acbed"
+                ]
+            },
+            "expected": [
+                [
+                    "abcde",
+                    "edcba",
+                    "bcdea",
+                    "decab",
+                    "cabed",
+                    "edbac",
+                    "baced",
+                    "deabc",
+                    "ebadc",
+                    "acbed"
+                ]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "abc",
+                    "bcd",
+                    "cab",
+                    "bac",
+                    "bca",
+                    "cba",
+                    "xyz",
+                    "zyx",
+                    "yxz",
+                    "zy",
+                    "yz",
+                    "z",
+                    "a",
+                    "b",
+                    "c"
+                ]
+            },
+            "expected": [
+                ["abc", "cab", "bac", "bca", "cba"],
+                ["bcd"],
+                ["xyz", "zyx", "yxz"],
+                ["zy", "yz"],
+                ["z"],
+                ["a"],
+                ["b"],
+                ["c"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "a",
+                    "b",
+                    "c",
+                    "aa",
+                    "bb",
+                    "cc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaaa",
+                    "bbbb",
+                    "cccc"
+                ]
+            },
+            "expected": [
+                ["a"],
+                ["b"],
+                ["c"],
+                ["aa"],
+                ["bb"],
+                ["cc"],
+                ["aaa"],
+                ["bbb"],
+                ["ccc"],
+                ["aaaa"],
+                ["bbbb"],
+                ["cccc"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "inhti",
+                    "ytsud",
+                    "ytsdu",
+                    "gnith",
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "inhti",
+                    "ytsud",
+                    "ytsdu",
+                    "gnith",
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "inhti",
+                    "ytsud",
+                    "ytsdu",
+                    "gnith",
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "inhti",
+                    "ytsud",
+                    "ytsdu",
+                    "gnith"
+                ]
+            },
+            "expected": [
+                [
+                    "dusty",
+                    "study",
+                    "ytsud",
+                    "ytsdu",
+                    "dusty",
+                    "study",
+                    "ytsud",
+                    "ytsdu",
+                    "dusty",
+                    "study",
+                    "ytsud",
+                    "ytsdu",
+                    "dusty",
+                    "study",
+                    "ytsud",
+                    "ytsdu"
+                ],
+                [
+                    "night",
+                    "thing",
+                    "gnith",
+                    "night",
+                    "thing",
+                    "gnith",
+                    "night",
+                    "thing",
+                    "gnith",
+                    "night",
+                    "thing",
+                    "gnith"
+                ],
+                ["inhti", "inhti", "inhti", "inhti"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "ab",
+                    "ba",
+                    "abc",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "acb",
+                    "abc",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "acb"
+                ]
+            },
+            "expected": [
+                ["ab", "ba"],
+                ["abc", "cba", "bac", "bca", "cab", "acb", "abc", "cba", "bac", "bca", "cab", "acb"]
+            ]
+        },
+        {
+            "args": {
+                "strs": [
+                    "dusty",
+                    "study",
+                    "night",
+                    "thing",
+                    "sight",
+                    "fling",
+                    "tying",
+                    "sting",
+                    "dusty"
+                ]
+            },
+            "expected": [
+                ["dusty", "study", "dusty"],
+                ["night", "thing"],
+                ["sight"],
+                ["fling"],
+                ["tying"],
+                ["sting"]
+            ]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().groupAnagrams",
+        "typescript": "Solution().groupAnagrams"
+    }
+}

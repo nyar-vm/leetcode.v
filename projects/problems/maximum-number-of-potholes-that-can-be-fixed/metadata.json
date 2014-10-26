@@ -1,0 +1,908 @@
+{
+    "id": "maximum-number-of-potholes-that-can-be-fixed",
+    "questionId": 3119,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "String", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "road": "xxxx",
+                "budget": 6
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "..",
+                "budget": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "x.x.xxx...x",
+                "budget": 14
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxx.xxxx",
+                "budget": 12
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "road": "xx.xx.xx.xx",
+                "budget": 15
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "road": "x",
+                "budget": 2
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "road": "x.x.x.x",
+                "budget": 6
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "road": "xxx.xxx.xx",
+                "budget": 15
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x",
+                "budget": 20
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "x.xxxxx.x",
+                "budget": 15
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x",
+                "budget": 15
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.x.x.x",
+                "budget": 8
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "xxxxx",
+                "budget": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.x.x",
+                "budget": 5
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxx",
+                "budget": 10
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "x...x...x...x",
+                "budget": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "xxx...xxx",
+                "budget": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x",
+                "budget": 6
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "road": "xxxxx",
+                "budget": 6
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "...",
+                "budget": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "...",
+                "budget": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x",
+                "budget": 7
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "road": ".x.x.x.x.",
+                "budget": 8
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "...",
+                "budget": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxx",
+                "budget": 20
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "x.xxxxx.x",
+                "budget": 10
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "xxxx",
+                "budget": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "........",
+                "budget": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "..xxxxx",
+                "budget": 4
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxx",
+                "budget": 100
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "...xxx...xxxx...xxxxx...xxxxxx",
+                "budget": 35
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "road": "............",
+                "budget": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxxxxxxxxxx",
+                "budget": 50
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 50
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 40
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x",
+                "budget": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 30
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "budget": 50
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxx...xxxxxxxxx...xxxxxxxxx",
+                "budget": 30
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "road": "xxxxx...xxxxx",
+                "budget": 20
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "xxxxxx",
+                "budget": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxx",
+                "budget": 15
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxx.xxxxxxxxx.xxxxx",
+                "budget": 40
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "road": "xx..xx..xx",
+                "budget": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x",
+                "budget": 50
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "...xxxxxxx....xxxxx...",
+                "budget": 20
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "road": "xx.xx.xx.xx.xx.xx.xx",
+                "budget": 20
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxx...xxxxxxxxx",
+                "budget": 30
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 30
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "road": "x.xxxx.xxxxxx.xxxxxxxx",
+                "budget": 30
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "road": "....xxxxx.....xxxxx.....xxxxx....",
+                "budget": 40
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "xx..xx...xx....xx.....xx......xx.......xx........xx.........xx..........xx",
+                "budget": 50
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxxxxxxx",
+                "budget": 30
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 40
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "road": "xxxx.xxxx.xxxx",
+                "budget": 25
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 30
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x",
+                "budget": 15
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxxx.xxxxx.xxxxx",
+                "budget": 20
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "...........................",
+                "budget": 50
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 40
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "road": "...x...x...x...x...x...",
+                "budget": 12
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.x...x...x...x...x...x...x...x...x...x",
+                "budget": 20
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "x.x...x.x.x.x...x.x.x",
+                "budget": 15
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x",
+                "budget": 25
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "x.xxxxx.xxxxx.x",
+                "budget": 25
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "road": "xxxx.xxxxx.xxxxx.xxxxx",
+                "budget": 25
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "road": "x.x...x.x...x.x...x",
+                "budget": 12
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxx",
+                "budget": 100
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxx........x....x.......xxxxxxx",
+                "budget": 30
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxx...xxxxxxxxxxx...xxxxxxxxxxx",
+                "budget": 70
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxx",
+                "budget": 15
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "........x........x........x",
+                "budget": 3
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "road": "x.xxxxx.x",
+                "budget": 12
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "xxxxx.xxxxx.xxxxx.xxxxx.xxxxx",
+                "budget": 80
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "road": "xxxx.xxxx.xxxx.xxxx.xxxx",
+                "budget": 25
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxx",
+                "budget": 10
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x",
+                "budget": 12
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxx..xxx..xx",
+                "budget": 15
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x",
+                "budget": 50
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 25
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "road": "x",
+                "budget": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "x......x......x......x......x......x......x",
+                "budget": 35
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "....",
+                "budget": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "...xxx.xxxx...xx.xx.xxxxx",
+                "budget": 25
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "road": "xxxx...xxxx...xxxx",
+                "budget": 25
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "road": "x..x...x...x..x",
+                "budget": 12
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "...xxxxxx...",
+                "budget": 8
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 100
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 20
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "road": "x.x...x..x...x...x..x...x",
+                "budget": 30
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "road": "xxxxx.xxxxx.xxxxx.xxxxx.xxxxx",
+                "budget": 30
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x",
+                "budget": 21
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "x.xxxx.xxxx.xxxxx",
+                "budget": 20
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxx",
+                "budget": 20
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x",
+                "budget": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x",
+                "budget": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "...xxxxx...",
+                "budget": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "...",
+                "budget": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "x..xx..xx..x",
+                "budget": 15
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxxxx.xxxxx.xxxxx",
+                "budget": 40
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "road": "x....x...x....x...x",
+                "budget": 15
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.xxxxx.xxxxx.xxxxx.xxxxx",
+                "budget": 30
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 60
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "road": "x.xxxxxx.xxxxxx.xxxxxx",
+                "budget": 60
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "road": ".x.x.x.x.x.x.x.x.x.",
+                "budget": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x...x...x...x...x",
+                "budget": 15
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x",
+                "budget": 18
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "budget": 100
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "road": "xxxx.xxxxx",
+                "budget": 15
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 30
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxx",
+                "budget": 25
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "xxxx....xxx....xx",
+                "budget": 20
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "road": "........x....x........x....x........",
+                "budget": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "xxxxxxx...xxx.xx.x.x",
+                "budget": 20
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxx",
+                "budget": 9
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "road": "............",
+                "budget": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "road": "...x...x...x...x...x...x",
+                "budget": 20
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "xxxx...xxx",
+                "budget": 11
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "road": "xxxxxxxxxxxxxxxxxxx",
+                "budget": 25
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "road": "x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x",
+                "budget": 60
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "road": "................x............x............x............x............x............x............",
+                "budget": 20
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": "...x....x....x....x....x",
+                "budget": 15
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "road": ".............x.............",
+                "budget": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "road": "xxxxxxx...xxxxx....xxx",
+                "budget": 25
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "road": "x..xx..x",
+                "budget": 8
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "road": "xx..xx..xx..xx..xx..xx..xx..xx",
+                "budget": 20
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "road": "x..x..x..x..x..x",
+                "budget": 15
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "road": ".x.x.x.x.x.x.x.x.x.x",
+                "budget": 15
+            },
+            "expected": 7
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maxPotholes",
+        "typescript": "Solution().maxPotholes"
+    }
+}

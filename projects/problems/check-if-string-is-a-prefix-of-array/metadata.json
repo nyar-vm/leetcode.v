@@ -1,0 +1,887 @@
+{
+    "id": "check-if-string-is-a-prefix-of-array",
+    "questionId": 1961,
+    "difficulty": "Easy",
+    "tags": ["Array", "Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "aaaa",
+                "words": ["aa", "aa"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hello",
+                "words": ["he", "ll", "o"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abc",
+                "words": ["a"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abc",
+                "words": ["a", "bc"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "a",
+                "words": ["a", "b", "c"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["a", "bcd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "cat",
+                "words": ["ca", "t"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["abc", "d"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hello",
+                "words": ["he", "l", "lo"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abc",
+                "words": ["ab", "c"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "",
+                "words": ["a", "b", "c"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "iloveleetcode",
+                "words": ["apples", "i", "love", "leetcode"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "hello",
+                "words": ["he", "llo"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["a", "b", "c", "d"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["ab", "cd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["abcd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "iloveleetcode",
+                "words": ["i", "love", "leetcode", "apples"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "words": ["x", "y", "z"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abc",
+                "words": ["a", "b", "c"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["abc"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "complexprefixstring",
+                "words": ["complex", "prefix", "string", "extra"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aquickbrownfox",
+                "words": ["a", "quick", "brown", "fox", "jumps"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "onetwothree",
+                "words": ["one", "two", "three", "four", "five"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "words": ["algo", "r", "ith", "m"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "python",
+                "words": ["py", "th", "on", "n"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "complexprefix",
+                "words": ["com", "ple", "xpre", "fix"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "concatenate",
+                "words": ["con", "cat", "en", "ate"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "algorithms",
+                "words": ["algo", "rithm", "s", "data"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "words": ["abra", "ca", "da", "bra", "bra"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "substring",
+                "words": ["sub", "str", "ing", "example"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "onetwothreefour",
+                "words": ["one", "two", "three", "four", "five"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "words": ["x", "y", "z", "w"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefixstring",
+                "words": ["pre", "fix", "string"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "programming",
+                "words": ["pro", "gram", "ming"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "concatenate",
+                "words": ["con", "cat", "e", "nate"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "words": ["this", "is", "a", "test", "case"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "substring",
+                "words": ["sub", "string", "abc"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "words": ["mis", "si", "ssippi", "p"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefixprefix",
+                "words": ["pre", "fix", "pre", "fix", "pre", "fix"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "words": ["a", "b", "c", "def", "ghi"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "words": ["this", "is", "a", "test", "case"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "words": ["a", "b", "c", "d", "e", "f", "g"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aaabbbccc",
+                "words": ["aaa", "bbb", "ccc", "ddd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hello",
+                "words": ["h", "he", "hel", "hell", "hello"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdabc",
+                "words": ["ab", "c", "d", "abc", "def"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "complexstring",
+                "words": ["com", "plex", "string", "other"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "words": ["abcd", "ef", "gh", "ijk"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "uniqueprefix",
+                "words": ["unique", "prefix", "not"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefix",
+                "words": ["pre", "fix", "e", "f", "g"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "oneonetwo",
+                "words": ["one", "one", "two", "three"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "xyzzy",
+                "words": ["xy", "zz", "y", "z"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "partialmatch",
+                "words": ["partial", "non", "matching", "words"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "prefixmatching",
+                "words": ["pre", "fix", "mat", "ching"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "overlapexample",
+                "words": ["over", "lap", "ex", "ample"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "boundary",
+                "words": ["bound", "ary", "extra"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "partialmatch",
+                "words": ["par", "tial", "match", "nomatch"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdabcd",
+                "words": ["abcd", "abcd", "abcd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "oneonetwo",
+                "words": ["one", "one", "two", "three"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "words": ["abc", "def", "ghi", "j"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "words": ["mis", "si", "ss", "ippi"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "matchmaking",
+                "words": ["mat", "ch", "mak", "ing"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "words": ["a", "bc", "de", "fg", "xyz"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefix",
+                "words": ["pre", "fix", "ed", "abc"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefix",
+                "words": ["pre", "fix", "post"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "mnopqr",
+                "words": ["mn", "op", "qr", "st"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "programminglanguage",
+                "words": ["pro", "gram", "ming", "lan", "guage"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hellohello",
+                "words": ["hello", "hello", "world"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefixstring",
+                "words": ["pre", "fix", "str", "ing"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "words": ["he", "ll", "o", "there"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "concatenation",
+                "words": ["con", "cat", "en", "ation"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hellohello",
+                "words": ["hello", "hello", "hello"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hello",
+                "words": ["h", "e", "l", "l", "o", "world"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "words": ["quick", "brown", "fox", "jump"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghi",
+                "words": ["abc", "def", "ghi", "jkl"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "one",
+                "words": ["on", "e", "extra"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "notprefix",
+                "words": ["prefix", "not"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "words": ["a", "bc", "def", "gh"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefixstring",
+                "words": ["prefix", "string", "extra"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefix",
+                "words": ["pre", "fi", "x"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "longword",
+                "words": ["lo", "ng", "wor", "d"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "xxyyyzzz",
+                "words": ["xx", "yyy", "zzz", "a"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "concatenation",
+                "words": ["con", "cat", "en", "ation"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "unique",
+                "words": ["un", "iq", "ue"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "words": ["algo", "r", "ith", "m"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "variouslengths",
+                "words": ["vari", "ous", "length", "s"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "two",
+                "words": ["tw", "o", "tw", "o"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdabcd",
+                "words": ["abc", "d", "abcd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "wordplay",
+                "words": ["word", "play", "game", "time"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "programming",
+                "words": ["pro", "gram", "ming", "lang"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "concatenation",
+                "words": ["con", "cat", "enation", "ation"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "words": ["super", "cali", "fragilistic", "expiali", "docious"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "words": ["a", "bc", "de", "fghi", "j"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "words": ["algo", "rith", "m"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "testcase",
+                "words": ["tes", "t", "ca", "se"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "concatenation",
+                "words": ["con", "cat", "e", "na", "tion"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "words": ["abc", "def", "ghi", "j"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "words": ["x", "y", "z", "a", "b", "c"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefixtest",
+                "words": ["pre", "fix", "test", "suffix"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "repeated",
+                "words": ["rep", "e", "ated"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "matchingprefix",
+                "words": ["matching", "prefix", "matching", "prefix"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdexyz",
+                "words": ["abc", "de", "xyz", "mnop"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccdd",
+                "words": ["aa", "bb", "cc", "d", "d"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "words": ["a", "b", "c", "def"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "words": ["pro", "gram", "ming", "is", "fun"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "short",
+                "words": ["shor", "t"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "words": ["mis", "si", "s", "ip", "pi"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "repeatedword",
+                "words": ["repeated", "word", "repeated"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "rapiddevelopment",
+                "words": ["rap", "id", "devel", "op", "ment"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "onetwothree",
+                "words": ["one", "two", "three", "four"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "interviewquestion",
+                "words": ["inter", "view", "quest", "ion"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdabcd",
+                "words": ["abcd", "abcd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "longstring",
+                "words": ["long", "string", "extrastuff"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "words": ["xy", "z", "a", "b"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "words": ["this", "is", "a", "test"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "words": ["abc", "def", "g", "h"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "words": ["he", "ll", "ot", "her", "e"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "buildingblocks",
+                "words": ["building", "block", "s"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "words": ["abc", "de", "f", "gh", "ij"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "prefixmatch",
+                "words": ["prefix", "ma", "tch"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "python",
+                "words": ["py", "th", "on", "o"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "python",
+                "words": ["py", "t", "h", "o", "n", "extra"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbcc",
+                "words": ["aa", "bb", "cc", "dd"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abacax",
+                "words": ["aba", "c", "ax", "a"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbcc",
+                "words": ["aa", "bb", "cc", "dd"]
+            },
+            "expected": true
+        }
+    ],
+    "invoke": {
+        "python": "Solution().isPrefixString",
+        "typescript": "Solution().isPrefixString"
+    }
+}

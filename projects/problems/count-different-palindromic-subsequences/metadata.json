@@ -1,0 +1,540 @@
+{
+    "id": "count-different-palindromic-subsequences",
+    "questionId": 730,
+    "difficulty": "Hard",
+    "tags": ["String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "s": "abba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abccba"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abcba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abac"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcddcbadcbadcbadcbadcbadcbadcbadcba"
+            },
+            "expected": 104860361
+        },
+        {
+            "args": {
+                "s": "aabbaa"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 29348
+        },
+        {
+            "args": {
+                "s": "abcddcba"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "s": "bccb"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aabb"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abab"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadabacaba"
+            },
+            "expected": 2571
+        },
+        {
+            "args": {
+                "s": "ababbabaabbababbab"
+            },
+            "expected": 212
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcdeabcdeabcde"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabb"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccaaaabbbbccccaaaabbbbcccc"
+            },
+            "expected": 996
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcde"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "ddccbbbaaacccbdd"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc"
+            },
+            "expected": 84
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbccccddddaaaaabbbbbccccddddaaaaabbbbbccccddddaaaaabbbbbccccddddaaaaabbbbbccccddddaaaaabbbbbccccddddaaaaabbbbbccccdddd"
+            },
+            "expected": 127372410
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeffffffffffgggggggggghhhhhhhhhh"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "abcddcbaabcddcba"
+            },
+            "expected": 340
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd"
+            },
+            "expected": 72
+        },
+        {
+            "args": {
+                "s": "abababababababababababababababab"
+            },
+            "expected": 8358
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddaaaabbbbccccdddd"
+            },
+            "expected": 224
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefffggghhhhiiiijjjkkklllmmmmmnnnooooppppqqqqrrrsssttttuuuuvvvvwxxxxyyzz"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "abacaba"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 450061485
+        },
+        {
+            "args": {
+                "s": "aaaabbbaaaaabbbbaaaaabbbbaaaaabbbbaaaaabbbbaaaaabbbbaaaa"
+            },
+            "expected": 61293
+        },
+        {
+            "args": {
+                "s": "abcdcba"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadaaaabbbbccccddddeeeeffff"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "acbdca"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 320164
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababababababababababababababababababababababab"
+            },
+            "expected": 672623781
+        },
+        {
+            "args": {
+                "s": "abcdbca"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "abccbaabccbaabccba"
+            },
+            "expected": 446
+        },
+        {
+            "args": {
+                "s": "abcdabcdaabbccbddc"
+            },
+            "expected": 184
+        },
+        {
+            "args": {
+                "s": "aabbccddeedccbbaa"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "ababababababab"
+            },
+            "expected": 106
+        },
+        {
+            "args": {
+                "s": "abababababab"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "s": "abcababcababcababcababcababcababcababcab"
+            },
+            "expected": 237716
+        },
+        {
+            "args": {
+                "s": "abcdabcdaabbccbddcddcbaabccbddcddcba"
+            },
+            "expected": 17166
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc"
+            },
+            "expected": 504
+        },
+        {
+            "args": {
+                "s": "aababaababaababaababaababaababaababaababaababaababa"
+            },
+            "expected": 442187
+        },
+        {
+            "args": {
+                "s": "abbbccaddccbbbaabbbccaddccbbba"
+            },
+            "expected": 4260
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd"
+            },
+            "expected": 244
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcd"
+            },
+            "expected": 812
+        },
+        {
+            "args": {
+                "s": "ddccbbbaaacccbbbaaacccbdd"
+            },
+            "expected": 607
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 38097140
+        },
+        {
+            "args": {
+                "s": "dddddddddddddddddddddddd"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "abababababababababab"
+            },
+            "expected": 462
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcde"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba"
+            },
+            "expected": 232
+        },
+        {
+            "args": {
+                "s": "dcbadcbadcbadcbadcbadcb"
+            },
+            "expected": 2219
+        },
+        {
+            "args": {
+                "s": "aabababababababa"
+            },
+            "expected": 161
+        },
+        {
+            "args": {
+                "s": "abcdabcd"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbcccc"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abccccddddddbbbaaaadddbbbbccccaaaabbbccbbccbbccbbccbbccbbccbbbbaaaaddbbbbccccaaaaadddbbbbccccaaaabbbccbbccbbccbbccbbccbbccbbbbaaaadd"
+            },
+            "expected": 584072730
+        },
+        {
+            "args": {
+                "s": "dcbaabcd"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "s": "abracadabraabracadabra"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "abcabcdabcabcdabcabcdabcabcdabcabcdabcabcdabcabcdabcabcdabcabcdabcabcdabcabcd"
+            },
+            "expected": 852725823
+        },
+        {
+            "args": {
+                "s": "abcdabcdbabcdbabcdb"
+            },
+            "expected": 607
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffaabbccddeeff"
+            },
+            "expected": "Error: list assignment index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccdddd"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadabacabad"
+            },
+            "expected": 2784
+        },
+        {
+            "args": {
+                "s": "abbaabbaabba"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 96936
+        },
+        {
+            "args": {
+                "s": "aabbccddccbbaa"
+            },
+            "expected": 106
+        },
+        {
+            "args": {
+                "s": "abccbaabcba"
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "s": "abababababababababababab"
+            },
+            "expected": 1216
+        },
+        {
+            "args": {
+                "s": "ababababab"
+            },
+            "expected": 38
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcda"
+            },
+            "expected": 198263755
+        },
+        {
+            "args": {
+                "s": "abcabc"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 125826312
+        },
+        {
+            "args": {
+                "s": "abcdcbadcbadcbabcd"
+            },
+            "expected": 432
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabc"
+            },
+            "expected": 2952
+        },
+        {
+            "args": {
+                "s": "dcbbabdccacbaaadbcbbabcbbb"
+            },
+            "expected": 934
+        },
+        {
+            "args": {
+                "s": "ababa"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": 320443980
+        },
+        {
+            "args": {
+                "s": "ddddcbbaabcdccbdddbddbcccbdbabdbbaccabdbdddcbbaabaddabbdcbbaabcddbacccbadcbbaabcdccbdddbddbcccbdbabdbbaccabdbddd"
+            },
+            "expected": 923039370
+        },
+        {
+            "args": {
+                "s": "abcadcbadcbadcb"
+            },
+            "expected": 210
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcddcbadcbadcbadcbadcbadcbadcbadcbaabcd"
+            },
+            "expected": 649659461
+        },
+        {
+            "args": {
+                "s": "abcdcbaabcdcbaabcdcba"
+            },
+            "expected": 1694
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countPalindromicSubsequences",
+        "typescript": "Solution().countPalindromicSubsequences"
+    }
+}

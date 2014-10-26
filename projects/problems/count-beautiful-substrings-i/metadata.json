@@ -1,0 +1,642 @@
+{
+    "id": "count-beautiful-substrings-i",
+    "questionId": 2947,
+    "difficulty": "Medium",
+    "tags": ["Hash Table", "Math", "String", "Enumeration", "Number Theory", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "s": "aeaeaeae",
+                "k": 8
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxyz",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aebcdfe",
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "baeyh",
+                "k": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aebcdeedaa",
+                "k": 4
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "bcdf",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "",
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abba",
+                "k": 1
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "bcdfgh",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccdd",
+                "k": 2
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "a",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabb",
+                "k": 2
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aeiou",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "b",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 4
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiou",
+                "k": 25
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbaaeeiioouuccddffgg",
+                "k": 10
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiou",
+                "k": 200
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeioubcdfgh",
+                "k": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aeioubcdfghjklmnpqrstvwxyzaeioubcdfghjklmnpqrstvwxyz",
+                "k": 12
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "vowelsandconsonantsareimportant",
+                "k": 12
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "k": 3
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "aebcdfeab",
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aeioubcdefghijklmnopqrstuvwxyz",
+                "k": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "vowelsconsonantsvowelsconsonants",
+                "k": 8
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "vowelsandconsonants",
+                "k": 6
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgg",
+                "k": 12
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aebcdefghijklmnopqrstuvwxyz",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaabbbbbbbbbbcccccccccc",
+                "k": 25
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bbbbbbaaaaeiiuuuccccc",
+                "k": 15
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmixedcharacters",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 12
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "beautifulstring",
+                "k": 3
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghij",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "consonantsandvowelsareequal",
+                "k": 14
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou",
+                "k": 25
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zzzzzaaaaabbbbcccc",
+                "k": 16
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aeioubcdfg",
+                "k": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "bcdfg",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeiouaeiou",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeiou",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbaaeebbeeaabbaa",
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 49
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaeeiioouubbbccddffgg",
+                "k": 10
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "k": 9
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 6
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "vowelsandconsonants",
+                "k": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "xylophoneaeiouaeiou",
+                "k": 12
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "exampleexampleexample",
+                "k": 9
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 6
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "xylophoneisfun",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "beautifulstringwithvowelsandconsonants",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeiouaeiou",
+                "k": 25
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeiouzzzzzzzzzz",
+                "k": 200
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeioubcdfghjklmnpqrstvwxyz",
+                "k": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 21
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bbaaeeddbb",
+                "k": 4
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "eeeeeeeeeeaaaaaaaaaaiiiiiiiiiiooooooooouuuuuuuuuu",
+                "k": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zzzzyyyyxxxx",
+                "k": 9
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithvowelsandconsonants",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thisisbeautifulstringwithvariousvowelsandconsonants",
+                "k": 8
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeioubcdfghjklmnpqrstvwxy",
+                "k": 11
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "beautifulstringwithvowelandconsonants",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "consonantsconsonantsconsonants",
+                "k": 30
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "mamamamamamamamama",
+                "k": 2
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmanyvowelsandconsonants",
+                "k": 12
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "vowelsarebeautiful",
+                "k": 6
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxyzaeiou",
+                "k": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxyzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 8
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeaeaeaeaeaeaeaeaeae",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiou",
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 15
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaeeeiioouu",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxybcdfghjklmnpqrstvwxy",
+                "k": 9
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz",
+                "k": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 50
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().beautifulSubstrings",
+        "typescript": "Solution().beautifulSubstrings"
+    }
+}

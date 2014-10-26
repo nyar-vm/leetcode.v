@@ -1,0 +1,1198 @@
+{
+    "id": "groups-of-special-equivalent-strings",
+    "questionId": 893,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "words": ["abcd", "abdc", "cdab", "cdba", "dcba", "bacd"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcd", "abdc", "cdab", "cdba"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl", "mno", "pqr"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["aabb", "bbaa", "abab", "baba", "abba", "baab"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aabb", "abab", "baba", "bbaa", "abba", "baab"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcde", "edcba", "acebd", "decab", "bdeca", "cabed"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abc", "acb", "bac", "bca", "cab", "cba"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcde", "abced", "adcbe", "aebcd", "eabcd", "ebacd"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["aabb", "bbaa", "abab", "baba", "aaaa", "bbbb"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["abcd", "cdab", "cbad", "xyzz", "zzxy", "zzyx"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcde", "edcba", "abced", "decba"]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["aabb", "bbaa", "abab", "baba"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "mnopqr",
+                    "nopqr",
+                    "opqr",
+                    "pqr",
+                    "qr",
+                    "r",
+                    "mnopqrs",
+                    "nopqrs",
+                    "opqrs",
+                    "pqr",
+                    "qr",
+                    "r",
+                    "mnopqrst",
+                    "nopqrst",
+                    "opqrst",
+                    "pqrst",
+                    "qrst",
+                    "rst",
+                    "st",
+                    "t"
+                ]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdeabcde",
+                    "cdeabcdeab",
+                    "deabcdeabc",
+                    "eabcdeabcd",
+                    "abcdecdeab",
+                    "bacdecdeba",
+                    "cabdecdeab",
+                    "cbadecdeba",
+                    "abcdefedcb",
+                    "fedcbaedcb",
+                    "gfedcbedcb",
+                    "bacdefedcb",
+                    "defabcdecb",
+                    "cabfedecba",
+                    "cbafedecba",
+                    "dcbaefdcba",
+                    "efabcdecba",
+                    "fedcbaecba",
+                    "gfedcbedcb",
+                    "bacdefecba"
+                ]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": [
+                    "xxyyzz",
+                    "yyzzxx",
+                    "zzxxyy",
+                    "yxzyxz",
+                    "yzyxzx",
+                    "zyzyyx",
+                    "zyxzyx",
+                    "xyzzyx"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bbaacc",
+                    "ccabba",
+                    "aabbcc",
+                    "bbaacc",
+                    "ccabba",
+                    "aabbcc",
+                    "bbaacc"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbaacc", "ababcc", "babcac", "cabcab", "acbacb"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzz"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdef", "bacdef", "decfab", "fedcba", "fedbac", "defacb"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaaccddeeff",
+                    "aacbbddeeff",
+                    "ddffeeaabbbc",
+                    "effeeddabbcc",
+                    "bbccddfeea",
+                    "ccddeeffaabb",
+                    "effddcbaabbb"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefg",
+                    "gfedcba",
+                    "bdfhace",
+                    "fhdbaec",
+                    "acegfb",
+                    "bfhacd",
+                    "fhbdcae",
+                    "gacfbde"
+                ]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": [
+                    "xyzzxy",
+                    "zzxyxy",
+                    "zxyzyx",
+                    "xyzyzx",
+                    "zyxzyx",
+                    "yxzyxz",
+                    "zyxzyx",
+                    "zxzyzx"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "xyxzyxzyx",
+                    "yxzyxzyxy",
+                    "xzyxzyxzy",
+                    "zyxzyxzyx",
+                    "yxyxzyxzy",
+                    "xyzzyxzyx"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bbaacc",
+                    "abacbc",
+                    "babcac",
+                    "aabbccdd",
+                    "ddccbb",
+                    "abcdabcd",
+                    "cdabcdab",
+                    "abcdabdc",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd",
+                    "abcdabcd"
+                ]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "abcdefghji",
+                    "jihgfedcba",
+                    "ihgfedcbaj",
+                    "jihgfedabc",
+                    "abcdefghij",
+                    "cbadefghij"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaaabbbb", "bbbaaa", "abababab", "babaabab", "bababaab", "abababba"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdabcd",
+                    "cdabcdab",
+                    "bacdbacd",
+                    "dcbadabc",
+                    "badcabcd",
+                    "dcababcd",
+                    "abcdadcb"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "fedcba",
+                    "gfedcb",
+                    "bacdef",
+                    "defabc",
+                    "cabfed",
+                    "cbafed",
+                    "dcbaef",
+                    "efabcd",
+                    "fedabc",
+                    "gfedcb",
+                    "bacdef",
+                    "defabc",
+                    "cabfed",
+                    "cbafed",
+                    "dcbaef",
+                    "efabcd",
+                    "fedabc",
+                    "gfedcb",
+                    "bacdef"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "bacdefghij",
+                    "cbadefghij",
+                    "abcdefghij",
+                    "ijabcdefgh",
+                    "hgfedcba",
+                    "abcdefghij",
+                    "bacdefghij"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bbaaccaabb",
+                    "ababcc",
+                    "aabcbcba",
+                    "ccbaab",
+                    "bccabaab",
+                    "abccbaab",
+                    "baccbaab",
+                    "aabbccba",
+                    "bbaabbcc"
+                ]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["abcdabcd", "cdabcdab", "cbadabcd", "xyzzxyzz", "zzxyzzxy", "zzyxzzyx"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abac", "baca", "caba", "acba", "abca", "baca", "caba", "acba"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "bacdef",
+                    "cbadef",
+                    "abcdefg",
+                    "gfedcba",
+                    "fedcbag",
+                    "gfedabc",
+                    "gfdecba"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "ghfedcba",
+                    "abcdghfe",
+                    "bacdefgh",
+                    "hgfedcba",
+                    "abcdefgh",
+                    "ghfedcba",
+                    "bacdefgh"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbaacc", "abacbc", "accabb", "abcabc", "cbaabc"]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": [
+                    "mnopqr",
+                    "qrpmno",
+                    "pqmron",
+                    "opmqrn",
+                    "rnmqpo",
+                    "nqrpom",
+                    "mnopqr",
+                    "qrpmno",
+                    "pqmron",
+                    "opmqrn",
+                    "rnmqpo",
+                    "nqrpom"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["abcdef", "acbedf", "abefcd", "efabcd", "cbadef", "fedcba"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": [
+                    "abcde",
+                    "edcba",
+                    "deabc",
+                    "cdeab",
+                    "bcdea",
+                    "aebcd",
+                    "abced",
+                    "bcdea",
+                    "cdeab",
+                    "deabc",
+                    "edcba",
+                    "abcde"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefg",
+                    "bacdefg",
+                    "cbadefg",
+                    "dcbaefg",
+                    "edcbafg",
+                    "fedcgb",
+                    "gfedcba"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaaccddeeff",
+                    "aacbbddeeff",
+                    "deeffaabbcc",
+                    "efdeaabbcc",
+                    "ccddeeffaabb"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaaccddeeff",
+                    "abbaccddeeff",
+                    "aabbccceeffd",
+                    "aabbccddeff",
+                    "bbaaccddeeff",
+                    "abbaccddeeff",
+                    "aabbccceeffd",
+                    "aabbccddeff",
+                    "bbaaccddeeff",
+                    "abbaccddeeff",
+                    "aabbccceeffd",
+                    "aabbccddeff",
+                    "bbaaccddeeff",
+                    "abbaccddeeff",
+                    "aabbccceeffd",
+                    "aabbccddeff",
+                    "bbaaccddeeff",
+                    "abbaccddeeff",
+                    "aabbccceeffd"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "defabc",
+                    "bcdefa",
+                    "efabcd",
+                    "fabcde",
+                    "abcdefg",
+                    "defabce",
+                    "bcdefag",
+                    "efabcdg",
+                    "fabcdeg",
+                    "abcdefh",
+                    "defabceg",
+                    "bcdefagh",
+                    "efabcdgh",
+                    "fabcdegh",
+                    "abcdef",
+                    "defabc",
+                    "bcdefa",
+                    "efabcd",
+                    "fabcde",
+                    "abcdefg",
+                    "defabce",
+                    "bcdefag",
+                    "efabcdg",
+                    "fabcdeg",
+                    "abcdefh",
+                    "defabceg",
+                    "bcdefagh",
+                    "efabcdgh",
+                    "fabcdegh"
+                ]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "fedcba",
+                    "bdfeca",
+                    "fdbeca",
+                    "acefbd",
+                    "bfecad",
+                    "fdbeca",
+                    "gacfbde",
+                    "abcdefg",
+                    "gfedcba",
+                    "bdfhace",
+                    "fhdbaec",
+                    "acegfb",
+                    "bfhacd",
+                    "fhbdcae",
+                    "gacfbde",
+                    "mnopqr",
+                    "qrpmno",
+                    "pqmron",
+                    "opmqrn",
+                    "rnmqpo",
+                    "nqrpom",
+                    "mnopqr",
+                    "qrpmno",
+                    "pqmron",
+                    "opmqrn",
+                    "rnmqpo",
+                    "nqrpom"
+                ]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaaddccffee",
+                    "aacccbbbddffee",
+                    "ddffeeaaabbbcc",
+                    "bbccddaaffee",
+                    "ffeeddaabbcc",
+                    "ccddeeffaabbbb",
+                    "ddeeffaacccbbbbb"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcabc",
+                    "bacbac",
+                    "cababc",
+                    "abcbac",
+                    "baccab",
+                    "acbacb",
+                    "acbbac",
+                    "bacbac"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh",
+                    "abcdefgh"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": [
+                    "pqrstuvw",
+                    "qrstuvwp",
+                    "rstuvwqp",
+                    "stuvwqpr",
+                    "tuvwqprs",
+                    "uvwqprst",
+                    "vwqprstu",
+                    "wqprstuv",
+                    "qprstuvw",
+                    "prstuvqw",
+                    "rstuvqwp",
+                    "stuvqprw",
+                    "tuvqprws",
+                    "uvqprwst",
+                    "vqprwstu",
+                    "qprwstuv"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": [
+                    "mnopqr",
+                    "opqrmn",
+                    "pqrmon",
+                    "qrmpno",
+                    "rmpnoq",
+                    "mpnoqr",
+                    "nqrmpo",
+                    "qrpmno"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["abcdef", "defabc", "bcadef", "fedcba", "defacb", "efabcd"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "fedcba",
+                    "efabcd",
+                    "cdefab",
+                    "bacdef",
+                    "defabc",
+                    "fabcde",
+                    "abcdefg",
+                    "gfedcba",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz",
+                    "zzzzzz"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "efghabcd",
+                    "hgfedcba",
+                    "cdabefgh",
+                    "bacdefgh",
+                    "cbadefgh",
+                    "fedcbaab",
+                    "ghfedcba",
+                    "abcdabef",
+                    "efghabcdab"
+                ]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "gfedcba", "cdabefg", "efgabcd", "fedcbag", "bacdefg"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijk",
+                    "abcdefghijk",
+                    "abcdefghijk",
+                    "abcdefghijk",
+                    "abcdefghijk",
+                    "abcdefghijk"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "gfedcba", "cebgfad", "bacdfeg", "adgfceb", "fdgecab"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "aaabbbccc",
+                    "bbbaaaccc",
+                    "aabbccabb",
+                    "bbccaaabb",
+                    "ccbbbaaab",
+                    "aabbbccc",
+                    "bbbaaaccc",
+                    "aabbccabb"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["xyzxyz", "zyxzyx", "yzxyzx", "xzyzxz", "zyxzxy", "zxyxzy"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccdd",
+                    "bbaaddcc",
+                    "ababcdcd",
+                    "babcadcd",
+                    "cbadcbad",
+                    "dcbadabc",
+                    "abcdabcd",
+                    "badcabcd"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdabcd",
+                    "cdabcdab",
+                    "bacdbacd",
+                    "abcdcdab",
+                    "cdababcd",
+                    "bacdabcd",
+                    "abcdabcd",
+                    "cdabcdab"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["zzzzzzzz", "zzzzzzzz", "zzzzzzzz", "zzzzzzzz", "zzzzzzzz", "zzzzzzzz"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "bacdefgh",
+                    "decfghab",
+                    "fedghabc",
+                    "fedcbagh",
+                    "defghacb",
+                    "gfedcbah",
+                    "hgfedcba"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaaddeeccff",
+                    "ababcdcdefef",
+                    "babaabcdcdef",
+                    "ccddeeffabcd",
+                    "ddaabbccdefe",
+                    "abcdccddeeff",
+                    "ccddeeffaabb",
+                    "bbccddeeffaa",
+                    "aabbddeeffcc",
+                    "fedcbafedcba",
+                    "defcbafedcba",
+                    "efcbadfedcba",
+                    "cdefbafedcba",
+                    "bacdefedcba",
+                    "abcdefedcba",
+                    "fedcbadefcba",
+                    "defcbadefcba",
+                    "efcbadfedcba",
+                    "cdefbafedcba",
+                    "bacdefedcba",
+                    "abcdebcdfa",
+                    "defcbedabcfa",
+                    "efcbadefabcf",
+                    "cdefbafedabcf",
+                    "bacdefedabcf",
+                    "abcdebcfabcf"
+                ]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "hgfedcba",
+                    "efghabcd",
+                    "cdefghab",
+                    "bacdefgh",
+                    "defghcab",
+                    "fghabcde",
+                    "ghabcdef",
+                    "habcdefg",
+                    "abcdefghg",
+                    "gfedcbaa",
+                    "efghabcd",
+                    "cdefghab",
+                    "bacdefgh",
+                    "defghcab",
+                    "fghabcde",
+                    "ghabcdef",
+                    "habcdefg",
+                    "abcdefghh",
+                    "gfedcbab"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "bacdefghij",
+                    "jihgfedcba",
+                    "bacdefghij",
+                    "jihgfedcba"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "bdfhjacegi",
+                    "fhjdgbacae",
+                    "acegfbidhj",
+                    "bfhacdijeg",
+                    "fhbdcaejg",
+                    "gacfbdehji"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bbaacc",
+                    "abacbc",
+                    "cababc",
+                    "acbacb",
+                    "bcabac",
+                    "cabcab",
+                    "abcabc"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccdd",
+                    "bbaaddcc",
+                    "ababcdcd",
+                    "babaabcd",
+                    "ccddabcd",
+                    "ddaabbcc",
+                    "abcdccdd",
+                    "ccddabba",
+                    "bbccddaa",
+                    "aabbddcc"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "bacdefgh",
+                    "cbadefgh",
+                    "abcdfehg",
+                    "gfedcba",
+                    "hgfedcba",
+                    "abcdefgh",
+                    "bacdefgh"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaacceeddff",
+                    "aabcbceddeff",
+                    "aabbccddfeef",
+                    "bbaacceeddff",
+                    "aabcbceddeff",
+                    "aabbccddeeff",
+                    "bbaacceeddff"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "acegbdfh", "agbfcehd", "hgfedcba", "efghabcd", "ceafghbd"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "ffeeddccbbaa",
+                    "bbaaccddffee",
+                    "ffeeddccbbaa",
+                    "aabbccddeeff",
+                    "ffeeddccbbaa"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["zzzzzz", "zzzzzz", "zzzzzz", "zzzzzz", "zzzzzz", "zzzzzz"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdef", "bacdef", "cbadef", "defabc", "fedcba", "efdcba", "fabced"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "bacdefgh",
+                    "cbadefgh",
+                    "defghabc",
+                    "fedcbagh",
+                    "efdcgbah",
+                    "gahfedcb",
+                    "hgfedcba"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaaccddeeff",
+                    "ababccddeeff",
+                    "bbacacddeeff",
+                    "aabbccddeeff",
+                    "aabbcdeeffcc",
+                    "aaabbbcccddd"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "xyzxyz",
+                    "yzxzyx",
+                    "zxyxyz",
+                    "xyzyxz",
+                    "yzxyzx",
+                    "zxyzxy",
+                    "xyzxzy",
+                    "yzzxyx",
+                    "zyxxyz",
+                    "xzyzyx"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["xyzabc", "yzxcba", "zxcbya", "zyxcba", "yxzabc", "yxzcba", "zxycba"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "gfedcba", "bacdefg", "gfedcba", "bacdefg", "gfedcba"]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": [
+                    "ababab",
+                    "bababa",
+                    "ababab",
+                    "bababa",
+                    "ababab",
+                    "bababa",
+                    "ababab",
+                    "bababa",
+                    "ababab",
+                    "bababa",
+                    "ababab",
+                    "bababa"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": [
+                    "mnopqr",
+                    "mopnqr",
+                    "mpnoqr",
+                    "mnopqr",
+                    "pmonqr",
+                    "pmqnor",
+                    "npoqmr",
+                    "qmonpr"
+                ]
+            },
+            "expected": 5
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numSpecialEquivGroups",
+        "typescript": "Solution().numSpecialEquivGroups"
+    }
+}

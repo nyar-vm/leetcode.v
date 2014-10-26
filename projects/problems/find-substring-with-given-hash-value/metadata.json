@@ -1,0 +1,992 @@
+{
+    "id": "find-substring-with-given-hash-value",
+    "questionId": 2156,
+    "difficulty": "Hard",
+    "tags": ["String", "Sliding Window", "Hash Function", "Rolling Hash"],
+    "tests": [
+        {
+            "args": {
+                "s": "zxcvbnm",
+                "power": 10,
+                "modulo": 1000000007,
+                "k": 4,
+                "hashValue": 807311072
+            },
+            "expected": "vbnm"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "power": 5,
+                "modulo": 11,
+                "k": 3,
+                "hashValue": 4
+            },
+            "expected": "dab"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz",
+                "power": 29,
+                "modulo": 1000000007,
+                "k": 4,
+                "hashValue": 78608631
+            },
+            "expected": "zzzz"
+        },
+        {
+            "args": {
+                "s": "leetcode",
+                "power": 7,
+                "modulo": 20,
+                "k": 2,
+                "hashValue": 0
+            },
+            "expected": "ee"
+        },
+        {
+            "args": {
+                "s": "fbxzaad",
+                "power": 31,
+                "modulo": 100,
+                "k": 3,
+                "hashValue": 32
+            },
+            "expected": "fbx"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "power": 26,
+                "modulo": 101,
+                "k": 5,
+                "hashValue": 53
+            },
+            "expected": "vwxyz"
+        },
+        {
+            "args": {
+                "s": "a",
+                "power": 1,
+                "modulo": 1,
+                "k": 1,
+                "hashValue": 0
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "zaz",
+                "power": 26,
+                "modulo": 29,
+                "k": 2,
+                "hashValue": 27
+            },
+            "expected": "az"
+        },
+        {
+            "args": {
+                "s": "a",
+                "power": 13,
+                "modulo": 97,
+                "k": 1,
+                "hashValue": 1
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "power": 13,
+                "modulo": 50,
+                "k": 5,
+                "hashValue": 37
+            },
+            "expected": "klmno"
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "power": 2,
+                "modulo": 11,
+                "k": 3,
+                "hashValue": 7
+            },
+            "expected": "cde"
+        },
+        {
+            "args": {
+                "s": "a",
+                "power": 5,
+                "modulo": 13,
+                "k": 1,
+                "hashValue": 1
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "mmcp",
+                "power": 13,
+                "modulo": 457,
+                "k": 2,
+                "hashValue": 33
+            },
+            "expected": "cp"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatweneedtofindasubstringwithagivenhashvalue",
+                "power": 5,
+                "modulo": 1000000009,
+                "k": 12,
+                "hashValue": 543
+            },
+            "expected": "venhashvalue"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 29,
+                "modulo": 101,
+                "k": 20,
+                "hashValue": 95
+            },
+            "expected": "zzzzzzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "hellothereeveryone",
+                "power": 37,
+                "modulo": 101,
+                "k": 6,
+                "hashValue": 74
+            },
+            "expected": "eryone"
+        },
+        {
+            "args": {
+                "s": "complexityisimportantinbigdatatechnology",
+                "power": 19,
+                "modulo": 1000000009,
+                "k": 8,
+                "hashValue": 543210987
+            },
+            "expected": "chnology"
+        },
+        {
+            "args": {
+                "s": "zxcvbnmasdfghjklqwertyuiop",
+                "power": 29,
+                "modulo": 1000000007,
+                "k": 6,
+                "hashValue": 563872
+            },
+            "expected": "tyuiop"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 19,
+                "modulo": 1000000007,
+                "k": 26,
+                "hashValue": 267973410
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "power": 17,
+                "modulo": 1000000009,
+                "k": 7,
+                "hashValue": 123456789
+            },
+            "expected": "wxxyyzz"
+        },
+        {
+            "args": {
+                "s": "abababababababababababababababababababababababababab",
+                "power": 5,
+                "modulo": 1000000003,
+                "k": 11,
+                "hashValue": 543210987
+            },
+            "expected": "bababababab"
+        },
+        {
+            "args": {
+                "s": "a",
+                "power": 7,
+                "modulo": 13,
+                "k": 1,
+                "hashValue": 1
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "power": 19,
+                "modulo": 1000000007,
+                "k": 4,
+                "hashValue": 683
+            },
+            "expected": "ippi"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 11,
+                "modulo": 79,
+                "k": 20,
+                "hashValue": 10
+            },
+            "expected": "zzzzzzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "power": 19,
+                "modulo": 83,
+                "k": 15,
+                "hashValue": 28
+            },
+            "expected": "abcabcabcabcabc"
+        },
+        {
+            "args": {
+                "s": "lkjihgfedcbazyxwvutsrqponml",
+                "power": 41,
+                "modulo": 1000000009,
+                "k": 14,
+                "hashValue": 102474831
+            },
+            "expected": "yxwvutsrqponml"
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababababababababababab",
+                "power": 11,
+                "modulo": 1000000007,
+                "k": 10,
+                "hashValue": 543210987
+            },
+            "expected": "ababababab"
+        },
+        {
+            "args": {
+                "s": "powerrangers",
+                "power": 29,
+                "modulo": 97,
+                "k": 4,
+                "hashValue": 53
+            },
+            "expected": "gers"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 17,
+                "modulo": 53,
+                "k": 10,
+                "hashValue": 49
+            },
+            "expected": "qrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+                "power": 2,
+                "modulo": 13,
+                "k": 8,
+                "hashValue": 7
+            },
+            "expected": "bcdefghi"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 999999937,
+                "modulo": 1000000007,
+                "k": 10000,
+                "hashValue": 123456789
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "s": "mmmmmmmmmabcdefghimnopqrstuvwxyz",
+                "power": 37,
+                "modulo": 1000000007,
+                "k": 8,
+                "hashValue": 987654321
+            },
+            "expected": "stuvwxyz"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatweneedtofindthesubstringwiththespecifiedhashvalue",
+                "power": 13,
+                "modulo": 1000000007,
+                "k": 20,
+                "hashValue": 345234657
+            },
+            "expected": "hespecifiedhashvalue"
+        },
+        {
+            "args": {
+                "s": "thisisjustanexampleofalongsstringwithseveralhashvalues",
+                "power": 3,
+                "modulo": 100,
+                "k": 4,
+                "hashValue": 15
+            },
+            "expected": "lues"
+        },
+        {
+            "args": {
+                "s": "qponmlkjihgfedcbaabcdefghijklmnopqrstuvwxyz",
+                "power": 43,
+                "modulo": 1000000007,
+                "k": 22,
+                "hashValue": 872889924
+            },
+            "expected": "efghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "power": 37,
+                "modulo": 100000007,
+                "k": 50,
+                "hashValue": 876543210
+            },
+            "expected": "bbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba",
+                "power": 43,
+                "modulo": 1000000007,
+                "k": 25,
+                "hashValue": 54321
+            },
+            "expected": "yxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "xylophonepianoxylophonepianoxylophonepianoxyloph",
+                "power": 23,
+                "modulo": 1000000009,
+                "k": 9,
+                "hashValue": 765432109
+            },
+            "expected": "anoxyloph"
+        },
+        {
+            "args": {
+                "s": "abcdefghijkabcdefghijkabcdefghijk",
+                "power": 19,
+                "modulo": 1000000009,
+                "k": 11,
+                "hashValue": 123456789
+            },
+            "expected": "abcdefghijk"
+        },
+        {
+            "args": {
+                "s": "mississippiissi",
+                "power": 5,
+                "modulo": 1000000007,
+                "k": 7,
+                "hashValue": 432109876
+            },
+            "expected": "ppiissi"
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "power": 17,
+                "modulo": 1000000007,
+                "k": 12,
+                "hashValue": 617980928
+            },
+            "expected": "bcbcbcbcbcbc"
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "power": 37,
+                "modulo": 1000000007,
+                "k": 15,
+                "hashValue": 756839574
+            },
+            "expected": "soverthelazydog"
+        },
+        {
+            "args": {
+                "s": "mississippiisaverypopularstring",
+                "power": 23,
+                "modulo": 107,
+                "k": 9,
+                "hashValue": 62
+            },
+            "expected": "larstring"
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+                "power": 29,
+                "modulo": 999983,
+                "k": 9,
+                "hashValue": 456789
+            },
+            "expected": "bcdefghij"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 10,
+                "modulo": 10007,
+                "k": 10,
+                "hashValue": 7007
+            },
+            "expected": "zzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "power": 10,
+                "modulo": 61,
+                "k": 5,
+                "hashValue": 31
+            },
+            "expected": "acaba"
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "power": 5,
+                "modulo": 1000000009,
+                "k": 8,
+                "hashValue": 77777777
+            },
+            "expected": "ingisfun"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatwillbeusedtohashandfindthesubstring",
+                "power": 19,
+                "modulo": 1000003,
+                "k": 12,
+                "hashValue": 876543
+            },
+            "expected": "thesubstring"
+        },
+        {
+            "args": {
+                "s": "xyzabcxyz",
+                "power": 17,
+                "modulo": 101,
+                "k": 4,
+                "hashValue": 70
+            },
+            "expected": "cxyz"
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "power": 11,
+                "modulo": 997,
+                "k": 12,
+                "hashValue": 896
+            },
+            "expected": "erthelazydog"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "power": 5,
+                "modulo": 10007,
+                "k": 2,
+                "hashValue": 22
+            },
+            "expected": "na"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba",
+                "power": 19,
+                "modulo": 47,
+                "k": 15,
+                "hashValue": 29
+            },
+            "expected": "onmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 31,
+                "modulo": 1000000007,
+                "k": 5,
+                "hashValue": 35852459
+            },
+            "expected": "zzzzz"
+        },
+        {
+            "args": {
+                "s": "kjfslafjslkafjslkfjslkfjlskjflskjflskfjslkfjslkfjslk",
+                "power": 11,
+                "modulo": 1000000001,
+                "k": 8,
+                "hashValue": 987654321
+            },
+            "expected": "slkfjslk"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "power": 13,
+                "modulo": 1000000007,
+                "k": 20,
+                "hashValue": 689648594
+            },
+            "expected": "tsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 23,
+                "modulo": 999983,
+                "k": 15,
+                "hashValue": 123456
+            },
+            "expected": "zzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "quickbrownfoxjumpsoverthelazydog",
+                "power": 41,
+                "modulo": 1000000009,
+                "k": 6,
+                "hashValue": 345678
+            },
+            "expected": "azydog"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatcontainsmanywordsandcharactersforhashing",
+                "power": 41,
+                "modulo": 1000000009,
+                "k": 18,
+                "hashValue": 897530987
+            },
+            "expected": "aractersforhashing"
+        },
+        {
+            "args": {
+                "s": "thepowerofhashing",
+                "power": 17,
+                "modulo": 10007,
+                "k": 9,
+                "hashValue": 9999
+            },
+            "expected": "ofhashing"
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "power": 17,
+                "modulo": 1000000009,
+                "k": 3,
+                "hashValue": 113
+            },
+            "expected": "car"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyza",
+                "power": 23,
+                "modulo": 1000000009,
+                "k": 21,
+                "hashValue": 850494334
+            },
+            "expected": "ghijklmnopqrstuvwxyza"
+        },
+        {
+            "args": {
+                "s": "racecarannakayak",
+                "power": 37,
+                "modulo": 109,
+                "k": 7,
+                "hashValue": 87
+            },
+            "expected": "nakayak"
+        },
+        {
+            "args": {
+                "s": "rollinghashingisaveryefficientalgorithm",
+                "power": 29,
+                "modulo": 1000000007,
+                "k": 10,
+                "hashValue": 987654321
+            },
+            "expected": "talgorithm"
+        },
+        {
+            "args": {
+                "s": "hashfunctionexample",
+                "power": 31,
+                "modulo": 1000000007,
+                "k": 13,
+                "hashValue": 234567890
+            },
+            "expected": "nctionexample"
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde",
+                "power": 7,
+                "modulo": 13,
+                "k": 5,
+                "hashValue": 5
+            },
+            "expected": "eabcd"
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+                "power": 31,
+                "modulo": 1000000009,
+                "k": 10,
+                "hashValue": 109876543
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 27,
+                "modulo": 10007,
+                "k": 26,
+                "hashValue": 4750
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "thisproblemisfunandchallengingandfunandchallenging",
+                "power": 41,
+                "modulo": 1000000011,
+                "k": 14,
+                "hashValue": 543210987
+            },
+            "expected": "andchallenging"
+        },
+        {
+            "args": {
+                "s": "jqwertyuiopasdfghjklzxcvbnmnbvcxzlkjhgfdsapoiuytrewq",
+                "power": 17,
+                "modulo": 1000000009,
+                "k": 15,
+                "hashValue": 765432109
+            },
+            "expected": "gfdsapoiuytrewq"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 1000000007,
+                "modulo": 1000000009,
+                "k": 10,
+                "hashValue": 999999939
+            },
+            "expected": "zzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "acacacacacacacacacacacacacacacacacacacacacacacacacacac",
+                "power": 19,
+                "modulo": 1000000007,
+                "k": 12,
+                "hashValue": 876543210
+            },
+            "expected": "acacacacacac"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 1000000007,
+                "modulo": 1000000009,
+                "k": 10000,
+                "hashValue": 123456789
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "s": "loremipsumdolorsitametloremipsumdolorsitametlorem",
+                "power": 43,
+                "modulo": 1000000017,
+                "k": 15,
+                "hashValue": 432109876
+            },
+            "expected": "lorsitametlorem"
+        },
+        {
+            "args": {
+                "s": "mnopqrstuvwxyzaabcdefghijklmnopqr",
+                "power": 37,
+                "modulo": 1000000007,
+                "k": 25,
+                "hashValue": 519164833
+            },
+            "expected": "uvwxyzaabcdefghijklmnopqr"
+        },
+        {
+            "args": {
+                "s": "thesoundofsilencethesoundofsilencethesoundofsilence",
+                "power": 37,
+                "modulo": 1000000013,
+                "k": 13,
+                "hashValue": 654321098
+            },
+            "expected": "oundofsilence"
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababababab",
+                "power": 23,
+                "modulo": 29,
+                "k": 7,
+                "hashValue": 17
+            },
+            "expected": "bababab"
+        },
+        {
+            "args": {
+                "s": "xyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxy",
+                "power": 31,
+                "modulo": 1000000009,
+                "k": 15,
+                "hashValue": 987654321
+            },
+            "expected": "zzzzzzzzzzzzzxy"
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbccccdddddeeeeefffffggggghhhhiiiiijjjjjkkkkklllllmmmmmnnnnnooooo",
+                "power": 11,
+                "modulo": 100000007,
+                "k": 13,
+                "hashValue": 111222
+            },
+            "expected": "mmmnnnnnooooo"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatshouldworkwiththehashingfunctioncorrectly",
+                "power": 13,
+                "modulo": 107,
+                "k": 25,
+                "hashValue": 67
+            },
+            "expected": "ehashingfunctioncorrectly"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                "power": 97,
+                "modulo": 10007,
+                "k": 6,
+                "hashValue": 10001
+            },
+            "expected": "cdabcd"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 17,
+                "modulo": 89,
+                "k": 10,
+                "hashValue": 67
+            },
+            "expected": "qrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "power": 7,
+                "modulo": 1000000009,
+                "k": 15,
+                "hashValue": 324434711
+            },
+            "expected": "sttuuvvwwxxyyzz"
+        },
+        {
+            "args": {
+                "s": "xyzzxyzzxyzzxyzzxyzzxyzzxyzzxyzzxyzzxyzzxyzzxyzzxyzz",
+                "power": 11,
+                "modulo": 97,
+                "k": 6,
+                "hashValue": 76
+            },
+            "expected": "xyzzxy"
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde",
+                "power": 5,
+                "modulo": 17,
+                "k": 14,
+                "hashValue": 11
+            },
+            "expected": "abcdeabcdeabcd"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 13,
+                "modulo": 101,
+                "k": 10,
+                "hashValue": 97
+            },
+            "expected": "qrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 13,
+                "modulo": 101,
+                "k": 10,
+                "hashValue": 60
+            },
+            "expected": "xyzabcdefg"
+        },
+        {
+            "args": {
+                "s": "hashingisawesome",
+                "power": 37,
+                "modulo": 1000000007,
+                "k": 7,
+                "hashValue": 88888888
+            },
+            "expected": "awesome"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "power": 23,
+                "modulo": 41,
+                "k": 7,
+                "hashValue": 35
+            },
+            "expected": "cdefghi"
+        },
+        {
+            "args": {
+                "s": "thefastbrownfoxjumpedoverthelazydog",
+                "power": 43,
+                "modulo": 1000000007,
+                "k": 5,
+                "hashValue": 234567
+            },
+            "expected": "zydog"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba",
+                "power": 26,
+                "modulo": 1000000009,
+                "k": 26,
+                "hashValue": 987654321
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 1000000007,
+                "modulo": 1000000009,
+                "k": 10,
+                "hashValue": 876543210
+            },
+            "expected": "qrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "power": 31,
+                "modulo": 1000000007,
+                "k": 26,
+                "hashValue": 680151233
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfivesixseveneightnineseveneightsixfiv foureventhreetwooneonetwothreefourfivesix",
+                "power": 13,
+                "modulo": 103,
+                "k": 8,
+                "hashValue": 45
+            },
+            "expected": "veneight"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "power": 5,
+                "modulo": 1000000009,
+                "k": 10,
+                "hashValue": 740006228
+            },
+            "expected": "cabcabcabc"
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "power": 33,
+                "modulo": 1000000007,
+                "k": 4,
+                "hashValue": 123
+            },
+            "expected": "ydog"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "power": 5,
+                "modulo": 1000,
+                "k": 7,
+                "hashValue": 500
+            },
+            "expected": "wxxyyzz"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "power": 31,
+                "modulo": 1000000007,
+                "k": 15,
+                "hashValue": 123456789
+            },
+            "expected": "zzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef",
+                "power": 41,
+                "modulo": 997,
+                "k": 12,
+                "hashValue": 500
+            },
+            "expected": "abcdefabcdef"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().subStrHash",
+        "typescript": "Solution().subStrHash"
+    }
+}

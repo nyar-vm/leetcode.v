@@ -1,0 +1,949 @@
+{
+    "id": "evaluate-the-bracket-pairs-of-a-string",
+    "questionId": 1807,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "(a)(a)(a)aaa",
+                "knowledge": [["a", "yes"]]
+            },
+            "expected": "yesyesyesaaa"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)",
+                "knowledge": [["a", "1"], ["b", "2"], ["c", "3"]]
+            },
+            "expected": "123?"
+        },
+        {
+            "args": {
+                "s": "hi(name)",
+                "knowledge": [["a", "b"]]
+            },
+            "expected": "hi?"
+        },
+        {
+            "args": {
+                "s": "(a)(a)(a)aaa",
+                "knowledge": [["a", "yes"]]
+            },
+            "expected": "yesyesyesaaa"
+        },
+        {
+            "args": {
+                "s": "",
+                "knowledge": []
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "noknowledgehere",
+                "knowledge": []
+            },
+            "expected": "noknowledgehere"
+        },
+        {
+            "args": {
+                "s": "no(brackets)here",
+                "knowledge": []
+            },
+            "expected": "no?here"
+        },
+        {
+            "args": {
+                "s": "hi(name)",
+                "knowledge": [["a", "b"]]
+            },
+            "expected": "hi?"
+        },
+        {
+            "args": {
+                "s": "(nested)but(not)really",
+                "knowledge": [["nested", "nested"], ["not", "not"]]
+            },
+            "expected": "nestedbutnotreally"
+        },
+        {
+            "args": {
+                "s": "(key1)(key2)(key3)",
+                "knowledge": [["key1", "value1"], ["key2", "value2"]]
+            },
+            "expected": "value1value2?"
+        },
+        {
+            "args": {
+                "s": "this(is)a(test)",
+                "knowledge": [["is", "was"], ["test", "trial"]]
+            },
+            "expected": "thiswasatrial"
+        },
+        {
+            "args": {
+                "s": "(name)is(age)yearsold",
+                "knowledge": [["name", "bob"], ["age", "two"]]
+            },
+            "expected": "bobistwoyearsold"
+        },
+        {
+            "args": {
+                "s": "(key1)(key2)",
+                "knowledge": [["key1", "value1"], ["key2", "value2"]]
+            },
+            "expected": "value1value2"
+        },
+        {
+            "args": {
+                "s": "(single)",
+                "knowledge": [["single", "one"]]
+            },
+            "expected": "one"
+        },
+        {
+            "args": {
+                "s": "(last)one",
+                "knowledge": [["last", "final"]]
+            },
+            "expected": "finalone"
+        },
+        {
+            "args": {
+                "s": "single",
+                "knowledge": [["single", "word"]]
+            },
+            "expected": "single"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "knowledge": []
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "(unknown)key",
+                "knowledge": [["known", "value"]]
+            },
+            "expected": "?key"
+        },
+        {
+            "args": {
+                "s": "(name)is(age)yearsold",
+                "knowledge": [["name", "bob"], ["age", "two"]]
+            },
+            "expected": "bobistwoyearsold"
+        },
+        {
+            "args": {
+                "s": "(key1)(key2)(key3)",
+                "knowledge": [["key1", "val1"], ["key2", "val2"], ["key3", "val3"]]
+            },
+            "expected": "val1val2val3"
+        },
+        {
+            "args": {
+                "s": "(book)written(by)(author)",
+                "knowledge": [["book", "1984"], ["author", "George"]]
+            },
+            "expected": "1984written?George"
+        },
+        {
+            "args": {
+                "s": "(city)(in)(country)",
+                "knowledge": [["city", "Tokyo"], ["country", "Japan"]]
+            },
+            "expected": "Tokyo?Japan"
+        },
+        {
+            "args": {
+                "s": "(nested)(key)(nested)",
+                "knowledge": [["key", "value"], ["nested", "deep"]]
+            },
+            "expected": "deepvaluedeep"
+        },
+        {
+            "args": {
+                "s": "(ingredient)requiresto(cooktime)mins",
+                "knowledge": [["ingredient", "Cookies"], ["cooktime", "15"]]
+            },
+            "expected": "Cookiesrequiresto15mins"
+        },
+        {
+            "args": {
+                "s": "(one)(two)(three)(four)(five)",
+                "knowledge": [["one", "1"], ["two", "2"], ["three", "3"], ["four", "4"]]
+            },
+            "expected": "1234?"
+        },
+        {
+            "args": {
+                "s": "(customer)(order)at(store)",
+                "knowledge": [["customer", "Alice"], ["order", "Order123"]]
+            },
+            "expected": "AliceOrder123at?"
+        },
+        {
+            "args": {
+                "s": "(keyA)and(keyB)and(keyC)and(keyD)",
+                "knowledge": [["keyA", "valA"], ["keyB", "valB"]]
+            },
+            "expected": "valAandvalBand?and?"
+        },
+        {
+            "args": {
+                "s": "(key)with(missing)knowledge",
+                "knowledge": [["key", "value1"], ["missing", "value2"], ["knowledge", "value3"]]
+            },
+            "expected": "value1withvalue2knowledge"
+        },
+        {
+            "args": {
+                "s": "(greeting)(world)(planet)",
+                "knowledge": [["greeting", "hello"], ["world", "earth"], ["planet", "mars"]]
+            },
+            "expected": "helloearthmars"
+        },
+        {
+            "args": {
+                "s": "(this)(is)(a)(test)(string)(with)(multiple)(keys)",
+                "knowledge": [
+                    ["this", "it"],
+                    ["is", "be"],
+                    ["a", "an"],
+                    ["test", "example"],
+                    ["string", "sequence"],
+                    ["with", "having"],
+                    ["multiple", "several"],
+                    ["keys", "identifiers"]
+                ]
+            },
+            "expected": "itbeanexamplesequencehavingseveralidentifiers"
+        },
+        {
+            "args": {
+                "s": "(language)programmingis(fun)",
+                "knowledge": [["language", "python"], ["fun", "awesome"]]
+            },
+            "expected": "pythonprogrammingisawesome"
+        },
+        {
+            "args": {
+                "s": "(fruit)(vegetable)",
+                "knowledge": [["fruit", "apple"], ["vegetable", "carrot"]]
+            },
+            "expected": "applecarrot"
+        },
+        {
+            "args": {
+                "s": "(animal)lives(in)(habitat)",
+                "knowledge": [["animal", "tiger"], ["habitat", "jungle"]]
+            },
+            "expected": "tigerlives?jungle"
+        },
+        {
+            "args": {
+                "s": "(name)has(age)yearsand(occupation)",
+                "knowledge": [["name", "Alice"], ["age", "30"]]
+            },
+            "expected": "Alicehas30yearsand?"
+        },
+        {
+            "args": {
+                "s": "(longkey)(anotherkey)(yetanotherkey)",
+                "knowledge": [
+                    ["longkey", "averylongvalue"],
+                    ["anotherkey", "shortval"],
+                    ["yetanotherkey", "value"]
+                ]
+            },
+            "expected": "averylongvalueshortvalvalue"
+        },
+        {
+            "args": {
+                "s": "(language)is(cool)",
+                "knowledge": [["language", "Python"], ["cool", "awesome"]]
+            },
+            "expected": "Pythonisawesome"
+        },
+        {
+            "args": {
+                "s": "(first)and(last)name",
+                "knowledge": [["first", "john"], ["last", "doe"]]
+            },
+            "expected": "johnanddoename"
+        },
+        {
+            "args": {
+                "s": "(name)is(living)(in)(city)",
+                "knowledge": [["name", "bob"], ["in", "at"], ["city", "london"]]
+            },
+            "expected": "bobis?atlondon"
+        },
+        {
+            "args": {
+                "s": "(animal)(eats)(food)",
+                "knowledge": [["animal", "lion"], ["food", "meat"]]
+            },
+            "expected": "lion?meat"
+        },
+        {
+            "args": {
+                "s": "(user)likes(to)(eat)(food)",
+                "knowledge": [["user", "alice"], ["eat", "enjoy"], ["food", "pizza"]]
+            },
+            "expected": "alicelikes?enjoypizza"
+        },
+        {
+            "args": {
+                "s": "(prefix)middle(suffix)",
+                "knowledge": [["prefix", "start"], ["suffix", "end"]]
+            },
+            "expected": "startmiddleend"
+        },
+        {
+            "args": {
+                "s": "(flower)grows(in)(soil)",
+                "knowledge": [["flower", "rose"], ["soil", "dirt"]]
+            },
+            "expected": "rosegrows?dirt"
+        },
+        {
+            "args": {
+                "s": "(first)nameis(last)name",
+                "knowledge": [["first", "john"], ["last", "doe"]]
+            },
+            "expected": "johnnameisdoename"
+        },
+        {
+            "args": {
+                "s": "(longkey1)and(longkey2)and(longkey3)and(longkey4)",
+                "knowledge": [
+                    ["longkey1", "value1"],
+                    ["longkey2", "value2"],
+                    ["longkey3", "value3"],
+                    ["longkey4", "value4"]
+                ]
+            },
+            "expected": "value1andvalue2andvalue3andvalue4"
+        },
+        {
+            "args": {
+                "s": "(department)islocatedat(address)",
+                "knowledge": [["department", "Sales"], ["address", "123BusinessSt"]]
+            },
+            "expected": "Salesislocatedat123BusinessSt"
+        },
+        {
+            "args": {
+                "s": "(name)has(a)(pet)",
+                "knowledge": [["name", "Mary"], ["pet", "dog"]]
+            },
+            "expected": "Maryhas?dog"
+        },
+        {
+            "args": {
+                "s": "(drink)is(served)in(glass)",
+                "knowledge": [["drink", "water"], ["glass", "big"]]
+            },
+            "expected": "wateris?inbig"
+        },
+        {
+            "args": {
+                "s": "prefix(key1)middle(key2)suffix",
+                "knowledge": [["key1", "value1"], ["key2", "value2"]]
+            },
+            "expected": "prefixvalue1middlevalue2suffix"
+        },
+        {
+            "args": {
+                "s": "(key1)(key2)(key1)",
+                "knowledge": [["key1", "value1"], ["key2", "value2"]]
+            },
+            "expected": "value1value2value1"
+        },
+        {
+            "args": {
+                "s": "(item1)(item2)(item3)(item4)",
+                "knowledge": [["item1", "itemA"], ["item2", "itemB"], ["item4", "itemD"]]
+            },
+            "expected": "itemAitemB?itemD"
+        },
+        {
+            "args": {
+                "s": "(greeting)world",
+                "knowledge": [["greeting", "hello"], ["farewell", "bye"]]
+            },
+            "expected": "helloworld"
+        },
+        {
+            "args": {
+                "s": "(user)(name)livesin(city)with(zip)",
+                "knowledge": [["user", "John"], ["city", "San Francisco"], ["zip", "94111"]]
+            },
+            "expected": "John?livesinSan Franciscowith94111"
+        },
+        {
+            "args": {
+                "s": "(person)(from)(place)isvisiting(placeofinterest)",
+                "knowledge": [
+                    ["person", "Bob"],
+                    ["from", "LosAngeles"],
+                    ["place", "SanFrancisco"],
+                    ["placeofinterest", "Alcatraz"]
+                ]
+            },
+            "expected": "BobLosAngelesSanFranciscoisvisitingAlcatraz"
+        },
+        {
+            "args": {
+                "s": "(longkeyname)is(longervaluename)",
+                "knowledge": [["longkeyname", "longervaluename"]]
+            },
+            "expected": "longervaluenameis?"
+        },
+        {
+            "args": {
+                "s": "(name)has(a)(pet)(dog)",
+                "knowledge": [["name", "john"], ["pet", "dog"], ["dog", "buddy"]]
+            },
+            "expected": "johnhas?dogbuddy"
+        },
+        {
+            "args": {
+                "s": "(key1)and(key2)and(key3)and(key4)and(key5)",
+                "knowledge": [
+                    ["key1", "value1"],
+                    ["key2", "value2"],
+                    ["key3", "value3"],
+                    ["key4", "value4"]
+                ]
+            },
+            "expected": "value1andvalue2andvalue3andvalue4and?"
+        },
+        {
+            "args": {
+                "s": "(prefix)_(suffix)",
+                "knowledge": [["prefix", "start"], ["suffix", "end"]]
+            },
+            "expected": "start_end"
+        },
+        {
+            "args": {
+                "s": "(number)plus(number)equals(twice_number)",
+                "knowledge": [["number", "10"], ["twice_number", "20"]]
+            },
+            "expected": "10plus10equals20"
+        },
+        {
+            "args": {
+                "s": "(name)livesat(address)andworksat(company)",
+                "knowledge": [["name", "Alice"], ["address", "Wonderland"], ["company", "TechCorp"]]
+            },
+            "expected": "AlicelivesatWonderlandandworksatTechCorp"
+        },
+        {
+            "args": {
+                "s": "(repeated)(key)(repeated)(key)",
+                "knowledge": [["key", "value"]]
+            },
+            "expected": "?value?value"
+        },
+        {
+            "args": {
+                "s": "(planet)(orbits)around(star)",
+                "knowledge": [["planet", "Earth"], ["star", "Sun"]]
+            },
+            "expected": "Earth?aroundSun"
+        },
+        {
+            "args": {
+                "s": "(item)isavaliablefrom(date)",
+                "knowledge": [["item", "Smartphone"], ["date", "2023-12-15"]]
+            },
+            "expected": "Smartphoneisavaliablefrom2023-12-15"
+        },
+        {
+            "args": {
+                "s": "(conference)heldon(date)",
+                "knowledge": [["conference", "GDC"], ["date", "2024-03-19"]]
+            },
+            "expected": "GDCheldon2024-03-19"
+        },
+        {
+            "args": {
+                "s": "(first)(second)(third)(fourth)",
+                "knowledge": [["first", "one"], ["second", "two"], ["third", "three"]]
+            },
+            "expected": "onetwothree?"
+        },
+        {
+            "args": {
+                "s": "(color)(animal)",
+                "knowledge": [["color", "blue"], ["animal", "dog"], ["bird", "sparrow"]]
+            },
+            "expected": "bluedog"
+        },
+        {
+            "args": {
+                "s": "(firstName)(lastName)isfrom(city)in(country)",
+                "knowledge": [
+                    ["firstName", "Alice"],
+                    ["lastName", "Wonderland"],
+                    ["city", "Wonderland"],
+                    ["country", "Fantasia"]
+                ]
+            },
+            "expected": "AliceWonderlandisfromWonderlandinFantasia"
+        },
+        {
+            "args": {
+                "s": "(product)costs(dollars)and(euros)",
+                "knowledge": [["product", "Laptop"], ["dollars", "1200"], ["euros", "1020"]]
+            },
+            "expected": "Laptopcosts1200and1020"
+        },
+        {
+            "args": {
+                "s": "(nested)but(notreally)nested",
+                "knowledge": [["nested", "deep"], ["notreally", "shallow"]]
+            },
+            "expected": "deepbutshallownested"
+        },
+        {
+            "args": {
+                "s": "(first)(last)(age)",
+                "knowledge": [["first", "john"], ["last", "doe"], ["age", "thirty"]]
+            },
+            "expected": "johndoethirty"
+        },
+        {
+            "args": {
+                "s": "(city)(has)(many)(buildings)",
+                "knowledge": [["city", "newyork"], ["many", "lots"]]
+            },
+            "expected": "newyork?lots?"
+        },
+        {
+            "args": {
+                "s": "(language)(framework)",
+                "knowledge": [["language", "Python"], ["framework", "Django"], ["version", "3.9"]]
+            },
+            "expected": "PythonDjango"
+        },
+        {
+            "args": {
+                "s": "(model)releasedon(year)",
+                "knowledge": [["model", "iPhone15"], ["year", "2023"]]
+            },
+            "expected": "iPhone15releasedon2023"
+        },
+        {
+            "args": {
+                "s": "(multiple)(keys)(here)",
+                "knowledge": [["multiple", "many"], ["keys", "some"], ["here", "there"]]
+            },
+            "expected": "manysomethere"
+        },
+        {
+            "args": {
+                "s": "(username)lastloggedin(on)",
+                "knowledge": [["username", "Alice"], ["on", "2023-10-01"]]
+            },
+            "expected": "Alicelastloggedin2023-10-01"
+        },
+        {
+            "args": {
+                "s": "(planet)is(almost)full",
+                "knowledge": [["planet", "Earth"], ["almost", "not"], ["full", "occupied"]]
+            },
+            "expected": "Earthisnotfull"
+        },
+        {
+            "args": {
+                "s": "(person)loves(to)(eat)",
+                "knowledge": [["person", "John"], ["eat", "pizza"]]
+            },
+            "expected": "Johnloves?pizza"
+        },
+        {
+            "args": {
+                "s": "(car)is(fast)and(economical)",
+                "knowledge": [["car", "Ferrari"], ["fast", "very"], ["economical", "not"]]
+            },
+            "expected": "Ferrariisveryandnot"
+        },
+        {
+            "args": {
+                "s": "(key1)and(key2)and(key3)and(key4)",
+                "knowledge": [["key1", "value1"], ["key2", "value2"], ["key4", "value4"]]
+            },
+            "expected": "value1andvalue2and?andvalue4"
+        },
+        {
+            "args": {
+                "s": "(part1)(part2)(part3)",
+                "knowledge": [["part1", "first"], ["part2", "second"], ["part3", "third"]]
+            },
+            "expected": "firstsecondthird"
+        },
+        {
+            "args": {
+                "s": "(color)(is)(used)in(art)",
+                "knowledge": [["color", "red"], ["used", "frequently"]]
+            },
+            "expected": "red?frequentlyin?"
+        },
+        {
+            "args": {
+                "s": "(key1)is(key2)and(key3)is(key4)",
+                "knowledge": [["key1", "value1"], ["key2", "value2"], ["key3", "value3"]]
+            },
+            "expected": "value1isvalue2andvalue3is?"
+        },
+        {
+            "args": {
+                "s": "(name)from(country)is(visitor)",
+                "knowledge": [["name", "Bob"], ["country", "USA"]]
+            },
+            "expected": "BobfromUSAis?"
+        },
+        {
+            "args": {
+                "s": "(prefix)example(suffix)",
+                "knowledge": [["prefix", "pre"], ["suffix", "post"]]
+            },
+            "expected": "preexamplepost"
+        },
+        {
+            "args": {
+                "s": "(unknown)(key)(not)(present)",
+                "knowledge": [["present", "available"]]
+            },
+            "expected": "???available"
+        },
+        {
+            "args": {
+                "s": "(unknown)(key1)(unknown)(key2)(unknown)",
+                "knowledge": [["key1", "value1"], ["key2", "value2"]]
+            },
+            "expected": "?value1?value2?"
+        },
+        {
+            "args": {
+                "s": "(book)writtenby(author)publishedby(publisher)",
+                "knowledge": [
+                    ["book", "GreatExpectations"],
+                    ["author", "CharlesDickens"],
+                    ["publisher", "ChapmanandHall"]
+                ]
+            },
+            "expected": "GreatExpectationswrittenbyCharlesDickenspublishedbyChapmanandHall"
+        },
+        {
+            "args": {
+                "s": "(instrument)plays(music)",
+                "knowledge": [["instrument", "guitar"], ["music", "beautiful"]]
+            },
+            "expected": "guitarplaysbeautiful"
+        },
+        {
+            "args": {
+                "s": "(prefix)(middle)(suffix)",
+                "knowledge": [["prefix", "pre"], ["middle", "mid"], ["suffix", "suf"]]
+            },
+            "expected": "premidsuf"
+        },
+        {
+            "args": {
+                "s": "(fruit)are(sweet)and(healthy)",
+                "knowledge": [["fruit", "apples"], ["sweet", "very"], ["healthy", "indeed"]]
+            },
+            "expected": "applesareveryandindeed"
+        },
+        {
+            "args": {
+                "s": "(repeated)repeated(repeated)",
+                "knowledge": [["repeated", "again"]]
+            },
+            "expected": "againrepeatedagain"
+        },
+        {
+            "args": {
+                "s": "(planet)(moon)orbiting(planet)",
+                "knowledge": [["planet", "Earth"], ["moon", "Moon"]]
+            },
+            "expected": "EarthMoonorbitingEarth"
+        },
+        {
+            "args": {
+                "s": "(key1)(key1)(key1)(key1)(key1)",
+                "knowledge": [["key1", "repeat"]]
+            },
+            "expected": "repeatrepeatrepeatrepeatrepeat"
+        },
+        {
+            "args": {
+                "s": "(key1)is(key2)yearsold(key3)",
+                "knowledge": [["key1", "bob"], ["key2", "two"]]
+            },
+            "expected": "bobistwoyearsold?"
+        },
+        {
+            "args": {
+                "s": "(greeting)everyone(my)name(is)(unknown)",
+                "knowledge": [["greeting", "hi"], ["my", "my"]]
+            },
+            "expected": "hieveryonemyname??"
+        },
+        {
+            "args": {
+                "s": "(bird)can(fly)high",
+                "knowledge": [["bird", "eagle"], ["fly", "soar"]]
+            },
+            "expected": "eaglecansoarhigh"
+        },
+        {
+            "args": {
+                "s": "(country)has(a)(capital)",
+                "knowledge": [["country", "India"], ["capital", "Delhi"]]
+            },
+            "expected": "Indiahas?Delhi"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)(f)",
+                "knowledge": [
+                    ["a", "one"],
+                    ["b", "two"],
+                    ["c", "three"],
+                    ["d", "four"],
+                    ["e", "five"],
+                    ["f", "six"]
+                ]
+            },
+            "expected": "onetwothreefourfivesix"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)(n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)",
+                "knowledge": [
+                    ["a", "A"],
+                    ["b", "B"],
+                    ["c", "C"],
+                    ["d", "D"],
+                    ["e", "E"],
+                    ["f", "F"],
+                    ["g", "G"],
+                    ["h", "H"],
+                    ["i", "I"],
+                    ["j", "J"],
+                    ["k", "K"],
+                    ["l", "L"],
+                    ["m", "M"],
+                    ["n", "N"],
+                    ["o", "O"],
+                    ["p", "P"],
+                    ["q", "Q"],
+                    ["r", "R"],
+                    ["s", "S"],
+                    ["t", "T"],
+                    ["u", "U"],
+                    ["v", "V"],
+                    ["w", "W"],
+                    ["x", "X"],
+                    ["y", "Y"],
+                    ["z", "Z"]
+                ]
+            },
+            "expected": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        },
+        {
+            "args": {
+                "s": "(color)(of)the(sky)",
+                "knowledge": [["color", "blue"], ["sky", "beautiful"]]
+            },
+            "expected": "blue?thebeautiful"
+        },
+        {
+            "args": {
+                "s": "(name)is(unknown)but(age)yearsold",
+                "knowledge": [["name", "alice"], ["age", "30"]]
+            },
+            "expected": "aliceis?but30yearsold"
+        },
+        {
+            "args": {
+                "s": "(product)priceis(price)and(quantity)itemsareavailable",
+                "knowledge": [["product", "laptop"], ["price", "1000"], ["quantity", "5"]]
+            },
+            "expected": "laptoppriceis1000and5itemsareavailable"
+        },
+        {
+            "args": {
+                "s": "(item)costs(amount)currency",
+                "knowledge": [["item", "book"], ["amount", "10"], ["currency", "dollars"]]
+            },
+            "expected": "bookcosts10currency"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)",
+                "knowledge": [
+                    ["a", "alpha"],
+                    ["b", "beta"],
+                    ["c", "gamma"],
+                    ["d", "delta"],
+                    ["e", "epsilon"]
+                ]
+            },
+            "expected": "alphabetagammadeltaepsilon"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)(n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)",
+                "knowledge": [
+                    ["a", "a"],
+                    ["b", "b"],
+                    ["c", "c"],
+                    ["d", "d"],
+                    ["e", "e"],
+                    ["f", "f"],
+                    ["g", "g"],
+                    ["h", "h"],
+                    ["i", "i"],
+                    ["j", "j"],
+                    ["k", "k"],
+                    ["l", "l"],
+                    ["m", "m"],
+                    ["n", "n"],
+                    ["o", "o"],
+                    ["p", "p"],
+                    ["q", "q"],
+                    ["r", "r"],
+                    ["s", "s"],
+                    ["t", "t"],
+                    ["u", "u"],
+                    ["v", "v"],
+                    ["w", "w"],
+                    ["x", "x"],
+                    ["y", "y"],
+                    ["z", "z"]
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "(repeated)(repeated)(repeated)",
+                "knowledge": [["repeated", "rep"]]
+            },
+            "expected": "repreprep"
+        },
+        {
+            "args": {
+                "s": "(key1)and(key2)and(key3)and(key4)and(key5)and(key6)and(key7)",
+                "knowledge": [
+                    ["key1", "value1"],
+                    ["key2", "value2"],
+                    ["key3", "value3"],
+                    ["key4", "value4"],
+                    ["key5", "value5"],
+                    ["key6", "value6"],
+                    ["key7", "value7"]
+                ]
+            },
+            "expected": "value1andvalue2andvalue3andvalue4andvalue5andvalue6andvalue7"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)",
+                "knowledge": [
+                    ["a", "one"],
+                    ["b", "two"],
+                    ["c", "three"],
+                    ["d", "four"],
+                    ["e", "five"],
+                    ["f", "six"],
+                    ["g", "seven"],
+                    ["h", "eight"],
+                    ["i", "nine"],
+                    ["j", "ten"]
+                ]
+            },
+            "expected": "onetwothreefourfivesixseveneightnineten"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)",
+                "knowledge": [
+                    ["a", "yes"],
+                    ["b", "no"],
+                    ["c", "maybe"],
+                    ["d", "sure"],
+                    ["e", "never"],
+                    ["f", "always"],
+                    ["g", "often"],
+                    ["h", "rarely"],
+                    ["i", "sometimes"],
+                    ["j", "usually"]
+                ]
+            },
+            "expected": "yesnomaybesureneveralwaysoftenrarelysometimesusually"
+        },
+        {
+            "args": {
+                "s": "(user)hasposted(numberofposts)times",
+                "knowledge": [["user", "Charlie"], ["numberofposts", "250"]]
+            },
+            "expected": "Charliehasposted250times"
+        },
+        {
+            "args": {
+                "s": "(complex)(string)(with)(multiple)(keys)",
+                "knowledge": [
+                    ["complex", "com"],
+                    ["string", "str"],
+                    ["with", "wi"],
+                    ["multiple", "mul"],
+                    ["keys", "ke"]
+                ]
+            },
+            "expected": "comstrwimulke"
+        },
+        {
+            "args": {
+                "s": "(key1)is(key2)yearsold(key3)and(key4)livesin(key5)",
+                "knowledge": [["key1", "bob"], ["key2", "two"], ["key5", "NYC"]]
+            },
+            "expected": "bobistwoyearsold?and?livesinNYC"
+        },
+        {
+            "args": {
+                "s": "(a)(b)(c)(d)(e)(f)",
+                "knowledge": [
+                    ["a", "alpha"],
+                    ["b", "beta"],
+                    ["c", "gamma"],
+                    ["d", "delta"],
+                    ["e", "epsilon"]
+                ]
+            },
+            "expected": "alphabetagammadeltaepsilon?"
+        },
+        {
+            "args": {
+                "s": "(nested)brackets(are)not(allowed)",
+                "knowledge": [["nested", "nested"], ["brackets", "brackets"], ["not", "not"]]
+            },
+            "expected": "nestedbrackets?not?"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().evaluate",
+        "typescript": "Solution().evaluate"
+    }
+}

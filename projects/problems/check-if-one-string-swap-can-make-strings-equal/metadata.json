@@ -1,0 +1,768 @@
+{
+    "id": "check-if-one-string-swap-can-make-strings-equal",
+    "questionId": 1790,
+    "difficulty": "Easy",
+    "tags": ["Hash Table", "String", "Counting"],
+    "tests": [
+        {
+            "args": {
+                "s1": "attack",
+                "s2": "defend"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "bank",
+                "s2": "kanb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcde",
+                "s2": "abced"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcd",
+                "s2": "abdc"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aaa",
+                "s2": "aaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "kelb",
+                "s2": "kelb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabb",
+                "s2": "abab"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcd",
+                "s2": "dcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "algorithm",
+                "s2": "logarithm"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "almost",
+                "s2": "almost"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "ghfedcb"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyzabc",
+                "s2": "yzabxc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "fedcbag"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "abcdefx"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aaaaabbbb",
+                "s2": "bbbbaaaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "ccbaab"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "aabbbc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abacabadabacaba",
+                "s2": "babacabadabacab"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "missisppi"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "ccbbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "programming",
+                "s2": "programminj"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "samestr",
+                "s2": "strsame"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "hlelo"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "gfedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abababab",
+                "s2": "babababa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abracadabra",
+                "s2": "abracadabrb"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "mississipsp"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "palindrome",
+                "s2": "lpadnrimoe"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "ccabba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "mississipip"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "abcdefg"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "bbaacc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdexyz",
+                "s2": "xyzabcde"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdxyz",
+                "s2": "abczyxd"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefgh",
+                "s2": "hgfedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcde",
+                "s2": "abcde"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "banana",
+                "s2": "anana"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "ab",
+                "s2": "ba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "olleh"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "hallo"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "abcfed"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "abcdefgh"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "qwertyuiop",
+                "s2": "qewrtyuipo"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "mississippa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "programming",
+                "s2": "prorgamming"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "abdecfg"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "noon",
+                "s2": "nnon"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "ohell"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "hxllo"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aaaabbbb",
+                "s2": "bbbbaaaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abc",
+                "s2": "acb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "lehho"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdexyz",
+                "s2": "abcdefyz"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "python",
+                "s2": "pythno"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abracadabra",
+                "s2": "abracadabra"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefgh",
+                "s2": "bcadefgh"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abacabadabacaba",
+                "s2": "abacabadabacaba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "bello"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "heoll"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghij",
+                "s2": "abcdefghjk"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "unique",
+                "s2": "unqieu"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdabcd",
+                "s2": "dcbaabcd"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abacax",
+                "s2": "abacxa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghij",
+                "s2": "abcdefghij"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "algorithm",
+                "s2": "algorithn"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "algorithm",
+                "s2": "aloritghm"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "abcdegf"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "aaccbb"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "almost",
+                "s2": "alosmt"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "racecar",
+                "s2": "racecar"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "mmissisippi"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefgh",
+                "s2": "efghabcd"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyzz",
+                "s2": "zzxy"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "palindrome",
+                "s2": "palindorme"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "abcdef"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "ab",
+                "s2": "ab"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "abcdeg"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "oneone",
+                "s2": "noonoe"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcxyz",
+                "s2": "xyzabc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abac",
+                "s2": "caba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "zyx"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abracadabra",
+                "s2": "abracadbrba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abac",
+                "s2": "abca"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "same",
+                "s2": "same"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefgh",
+                "s2": "abcdefgh"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "fedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefghij",
+                "s2": "abcdefghji"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcde",
+                "s2": "edcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "swapping",
+                "s2": "swapgnip"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbccdd",
+                "s2": "ddccbbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyzz",
+                "s2": "zyzz"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "algorithm",
+                "s2": "algorjthm"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyzz",
+                "s2": "zyxz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "aabbdc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefghijk",
+                "s2": "abcdefghijl"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "ababab",
+                "s2": "bababa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abab",
+                "s2": "baba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "mambo",
+                "s2": "mambp"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "abcdfe"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abdc",
+                "s2": "abcd"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "xyzz",
+                "s2": "zyzx"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabb",
+                "s2": "bbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "same",
+                "s2": "emsa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdxyz",
+                "s2": "abcdzyx"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "mmississippi"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "python",
+                "s2": "ytonph"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyzxyz",
+                "s2": "zyxzyx"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aaaa",
+                "s2": "aaaa"
+            },
+            "expected": true
+        }
+    ],
+    "invoke": {
+        "python": "Solution().areAlmostEqual",
+        "typescript": "Solution().areAlmostEqual"
+    }
+}

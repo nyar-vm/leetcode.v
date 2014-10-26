@@ -1,0 +1,943 @@
+{
+    "id": "reverse-prefix-of-word",
+    "questionId": 2000,
+    "difficulty": "Easy",
+    "tags": ["Stack", "Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "word": "abcdef",
+                "ch": "f"
+            },
+            "expected": "fedcba"
+        },
+        {
+            "args": {
+                "word": "madam",
+                "ch": "d"
+            },
+            "expected": "damam"
+        },
+        {
+            "args": {
+                "word": "abcdefd",
+                "ch": "d"
+            },
+            "expected": "dcbaefd"
+        },
+        {
+            "args": {
+                "word": "abcd",
+                "ch": "z"
+            },
+            "expected": "abcd"
+        },
+        {
+            "args": {
+                "word": "a",
+                "ch": "a"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "word": "python",
+                "ch": "y"
+            },
+            "expected": "ypthon"
+        },
+        {
+            "args": {
+                "word": "operation",
+                "ch": "p"
+            },
+            "expected": "poeration"
+        },
+        {
+            "args": {
+                "word": "xyxzxe",
+                "ch": "z"
+            },
+            "expected": "zxyxxe"
+        },
+        {
+            "args": {
+                "word": "segment",
+                "ch": "t"
+            },
+            "expected": "tnemges"
+        },
+        {
+            "args": {
+                "word": "hello",
+                "ch": "l"
+            },
+            "expected": "lehlo"
+        },
+        {
+            "args": {
+                "word": "racecar",
+                "ch": "e"
+            },
+            "expected": "ecarcar"
+        },
+        {
+            "args": {
+                "word": "abcdef",
+                "ch": "g"
+            },
+            "expected": "abcdef"
+        },
+        {
+            "args": {
+                "word": "example",
+                "ch": "m"
+            },
+            "expected": "maxeple"
+        },
+        {
+            "args": {
+                "word": "reverse",
+                "ch": "r"
+            },
+            "expected": "reverse"
+        },
+        {
+            "args": {
+                "word": "abcdef",
+                "ch": "a"
+            },
+            "expected": "abcdef"
+        },
+        {
+            "args": {
+                "word": "supercalifragilisticexpialidocious",
+                "ch": "x"
+            },
+            "expected": "xecitsiligarfilacrepuspialidocious"
+        },
+        {
+            "args": {
+                "word": "abracadabra",
+                "ch": "r"
+            },
+            "expected": "rbaacadabra"
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba",
+                "ch": "a"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "word": "",
+                "ch": "a"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "word": "unbelievable",
+                "ch": "e"
+            },
+            "expected": "ebnulievable"
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz",
+                "ch": "m"
+            },
+            "expected": "mlkjihgfedcbanopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "word": "supercalifragilisticexpialidocious",
+                "ch": "c"
+            },
+            "expected": "crepusalifragilisticexpialidocious"
+        },
+        {
+            "args": {
+                "word": "interview",
+                "ch": "w"
+            },
+            "expected": "weivretni"
+        },
+        {
+            "args": {
+                "word": "unpredictable",
+                "ch": "d"
+            },
+            "expected": "derpnuictable"
+        },
+        {
+            "args": {
+                "word": "beautifulization",
+                "ch": "z"
+            },
+            "expected": "zilufituaebation"
+        },
+        {
+            "args": {
+                "word": "characterization",
+                "ch": "c"
+            },
+            "expected": "characterization"
+        },
+        {
+            "args": {
+                "word": "communication",
+                "ch": "m"
+            },
+            "expected": "mocmunication"
+        },
+        {
+            "args": {
+                "word": "reversethispart",
+                "ch": "e"
+            },
+            "expected": "erversethispart"
+        },
+        {
+            "args": {
+                "word": "reinforce",
+                "ch": "e"
+            },
+            "expected": "erinforce"
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba",
+                "ch": "q"
+            },
+            "expected": "qrstuvwxyzponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "word": "unbelievable",
+                "ch": "l"
+            },
+            "expected": "lebnuievable"
+        },
+        {
+            "args": {
+                "word": "nothingtoreverse",
+                "ch": "x"
+            },
+            "expected": "nothingtoreverse"
+        },
+        {
+            "args": {
+                "word": "characterization",
+                "ch": "a"
+            },
+            "expected": "ahcracterization"
+        },
+        {
+            "args": {
+                "word": "quickbrownfox",
+                "ch": "o"
+            },
+            "expected": "orbkciuqwnfox"
+        },
+        {
+            "args": {
+                "word": "banana",
+                "ch": "n"
+            },
+            "expected": "nabana"
+        },
+        {
+            "args": {
+                "word": "qwertyuiop",
+                "ch": "p"
+            },
+            "expected": "poiuytrewq"
+        },
+        {
+            "args": {
+                "word": "qwertyuiop",
+                "ch": "q"
+            },
+            "expected": "qwertyuiop"
+        },
+        {
+            "args": {
+                "word": "boundary",
+                "ch": "d"
+            },
+            "expected": "dnuobary"
+        },
+        {
+            "args": {
+                "word": "continuous",
+                "ch": "s"
+            },
+            "expected": "suounitnoc"
+        },
+        {
+            "args": {
+                "word": "interoperability",
+                "ch": "i"
+            },
+            "expected": "interoperability"
+        },
+        {
+            "args": {
+                "word": "aaaaaa",
+                "ch": "a"
+            },
+            "expected": "aaaaaa"
+        },
+        {
+            "args": {
+                "word": "quizzically",
+                "ch": "q"
+            },
+            "expected": "quizzically"
+        },
+        {
+            "args": {
+                "word": "congratulations",
+                "ch": "g"
+            },
+            "expected": "gnocratulations"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeff",
+                "ch": "f"
+            },
+            "expected": "feeddccbbaaf"
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba",
+                "ch": "m"
+            },
+            "expected": "mnopqrstuvwxyzlkjihgfedcba"
+        },
+        {
+            "args": {
+                "word": "concatenation",
+                "ch": "c"
+            },
+            "expected": "concatenation"
+        },
+        {
+            "args": {
+                "word": "implementation",
+                "ch": "i"
+            },
+            "expected": "implementation"
+        },
+        {
+            "args": {
+                "word": "establishment",
+                "ch": "b"
+            },
+            "expected": "batselishment"
+        },
+        {
+            "args": {
+                "word": "abcdefghijkllllllllllllllllllllllllllllllllllllllllllllllll",
+                "ch": "l"
+            },
+            "expected": "lkjihgfedcballlllllllllllllllllllllllllllllllllllllllllllll"
+        },
+        {
+            "args": {
+                "word": "abcdefg",
+                "ch": "g"
+            },
+            "expected": "gfedcba"
+        },
+        {
+            "args": {
+                "word": "development",
+                "ch": "p"
+            },
+            "expected": "polevedment"
+        },
+        {
+            "args": {
+                "word": "unfortunately",
+                "ch": "r"
+            },
+            "expected": "rofnutunately"
+        },
+        {
+            "args": {
+                "word": "challenges",
+                "ch": "e"
+            },
+            "expected": "ellahcnges"
+        },
+        {
+            "args": {
+                "word": "thisisaverylongwordthatneedstoreversed",
+                "ch": "n"
+            },
+            "expected": "nolyrevasisihtgwordthatneedstoreversed"
+        },
+        {
+            "args": {
+                "word": "interview",
+                "ch": "e"
+            },
+            "expected": "etnirview"
+        },
+        {
+            "args": {
+                "word": "abcdeffedcba",
+                "ch": "f"
+            },
+            "expected": "fedcbafedcba"
+        },
+        {
+            "args": {
+                "word": "classification",
+                "ch": "l"
+            },
+            "expected": "lcassification"
+        },
+        {
+            "args": {
+                "word": "thisisateststring",
+                "ch": "t"
+            },
+            "expected": "thisisateststring"
+        },
+        {
+            "args": {
+                "word": "mississippi",
+                "ch": "i"
+            },
+            "expected": "imssissippi"
+        },
+        {
+            "args": {
+                "word": "unbelievable",
+                "ch": "b"
+            },
+            "expected": "bnuelievable"
+        },
+        {
+            "args": {
+                "word": "mississippi",
+                "ch": "s"
+            },
+            "expected": "simsissippi"
+        },
+        {
+            "args": {
+                "word": "congratulations",
+                "ch": "l"
+            },
+            "expected": "lutargnocations"
+        },
+        {
+            "args": {
+                "word": "synchronous",
+                "ch": "c"
+            },
+            "expected": "cnyshronous"
+        },
+        {
+            "args": {
+                "word": "algorithm",
+                "ch": "l"
+            },
+            "expected": "lagorithm"
+        },
+        {
+            "args": {
+                "word": "abracadabra",
+                "ch": "c"
+            },
+            "expected": "carbaadabra"
+        },
+        {
+            "args": {
+                "word": "zzzzzzzzzzzzzzzz",
+                "ch": "z"
+            },
+            "expected": "zzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "word": "development",
+                "ch": "l"
+            },
+            "expected": "levedopment"
+        },
+        {
+            "args": {
+                "word": "identification",
+                "ch": "i"
+            },
+            "expected": "identification"
+        },
+        {
+            "args": {
+                "word": "beautiful",
+                "ch": "t"
+            },
+            "expected": "tuaebiful"
+        },
+        {
+            "args": {
+                "word": "asdfghjklzxcvbnm",
+                "ch": "m"
+            },
+            "expected": "mnbvcxzlkjhgfdsa"
+        },
+        {
+            "args": {
+                "word": "representation",
+                "ch": "r"
+            },
+            "expected": "representation"
+        },
+        {
+            "args": {
+                "word": "congratulations",
+                "ch": "t"
+            },
+            "expected": "targnoculations"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "ch": "q"
+            },
+            "expected": "qppoonnmmllkkjjiihhggffeeddccbbaaqrrssttuuvvwwxxyyzz"
+        },
+        {
+            "args": {
+                "word": "sequence",
+                "ch": "q"
+            },
+            "expected": "qesuence"
+        },
+        {
+            "args": {
+                "word": "environment",
+                "ch": "v"
+            },
+            "expected": "vneironment"
+        },
+        {
+            "args": {
+                "word": "algorithm",
+                "ch": "g"
+            },
+            "expected": "glaorithm"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "ch": "z"
+            },
+            "expected": "zyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaaz"
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz",
+                "ch": "z"
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "word": "abcdefghij",
+                "ch": "e"
+            },
+            "expected": "edcbafghij"
+        },
+        {
+            "args": {
+                "word": "solution",
+                "ch": "u"
+            },
+            "expected": "ulostion"
+        },
+        {
+            "args": {
+                "word": "environment",
+                "ch": "n"
+            },
+            "expected": "nevironment"
+        },
+        {
+            "args": {
+                "word": "environmentally",
+                "ch": "v"
+            },
+            "expected": "vneironmentally"
+        },
+        {
+            "args": {
+                "word": "algorithm",
+                "ch": "o"
+            },
+            "expected": "oglarithm"
+        },
+        {
+            "args": {
+                "word": "single",
+                "ch": "l"
+            },
+            "expected": "lgnise"
+        },
+        {
+            "args": {
+                "word": "supercalifragilisticexpialidocious",
+                "ch": "f"
+            },
+            "expected": "filacrepusragilisticexpialidocious"
+        },
+        {
+            "args": {
+                "word": "abcdefg",
+                "ch": "z"
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "word": "double",
+                "ch": "x"
+            },
+            "expected": "double"
+        },
+        {
+            "args": {
+                "word": "algorithms",
+                "ch": "a"
+            },
+            "expected": "algorithms"
+        },
+        {
+            "args": {
+                "word": "algorithm",
+                "ch": "r"
+            },
+            "expected": "roglaithm"
+        },
+        {
+            "args": {
+                "word": "characterization",
+                "ch": "h"
+            },
+            "expected": "hcaracterization"
+        },
+        {
+            "args": {
+                "word": "xyzzyx",
+                "ch": "z"
+            },
+            "expected": "zyxzyx"
+        },
+        {
+            "args": {
+                "word": "subsequence",
+                "ch": "q"
+            },
+            "expected": "qesbusuence"
+        },
+        {
+            "args": {
+                "word": "reversal",
+                "ch": "a"
+            },
+            "expected": "asreverl"
+        },
+        {
+            "args": {
+                "word": "a",
+                "ch": "b"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "word": "visualization",
+                "ch": "i"
+            },
+            "expected": "ivsualization"
+        },
+        {
+            "args": {
+                "word": "incomprehensible",
+                "ch": "h"
+            },
+            "expected": "herpmocniensible"
+        },
+        {
+            "args": {
+                "word": "hellothere",
+                "ch": "e"
+            },
+            "expected": "ehllothere"
+        },
+        {
+            "args": {
+                "word": "reverseprefix",
+                "ch": "r"
+            },
+            "expected": "reverseprefix"
+        },
+        {
+            "args": {
+                "word": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "ch": "o"
+            },
+            "expected": "omuenpnoultramicroscopicsilicovolcanoconiosis"
+        },
+        {
+            "args": {
+                "word": "uniquecharacters",
+                "ch": "u"
+            },
+            "expected": "uniquecharacters"
+        },
+        {
+            "args": {
+                "word": "alphabetization",
+                "ch": "b"
+            },
+            "expected": "bahplaetization"
+        },
+        {
+            "args": {
+                "word": "standardization",
+                "ch": "i"
+            },
+            "expected": "idradnatszation"
+        },
+        {
+            "args": {
+                "word": "automation",
+                "ch": "o"
+            },
+            "expected": "otuamation"
+        },
+        {
+            "args": {
+                "word": "mnopqr",
+                "ch": "r"
+            },
+            "expected": "rqponm"
+        },
+        {
+            "args": {
+                "word": "pronunciation",
+                "ch": "u"
+            },
+            "expected": "unorpnciation"
+        },
+        {
+            "args": {
+                "word": "abacaxa",
+                "ch": "a"
+            },
+            "expected": "abacaxa"
+        },
+        {
+            "args": {
+                "word": "reversal",
+                "ch": "r"
+            },
+            "expected": "reversal"
+        },
+        {
+            "args": {
+                "word": "congratulations",
+                "ch": "u"
+            },
+            "expected": "utargnoclations"
+        },
+        {
+            "args": {
+                "word": "performance",
+                "ch": "f"
+            },
+            "expected": "frepormance"
+        },
+        {
+            "args": {
+                "word": "nevertheless",
+                "ch": "n"
+            },
+            "expected": "nevertheless"
+        },
+        {
+            "args": {
+                "word": "multifaceted",
+                "ch": "f"
+            },
+            "expected": "fitlumaceted"
+        },
+        {
+            "args": {
+                "word": "reversal",
+                "ch": "v"
+            },
+            "expected": "verersal"
+        },
+        {
+            "args": {
+                "word": "thisisaverylongwordthatshouldtestthelimitsofthefunction",
+                "ch": "t"
+            },
+            "expected": "thisisaverylongwordthatshouldtestthelimitsofthefunction"
+        },
+        {
+            "args": {
+                "word": "sophistication",
+                "ch": "s"
+            },
+            "expected": "sophistication"
+        },
+        {
+            "args": {
+                "word": "xylophone",
+                "ch": "o"
+            },
+            "expected": "olyxphone"
+        },
+        {
+            "args": {
+                "word": "visualization",
+                "ch": "z"
+            },
+            "expected": "zilausivation"
+        },
+        {
+            "args": {
+                "word": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "ch": "u"
+            },
+            "expected": "uenpmonoultramicroscopicsilicovolcanoconiosis"
+        },
+        {
+            "args": {
+                "word": "xyzxyzxyz",
+                "ch": "x"
+            },
+            "expected": "xyzxyzxyz"
+        },
+        {
+            "args": {
+                "word": "challenge",
+                "ch": "e"
+            },
+            "expected": "ellahcnge"
+        },
+        {
+            "args": {
+                "word": "perseverance",
+                "ch": "v"
+            },
+            "expected": "vesreperance"
+        },
+        {
+            "args": {
+                "word": "abcdefghijk",
+                "ch": "i"
+            },
+            "expected": "ihgfedcbajk"
+        },
+        {
+            "args": {
+                "word": "mississippi",
+                "ch": "p"
+            },
+            "expected": "pississimpi"
+        },
+        {
+            "args": {
+                "word": "programming",
+                "ch": "g"
+            },
+            "expected": "gorpramming"
+        },
+        {
+            "args": {
+                "word": "responsibilities",
+                "ch": "s"
+            },
+            "expected": "serponsibilities"
+        },
+        {
+            "args": {
+                "word": "synchronization",
+                "ch": "n"
+            },
+            "expected": "nyschronization"
+        },
+        {
+            "args": {
+                "word": "floccinaucinihilipilification",
+                "ch": "f"
+            },
+            "expected": "floccinaucinihilipilification"
+        },
+        {
+            "args": {
+                "word": "operationalization",
+                "ch": "o"
+            },
+            "expected": "operationalization"
+        },
+        {
+            "args": {
+                "word": "specializations",
+                "ch": "a"
+            },
+            "expected": "aicepslizations"
+        },
+        {
+            "args": {
+                "word": "optimization",
+                "ch": "t"
+            },
+            "expected": "tpoimization"
+        },
+        {
+            "args": {
+                "word": "abcdefghijk",
+                "ch": "h"
+            },
+            "expected": "hgfedcbaijk"
+        },
+        {
+            "args": {
+                "word": "xylophone",
+                "ch": "p"
+            },
+            "expected": "polyxhone"
+        },
+        {
+            "args": {
+                "word": "hellohellohello",
+                "ch": "l"
+            },
+            "expected": "lehlohellohello"
+        },
+        {
+            "args": {
+                "word": "concatenation",
+                "ch": "n"
+            },
+            "expected": "noccatenation"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().reversePrefix",
+        "typescript": "Solution().reversePrefix"
+    }
+}

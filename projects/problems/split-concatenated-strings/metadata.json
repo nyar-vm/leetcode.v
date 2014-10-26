@@ -1,0 +1,1689 @@
+{
+    "id": "split-concatenated-strings",
+    "questionId": 555,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Array", "String"],
+    "tests": [
+        {
+            "args": {
+                "strs": ["hello", "world"]
+            },
+            "expected": "worldolleh"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "abdc", "acbd", "acdb"]
+            },
+            "expected": "dcdbcabdcadcbaab"
+        },
+        {
+            "args": {
+                "strs": ["aabb", "bbaa", "ccdd", "ddcc"]
+            },
+            "expected": "ddddccbbaabbaacc"
+        },
+        {
+            "args": {
+                "strs": ["a", "b", "c"]
+            },
+            "expected": "cab"
+        },
+        {
+            "args": {
+                "strs": ["dog", "cat", "bat"]
+            },
+            "expected": "ttabgodca"
+        },
+        {
+            "args": {
+                "strs": ["zzz", "aaa", "zzz"]
+            },
+            "expected": "zzzzzzaaa"
+        },
+        {
+            "args": {
+                "strs": ["abc", "xyz"]
+            },
+            "expected": "zyxcba"
+        },
+        {
+            "args": {
+                "strs": ["race", "car"]
+            },
+            "expected": "rraceca"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "efgh", "ijkl", "mnop", "qrst"]
+            },
+            "expected": "tsrqdcbahgfelkjiponm"
+        },
+        {
+            "args": {
+                "strs": ["a", "ab", "abc", "abcd"]
+            },
+            "expected": "dcbaabacba"
+        },
+        {
+            "args": {
+                "strs": ["zzz", "aaa", "zzz"]
+            },
+            "expected": "zzzzzzaaa"
+        },
+        {
+            "args": {
+                "strs": ["abc"]
+            },
+            "expected": "cba"
+        },
+        {
+            "args": {
+                "strs": ["ab", "ba", "cc"]
+            },
+            "expected": "ccbaba"
+        },
+        {
+            "args": {
+                "strs": ["a", "b", "c"]
+            },
+            "expected": "cab"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba", "efgh", "gfed"]
+            },
+            "expected": "hgfegfeddcbadcba"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba", "ab", "ba"]
+            },
+            "expected": "ddcbababaabc"
+        },
+        {
+            "args": {
+                "strs": [
+                    "z",
+                    "y",
+                    "x",
+                    "w",
+                    "v",
+                    "u",
+                    "t",
+                    "s",
+                    "r",
+                    "q",
+                    "p",
+                    "o",
+                    "n",
+                    "m",
+                    "l",
+                    "k",
+                    "j",
+                    "i",
+                    "h",
+                    "g",
+                    "f",
+                    "e",
+                    "d",
+                    "c",
+                    "b",
+                    "a"
+                ]
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "strs": ["banana", "apple", "cherry"]
+            },
+            "expected": "yrrehcbananaelppa"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba", "efgh"]
+            },
+            "expected": "hgfedcbadcba"
+        },
+        {
+            "args": {
+                "strs": ["ab", "ba", "cd", "dc"]
+            },
+            "expected": "ddcbabac"
+        },
+        {
+            "args": {
+                "strs": ["aabb", "ccdd", "eefg", "hhiijj"]
+            },
+            "expected": "jjiihhbbaaddccgfee"
+        },
+        {
+            "args": {
+                "strs": ["abc", "xyz"]
+            },
+            "expected": "zyxcba"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba"]
+            },
+            "expected": "ddcbaabc"
+        },
+        {
+            "args": {
+                "strs": ["zzzz", "zaz", "zzzz", "zaz", "zzzz"]
+            },
+            "expected": "zzzzzzzzzzazzzzzza"
+        },
+        {
+            "args": {
+                "strs": ["abc", "acb", "bac", "bca", "cab", "cba"]
+            },
+            "expected": "ccbacbabcacabbcaba"
+        },
+        {
+            "args": {
+                "strs": ["aaa", "bbb", "ccc"]
+            },
+            "expected": "cccaaabbb"
+        },
+        {
+            "args": {
+                "strs": ["aaaa", "bbbb", "cccc", "dddd"]
+            },
+            "expected": "ddddaaaabbbbcccc"
+        },
+        {
+            "args": {
+                "strs": ["ab", "ba", "ac", "ca"]
+            },
+            "expected": "ccababaa"
+        },
+        {
+            "args": {
+                "strs": ["abcde", "edcba", "fghij", "jihgf"]
+            },
+            "expected": "jjihgfedcbaedcbafghi"
+        },
+        {
+            "args": {
+                "strs": ["a", "b", "c", "d"]
+            },
+            "expected": "dabc"
+        },
+        {
+            "args": {
+                "strs": ["aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh", "iii", "jjj"]
+            },
+            "expected": "jjjaaabbbcccdddeeefffggghhhiii"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba", "abcd", "dcba", "abcd", "dcba", "abcd", "dcba"]
+            },
+            "expected": "ddcbadcbadcbadcbadcbadcbadcbaabc"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abacaba",
+                    "bacabab",
+                    "acababa",
+                    "cababab",
+                    "bababab",
+                    "abababa",
+                    "bababaa",
+                    "aababab",
+                    "ababaab",
+                    "bababab"
+                ]
+            },
+            "expected": "cbabababababababababaabababaabaabababababababacababacababacabababababa"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "bbaa",
+                    "aabb",
+                    "bbaa",
+                    "aabb",
+                    "bbaa",
+                    "aabb",
+                    "bbaa",
+                    "aabb",
+                    "bbaa"
+                ]
+            },
+            "expected": "bbbbaabbaabbaabbaabbaabbaabbaabbaabbaaaa"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "dcba", "abcd", "dcba", "abcd", "dcba"]
+            },
+            "expected": "ddcbadcbadcbadcbadcbaabc"
+        },
+        {
+            "args": {
+                "strs": ["xyzz", "zzxy", "yzxy", "zxyy", "xzyz", "yxzy", "zyzx", "yzzx"]
+            },
+            "expected": "zzzzxyyzxyzxyyzyzxyzxyzyzxyzzxxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "xyz",
+                    "zyx",
+                    "wvu",
+                    "uvw",
+                    "tsr",
+                    "rst",
+                    "qpo",
+                    "opq",
+                    "nml",
+                    "lmn",
+                    "klj",
+                    "jkl",
+                    "ihg",
+                    "ghi",
+                    "fed",
+                    "efd",
+                    "cba",
+                    "bac",
+                    "abc",
+                    "def",
+                    "fed",
+                    "ghi",
+                    "ihg",
+                    "jkl",
+                    "klj",
+                    "lmn",
+                    "nml",
+                    "opq",
+                    "qpo",
+                    "rst",
+                    "tsr",
+                    "uvw",
+                    "wvu",
+                    "zyx",
+                    "xyz"
+                ]
+            },
+            "expected": "zzyxzyxzyxwvuwvutsrtsrqpoqponmlnmlkljlkjihgihgfedefdcbacabcbafedfedihgihglkjkljnmlnmlqpoqpotsrtsrwvuwvuxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "racecar",
+                    "level",
+                    "deified",
+                    "civic",
+                    "rotor",
+                    "kayak",
+                    "reviled",
+                    "redder",
+                    "repaper",
+                    "deed"
+                ]
+            },
+            "expected": "yakreviledredderrepaperdeedracecarleveldeifiedcivicrotorka"
+        },
+        {
+            "args": {
+                "strs": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "zabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "xyzyx",
+                    "yzyx",
+                    "zyx",
+                    "yx",
+                    "x",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "zyzyxyxxabcdefghijklmnopqrstuvwxyzxyzyxxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abc",
+                    "bca",
+                    "cab",
+                    "xyz",
+                    "yzx",
+                    "zxy",
+                    "mno",
+                    "nom",
+                    "opq",
+                    "qpo",
+                    "rst",
+                    "tsr",
+                    "uvw",
+                    "wvu"
+                ]
+            },
+            "expected": "zyzxzxyonmnomqpoqpotsrtsrwvuwvucbabcacabxy"
+        },
+        {
+            "args": {
+                "strs": ["aabbcc", "ccbbdd", "ddbbcc", "cceedd", "aaddbb"]
+            },
+            "expected": "eeddbbddaaccbbaaddbbccddbbcccc"
+        },
+        {
+            "args": {
+                "strs": ["pqrs", "dcba", "mnop", "zyxw", "uv"]
+            },
+            "expected": "zyxwvusrqpdcbaponm"
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzzzz",
+                    "yyyyyy",
+                    "xxxxxx",
+                    "wwwwww",
+                    "vvvvvv",
+                    "uuuuuu",
+                    "tttttt",
+                    "ssssss",
+                    "rrrrrr",
+                    "qqqqqq",
+                    "pppppp",
+                    "oooooo",
+                    "nnnnnn",
+                    "mmmmmm",
+                    "llllll",
+                    "kkkkkk",
+                    "jjjjjj",
+                    "iiiiii",
+                    "hhhhhh",
+                    "gggggg",
+                    "ffffffff",
+                    "eeeeee",
+                    "dddddd",
+                    "cccccc",
+                    "bbbbbb",
+                    "aaaaaa"
+                ]
+            },
+            "expected": "zzzzzzyyyyyyxxxxxxwwwwwwvvvvvvuuuuuuttttttssssssrrrrrrqqqqqqppppppoooooonnnnnnmmmmmmllllllkkkkkkjjjjjjiiiiiihhhhhhggggggffffffffeeeeeeddddddccccccbbbbbbaaaaaa"
+        },
+        {
+            "args": {
+                "strs": ["mnopqr", "rstuvw", "xyzabc", "defghi", "jklmno"]
+            },
+            "expected": "zyxihgfedonmlkjrqponmwvutsrcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "fghij",
+                    "jihgf",
+                    "klmno",
+                    "onmlk",
+                    "pqrst",
+                    "tsrqp",
+                    "uvwxy",
+                    "yxwvu",
+                    "zabcd",
+                    "dcba"
+                ]
+            },
+            "expected": "zdcbaedcbaedcbajihgfjihgfonmlkonmlktsrqptsrqpyxwvuyxwvudcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefgh",
+                    "hgfedcba",
+                    "ijklmnop",
+                    "ponmlkji",
+                    "qrstuvwx",
+                    "xwvutsrq",
+                    "yzabcd",
+                    "dcba"
+                ]
+            },
+            "expected": "zydcbahgfedcbahgfedcbaponmlkjiponmlkjixwvutsrqxwvutsrqdcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "efgh",
+                    "hgfe",
+                    "ijkl",
+                    "lkji",
+                    "mnop",
+                    "ponm",
+                    "qrst",
+                    "tsrq",
+                    "uvwx",
+                    "xwvu",
+                    "yzab",
+                    "bazy"
+                ]
+            },
+            "expected": "zyyzabdcbadcbahgfehgfelkjilkjiponmponmtsrqtsrqxwvuxwvuba"
+        },
+        {
+            "args": {
+                "strs": ["zzzzzzzzzz", "aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc", "dddddddddd"]
+            },
+            "expected": "zzzzzzzzzzaaaaaaaaaabbbbbbbbbbccccccccccdddddddddd"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "fghij",
+                    "jihgf",
+                    "klmno",
+                    "onmlk",
+                    "pqrst",
+                    "tsrqp",
+                    "uvwxy",
+                    "yxwvu"
+                ]
+            },
+            "expected": "yyxwvuedcbaedcbajihgfjihgfonmlkonmlktsrqptsrqpuvwx"
+        },
+        {
+            "args": {
+                "strs": ["abcdxyz", "zyxcba", "mnopqr", "rqponm"]
+            },
+            "expected": "zzyxcbarqponmrqponmabcdxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "ghijkl",
+                    "lkjihg",
+                    "mnopqr",
+                    "rqponm",
+                    "stuvwx",
+                    "xwvuts",
+                    "yzab",
+                    "baz"
+                ]
+            },
+            "expected": "zyzabfedcbafedcbalkjihglkjihgrqponmrqponmxwvutsxwvutsba"
+        },
+        {
+            "args": {
+                "strs": ["abcdefg", "gfedcba", "hijklmn", "nopqrst", "utsrqpon"]
+            },
+            "expected": "utsrqpongfedcbagfedcbanmlkjihtsrqpon"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "efgh",
+                    "hgfe",
+                    "ijkl",
+                    "lkji",
+                    "mnop",
+                    "ponm",
+                    "qrst",
+                    "tsrq"
+                ]
+            },
+            "expected": "ttsrqdcbadcbahgfehgfelkjilkjiponmponmqrs"
+        },
+        {
+            "args": {
+                "strs": ["zebra", "apple", "banana", "grape", "orange"]
+            },
+            "expected": "zelppabananagrapeorangearbe"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "mnopqrstuvwxyz",
+                    "rstuvwxyzabcdefghijklmnopq",
+                    "zyxwvutsrqponmlkjihg",
+                    "fedcbazyxwvut"
+                ]
+            },
+            "expected": "zzyxwvutsrqponmrstuvwxyzabcdefghijklmnopqzyxwvutsrqponmlkjihgtuvwxyzabcdefzyxwvutsrqponmlkjihgfedcbaabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "strs": ["abcdef", "fedcba", "ghijkl", "lkjihg", "mnopqr", "rqponm"]
+            },
+            "expected": "rrqponmfedcbafedcbalkjihglkjihgmnopq"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba"
+                ]
+            },
+            "expected": "jjihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbaabcdefghi"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj"
+                ]
+            },
+            "expected": "jjjjaaaabbbbccccddddeeeeffffgggghhhhiiii"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabb",
+                    "bbaa",
+                    "abab",
+                    "baba",
+                    "abcd",
+                    "dcba",
+                    "abdc",
+                    "dcba",
+                    "cdab",
+                    "bacd",
+                    "abcd",
+                    "dcba",
+                    "cdab",
+                    "bacd"
+                ]
+            },
+            "expected": "ddcbadcbacdabdcabbbaabbaababababadcbadcbacdbadcbacdabbac"
+        },
+        {
+            "args": {
+                "strs": ["aabbcc", "ccbbdd", "ddeeff", "ffeedd", "bbccaa"]
+            },
+            "expected": "ffffeeddbbccaaccbbaaddbbccddee"
+        },
+        {
+            "args": {
+                "strs": ["abacaba", "babcbab", "acbacba", "bcabcab", "cabacab"]
+            },
+            "expected": "cbcabacababacabababcbabacbacbabacba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "ccbbaa",
+                    "aabbcc",
+                    "ccbbaa",
+                    "aabbcc",
+                    "ccbbaa",
+                    "aabbcc",
+                    "ccbbaa",
+                    "aabbcc",
+                    "ccbbaa"
+                ]
+            },
+            "expected": "ccccbbaaccbbaaccbbaaccbbaaccbbaaccbbaaccbbaaccbbaaccbbaaaabb"
+        },
+        {
+            "args": {
+                "strs": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "zabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aaaaa",
+                    "bbbbb",
+                    "ccccc",
+                    "ddddd",
+                    "eeeee",
+                    "ffffff",
+                    "ggggg",
+                    "hhhhh",
+                    "iiiii",
+                    "jjjjj"
+                ]
+            },
+            "expected": "jjjjjaaaaabbbbbcccccdddddeeeeeffffffggggghhhhhiiiii"
+        },
+        {
+            "args": {
+                "strs": [
+                    "ab",
+                    "ba",
+                    "cc",
+                    "dd",
+                    "ee",
+                    "ff",
+                    "gg",
+                    "hh",
+                    "ii",
+                    "jj",
+                    "kk",
+                    "ll",
+                    "mm",
+                    "nn",
+                    "oo",
+                    "pp",
+                    "qq",
+                    "rr",
+                    "ss",
+                    "tt",
+                    "uu",
+                    "vv",
+                    "ww",
+                    "xx",
+                    "yy",
+                    "zz"
+                ]
+            },
+            "expected": "zzbabaccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy"
+        },
+        {
+            "args": {
+                "strs": ["zzzz", "zyzy", "zxzx", "wywy", "wvuv", "wvuw", "wvuv", "vuvu"]
+            },
+            "expected": "zzzzzyzyzxzxywywwvuvwvuwwvuvvuvu"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "mnopqr",
+                    "rqponm",
+                    "stuvwx",
+                    "xwvuts",
+                    "yzab",
+                    "zyba",
+                    "cdefg",
+                    "gfedc"
+                ]
+            },
+            "expected": "zyzybagfedcgfedcfedcbafedcbarqponmrqponmxwvutsxwvutsba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba"
+                ]
+            },
+            "expected": "ddcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbaabc"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdexyz",
+                    "zyxwvut",
+                    "hgfedcba",
+                    "lkjihgf",
+                    "mnopqr",
+                    "utsrqpon",
+                    "zyxwv",
+                    "utsrqpon",
+                    "lkjihgf",
+                    "mnopqr",
+                    "hgfedcba",
+                    "zyxwvut",
+                    "abcdexyz"
+                ]
+            },
+            "expected": "zzyxwvuthgfedcbalkjihgfrqponmutsrqponzyxwvutsrqponlkjihgfrqponmhgfedcbazyxwvutzyxedcbaabcdexy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "fghij",
+                    "jihgf",
+                    "klmno",
+                    "onmlk",
+                    "pqrst",
+                    "tsrqp",
+                    "uvwxy",
+                    "yxwvu",
+                    "zabcd",
+                    "dcbae",
+                    "fghij",
+                    "jihgf",
+                    "klmno",
+                    "onmlk",
+                    "pqrst",
+                    "tsrqp",
+                    "uvwxy",
+                    "yxwvu"
+                ]
+            },
+            "expected": "zeabcdjihgfjihgfonmlkonmlktsrqptsrqpyxwvuyxwvuedcbaedcbajihgfjihgfonmlkonmlktsrqptsrqpyxwvuyxwvudcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba"
+                ]
+            },
+            "expected": "ddcbadcbadcbadcbadcbadcbadcbadcbadcbaabc"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "ghijkl",
+                    "lkjihg",
+                    "mnopqr",
+                    "rqponm",
+                    "stuvwx",
+                    "xwvuts",
+                    "yzabcd",
+                    "dcbaey"
+                ]
+            },
+            "expected": "zyyeabcdfedcbafedcbalkjihglkjihgrqponmrqponmxwvutsxwvutsdcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abc",
+                    "bca",
+                    "cab",
+                    "acb",
+                    "bac",
+                    "cba",
+                    "abc",
+                    "bca",
+                    "cab",
+                    "acb",
+                    "bac",
+                    "cba"
+                ]
+            },
+            "expected": "ccbacbabcacabbcacabcbacbabcacabbcaba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzz",
+                    "yyyy",
+                    "xxxx",
+                    "wwww",
+                    "vvvv",
+                    "uuuu",
+                    "tttt",
+                    "ssss",
+                    "rrrr",
+                    "qqqq",
+                    "pppp",
+                    "oooo",
+                    "nnnn",
+                    "mmmm",
+                    "llll",
+                    "kkkk",
+                    "jjjj",
+                    "iiii",
+                    "hhhh",
+                    "gggg",
+                    "ffff",
+                    "eeee",
+                    "dddd",
+                    "cccc",
+                    "bbbb",
+                    "aaaa"
+                ]
+            },
+            "expected": "zzzzyyyyxxxxwwwwvvvvuuuuttttssssrrrrqqqqppppoooonnnnmmmmllllkkkkjjjjiiiihhhhggggffffeeeeddddccccbbbbaaaa"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "ccbbaa",
+                    "ddeeff",
+                    "ffeedd",
+                    "gghhii",
+                    "iigg.hh",
+                    "jjkkll",
+                    "llkkjj",
+                    "mmnnoo",
+                    "oonnmm"
+                ]
+            },
+            "expected": "oooonnmmccbbaaccbbaaffeeddffeeddiihhggiigg.hhllkkjjllkkjjmmnn"
+        },
+        {
+            "args": {
+                "strs": [
+                    "mnopqr",
+                    "rstuvw",
+                    "xyzabc",
+                    "defghi",
+                    "jklmno",
+                    "pqrstu",
+                    "vwxyzab",
+                    "cdefghi",
+                    "jklmnop"
+                ]
+            },
+            "expected": "zyxwvihgfedcponmlkjrqponmwvutsrxyzabcihgfedonmlkjutsrqpba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz"
+                ]
+            },
+            "expected": "zycbafedihglkjonmrqputsxwvzycbafedihglkjonmrqputsxwv"
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzz",
+                    "aaaa",
+                    "zzzz",
+                    "aaaa",
+                    "zzzz",
+                    "aaaa",
+                    "zzzz",
+                    "aaaa",
+                    "zzzz",
+                    "aaaa"
+                ]
+            },
+            "expected": "zzzzaaaazzzzaaaazzzzaaaazzzzaaaazzzzaaaa"
+        },
+        {
+            "args": {
+                "strs": ["mnop", "qrst", "wxyz", "vuts", "rqpo", "lkji", "hgfe", "dcba"]
+            },
+            "expected": "zyxwvutsrqpolkjihgfedcbaponmtsrq"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "ghijkl",
+                    "lkjihg",
+                    "mnopqr",
+                    "rqponm",
+                    "stuvwx",
+                    "xwvuts",
+                    "yzabcd",
+                    "dcbaef"
+                ]
+            },
+            "expected": "zyfeabcdfedcbafedcbalkjihglkjihgrqponmrqponmxwvutsxwvutsdcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "fghij",
+                    "jihgf",
+                    "klmno",
+                    "onmlk",
+                    "pqrst",
+                    "tsrqp",
+                    "uvwxy",
+                    "yxwvu",
+                    "zabcd",
+                    "dcbae"
+                ]
+            },
+            "expected": "zeabcdedcbaedcbajihgfjihgfonmlkonmlktsrqptsrqpyxwvuyxwvudcba"
+        },
+        {
+            "args": {
+                "strs": ["aabbcc", "ccbbaa", "abcabc", "cbaabc", "abacab"]
+            },
+            "expected": "ccccbbaacbacbacbaabcbacabaaabb"
+        },
+        {
+            "args": {
+                "strs": ["abcdefgh", "hgfedcba", "abcdefgh", "hgfedcba", "abcdefgh", "hgfedcba"]
+            },
+            "expected": "hhgfedcbahgfedcbahgfedcbahgfedcbahgfedcbaabcdefg"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "efgh",
+                    "hgfj",
+                    "ijkl",
+                    "lkji",
+                    "mnop",
+                    "ponm",
+                    "qrst",
+                    "tsrq",
+                    "uvwx",
+                    "xwvu",
+                    "yzab",
+                    "bazc",
+                    "cdef",
+                    "fedc",
+                    "abcd",
+                    "dcba",
+                    "efgh",
+                    "hgfj",
+                    "ijkl",
+                    "lkji",
+                    "mnop",
+                    "ponm",
+                    "qrst",
+                    "tsrq",
+                    "uvwx",
+                    "xwvu",
+                    "yzab",
+                    "bazc",
+                    "cdef",
+                    "fedc"
+                ]
+            },
+            "expected": "zyczabfedcfedcdcbadcbahgfejfghlkjilkjiponmponmtsrqtsrqxwvuxwvuyzabczabfedcfedcdcbadcbahgfejfghlkjilkjiponmponmtsrqtsrqxwvuxwvuba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdabcd",
+                    "dcbaabcd",
+                    "abcd",
+                    "dcba",
+                    "abcdabcd",
+                    "dcbaabcd",
+                    "abcd",
+                    "dcba",
+                    "abcdabcd",
+                    "dcbaabcd"
+                ]
+            },
+            "expected": "ddcbadcbadcbadcbadcbaabcddcbadcbadcbadcbadcbaabcddcbadcbadcbaabc"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "ghijkl",
+                    "lkjihg",
+                    "mnopqr",
+                    "rqponm",
+                    "stuvwx",
+                    "xwvuts"
+                ]
+            },
+            "expected": "xxwvutsfedcbafedcbalkjihglkjihgrqponmrqponmstuvw"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba"
+                ]
+            },
+            "expected": "jjihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbaabcdefghi"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "efgh",
+                    "hgfj",
+                    "ijkl",
+                    "lkji",
+                    "mnop",
+                    "ponm",
+                    "qrst",
+                    "tsrq",
+                    "uvwx",
+                    "xwvu",
+                    "yzab",
+                    "bazc",
+                    "cdef",
+                    "fedc"
+                ]
+            },
+            "expected": "zyczabfedcfedcdcbadcbahgfejfghlkjilkjiponmponmtsrqtsrqxwvuxwvuba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "klmnopqr",
+                    "rqponmlk",
+                    "stuvwxyz",
+                    "zyxwvuts",
+                    "abcdefgh",
+                    "hgfedcba",
+                    "ijklmnop",
+                    "ponmlkji"
+                ]
+            },
+            "expected": "zzyxwvutshgfedcbahgfedcbaponmlkjiponmlkjijihgfedcbajihgfedcbarqponmlkrqponmlkstuvwxy"
+        },
+        {
+            "args": {
+                "strs": ["abcdef", "gfedcb", "hijklm", "mlkjih", "nopqr", "rqpon"]
+            },
+            "expected": "rrqponfedcbagfedcbmlkjihmlkjihnopq"
+        },
+        {
+            "args": {
+                "strs": ["aabbcc", "bbaacc", "ccabba", "aabbbc", "bbcbbc", "bccbbc", "bbccbb"]
+            },
+            "expected": "ccccabbacbbbaacbbcbbcbbccbbbccbbccbbaabbaa"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefgh",
+                    "hgfedcba",
+                    "ijklmnop",
+                    "ponmlkji",
+                    "qrstuvwx",
+                    "xwvutsrq",
+                    "yzabcd",
+                    "dcba"
+                ]
+            },
+            "expected": "zydcbahgfedcbahgfedcbaponmlkjiponmlkjixwvutsrqxwvutsrqdcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": "zzyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbaabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzz",
+                    "aaa",
+                    "bbb",
+                    "zzz",
+                    "aaa",
+                    "bbb",
+                    "zzz",
+                    "aaa",
+                    "bbb",
+                    "zzz",
+                    "aaa",
+                    "bbb"
+                ]
+            },
+            "expected": "zzzaaabbbzzzaaabbbzzzaaabbbzzzaaabbb"
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzz",
+                    "yyy",
+                    "xxx",
+                    "www",
+                    "vvv",
+                    "uuu",
+                    "ttt",
+                    "sss",
+                    "rrr",
+                    "qqq",
+                    "ppp",
+                    "ooo",
+                    "nnn",
+                    "mmm",
+                    "lll",
+                    "kkk",
+                    "jjj",
+                    "iii",
+                    "hhh",
+                    "ggg",
+                    "fff",
+                    "eee",
+                    "ddd",
+                    "ccc",
+                    "bbb",
+                    "aaa"
+                ]
+            },
+            "expected": "zzzyyyxxxwwwvvvuuutttsssrrrqqqpppooonnnmmmlllkkkjjjiiihhhgggfffeeedddcccbbbaaa"
+        },
+        {
+            "args": {
+                "strs": [
+                    "mnopqr",
+                    "rstuvw",
+                    "wvutsr",
+                    "qponml",
+                    "lkjihg",
+                    "fedcba",
+                    "zyxwvu",
+                    "utsrqponmlkjihgfedcba"
+                ]
+            },
+            "expected": "zyxwvuutsrqponmlkjihgfedcbarqponmwvutsrwvutsrqponmllkjihgfedcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "fghij",
+                    "jihgf",
+                    "klmno",
+                    "onmlk",
+                    "pqrst",
+                    "tsrqp",
+                    "uvwxy",
+                    "yxwvu",
+                    "zabcd",
+                    "dcbae"
+                ]
+            },
+            "expected": "zeabcdedcbaedcbajihgfjihgfonmlkonmlktsrqptsrqpyxwvuyxwvudcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "racecar",
+                    "madam",
+                    "level",
+                    "rotor",
+                    "kayak",
+                    "reviled",
+                    "deed",
+                    "civic",
+                    "rotor",
+                    "deed",
+                    "civic",
+                    "rotor",
+                    "deed",
+                    "civic",
+                    "rotor",
+                    "deed",
+                    "civic",
+                    "rotor",
+                    "deed",
+                    "civic"
+                ]
+            },
+            "expected": "yakrevileddeedcivicrotordeedcivicrotordeedcivicrotordeedcivicrotordeedcivicracecarmadamlevelrotorka"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "klmnopqr",
+                    "rqponmlk",
+                    "stuvwxyz",
+                    "zyxwvutsr",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "klmnopqr",
+                    "rqponmlk",
+                    "stuvwxyz",
+                    "zyxwvutsr"
+                ]
+            },
+            "expected": "zzyxwvutsrjihgfedcbajihgfedcbarqponmlkrqponmlkzyxwvutszyxwvutsrjihgfedcbajihgfedcbarqponmlkrqponmlkstuvwxy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "efgh",
+                    "hgf",
+                    "ijkl",
+                    "lkj",
+                    "mnop",
+                    "onm",
+                    "qrst",
+                    "tsrq",
+                    "uvwx",
+                    "xwv",
+                    "yz",
+                    "zy",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "zzyabcdefghijklmnopqrstuvwxyzdcbadcbahgfehgflkjilkjponmonmtsrqtsrqxwvuxwvy"
+        },
+        {
+            "args": {
+                "strs": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yzab"]
+            },
+            "expected": "zydcbahgfelkjiponmtsrqxwvuba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefgh",
+                    "hgfedcba",
+                    "ijklmnop",
+                    "ponmlkji",
+                    "qrstuvwx",
+                    "xwvutsrq",
+                    "yzabcd",
+                    "dcbaef",
+                    "ghijkl",
+                    "lkjihg"
+                ]
+            },
+            "expected": "zyfeabcdlkjihglkjihghgfedcbahgfedcbaponmlkjiponmlkjixwvutsrqxwvutsrqdcba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba"
+                ]
+            },
+            "expected": "jjihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbaabcdefghi"
+        },
+        {
+            "args": {
+                "strs": [
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z",
+                    "z"
+                ]
+            },
+            "expected": "zzzzzzzzzzzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "strs": ["aaabbb", "bbbaaa", "cccddd", "dddccc", "eeefff", "fffeee"]
+            },
+            "expected": "ffffffeeebbbaaabbbaaadddcccdddccceee"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "ghijkl",
+                    "lkjihg",
+                    "mnopqr",
+                    "rqponm",
+                    "stuvwx",
+                    "xwvuts",
+                    "yzabcd",
+                    "dcba",
+                    "efghij",
+                    "jihgfe",
+                    "klmnop",
+                    "ponmlk",
+                    "qrstuv",
+                    "vutsrq",
+                    "wxyzab",
+                    "bazuvw"
+                ]
+            },
+            "expected": "zyxwwvuzabfedcbafedcbalkjihglkjihgrqponmrqponmxwvutsxwvutsyzabcddcbajihgfejihgfeponmlkponmlkvutsrqvutsrqba"
+        },
+        {
+            "args": {
+                "strs": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yzab", "cdef"]
+            },
+            "expected": "zyfedcdcbahgfelkjiponmtsrqxwvuba"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba",
+                    "abcd",
+                    "dcba"
+                ]
+            },
+            "expected": "ddcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbaabc"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().splitLoopedString",
+        "typescript": "Solution().splitLoopedString"
+    }
+}

@@ -1,0 +1,924 @@
+{
+    "id": "minimum-penalty-for-a-shop",
+    "questionId": 2483,
+    "difficulty": "Medium",
+    "tags": ["String", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "customers": "YNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "YNNYNYYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NNYNNYNNYNNYNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYNNYYYYNNYYYYNNYYYYNNNN"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "customers": "YNYYYYYYNY"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "customers": "YNYYYYNNYY"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "customers": "NYYNNYNY"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "customers": "YNYNNYNYYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NYYYYYNNNYYYYYYYYYYNNNNN"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYY"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYY"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNYNNYNYN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NYNNNNNNYN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYNY"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "YYYYNNNNYYYY"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "customers": "NYYNNYNYNNY"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYY"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "customers": "YNYYYYYYNYYN"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "customers": "YNNYYNYY"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "customers": "YYYYYNNNNNYYYYYY"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "customers": "YNNYNYY"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYNNYNNYNNYNNY"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "customers": "NNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYY"
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNN"
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYYYYYYYYYYYYY"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYYYYYYY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNNYNNYNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYY"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YNYYYYYYYYNYNYYYYYYYYNYNYYYYYYYYNYNYYYYYYYYNYNYYYYYYYY"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "customers": "YYNNYNYNYNYNYNYNYNYN"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NYNNYYNYNNYYNYNNYYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YYYYNNYYYNYYNNYYNNYYNYNNYYNYNYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNYNYNYNNYYNNYYNNYYNNYYNYNYNYNNYYNNYYNNYYNNYYNYNYNY"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "customers": "YYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNN"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "YYYYYNNNNNYYYYYNNNNNYYYYYNNNNNYYYYYNNNNN"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YNNYNYYNYYNNYNNYNYYN"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "YYYYYNNYYYYNNYYY"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "customers": "YYNNYYNNYYNNYY"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 92
+        },
+        {
+            "args": {
+                "customers": "NYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYYYYYYYYY"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYNYYNYNYYNNYY"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "NYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYY"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "customers": "NYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNY"
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 88
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YYYYNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNY"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYNNNNYYYYNNNN"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "customers": "YYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYY"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYY"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "customers": "NNNNNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "customers": "YYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYY"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "NYNYNNYNYNYNYNNYNYNNYNYNYNNYNYNNYNYNNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNNYYYN"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "customers": "NYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYN"
+            },
+            "expected": 93
+        },
+        {
+            "args": {
+                "customers": "NYNNYNYNNYNYNNYNYNNYNYNNYNYNNYNYNNYNYNNYNYNNYNYNNYNYNNYN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNYYYYYYYY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNYNNYNNYNNYNNYY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNN"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNYYNNNNYYNNYYYYNYYY"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "customers": "NYNNYNYYNNYNYYNNYNYYNNYNYYNNYNYYNNYNYYNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YNNYYNYYNNYYNYYNNYYNYYNNYYNYYNNYYNYYNNYYNYYNN"
+            },
+            "expected": 43
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "NNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "customers": "YYYYYNNNNNNNNNNN"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "customers": "YYYYYNNYNYNYNYNN"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYNNNNNNNN"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "YYYYYYNNNNNNYYYYYYNNNNNNYYYYYYNNNNNNYYYYYY"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNNY"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYNNYYYNYYYYNNYYYNYYYYNNYYYNYYYYNNYYYNYYYYNNYYYNYYYY"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNNYYNYNN"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "YYYYNNNNNNNNNNNNNNNNNNNNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 108
+        },
+        {
+            "args": {
+                "customers": "YYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYYYYY"
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NYNYYNNYNYNYYNNYNYNY"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "customers": "NNYNYNYNYNYNYNYN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YYNNYYYYYYNNYYYYYYNNYYYYYYNNYYYYYYNNYYYYYY"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "customers": "NYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNY"
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "customers": "NNNNNYYYYYYYNNNN"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "customers": "YYYYYNNNNYYYYYYYYYNNNNNNNYYYYYYYYYNNNNNYYY"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNN"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "YNNNNYNNYNYNYNYNNYNNYNNYNYNNYNNYNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNYNNY"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "YYNYNYNYNYNNYNNY"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "NYYYYYYYYYNNNNNNNNNN"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "NNNNNNYYYYYYYYYYYYYY"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "NNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYYNNNNYYYY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YYNNYYNNYYNN"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "NNYNYNYNYNYNYNNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNN"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "NYYYYYYYYYYYNN"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "customers": "NNYYYYNNYYYYNNYYYYNNYYYYNNYYYYNNYYYYNNYYYY"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNN"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYN"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NNNNYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "customers": "YNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYY"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNYNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNN"
+            },
+            "expected": 88
+        },
+        {
+            "args": {
+                "customers": "YYYNYYNYYYNYYNNYYYYNYYYYNYNYNYYYYYYYYYYYYNNNYNYNYYNNYNN"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNYYYYYYYYYYNNNNNNNNNYYYYYYYYYYNNNNNNNNNYYYYYYYYYYNNNNNNNNNYYYYYYYYYY"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "customers": "YYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYYNNYY"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "customers": "NYNNNYNNNYNNNY"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "NYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNYYNNYY"
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "customers": "NNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNNYYYYYYYYYYNNNNNNNNNN"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "customers": "YYYYYYYYYYNNNNNNNNNN"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "customers": "NYNYNYNYNYNYNYNYNYNYNYNNNNNNNNNNNNNNNNNNNNNNNNYYYYYYYYYYYYYYYYYYYY"
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().bestClosingTime",
+        "typescript": "Solution().bestClosingTime"
+    }
+}

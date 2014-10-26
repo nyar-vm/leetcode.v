@@ -1,0 +1,792 @@
+{
+    "id": "number-of-substrings-containing-all-three-characters",
+    "questionId": 1358,
+    "difficulty": "Medium",
+    "tags": ["Hash Table", "String", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s": "aaabbbccc"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "cba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "cbaacb"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "bbbacbac"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "ccccabc"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcabcabc"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc"
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "s": "aabbc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "cccbaab"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "aabbbc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aabcbc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abcabc"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aabbaacc"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "abacbc"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "abacabacabc"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "ccbaaabb"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "baccab"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "bca"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "ccccbaaa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "aaacb"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "ccccbaab"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "abcababc"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "aabbcc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aaaabbbccc"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "abacbac"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abcacbacbacbabc"
+            },
+            "expected": 89
+        },
+        {
+            "args": {
+                "s": "aabbcacabcabc"
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "s": "ccabababc"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "abacbabacbabacbab"
+            },
+            "expected": 112
+        },
+        {
+            "args": {
+                "s": "aabccbabcbacbac"
+            },
+            "expected": 85
+        },
+        {
+            "args": {
+                "s": "abcabcabccba"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "aabbccbaa"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "aaabbbcccbbbccc"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "s": "acbacbacbacbacb"
+            },
+            "expected": 91
+        },
+        {
+            "args": {
+                "s": "abacbacbacb"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "s": "aabcbacbacbabc"
+            },
+            "expected": 75
+        },
+        {
+            "args": {
+                "s": "bcabcabcabcabc"
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "s": "aaabbbcccabcabcabc"
+            },
+            "expected": 115
+        },
+        {
+            "args": {
+                "s": "abacbacbacbacbabcababcabc"
+            },
+            "expected": 271
+        },
+        {
+            "args": {
+                "s": "acbacbacbacb"
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "s": "abacbacbacbabc"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "s": "cccbbbaaa"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "caabcbacbacb"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "abbbcccaabbbabc"
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "s": "abacbcabc"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aaabbbcccbbbaaa"
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "s": "bacbacbacbacb"
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "s": "cabcbacbacbabcb"
+            },
+            "expected": 88
+        },
+        {
+            "args": {
+                "s": "abacbcacab"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "bbbbbbcccaaa"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbccc"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "s": "ccbbbaaabbbccc"
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": 406
+        },
+        {
+            "args": {
+                "s": "abcabcabcab"
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "s": "aabbaaccabcabcabc"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "s": "bacbacbacbacbacba"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "s": "ccccbbbaaaaa"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "abababababababab"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacbcabcabcab"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "s": "abababababab"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "cacbacbacbac"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "s": "cabbacbac"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "aabbaacccbaab"
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc"
+            },
+            "expected": 136
+        },
+        {
+            "args": {
+                "s": "cbacbacbacbac"
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "s": "aabbbcccaaaabbbccc"
+            },
+            "expected": 86
+        },
+        {
+            "args": {
+                "s": "bacbacbacbacba"
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "s": "aabacababaac"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "s": "abcababccbaabc"
+            },
+            "expected": 69
+        },
+        {
+            "args": {
+                "s": "ababababcabcab"
+            },
+            "expected": 57
+        },
+        {
+            "args": {
+                "s": "aaabbbcccbbb"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcababc"
+            },
+            "expected": 117
+        },
+        {
+            "args": {
+                "s": "abccbaabccbaab"
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "s": "baccabaccabacc"
+            },
+            "expected": 69
+        },
+        {
+            "args": {
+                "s": "abacbcacbacb"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "cccccbbaaaabbbccc"
+            },
+            "expected": 68
+        },
+        {
+            "args": {
+                "s": "bbcccaabbcccaab"
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "s": "aabbbccccaaaabbbbccc"
+            },
+            "expected": 103
+        },
+        {
+            "args": {
+                "s": "abababab"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "cbacbacbacbacbacbacbacbacbacbacb"
+            },
+            "expected": 465
+        },
+        {
+            "args": {
+                "s": "abcbaabcbaabc"
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "s": "aabcbabacabc"
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "s": "aabacbacbacbac"
+            },
+            "expected": 75
+        },
+        {
+            "args": {
+                "s": "aabbaaccbbacbbacaacabcbacbacbacbac"
+            },
+            "expected": 498
+        },
+        {
+            "args": {
+                "s": "abacbabacbabac"
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "s": "aabbbcccaabbbabc"
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "s": "aaaabbccccabbbccc"
+            },
+            "expected": 85
+        },
+        {
+            "args": {
+                "s": "cccaaaabbbcccbbb"
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "s": "ccccbbaaaabc"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "s": "acbacbacbacbacbacbacbacbacbacbac"
+            },
+            "expected": 465
+        },
+        {
+            "args": {
+                "s": "abcbbccaaa"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "cccaabbbaaacc"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "s": "ccccccccabbaabbcbbb"
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "s": "cccbababac"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "s": "ccccabcabcabc"
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "s": "aabacbababcabc"
+            },
+            "expected": 69
+        },
+        {
+            "args": {
+                "s": "aaabbbcccbbbaaabbbc"
+            },
+            "expected": 87
+        },
+        {
+            "args": {
+                "s": "abccabccabccabc"
+            },
+            "expected": 85
+        },
+        {
+            "args": {
+                "s": "abcbacbacbacbaca"
+            },
+            "expected": 103
+        },
+        {
+            "args": {
+                "s": "abcabcabcabacbacb"
+            },
+            "expected": 119
+        },
+        {
+            "args": {
+                "s": "aabbbcccabcabcabc"
+            },
+            "expected": 103
+        },
+        {
+            "args": {
+                "s": "abacbcabcabc"
+            },
+            "expected": 53
+        },
+        {
+            "args": {
+                "s": "aabbaaccaabbcc"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "abcabcabacbcab"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "s": "aabbbccc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aabbaacccbbcabab"
+            },
+            "expected": 77
+        },
+        {
+            "args": {
+                "s": "babababacacacacbcbbcbcbcbacbacbacb"
+            },
+            "expected": 441
+        },
+        {
+            "args": {
+                "s": "cacbacbacbacbacbac"
+            },
+            "expected": 135
+        },
+        {
+            "args": {
+                "s": "cccbbaaaabacbacb"
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "s": "ccccbbbaaa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabcabcabcabcabc"
+            },
+            "expected": 208
+        },
+        {
+            "args": {
+                "s": "aabbbccccaaa"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "s": "abacbacbac"
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "s": "aabbbaccccba"
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "s": "ccbaabccababab"
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "s": "ccccbaabccc"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "s": "ccccbaa"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "bacabcabcabcabcabcabcabc"
+            },
+            "expected": 252
+        },
+        {
+            "args": {
+                "s": "ccccccaaaabbbccc"
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": 496
+        },
+        {
+            "args": {
+                "s": "abacbabcc"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "abacbacbacbacb"
+            },
+            "expected": 77
+        },
+        {
+            "args": {
+                "s": "bacbacbacbacbacbacbac"
+            },
+            "expected": 190
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc"
+            },
+            "expected": 91
+        },
+        {
+            "args": {
+                "s": "bbaacccaaaabbccba"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbccccc"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "aaabbbcccabc"
+            },
+            "expected": 34
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numberOfSubstrings",
+        "typescript": "Solution().numberOfSubstrings"
+    }
+}

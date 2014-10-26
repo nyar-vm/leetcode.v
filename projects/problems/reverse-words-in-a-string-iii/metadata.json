@@ -1,0 +1,558 @@
+{
+    "id": "reverse-words-in-a-string-iii",
+    "questionId": 557,
+    "difficulty": "Easy",
+    "tags": ["Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "Reverse each word"
+            },
+            "expected": "esreveR hcae drow"
+        },
+        {
+            "args": {
+                "s": "Python Programming"
+            },
+            "expected": "nohtyP gnimmargorP"
+        },
+        {
+            "args": {
+                "s": "Python is fun"
+            },
+            "expected": "nohtyP si nuf"
+        },
+        {
+            "args": {
+                "s": "reverse each word"
+            },
+            "expected": "esrever hcae drow"
+        },
+        {
+            "args": {
+                "s": "Mr Ding"
+            },
+            "expected": "rM gniD"
+        },
+        {
+            "args": {
+                "s": "Hello World"
+            },
+            "expected": "olleH dlroW"
+        },
+        {
+            "args": {
+                "s": "Let's take LeetCode contest"
+            },
+            "expected": "s'teL ekat edoCteeL tsetnoc"
+        },
+        {
+            "args": {
+                "s": "a b c d e"
+            },
+            "expected": "a b c d e"
+        },
+        {
+            "args": {
+                "s": "a long sentence with multiple words to reverse each one"
+            },
+            "expected": "a gnol ecnetnes htiw elpitlum sdrow ot esrever hcae eno"
+        },
+        {
+            "args": {
+                "s": "spaces    at    the    end    of    the    sentence    "
+            },
+            "expected": "secaps ta eht dne fo eht ecnetnes"
+        },
+        {
+            "args": {
+                "s": "longwordswithoutspaces"
+            },
+            "expected": "secapstuohtiwsdrowgnol"
+        },
+        {
+            "args": {
+                "s": "!@#$%^ &*()"
+            },
+            "expected": "^%$#@! )(*&"
+        },
+        {
+            "args": {
+                "s": "longwordthatdoesnotcontainanywhitespace"
+            },
+            "expected": "ecapsetihwynaniatnoctonseodtahtdrowgnol"
+        },
+        {
+            "args": {
+                "s": "Able was I ere I saw Elba"
+            },
+            "expected": "elbA saw I ere I was ablE"
+        },
+        {
+            "args": {
+                "s": "a quick brown fox jumps over the lazy dog"
+            },
+            "expected": "a kciuq nworb xof spmuj revo eht yzal god"
+        },
+        {
+            "args": {
+                "s": "Qwen AI assistant"
+            },
+            "expected": "newQ IA tnatsissa"
+        },
+        {
+            "args": {
+                "s": "multiple    spaces between words"
+            },
+            "expected": "elpitlum secaps neewteb sdrow"
+        },
+        {
+            "args": {
+                "s": "123 abc 456 def 789 ghi"
+            },
+            "expected": "321 cba 654 fed 987 ihg"
+        },
+        {
+            "args": {
+                "s": "Was it a car or a cat I saw"
+            },
+            "expected": "saW ti a rac ro a tac I was"
+        },
+        {
+            "args": {
+                "s": "Eva can I see bees in a cave"
+            },
+            "expected": "avE nac I ees seeb ni a evac"
+        },
+        {
+            "args": {
+                "s": "racecar level kayak deed civic"
+            },
+            "expected": "racecar level kayak deed civic"
+        },
+        {
+            "args": {
+                "s": "A quick brown fox jumps over the lazy dog"
+            },
+            "expected": "A kciuq nworb xof spmuj revo eht yzal god"
+        },
+        {
+            "args": {
+                "s": "Do geese see God"
+            },
+            "expected": "oD eseeg ees doG"
+        },
+        {
+            "args": {
+                "s": "singleword"
+            },
+            "expected": "drowelgnis"
+        },
+        {
+            "args": {
+                "s": "very long string with multiple words to ensure the solution handles large inputs efficiently"
+            },
+            "expected": "yrev gnol gnirts htiw elpitlum sdrow ot erusne eht noitulos seldnah egral stupni yltneiciffe"
+        },
+        {
+            "args": {
+                "s": "The quick brown fox jumps over the lazy dog"
+            },
+            "expected": "ehT kciuq nworb xof spmuj revo eht yzal god"
+        },
+        {
+            "args": {
+                "s": "EdgeCase"
+            },
+            "expected": "esaCegdE"
+        },
+        {
+            "args": {
+                "s": "!@#$% ^&*()"
+            },
+            "expected": "%$#@! )(*&^"
+        },
+        {
+            "args": {
+                "s": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+            },
+            "expected": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+        },
+        {
+            "args": {
+                "s": "abcdef ghijklm nopqrst uvwxyz"
+            },
+            "expected": "fedcba mlkjihg tsrqpon zyxwvu"
+        },
+        {
+            "args": {
+                "s": "123 456 789"
+            },
+            "expected": "321 654 987"
+        },
+        {
+            "args": {
+                "s": "123abc def456 ghi789"
+            },
+            "expected": "cba321 654fed 987ihg"
+        },
+        {
+            "args": {
+                "s": "SingleWord"
+            },
+            "expected": "droWelgniS"
+        },
+        {
+            "args": {
+                "s": "12345 67890 111213"
+            },
+            "expected": "54321 09876 312111"
+        },
+        {
+            "args": {
+                "s": "12345 67890 09876 54321"
+            },
+            "expected": "54321 09876 67890 12345"
+        },
+        {
+            "args": {
+                "s": "Debugging is twice as hard as writing the code in the first place"
+            },
+            "expected": "gniggubeD si eciwt sa drah sa gnitirw eht edoc ni eht tsrif ecalp"
+        },
+        {
+            "args": {
+                "s": "Palindrome level deed civic radar rotor kayak"
+            },
+            "expected": "emordnilaP level deed civic radar rotor kayak"
+        },
+        {
+            "args": {
+                "s": "Special $characters #are &important"
+            },
+            "expected": "laicepS sretcarahc$ era# tnatropmi&"
+        },
+        {
+            "args": {
+                "s": "a1 b2 c3 d4 e5 f6 g7 h8 i9 j0"
+            },
+            "expected": "1a 2b 3c 4d 5e 6f 7g 8h 9i 0j"
+        },
+        {
+            "args": {
+                "s": "Programming challenges are great"
+            },
+            "expected": "gnimmargorP segnellahc era taerg"
+        },
+        {
+            "args": {
+                "s": "No lemon no melon"
+            },
+            "expected": "oN nomel on nolem"
+        },
+        {
+            "args": {
+                "s": "Python is fun to learn"
+            },
+            "expected": "nohtyP si nuf ot nrael"
+        },
+        {
+            "args": {
+                "s": "Desperation is the true mark of weakness"
+            },
+            "expected": "noitarepseD si eht eurt kram fo ssenkaew"
+        },
+        {
+            "args": {
+                "s": "The quick brown fox"
+            },
+            "expected": "ehT kciuq nworb xof"
+        },
+        {
+            "args": {
+                "s": "Multiple   spaces   in   between"
+            },
+            "expected": "elpitluM secaps ni neewteb"
+        },
+        {
+            "args": {
+                "s": "special!@# characters $%^&* should be reversed"
+            },
+            "expected": "#@!laiceps sretcarahc *&^%$ dluohs eb desrever"
+        },
+        {
+            "args": {
+                "s": "123abc def456 ghi789 jkl012"
+            },
+            "expected": "cba321 654fed 987ihg 210lkj"
+        },
+        {
+            "args": {
+                "s": "special!@# $%^&*() characters"
+            },
+            "expected": "#@!laiceps )(*&^%$ sretcarahc"
+        },
+        {
+            "args": {
+                "s": "Very long sentence with multiple words to test the implementation correctly"
+            },
+            "expected": "yreV gnol ecnetnes htiw elpitlum sdrow ot tset eht noitatnemelpmi yltcerroc"
+        },
+        {
+            "args": {
+                "s": "Mixed CASE with UPPER and lower"
+            },
+            "expected": "dexiM ESAC htiw REPPU dna rewol"
+        },
+        {
+            "args": {
+                "s": "Reverse each word in this sentence"
+            },
+            "expected": "esreveR hcae drow ni siht ecnetnes"
+        },
+        {
+            "args": {
+                "s": "Alibaba Cloud Services"
+            },
+            "expected": "ababilA duolC secivreS"
+        },
+        {
+            "args": {
+                "s": "multiple   spaces between words"
+            },
+            "expected": "elpitlum secaps neewteb sdrow"
+        },
+        {
+            "args": {
+                "s": "Step on no pets"
+            },
+            "expected": "petS no on step"
+        },
+        {
+            "args": {
+                "s": "Special!@# $%^&*() Characters"
+            },
+            "expected": "#@!laicepS )(*&^%$ sretcarahC"
+        },
+        {
+            "args": {
+                "s": "OpenAI GPT-4"
+            },
+            "expected": "IAnepO 4-TPG"
+        },
+        {
+            "args": {
+                "s": "Never odd or even"
+            },
+            "expected": "reveN ddo ro neve"
+        },
+        {
+            "args": {
+                "s": "Keep calm and code on"
+            },
+            "expected": "peeK mlac dna edoc no"
+        },
+        {
+            "args": {
+                "s": "OneLongWordWithoutSpaces"
+            },
+            "expected": "secapStuohtiWdroWgnoLenO"
+        },
+        {
+            "args": {
+                "s": "Python is fun and challenging"
+            },
+            "expected": "nohtyP si nuf dna gnignellahc"
+        },
+        {
+            "args": {
+                "s": "1234567890 0987654321 1122334455 5544332211"
+            },
+            "expected": "0987654321 1234567890 5544332211 1122334455"
+        },
+        {
+            "args": {
+                "s": "Mickey Mouse"
+            },
+            "expected": "yekciM esuoM"
+        },
+        {
+            "args": {
+                "s": "Reverse each word but not the sentence order"
+            },
+            "expected": "esreveR hcae drow tub ton eht ecnetnes redro"
+        },
+        {
+            "args": {
+                "s": "Programming Challenges"
+            },
+            "expected": "gnimmargorP segnellahC"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa"
+        },
+        {
+            "args": {
+                "s": "12345 67890 54321 09876"
+            },
+            "expected": "54321 09876 12345 67890"
+        },
+        {
+            "args": {
+                "s": "verylongwordwithoutspaces"
+            },
+            "expected": "secapstuohtiwdrowgnolyrev"
+        },
+        {
+            "args": {
+                "s": "CASE SENSITIVE or NOT"
+            },
+            "expected": "ESAC EVITISNES ro TON"
+        },
+        {
+            "args": {
+                "s": "reverse this sentence please"
+            },
+            "expected": "esrever siht ecnetnes esaelp"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "1a2b3c4d5e 6f7g8h9i0j"
+            },
+            "expected": "e5d4c3b2a1 j0i9h8g7f6"
+        },
+        {
+            "args": {
+                "s": "spaces   between   words"
+            },
+            "expected": "secaps neewteb sdrow"
+        },
+        {
+            "args": {
+                "s": "reversed words in this sentence should be flipped"
+            },
+            "expected": "desrever sdrow ni siht ecnetnes dluohs eb deppilf"
+        },
+        {
+            "args": {
+                "s": "Multiple    spaces between words"
+            },
+            "expected": "elpitluM secaps neewteb sdrow"
+        },
+        {
+            "args": {
+                "s": "1234567890"
+            },
+            "expected": "0987654321"
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "Try your best and you will succeed"
+            },
+            "expected": "yrT ruoy tseb dna uoy lliw deeccus"
+        },
+        {
+            "args": {
+                "s": "Data structures and algorithms"
+            },
+            "expected": "ataD serutcurts dna smhtirogla"
+        },
+        {
+            "args": {
+                "s": "This is a test for the reverseWords function"
+            },
+            "expected": "sihT si a tset rof eht sdroWesrever noitcnuf"
+        },
+        {
+            "args": {
+                "s": "12345 67890"
+            },
+            "expected": "54321 09876"
+        },
+        {
+            "args": {
+                "s": "This is a test of the reverseWords function"
+            },
+            "expected": "sihT si a tset fo eht sdroWesrever noitcnuf"
+        },
+        {
+            "args": {
+                "s": "Python is an awesome programming language"
+            },
+            "expected": "nohtyP si na emosewa gnimmargorp egaugnal"
+        },
+        {
+            "args": {
+                "s": "MixedCASE Words"
+            },
+            "expected": "ESACdexiM sdroW"
+        },
+        {
+            "args": {
+                "s": "aBcDeFg HiJkLmNoP QrStUvWxYz"
+            },
+            "expected": "gFeDcBa PoNmLkJiH zYxWvUtSrQ"
+        },
+        {
+            "args": {
+                "s": "racecar level kayak rotator"
+            },
+            "expected": "racecar level kayak rotator"
+        },
+        {
+            "args": {
+                "s": "123 456 789 0"
+            },
+            "expected": "321 654 987 0"
+        },
+        {
+            "args": {
+                "s": "Madam Arora teaches malayalam"
+            },
+            "expected": "madaM arorA sehcaet malayalam"
+        },
+        {
+            "args": {
+                "s": "Palindrome madam racecar"
+            },
+            "expected": "emordnilaP madam racecar"
+        },
+        {
+            "args": {
+                "s": "Another EdgeCase!"
+            },
+            "expected": "rehtonA !esaCegdE"
+        },
+        {
+            "args": {
+                "s": "Multiple    spaces    between words"
+            },
+            "expected": "elpitluM secaps neewteb sdrow"
+        },
+        {
+            "args": {
+                "s": "multiple     spaces between words should be preserved"
+            },
+            "expected": "elpitlum secaps neewteb sdrow dluohs eb devreserp"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().reverseWords",
+        "typescript": "Solution().reverseWords"
+    }
+}

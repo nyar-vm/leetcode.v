@@ -1,0 +1,764 @@
+{
+    "id": "sort-integers-by-the-power-value",
+    "questionId": 1387,
+    "difficulty": "Medium",
+    "tags": ["Memoization", "Dynamic Programming", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "lo": 1,
+                "hi": 10,
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "lo": 5,
+                "hi": 5,
+                "k": 1
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "lo": 12,
+                "hi": 15,
+                "k": 2
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 10,
+                "k": 5
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "lo": 10,
+                "hi": 20,
+                "k": 5
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "lo": 7,
+                "hi": 11,
+                "k": 4
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "lo": 10,
+                "hi": 20,
+                "k": 3
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 10,
+                "k": 3
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 500,
+                "k": 100
+            },
+            "expected": 370
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 200,
+                "k": 1
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 700,
+                "k": 150
+            },
+            "expected": 613
+        },
+        {
+            "args": {
+                "lo": 700,
+                "hi": 800,
+                "k": 18
+            },
+            "expected": 794
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 200,
+                "k": 75
+            },
+            "expected": 183
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 100,
+                "k": 100
+            },
+            "expected": 97
+        },
+        {
+            "args": {
+                "lo": 700,
+                "hi": 800,
+                "k": 50
+            },
+            "expected": 766
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 900,
+                "k": 5
+            },
+            "expected": 802
+        },
+        {
+            "args": {
+                "lo": 900,
+                "hi": 1000,
+                "k": 50
+            },
+            "expected": 988
+        },
+        {
+            "args": {
+                "lo": 600,
+                "hi": 800,
+                "k": 150
+            },
+            "expected": 756
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 1000,
+                "k": 50
+            },
+            "expected": 912
+        },
+        {
+            "args": {
+                "lo": 500,
+                "hi": 900,
+                "k": 100
+            },
+            "expected": 692
+        },
+        {
+            "args": {
+                "lo": 400,
+                "hi": 600,
+                "k": 100
+            },
+            "expected": 489
+        },
+        {
+            "args": {
+                "lo": 400,
+                "hi": 700,
+                "k": 120
+            },
+            "expected": 418
+        },
+        {
+            "args": {
+                "lo": 750,
+                "hi": 850,
+                "k": 50
+            },
+            "expected": 758
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 400,
+                "k": 100
+            },
+            "expected": 313
+        },
+        {
+            "args": {
+                "lo": 5,
+                "hi": 25,
+                "k": 1
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 350,
+                "k": 30
+            },
+            "expected": 338
+        },
+        {
+            "args": {
+                "lo": 950,
+                "hi": 1000,
+                "k": 25
+            },
+            "expected": 984
+        },
+        {
+            "args": {
+                "lo": 200,
+                "hi": 300,
+                "k": 1
+            },
+            "expected": 256
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 900,
+                "k": 50
+            },
+            "expected": 855
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 900,
+                "k": 85
+            },
+            "expected": 898
+        },
+        {
+            "args": {
+                "lo": 500,
+                "hi": 600,
+                "k": 50
+            },
+            "expected": 509
+        },
+        {
+            "args": {
+                "lo": 250,
+                "hi": 450,
+                "k": 150
+            },
+            "expected": 428
+        },
+        {
+            "args": {
+                "lo": 150,
+                "hi": 450,
+                "k": 100
+            },
+            "expected": 173
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 350,
+                "k": 10
+            },
+            "expected": 309
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 600,
+                "k": 150
+            },
+            "expected": 374
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 200,
+                "k": 10
+            },
+            "expected": 138
+        },
+        {
+            "args": {
+                "lo": 400,
+                "hi": 600,
+                "k": 150
+            },
+            "expected": 486
+        },
+        {
+            "args": {
+                "lo": 900,
+                "hi": 1000,
+                "k": 10
+            },
+            "expected": 965
+        },
+        {
+            "args": {
+                "lo": 250,
+                "hi": 500,
+                "k": 100
+            },
+            "expected": 312
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 400,
+                "k": 50
+            },
+            "expected": 367
+        },
+        {
+            "args": {
+                "lo": 500,
+                "hi": 1000,
+                "k": 250
+            },
+            "expected": 658
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 350,
+                "k": 25
+            },
+            "expected": 315
+        },
+        {
+            "args": {
+                "lo": 200,
+                "hi": 300,
+                "k": 75
+            },
+            "expected": 242
+        },
+        {
+            "args": {
+                "lo": 50,
+                "hi": 150,
+                "k": 25
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "lo": 250,
+                "hi": 350,
+                "k": 100
+            },
+            "expected": 313
+        },
+        {
+            "args": {
+                "lo": 50,
+                "hi": 75,
+                "k": 1
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "lo": 500,
+                "hi": 1000,
+                "k": 150
+            },
+            "expected": 943
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 800,
+                "k": 200
+            },
+            "expected": 547
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 500,
+                "k": 30
+            },
+            "expected": 150
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 500,
+                "k": 250
+            },
+            "expected": 465
+        },
+        {
+            "args": {
+                "lo": 400,
+                "hi": 600,
+                "k": 120
+            },
+            "expected": 590
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 100,
+                "k": 10
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "lo": 200,
+                "hi": 300,
+                "k": 50
+            },
+            "expected": 271
+        },
+        {
+            "args": {
+                "lo": 250,
+                "hi": 750,
+                "k": 250
+            },
+            "expected": 741
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 400,
+                "k": 5
+            },
+            "expected": 384
+        },
+        {
+            "args": {
+                "lo": 400,
+                "hi": 600,
+                "k": 200
+            },
+            "expected": 487
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 500,
+                "k": 150
+            },
+            "expected": 163
+        },
+        {
+            "args": {
+                "lo": 150,
+                "hi": 250,
+                "k": 20
+            },
+            "expected": 234
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 1000,
+                "k": 200
+            },
+            "expected": 937
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 1000,
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "lo": 999,
+                "hi": 1000,
+                "k": 1
+            },
+            "expected": 999
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 1000,
+                "k": 500
+            },
+            "expected": 606
+        },
+        {
+            "args": {
+                "lo": 200,
+                "hi": 300,
+                "k": 100
+            },
+            "expected": 231
+        },
+        {
+            "args": {
+                "lo": 200,
+                "hi": 300,
+                "k": 10
+            },
+            "expected": 280
+        },
+        {
+            "args": {
+                "lo": 300,
+                "hi": 700,
+                "k": 250
+            },
+            "expected": 699
+        },
+        {
+            "args": {
+                "lo": 250,
+                "hi": 400,
+                "k": 100
+            },
+            "expected": 263
+        },
+        {
+            "args": {
+                "lo": 750,
+                "hi": 850,
+                "k": 30
+            },
+            "expected": 813
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 300,
+                "k": 150
+            },
+            "expected": 242
+        },
+        {
+            "args": {
+                "lo": 5,
+                "hi": 25,
+                "k": 25
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "lo": 25,
+                "hi": 75,
+                "k": 25
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "lo": 400,
+                "hi": 500,
+                "k": 100
+            },
+            "expected": 487
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 900,
+                "k": 80
+            },
+            "expected": 874
+        },
+        {
+            "args": {
+                "lo": 50,
+                "hi": 75,
+                "k": 25
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "lo": 150,
+                "hi": 300,
+                "k": 75
+            },
+            "expected": 210
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 100,
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "lo": 500,
+                "hi": 1000,
+                "k": 300
+            },
+            "expected": 754
+        },
+        {
+            "args": {
+                "lo": 600,
+                "hi": 700,
+                "k": 20
+            },
+            "expected": 663
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 900,
+                "k": 100
+            },
+            "expected": 889
+        },
+        {
+            "args": {
+                "lo": 200,
+                "hi": 400,
+                "k": 150
+            },
+            "expected": 243
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 200,
+                "k": 100
+            },
+            "expected": 129
+        },
+        {
+            "args": {
+                "lo": 100,
+                "hi": 200,
+                "k": 50
+            },
+            "expected": 114
+        },
+        {
+            "args": {
+                "lo": 800,
+                "hi": 900,
+                "k": 25
+            },
+            "expected": 882
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 100,
+                "k": 50
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "lo": 500,
+                "hi": 600,
+                "k": 25
+            },
+            "expected": 538
+        },
+        {
+            "args": {
+                "lo": 50,
+                "hi": 150,
+                "k": 50
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "lo": 1000,
+                "hi": 1000,
+                "k": 1
+            },
+            "expected": 1000
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 100,
+                "k": 75
+            },
+            "expected": 67
+        },
+        {
+            "args": {
+                "lo": 900,
+                "hi": 999,
+                "k": 15
+            },
+            "expected": 985
+        },
+        {
+            "args": {
+                "lo": 2,
+                "hi": 10,
+                "k": 5
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 1000,
+                "k": 750
+            },
+            "expected": 322
+        },
+        {
+            "args": {
+                "lo": 600,
+                "hi": 900,
+                "k": 150
+            },
+            "expected": 718
+        },
+        {
+            "args": {
+                "lo": 50,
+                "hi": 100,
+                "k": 15
+            },
+            "expected": 93
+        },
+        {
+            "args": {
+                "lo": 1,
+                "hi": 1,
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "lo": 600,
+                "hi": 800,
+                "k": 100
+            },
+            "expected": 676
+        }
+    ],
+    "invoke": {
+        "python": "Solution().getKth",
+        "typescript": "Solution().getKth"
+    }
+}

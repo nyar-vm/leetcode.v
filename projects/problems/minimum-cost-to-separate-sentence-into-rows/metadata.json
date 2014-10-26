@@ -1,0 +1,719 @@
+{
+    "id": "minimum-cost-to-separate-sentence-into-rows",
+    "questionId": 2052,
+    "difficulty": "Medium",
+    "tags": ["Array", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "sentence": "this is a test sentence for the problem",
+                "k": 9
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "sentence": "i love leetcode",
+                "k": 12
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "sentence": "this is a test sentence for the problem",
+                "k": 15
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "sentence": "the quick brown fox jumps over the lazy dog",
+                "k": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "sentence": "a b c d e f g h i j",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "this is a test sentence to check the implementation",
+                "k": 15
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "sentence": "hello world",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "this is a test case for the problem",
+                "k": 15
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming is fun",
+                "k": 8
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "a",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "one two three four five six seven eight nine ten",
+                "k": 4
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "apples and bananas taste great",
+                "k": 7
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "sentence": "optimization problems are often complex and require careful consideration",
+                "k": 20
+            },
+            "expected": 162
+        },
+        {
+            "args": {
+                "sentence": "this is a test sentence with some longerwordsintheend",
+                "k": 10
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "software development involves writing code that is both efficient and maintainable",
+                "k": 18
+            },
+            "expected": 179
+        },
+        {
+            "args": {
+                "sentence": "optimization techniques are crucial for software performance",
+                "k": 20
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "sentence": "python programming is fun and educational",
+                "k": 8
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "the intersection of artificial intelligence and machine learning is rapidly evolving",
+                "k": 25
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "sentence": "recursion is a powerful technique in functional programming",
+                "k": 12
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "sentence": "spaces between words are important in this sentence",
+                "k": 12
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "sentence": "this is another test case to ensure the function handles various scenarios correctly",
+                "k": 18
+            },
+            "expected": 114
+        },
+        {
+            "args": {
+                "sentence": "machine learning and artificial intelligence are transforming industries",
+                "k": 28
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "sentence": "in computer science algorithms are used to perform operations",
+                "k": 20
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "sentence": "words words words words words words words words words words",
+                "k": 6
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "sentence": "this is a test sentence to check the implementation of the code",
+                "k": 20
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "sentence": "repeated repeated repeated repeated repeated repeated repeated repeated repeated repeated repeated repeated repeated",
+                "k": 8
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "this problem requires careful consideration of all possible scenarios",
+                "k": 22
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "sentence": "short words are easy to handle",
+                "k": 6
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "sentence": "testing with a very short k to see how the algorithm handles it",
+                "k": 3
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "boundary conditions are important to test the limits of the function",
+                "k": 15
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "sentence": "minimum cost solution for the given problem is required",
+                "k": 12
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "sentence": "data structures and algorithms form the foundation of computer science",
+                "k": 13
+            },
+            "expected": 237
+        },
+        {
+            "args": {
+                "sentence": "continuous integration and continuous deployment improve software quality",
+                "k": 22
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "sentence": "short words make it easy to split and calculate the cost short words make it easy to split and calculate the cost",
+                "k": 10
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "sentence": "hello world this is a test case to see how the solution works",
+                "k": 8
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "sentence": "a very long sentence that needs to be split into multiple lines in order to compute the minimum cost of splitting the sentence into rows without exceeding the given width k",
+                "k": 25
+            },
+            "expected": 93
+        },
+        {
+            "args": {
+                "sentence": "this problem requires careful consideration of edge cases and constraints",
+                "k": 25
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "sentence": "equal length words are here equal length words are here equal length words are here equal length words are here",
+                "k": 12
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "sentence": "abcdef ghijklm nopqrst uvwxyz",
+                "k": 13
+            },
+            "expected": 121
+        },
+        {
+            "args": {
+                "sentence": "python is a versatile and widely used programming language",
+                "k": 14
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "sentence": "a b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "data structures and algorithms form the foundation of computer science",
+                "k": 18
+            },
+            "expected": 150
+        },
+        {
+            "args": {
+                "sentence": "equal length words word word word word word word word word word word word word",
+                "k": 6
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "sentence": "algorithm design involves creating efficient algorithms",
+                "k": 12
+            },
+            "expected": 86
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming is a method for solving complex problems",
+                "k": 18
+            },
+            "expected": 125
+        },
+        {
+            "args": {
+                "sentence": "refactoring improves code readability and maintainability",
+                "k": 17
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "sentence": "sometimes it is necessary to break down a complex problem into smaller manageable parts",
+                "k": 18
+            },
+            "expected": 61
+        },
+        {
+            "args": {
+                "sentence": "performance tuning can significantly speed up application execution",
+                "k": 21
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "sentence": "equal equal equal equal equal equal equal",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "uneven lengths different words with varying sizes to challenge the function",
+                "k": 12
+            },
+            "expected": 124
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming solutions are powerful but can be complex",
+                "k": 18
+            },
+            "expected": 199
+        },
+        {
+            "args": {
+                "sentence": "testing edge cases with very small k",
+                "k": 3
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog",
+                "k": 18
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "sentence": "a very long sentence that needs to be broken down into smaller parts because it is quite extensive",
+                "k": 15
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "sentence": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming is very useful in solving complex problems",
+                "k": 15
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "sentence": "hello world this is a simple example to demonstrate the solution",
+                "k": 8
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "algorithms and data structures are fundamental to computer science",
+                "k": 16
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "sentence": "a long sentence to test the edge cases and ensure the solution handles large inputs",
+                "k": 12
+            },
+            "expected": 86
+        },
+        {
+            "args": {
+                "sentence": "complex systems often require sophisticated models and simulations to understand",
+                "k": 21
+            },
+            "expected": 110
+        },
+        {
+            "args": {
+                "sentence": "scalability is a key concern in cloud computing",
+                "k": 15
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "sentence": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen",
+                "k": 6
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "words of varying lengths can affect the distribution of rows",
+                "k": 8
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming is a method used in computer science and mathematics",
+                "k": 15
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "sentence": "concurrency and parallelism are crucial in modern software",
+                "k": 13
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "sentence": "very very very very very very very very very long sentence",
+                "k": 5
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "short words like i a to the are very frequent",
+                "k": 3
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "a very long sentence that should be split into multiple rows to test the implementation of the function properly",
+                "k": 25
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "sentence": "optimization problems like this one are often challenging",
+                "k": 14
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "sentence": "consistent testing and debugging are crucial for the success of any software project",
+                "k": 17
+            },
+            "expected": 114
+        },
+        {
+            "args": {
+                "sentence": "algorithms and data structures are fundamental",
+                "k": 12
+            },
+            "expected": 105
+        },
+        {
+            "args": {
+                "sentence": "code reviews enhance code quality and knowledge sharing",
+                "k": 11
+            },
+            "expected": 134
+        },
+        {
+            "args": {
+                "sentence": "the rapid advancement of technology continues to drive innovation and change",
+                "k": 22
+            },
+            "expected": 98
+        },
+        {
+            "args": {
+                "sentence": "the longer the sentence the more challenging it becomes to optimize",
+                "k": 18
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "sentence": "debugging is an essential part of software development",
+                "k": 9
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "using python for data analysis has become increasingly popular",
+                "k": 22
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "sentence": "maximum length words should be handled gracefully maximum length words should be handled gracefully",
+                "k": 30
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "sentence": "the solution should be efficient and scalable for various input sizes",
+                "k": 25
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "sentence": "continuous integration and continuous deployment improve development processes",
+                "k": 25
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming can solve complex problems efficiently",
+                "k": 20
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "sentence": "splitting the sentence optimally can be quite challenging",
+                "k": 17
+            },
+            "expected": 90
+        },
+        {
+            "args": {
+                "sentence": "optimization is the process of finding the best solution among many",
+                "k": 16
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "sentence": "this is a rather long sentence that needs to be broken down into smaller parts efficiently",
+                "k": 10
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty",
+                "k": 6
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "short words only",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "this is an extremelylongwordthatwilltesttheimplementation",
+                "k": 20
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "consecutive words words words words words words words",
+                "k": 7
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen",
+                "k": 10
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "sentence": "minimizing cost is crucial for optimizing performance minimizing cost is crucial for optimizing performance",
+                "k": 15
+            },
+            "expected": 68
+        },
+        {
+            "args": {
+                "sentence": "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "k": 20
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "sentence": "dynamic programming solves many optimization problems efficiently",
+                "k": 15
+            },
+            "expected": 154
+        },
+        {
+            "args": {
+                "sentence": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "k": 20
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "sentence": "spaces should be handled correctly without any issues in splitting",
+                "k": 8
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "the art of problem solving is a valuable skill in software engineering",
+                "k": 27
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "sentence": "algorithms can be designed to solve a wide range of problems efficiently and effectively",
+                "k": 12
+            },
+            "expected": 147
+        },
+        {
+            "args": {
+                "sentence": "short words only",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "programming is a great way to enhance skills in logical thinking",
+                "k": 12
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "sentence": "the quick brown fox jumps over the lazy dog",
+                "k": 8
+            },
+            "expected": 77
+        },
+        {
+            "args": {
+                "sentence": "splitting this sentence optimally will be quite interesting",
+                "k": 15
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "sentence": "optimization is key for efficient code execution",
+                "k": 10
+            },
+            "expected": "inf"
+        },
+        {
+            "args": {
+                "sentence": "machine learning and artificial intelligence are rapidly advancing fields",
+                "k": 25
+            },
+            "expected": 45
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimumCost",
+        "typescript": "Solution().minimumCost"
+    }
+}

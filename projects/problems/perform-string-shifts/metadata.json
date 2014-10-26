@@ -1,0 +1,688 @@
+{
+    "id": "perform-string-shifts",
+    "questionId": 1427,
+    "difficulty": "Easy",
+    "tags": ["Array", "Math", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "abcdefg",
+                "shift": [[1, 1], [1, 1], [0, 2], [1, 3]]
+            },
+            "expected": "efgabcd"
+        },
+        {
+            "args": {
+                "s": "abc",
+                "shift": [[0, 1], [1, 2]]
+            },
+            "expected": "cab"
+        },
+        {
+            "args": {
+                "s": "a",
+                "shift": [[0, 100], [1, 100], [0, 50], [1, 50], [0, 25], [1, 25]]
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "helloalibabacloud",
+                "shift": [[0, 1], [0, 2], [0, 3], [1, 4], [1, 5], [0, 6], [1, 7], [0, 8], [1, 9]]
+            },
+            "expected": "cloudhelloalibaba"
+        },
+        {
+            "args": {
+                "s": "pqrstuvwxyz",
+                "shift": [[0, 10], [1, 10], [0, 10], [1, 10]]
+            },
+            "expected": "pqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "shift": [[0, 1], [0, 2], [0, 3], [0, 4]]
+            },
+            "expected": "cdab"
+        },
+        {
+            "args": {
+                "s": "qwen",
+                "shift": [[1, 1], [0, 1], [1, 1], [0, 1]]
+            },
+            "expected": "qwen"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "shift": [
+                    [0, 1],
+                    [1, 2],
+                    [0, 3],
+                    [1, 4],
+                    [0, 5],
+                    [1, 6],
+                    [0, 7],
+                    [1, 8],
+                    [0, 9],
+                    [1, 10]
+                ]
+            },
+            "expected": "ghijkabcdef"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "shift": [[1, 7], [0, 5], [1, 3], [0, 2]]
+            },
+            "expected": "ingprogramm"
+        },
+        {
+            "args": {
+                "s": "rotation",
+                "shift": [[0, 2], [1, 2], [0, 2], [1, 2]]
+            },
+            "expected": "rotation"
+        },
+        {
+            "args": {
+                "s": "rotation",
+                "shift": [[1, 2], [0, 3], [1, 1], [0, 2], [1, 4], [0, 5]]
+            },
+            "expected": "ationrot"
+        },
+        {
+            "args": {
+                "s": "python",
+                "shift": [[1, 2], [0, 3], [1, 1], [0, 1], [1, 2]]
+            },
+            "expected": "npytho"
+        },
+        {
+            "args": {
+                "s": "rotation",
+                "shift": [[0, 5], [1, 3], [0, 2], [1, 4]]
+            },
+            "expected": "rotation"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "shift": [[0, 26], [1, 26], [0, 13], [1, 13]]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "shift": [[0, 13], [1, 10], [0, 5], [1, 2]]
+            },
+            "expected": "ghijklmnopqrstuvwxyzabcdef"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "shift": [[1, 0], [0, 0], [1, 0], [0, 0]]
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "shift": [[0, 1], [1, 2], [0, 3], [1, 4], [0, 5], [1, 6]]
+            },
+            "expected": "bnmqwertyuiopasdfghjklzxcv"
+        },
+        {
+            "args": {
+                "s": "example",
+                "shift": [[0, 3], [1, 2], [0, 1], [1, 4], [0, 2], [1, 3]]
+            },
+            "expected": "pleexam"
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "shift": [[0, 1], [1, 1], [0, 2], [1, 2], [0, 3], [1, 3], [0, 4], [1, 4]]
+            },
+            "expected": "thisisatest"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "shift": [[0, 9], [1, 4], [0, 5], [1, 2], [0, 3], [1, 6]]
+            },
+            "expected": "ammingprogr"
+        },
+        {
+            "args": {
+                "s": "abababab",
+                "shift": [[0, 1], [1, 1], [0, 2], [1, 2], [0, 3], [1, 3]]
+            },
+            "expected": "abababab"
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "shift": [[0, 2], [1, 2], [0, 3], [1, 3], [0, 4], [1, 4]]
+            },
+            "expected": "racecar"
+        },
+        {
+            "args": {
+                "s": "python",
+                "shift": [[0, 1], [1, 1], [0, 1], [1, 1], [0, 1], [1, 1]]
+            },
+            "expected": "python"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "shift": [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7]]
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "s": "a",
+                "shift": [[0, 1000], [1, 1000], [0, 1000], [1, 1000]]
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "shiftthis",
+                "shift": [[0, 1], [1, 2], [0, 3], [1, 4], [0, 5], [1, 6], [0, 7], [1, 8]]
+            },
+            "expected": "thisshift"
+        },
+        {
+            "args": {
+                "s": "shift",
+                "shift": [[0, 2], [1, 3], [0, 1], [1, 2], [0, 3], [1, 1]]
+            },
+            "expected": "shift"
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "shift": [[0, 1], [1, 1], [0, 1], [1, 1], [0, 1], [1, 1]]
+            },
+            "expected": "racecar"
+        },
+        {
+            "args": {
+                "s": "python",
+                "shift": [[0, 1], [1, 1], [0, 1], [1, 1], [0, 1], [1, 1], [0, 1], [1, 1]]
+            },
+            "expected": "python"
+        },
+        {
+            "args": {
+                "s": "a",
+                "shift": [[0, 100], [1, 100], [0, 200], [1, 200]]
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "shift",
+                "shift": [[1, 2], [0, 3], [1, 1], [0, 1], [1, 2], [0, 3]]
+            },
+            "expected": "iftsh"
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "shift": [[1, 3], [0, 7], [1, 2], [0, 4], [1, 1], [0, 3]]
+            },
+            "expected": "exylophon"
+        },
+        {
+            "args": {
+                "s": "helloworld",
+                "shift": [[0, 3], [1, 4], [0, 2], [1, 5]]
+            },
+            "expected": "orldhellow"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "shift": [[0, 5], [1, 5], [0, 2], [1, 2], [0, 1]]
+            },
+            "expected": "rogrammingp"
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "shift": [[1, 20], [0, 15], [1, 10], [0, 5], [1, 2], [0, 1]]
+            },
+            "expected": "ialidocioussupercalifragilisticexp"
+        },
+        {
+            "args": {
+                "s": "zebra",
+                "shift": [[1, 2], [0, 3], [1, 1], [0, 2], [1, 4], [0, 5]]
+            },
+            "expected": "razeb"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "shift": [
+                    [1, 9],
+                    [0, 8],
+                    [1, 7],
+                    [0, 6],
+                    [1, 5],
+                    [0, 4],
+                    [1, 3],
+                    [0, 2],
+                    [1, 1],
+                    [0, 0]
+                ]
+            },
+            "expected": "fghijabcde"
+        },
+        {
+            "args": {
+                "s": "alibabacloud",
+                "shift": [[1, 5], [0, 3], [1, 2], [0, 4], [1, 3], [0, 2]]
+            },
+            "expected": "dalibabaclou"
+        },
+        {
+            "args": {
+                "s": "python",
+                "shift": [[1, 2], [0, 2], [1, 3], [0, 3], [1, 1], [0, 1]]
+            },
+            "expected": "python"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "shift": [
+                    [0, 100],
+                    [1, 100],
+                    [0, 100],
+                    [1, 100],
+                    [0, 100],
+                    [1, 100],
+                    [0, 100],
+                    [1, 100]
+                ]
+            },
+            "expected": "programming"
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "shift": [[0, 100], [1, 200], [0, 300], [1, 400]]
+            },
+            "expected": "ilicovolcanoconiosispneumonoultramicroscopics"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "shift": [[1, 4], [0, 1], [1, 3], [0, 2]]
+            },
+            "expected": "mingprogram"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "shift": [[0, 1], [1, 1], [0, 1], [1, 1], [0, 1], [1, 1]]
+            },
+            "expected": "programming"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "shift": [[0, 3], [1, 7], [0, 2], [1, 4]]
+            },
+            "expected": "efghijabcd"
+        },
+        {
+            "args": {
+                "s": "giraffe",
+                "shift": [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6]]
+            },
+            "expected": "giraffe"
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "shift": [[1, 50], [0, 30], [1, 20], [0, 10], [1, 5], [0, 2]]
+            },
+            "expected": "ophonexyl"
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "shift": [[0, 13], [1, 26], [0, 7], [1, 19]]
+            },
+            "expected": "wertyuiopasdfghjklzxcvbnmq"
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "shift": [[0, 1], [0, 2], [0, 3], [1, 1], [1, 2], [1, 3]]
+            },
+            "expected": "hellothere"
+        },
+        {
+            "args": {
+                "s": "a",
+                "shift": [[0, 1], [1, 1], [0, 1], [1, 1], [0, 1], [1, 1]]
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "zxy",
+                "shift": [[0, 1], [1, 1], [0, 1], [1, 1]]
+            },
+            "expected": "zxy"
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "shift": [[1, 1], [1, 1], [1, 1], [1, 1]]
+            },
+            "expected": "zxy"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "shift": [[0, 5], [1, 10], [0, 15], [1, 20]]
+            },
+            "expected": "qrstuvwxyzabcdefghijklmnop"
+        },
+        {
+            "args": {
+                "s": "alibabacloud",
+                "shift": [[0, 10], [1, 10], [0, 5], [1, 5], [0, 2], [1, 2]]
+            },
+            "expected": "alibabacloud"
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "shift": [[0, 3], [1, 2], [0, 3], [1, 2]]
+            },
+            "expected": "cecarra"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "shift": [[0, 25], [1, 5], [0, 10], [1, 15]]
+            },
+            "expected": "pqrstuvwxyzabcdefghijklmno"
+        },
+        {
+            "args": {
+                "s": "qwen",
+                "shift": [
+                    [0, 1],
+                    [1, 1],
+                    [0, 2],
+                    [1, 2],
+                    [0, 3],
+                    [1, 3],
+                    [0, 4],
+                    [1, 4],
+                    [0, 5],
+                    [1, 5]
+                ]
+            },
+            "expected": "qwen"
+        },
+        {
+            "args": {
+                "s": "qwen",
+                "shift": [[0, 1], [1, 2], [0, 3], [1, 4], [0, 2], [1, 1], [0, 1], [1, 2]]
+            },
+            "expected": "enqw"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "shift": [[0, 10], [1, 26], [0, 13]]
+            },
+            "expected": "xyzabcdefghijklmnopqrstuvw"
+        },
+        {
+            "args": {
+                "s": "abcdexyz",
+                "shift": [[1, 2], [0, 3], [1, 1], [0, 2], [1, 3]]
+            },
+            "expected": "zabcdexy"
+        },
+        {
+            "args": {
+                "s": "rotation",
+                "shift": [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]]
+            },
+            "expected": "tionrota"
+        },
+        {
+            "args": {
+                "s": "shiftme",
+                "shift": [
+                    [0, 1],
+                    [1, 1],
+                    [0, 1],
+                    [1, 1],
+                    [0, 1],
+                    [1, 1],
+                    [0, 1],
+                    [1, 1],
+                    [0, 1],
+                    [1, 1]
+                ]
+            },
+            "expected": "shiftme"
+        },
+        {
+            "args": {
+                "s": "helloworld",
+                "shift": [[0, 3], [1, 5], [0, 2]]
+            },
+            "expected": "helloworld"
+        },
+        {
+            "args": {
+                "s": "a",
+                "shift": [[0, 100], [1, 100], [0, 50], [1, 50]]
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "shift": [[0, 100], [1, 100], [0, 50], [1, 50]]
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "shift": [[0, 10], [1, 10], [0, 5], [1, 5], [0, 2], [1, 2]]
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "s": "hello_world",
+                "shift": [[0, 5], [1, 3], [0, 2], [1, 7]]
+            },
+            "expected": "rldhello_wo"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "shift": [[0, 5], [1, 5], [0, 10], [1, 10]]
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "shift": [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "alibabacloud",
+                "shift": [[0, 5], [1, 3], [0, 2], [1, 4]]
+            },
+            "expected": "alibabacloud"
+        },
+        {
+            "args": {
+                "s": "datastructures",
+                "shift": [[1, 9], [0, 7], [1, 4], [0, 2], [1, 3], [0, 1]]
+            },
+            "expected": "cturesdatastru"
+        },
+        {
+            "args": {
+                "s": "xyzabc",
+                "shift": [[0, 1], [1, 1], [0, 2], [1, 2], [0, 3]]
+            },
+            "expected": "abcxyz"
+        },
+        {
+            "args": {
+                "s": "noon",
+                "shift": [[0, 1], [1, 1], [0, 2], [1, 2]]
+            },
+            "expected": "noon"
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "shift": [[1, 1], [0, 1], [1, 1], [0, 1]]
+            },
+            "expected": "xyz"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "shift": [[0, 4], [1, 3], [0, 2], [1, 1], [0, 3], [1, 2]]
+            },
+            "expected": "acadabraabr"
+        },
+        {
+            "args": {
+                "s": "ab",
+                "shift": [[0, 100], [1, 100], [0, 50], [1, 50]]
+            },
+            "expected": "ab"
+        },
+        {
+            "args": {
+                "s": "challenge",
+                "shift": [[0, 10], [1, 10], [0, 5], [1, 5], [0, 2], [1, 2]]
+            },
+            "expected": "challenge"
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "shift": [[0, 5], [1, 10], [0, 15], [1, 20], [0, 25]]
+            },
+            "expected": "umpsoverthelazydogaquickbrownfoxj"
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "shift": [[0, 100], [1, 100], [0, 200], [1, 200]]
+            },
+            "expected": "abcdefgh"
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "shift": [[1, 101], [0, 51], [1, 25], [0, 100], [1, 1], [0, 2]]
+            },
+            "expected": "cdefab"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "shift": [[1, 0], [0, 0], [1, 100], [0, 100]]
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "shift": [[0, 1], [1, 2], [0, 3], [1, 4], [0, 5], [1, 6]]
+            },
+            "expected": "braabracada"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "shift": [[0, 3], [1, 2], [0, 4], [1, 5], [0, 6], [1, 7]]
+            },
+            "expected": "gabcdef"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "shift": [[0, 5], [1, 3], [0, 2], [1, 4], [0, 1], [1, 1]]
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "shift": [[0, 3], [1, 3], [0, 3], [1, 3], [0, 3], [1, 3]]
+            },
+            "expected": "abcdef"
+        },
+        {
+            "args": {
+                "s": "helloworld",
+                "shift": [[0, 3], [1, 5], [0, 2], [1, 4]]
+            },
+            "expected": "orldhellow"
+        },
+        {
+            "args": {
+                "s": "shiftexample",
+                "shift": [[0, 3], [1, 3], [0, 7], [1, 7], [0, 1], [1, 1]]
+            },
+            "expected": "shiftexample"
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "shift": [[0, 1], [1, 1], [0, 2], [1, 2], [0, 3], [1, 3], [0, 4], [1, 4]]
+            },
+            "expected": "abcdefgh"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "shift": [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]]
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "s": "shiftandrotate",
+                "shift": [[0, 6], [1, 8], [0, 4], [1, 2], [0, 3], [1, 5]]
+            },
+            "expected": "teshiftandrota"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().stringShift",
+        "typescript": "Solution().stringShift"
+    }
+}

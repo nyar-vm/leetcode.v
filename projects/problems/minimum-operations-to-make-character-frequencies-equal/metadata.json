@@ -1,0 +1,252 @@
+{
+    "id": "minimum-operations-to-make-character-frequencies-equal",
+    "questionId": 3389,
+    "difficulty": "Hard",
+    "tags": ["Hash Table", "String", "Dynamic Programming", "Counting", "Enumeration"],
+    "tests": [
+        {
+            "args": {
+                "s": "acab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aaabc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aabbbccc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "zzzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbcc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbbcc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcde"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbbcccc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "zzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "wddw"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbbcccddddeeeee"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aabbbcccdddd"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "zyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyx"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadabacabad"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "zyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "ababababababababababab"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbbcccddddeeeeefffffgggg"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abcdabcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbbccccddddeeeeeffffffffgggggggg"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbaaabbbaaaabbbbaaaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbcccc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabbaabb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "mnopqrstuvwxyzmnopqrstuvwxyzmnopqrstuvwxyzmnopqrstuvwxyz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "aabccccdddddeeeeeeeeeee"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "qqqwwweeeerrrrttttyyyyuuuuiiiiooooppppllllnnnnmmmmbbbb"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aabbccdd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().makeStringGood",
+        "typescript": "Solution().makeStringGood"
+    }
+}

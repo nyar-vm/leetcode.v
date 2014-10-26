@@ -1,0 +1,1111 @@
+{
+    "id": "similar-string-groups",
+    "questionId": 839,
+    "difficulty": "Hard",
+    "tags": [
+        "Depth-First Search",
+        "Breadth-First Search",
+        "Union Find",
+        "Array",
+        "Hash Table",
+        "String"
+    ],
+    "tests": [
+        {
+            "args": {
+                "strs": ["abc", "bca", "cab", "cba", "bac", "acb"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["ab", "ba", "abc", "cab", "bca"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["aaaaa", "aaabb", "aaabc", "aaaba", "aaaaa"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["tars", "rats", "arts", "star"]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "abdc",
+                    "acbd",
+                    "acdb",
+                    "adbc",
+                    "adcb",
+                    "bacd",
+                    "badc",
+                    "bcad",
+                    "bcda",
+                    "bdac",
+                    "bdca",
+                    "cabd",
+                    "cadb",
+                    "cbad",
+                    "cbda",
+                    "cdab",
+                    "cdba",
+                    "dabc",
+                    "dacb",
+                    "dbac",
+                    "dbca",
+                    "dcab",
+                    "dcba"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["abc", "bca", "cab", "cba", "acb", "bac"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["abcde", "edcba", "abced", "decba", "decab"]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yzw"]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "strs": ["omv", "ovm"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "kite",
+                    "peek",
+                    "pink",
+                    "pite",
+                    "side",
+                    "like",
+                    "pipe",
+                    "pike",
+                    "lipk",
+                    "kite",
+                    "tape",
+                    "pelt",
+                    "pite",
+                    "pink",
+                    "pite"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["aaa", "aab", "aba", "baa", "abb", "bba", "bab", "bba", "bbb", "bbb"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["aaaaaa", "aaaabb", "aaaabc", "aaaaba", "aaaaaa"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["abc", "bca", "cab", "acb", "bac", "cba"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["abcdef", "bcdefa", "cdefab", "defabc", "efabcd", "fabcde"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "strs": ["abcde", "edcba", "abced", "deabc", "decab", "cdeab"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "strs": ["abc", "acb", "bac", "bca", "cab", "cba"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["a", "a", "a", "a", "a"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "bcadefghijklmnopqrstuvwxyza",
+                    "cdefghijklmnopqrstuvwxyzab"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "strs": [
+                    "aaaa",
+                    "aada",
+                    "aadaa",
+                    "aadda",
+                    "aaddd",
+                    "adaaa",
+                    "adaad",
+                    "adaad",
+                    "addaa",
+                    "adada",
+                    "adada",
+                    "addaa",
+                    "daaaa",
+                    "daada",
+                    "daada",
+                    "dadaa",
+                    "dadad",
+                    "daada",
+                    "dadaa",
+                    "dadad",
+                    "daada",
+                    "ddaaa",
+                    "ddada",
+                    "ddaad",
+                    "ddada",
+                    "dddda"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzy",
+                    "zzzzzzzzzx",
+                    "zzzzzzzzzw",
+                    "zzzzzzzzzv",
+                    "zzzzzzzzzu",
+                    "zzzzzzzzzt",
+                    "zzzzzzzzzs",
+                    "zzzzzzzzzr",
+                    "zzzzzzzzzq"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "mnopqr",
+                    "nopqmr",
+                    "opqmnr",
+                    "pqomnr",
+                    "qpomnr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr",
+                    "mnopqr"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "abced",
+                    "decba",
+                    "decab",
+                    "abcde",
+                    "edcba",
+                    "abced",
+                    "decba",
+                    "decab"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefgh",
+                    "bcdefgha",
+                    "cdefghab",
+                    "defghabc",
+                    "efghabcd",
+                    "fghabcde",
+                    "ghabcdef",
+                    "habcdefg"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "strs": [
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdeabcde",
+                    "edcbaedcba",
+                    "abcedabced",
+                    "decbaedcba",
+                    "decabdecab",
+                    "abcdeabced",
+                    "abcdeabcdx"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik",
+                    "abcdefghik"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbcc",
+                    "ccaabb",
+                    "bbaacc",
+                    "aabbbc",
+                    "bcaabb",
+                    "abcabc",
+                    "babcac",
+                    "cabcab",
+                    "bacbac",
+                    "acbacb",
+                    "acbbac",
+                    "abacbc",
+                    "cababc",
+                    "cbaabc",
+                    "acabbc",
+                    "bcabac",
+                    "abcbac",
+                    "cabbac",
+                    "bcacab",
+                    "acbbca"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["qwertyuiop", "qeywrtuiop", "qwrtypuioe", "qwertyuiop", "qwertyuipo"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcabcabcabc",
+                    "cbacbacbacba",
+                    "bacbacbacbac",
+                    "abcabcabcacb",
+                    "cbacbacbacac",
+                    "bacbacbacabc",
+                    "abcabcabcaba",
+                    "cbacbacbacad",
+                    "bacbacbacaba",
+                    "abcabcabcaca",
+                    "cbacbacbacad",
+                    "bacbacbacaca",
+                    "abcabcabacba",
+                    "cbacbacbacba",
+                    "bacbacbacacb",
+                    "abcabcabcabc",
+                    "cbacbacbacac",
+                    "bacbacbacabc"
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "strs": [
+                    "abacabad",
+                    "babadaba",
+                    "bacabada",
+                    "acabadab",
+                    "adabacab",
+                    "cabadaba",
+                    "abadabac",
+                    "badabaca"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "strs": ["abcdefghij", "abcdefghji", "abcdefghif", "abcdefghig", "abcdefghih"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "abcdefghik",
+                    "abcdefghil",
+                    "abcdefghim",
+                    "abcdefghin",
+                    "abcdefghio"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "xyzzxy",
+                    "zyxzyx",
+                    "zzzyxy",
+                    "zyzzxz",
+                    "xyzzzx",
+                    "zyxzyy",
+                    "zyzzxy",
+                    "zyzzxy"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefg",
+                    "gfedcba",
+                    "fedcbag",
+                    "gabcdef",
+                    "bacdefg",
+                    "gfeabcd",
+                    "bcdefga",
+                    "gfabcde",
+                    "gefedcb",
+                    "defgabc",
+                    "gdefcab",
+                    "fgedcba",
+                    "gfabced",
+                    "gfadebc",
+                    "gbafced",
+                    "gfacedb",
+                    "gfebacd",
+                    "gfbaced",
+                    "gfbcdea",
+                    "gfbedac",
+                    "gfeadcb",
+                    "gfecdba",
+                    "gfdbeca",
+                    "gfdecba"
+                ]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "strs": ["abcdefghij", "abcdefghik", "abcdefghil", "abcdefghim", "abcdefghin"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefgh",
+                    "abcdefgh",
+                    "bcdefgha",
+                    "cdefghab",
+                    "defghabc",
+                    "efghabcd",
+                    "fghabcde",
+                    "ghabcdef",
+                    "habcdefg",
+                    "abcdefgha",
+                    "abcdefghb",
+                    "abcdefghc",
+                    "abcdefghd",
+                    "abcdefghi",
+                    "abcdefghj"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefgh",
+                    "abcdefgh",
+                    "aefghbcd",
+                    "bcdefgha",
+                    "ghabcdef",
+                    "hgfedcba",
+                    "abcdefgh"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "yxwvutsrqponmlkjihgfedcba",
+                    "xwvutsrqponmlkjihgfedcba",
+                    "wvutsrqponmlkjihgfedcba",
+                    "vutsrqponmlkjihgfedcba",
+                    "utsrqponmlkjihgfedcba",
+                    "tsrqponmlkjihgfedcba",
+                    "srqponmlkjihgfedcba",
+                    "rqponmlkjihgfedcba",
+                    "qponmlkjihgfedcba",
+                    "ponmlkjihgfedcba",
+                    "onmlkjihgfedcba",
+                    "nmlkjihgfedcba",
+                    "mlkjihgfedcba",
+                    "lkjihgfedcba",
+                    "kjihgfedcba",
+                    "jihgfedcba",
+                    "ihgfedcba",
+                    "hgfedcba",
+                    "gfedcba",
+                    "fedcba",
+                    "edcba",
+                    "dcba",
+                    "cba",
+                    "ba",
+                    "a"
+                ]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "strs": [
+                    "xyzxyz",
+                    "yzxyxz",
+                    "zxyxyz",
+                    "xyxzyz",
+                    "yxzxzy",
+                    "zxzyxy",
+                    "xzyzxy",
+                    "zyxzyx"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "abced",
+                    "abdec",
+                    "abdec",
+                    "abced",
+                    "abcde",
+                    "abced",
+                    "abdec",
+                    "abced",
+                    "abcde",
+                    "abced",
+                    "abdec",
+                    "abced",
+                    "abcde",
+                    "abced",
+                    "abdec",
+                    "abced",
+                    "abcde"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijabcdefghij",
+                    "jihgfedcbaijhg",
+                    "abcdefghijabcdefghij",
+                    "ijhgfedcbaigjh",
+                    "abcdefghijabcdefghij",
+                    "jihgfedcbajihg",
+                    "abcdefghijabcdefghij",
+                    "ijhgfedcbajigh",
+                    "abcdefghijabcdefghij",
+                    "jihgfedcbaighj",
+                    "abcdefghijabcdefghij",
+                    "ijhgfedcbahijg",
+                    "abcdefghijabcdefghij",
+                    "jihgfedcbahigh",
+                    "abcdefghijabcdefghij",
+                    "ijhgfedcbahgij"
+                ]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "abcdefghik",
+                    "abcdefghil",
+                    "abcdefghij",
+                    "abcdefghim",
+                    "abcdefghij",
+                    "abcdefghin",
+                    "abcdefghio"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdef",
+                    "fedcba",
+                    "abfced",
+                    "decbae",
+                    "decabe",
+                    "dacebf",
+                    "edcba",
+                    "fedcb",
+                    "efdcba",
+                    "abcdeg",
+                    "bcadef",
+                    "cdefab",
+                    "defabc",
+                    "efabcd",
+                    "fabcde",
+                    "abcdef",
+                    "fedcba",
+                    "abfced",
+                    "decbae",
+                    "decabe",
+                    "dacebf",
+                    "edcba",
+                    "fedcb",
+                    "efdcba",
+                    "abcdeg",
+                    "bcadef",
+                    "cdefab",
+                    "defabc",
+                    "efabcd",
+                    "fabcde"
+                ]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefg",
+                    "bacdefg",
+                    "cbadefg",
+                    "dcabefg",
+                    "edcabfg",
+                    "fedcabc",
+                    "gfedcab",
+                    "hgfedca"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "bacdefghij",
+                    "cabdefghij",
+                    "abcdfehgij",
+                    "abcdefghij",
+                    "abcdefghik",
+                    "abcdefghji"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcd",
+                    "dcba",
+                    "cdab",
+                    "bacd",
+                    "cabd",
+                    "acdb",
+                    "adcb",
+                    "bcda",
+                    "cdba",
+                    "bdca",
+                    "dacb",
+                    "cadb",
+                    "bdac",
+                    "abcd",
+                    "dcba",
+                    "cdab",
+                    "bacd",
+                    "cabd",
+                    "acdb",
+                    "adcb",
+                    "bcda",
+                    "cdba",
+                    "bdca",
+                    "dacb",
+                    "cadb",
+                    "bdac"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "aaaaabbbbb",
+                    "aaaabbbbba",
+                    "aaabbbbaaa",
+                    "aabbbbaaaa",
+                    "abbbbaaaaa",
+                    "baaaaabbbb",
+                    "baaaaabbbb",
+                    "bbbbbaaaaa",
+                    "bbbbbaaaab",
+                    "bbbbbaaabb",
+                    "bbbbbaabba",
+                    "bbbbbaabbb",
+                    "bbbbabbbbb",
+                    "bbbbbaabaa",
+                    "bbbbaabbbb",
+                    "bbaaaaabbb",
+                    "bbaaaabbbb",
+                    "bbaaabbbbb",
+                    "bbbaaaaabb",
+                    "bbbaaaabbb",
+                    "bbbaaabbbb",
+                    "bbbbaaaabb",
+                    "bbbbaaabbb",
+                    "bbbbaabbbb",
+                    "bbbbbaaaab",
+                    "bbbbbaaabbb",
+                    "bbbbbaabbb",
+                    "bbbbabbbba",
+                    "bbbbabbaaa",
+                    "bbbbbaabaa",
+                    "bbbbbaaabb",
+                    "bbbbaaaaaa",
+                    "bbbbaaaaba",
+                    "bbbbaaabaa",
+                    "bbbbaaabab",
+                    "bbbbaaabra",
+                    "bbbbbaaaaa",
+                    "bbbbbaaaab",
+                    "bbbbbaaaba",
+                    "bbbbbaabaa",
+                    "bbbbbaaabb"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": ["abcd", "acbd", "adbc", "cabd", "dbca", "dcba", "dcab"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abababab",
+                    "babababa",
+                    "aabbaabb",
+                    "bbaabbaa",
+                    "abbaabba",
+                    "baabbaab",
+                    "abbaabba",
+                    "baabbaab",
+                    "bbaabbaa",
+                    "aabbaabb",
+                    "babababa",
+                    "abababab"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "strs": ["abcdefghij", "ihgfedcba", "jihgfedcba", "abcdefghij", "abcdefghik"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "strs": ["lkjhgfedcba", "lkjhgfedcba", "lkjhgfedcba", "lkjhgfedcba", "lkjhgfedcba"]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcde",
+                    "edcba",
+                    "dbeca",
+                    "decba",
+                    "decab",
+                    "cedab",
+                    "aebcd",
+                    "bcdea",
+                    "debac",
+                    "baced",
+                    "acebd",
+                    "bdeca",
+                    "acdeb",
+                    "bacde",
+                    "abced",
+                    "decba",
+                    "edabc",
+                    "abcde",
+                    "acbde",
+                    "baced",
+                    "bcaed"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "strs": [
+                    "qwertyuiop",
+                    "wertyuiopq",
+                    "ertyuiopqw",
+                    "rtyuiopqwe",
+                    "tyuiopqrst",
+                    "yuiopqrstu",
+                    "uiopqrstuv",
+                    "iopqrstuvw",
+                    "opqrstuvwx",
+                    "pqrstuvwxy",
+                    "qrstuvwxyz",
+                    "rstuvwxyzp",
+                    "stuvwxyzpr",
+                    "tuvwxyzprs",
+                    "uvwxyzprst",
+                    "vwxyzprstq",
+                    "wxyzprstqu",
+                    "xyzprstquv",
+                    "yzprstquvx",
+                    "zprstquvxy",
+                    "prstquvxyz",
+                    "rstquvxyza",
+                    "stquvxyzab",
+                    "tquvxyzabc",
+                    "quvxyzabcd",
+                    "uvxyzabcde",
+                    "vxyzabcdef",
+                    "xyzabcdefg",
+                    "yzabcdefgq",
+                    "zabcdefgqr",
+                    "abcdefgqrs",
+                    "bcdefgqrst",
+                    "cdefgqrstu",
+                    "defgqrstuv",
+                    "efgqrstuvw",
+                    "fgqrstuvwxyz",
+                    "gqrstuvwxyzx",
+                    "hqrstuvwxyzx",
+                    "qrstuvwxyzxy",
+                    "rstuvwxyzxyq",
+                    "stuvwxyzxyqp",
+                    "tuvwxyzxyqpr",
+                    "uvwxyzxyqprs",
+                    "vwxyzxyqprst",
+                    "wxyzxyqprstu",
+                    "xyzxyqprstuv",
+                    "yzxyqprstuvw",
+                    "zxyqprstuvwx",
+                    "xyqprstuvwxy",
+                    "yqprstuvwxyz",
+                    "qprstuvwxyzx",
+                    "prstuvwxyzxy",
+                    "rstuvwxyzxyz",
+                    "stuvwxyzxyza",
+                    "tuvwxyzxyqza"
+                ]
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefg",
+                    "gfedcba",
+                    "bacdefg",
+                    "abcdefg",
+                    "gfedcbx",
+                    "abcdefg",
+                    "gfedcbw"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": [
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa",
+                    "aabbccddeeff",
+                    "ffeeddccbaaa"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": [
+                    "ababab",
+                    "bababa",
+                    "bbaaab",
+                    "aababb",
+                    "ababba",
+                    "abbaab",
+                    "aabbab",
+                    "ababab",
+                    "aabbaa"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                    "bcadefghijklmnopqrstuvwxyzabcdefg",
+                    "cdefghijklmnopqrstuvwxyzabcdefghi",
+                    "defghijklmnopqrstuvwxyzabcdefghij",
+                    "efghijklmnopqrstuvwxyzabcdefghijk"
+                ]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "strs": [
+                    "aaaaaaaa",
+                    "aaaaabaa",
+                    "aaaabaab",
+                    "aaabaaba",
+                    "aabaaaba",
+                    "abaabaaa",
+                    "baaaaaab",
+                    "baaabaaa",
+                    "baabaaab",
+                    "babaaaaa",
+                    "abaaaaab",
+                    "abaaabaa",
+                    "abaabaab",
+                    "baabaaba",
+                    "aabaaaba",
+                    "aaabaaba",
+                    "baaabaaa",
+                    "baaaaaab",
+                    "abaaaaab",
+                    "baaaabaa",
+                    "aabaaaba",
+                    "abaabaab",
+                    "baabaaba",
+                    "aabaaaba",
+                    "baaaabaa",
+                    "baaaaaab",
+                    "abaaaaab",
+                    "abaabaab",
+                    "baabaaba",
+                    "aabaaaba",
+                    "baaaabaa",
+                    "baaaaaab",
+                    "abaaaaab",
+                    "abaabaab",
+                    "baabaaba",
+                    "aabaaaba",
+                    "baaaabaa",
+                    "baaaaaab",
+                    "abaaaaab"
+                ]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "strs": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "ijhgfedcba",
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghij",
+                    "ijhgfedcba"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "strs": ["abacax", "aacxab", "abacax", "bacaxa", "cacxab", "abcaxa"]
+            },
+            "expected": 3
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numSimilarGroups",
+        "typescript": "Solution().numSimilarGroups"
+    }
+}

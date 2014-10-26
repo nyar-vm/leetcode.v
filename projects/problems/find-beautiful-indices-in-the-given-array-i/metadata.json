@@ -1,0 +1,1054 @@
+{
+    "id": "find-beautiful-indices-in-the-given-array-i",
+    "questionId": 3006,
+    "difficulty": "Medium",
+    "tags": [
+        "Two Pointers",
+        "String",
+        "Binary Search",
+        "String Matching",
+        "Hash Function",
+        "Rolling Hash"
+    ],
+    "tests": [
+        {
+            "args": {
+                "s": "beautifulbeautifulbeautiful",
+                "a": "ful",
+                "b": "aut",
+                "k": 5
+            },
+            "expected": [6, 15, 24]
+        },
+        {
+            "args": {
+                "s": "hellobeautifulworld",
+                "a": "be",
+                "b": "autiful",
+                "k": 5
+            },
+            "expected": [5]
+        },
+        {
+            "args": {
+                "s": "beautifulbeautifulbeautiful",
+                "a": "ful",
+                "b": "uti",
+                "k": 5
+            },
+            "expected": [6, 15, 24]
+        },
+        {
+            "args": {
+                "s": "hellohellohello",
+                "a": "he",
+                "b": "lo",
+                "k": 3
+            },
+            "expected": [0, 5, 10]
+        },
+        {
+            "args": {
+                "s": "beautifulday",
+                "a": "day",
+                "b": "beat",
+                "k": 10
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abababab",
+                "a": "ab",
+                "b": "ba",
+                "k": 2
+            },
+            "expected": [0, 2, 4, 6]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc",
+                "a": "ab",
+                "b": "bc",
+                "k": 3
+            },
+            "expected": [0, 3, 6, 9]
+        },
+        {
+            "args": {
+                "s": "hellohellohello",
+                "a": "he",
+                "b": "lo",
+                "k": 2
+            },
+            "expected": [5, 10]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "a": "a",
+                "b": "a",
+                "k": 4
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "a": "aa",
+                "b": "aaa",
+                "k": 2
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "isawsquirrelnearmysquirrelhouseohmy",
+                "a": "my",
+                "b": "squirrel",
+                "k": 15
+            },
+            "expected": [16, 33]
+        },
+        {
+            "args": {
+                "s": "abababab",
+                "a": "ab",
+                "b": "ba",
+                "k": 1
+            },
+            "expected": [0, 2, 4, 6]
+        },
+        {
+            "args": {
+                "s": "hellotherehello",
+                "a": "he",
+                "b": "lo",
+                "k": 5
+            },
+            "expected": [0, 6, 10]
+        },
+        {
+            "args": {
+                "s": "teststringteststring",
+                "a": "test",
+                "b": "ing",
+                "k": 10
+            },
+            "expected": [0, 10]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc",
+                "a": "abc",
+                "b": "cab",
+                "k": 3
+            },
+            "expected": [0, 3, 6, 9]
+        },
+        {
+            "args": {
+                "s": "beautifulbeautiful",
+                "a": "ful",
+                "b": "uti",
+                "k": 5
+            },
+            "expected": [6, 15]
+        },
+        {
+            "args": {
+                "s": "hellobeautifulworld",
+                "a": "bea",
+                "b": "ful",
+                "k": 7
+            },
+            "expected": [5]
+        },
+        {
+            "args": {
+                "s": "overlappingoverlappingoverlapping",
+                "a": "over",
+                "b": "lapping",
+                "k": 10
+            },
+            "expected": [0, 11, 22]
+        },
+        {
+            "args": {
+                "s": "overlappingoverlappingoverlapping",
+                "a": "over",
+                "b": "lap",
+                "k": 5
+            },
+            "expected": [0, 11, 22]
+        },
+        {
+            "args": {
+                "s": "randomstringwithrandomstringinside",
+                "a": "random",
+                "b": "inside",
+                "k": 25
+            },
+            "expected": [16]
+        },
+        {
+            "args": {
+                "s": "qwertyuiopqwertyuiop",
+                "a": "erty",
+                "b": "rtyu",
+                "k": 8
+            },
+            "expected": [2, 12]
+        },
+        {
+            "args": {
+                "s": "abababababab",
+                "a": "aba",
+                "b": "bab",
+                "k": 2
+            },
+            "expected": [0, 2, 4, 6, 8]
+        },
+        {
+            "args": {
+                "s": "repeatedwordrepeatedwordrepeated",
+                "a": "word",
+                "b": "repeated",
+                "k": 10
+            },
+            "expected": [8, 20]
+        },
+        {
+            "args": {
+                "s": "xyxxyxyxyxyxxyxyxyxy",
+                "a": "xy",
+                "b": "yx",
+                "k": 4
+            },
+            "expected": [0, 3, 5, 7, 9, 12, 14, 16, 18]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "iss",
+                "b": "sis",
+                "k": 3
+            },
+            "expected": [1, 4]
+        },
+        {
+            "args": {
+                "s": "uniquestringswithvariouslengthsandcharacters",
+                "a": "strings",
+                "b": "length",
+                "k": 25
+            },
+            "expected": [6]
+        },
+        {
+            "args": {
+                "s": "longestsubstringhereandthere",
+                "a": "long",
+                "b": "here",
+                "k": 12
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "bananaananabanana",
+                "a": "ana",
+                "b": "nan",
+                "k": 4
+            },
+            "expected": [1, 3, 6, 8, 12, 14]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "issi",
+                "b": "sip",
+                "k": 4
+            },
+            "expected": [4]
+        },
+        {
+            "args": {
+                "s": "aaaaaabaaaaaabaaaaaabaaaaaabaaaaaabaaaaaabaaaaaab",
+                "a": "aa",
+                "b": "bb",
+                "k": 5
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xylophonexylophonexylophone",
+                "a": "xylo",
+                "b": "phone",
+                "k": 7
+            },
+            "expected": [0, 9, 18]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "issi",
+                "b": "issi",
+                "k": 3
+            },
+            "expected": [1, 4]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "issi",
+                "b": "issi",
+                "k": 2
+            },
+            "expected": [1, 4]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyzxyzxyzxyz",
+                "a": "xyz",
+                "b": "zyx",
+                "k": 2
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "racecaracecaracecar",
+                "a": "ace",
+                "b": "cec",
+                "k": 7
+            },
+            "expected": [1, 7, 13]
+        },
+        {
+            "args": {
+                "s": "abababababababa",
+                "a": "aba",
+                "b": "bab",
+                "k": 3
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12]
+        },
+        {
+            "args": {
+                "s": "overlappingoverlappingoverlapping",
+                "a": "lapping",
+                "b": "over",
+                "k": 10
+            },
+            "expected": [4, 15, 26]
+        },
+        {
+            "args": {
+                "s": "thelongestwordinenglishdictionary",
+                "a": "word",
+                "b": "english",
+                "k": 15
+            },
+            "expected": [10]
+        },
+        {
+            "args": {
+                "s": "repeatthisstringmanytimesrepeatthisstringmanytimes",
+                "a": "this",
+                "b": "many",
+                "k": 25
+            },
+            "expected": [6, 31]
+        },
+        {
+            "args": {
+                "s": "bananaananabanana",
+                "a": "ana",
+                "b": "nana",
+                "k": 6
+            },
+            "expected": [1, 3, 6, 8, 12, 14]
+        },
+        {
+            "args": {
+                "s": "alibabaibabaibaba",
+                "a": "ali",
+                "b": "iba",
+                "k": 5
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "bananaananabananananabanana",
+                "a": "ana",
+                "b": "nana",
+                "k": 5
+            },
+            "expected": [1, 3, 6, 8, 12, 14, 16, 18, 22, 24]
+        },
+        {
+            "args": {
+                "s": "overlappingstringsoverlapping",
+                "a": "lap",
+                "b": "ing",
+                "k": 10
+            },
+            "expected": [4, 22]
+        },
+        {
+            "args": {
+                "s": "squirrelmysquirrelhouseohmysquirrel",
+                "a": "squirrel",
+                "b": "house",
+                "k": 20
+            },
+            "expected": [0, 10, 27]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatcontainsmultipleinstancesofthesamepattern",
+                "a": "this",
+                "b": "that",
+                "k": 25
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefg",
+                "a": "abc",
+                "b": "defg",
+                "k": 15
+            },
+            "expected": [0, 7, 14]
+        },
+        {
+            "args": {
+                "s": "abababababababababab",
+                "a": "aba",
+                "b": "bab",
+                "k": 5
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16]
+        },
+        {
+            "args": {
+                "s": "xyxyxyxyxyxyxyxyxyxyxyxyxyxyxyxyxy",
+                "a": "xy",
+                "b": "yx",
+                "k": 2
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+        },
+        {
+            "args": {
+                "s": "abababababababababababababababababab",
+                "a": "aba",
+                "b": "bab",
+                "k": 2
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "a": "abc",
+                "b": "xyz",
+                "k": 20
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "complexexamplecomplexexample",
+                "a": "complex",
+                "b": "exam",
+                "k": 15
+            },
+            "expected": [0, 14]
+        },
+        {
+            "args": {
+                "s": "fuzzywuzzy",
+                "a": "fuz",
+                "b": "uzz",
+                "k": 3
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz",
+                "a": "zzz",
+                "b": "zzz",
+                "k": 2
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+        },
+        {
+            "args": {
+                "s": "findingbeautifulindices",
+                "a": "find",
+                "b": "ind",
+                "k": 7
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aaaaaaabaaaaaa",
+                "a": "aa",
+                "b": "aaa",
+                "k": 5
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12]
+        },
+        {
+            "args": {
+                "s": "repeatedsubstringsarecool",
+                "a": "are",
+                "b": "cool",
+                "k": 10
+            },
+            "expected": [18]
+        },
+        {
+            "args": {
+                "s": "longstringwithmultipleoccurrencesofaandb",
+                "a": "multiple",
+                "b": "occurrences",
+                "k": 30
+            },
+            "expected": [14]
+        },
+        {
+            "args": {
+                "s": "overlappingoverlapping",
+                "a": "over",
+                "b": "lap",
+                "k": 8
+            },
+            "expected": [0, 11]
+        },
+        {
+            "args": {
+                "s": "repeatedpatternsrepeatedpatternsrepeatedpatterns",
+                "a": "repeated",
+                "b": "patterns",
+                "k": 20
+            },
+            "expected": [0, 16, 32]
+        },
+        {
+            "args": {
+                "s": "mississippiissiisipiissipississippi",
+                "a": "issi",
+                "b": "ippi",
+                "k": 10
+            },
+            "expected": [1, 4, 11, 25, 28]
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababa",
+                "a": "aba",
+                "b": "bab",
+                "k": 4
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
+        },
+        {
+            "args": {
+                "s": "mississippiississippiississippi",
+                "a": "issi",
+                "b": "miss",
+                "k": 12
+            },
+            "expected": [1, 4, 11]
+        },
+        {
+            "args": {
+                "s": "xyxyxyxyxyxy",
+                "a": "xyx",
+                "b": "yxy",
+                "k": 4
+            },
+            "expected": [0, 2, 4, 6, 8]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghij",
+                "a": "def",
+                "b": "ghi",
+                "k": 10
+            },
+            "expected": [3, 13]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "iss",
+                "b": "issi",
+                "k": 4
+            },
+            "expected": [1, 4]
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfivesixseveneightnine",
+                "a": "one",
+                "b": "two",
+                "k": 5
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabaaaaaaaaaabaaaaaaaaaab",
+                "a": "aaaaaa",
+                "b": "aaab",
+                "k": 15
+            },
+            "expected": [0, 1, 2, 3, 4, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26]
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "a": "fun",
+                "b": "ing",
+                "k": 10
+            },
+            "expected": [13]
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "a": "abr",
+                "b": "cad",
+                "k": 8
+            },
+            "expected": [0, 7]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "a": "cdef",
+                "b": "ghij",
+                "k": 5
+            },
+            "expected": [2, 12, 22]
+        },
+        {
+            "args": {
+                "s": "repeatedrepeatedrepeated",
+                "a": "peat",
+                "b": "peat",
+                "k": 3
+            },
+            "expected": [2, 10, 18]
+        },
+        {
+            "args": {
+                "s": "abcdefabcdefabcdefabcdefabcdef",
+                "a": "cdef",
+                "b": "ab",
+                "k": 8
+            },
+            "expected": [2, 8, 14, 20, 26]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz",
+                "a": "zzz",
+                "b": "zz",
+                "k": 1
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "a": "abc",
+                "b": "efg",
+                "k": 15
+            },
+            "expected": [0, 10, 20]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghij",
+                "a": "abc",
+                "b": "efg",
+                "k": 12
+            },
+            "expected": [0, 10]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithaverylongsubstring",
+                "a": "very",
+                "b": "long",
+                "k": 20
+            },
+            "expected": [7, 26]
+        },
+        {
+            "args": {
+                "s": "squirrelmysquirrelhouse",
+                "a": "my",
+                "b": "squirrel",
+                "k": 10
+            },
+            "expected": [8]
+        },
+        {
+            "args": {
+                "s": "bananaananabananananana",
+                "a": "ana",
+                "b": "nan",
+                "k": 5
+            },
+            "expected": [1, 3, 6, 8, 12, 14, 16, 18, 20]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "iss",
+                "b": "sip",
+                "k": 4
+            },
+            "expected": [4]
+        },
+        {
+            "args": {
+                "s": "abababababab",
+                "a": "aba",
+                "b": "bab",
+                "k": 3
+            },
+            "expected": [0, 2, 4, 6, 8]
+        },
+        {
+            "args": {
+                "s": "beautifulbeautifulbeautifulbeautiful",
+                "a": "bea",
+                "b": "ful",
+                "k": 15
+            },
+            "expected": [0, 9, 18, 27]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithrepeatedsubstringsandlongoccurrencesofpatterns",
+                "a": "long",
+                "b": "pattern",
+                "k": 30
+            },
+            "expected": [46]
+        },
+        {
+            "args": {
+                "s": "beautifuldaybeautifulday",
+                "a": "day",
+                "b": "beau",
+                "k": 12
+            },
+            "expected": [9, 21]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyz",
+                "a": "xyz",
+                "b": "yzx",
+                "k": 2
+            },
+            "expected": [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmultiplesubstrings",
+                "a": "very",
+                "b": "string",
+                "k": 20
+            },
+            "expected": [7]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz",
+                "a": "zz",
+                "b": "zzz",
+                "k": 5
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+        },
+        {
+            "args": {
+                "s": "xyxyxyxyxyxyxyxyxyxy",
+                "a": "xy",
+                "b": "yx",
+                "k": 3
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+        },
+        {
+            "args": {
+                "s": "aaaaabaaaabaaaaaaaba",
+                "a": "aa",
+                "b": "aaa",
+                "k": 5
+            },
+            "expected": [0, 1, 2, 3, 6, 7, 8, 11, 12, 13, 14, 15, 16]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "a": "abc",
+                "b": "efg",
+                "k": 8
+            },
+            "expected": [0, 10, 20]
+        },
+        {
+            "args": {
+                "s": "repeatedrepeatedrepeated",
+                "a": "repe",
+                "b": "ated",
+                "k": 6
+            },
+            "expected": [0, 8, 16]
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "a": "race",
+                "b": "car",
+                "k": 5
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "thisissomereallylongstringwithsomerepetitions",
+                "a": "some",
+                "b": "long",
+                "k": 15
+            },
+            "expected": [6, 30]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "a": "abc",
+                "b": "xyz",
+                "k": 10
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghij",
+                "a": "ghi",
+                "b": "def",
+                "k": 8
+            },
+            "expected": [6, 16, 26, 36]
+        },
+        {
+            "args": {
+                "s": "quickbrownfoxjumpsoverthelazydog",
+                "a": "quick",
+                "b": "lazy",
+                "k": 20
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "a": "mnop",
+                "b": "qrst",
+                "k": 10
+            },
+            "expected": [12]
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfivesixseveneightnine",
+                "a": "two",
+                "b": "nine",
+                "k": 20
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmultiplesubstrings",
+                "a": "very",
+                "b": "string",
+                "k": 10
+            },
+            "expected": [7]
+        },
+        {
+            "args": {
+                "s": "complexstringwithmultipleoccurrences",
+                "a": "with",
+                "b": "occurrences",
+                "k": 28
+            },
+            "expected": [13]
+        },
+        {
+            "args": {
+                "s": "patternmatchingexamplepatternmatchingexamplepatternmatchingexample",
+                "a": "example",
+                "b": "pattern",
+                "k": 50
+            },
+            "expected": [15, 37, 59]
+        },
+        {
+            "args": {
+                "s": "aaabbbcccaaa",
+                "a": "aaa",
+                "b": "bbb",
+                "k": 5
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringfortesting",
+                "a": "very",
+                "b": "long",
+                "k": 12
+            },
+            "expected": [7]
+        },
+        {
+            "args": {
+                "s": "bananaananabay",
+                "a": "ana",
+                "b": "nana",
+                "k": 4
+            },
+            "expected": [1, 3, 6, 8]
+        },
+        {
+            "args": {
+                "s": "abababababababababab",
+                "a": "aba",
+                "b": "bab",
+                "k": 2
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16]
+        },
+        {
+            "args": {
+                "s": "bananaananabananananabanana",
+                "a": "ana",
+                "b": "nan",
+                "k": 5
+            },
+            "expected": [1, 3, 6, 8, 12, 14, 16, 18, 22, 24]
+        },
+        {
+            "args": {
+                "s": "thisissomethingreallylongthatshouldtestthelimits",
+                "a": "test",
+                "b": "limits",
+                "k": 25
+            },
+            "expected": [35]
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnmqwertyuiop",
+                "a": "qwerty",
+                "b": "poi",
+                "k": 15
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "bananaananabanana",
+                "a": "ana",
+                "b": "na",
+                "k": 5
+            },
+            "expected": [1, 3, 6, 8, 12, 14]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "a": "def",
+                "b": "ghi",
+                "k": 10
+            },
+            "expected": [3, 13, 23]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmultiplesubstrings",
+                "a": "long",
+                "b": "string",
+                "k": 10
+            },
+            "expected": [11]
+        },
+        {
+            "args": {
+                "s": "qwertyuiopqwertyuiopqwertyuiop",
+                "a": "qwerty",
+                "b": "uiop",
+                "k": 6
+            },
+            "expected": [0, 10, 20]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "a": "issi",
+                "b": "iss",
+                "k": 5
+            },
+            "expected": [1, 4]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkk",
+                "a": "abc",
+                "b": "def",
+                "k": 10
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abababababababababab",
+                "a": "aba",
+                "b": "bab",
+                "k": 4
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16]
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "a": "micro",
+                "b": "scopic",
+                "k": 30
+            },
+            "expected": [13]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().beautifulIndices",
+        "typescript": "Solution().beautifulIndices"
+    }
+}

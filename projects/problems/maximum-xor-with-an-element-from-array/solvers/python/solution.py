@@ -1,0 +1,118 @@
+import random
+import functools
+import collections
+import string
+import math
+import datetime
+
+from typing import *
+from functools import *
+from collections import *
+from itertools import *
+from heapq import *
+from bisect import *
+from string import *
+from operator import *
+from math import *
+
+inf = float('inf')
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def list_node(values: list):
+    if not values:
+        return None
+    head = ListNode(values[0])
+    p = head
+    for val in values[1:]:
+        node = ListNode(val)
+        p.next = node
+        p = node
+    return head
+
+def is_same_list(p1, p2):
+    if p1 is None and p2 is None:
+        return True
+    if not p1 or not p2:
+        return False
+    return p1.val == p2.val and is_same_list(p1.next, p2.next)
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def tree_node(values: list):
+    if not values:
+        return None
+    root = TreeNode(values[0])
+    i = 1
+    queue = deque()
+    queue.append(root)
+    while queue:
+        node = queue.popleft()
+        if i < len(values) and values[i] is not None:
+            node.left = TreeNode(values[i])
+            queue.append(node.left)
+        i += 1
+        if i < len(values) and values[i] is not None:
+            node.right = TreeNode(values[i])
+            queue.append(node.right)
+        i += 1
+    return root
+
+def is_same_tree(p, q):
+    if not p and not q:
+        return True
+    elif not p or not q:
+        return False
+    elif p.val != q.val:
+        return False
+    else:
+        return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
+
+class Trie:
+    __slots__ = ["children"]
+
+    def __init__(self):
+        self.children = [None] * 2
+
+    def insert(self, x: int):
+        node = self
+        for i in range(30, -1, -1):
+            v = x >> i & 1
+            if node.children[v] is None:
+                node.children[v] = Trie()
+            node = node.children[v]
+
+    def search(self, x: int) -> int:
+        node = self
+        ans = 0
+        for i in range(30, -1, -1):
+            v = x >> i & 1
+            if node.children[v ^ 1]:
+                ans |= 1 << i
+                node = node.children[v ^ 1]
+            elif node.children[v]:
+                node = node.children[v]
+            else:
+                return -1
+        return ans
+
+
+class Solution:
+    def maximizeXor(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        trie = Trie()
+        nums.sort()
+        j, n = 0, len(queries)
+        ans = [-1] * n
+        for i, (x, m) in sorted(zip(range(n), queries), key=lambda x: x[1][1]):
+            while j < len(nums) and nums[j] <= m:
+                trie.insert(nums[j])
+                j += 1
+            ans[i] = trie.search(x)
+        return ans

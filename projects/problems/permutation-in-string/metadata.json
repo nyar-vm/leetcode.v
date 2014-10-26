@@ -1,0 +1,677 @@
+{
+    "id": "permutation-in-string",
+    "questionId": 567,
+    "difficulty": "Medium",
+    "tags": ["Hash Table", "Two Pointers", "String", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s1": "abc",
+                "s2": "bbbccca"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "adc",
+                "s2": "dcda"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abc",
+                "s2": "bbbccba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcde",
+                "s2": "adecb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "test",
+                "s2": "ttewest"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abc",
+                "s2": "cbadef"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abc",
+                "s2": "defabc"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "zyxwvut"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "ooollehed"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "ab",
+                "s2": "eidboaoo"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "abcabc"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "ooolleoooleh"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "ayzxbcd"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "ooollehdl"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "a",
+                "s2": "ab"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "z",
+                "s2": "abcz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "a",
+                "s2": "b"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcd",
+                "s2": "dcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "ab",
+                "s2": "eidbaooo"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcd",
+                "s2": "dcbaefg"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abc",
+                "s2": "cccccbabb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aaaa",
+                "s2": "aaabaaaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcd",
+                "s2": "abcdxzyw"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "a",
+                "s2": "a"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abracadabra",
+                "s2": "cadabraabra"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "unique",
+                "s2": "enquci"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "complexity",
+                "s2": "itpelxcmoytz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "python",
+                "s2": "nothpy"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "permutation",
+                "s2": "aeronpmutitno"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "pqrstuvw",
+                "s2": "stuvwpqrxyz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "zzzzz",
+                "s2": "zzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbccddeeff",
+                "s2": "bbccddeeffaabb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "zyxabcdef"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "permutation",
+                "s2": "terumtnipxo"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "characters",
+                "s2": "trchaesrhc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "baccabdefg"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "algorithm",
+                "s2": "logarithma"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "fedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "substring",
+                "s2": "tstringsub"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "mnopqr",
+                "s2": "qrstuvwxyzmnopqr"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbccddeeff",
+                "s2": "fedcbazyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "unique",
+                "s2": "eniquu"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghij",
+                "s2": "abcdefghijabcdefghij"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "axbyczd"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefghij",
+                "s2": "jihgfedcbaefghijkl"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "ohellonow"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghijklmnopqrstuvwxyz",
+                "s2": "zyxwvutsrqponmlkjihgfedcbaabcde"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "substring",
+                "s2": "stringgnusbs"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "permutation",
+                "s2": "tnuatipremot"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "testcase",
+                "s2": "stceatcases"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "unique",
+                "s2": "euqnieabcd"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "longstring",
+                "s2": "gnirtsolongstring"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdabcd",
+                "s2": "dcbaabcd"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "isppiimsss"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "ghfedcbijklm"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "substringpermutation",
+                "s2": "permutationsubstring"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "variation",
+                "s2": "atinoriva"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghijk",
+                "s2": "jihgfedcbaklmnopqrs"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcd",
+                "s2": "dcbaefghijklmnopqrstuvwxyz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "permutation",
+                "s2": "tporemutani"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "complexity",
+                "s2": "xxlpeicmtostiy"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "unique",
+                "s2": "ueiqnunc"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "cbacbacbacbacbacbacbacbacb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "ghijklmnopabcdefg"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghiklmnopqrstuvwxyz",
+                "s2": "zyxwvutsrqponmlkjihgfedcbaabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbccddeeff",
+                "s2": "fedcbafedcbafedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "challenge",
+                "s2": "hgelangecllon"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "gfedcbahijklmnopqrstuvwxyz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "permutation",
+                "s2": "tpremnoiuat"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "oellhworld"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "test",
+                "s2": "tsetabcd"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefghijk",
+                "s2": "kljihgfedcbazyxwvutsrqponml"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdef",
+                "s2": "fedcbaxyzabcdef"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "example",
+                "s2": "melpaxe"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "interview",
+                "s2": "wterevinirt"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "zyxw",
+                "s2": "wxyzabcd"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "permutation",
+                "s2": "ttnremuapoi"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "xyzz",
+                "s2": "zzzyxzzzzzyx"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "hello",
+                "s2": "ohellworld"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "longstring",
+                "s2": "tgnirlongs"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "bbccaaabcdef"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aaaaabbbbb",
+                "s2": "ababababab"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "complexpermutation",
+                "s2": "xmplxcmpotrenuati"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "zyxzyxzyxzyxzyx"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "mississippi",
+                "s2": "ssippiimis"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "aabbbccc",
+                "s2": "cccbbbaaabbbcccaabb"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "xyz",
+                "s2": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abcdefg",
+                "s2": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "permutationexample",
+                "s2": "xamplepermutation"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "substring",
+                "s2": "ggnirtsabcd"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "abcdefgh",
+                "s2": "hgfedcbaijkl"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "abacabadabacaba",
+                "s2": "badacababacabadaba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "characters",
+                "s2": "tcsrhaec"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s1": "longerstring",
+                "s2": "stringlongeron"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s1": "aabbcc",
+                "s2": "baccab"
+            },
+            "expected": true
+        }
+    ],
+    "invoke": {
+        "python": "Solution().checkInclusion",
+        "typescript": "Solution().checkInclusion"
+    }
+}

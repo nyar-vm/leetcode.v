@@ -1,0 +1,1103 @@
+{
+    "id": "minimum-number-of-valid-strings-to-form-target-i",
+    "questionId": 3291,
+    "difficulty": "Medium",
+    "tags": [
+        "Trie",
+        "Segment Tree",
+        "Array",
+        "String",
+        "Binary Search",
+        "Dynamic Programming",
+        "String Matching",
+        "Hash Function",
+        "Rolling Hash"
+    ],
+    "tests": [
+        {
+            "args": {
+                "words": ["abc"],
+                "target": "abcabc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["ab", "ba"],
+                "target": "abab"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d"],
+                "target": "abcdabcdabcd"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["abcde", "fghij", "klmno"],
+                "target": "abcdefghijklmno"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["z"],
+                "target": "zzzzzzzzzz"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["abababab", "ab"],
+                "target": "ababaababa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "abc", "abc"],
+                "target": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa"],
+                "target": "aaaaaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "target": "hello"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdef"],
+                "target": "xyz"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "fix"],
+                "target": "prefixfix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa"],
+                "target": "aaaaaaaaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "target": "hello"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a"],
+                "target": "aaaaaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["aa", "bb", "cc"],
+                "target": "aabbcc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "cd"],
+                "target": "abcd"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abcd", "efgh", "ijkl"],
+                "target": "abcdefghijl"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "target": "abc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "target": "helloworld"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc"],
+                "target": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "target": "abc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "target": "abcdef"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "fix"],
+                "target": "prefixfix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "target": "world"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a"],
+                "target": "aaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc"],
+                "target": "abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["prefix", "suffix"],
+                "target": "prefixsuffix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "aaaaa", "bcdef"],
+                "target": "aabcdabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl", "mno"],
+                "target": "abcdefghijklmno"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"],
+                "target": "abcdabcdabcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "fix", "suffix"],
+                "target": "prefixsuffix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "bca", "cab"],
+                "target": "abcabcabcabc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["aaa", "aaaa", "aaaaa", "aaaaaa"],
+                "target": "aaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["jump", "jum", "ju", "j"],
+                "target": "jumpjumpjump"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["ab", "ba", "aba", "bab", "abab"],
+                "target": "ababbababababa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["brown", "brow", "bro", "br", "b"],
+                "target": "brownbrownbrow"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a", "aaaa"],
+                "target": "aaaaaaaaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl"],
+                "target": "abcdefghijk"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "jihgfedcba", "abcdefgh", "hgfedcba"],
+                "target": "abcdefghijhgfedcbahgfedcba"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl", "mno"],
+                "target": "abcdefghijklmnopqrstuvwxyza"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["lazy", "laz", "la", "l"],
+                "target": "lazylazy"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "target": "aaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "target": "onetwothreefourfivesixseveneightnineten"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["repeated", "repeat", "re", "rep", "repe"],
+                "target": "repeatedrepeated"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcd", "cd", "d"],
+                "target": "abcdbcdbcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "target": "onetwothree"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hello", "world"],
+                "target": "helloworldhello"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "yz", "zx", "yx"],
+                "target": "zyxzyxzyx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "fix", "fixx", "fixxx"],
+                "target": "prefixfixfixxxfixfixfixx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "target": "onetwothreefour"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x"],
+                "target": "xyzyzyxzyzyx"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["longprefix", "longerprefix", "longestprefix"],
+                "target": "longestprefixlongprefixlongerprefix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["dog", "do", "d"],
+                "target": "dogdogdog"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["short", "longer", "longestword"],
+                "target": "shortlongerlongestwordshortlongerlongestwordshortlongerlongestword"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["abcd", "abc", "ab", "a"],
+                "target": "abcabcabcabc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "bcdefgh", "cdefghi", "defghij", "efghijk"],
+                "target": "abcdefghijk"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["unique", "words", "only", "here"],
+                "target": "uniquewordsonlyhere"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "ijklmnop", "qrstuvwx", "yz"],
+                "target": "abcdefghijklmnopqrstuvwxyzyz"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["abab", "baba", "abba", "baab", "aaaa"],
+                "target": "ababbabaabbaab"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hello", "world"],
+                "target": "helloworldhelloworld"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["longword", "longerword", "longestword"],
+                "target": "longwordlongerwordlongestwordlongestwordlongestword"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "he", "h"],
+                "target": "hellohello"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["prefix", "prefixprefix", "prefixprefixprefix"],
+                "target": "prefixprefixprefixprefix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["ab", "abc", "abcd"],
+                "target": "abcabcdab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aac", "aad"],
+                "target": "aaabaaacaaad"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["small", "big", "medium"],
+                "target": "smallbigmediumbig"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "target": "onetwothreefour"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hel", "lo", "wor", "ld"],
+                "target": "helloworld"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["giraffe", "gira", "gir", "gi", "g"],
+                "target": "giraffegiraffe"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "target": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["one", "on", "o"],
+                "target": "ononeone"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "xy", "yz", "xz", "xyz"],
+                "target": "xyzxyzxyz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "fix", "pre", "prefixfix"],
+                "target": "prefixprefix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "fix", "prefixfix"],
+                "target": "prefixprefixfix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["aabb", "ab", "aab", "aa"],
+                "target": "aabbabaaababaab"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["pqr", "pq", "p"],
+                "target": "pqrpqppqrpqpp"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["abc", "abcabc", "abcabcabc", "abcabcabcabc"],
+                "target": "abcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x"],
+                "target": "xyzyxzyz"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["prefix", "suffix", "pre", "fix", "postfix"],
+                "target": "prefixpostfix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e"],
+                "target": "abcdeabcdeabcde"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcde", "abcdef", "abcdefg"],
+                "target": "abcdefgabcdefgabcdefg"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg"],
+                "target": "abcdefg"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abcd", "abc", "ab", "a"],
+                "target": "abcdabc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def"],
+                "target": "abcdef"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["hello", "hellohello", "hellohellohello"],
+                "target": "hellohellohellohellohellohello"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["quick", "qui", "qu", "q"],
+                "target": "quickquick"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["xyz", "yz", "z"],
+                "target": "xyzxyz"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["longword", "long", "lo", "l"],
+                "target": "longwordlongwordlongword"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["panda", "pan", "pa", "p"],
+                "target": "pandapanpapanda"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl"],
+                "target": "abcdefghijkl"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abc", "b", "c"],
+                "target": "abcbabcbabc"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["repeated", "repeat", "rep", "r"],
+                "target": "repeatedrepeatedrepeated"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["zebra", "zeb", "ze", "z"],
+                "target": "zebrazebrazebra"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "cba", "bac"],
+                "target": "abcbacbac"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"],
+                "target": "abcdabcdabcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaa", "aa", "a"],
+                "target": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa"],
+                "target": "aaaaaaaaaaaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["ab", "a", "b"],
+                "target": "abababababab"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaa", "aa", "a"],
+                "target": "aaaaaaaaaaaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["longprefix", "prefix", "fix", "suffix"],
+                "target": "longprefixsuffix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["fox", "fo", "f"],
+                "target": "foxfoxfoxfox"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcd", "abc", "ab", "a"],
+                "target": "abcdabcaba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["pqr", "pq", "p"],
+                "target": "ppppqqqrrr"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["prefix", "prefi", "pref", "pre", "pr"],
+                "target": "prefixprefix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["cat", "ca", "c"],
+                "target": "catcatcatcat"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["prefix", "pref", "pre", "p"],
+                "target": "prefixprefix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def"],
+                "target": "abcdefg"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry"],
+                "target": "applebananaapple"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["partial", "part", "par", "pa", "p"],
+                "target": "partialpartparpap"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["abcd", "abc", "ab", "a"],
+                "target": "abcdabcab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "fix", "fixx"],
+                "target": "prefixprefixfixfixxfix"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a"],
+                "target": "aaaaaaaaaaaaaaaa"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["prefix", "prefixing", "pre", "fix", "fixing"],
+                "target": "prefixprefixfix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["qwerty", "werty", "erty", "rty", "ty", "y", "yt", "tyu"],
+                "target": "qwertytyutytutytutytutytutytutytutytutu"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["abac", "bac", "cab", "abc"],
+                "target": "abacbacabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["over", "ove", "ov", "o"],
+                "target": "overoverover"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaaaa", "aaaa", "aaa", "aa", "a"],
+                "target": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": ["abcde", "cdefg", "efghi", "fghij"],
+                "target": "abcdefghij"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e"],
+                "target": "edcba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "target": "onetwothreeonetwo"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["abc", "ab", "a"],
+                "target": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"],
+                "target": "abcdabcd"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["hello", "hi", "h", "he", "hel"],
+                "target": "hellohellohi"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "yyz", "xzy"],
+                "target": "zyxzyxzyx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["same", "same", "same"],
+                "target": "samesamesamesamesame"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["pqr", "pr", "qr", "r", "pq", "q"],
+                "target": "pqrprqrpqr"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "testcase"],
+                "target": "testtestingtestcase"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcd", "cde", "def", "efg", "fgh"],
+                "target": "abcdefg"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde"],
+                "target": "abcdeabcdeabcde"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["complex", "words", "example"],
+                "target": "complexwordscomplex"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["elephant", "elepha", "eleph", "elep", "ele", "el", "e"],
+                "target": "elephantelephant"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "bc", "c", "abcd"],
+                "target": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "yzx"],
+                "target": "xyzzyxyzzyx"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["xy", "xyz", "xyza", "xyzabc"],
+                "target": "xyzabcxyzabcxyz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x"],
+                "target": "xyzyxyzyx"
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "target": "abcdefghij"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["aaa", "bbb", "ccc"],
+                "target": "aaabbbccc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "ab", "bcde"],
+                "target": "abcdabcde"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd", "abcde"],
+                "target": "abcdeabcde"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "yxz", "yxzyx"],
+                "target": "xyzzyxzyxzyxzyxzyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["zzz", "zz", "z"],
+                "target": "zzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["z", "yz", "xyz", "wxyz"],
+                "target": "wxyzwxyzwxyz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "acb", "bac", "bca", "cab", "cba"],
+                "target": "abcacbabcabc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcde", "bcd", "cde", "efg"],
+                "target": "abcdecdefg"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["repeated", "repeate", "repea", "repe", "rep", "re", "r"],
+                "target": "repeatedrepeatedrepeated"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aa", "a"],
+                "target": "aaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["onetwo", "one", "two", "three"],
+                "target": "onetwothreeonetwo"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl"],
+                "target": "abcdefghijk"
+            },
+            "expected": 4
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minValidStrings",
+        "typescript": "Solution().minValidStrings"
+    }
+}

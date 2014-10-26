@@ -1,0 +1,799 @@
+{
+    "id": "find-all-anagrams-in-a-string",
+    "questionId": 438,
+    "difficulty": "Medium",
+    "tags": ["Hash Table", "String", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s": "hello",
+                "p": "billion"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aaaaa",
+                "p": "a"
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "bbaa",
+                "p": "ab"
+            },
+            "expected": [1]
+        },
+        {
+            "args": {
+                "s": "abab",
+                "p": "ab"
+            },
+            "expected": [0, 1, 2]
+        },
+        {
+            "args": {
+                "s": "abacbabc",
+                "p": "abc"
+            },
+            "expected": [1, 2, 3, 5]
+        },
+        {
+            "args": {
+                "s": "a",
+                "p": "a"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "p": "aa"
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "cbaebabacd",
+                "p": "abc"
+            },
+            "expected": [0, 6]
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "p": "zyx"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaa",
+                "p": "aaa"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "p": "issi"
+            },
+            "expected": [1, 4]
+        },
+        {
+            "args": {
+                "s": "abcabcabc",
+                "p": "abc"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6]
+        },
+        {
+            "args": {
+                "s": "aabbcc",
+                "p": "abc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "p": "issip"
+            },
+            "expected": [4]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "p": "efgh"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "p": "fgh"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "p": "gfedcba"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aabbccdd",
+                "p": "abcd"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "hello",
+                "p": "oll"
+            },
+            "expected": [2]
+        },
+        {
+            "args": {
+                "s": "p",
+                "p": "p"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "zdhfkahfewrfsad",
+                "p": "fes"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "p": "zzzz"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46
+            ]
+        },
+        {
+            "args": {
+                "s": "ananananan",
+                "p": "nana"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6]
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababababababababababababab",
+                "p": "baba"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62
+            ]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzz",
+                "p": "zzzz"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        },
+        {
+            "args": {
+                "s": "anagramanagramanagram",
+                "p": "anagramanagram"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "xxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzzxxyyzz",
+                "p": "xxyyzz"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+                65, 66
+            ]
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "p": "quick"
+            },
+            "expected": [1]
+        },
+        {
+            "args": {
+                "s": "xyzzxyzz",
+                "p": "xyz"
+            },
+            "expected": [0, 3, 4]
+        },
+        {
+            "args": {
+                "s": "almostanagram",
+                "p": "anagram"
+            },
+            "expected": [6]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "p": "abcdefghijklmnop"
+            },
+            "expected": [0, 26]
+        },
+        {
+            "args": {
+                "s": "abcdabcdeabcdabcdeabcdabcde",
+                "p": "abcde"
+            },
+            "expected": [4, 5, 6, 7, 8, 13, 14, 15, 16, 17, 22]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhii",
+                "p": "abcdefghi"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverlazydog",
+                "p": "lazy"
+            },
+            "expected": [23]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "p": "zzzzzz"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+                65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
+                86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110
+            ]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringtocheckanagrams",
+                "p": "strings"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xyxzyzyx",
+                "p": "zyx"
+            },
+            "expected": [1, 2, 5]
+        },
+        {
+            "args": {
+                "s": "bbaaaaab",
+                "p": "ab"
+            },
+            "expected": [1, 6]
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "p": "bbccbb"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abababababababababababababababababababababababababababababababababababababababababababab",
+                "p": "bab"
+            },
+            "expected": [
+                1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43,
+                45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85
+            ]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc",
+                "p": "abcabc"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd",
+                "p": "dcba"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "p": "mnopqrstuvwxyz"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "thisisanotherexample",
+                "p": "ample"
+            },
+            "expected": [15]
+        },
+        {
+            "args": {
+                "s": "acbabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "p": "bcab"
+            },
+            "expected": [
+                1, 2, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58, 61
+            ]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "p": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xyzzzzzyxyzzzzzyxyzzzzzy",
+                "p": "zzzzzyxy"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        },
+        {
+            "args": {
+                "s": "repeatedpatternrepeatedpatternrepeated",
+                "p": "repeatedpattern"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+            ]
+        },
+        {
+            "args": {
+                "s": "eidbaooo",
+                "p": "ab"
+            },
+            "expected": [3]
+        },
+        {
+            "args": {
+                "s": "acdfgdcagdfgdsf",
+                "p": "gcd"
+            },
+            "expected": [4]
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefg",
+                "p": "gfedcba"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "p": "mnopqrstuvwxzy"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyz",
+                "p": "xyz"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42
+            ]
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbc",
+                "p": "bccb"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "p": "ihgfedcba"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc",
+                "p": "cba"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27
+            ]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "p": "zzz"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+                65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
+                86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103
+            ]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbbbcccccccccc",
+                "p": "abc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "p": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "p": "pneumonia"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "counterexampletofindallanagramsinaverylargeinputstring",
+                "p": "example"
+            },
+            "expected": [7]
+        },
+        {
+            "args": {
+                "s": "zazazazazaz",
+                "p": "aaa"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "p": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "p": "test"
+            },
+            "expected": [7]
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababa",
+                "p": "baba"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29
+            ]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyz",
+                "p": "xyzzyx"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27
+            ]
+        },
+        {
+            "args": {
+                "s": "anagramananagramanagramanagramanagram",
+                "p": "nagaram"
+            },
+            "expected": [
+                0, 1, 2, 3, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+                27, 28, 29, 30
+            ]
+        },
+        {
+            "args": {
+                "s": "abcdabcde",
+                "p": "cde"
+            },
+            "expected": [6]
+        },
+        {
+            "args": {
+                "s": "abacbabcabcab",
+                "p": "abc"
+            },
+            "expected": [1, 2, 3, 5, 6, 7, 8, 9, 10]
+        },
+        {
+            "args": {
+                "s": "anananananananananananananananananananananana",
+                "p": "nana"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41
+            ]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaab",
+                "p": "ba"
+            },
+            "expected": [26]
+        },
+        {
+            "args": {
+                "s": "acbabcabcabcabcabcabcabcabcabcabc",
+                "p": "bac"
+            },
+            "expected": [
+                0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+                24, 25, 26, 27, 28, 29, 30
+            ]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaab",
+                "p": "aaaab"
+            },
+            "expected": [8]
+        },
+        {
+            "args": {
+                "s": "ldfldjflsdkflsdkjfldsjkfldsjfldsjflsdkjfldskjflds",
+                "p": "sdkjf"
+            },
+            "expected": [13, 19, 35, 41]
+        },
+        {
+            "args": {
+                "s": "abababababababababab",
+                "p": "abab"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffaabbccddeeff",
+                "p": "abcdef"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz",
+                "p": "zzz"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "zxyzzxyz",
+                "p": "xyz"
+            },
+            "expected": [0, 1, 4, 5]
+        },
+        {
+            "args": {
+                "s": "thisisanexampleofaverylongstringwherefindinganagramsisnotthatstraightforward",
+                "p": "anagram"
+            },
+            "expected": [44]
+        },
+        {
+            "args": {
+                "s": "anagramananagramananagram",
+                "p": "anagram"
+            },
+            "expected": [0, 1, 2, 3, 9, 10, 11, 12, 18]
+        },
+        {
+            "args": {
+                "s": "anananananananananananananananananana",
+                "p": "anana"
+            },
+            "expected": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "p": "jihgfedcba"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "p": "aaaaaa"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46
+            ]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "p": "mnopqr"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "p": "mnbvcxzlkjhgfdsapoiuytrewq"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "acbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacb",
+                "p": "acbac"
+            },
+            "expected": [
+                0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63
+            ]
+        },
+        {
+            "args": {
+                "s": "hellohellohellohellohellohellohellohellohellohello",
+                "p": "world"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "anagramanagramanagram",
+                "p": "nagaram"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm",
+                "p": "mnbvcxzlkjhgfdsapoiuytrewq"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26
+            ]
+        },
+        {
+            "args": {
+                "s": "layer",
+                "p": "relay"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "quickbrownfoxjumpsoverthelazydog",
+                "p": "thequickbrownfoxjumpsover"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "llllllllllllllllllllllllllllllllllllll",
+                "p": "ll"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+            ]
+        },
+        {
+            "args": {
+                "s": "abababababababababab",
+                "p": "baba"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+                "p": "aab"
+            },
+            "expected": [62]
+        },
+        {
+            "args": {
+                "s": "qazwsxedcrfvtgbyhnujmikolp",
+                "p": "lopihgfytvremkluzxwqjncbv"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "p": "abacab"
+            },
+            "expected": [0, 1, 8, 9]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithseveralrepeatingcharacters",
+                "p": "characters"
+            },
+            "expected": [41]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhii",
+                "p": "iihhggffeeddccbbaa"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "thisisanagram",
+                "p": "nagaram"
+            },
+            "expected": [6]
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababababababab",
+                "p": "baba"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+                44, 45, 46, 47, 48, 49, 50
+            ]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "p": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26
+            ]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "p": "abcdef"
+            },
+            "expected": []
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findAnagrams",
+        "typescript": "Solution().findAnagrams"
+    }
+}

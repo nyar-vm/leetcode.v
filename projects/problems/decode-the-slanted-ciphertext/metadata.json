@@ -1,0 +1,796 @@
+{
+    "id": "decode-the-slanted-ciphertext",
+    "questionId": 2075,
+    "difficulty": "Medium",
+    "tags": ["String", "Simulation"],
+    "tests": [
+        {
+            "args": {
+                "encodedText": "a",
+                "rows": 1
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "encodedText": "abcd efg hijk",
+                "rows": 3
+            },
+            "expected": "aeibfjcgd"
+        },
+        {
+            "args": {
+                "encodedText": "a   b   c   d",
+                "rows": 2
+            },
+            "expected": "a  c    b"
+        },
+        {
+            "args": {
+                "encodedText": "coding",
+                "rows": 1
+            },
+            "expected": "coding"
+        },
+        {
+            "args": {
+                "encodedText": "abc def ghi jkl mno",
+                "rows": 5
+            },
+            "expected": "adgbec"
+        },
+        {
+            "args": {
+                "encodedText": "ab c  de",
+                "rows": 2
+            },
+            "expected": "a bd ec"
+        },
+        {
+            "args": {
+                "encodedText": "ch   ie   pr",
+                "rows": 3
+            },
+            "expected": "cipher"
+        },
+        {
+            "args": {
+                "encodedText": "iveo    eed   l te   olc",
+                "rows": 4
+            },
+            "expected": "i love leetcode"
+        },
+        {
+            "args": {
+                "encodedText": "python programming is fun",
+                "rows": 4
+            },
+            "expected": "ppm yriftonuhggorn"
+        },
+        {
+            "args": {
+                "encodedText": "algorithms and data structures",
+                "rows": 5
+            },
+            "expected": "ah telmdrsgsauo trai"
+        },
+        {
+            "args": {
+                "encodedText": "hello world  from    leetcode     challenges",
+                "rows": 6
+            },
+            "expected": "hrmt nel c gld ocl  do   fw"
+        },
+        {
+            "args": {
+                "encodedText": "t a c o s e q u i r r e s e l l   f o o d   s o u p",
+                "rows": 5
+            },
+            "expected": "t e s q f a s o u o c e u i o o l  r s"
+        },
+        {
+            "args": {
+                "encodedText": "one    two    three    four    five    six",
+                "rows": 3
+            },
+            "expected": "oh nrfeei ev  e      t  wf oos ui rx"
+        },
+        {
+            "args": {
+                "encodedText": "programming challenges are fun",
+                "rows": 4
+            },
+            "expected": "pilrrneeogn g gfrceahm"
+        },
+        {
+            "args": {
+                "encodedText": "filling   the   matrix   in   a   slanted   manner",
+                "rows": 6
+            },
+            "expected": "f t aaitr nnlhi tnlexaei   n  g"
+        },
+        {
+            "args": {
+                "encodedText": "p y trh    e  t s    o    n    a",
+                "rows": 3
+            },
+            "expected": "pe    y   t t nrs h"
+        },
+        {
+            "args": {
+                "encodedText": "m e t a l l i c a",
+                "rows": 3
+            },
+            "expected": "mai   elc  t"
+        },
+        {
+            "args": {
+                "encodedText": "",
+                "rows": 10
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "encodedText": "padding   with   spaces   at   the   end     ",
+                "rows": 5
+            },
+            "expected": "pwc  aiet dtsh dh e i    n   g a s"
+        },
+        {
+            "args": {
+                "encodedText": "a    b    c    d    e    f    g    h    i",
+                "rows": 9
+            },
+            "expected": "abcd"
+        },
+        {
+            "args": {
+                "encodedText": "qo   su   me   ve   rt",
+                "rows": 5
+            },
+            "expected": "qsmvoue"
+        },
+        {
+            "args": {
+                "encodedText": "sh jfuew xq  z   r e",
+                "rows": 3
+            },
+            "expected": "sw h   x jqrf u"
+        },
+        {
+            "args": {
+                "encodedText": "this  is a   test  string",
+                "rows": 5
+            },
+            "expected": "ti  ghstsi esa"
+        },
+        {
+            "args": {
+                "encodedText": "abcdef ghijkl mnopqr stuvwx yz",
+                "rows": 5
+            },
+            "expected": "agmsybhntzcioudjpekf"
+        },
+        {
+            "args": {
+                "encodedText": "a quick brown fox jumps over the lazy dog",
+                "rows": 6
+            },
+            "expected": "a fp z bostqrx uo iwc"
+        },
+        {
+            "args": {
+                "encodedText": "wcy  hmu  eai  xfi",
+                "rows": 3
+            },
+            "expected": "wu c xy f ei ah"
+        },
+        {
+            "args": {
+                "encodedText": "two words",
+                "rows": 1
+            },
+            "expected": "two words"
+        },
+        {
+            "args": {
+                "encodedText": "th qzih xof  c ",
+                "rows": 3
+            },
+            "expected": "th h c x qoz"
+        },
+        {
+            "args": {
+                "encodedText": "ab  c   d    e     f      g       h        i         j",
+                "rows": 10
+            },
+            "expected": "a    b ef d   c"
+        },
+        {
+            "args": {
+                "encodedText": "programming in python is fun",
+                "rows": 3
+            },
+            "expected": "pgnr  oiignsr  apfmyumti"
+        },
+        {
+            "args": {
+                "encodedText": "spaces   in   between   words",
+                "rows": 4
+            },
+            "expected": "s twpiwoanerc ede ns"
+        },
+        {
+            "args": {
+                "encodedText": "qjewukcuvm xs   ezmrg",
+                "rows": 4
+            },
+            "expected": "qcsmju rev wmu"
+        },
+        {
+            "args": {
+                "encodedText": "this is a longer example to test the decoding function",
+                "rows": 8
+            },
+            "expected": "t epteharlei  esle oi"
+        },
+        {
+            "args": {
+                "encodedText": "q w   e r   t y   u i   o p",
+                "rows": 4
+            },
+            "expected": "q y  r  w"
+        },
+        {
+            "args": {
+                "encodedText": "a    q    o    q    r    s",
+                "rows": 6
+            },
+            "expected": "aqoq"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefghi jklmnop qrstuv wx yz",
+                "rows": 5
+            },
+            "expected": "ahntybiouzc pvdj ekf"
+        },
+        {
+            "args": {
+                "encodedText": "i s l a n d   o f   d r e a m s",
+                "rows": 3
+            },
+            "expected": "i r   s e o l a f a m   n"
+        },
+        {
+            "args": {
+                "encodedText": "s h e e l  s  s  f  i  r  e",
+                "rows": 5
+            },
+            "expected": "se       hls  e"
+        },
+        {
+            "args": {
+                "encodedText": "abc def ghi jkl mno pqr stu vwx yz",
+                "rows": 6
+            },
+            "expected": "afjosb k cgl hd"
+        },
+        {
+            "args": {
+                "encodedText": "hello   world   this   is   a   test",
+                "rows": 5
+            },
+            "expected": "hwtsteoh elri slls od"
+        },
+        {
+            "args": {
+                "encodedText": "c o n s t a n t i n o p o l i s",
+                "rows": 6
+            },
+            "expected": "csnno    ott  n"
+        },
+        {
+            "args": {
+                "encodedText": "a b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "rows": 5
+            },
+            "expected": "a l w g r b m x h s c n y i t d o  j e"
+        },
+        {
+            "args": {
+                "encodedText": "this is a test of the emergency broadcast system",
+                "rows": 6
+            },
+            "expected": "t tedththnceieecamss ys te i mso"
+        },
+        {
+            "args": {
+                "encodedText": "x w v u t s r q p o n m l k j i h g f e d c b a",
+                "rows": 26
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "encodedText": "keep it secret keep it safe",
+                "rows": 6
+            },
+            "expected": "kicketre p"
+        },
+        {
+            "args": {
+                "encodedText": "a    b   c  d e f g h i j k l m n o p q r s t u v w x y z",
+                "rows": 26
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "encodedText": "hello world from the other side",
+                "rows": 4
+            },
+            "expected": "hr eeltrldh l esof  rw"
+        },
+        {
+            "args": {
+                "encodedText": "data structures and algorithms",
+                "rows": 8
+            },
+            "expected": "d uast"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefghij klmnopqrst uvwxyz",
+                "rows": 3
+            },
+            "expected": "a tbk cludmvenwfoxgpyhqi"
+        },
+        {
+            "args": {
+                "encodedText": "singleword",
+                "rows": 10
+            },
+            "expected": "s"
+        },
+        {
+            "args": {
+                "encodedText": "the quick brown fox jumps over the lazy dog",
+                "rows": 6
+            },
+            "expected": "tkfshdh o eoebxo  r vqojuwi"
+        },
+        {
+            "args": {
+                "encodedText": "thisisaverylongstringthatwillbereconstructedusingtheslantedciphertechnique",
+                "rows": 7
+            },
+            "expected": "tlhcunehoaostcintniehsgwsndnisitgcstlrtarluvibenr"
+        },
+        {
+            "args": {
+                "encodedText": "one",
+                "rows": 1
+            },
+            "expected": "one"
+        },
+        {
+            "args": {
+                "encodedText": "z y x w v u t s r q p o n m l k j i h g f e d c b a",
+                "rows": 5
+            },
+            "expected": "z o d t i y n c s h x m b r g w l  q v"
+        },
+        {
+            "args": {
+                "encodedText": "t h e q u i c k b r o w n   f o x   j u m p s   o v e r   t h e   l a z y   d o g",
+                "rows": 7
+            },
+            "expected": "tcnjohy       hk uve        ebfme d      qropr    uox  i"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefgh ijklmnop qrstuvwx yz      this is a test",
+                "rows": 5
+            },
+            "expected": "ajs ibkt sclu  dmv aenw  foxtgp h"
+        },
+        {
+            "args": {
+                "encodedText": "a quick movement of the enemy will jeopardize five gunboats",
+                "rows": 7
+            },
+            "expected": "aofme b v yofoqet piumhwaieeicn kt"
+        },
+        {
+            "args": {
+                "encodedText": "slantedtranspositioncipheriscomplexandfun",
+                "rows": 7
+            },
+            "expected": "sdpoeltonarsnat"
+        },
+        {
+            "args": {
+                "encodedText": "one two three four five six seven eight nine ten eleven twelve",
+                "rows": 4
+            },
+            "expected": "oun nr ee el fietigvwvheoetn    tsnthiiwrxnee eles  ef"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefghij",
+                "rows": 1
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "encodedText": "x    y     z      ",
+                "rows": 3
+            },
+            "expected": "x            zy"
+        },
+        {
+            "args": {
+                "encodedText": "machine learning is fascinating",
+                "rows": 7
+            },
+            "expected": "mnagaerc h"
+        },
+        {
+            "args": {
+                "encodedText": "lqtk e o mu yzfe ot i g rya wne l oxtesn gdeo",
+                "rows": 5
+            },
+            "expected": "luie q   gtygldkz  e frooeeyx  aoo"
+        },
+        {
+            "args": {
+                "encodedText": "p r o g r a m m i n g   l a n g u a g e s",
+                "rows": 5
+            },
+            "expected": "p n g a n r g e m g o    m g"
+        },
+        {
+            "args": {
+                "encodedText": "wecoloveleetcode",
+                "rows": 2
+            },
+            "expected": "weeectocloodvee"
+        },
+        {
+            "args": {
+                "encodedText": "example     of    a    very    long    encoded    text",
+                "rows": 7
+            },
+            "expected": "e  eon x  rnca aygm   po lfe"
+        },
+        {
+            "args": {
+                "encodedText": "longer text with multiple spaces in between",
+                "rows": 3
+            },
+            "expected": "lheo snm guielnrt  ibtpeeltxewt e sewpi"
+        },
+        {
+            "args": {
+                "encodedText": "it wof  eit   ss dp",
+                "rows": 4
+            },
+            "expected": "iftst    w"
+        },
+        {
+            "args": {
+                "encodedText": "a      b      c      d      e",
+                "rows": 5
+            },
+            "expected": "a     b    c"
+        },
+        {
+            "args": {
+                "encodedText": "abcd efgh ijkl mnop qrst uvwx yz",
+                "rows": 5
+            },
+            "expected": "ag rxbhms c ntdio je"
+        },
+        {
+            "args": {
+                "encodedText": "the quick brown fox jumps over lazy dogs",
+                "rows": 4
+            },
+            "expected": "trmzhopyews  n dq ooufvgioescxrk"
+        },
+        {
+            "args": {
+                "encodedText": "special    characters    !@#$%^&*() are    allowed    in    the    text",
+                "rows": 10
+            },
+            "expected": "s c * ep t!( e e@)ccr#ihsaal"
+        },
+        {
+            "args": {
+                "encodedText": "thisisaverylongtextthatneedstobeencodedusingaslantedtranspositioncipher",
+                "rows": 8
+            },
+            "expected": "trtsdsaohyttelnilhodasoabuintesgnatv"
+        },
+        {
+            "args": {
+                "encodedText": "spaces    are   handled   correctly",
+                "rows": 5
+            },
+            "expected": "s h tp a laancycrdoeels"
+        },
+        {
+            "args": {
+                "encodedText": "f l e x i b l e   r e s o u r c e s",
+                "rows": 5
+            },
+            "expected": "fi oe     lbrus    ele  x"
+        },
+        {
+            "args": {
+                "encodedText": "t h e   q u i c k   b r o w n   f o x   j u m p s   o v e r   l a z y   d o g s",
+                "rows": 3
+            },
+            "expected": "t v n h e   e r f     o q l x u a   i z j c y u k   m   d p b o s r g   o"
+        },
+        {
+            "args": {
+                "encodedText": "a    b     c      d       e        f         g          h           i",
+                "rows": 9
+            },
+            "expected": "a              de  c     b"
+        },
+        {
+            "args": {
+                "encodedText": "python programming is fun",
+                "rows": 3
+            },
+            "expected": "po ygitrsha omfnmu ip"
+        },
+        {
+            "args": {
+                "encodedText": "spaces   between   words   are   preserved",
+                "rows": 3
+            },
+            "expected": "sn p  a  c pewrsoe rs de srb ve et dwae"
+        },
+        {
+            "args": {
+                "encodedText": "keep calm and code on",
+                "rows": 2
+            },
+            "expected": "knede pc ocdael mo"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefgh ijklmnop qrstuv wxyz",
+                "rows": 4
+            },
+            "expected": "a p bi wcjqxdkryelsfmg"
+        },
+        {
+            "args": {
+                "encodedText": "decoding slanted transposition cipher is challenging",
+                "rows": 7
+            },
+            "expected": "d  si gestipcclrthoaaidnnitn"
+        },
+        {
+            "args": {
+                "encodedText": "a quick brown fox jumps over the lazy dog",
+                "rows": 3
+            },
+            "expected": "af  otqxhu eij culkma pzbsyr  oodwvn"
+        },
+        {
+            "args": {
+                "encodedText": "the quick brown fox jumps over the lazy dog and then some more text to fill",
+                "rows": 8
+            },
+            "expected": "tbj der hrutonefeomhg   wpe sqns au  lifocok"
+        },
+        {
+            "args": {
+                "encodedText": "empty string test",
+                "rows": 1
+            },
+            "expected": "empty string test"
+        },
+        {
+            "args": {
+                "encodedText": "u p   d o w n   w i d e   t h i n g s",
+                "rows": 4
+            },
+            "expected": "uwdi    pnen       g    dwt  o"
+        },
+        {
+            "args": {
+                "encodedText": "this is a test of the emergency broadcast system",
+                "rows": 5
+            },
+            "expected": "tteythe   isebsstmry  eosiorasfg  a"
+        },
+        {
+            "args": {
+                "encodedText": "shorttext",
+                "rows": 1
+            },
+            "expected": "shorttext"
+        },
+        {
+            "args": {
+                "encodedText": "a quick brown fox jumps over the lazy dog",
+                "rows": 5
+            },
+            "expected": "arjry ou  qwmtdunphoi secf ko"
+        },
+        {
+            "args": {
+                "encodedText": "a   bcd efgh  ijklm nopqrst uvwxy z",
+                "rows": 5
+            },
+            "expected": "aekry fls  gmtz h  b nc d"
+        },
+        {
+            "args": {
+                "encodedText": "one two three four five six seven eight nine ten",
+                "rows": 4
+            },
+            "expected": "o x nf neosi uentrvew e ofnt i etvenheir e"
+        },
+        {
+            "args": {
+                "encodedText": "a    b    c    d    e",
+                "rows": 5
+            },
+            "expected": "abcd"
+        },
+        {
+            "args": {
+                "encodedText": "thisisaverylongtextthatneedstobeencodedproperly",
+                "rows": 6
+            },
+            "expected": "teeeerhrxenoiytdcsltsiohsna"
+        },
+        {
+            "args": {
+                "encodedText": "the quick brown fox jumps over a lazy dog",
+                "rows": 3
+            },
+            "expected": "tneh ref  oaqx u lijacuzkmy p bsdr o"
+        },
+        {
+            "args": {
+                "encodedText": "one two    three four    five six seven",
+                "rows": 3
+            },
+            "expected": "oeene e s fitoxwu ors  e  v  e  ntfh"
+        },
+        {
+            "args": {
+                "encodedText": "pythonprogramminglanguageisawesome",
+                "rows": 5
+            },
+            "expected": "priuwyonaetggghrloan"
+        },
+        {
+            "args": {
+                "encodedText": "sl  yz  vx  qu  tm",
+                "rows": 4
+            },
+            "expected": "sz  l"
+        },
+        {
+            "args": {
+                "encodedText": "this   is   a   long   encoded   text   for   testing",
+                "rows": 7
+            },
+            "expected": "tsln fsh octoi noes gd a"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefghij    klmnopqrst    uvwxyz",
+                "rows": 3
+            },
+            "expected": "a  b  ck dl emufnvgowhpxiqyjr"
+        },
+        {
+            "args": {
+                "encodedText": "a quick brown fox jumps over the lazy dog",
+                "rows": 4
+            },
+            "expected": "awsl n aq ozufvyioe cxrdk  o jtbur"
+        },
+        {
+            "args": {
+                "encodedText": "a            b           c          d         e",
+                "rows": 5
+            },
+            "expected": "a               b          c"
+        },
+        {
+            "args": {
+                "encodedText": "a   bcd   efgh   ijklm   nopqrst   uvwxyz",
+                "rows": 6
+            },
+            "expected": "a  mqu    r     eibfc"
+        },
+        {
+            "args": {
+                "encodedText": "a   a   a   a   a   a   a   a   a   a",
+                "rows": 10
+            },
+            "expected": "aaa"
+        },
+        {
+            "args": {
+                "encodedText": "exampleofasingleword",
+                "rows": 1
+            },
+            "expected": "exampleofasingleword"
+        },
+        {
+            "args": {
+                "encodedText": "the quick brown fox jumps over lazy dogs",
+                "rows": 5
+            },
+            "expected": "t xvdhb eoerjrg ou sqwmlunpi c"
+        },
+        {
+            "args": {
+                "encodedText": "a very long text that is used to test the edge cases of the problem statement",
+                "rows": 10
+            },
+            "expected": "ao   ea ntut vghsee aerttye"
+        },
+        {
+            "args": {
+                "encodedText": "a  b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "rows": 6
+            },
+            "expected": "ae n w  j s  f o xb k t g pc l hd"
+        },
+        {
+            "args": {
+                "encodedText": "onewordonly",
+                "rows": 1
+            },
+            "expected": "onewordonly"
+        },
+        {
+            "args": {
+                "encodedText": "python is an interpreted high level general purpose programming language",
+                "rows": 6
+            },
+            "expected": "piiepayngrrntthaoghe lguorl ranpepag rvumeieermstlp e adn"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefghijklmnopqrstuvwxyz",
+                "rows": 10
+            },
+            "expected": "adb"
+        },
+        {
+            "args": {
+                "encodedText": "abcdefghijklmnopqrstuvwxyz",
+                "rows": 26
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "encodedText": "slantedtranspositioncipherexample",
+                "rows": 10
+            },
+            "expected": "strlea"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().decodeCiphertext",
+        "typescript": "Solution().decodeCiphertext"
+    }
+}

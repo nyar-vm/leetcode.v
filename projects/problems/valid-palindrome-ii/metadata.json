@@ -1,0 +1,660 @@
+{
+    "id": "valid-palindrome-ii",
+    "questionId": 680,
+    "difficulty": "Easy",
+    "tags": ["Greedy", "Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "raceecar"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "deeee"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "ab"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "racecarx"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abca"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefgihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefdba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "racecar"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefg"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbbbaaabbb"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdefghijklnkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghikjlmnopqrstuvutsrqponmlkjihgfedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "noonappa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "zxcvbnmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdexyzzyxedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddcccccccddddbbbbbbaaaaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbcccbbbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "flgfgldad"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "tattarrattat"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeeeedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbacdfgfddcabbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeeeffgggghhhiiiijjjjkkoollmmnnnnooppqqrrsstttuuuvvvvwwxxyyyzzzzyyyyxwvvvvuuutttsrrrqpnoonmlkkkiiihhhhggggfffeeedddccbbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbccddeeeffgggihhii"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "qwertyuiopoiuytrewq"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "zxcvbnmasdfghjklqwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiaahhgffeeddccbbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdefghihgfeddcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdabc"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbcddcbbbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbbbbaaabbbb"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbaabbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabcaaba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhijjihhgffeeddccbbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupucmlmgqfvnbgtapekouga"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdexyzxedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddee"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abbaabbaabbaabba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "racecarwitharacecarinitt"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "racecarxracecar"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbacdfgdcabbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abbaaaabba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeedccbbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeeeffgggghhhhiiiijjjjkkkkllmmnnnnooppqqrrsstttuuuvvvvvwwxxyyyzzzzzzzyyyyxwvvvvuuutttsrrrqpnoonmlkkkiiihhhhggggfffeeedddccbbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcaabcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "raceacar"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "noon"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdeffedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "level"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbbbbbbaaabbbbbb"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aaaaabbaaaaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghhgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeeeffggghhiiii"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "ababababababa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "zxcvbnmasdfghjklqwertyuiopplkjhgfdsazxcvbnm"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdefghijkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeedcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefffggg"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "levelwithoneleveldropped"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "noonwithanothernoon"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abzcdedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "acbbbca"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "lcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuc"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcbad"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghijkmlkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdexyzzyxdecba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abccba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdxzyxcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "madamimadam"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbabba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghihgfedcbai"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "amanaplanacanalpanama"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeedccbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aebcbda"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "deified"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "repaper"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "eedede"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdeffgedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "acbbcdcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbaaabbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghijkllkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abacdfgdcaba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrrponmlkjihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abacdfgdfcba"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbccdddccbaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcddcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aaaaabaaa"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "rotor"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyz"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "abcdefghihgfedcba"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupucmlgqfvnbgtapekouga"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "detartratedwithanotherdetartrated"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffggahhigghhffeeddccbbaa"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "zzazz"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "rotorwithatinyrotor"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "mississippi"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "s": "e race car e"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "abcdefghihgfedcbaj"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "ebcbbececabbacecbbcbe"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "s": "acbbba"
+            },
+            "expected": true
+        }
+    ],
+    "invoke": {
+        "python": "Solution().validPalindrome",
+        "typescript": "Solution().validPalindrome"
+    }
+}

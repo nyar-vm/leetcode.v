@@ -1,0 +1,663 @@
+{
+    "id": "find-the-lexicographically-largest-string-from-the-box-i",
+    "questionId": 3403,
+    "difficulty": "Medium",
+    "tags": ["Two Pointers", "String", "Enumeration"],
+    "tests": [
+        {
+            "args": {
+                "word": "aabbcc",
+                "numFriends": 2
+            },
+            "expected": "cc"
+        },
+        {
+            "args": {
+                "word": "zxy",
+                "numFriends": 1
+            },
+            "expected": "zxy"
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba",
+                "numFriends": 5
+            },
+            "expected": "zyxwvutsrqponmlkjihgfe"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeff",
+                "numFriends": 6
+            },
+            "expected": "ff"
+        },
+        {
+            "args": {
+                "word": "gggg",
+                "numFriends": 4
+            },
+            "expected": "g"
+        },
+        {
+            "args": {
+                "word": "aabbcc",
+                "numFriends": 6
+            },
+            "expected": "c"
+        },
+        {
+            "args": {
+                "word": "abcdefg",
+                "numFriends": 7
+            },
+            "expected": "g"
+        },
+        {
+            "args": {
+                "word": "abcdef",
+                "numFriends": 3
+            },
+            "expected": "f"
+        },
+        {
+            "args": {
+                "word": "banana",
+                "numFriends": 3
+            },
+            "expected": "nana"
+        },
+        {
+            "args": {
+                "word": "zzzzzz",
+                "numFriends": 2
+            },
+            "expected": "zzzzz"
+        },
+        {
+            "args": {
+                "word": "racecar",
+                "numFriends": 5
+            },
+            "expected": "rac"
+        },
+        {
+            "args": {
+                "word": "abcde",
+                "numFriends": 3
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "word": "zyxwvut",
+                "numFriends": 3
+            },
+            "expected": "zyxwv"
+        },
+        {
+            "args": {
+                "word": "zxy",
+                "numFriends": 3
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "word": "abcde",
+                "numFriends": 2
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "word": "dbca",
+                "numFriends": 2
+            },
+            "expected": "dbc"
+        },
+        {
+            "args": {
+                "word": "abcdef",
+                "numFriends": 2
+            },
+            "expected": "f"
+        },
+        {
+            "args": {
+                "word": "aabbcc",
+                "numFriends": 3
+            },
+            "expected": "cc"
+        },
+        {
+            "args": {
+                "word": "xyzzxyzzyx",
+                "numFriends": 5
+            },
+            "expected": "zzyx"
+        },
+        {
+            "args": {
+                "word": "aaaaabbbbccccdddd",
+                "numFriends": 10
+            },
+            "expected": "dddd"
+        },
+        {
+            "args": {
+                "word": "level",
+                "numFriends": 3
+            },
+            "expected": "vel"
+        },
+        {
+            "args": {
+                "word": "aaaaabbbbccccddddeeeee",
+                "numFriends": 5
+            },
+            "expected": "eeeee"
+        },
+        {
+            "args": {
+                "word": "leetcodeisfun",
+                "numFriends": 5
+            },
+            "expected": "un"
+        },
+        {
+            "args": {
+                "word": "abcdabcdabcdabcd",
+                "numFriends": 4
+            },
+            "expected": "dabcdabcdabcd"
+        },
+        {
+            "args": {
+                "word": "abcdefghij",
+                "numFriends": 5
+            },
+            "expected": "j"
+        },
+        {
+            "args": {
+                "word": "amazingrace",
+                "numFriends": 3
+            },
+            "expected": "zingrace"
+        },
+        {
+            "args": {
+                "word": "racecar",
+                "numFriends": 2
+            },
+            "expected": "raceca"
+        },
+        {
+            "args": {
+                "word": "zzzzyyyyxxxwwwwvvvuuutttsssrrrqqqppoonn",
+                "numFriends": 10
+            },
+            "expected": "zzzzyyyyxxxwwwwvvvuuutttsssrrr"
+        },
+        {
+            "args": {
+                "word": "abcdedcba",
+                "numFriends": 5
+            },
+            "expected": "edcba"
+        },
+        {
+            "args": {
+                "word": "mamamamamamamama",
+                "numFriends": 12
+            },
+            "expected": "mamam"
+        },
+        {
+            "args": {
+                "word": "bananabananabanana",
+                "numFriends": 6
+            },
+            "expected": "nanabananaban"
+        },
+        {
+            "args": {
+                "word": "hello",
+                "numFriends": 1
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "word": "abcdefghij",
+                "numFriends": 10
+            },
+            "expected": "j"
+        },
+        {
+            "args": {
+                "word": "abcabcabcabcabcabcabcabcabcabc",
+                "numFriends": 9
+            },
+            "expected": "cabcabcabcabcabcabcabc"
+        },
+        {
+            "args": {
+                "word": "zzzzzzyxwvutsrqponmlkjihgfedcba",
+                "numFriends": 3
+            },
+            "expected": "zzzzzzyxwvutsrqponmlkjihgfedc"
+        },
+        {
+            "args": {
+                "word": "abracadabra",
+                "numFriends": 5
+            },
+            "expected": "racadab"
+        },
+        {
+            "args": {
+                "word": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "numFriends": 10
+            },
+            "expected": "volcanoconiosis"
+        },
+        {
+            "args": {
+                "word": "mississippi",
+                "numFriends": 4
+            },
+            "expected": "ssissipp"
+        },
+        {
+            "args": {
+                "word": "abcdabcdabcdabcdabcdabcdabcdabcd",
+                "numFriends": 4
+            },
+            "expected": "dabcdabcdabcdabcdabcdabcdabcd"
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz",
+                "numFriends": 5
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba",
+                "numFriends": 10
+            },
+            "expected": "zyxwvutsrqponmlkj"
+        },
+        {
+            "args": {
+                "word": "abcdabcdaaaa",
+                "numFriends": 5
+            },
+            "expected": "dabcdaaa"
+        },
+        {
+            "args": {
+                "word": "deified",
+                "numFriends": 2
+            },
+            "expected": "ified"
+        },
+        {
+            "args": {
+                "word": "madam",
+                "numFriends": 3
+            },
+            "expected": "mad"
+        },
+        {
+            "args": {
+                "word": "abcdabcdabcdabcd",
+                "numFriends": 5
+            },
+            "expected": "dabcdabcdabc"
+        },
+        {
+            "args": {
+                "word": "oneonetwoonethree",
+                "numFriends": 4
+            },
+            "expected": "woonethree"
+        },
+        {
+            "args": {
+                "word": "aaaabbbbcccc",
+                "numFriends": 6
+            },
+            "expected": "cccc"
+        },
+        {
+            "args": {
+                "word": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "numFriends": 3
+            },
+            "expected": "zzzzzzzzzzzzzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba",
+                "numFriends": 3
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedc"
+        },
+        {
+            "args": {
+                "word": "zzzzzzzzzzzzzzzzzzzz",
+                "numFriends": 10
+            },
+            "expected": "zzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "word": "hellohellohello",
+                "numFriends": 3
+            },
+            "expected": "ohellohello"
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz",
+                "numFriends": 26
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "word": "leetcode",
+                "numFriends": 3
+            },
+            "expected": "tcode"
+        },
+        {
+            "args": {
+                "word": "abacabadabacaba",
+                "numFriends": 7
+            },
+            "expected": "dabacaba"
+        },
+        {
+            "args": {
+                "word": "aaaaaaaaaaa",
+                "numFriends": 3
+            },
+            "expected": "aaaaaaaaa"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "numFriends": 10
+            },
+            "expected": "zz"
+        },
+        {
+            "args": {
+                "word": "xyzxyzxyz",
+                "numFriends": 3
+            },
+            "expected": "zxyzxyz"
+        },
+        {
+            "args": {
+                "word": "zzzzyyyy",
+                "numFriends": 4
+            },
+            "expected": "zzzzy"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghh",
+                "numFriends": 8
+            },
+            "expected": "hh"
+        },
+        {
+            "args": {
+                "word": "elephant",
+                "numFriends": 2
+            },
+            "expected": "t"
+        },
+        {
+            "args": {
+                "word": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "numFriends": 100
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "word": "xyzxyzxyzxyz",
+                "numFriends": 4
+            },
+            "expected": "zxyzxyzxy"
+        },
+        {
+            "args": {
+                "word": "zyxzyxzyxzyxzyxzyxzyx",
+                "numFriends": 5
+            },
+            "expected": "zyxzyxzyxzyxzyxzy"
+        },
+        {
+            "args": {
+                "word": "zzzzzzzz",
+                "numFriends": 8
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "word": "lemonadelemonade",
+                "numFriends": 6
+            },
+            "expected": "onadelemona"
+        },
+        {
+            "args": {
+                "word": "aaaabbbbccccddddeeeeffff",
+                "numFriends": 10
+            },
+            "expected": "ffff"
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "numFriends": 26
+            },
+            "expected": "zz"
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz",
+                "numFriends": 1
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "word": "racecar",
+                "numFriends": 3
+            },
+            "expected": "racec"
+        },
+        {
+            "args": {
+                "word": "abcabcabcabc",
+                "numFriends": 8
+            },
+            "expected": "cabca"
+        },
+        {
+            "args": {
+                "word": "mississippi",
+                "numFriends": 3
+            },
+            "expected": "ssissippi"
+        },
+        {
+            "args": {
+                "word": "xyzzzxyzzzxyzzz",
+                "numFriends": 3
+            },
+            "expected": "zzzxyzzzxyzzz"
+        },
+        {
+            "args": {
+                "word": "qwertyuiopasdfghjklzxcvbnm",
+                "numFriends": 5
+            },
+            "expected": "zxcvbnm"
+        },
+        {
+            "args": {
+                "word": "refer",
+                "numFriends": 5
+            },
+            "expected": "r"
+        },
+        {
+            "args": {
+                "word": "banana",
+                "numFriends": 2
+            },
+            "expected": "nana"
+        },
+        {
+            "args": {
+                "word": "hellohellomyfriend",
+                "numFriends": 7
+            },
+            "expected": "yfriend"
+        },
+        {
+            "args": {
+                "word": "abcabcabcabcabcabc",
+                "numFriends": 6
+            },
+            "expected": "cabcabcabcabc"
+        },
+        {
+            "args": {
+                "word": "pqrsrstuv",
+                "numFriends": 4
+            },
+            "expected": "v"
+        },
+        {
+            "args": {
+                "word": "zzzzzzzzzzzzzzzzzzzz",
+                "numFriends": 20
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "word": "zzzzzzyyyyyy",
+                "numFriends": 3
+            },
+            "expected": "zzzzzzyyyy"
+        },
+        {
+            "args": {
+                "word": "thisisalongword",
+                "numFriends": 4
+            },
+            "expected": "word"
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz",
+                "numFriends": 10
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "word": "leetcodecontest",
+                "numFriends": 4
+            },
+            "expected": "test"
+        },
+        {
+            "args": {
+                "word": "mnopqrstu",
+                "numFriends": 3
+            },
+            "expected": "u"
+        },
+        {
+            "args": {
+                "word": "abracadabra",
+                "numFriends": 3
+            },
+            "expected": "racadabra"
+        },
+        {
+            "args": {
+                "word": "rotor",
+                "numFriends": 1
+            },
+            "expected": "rotor"
+        },
+        {
+            "args": {
+                "word": "hello",
+                "numFriends": 5
+            },
+            "expected": "o"
+        },
+        {
+            "args": {
+                "word": "hellothere",
+                "numFriends": 2
+            },
+            "expected": "there"
+        },
+        {
+            "args": {
+                "word": "zyxzyxzyx",
+                "numFriends": 4
+            },
+            "expected": "zyxzyx"
+        },
+        {
+            "args": {
+                "word": "aaaabbbbccccdddd",
+                "numFriends": 4
+            },
+            "expected": "dddd"
+        },
+        {
+            "args": {
+                "word": "aaaabbbbccccdddd",
+                "numFriends": 8
+            },
+            "expected": "dddd"
+        },
+        {
+            "args": {
+                "word": "xyzzyx",
+                "numFriends": 3
+            },
+            "expected": "zzyx"
+        },
+        {
+            "args": {
+                "word": "abacabadabacaba",
+                "numFriends": 5
+            },
+            "expected": "dabacaba"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().answerString",
+        "typescript": "Solution().answerString"
+    }
+}

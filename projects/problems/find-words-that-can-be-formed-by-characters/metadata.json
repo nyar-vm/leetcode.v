@@ -1,0 +1,1090 @@
+{
+    "id": "find-words-that-can-be-formed-by-characters",
+    "questionId": 1160,
+    "difficulty": "Easy",
+    "tags": ["Array", "Hash Table", "String", "Counting"],
+    "tests": [
+        {
+            "args": {
+                "words": ["abcd", "ab", "bc", "cd"],
+                "chars": "abcd"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["cat", "bt", "hat", "tree"],
+                "chars": "atach"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["zxcvbnm", "asdfghjkl", "qwertyuiop"],
+                "chars": "qwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "chars": "abcdefghi"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "wxy"],
+                "chars": "xyzzyxw"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry"],
+                "chars": "abc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abc", "abc", "abc"],
+                "chars": "aabbcc"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["test", "case", "word"],
+                "chars": "tcws"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "chars": "abcde"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "chars": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcd", "dcba", "abcd"],
+                "chars": "abcd"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "leetcode"],
+                "chars": "welldonehoneyr"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["zzz", "yyy", "xxx"],
+                "chars": "zyxzyx"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "chars": "onetwothree"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "words": ["python", "java", "c++"],
+                "chars": "pythjavacp"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["zzz", "yyy", "xxx"],
+                "chars": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "chars": "abc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["apple", "apple", "apple"],
+                "chars": "ppale"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa"],
+                "chars": "aaaaa"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "abc", "abc"],
+                "chars": "aabbcc"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["aaa", "bbb", "ccc"],
+                "chars": "aabbcc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcd", "efgh", "ijkl"],
+                "chars": "abcdefgh"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["aaa", "bbb", "ccc"],
+                "chars": "abc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry"],
+                "chars": "abcde"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["test", "code", "contest"],
+                "chars": "testcode"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["challenge", "python", "code", "fun"],
+                "chars": "nclhpgfouitay"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "words": ["programming", "language", "python", "java"],
+                "chars": "npgmajoasrivl"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["", "a", "aa", "aaa", "aaaa"],
+                "chars": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["banana", "ananas", "panama", "manana"],
+                "chars": "anamnb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": [
+                    "aabb",
+                    "bbcc",
+                    "ccdd",
+                    "ddee",
+                    "eeff",
+                    "ffgg",
+                    "gghh",
+                    "hhiijj",
+                    "kkll",
+                    "mmnn",
+                    "oorr",
+                    "ppqq",
+                    "sstt",
+                    "uuvv",
+                    "wwxx",
+                    "yyzz"
+                ],
+                "chars": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "words": ["complex", "words", "here"],
+                "chars": "owcpxlehre"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba", "abacax"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "chars": "oentwfhivxsg"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": ["xxyyzz", "yyzzxx", "zzxxyy"],
+                "chars": "xyzxyz"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "aabbccddeeffgg",
+                    "aabbccddeeffgghh",
+                    "aabbccddeeffgghhiijj"
+                ],
+                "chars": "aabbccddeeffgghhiijj"
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "words": ["zzzz", "zzz", "zz", "z"],
+                "chars": "zzzzzzzzzz"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["xylophone", "guitar", "drum", "bassoon", "violin"],
+                "chars": "guitardrumxyz"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["leetcode", "challenge", "contest", "question"],
+                "chars": "oelhctganegqisun"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["abacax", "banana", "grape"],
+                "chars": "aaabbnagpr"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": [
+                    "ab",
+                    "ba",
+                    "abc",
+                    "bca",
+                    "acb",
+                    "cab",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cab",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cab",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cab",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cab",
+                    "cba",
+                    "bac",
+                    "bca",
+                    "acb",
+                    "cab",
+                    "cba"
+                ],
+                "chars": "abc"
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "words": ["alibaba", "babala", "baliba", "lalala"],
+                "chars": "balibalab"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbccdd", "aaccdd"],
+                "chars": "aabbbccdd"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "jihgfedcba", "hgfedcb", "fedcbghij"],
+                "chars": "abcdefghij"
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeffgg", "bbccddeeffgghh", "ccddeeffgghhiijj"],
+                "chars": "abcdefghij"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["algorithm", "data", "structure", "binary", "search"],
+                "chars": "lgarithmtdastrucetubynrseahc"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "abcdefghi", "abcdefghij", "abcdefghijk"],
+                "chars": "abcdefghij"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "words": ["abcdabcd", "dcbaabcd", "abcd", "abcd"],
+                "chars": "abcdabcd"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["programming", "challenge", "difficulty", "algorithm"],
+                "chars": "progaminld"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "aabbc", "aabb", "aa", "a"],
+                "chars": "aabbbcccc"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "words": ["multiple", "words", "with", "same", "letters"],
+                "chars": "mlpuwihswtael"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcde", "abcdef"],
+                "chars": "abcdefg"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming"],
+                "chars": "helloworldpython"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde", "abcdef", "abcdefg"],
+                "chars": "abcdefg"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz", "zz", "yy", "xx"],
+                "chars": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "words": ["optimization", "algorithm", "datastructure"],
+                "chars": "odginatrlhms"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["short", "longerword", "evenlonger", "longestword", "tiny"],
+                "chars": "longestword"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "words": ["algorithm", "data", "structure"],
+                "chars": "algorithmdstuct"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "abcabc", "abacbc"],
+                "chars": "aabbcc"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeff", "gghhiijjkk", "llmmnnoopp", "qqrrssttuu", "vvwwxxyyzz"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["mississippi", "tennessee", "delaware", "georgia", "alabama"],
+                "chars": "mississippitennessegeorgiaalamaba"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "words": ["unique", "words", "here"],
+                "chars": "unewordhsere"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": [
+                    "x",
+                    "xx",
+                    "xxx",
+                    "xxxx",
+                    "xxxxx",
+                    "xxxxxx",
+                    "xxxxxxx",
+                    "xxxxxxxx",
+                    "xxxxxxxxx",
+                    "xxxxxxxxxx"
+                ],
+                "chars": "x"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcd", "dcba", "dcba", "abcd", "abcd"],
+                "chars": "abcdabcdabcd"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["aaaaaabbbbcccc", "bbbbbcccccc", "cccccccc", "ddddd"],
+                "chars": "aabbbccccdddd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["repeated", "repeated", "repeated", "repeated"],
+                "chars": "repeead"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["programming", "code", "challenge"],
+                "chars": "mprogainlce"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abc", "acb", "bac", "bca", "cab", "cba"],
+                "chars": "abc"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": ["repeat", "repear", "preear", "pareer"],
+                "chars": "reapeart"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["unique", "unigue", "uneque"],
+                "chars": "unequiq"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["programming", "is", "fun"],
+                "chars": "gimnoprrstu"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi", "mississippi"],
+                "chars": "misp"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "bcdefga", "cdefgab"],
+                "chars": "abcdefg"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "jihgfedcba", "abcde", "edcba"],
+                "chars": "abcdefghijabcdefghij"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "words": ["abcd", "dcba", "abdc", "dabc"],
+                "chars": "abcd"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["unique", "characters", "only", "here"],
+                "chars": "uneicharstolonhyer"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["repeated", "letters", "example"],
+                "chars": "repateledmx"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["programming", "python", "java", "coding"],
+                "chars": "gnimmargorpthonavajgnidoc"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missouri", "mismatch", "miss"],
+                "chars": "mississippi"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["abcdefghijk", "klmno", "pqrstuvw", "xyz", "mnopqr", "stuv", "wxyz"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "words": ["abacax", "banana", "grape"],
+                "chars": "aabacax"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["programming", "python", "java"],
+                "chars": "pgoramythnvaj"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["unique", "words", "only", "once"],
+                "chars": "nuqowinco"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["programming", "python", "java", "algorithm"],
+                "chars": "pgmnoaahjy"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeff", "zzzzzzzzzz", "yyyyyyyyyy"],
+                "chars": "abcdefzy"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaa", "bbbbbbbb", "cccccccc", "dddddddd"],
+                "chars": "abcd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["longerword", "evenlongerword", "superduperlongword"],
+                "chars": "lorenwdsupem"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["repeated", "characters", "here", "are", "some"],
+                "chars": "reepeaddttcharseom"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "chars": "enifxsv"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["testtest", "testtest", "testtest"],
+                "chars": "ttttseeeesss"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["abcd", "dcba", "efgh", "hgfe"],
+                "chars": "abcdefgh"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["qwerty", "asdfgh", "zxcvbn"],
+                "chars": "qwertyasdfghzxcvbn"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": ["abacax", "bacax", "cax", "ax", "x"],
+                "chars": "abacax"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": ["mississippi", "babbling", "bookkeeper"],
+                "chars": "bmkpeorins"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["repeated", "characters", "example", "strings", "test"],
+                "chars": "eeptxsa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["this", "is", "a", "test", "case"],
+                "chars": "tastciehins"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["banana", "bandana", "bandanna"],
+                "chars": "bandanabandana"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": ["encyclopedia", "dictionary", "thesaurus"],
+                "chars": "ctheosuraind"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["longword", "another", "wordset"],
+                "chars": "longanotwrheds"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "words": ["repeated", "characters", "in", "strings"],
+                "chars": "repachint"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["unique", "words", "only", "once"],
+                "chars": "euqinowrsc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["encyclopedia", "dictionary", "encyclopedia", "encyclopediab"],
+                "chars": "encyclopedia"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["banana", "apple", "orange", "grape", "peach"],
+                "chars": "aapplleeorrnggbnpppe"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "chars": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "barack", "rac", "cabra"],
+                "chars": "abracadabra"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "ijklmnop", "qrstuvwx", "yz"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["algorithm", "datastructure", "programming"],
+                "chars": "datastructureprogramming"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "chars": "onethreefourfive"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["mississippi", "baby", "racecar", "level", "rotor"],
+                "chars": "ississippiabaycerracelevrotor"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["repetition", "representation", "reform"],
+                "chars": "repitnfom"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["longwordhere", "anotherlongword", "shortword"],
+                "chars": "lnwordhertahoes"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["abcd", "abce", "abcf"],
+                "chars": "abcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcd", "abac", "aabc", "abcc", "accc"],
+                "chars": "abcc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["mississippi", "elephant", "umbrella", "java", "python"],
+                "chars": "ieelmpstuvy"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "abcabc", "ccabba", "baccab"],
+                "chars": "aabbcc"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["algorithm", "data", "structure"],
+                "chars": "gahlimstrucotad"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnopqr",
+                    "stuvwx"
+                ],
+                "chars": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "words": ["abcdabcd", "abcdabcdabcd", "abcdabcdabcdabcd", "abcd"],
+                "chars": "abcdabcdabcdabcd"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "words": [
+                    "supercalifragilisticexpialidocious",
+                    "antidisestablishmentarianism",
+                    "floccinaucinihilipilification"
+                ],
+                "chars": "supercalifragilisticexpialidociousantidisestablishmentarianismfloccinaucinihilipilification"
+            },
+            "expected": 91
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "mnopqrstuvwxyzabcde"
+                ],
+                "chars": "abcdefghijklmnopqrstuvwxyzzzzzzzzzz"
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "words": ["elephant", "giraffe", "hippopotamus"],
+                "chars": "eplhgaifeotmups"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["repeat", "repeat", "repeat", "repeat"],
+                "chars": "eprta"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "leetcode", "challenge"],
+                "chars": "helloworldleetcodechallenge"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "words": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yz"],
+                "chars": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["stackoverflow", "overflow", "underflow", "flow"],
+                "chars": "flowover"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": [
+                    "supercalifragilisticexpialidocious",
+                    "supercalifragilistic",
+                    "califragilistic",
+                    "expialidocious"
+                ],
+                "chars": "supercalifragilisticexpialidocious"
+            },
+            "expected": 83
+        },
+        {
+            "args": {
+                "words": ["umbrella", "balloon", "orange"],
+                "chars": "mnbaylobnragoe"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["xylophone", "triangle", "piano", "drum", "guitar"],
+                "chars": "tpirangedumxylophone"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "hijklmn", "opqrstu", "vwxyz"],
+                "chars": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["character", "char", "act", "react", "actchar"],
+                "chars": "character"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "words": ["programming", "language", "python", "java", "javascript", "c", "cpp"],
+                "chars": "pgoramlngyjtahivsc"
+            },
+            "expected": 21
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countCharacters",
+        "typescript": "Solution().countCharacters"
+    }
+}

@@ -1,0 +1,664 @@
+{
+    "id": "stamping-the-sequence",
+    "questionId": 936,
+    "difficulty": "Hard",
+    "tags": ["Stack", "Greedy", "Queue", "String"],
+    "tests": [
+        {
+            "args": {
+                "stamp": "world",
+                "target": "worldworldworld"
+            },
+            "expected": [9, 8, 7, 6, 4, 3, 2, 1, 10, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abcababcbcababc"
+            },
+            "expected": [11, 9, 8, 6, 4, 2, 1, 10, 7, 3, 12, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "abcdeabcde"
+            },
+            "expected": [4, 3, 2, 1, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abc????"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "a",
+                "target": "aaaaaaaa"
+            },
+            "expected": [7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "abcdeabcdeabcde"
+            },
+            "expected": [9, 8, 7, 6, 4, 3, 2, 1, 10, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "????abc???"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abcabc????????"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "?????"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "ab?bc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "hello",
+                "target": "hellohellohello"
+            },
+            "expected": [9, 8, 7, 6, 4, 3, 2, 1, 10, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abc????abc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "ab",
+                "target": "abababab"
+            },
+            "expected": [5, 3, 1, 6, 4, 2, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcdef",
+                "target": "abcdefabcdef"
+            },
+            "expected": [5, 4, 3, 2, 1, 6, 0]
+        },
+        {
+            "args": {
+                "stamp": "a",
+                "target": "aaaaaaaaa"
+            },
+            "expected": [8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abcabcabc"
+            },
+            "expected": [5, 4, 2, 1, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abc????????abc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abcabc"
+            },
+            "expected": [2, 1, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "a",
+                "target": "aaaaaaaaaa"
+            },
+            "expected": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "test",
+                "target": "testtesttest"
+            },
+            "expected": [7, 6, 5, 3, 2, 1, 8, 4, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcdabcd"
+            },
+            "expected": [3, 2, 1, 4, 0]
+        },
+        {
+            "args": {
+                "stamp": "abca",
+                "target": "aabcaca"
+            },
+            "expected": [2, 3, 0, 1]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "????abc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "??abc??"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "ababc"
+            },
+            "expected": [1, 0, 2]
+        },
+        {
+            "args": {
+                "stamp": "xyz",
+                "target": "xyzxyzxyz"
+            },
+            "expected": [5, 4, 2, 1, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "????????abcabc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abcabcabcabcabc"
+            },
+            "expected": [11, 10, 8, 7, 5, 4, 2, 1, 12, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "abcde"
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "ababcbababcbababc"
+            },
+            "expected": [11, 9, 5, 3, 13, 10, 7, 4, 1, 12, 6, 0, 14, 8, 2]
+        },
+        {
+            "args": {
+                "stamp": "mnopqr",
+                "target": "mnopqrmnopqrmnopqrmnopqrmnopqr"
+            },
+            "expected": [
+                23, 22, 21, 20, 19, 17, 16, 15, 14, 13, 11, 10, 9, 8, 7, 5, 4, 3, 2, 1, 24, 18, 12,
+                6, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "efgh",
+                "target": "efghefghefghefghefghefghefgh"
+            },
+            "expected": [
+                23, 22, 21, 19, 18, 17, 15, 14, 13, 11, 10, 9, 7, 6, 5, 3, 2, 1, 24, 20, 16, 12, 8,
+                4, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "aabbcc",
+                "target": "aabbccaaabbccaaabbcc"
+            },
+            "expected": [11, 10, 9, 8, 4, 3, 2, 1, 13, 12, 6, 5, 14, 7, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "ddddddddddddddddddddddddddddabcd"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "xyz",
+                "target": "xyxyxyxyxyxyxyxyxyxy"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "zzz",
+                "target": "zzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": [17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcdef",
+                "target": "abcdefabcdefabcdefabcdefabcdefabcdef"
+            },
+            "expected": [
+                29, 28, 27, 26, 25, 23, 22, 21, 20, 19, 17, 16, 15, 14, 13, 11, 10, 9, 8, 7, 5, 4,
+                3, 2, 1, 30, 24, 18, 12, 6, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "xyz",
+                "target": "xyxyxyxyxyxyxyxyxyxyxyx"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcabc",
+                "target": "abcabcabcabcabcabcabcd"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "aabbcc",
+                "target": "aabbccaaabbccaaabbccaaabbcc"
+            },
+            "expected": [
+                18, 17, 16, 15, 11, 10, 9, 8, 4, 3, 2, 1, 20, 19, 13, 12, 6, 5, 21, 14, 7, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "xyz",
+                "target": "xyzxyzxyzxyzxyz"
+            },
+            "expected": [11, 10, 8, 7, 5, 4, 2, 1, 12, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcdabcdeabcdabcd"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "aaaa",
+                "target": "aaaaaaaaaaaaaaaa"
+            },
+            "expected": [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "abcdeabcdeabcdeabcdef"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "xyzabcxyzabcxyz"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcdabcdabcdabcd"
+            },
+            "expected": [11, 10, 9, 7, 6, 5, 3, 2, 1, 12, 8, 4, 0]
+        },
+        {
+            "args": {
+                "stamp": "xyz",
+                "target": "xyzxyzxyzxyz"
+            },
+            "expected": [8, 7, 5, 4, 2, 1, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "qrstuv",
+                "target": "qrstuvqrstuvqrstuvqrstuvqrstuvqrstuvqrstuv"
+            },
+            "expected": [
+                35, 34, 33, 32, 31, 29, 28, 27, 26, 25, 23, 22, 21, 20, 19, 17, 16, 15, 14, 13, 11,
+                10, 9, 8, 7, 5, 4, 3, 2, 1, 36, 30, 24, 18, 12, 6, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "aaa",
+                "target": "aaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": [17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "a",
+                "target": "aaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": [19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "stamp": "xyzabc",
+                "target": "xyzabcxyzabcxyzabcxyzabc"
+            },
+            "expected": [17, 16, 15, 14, 13, 11, 10, 9, 8, 7, 5, 4, 3, 2, 1, 18, 12, 6, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcabc",
+                "target": "abcabcabcabcabcabcabc"
+            },
+            "expected": [14, 13, 11, 10, 8, 7, 5, 4, 2, 1, 15, 12, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "edcbaedcbaedcba"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcabc",
+                "target": "abcabcabcabcabcabcabcabc"
+            },
+            "expected": [17, 16, 14, 13, 11, 10, 8, 7, 5, 4, 2, 1, 18, 15, 12, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "xyz",
+                "target": "xyzxyzxyzxyzxyzxyz"
+            },
+            "expected": [14, 13, 11, 10, 8, 7, 5, 4, 2, 1, 15, 12, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "qrst",
+                "target": "qrstqrstqrstqrstqrstqrstqrstqrst"
+            },
+            "expected": [
+                27, 26, 25, 23, 22, 21, 19, 18, 17, 15, 14, 13, 11, 10, 9, 7, 6, 5, 3, 2, 1, 28, 24,
+                20, 16, 12, 8, 4, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "mnop",
+                "target": "mnopmnopmnopmnopmnopmnopmnopmnop"
+            },
+            "expected": [
+                27, 26, 25, 23, 22, 21, 19, 18, 17, 15, 14, 13, 11, 10, 9, 7, 6, 5, 3, 2, 1, 28, 24,
+                20, 16, 12, 8, 4, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "abcabcabcabcabcabc"
+            },
+            "expected": [14, 13, 11, 10, 8, 7, 5, 4, 2, 1, 15, 12, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "abac",
+                "target": "abacabacabacabacabac"
+            },
+            "expected": [15, 14, 13, 11, 10, 9, 7, 6, 5, 3, 2, 1, 16, 12, 8, 4, 0]
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "aaaaaaaaaaabcabcaaaaaaaaaa"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "ab",
+                "target": "abababababababababab"
+            },
+            "expected": [17, 15, 13, 11, 9, 7, 5, 3, 1, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0]
+        },
+        {
+            "args": {
+                "stamp": "stamp",
+                "target": "stampstampstamp"
+            },
+            "expected": [9, 8, 7, 6, 4, 3, 2, 1, 10, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcdefg",
+                "target": "abcdefgabcdefgabcdefgabcdefg"
+            },
+            "expected": [
+                20, 19, 18, 17, 16, 15, 13, 12, 11, 10, 9, 8, 6, 5, 4, 3, 2, 1, 21, 14, 7, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "abcdeabcdeabcdeabcdeabc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abab",
+                "target": "abababababababab"
+            },
+            "expected": [11, 9, 7, 5, 3, 1, 12, 10, 8, 6, 4, 2, 0]
+        },
+        {
+            "args": {
+                "stamp": "ab",
+                "target": "abaabaabaab"
+            },
+            "expected": [7, 4, 1, 8, 5, 2, 9, 6, 3, 0]
+        },
+        {
+            "args": {
+                "stamp": "hello",
+                "target": "hellohellohellohello"
+            },
+            "expected": [14, 13, 12, 11, 9, 8, 7, 6, 4, 3, 2, 1, 15, 10, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "mnopqr",
+                "target": "mnopqrnopqrmonpqrnonqrmpnoqrmnoprqmnopqr"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abc",
+                "target": "ababababababababc"
+            },
+            "expected": [1, 3, 0, 5, 2, 7, 4, 9, 6, 11, 8, 13, 10, 12, 14]
+        },
+        {
+            "args": {
+                "stamp": "xyzxyz",
+                "target": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyz"
+            },
+            "expected": [
+                29, 28, 26, 25, 23, 22, 20, 19, 17, 16, 14, 13, 11, 10, 8, 7, 5, 4, 2, 1, 30, 27,
+                24, 21, 18, 15, 12, 9, 6, 3, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "hello",
+                "target": "hellohellohellohelloh"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcabcabcabc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcdeabcd"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "mnopqr",
+                "target": "mnopqrmnopqrmnopqr"
+            },
+            "expected": [11, 10, 9, 8, 7, 5, 4, 3, 2, 1, 12, 6, 0]
+        },
+        {
+            "args": {
+                "stamp": "aabbcc",
+                "target": "aabbccaaabbccaaabbccabc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcdef",
+                "target": "fedcbafedcbafedcba"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcdef",
+                "target": "abcdefabcdefabcdefabcdef"
+            },
+            "expected": [17, 16, 15, 14, 13, 11, 10, 9, 8, 7, 5, 4, 3, 2, 1, 18, 12, 6, 0]
+        },
+        {
+            "args": {
+                "stamp": "stamp",
+                "target": "stampstampstampstam"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcdefg",
+                "target": "abcdefgabcdefgabcdefgabcdefgabcdefgabcdefg"
+            },
+            "expected": [
+                34, 33, 32, 31, 30, 29, 27, 26, 25, 24, 23, 22, 20, 19, 18, 17, 16, 15, 13, 12, 11,
+                10, 9, 8, 6, 5, 4, 3, 2, 1, 35, 28, 21, 14, 7, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcdabcdabcdabcdabcd"
+            },
+            "expected": [15, 14, 13, 11, 10, 9, 7, 6, 5, 3, 2, 1, 16, 12, 8, 4, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "abcdabcabcd"
+            },
+            "expected": [6, 5, 3, 2, 1, 4, 7, 0]
+        },
+        {
+            "args": {
+                "stamp": "xyzyx",
+                "target": "xyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyxyzyx"
+            },
+            "expected": [
+                67, 66, 65, 63, 62, 61, 59, 58, 57, 55, 54, 53, 51, 50, 49, 47, 46, 45, 43, 42, 41,
+                39, 38, 37, 35, 34, 33, 31, 30, 29, 27, 26, 25, 23, 22, 21, 19, 18, 17, 15, 14, 13,
+                11, 10, 9, 7, 6, 5, 3, 2, 1, 68, 64, 60, 56, 52, 48, 44, 40, 36, 32, 28, 24, 20, 16,
+                12, 8, 4, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "ab",
+                "target": "ababababababababababh"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "abcde",
+                "target": "abcdeabcdeabcdeabcde"
+            },
+            "expected": [14, 13, 12, 11, 9, 8, 7, 6, 4, 3, 2, 1, 15, 10, 5, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcd",
+                "target": "dabcdabc"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "stamp": "aabbcc",
+                "target": "aabbccaabbccaaabbccaaabbccaaabbccaaabbcc"
+            },
+            "expected": [
+                31, 30, 29, 28, 24, 23, 22, 21, 17, 16, 15, 14, 10, 9, 8, 7, 33, 32, 26, 25, 19, 18,
+                12, 11, 5, 4, 3, 2, 1, 34, 27, 20, 13, 6, 0
+            ]
+        },
+        {
+            "args": {
+                "stamp": "aabbcc",
+                "target": "aabbccaabbccaabbcc"
+            },
+            "expected": [11, 10, 9, 8, 7, 5, 4, 3, 2, 1, 12, 6, 0]
+        },
+        {
+            "args": {
+                "stamp": "abcdef",
+                "target": "fedcbafedcbafedcbafedcbafedcbafedcbafedcba"
+            },
+            "expected": []
+        }
+    ],
+    "invoke": {
+        "python": "Solution().movesToStamp",
+        "typescript": "Solution().movesToStamp"
+    }
+}

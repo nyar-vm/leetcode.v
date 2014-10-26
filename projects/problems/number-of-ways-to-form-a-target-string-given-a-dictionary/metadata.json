@@ -1,0 +1,1301 @@
+{
+    "id": "number-of-ways-to-form-a-target-string-given-a-dictionary",
+    "questionId": 1639,
+    "difficulty": "Hard",
+    "tags": ["Array", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "target": "abc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abc", "def"],
+                "target": "ad"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["mississippi"],
+                "target": "issi"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["aaa", "aaa", "aaa"],
+                "target": "aaa"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "words": ["abc", "acb", "bac", "bca", "cab", "cba"],
+                "target": "abc"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde"],
+                "target": "abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi"],
+                "target": "miss"
+            },
+            "expected": 567
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi"],
+                "target": "issi"
+            },
+            "expected": 1215
+        },
+        {
+            "args": {
+                "words": ["acca", "bbbb", "caca"],
+                "target": "aba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["leetcode", "leetcode", "leetcode"],
+                "target": "leet"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "words": ["aaa", "aaa", "aaa"],
+                "target": "a"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["zzz", "zzz", "zzz"],
+                "target": "zzz"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde"],
+                "target": "aab"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde"],
+                "target": "abd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaaaa", "aaaaaaaaaa", "aaaaaaaaaa"],
+                "target": "aaaa"
+            },
+            "expected": 17010
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "target": "adg"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abba", "baab"],
+                "target": "bab"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["mississippi"],
+                "target": "sip"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghijk"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcdef", "bcadef", "cdefgh"],
+                "target": "abcd"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "mnop"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["python", "java", "javascript", "csharp", "ruby"],
+                "target": "java"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "ijklmnop", "qrstuvwx", "yzabcdef"],
+                "target": "aceg"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "xyzabc", "mnopqr", "stuvwx"],
+                "target": "abc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["aaaaaa", "bbbbbb", "cccccc", "dddddd"],
+                "target": "abcd"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["aaaa", "bbbb", "cccc", "dddd"],
+                "target": "abcd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["xyzxyz", "yzxyzy", "zxyzxy", "yzyxzy"],
+                "target": "zyx"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "words": ["thisisanexample", "thisisanexample", "thisisanexample"],
+                "target": "example"
+            },
+            "expected": 2187
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi", "mississippi"],
+                "target": "miss"
+            },
+            "expected": 1792
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "zzzzyyxwwvvuuttrrssqqponnmlkkjjiihhggffeeddccbaab",
+                    "abcdefghijklmnopqrstuvwxyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+                ],
+                "target": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["hello", "hello", "hello", "hello", "hello"],
+                "target": "hello"
+            },
+            "expected": 3125
+        },
+        {
+            "args": {
+                "words": ["xylophone", "xylophone", "xylophone"],
+                "target": "xylo"
+            },
+            "expected": 162
+        },
+        {
+            "args": {
+                "words": ["hellohellohello", "worldworldworld", "hellohellohello"],
+                "target": "helloworld"
+            },
+            "expected": 2496
+        },
+        {
+            "args": {
+                "words": ["ababababab", "bababababa", "ababababab"],
+                "target": "ababab"
+            },
+            "expected": 4339
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "aceg"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "words": [
+                    "lloremipsumdolorsitamet",
+                    "lloremipsumdolorsitamet",
+                    "lloremipsumdolorsitamet"
+                ],
+                "target": "lorem"
+            },
+            "expected": 1458
+        },
+        {
+            "args": {
+                "words": ["abacabadabacaba", "bacabadabacabab", "acabadabacababa"],
+                "target": "abacaba"
+            },
+            "expected": 13252
+        },
+        {
+            "args": {
+                "words": ["abcabc", "bcabca", "cababc"],
+                "target": "abc"
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeff", "bbaacceeddff", "ccaabbeedddf", "ddaabbccdeff"],
+                "target": "abcde"
+            },
+            "expected": 1496
+        },
+        {
+            "args": {
+                "words": ["abacabad", "acadaeaf", "agahaiaj", "akalaalaa"],
+                "target": "baa"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["zzzz", "zzzz", "zzzz", "zzzz", "zzzz"],
+                "target": "zz"
+            },
+            "expected": 150
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "abcd"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["zzzzzz", "yyyyyy", "xxxxxx", "wwwwww", "vvvvvv"],
+                "target": "zyxwv"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["abcabcabcabc", "defdefdefdef", "ghighighighi", "jkljkljkljkl"],
+                "target": "adgj"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij"
+                ],
+                "target": "abcdefghij"
+            },
+            "expected": 999999937
+        },
+        {
+            "args": {
+                "words": ["algorithms", "datastructures", "programming"],
+                "target": "ds"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcde", "fghij", "klmno", "pqrst"],
+                "target": "afkp"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["zzzz", "zzzz", "zzzz", "zzzz"],
+                "target": "zzz"
+            },
+            "expected": 256
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "ijkl"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["xyzxyzxyzxyz", "yzxyzyzyzx", "zxyzxyzxyz"],
+                "target": "xyzxyz"
+            },
+            "expected": 770
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeff", "bbccddeeffgg", "ccddeeffgghh"],
+                "target": "abcdeffg"
+            },
+            "expected": 414
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "acfi"
+            },
+            "expected": 256
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "mnopqr"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["hello", "hello", "hello", "hello", "hello"],
+                "target": "hello"
+            },
+            "expected": 3125
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbaacc", "ccaabb"],
+                "target": "abc"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "words": ["banana", "banana", "banana", "banana"],
+                "target": "ban"
+            },
+            "expected": 192
+        },
+        {
+            "args": {
+                "words": ["abcdefghi", "jklmnopqr", "stuvwxyz"],
+                "target": "adgt"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "zzzzyyxwwvvuuttrrssqqponnmlkkjjiihhggffeeddccbaab",
+                    "abcdefghijklmnopqrstuvwxyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+                ],
+                "target": "zzzzzzzzzz"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "bcdefg", "cdefgh", "defghi", "efghij"],
+                "target": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcabcabc", "abcabcabc", "abcabcabc"],
+                "target": "abc"
+            },
+            "expected": 270
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi"],
+                "target": "mississippi"
+            },
+            "expected": 177147
+        },
+        {
+            "args": {
+                "words": [
+                    "mississippi",
+                    "mississippi",
+                    "mississippi",
+                    "mississippi",
+                    "mississippi",
+                    "mississippi"
+                ],
+                "target": "issipi"
+            },
+            "expected": 746496
+        },
+        {
+            "args": {
+                "words": ["zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz"],
+                "target": "zzzz"
+            },
+            "expected": 131250
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "ddeeff", "gghhii", "jjkkll", "mmnnoo"],
+                "target": "abcd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming", "challenge"],
+                "target": "how"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaaaa", "aaaaaaaaaa", "aaaaaaaaaa", "aaaaaaaaaa"],
+                "target": "aaaa"
+            },
+            "expected": 53760
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                    "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+                ],
+                "target": "abc"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["zzzzzzzzzzzzzzzzzzzz", "zzzzzzzzzzzzzzzzzzzz", "zzzzzzzzzzzzzzzzzzzz"],
+                "target": "zzzz"
+            },
+            "expected": 392445
+        },
+        {
+            "args": {
+                "words": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "afg"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "acegi"
+            },
+            "expected": 3125
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "klmnopqrstu", "vwxyzabcde", "fghijklmno"],
+                "target": "fedcba"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "bcdefg", "cdefgh", "defghi", "efghij"],
+                "target": "efghij"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"],
+                "target": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abacaba", "bacabab", "cacabac", "dacabad"],
+                "target": "abac"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "words": ["zzzzzzzzzz", "yyyyyyyyyy", "xxxxxxxxxx", "wwwwwwwwww", "vvvvvvvvvv"],
+                "target": "zyxwv"
+            },
+            "expected": 252
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc"],
+                "target": "abc"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "words": ["abcdef", "bcdefg", "cdefgh", "defghi", "efghij"],
+                "target": "defg"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["target", "target", "target", "target", "target"],
+                "target": "target"
+            },
+            "expected": 15625
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "jihgfedcba", "abcdefghij", "jihgfedcba"],
+                "target": "abcdefghij"
+            },
+            "expected": 1024
+        },
+        {
+            "args": {
+                "words": ["xyzxyzxyz", "uvwuvwuvw", "mnopqmnopq"],
+                "target": "xum"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "klmnopqrstu", "vwxyz"],
+                "target": "xyz"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "klmnopqr", "stuvwxyz", "abcdefghij", "klmnopqr"],
+                "target": "mnop"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["abacabad", "acadaeaf", "agahaiaj", "akalaalaa"],
+                "target": "aaa"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["banana", "banana", "banana", "banana", "banana"],
+                "target": "ban"
+            },
+            "expected": 375
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghij"
+            },
+            "expected": 59049
+        },
+        {
+            "args": {
+                "words": ["qwertyuiop", "asdfghjklz", "xcvbnm,./", "qwertyuiop"],
+                "target": "qzv"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["aaaa", "abbb", "accc", "addd"],
+                "target": "abcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+                ],
+                "target": "abcdefghijklmnopqrstu"
+            },
+            "expected": 46480318
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "abcdefg", "abcdefg", "abcdefg", "abcdefg"],
+                "target": "abcdefg"
+            },
+            "expected": 78125
+        },
+        {
+            "args": {
+                "words": [
+                    "hellohellohellohello",
+                    "worldworldworldworld",
+                    "pythonpythonpythonpython"
+                ],
+                "target": "python"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdefghijklmnop", "qrstuvwxyzab", "cdefghijklmnop", "qrstuvwxyzab"],
+                "target": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["aaaaaa", "bbbbbb", "cccccc", "dddddd"],
+                "target": "abcd"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijk",
+                    "abcdefghij",
+                    "abcdefghi",
+                    "abcdefgh",
+                    "abcdefg",
+                    "abcdef",
+                    "abcde",
+                    "abcd",
+                    "abc"
+                ],
+                "target": "abcdefg"
+            },
+            "expected": 1224720
+        },
+        {
+            "args": {
+                "words": ["aabbccdd", "aabbccdd", "aabbccdd", "aabbccdd"],
+                "target": "abcd"
+            },
+            "expected": 4096
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcf", "acdf", "adef"],
+                "target": "ace"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "klmnopqr", "stuvwxyz", "abcdefghij", "klmnopqr"],
+                "target": "mnopqrst"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaabaaaaaa", "baaaaaaaabaaaaa", "caaaaaaabaaaaaa"],
+                "target": "aaaaaabaaaaaa"
+            },
+            "expected": 9920232
+        },
+        {
+            "args": {
+                "words": ["abacabadabacaba", "bcbdbecbdbecb", "dcdcdcddcdcdc"],
+                "target": "abc"
+            },
+            "expected": 110
+        },
+        {
+            "args": {
+                "words": ["abababababababab", "bababababababa", "abababababababab"],
+                "target": "abab"
+            },
+            "expected": 9394
+        },
+        {
+            "args": {
+                "words": ["abcdef", "fedcba", "abcdef"],
+                "target": "abcdef"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "stuvwx"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["qwerty", "qwerty", "qwerty", "qwerty", "qwerty"],
+                "target": "qwe"
+            },
+            "expected": 125
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbccdd", "ccddeeff", "ddeeffgg", "eeffgghh"],
+                "target": "abcde"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcabcabc", "defdefdef", "ghighighi"],
+                "target": "adg"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijk",
+                    "abcdefghij",
+                    "abcdefghi",
+                    "abcdefgh",
+                    "abcdefg",
+                    "abcdef",
+                    "abcde",
+                    "abcd",
+                    "abc"
+                ],
+                "target": "abc"
+            },
+            "expected": 729
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghijabcdefghij"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "ddeeff", "gghhii", "jjkkgg"],
+                "target": "abgi"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba"
+                ],
+                "target": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 67108864
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ],
+                "target": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 67108864
+        },
+        {
+            "args": {
+                "words": ["aaaa", "abab", "acac", "adad", "aeae"],
+                "target": "aa"
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "words": ["programming", "is", "fun"],
+                "target": "pin"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["sequence", "sequence", "sequence", "sequence", "sequence"],
+                "target": "seq"
+            },
+            "expected": 125
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcd", "abcd", "abcd", "abcd"],
+                "target": "abcd"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi"],
+                "target": "ssss"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "words": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "abc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcdefghijkl", "mnopqrstuv", "wxyzabcdef", "ghijklmnop"],
+                "target": "mnop"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["abcdefghijabcdefghij", "jihgfedcbaabcdef", "abcdefghijjihgfe"],
+                "target": "abcdefghij"
+            },
+            "expected": 3536
+        },
+        {
+            "args": {
+                "words": ["abacaba", "bcbcbcb", "cacacac"],
+                "target": "abcabc"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["aabbccddeeff", "gghhiijjkkll", "mmnnooppqqrr", "ssttuuvvwwxx"],
+                "target": "abcdefff"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcde", "abfgh", "acjkl"],
+                "target": "abac"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["algorithm", "algorithm", "algorithm", "algorithm", "algorithm"],
+                "target": "algo"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaaaa", "aaaaaaaaab", "aaaaaaaaac", "aaaaaaaaad"],
+                "target": "aaa"
+            },
+            "expected": 5952
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "yzabcd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghij"
+            },
+            "expected": 9765625
+        },
+        {
+            "args": {
+                "words": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "bcdefgh", "cdefghi"],
+                "target": "efg"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghij"
+            },
+            "expected": 9765625
+        },
+        {
+            "args": {
+                "words": ["racecar", "racecar", "racecar", "racecar", "racecar"],
+                "target": "race"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "words": [
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+                ],
+                "target": "zzzzzzzzzz"
+            },
+            "expected": 277520636
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "klmnopqrstu", "vwxyzabcde", "fghijklmno"],
+                "target": "aeiou"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd",
+                    "abcd"
+                ],
+                "target": "abcdabcd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcabcabcabc", "bcabcabcabca", "cabcabcabcab"],
+                "target": "abcabc"
+            },
+            "expected": 924
+        },
+        {
+            "args": {
+                "words": ["aabbccdd", "bbaaddcc", "ccddaabb", "ddbbaacc"],
+                "target": "abcd"
+            },
+            "expected": 77
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaaaaaaa",
+                    "bbbbbbbbb",
+                    "ccccccccc",
+                    "ddddddddd",
+                    "eeeeeeeee",
+                    "fffffff",
+                    "ggggggggg",
+                    "hhhhhhhhh",
+                    "iiiiiiiii"
+                ],
+                "target": "abcdefghi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["zzzzzz", "zzzzzz", "zzzzzz"],
+                "target": "zzz"
+            },
+            "expected": 540
+        },
+        {
+            "args": {
+                "words": ["thisisatest", "anotherstring", "stringmatching"],
+                "target": "string"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["quickbrownfox", "quickbrownfox", "quickbrownfox"],
+                "target": "quickfox"
+            },
+            "expected": 6561
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghij"
+            },
+            "expected": 59049
+        },
+        {
+            "args": {
+                "words": [
+                    "abacabadabacaba",
+                    "bcbdbecbdbecb",
+                    "dcdcdcddcdcdc",
+                    "efefegfefegfe",
+                    "ghighighihighi"
+                ],
+                "target": "abcdefg"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "words": ["abcdabcdabcd", "abcdabcdabcd", "abcdabcdabcd"],
+                "target": "abcd"
+            },
+            "expected": 1215
+        },
+        {
+            "args": {
+                "words": ["abcdabcdabcd", "bcdbcdbcdb", "cdcdcdcdcd"],
+                "target": "abcdabcd"
+            },
+            "expected": 184
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "abcdef"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcabcabc", "defdefdef", "ghighighi"],
+                "target": "adg"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "hijklmn", "opqrstu", "vwxyzab", "cdefghi"],
+                "target": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdef", "ghijkl", "mnopqr"],
+                "target": "abcghi"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "zabcd"],
+                "target": "ace"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc", "dddddddddd", "eeeeeeeeee"],
+                "target": "abcde"
+            },
+            "expected": 252
+        },
+        {
+            "args": {
+                "words": ["zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz"],
+                "target": "zzz"
+            },
+            "expected": 7680
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "ddeeff", "gghhii", "jjkkll"],
+                "target": "abcd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"],
+                "target": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "efghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "target": "efgh"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ],
+                "target": "zyxwvut"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcde", "fghij", "klmno", "pqrst"],
+                "target": "afk"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["leetcode", "leetcode", "leetcode", "leetcode"],
+                "target": "leet"
+            },
+            "expected": 256
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "abcdefgh", "abcdefgh", "abcdefgh", "abcdefgh"],
+                "target": "abcdefgh"
+            },
+            "expected": 390625
+        },
+        {
+            "args": {
+                "words": [
+                    "thisisalongstring",
+                    "thisisalongstring",
+                    "thisisalongstring",
+                    "thisisalongstring"
+                ],
+                "target": "thisisalongstring"
+            },
+            "expected": 179869065
+        },
+        {
+            "args": {
+                "words": ["zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz"],
+                "target": "zzzz"
+            },
+            "expected": 53760
+        },
+        {
+            "args": {
+                "words": ["qwert", "qwerty", "qwertyu", "qwertyui", "qwertyuiop"],
+                "target": "qwerty"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["qwertyuiop", "asdfghjklz", "xcvbnm,./"],
+                "target": "asdf"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "afik"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abcdefghij"
+            },
+            "expected": 1048576
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"],
+                "target": "abc"
+            },
+            "expected": 125
+        },
+        {
+            "args": {
+                "words": ["mississippi", "mississippi", "mississippi"],
+                "target": "missi"
+            },
+            "expected": 3645
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "abracadabra", "abracadabra", "abracadabra"],
+                "target": "abrac"
+            },
+            "expected": 1024
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming", "language"],
+                "target": "python"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["ababababab", "bababababa", "ababababab", "bababababa"],
+                "target": "abab"
+            },
+            "expected": 3360
+        },
+        {
+            "args": {
+                "words": ["xylophone", "xylophone", "xylophone", "xylophone", "xylophone"],
+                "target": "xyl"
+            },
+            "expected": 125
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numWays",
+        "typescript": "Solution().numWays"
+    }
+}

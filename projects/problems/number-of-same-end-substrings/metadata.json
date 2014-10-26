@@ -1,0 +1,928 @@
+{
+    "id": "number-of-same-end-substrings",
+    "questionId": 2955,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String", "Counting", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "s": "abcaab",
+                "queries": [[0, 0], [1, 4], [2, 5], [0, 5]]
+            },
+            "expected": [1, 5, 5, 10]
+        },
+        {
+            "args": {
+                "s": "abcabcabc",
+                "queries": [[0, 2], [3, 5], [6, 8], [0, 8]]
+            },
+            "expected": [3, 3, 3, 18]
+        },
+        {
+            "args": {
+                "s": "xyzxyz",
+                "queries": [[0, 2], [3, 5], [0, 5]]
+            },
+            "expected": [3, 3, 9]
+        },
+        {
+            "args": {
+                "s": "aabbcc",
+                "queries": [[0, 2], [3, 5], [0, 5]]
+            },
+            "expected": [4, 4, 9]
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "queries": [[0, 0], [0, 1], [0, 2]]
+            },
+            "expected": [1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "queries": [[0, 0], [1, 1], [2, 2], [0, 2], [3, 5], [6, 8], [0, 8]]
+            },
+            "expected": [1, 1, 1, 3, 3, 3, 18]
+        },
+        {
+            "args": {
+                "s": "abcabc",
+                "queries": [[0, 5], [1, 4], [2, 3]]
+            },
+            "expected": [9, 5, 2]
+        },
+        {
+            "args": {
+                "s": "aaaa",
+                "queries": [[0, 0], [0, 1], [0, 2], [0, 3]]
+            },
+            "expected": [1, 3, 6, 10]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "queries": [[0, 3]]
+            },
+            "expected": [4]
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "queries": [[0, 6], [1, 5], [2, 4]]
+            },
+            "expected": [7, 5, 3]
+        },
+        {
+            "args": {
+                "s": "aaaa",
+                "queries": [[0, 3], [1, 2], [2, 2]]
+            },
+            "expected": [10, 3, 1]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "queries": [
+                    [0, 5],
+                    [5, 10],
+                    [10, 15],
+                    [15, 20],
+                    [20, 25],
+                    [25, 30],
+                    [30, 35],
+                    [35, 40],
+                    [40, 45],
+                    [45, 50],
+                    [0, 50]
+                ]
+            },
+            "expected": [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 459]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 25], [26, 51], [0, 51], [10, 20], [15, 35], [20, 40], [40, 51]]
+            },
+            "expected": [26, 26, 78, 11, 21, 21, 12]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "queries": [[0, 25], [26, 51], [52, 77], [78, 103], [104, 129], [130, 155]]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "queries": [[0, 50], [1, 49], [2, 48], [3, 47], [4, 46]]
+            },
+            "expected": [1326, 1225, 1128, 1035, 946]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc",
+                "queries": [[0, 35], [1, 10], [11, 20], [21, 30], [31, 35], [0, 9], [10, 19]]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "queries": [[0, 4], [1, 3], [4, 5], [2, 10], [0, 10]]
+            },
+            "expected": [7, 4, 2, 19, 24]
+        },
+        {
+            "args": {
+                "s": "zxyxzyzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxz",
+                "queries": [
+                    [0, 100],
+                    [10, 90],
+                    [20, 80],
+                    [30, 70],
+                    [40, 60],
+                    [50, 50],
+                    [0, 50],
+                    [50, 100]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaaaaa",
+                "queries": [[0, 6], [1, 5], [2, 4], [0, 3], [3, 6], [0, 4], [4, 6]]
+            },
+            "expected": [28, 15, 6, 10, 10, 15, 6]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [
+                    [0, 0],
+                    [1, 1],
+                    [2, 2],
+                    [25, 25],
+                    [0, 25],
+                    [1, 24],
+                    [2, 23],
+                    [3, 22],
+                    [4, 21],
+                    [5, 20],
+                    [6, 19],
+                    [7, 18],
+                    [8, 17],
+                    [9, 16],
+                    [10, 15],
+                    [11, 14],
+                    [12, 13]
+                ]
+            },
+            "expected": [1, 1, 1, 1, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzz",
+                "queries": [[0, 5], [6, 11], [0, 11], [5, 10], [0, 13], [1, 12]]
+            },
+            "expected": [21, 21, 78, 21, 105, 78]
+        },
+        {
+            "args": {
+                "s": "ababababababab",
+                "queries": [
+                    [0, 1],
+                    [2, 3],
+                    [4, 5],
+                    [6, 7],
+                    [8, 9],
+                    [10, 11],
+                    [0, 11],
+                    [1, 10],
+                    [2, 9]
+                ]
+            },
+            "expected": [2, 2, 2, 2, 2, 2, 42, 30, 20]
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd",
+                "queries": [[0, 3], [4, 7], [8, 11], [12, 15], [0, 15], [1, 14], [2, 13], [3, 12]]
+            },
+            "expected": [4, 4, 4, 4, 40, 32, 24, 18]
+        },
+        {
+            "args": {
+                "s": "abababababababababa",
+                "queries": [
+                    [0, 19],
+                    [1, 2],
+                    [3, 4],
+                    [5, 6],
+                    [7, 8],
+                    [9, 10],
+                    [11, 12],
+                    [13, 14],
+                    [15, 16],
+                    [17, 18],
+                    [19, 19]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "queries": [[0, 5], [1, 10], [5, 13], [0, 14], [3, 7], [8, 11]]
+            },
+            "expected": [10, 23, 18, 50, 6, 5]
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg",
+                "queries": [
+                    [0, 47],
+                    [1, 46],
+                    [2, 45],
+                    [3, 44],
+                    [4, 43],
+                    [5, 42],
+                    [6, 41],
+                    [7, 40],
+                    [8, 39]
+                ]
+            },
+            "expected": [189, 175, 161, 147, 135, 123, 111, 100, 90]
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "queries": [[0, 10], [1, 8], [2, 7], [3, 6], [4, 5], [0, 5], [5, 10]]
+            },
+            "expected": [23, 12, 9, 5, 2, 9, 9]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyza",
+                "queries": [
+                    [0, 25],
+                    [1, 24],
+                    [2, 23],
+                    [3, 22],
+                    [4, 21],
+                    [5, 20],
+                    [6, 19],
+                    [7, 18],
+                    [8, 17]
+                ]
+            },
+            "expected": [26, 24, 22, 20, 18, 16, 14, 12, 10]
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "queries": [[0, 10], [3, 12], [5, 8], [7, 14], [0, 14], [1, 13], [2, 11]]
+            },
+            "expected": [29, 22, 5, 15, 50, 35, 22]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 25], [5, 20], [10, 15], [0, 10], [15, 25], [5, 10]]
+            },
+            "expected": [26, 16, 6, 11, 11, 6]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "queries": [[0, 10], [11, 20], [21, 30], [31, 40], [41, 50], [51, 60]]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabb",
+                "queries": [
+                    [0, 5],
+                    [5, 10],
+                    [10, 15],
+                    [15, 20],
+                    [20, 25],
+                    [25, 30],
+                    [30, 35],
+                    [35, 40],
+                    [40, 45],
+                    [45, 50],
+                    [0, 50]
+                ]
+            },
+            "expected": [13, 12, 13, 12, 13, 12, 13, 12, 13, 12, 676]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "queries": [[0, 30], [5, 25], [10, 20], [15, 30], [0, 15], [20, 30]]
+            },
+            "expected": [496, 231, 66, 136, 136, 66]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "queries": [
+                    [0, 59],
+                    [60, 119],
+                    [120, 179],
+                    [180, 239],
+                    [240, 299],
+                    [300, 359],
+                    [0, 359]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaa",
+                "queries": [
+                    [0, 0],
+                    [1, 1],
+                    [2, 2],
+                    [0, 2],
+                    [1, 3],
+                    [0, 3],
+                    [0, 4],
+                    [0, 5],
+                    [0, 6],
+                    [0, 7],
+                    [0, 8],
+                    [0, 9]
+                ]
+            },
+            "expected": [1, 1, 1, 6, 6, 10, 15, 21, 28, 36, 45, 55]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "queries": [[0, 5], [5, 10], [10, 15], [15, 20], [20, 25], [0, 25]]
+            },
+            "expected": [21, 21, 21, 21, 21, 351]
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "queries": [[0, 14], [2, 10], [5, 7], [8, 12], [0, 6]]
+            },
+            "expected": [50, 20, 3, 8, 14]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc",
+                "queries": [
+                    [0, 14],
+                    [1, 13],
+                    [2, 12],
+                    [0, 7],
+                    [7, 14],
+                    [3, 11],
+                    [4, 10],
+                    [0, 10],
+                    [5, 15],
+                    [10, 20],
+                    [0, 20]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [
+                    [0, 25],
+                    [0, 12],
+                    [13, 25],
+                    [0, 5],
+                    [20, 25],
+                    [10, 15],
+                    [5, 10],
+                    [15, 20]
+                ]
+            },
+            "expected": [26, 13, 13, 6, 6, 6, 6, 6]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbbbcccccccccc",
+                "queries": [[0, 9], [10, 19], [20, 29], [0, 29], [5, 24], [15, 25]]
+            },
+            "expected": [55, 55, 55, 165, 85, 36]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzz",
+                "queries": [[0, 0], [1, 1], [2, 2], [0, 5], [5, 10], [0, 14]]
+            },
+            "expected": [1, 1, 1, 21, 21, 120]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "queries": [[0, 49], [1, 24], [25, 49], [0, 24], [25, 49], [0, 49]]
+            },
+            "expected": [75, 35, 37, 37, 37, 75]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzz",
+                "queries": [
+                    [0, 29],
+                    [1, 28],
+                    [2, 27],
+                    [0, 14],
+                    [15, 29],
+                    [5, 20],
+                    [10, 20],
+                    [0, 20]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "queries": [
+                    [0, 1],
+                    [2, 3],
+                    [4, 5],
+                    [24, 25],
+                    [0, 25],
+                    [1, 24],
+                    [2, 23],
+                    [3, 22],
+                    [4, 21],
+                    [5, 20],
+                    [6, 19],
+                    [7, 18],
+                    [8, 17],
+                    [9, 16],
+                    [10, 15],
+                    [11, 14],
+                    [12, 13],
+                    [0, 19],
+                    [1, 18],
+                    [2, 17],
+                    [3, 16],
+                    [4, 15],
+                    [5, 14],
+                    [6, 13],
+                    [7, 12],
+                    [8, 11],
+                    [9, 10]
+                ]
+            },
+            "expected": [
+                3, 3, 3, 3, 39, 35, 33, 29, 27, 23, 21, 17, 15, 11, 9, 5, 3, 30, 26, 24, 20, 18, 14,
+                12, 8, 6, 2
+            ]
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc",
+                "queries": [[0, 3], [4, 7], [8, 11], [0, 11], [1, 10], [2, 9]]
+            },
+            "expected": [10, 10, 10, 30, 22, 16]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 0], [1, 1], [25, 25], [0, 25], [5, 15], [10, 20], [15, 25]]
+            },
+            "expected": [1, 1, 1, 26, 11, 11, 11]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "queries": [[0, 25], [26, 51], [52, 77], [78, 103], [0, 103]]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "queries": [[0, 0], [1, 1], [2, 2], [0, 9], [1, 8], [2, 7], [3, 6], [4, 5]]
+            },
+            "expected": [1, 1, 1, 30, 20, 12, 6, 2]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 25], [1, 24], [2, 23], [3, 22], [4, 21]]
+            },
+            "expected": [26, 24, 22, 20, 18]
+        },
+        {
+            "args": {
+                "s": "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+                "queries": [
+                    [0, 100],
+                    [10, 90],
+                    [20, 80],
+                    [30, 70],
+                    [40, 60],
+                    [50, 50],
+                    [0, 50],
+                    [50, 100]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 25], [0, 12], [12, 25], [5, 15], [10, 20], [0, 20], [20, 25]]
+            },
+            "expected": [26, 13, 14, 11, 11, 21, 6]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "queries": [[0, 29], [5, 15], [10, 20], [15, 25], [20, 29]]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "queries": [
+                    [0, 4],
+                    [1, 5],
+                    [2, 6],
+                    [3, 7],
+                    [4, 8],
+                    [5, 9],
+                    [6, 10],
+                    [7, 11],
+                    [8, 12],
+                    [9, 13],
+                    [10, 14],
+                    [11, 15],
+                    [0, 14]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "xyzyzyzyzyzyzyz",
+                "queries": [
+                    [0, 2],
+                    [3, 5],
+                    [6, 8],
+                    [9, 11],
+                    [12, 14],
+                    [15, 17],
+                    [0, 17],
+                    [1, 16],
+                    [2, 15]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddeeeeffffgggghhhhiiii",
+                "queries": [
+                    [0, 3],
+                    [4, 7],
+                    [8, 11],
+                    [12, 15],
+                    [16, 19],
+                    [20, 23],
+                    [24, 27],
+                    [28, 31],
+                    [0, 31]
+                ]
+            },
+            "expected": [10, 10, 10, 10, 10, 10, 10, 10, 80]
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbaaaa",
+                "queries": [
+                    [0, 11],
+                    [0, 4],
+                    [5, 9],
+                    [10, 11],
+                    [0, 5],
+                    [5, 10],
+                    [0, 9],
+                    [1, 8],
+                    [2, 7],
+                    [3, 6]
+                ]
+            },
+            "expected": [43, 15, 15, 3, 16, 16, 30, 20, 12, 6]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc",
+                "queries": [[0, 11], [1, 10], [2, 9], [3, 8], [4, 7], [5, 6]]
+            },
+            "expected": [30, 22, 15, 9, 5, 2]
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "queries": [[0, 14], [1, 13], [2, 12], [0, 7], [7, 14], [3, 11], [4, 10], [0, 10]]
+            },
+            "expected": [50, 35, 28, 15, 15, 17, 14, 29]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzz",
+                "queries": [[0, 0], [1, 1], [2, 2], [0, 2], [1, 3], [2, 4], [0, 29]]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "queries": [
+                    [0, 25],
+                    [26, 50],
+                    [51, 75],
+                    [76, 100],
+                    [101, 125],
+                    [126, 150],
+                    [151, 175],
+                    [176, 200],
+                    [201, 225],
+                    [226, 250],
+                    [0, 250]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 25], [26, 51], [0, 51], [13, 25], [28, 40], [10, 30]]
+            },
+            "expected": [26, 26, 78, 13, 13, 21]
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "queries": [
+                    [0, 14],
+                    [1, 3],
+                    [2, 12],
+                    [5, 10],
+                    [0, 7],
+                    [8, 14],
+                    [0, 1],
+                    [1, 2],
+                    [2, 3]
+                ]
+            },
+            "expected": [50, 3, 28, 10, 15, 14, 2, 2, 2]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "queries": [[0, 25], [0, 0], [25, 25], [0, 10], [10, 20], [20, 25]]
+            },
+            "expected": [26, 1, 1, 11, 11, 6]
+        },
+        {
+            "args": {
+                "s": "aaaaaaa",
+                "queries": [[0, 6], [1, 5], [2, 4], [0, 3], [3, 6], [0, 1], [5, 6]]
+            },
+            "expected": [28, 15, 6, 10, 10, 3, 3]
+        },
+        {
+            "args": {
+                "s": "abccbaabccbaabccbaabccba",
+                "queries": [
+                    [0, 5],
+                    [6, 11],
+                    [12, 17],
+                    [18, 23],
+                    [24, 29],
+                    [0, 29],
+                    [5, 14],
+                    [10, 19],
+                    [15, 24]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "bbaabbaabb",
+                "queries": [[0, 9], [1, 8], [2, 7], [3, 6], [4, 5], [0, 5], [5, 9]]
+            },
+            "expected": [31, 20, 13, 6, 3, 13, 9]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "queries": [
+                    [0, 29],
+                    [1, 28],
+                    [2, 27],
+                    [3, 26],
+                    [4, 25],
+                    [0, 25],
+                    [5, 24],
+                    [6, 23],
+                    [7, 22],
+                    [8, 21],
+                    [9, 20],
+                    [10, 19],
+                    [11, 18],
+                    [12, 17],
+                    [13, 16],
+                    [14, 15]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnmqwertyuiop",
+                "queries": [[0, 9], [10, 19], [20, 29], [0, 19], [10, 29], [0, 29], [5, 15]]
+            },
+            "expected": [10, 10, 10, 20, 20, 34, 11]
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbcccccdddddeeeeeffffffggggg",
+                "queries": [
+                    [0, 4],
+                    [5, 9],
+                    [10, 14],
+                    [15, 19],
+                    [20, 24],
+                    [25, 29],
+                    [30, 34],
+                    [35, 39],
+                    [40, 44],
+                    [45, 49]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabb",
+                "queries": [[0, 11], [1, 5], [6, 10], [0, 4], [7, 11], [3, 7]]
+            },
+            "expected": [42, 9, 9, 9, 9, 9]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc",
+                "queries": [[0, 2], [3, 5], [6, 8], [9, 11], [0, 11], [1, 10]]
+            },
+            "expected": [3, 3, 3, 3, 30, 22]
+        },
+        {
+            "args": {
+                "s": "abacabacabacabacabacaba",
+                "queries": [
+                    [0, 0],
+                    [1, 1],
+                    [2, 2],
+                    [0, 2],
+                    [3, 5],
+                    [6, 8],
+                    [0, 8],
+                    [9, 11],
+                    [12, 14],
+                    [15, 17],
+                    [18, 20],
+                    [0, 20]
+                ]
+            },
+            "expected": [1, 1, 1, 4, 3, 4, 21, 3, 4, 3, 4, 96]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+                "queries": [
+                    [0, 9],
+                    [10, 19],
+                    [20, 29],
+                    [30, 39],
+                    [40, 49],
+                    [50, 59],
+                    [60, 69],
+                    [70, 79],
+                    [80, 89],
+                    [90, 99],
+                    [0, 99]
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "queries": [[0, 10], [1, 5], [5, 9], [0, 4], [6, 10], [2, 8], [0, 8]]
+            },
+            "expected": [23, 6, 6, 6, 6, 10, 16]
+        },
+        {
+            "args": {
+                "s": "abacabadabacabaabacabadabacaba",
+                "queries": [[0, 7], [8, 14], [15, 21], [22, 28], [0, 28], [7, 21]]
+            },
+            "expected": [15, 14, 14, 11, 169, 50]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaabbbbbbbbcccccccc",
+                "queries": [[0, 7], [8, 15], [16, 23], [0, 15], [8, 23], [0, 23]]
+            },
+            "expected": [36, 36, 36, 72, 72, 108]
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbcccccddddd",
+                "queries": [
+                    [0, 4],
+                    [5, 9],
+                    [10, 14],
+                    [15, 19],
+                    [0, 9],
+                    [5, 14],
+                    [10, 19],
+                    [0, 14],
+                    [5, 19],
+                    [0, 19]
+                ]
+            },
+            "expected": [15, 15, 15, 15, 30, 30, 30, 45, 45, 60]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabc",
+                "queries": [
+                    [0, 26],
+                    [1, 25],
+                    [2, 24],
+                    [3, 23],
+                    [4, 22],
+                    [5, 21],
+                    [6, 20],
+                    [7, 19],
+                    [8, 18],
+                    [9, 17],
+                    [10, 16],
+                    [11, 15],
+                    [12, 14],
+                    [13, 13]
+                ]
+            },
+            "expected": [135, 117, 100, 84, 70, 57, 45, 35, 26, 18, 12, 7, 3, 1]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabc",
+                "queries": [
+                    [0, 5],
+                    [5, 10],
+                    [10, 15],
+                    [15, 20],
+                    [20, 25],
+                    [25, 30],
+                    [30, 35],
+                    [0, 35]
+                ]
+            },
+            "expected": [9, 9, 9, 9, 9, 9, 9, 234]
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "queries": [[0, 9], [1, 8], [2, 7], [3, 6], [4, 5]]
+            },
+            "expected": [30, 20, 12, 6, 2]
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbcccccdddddeeeee",
+                "queries": [[0, 4], [5, 9], [10, 14], [15, 19], [20, 24], [0, 24]]
+            },
+            "expected": [15, 15, 15, 15, 15, 75]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().sameEndSubstringCount",
+        "typescript": "Solution().sameEndSubstringCount"
+    }
+}

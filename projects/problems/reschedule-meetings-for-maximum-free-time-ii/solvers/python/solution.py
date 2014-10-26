@@ -1,0 +1,124 @@
+import heapq
+import itertools
+from sortedcontainers import SortedList
+import random
+import functools
+import collections
+import string
+import math
+import datetime
+
+from typing import *
+from functools import *
+from collections import *
+from itertools import *
+from heapq import *
+from bisect import *
+from string import *
+from operator import *
+from math import *
+
+inf = float('inf')
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def list_node(values: list):
+    if not values:
+        return None
+    head = ListNode(values[0])
+    p = head
+    for val in values[1:]:
+        node = ListNode(val)
+        p.next = node
+        p = node
+    return head
+
+def is_same_list(p1, p2):
+    if p1 is None and p2 is None:
+        return True
+    if not p1 or not p2:
+        return False
+    return p1.val == p2.val and is_same_list(p1.next, p2.next)
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def tree_node(values: list):
+    if not values:
+        return None
+    root = TreeNode(values[0])
+    i = 1
+    queue = deque()
+    queue.append(root)
+    while queue:
+        node = queue.popleft()
+        if i < len(values) and values[i] is not None:
+            node.left = TreeNode(values[i])
+            queue.append(node.left)
+        i += 1
+        if i < len(values) and values[i] is not None:
+            node.right = TreeNode(values[i])
+            queue.append(node.right)
+        i += 1
+    return root
+
+def is_same_tree(p, q):
+    if not p and not q:
+        return True
+    elif not p or not q:
+        return False
+    elif p.val != q.val:
+        return False
+    else:
+        return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
+
+class Solution:
+    def maxFreeTime(
+        self, eventTime: int, startTime: List[int], endTime: List[int]
+    ) -> int:
+        n = len(startTime)
+        res = 0
+
+        left_gaps = [0] * n
+        left_gaps[0] = startTime[0]
+        for meet in range(1, n):
+            left_gaps[meet] = max(
+                left_gaps[meet - 1], startTime[meet] - endTime[meet - 1]
+            )
+
+        right_gaps = [0] * n
+        right_gaps[n - 1] = eventTime - endTime[-1]
+        for meet in range(n - 2, -1, -1):
+            right_gaps[meet] = max(
+                right_gaps[meet + 1], startTime[meet + 1] - endTime[meet]
+            )
+
+        for meet in range(n):
+            left_gap = (
+                left_gaps[meet] if meet == 0 else startTime[meet] - endTime[meet - 1]
+            )
+            right_gap = (
+                right_gaps[meet]
+                if meet == n - 1
+                else startTime[meet + 1] - endTime[meet]
+            )
+
+            interval = 0
+
+            if (
+                meet != 0
+                and left_gaps[meet - 1] >= (endTime[meet] - startTime[meet])
+                or meet != n - 1
+                and right_gaps[meet + 1] >= (endTime[meet] - startTime[meet])
+            ):
+                interval = endTime[meet] - startTime[meet]
+
+            res = max(res, left_gap + interval + right_gap)
+
+        return res

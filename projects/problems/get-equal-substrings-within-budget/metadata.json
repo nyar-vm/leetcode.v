@@ -1,0 +1,868 @@
+{
+    "id": "get-equal-substrings-within-budget",
+    "questionId": 1208,
+    "difficulty": "Medium",
+    "tags": ["String", "Binary Search", "Prefix Sum", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s": "a",
+                "t": "b",
+                "maxCost": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "a",
+                "t": "a",
+                "maxCost": 0
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "krrgw",
+                "t": "grkwa",
+                "maxCost": 3
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "abce",
+                "maxCost": 1
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "t": "efghabcd",
+                "maxCost": 10
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "krrgw",
+                "t": "zjxss",
+                "maxCost": 19
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "zzzzz",
+                "t": "bbbbb",
+                "maxCost": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "cdef",
+                "maxCost": 3
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcba",
+                "maxCost": 26
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "pxezla",
+                "t": "sllerr",
+                "maxCost": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "t": "bcdef",
+                "maxCost": 5
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "a",
+                "t": "b",
+                "maxCost": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "abcd",
+                "maxCost": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcba",
+                "maxCost": 25
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "t": "dddddddddddd",
+                "maxCost": 10
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "bcdf",
+                "maxCost": 3
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "t": "fghij",
+                "maxCost": 10
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "acde",
+                "maxCost": 0
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aaabbbcccddd",
+                "t": "bbcccaaaadd",
+                "maxCost": 20
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz",
+                "t": "aaaaaaaaaa",
+                "maxCost": 25
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcba",
+                "maxCost": 100
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbccccc",
+                "t": "bbbbbccccdaaaaa",
+                "maxCost": 15
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "a",
+                "t": "z",
+                "maxCost": 25
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstring",
+                "t": "thisisaverylongstring",
+                "maxCost": 50
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "t": "fghij",
+                "maxCost": 15
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzz",
+                "t": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "maxCost": 130
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "t": "abracadabra",
+                "maxCost": 5
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "t": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "maxCost": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "t": "pneumonia",
+                "maxCost": 20
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabb",
+                "t": "bbaabbaabbab",
+                "maxCost": 20
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "t": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "maxCost": 0
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatwearetesting",
+                "t": "thatshastobemorecomplextohandle",
+                "maxCost": 100
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "abcdefghij",
+                "maxCost": 50
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "lollipop",
+                "maxCost": 15
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatweneedtocompare",
+                "t": "thisisaverylongstringthatweneedtoreplace",
+                "maxCost": 50
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "s": "xyzz",
+                "t": "zzyx",
+                "maxCost": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcd",
+                "t": "dddddddddddddddddddddddddddddddd",
+                "maxCost": 200
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "s": "ababababababab",
+                "t": "bababababababa",
+                "maxCost": 12
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "mnopqr",
+                "t": "qrstuv",
+                "maxCost": 12
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "t": "xyzxyzxyzxyzxyzxyzx",
+                "maxCost": 30
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "abcdefghijklmnopqrstuvwxyz",
+                "maxCost": 0
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa",
+                "maxCost": 1300
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcba",
+                "maxCost": 50
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc",
+                "t": "ccccbbbbaaaa",
+                "maxCost": 16
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "t": "bababababa",
+                "maxCost": 15
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "longerstringtocheck",
+                "t": "short",
+                "maxCost": 10
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc",
+                "t": "abcabcabcabcabc",
+                "maxCost": 0
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggeeffddccbbaa",
+                "maxCost": 52
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababababab",
+                "t": "bababababababababababababababababababababababababa",
+                "maxCost": 25
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstring",
+                "t": "thatshouldnotmatch",
+                "maxCost": 20
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "abababababa",
+                "maxCost": 10
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "abcdefghja",
+                "maxCost": 9
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "abcdefghkj",
+                "maxCost": 2
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "acabababcababcaba",
+                "t": "bacbababcababcaba",
+                "maxCost": 25
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "oneonetwoonetwo",
+                "t": "twoonetwoonetwo",
+                "maxCost": 8
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "t": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "maxCost": 200
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "xyzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "t": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzx",
+                "maxCost": 50
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "t": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "maxCost": 0
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba",
+                "maxCost": 100
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcd",
+                "t": "dddddddddddddddddddd",
+                "maxCost": 15
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "bcdefghijklmnopqrstuvwxyza",
+                "maxCost": 51
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "t": "jajajajajajajajaj",
+                "maxCost": 50
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "maxCost": 100
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa",
+                "maxCost": 200
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc",
+                "t": "ccccbbbbaaaaffff",
+                "maxCost": 15
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "abcdefghij",
+                "maxCost": 1
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "t": "zzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "maxCost": 250
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "jihgfedcba",
+                "maxCost": 100
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "jihgfedcba",
+                "maxCost": 50
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabc",
+                "t": "bcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "maxCost": 30
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "t": "bbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "maxCost": 100
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "t": "xyzxyzxyzxyzxyz",
+                "maxCost": 26
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "samecharacters",
+                "t": "samecharacters",
+                "maxCost": 0
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc",
+                "t": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyz",
+                "maxCost": 30
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa",
+                "maxCost": 200
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbaa",
+                "maxCost": 300
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "abcdefghjk",
+                "maxCost": 1
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "t": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyz",
+                "maxCost": 500
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "t": "zzeeffgghhii",
+                "maxCost": 15
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "bcdefghijklmnopqrstuvwxyza",
+                "maxCost": 25
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "t": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "maxCost": 0
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "s": "hellothereeverybody",
+                "t": "worldwideeveryone",
+                "maxCost": 50
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "acde",
+                "maxCost": 2
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc",
+                "t": "defdefdefdefdefdef",
+                "maxCost": 18
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc",
+                "t": "defdefdefdefdefdefdefdefdefdefdefdef",
+                "maxCost": 27
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbaaaa",
+                "t": "zzzzzaaaaazzzz",
+                "maxCost": 40
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz",
+                "t": "aaaaaaaaaaaaaaaaaaa",
+                "maxCost": 100
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "t": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "maxCost": 260
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "t": "abcdbacdabca",
+                "maxCost": 15
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zabcdefghijklmnopqrstuvwxy",
+                "maxCost": 25
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "ab",
+                "t": "ba",
+                "maxCost": 100
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "zzzzyyyyxxxwwwwvvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbbaaa",
+                "t": "aaabbbcccdddeeefffggghhiijjkkllmmnnoopppqqrrssttuuvvvwwwxxxxyyyyzzzz",
+                "maxCost": 200
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttrrqqppoonnmmllkkjjiihhggffeeeeddccbaa",
+                "maxCost": 50
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "t": "zzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "maxCost": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "t": "zyxwzyxwzyxwzyx",
+                "maxCost": 50
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                "t": "mnopmnopmnopmnopmnopmnopmnopmnopmnop",
+                "maxCost": 100
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "xyzw",
+                "maxCost": 12
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccdddd",
+                "t": "ddddccccbbbbaaaa",
+                "maxCost": 20
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                "t": "zyxwzyxwzyxwzyxwzyxwzyxwzyxwzyxwzyxwzyxw",
+                "maxCost": 50
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "jihgfedcba",
+                "maxCost": 30
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaa",
+                "t": "zzzzzzzzzz",
+                "maxCost": 250
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcba",
+                "maxCost": 150
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabbaabbaabbaabbaabbaabbaabbaabb",
+                "t": "zzyyzzyyzzyyzzyyzzyyzzyyzzyyzzyyzzyyzzyy",
+                "maxCost": 150
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "t": "qwertyuiopasdfghjklzxcvbnm",
+                "maxCost": 0
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "t": "mnbvcxzlkjhgfdsapoiuytrewq",
+                "maxCost": 150
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz",
+                "t": "aaaaaaaaaa",
+                "maxCost": 100
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zabcdefghijklmnopqrstuvwxy",
+                "maxCost": 26
+            },
+            "expected": 25
+        }
+    ],
+    "invoke": {
+        "python": "Solution().equalSubstring",
+        "typescript": "Solution().equalSubstring"
+    }
+}

@@ -1,0 +1,876 @@
+{
+    "id": "decode-string",
+    "questionId": 394,
+    "difficulty": "Medium",
+    "tags": ["Stack", "Recursion", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "2[ab3[cd]]"
+            },
+            "expected": "abcdcdcdabcdcdcd"
+        },
+        {
+            "args": {
+                "s": "2[ab3[c]]"
+            },
+            "expected": "abcccabccc"
+        },
+        {
+            "args": {
+                "s": "1[a1[b1[c]]]"
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "s": "2[3[a]]"
+            },
+            "expected": "aaaaaa"
+        },
+        {
+            "args": {
+                "s": "a1[b]"
+            },
+            "expected": "ab"
+        },
+        {
+            "args": {
+                "s": "3[a3[b]1[c]]"
+            },
+            "expected": "abbbcabbbcabbbc"
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "10[abc]"
+            },
+            "expected": "abcabcabcabcabcabcabcabcabcabc"
+        },
+        {
+            "args": {
+                "s": "1[2[3[4[a]]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "2[3[a]b]"
+            },
+            "expected": "aaabaaab"
+        },
+        {
+            "args": {
+                "s": "4[ab]"
+            },
+            "expected": "abababab"
+        },
+        {
+            "args": {
+                "s": "1[a2[b3[c]]]"
+            },
+            "expected": "abcccbccc"
+        },
+        {
+            "args": {
+                "s": "10[a]"
+            },
+            "expected": "aaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "a2[b]c"
+            },
+            "expected": "abbc"
+        },
+        {
+            "args": {
+                "s": "2[abc]3[cd]ef"
+            },
+            "expected": "abcabccdcdcdef"
+        },
+        {
+            "args": {
+                "s": "1[a]"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "3[a2[c]]"
+            },
+            "expected": "accaccacc"
+        },
+        {
+            "args": {
+                "s": "3[a]2[bc]"
+            },
+            "expected": "aaabcbc"
+        },
+        {
+            "args": {
+                "s": "abc"
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "s": "3[a3[b2[c]]]"
+            },
+            "expected": "abccbccbccabccbccbccabccbccbcc"
+        },
+        {
+            "args": {
+                "s": "100[ab]"
+            },
+            "expected": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"
+        },
+        {
+            "args": {
+                "s": "a[b]"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "2[b3[c]]"
+            },
+            "expected": "bcccbccc"
+        },
+        {
+            "args": {
+                "s": "1[xyz]2[uvw]"
+            },
+            "expected": "xyzuvwuvw"
+        },
+        {
+            "args": {
+                "s": "a2[b3[c]]"
+            },
+            "expected": "abcccbccc"
+        },
+        {
+            "args": {
+                "s": "1[a1[b]]"
+            },
+            "expected": "ab"
+        },
+        {
+            "args": {
+                "s": "4[3[z]2[y]]"
+            },
+            "expected": "zzzyyzzzyyzzzyyzzzyy"
+        },
+        {
+            "args": {
+                "s": "5[ab3[c2[d]]]"
+            },
+            "expected": "abcddcddcddabcddcddcddabcddcddcddabcddcddcddabcddcddcdd"
+        },
+        {
+            "args": {
+                "s": "5[a1[b2[c3[d4[e]]]]]"
+            },
+            "expected": "abcdeeeedeeeedeeeecdeeeedeeeedeeeeabcdeeeedeeeedeeeecdeeeedeeeedeeeeabcdeeeedeeeedeeeecdeeeedeeeedeeeeabcdeeeedeeeedeeeecdeeeedeeeedeeeeabcdeeeedeeeedeeeecdeeeedeeeedeeee"
+        },
+        {
+            "args": {
+                "s": "a2[b3[c4[d5[e6[f7[g]]]]]]"
+            },
+            "expected": "abcdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggcdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggcdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggbcdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggcdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggcdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggdefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfgggggggefgggggggfgggggggfgggggggfgggggggfgggggggfggggggg"
+        },
+        {
+            "args": {
+                "s": "abc3[d2[e1[f]]]"
+            },
+            "expected": "abcdefefdefefdefef"
+        },
+        {
+            "args": {
+                "s": "5[a2[b3[c4[d]]]]"
+            },
+            "expected": "abcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcdddd"
+        },
+        {
+            "args": {
+                "s": "3[2[mn]1[op]2[qr]]"
+            },
+            "expected": "mnmnopqrqrmnmnopqrqrmnmnopqrqr"
+        },
+        {
+            "args": {
+                "s": "5[c2[d]]"
+            },
+            "expected": "cddcddcddcddcdd"
+        },
+        {
+            "args": {
+                "s": "a1[b2[c3[d]]]"
+            },
+            "expected": "abcdddcddd"
+        },
+        {
+            "args": {
+                "s": "7[2[x]3[y]]"
+            },
+            "expected": "xxyyyxxyyyxxyyyxxyyyxxyyyxxyyyxxyyy"
+        },
+        {
+            "args": {
+                "s": "2[ab3[cd]]4[ef5[gh]]"
+            },
+            "expected": "abcdcdcdabcdcdcdefghghghghghefghghghghghefghghghghghefghghghghgh"
+        },
+        {
+            "args": {
+                "s": "3[ab2[c]]4[de]"
+            },
+            "expected": "abccabccabccdededede"
+        },
+        {
+            "args": {
+                "s": "4[ab3[c2[d]]]"
+            },
+            "expected": "abcddcddcddabcddcddcddabcddcddcddabcddcddcdd"
+        },
+        {
+            "args": {
+                "s": "3[a2[b1[c0[d]]]]"
+            },
+            "expected": "abcbcabcbcabcbc"
+        },
+        {
+            "args": {
+                "s": "3[a4[b5[c6[d7[e8[f]]]]]]"
+            },
+            "expected": "abcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffabcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffabcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffbcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffcdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffdeffffffffeffffffffeffffffffeffffffffeffffffffeffffffffeffffffff"
+        },
+        {
+            "args": {
+                "s": "3[2[a]1[b]]2[3[c]4[d]]"
+            },
+            "expected": "aabaabaabcccddddcccdddd"
+        },
+        {
+            "args": {
+                "s": "abc2[def3[ghi]]jkl4[mno5[pqr]]stu"
+            },
+            "expected": "abcdefghighighidefghighighijklmnopqrpqrpqrpqrpqrmnopqrpqrpqrpqrpqrmnopqrpqrpqrpqrpqrmnopqrpqrpqrpqrpqrstu"
+        },
+        {
+            "args": {
+                "s": "2[3[a]2[b3[c]2[d]]]"
+            },
+            "expected": "aaabcccddbcccddaaabcccddbcccdd"
+        },
+        {
+            "args": {
+                "s": "6[ab2[cd3[ef]]]"
+            },
+            "expected": "abcdefefefcdefefefabcdefefefcdefefefabcdefefefcdefefefabcdefefefcdefefefabcdefefefcdefefefabcdefefefcdefefef"
+        },
+        {
+            "args": {
+                "s": "7[fg]2[h3[i]]"
+            },
+            "expected": "fgfgfgfgfgfgfghiiihiii"
+        },
+        {
+            "args": {
+                "s": "7[x2[y3[z4[w]]]]"
+            },
+            "expected": "xyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwwwxyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwwwxyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwwwxyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwwwxyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwwwxyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwwwxyzwwwwzwwwwzwwwwyzwwwwzwwwwzwwww"
+        },
+        {
+            "args": {
+                "s": "5[2[x3[y]]4[z]]"
+            },
+            "expected": "xyyyxyyyzzzzxyyyxyyyzzzzxyyyxyyyzzzzxyyyxyyyzzzzxyyyxyyyzzzz"
+        },
+        {
+            "args": {
+                "s": "1[a2[b3[c4[d5[e6[f7[g8[h9[i]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "6[ab2[cd3[ef4[gh]]]]"
+            },
+            "expected": "abcdefghghghghefghghghghefghghghghcdefghghghghefghghghghefghghghghabcdefghghghghefghghghghefghghghghcdefghghghghefghghghghefghghghghabcdefghghghghefghghghghefghghghghcdefghghghghefghghghghefghghghghabcdefghghghghefghghghghefghghghghcdefghghghghefghghghghefghghghghabcdefghghghghefghghghghefghghghghcdefghghghghefghghghghefghghghghabcdefghghghghefghghghghefghghghghcdefghghghghefghghghghefghghghgh"
+        },
+        {
+            "args": {
+                "s": "2[x2[y3[z]]]1[a]"
+            },
+            "expected": "xyzzzyzzzxyzzzyzzza"
+        },
+        {
+            "args": {
+                "s": "7[z]6[y5[x4[w3[v2[u1[t]]]]]]"
+            },
+            "expected": "zzzzzzzyxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututyxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututyxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututyxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututyxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututyxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvututxwvututvututvututwvututvututvututwvututvututvututwvututvututvutut"
+        },
+        {
+            "args": {
+                "s": "2[a3[b4[c]]]"
+            },
+            "expected": "abccccbccccbccccabccccbccccbcccc"
+        },
+        {
+            "args": {
+                "s": "10[a9[bc3[de]]]"
+            },
+            "expected": "abcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededeabcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdededebcdedede"
+        },
+        {
+            "args": {
+                "s": "3[ab]4[cd]5[ef]"
+            },
+            "expected": "abababcdcdcdcdefefefefef"
+        },
+        {
+            "args": {
+                "s": "1[a2[b3[c4[d5[e6[f7[g8[h9[i10[j]]]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "10[ab]"
+            },
+            "expected": "abababababababababab"
+        },
+        {
+            "args": {
+                "s": "5[4[3[2[1[x]]]]]"
+            },
+            "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        {
+            "args": {
+                "s": "2[ab3[cd4[ef]]]"
+            },
+            "expected": "abcdefefefefcdefefefefcdefefefefabcdefefefefcdefefefefcdefefefef"
+        },
+        {
+            "args": {
+                "s": "5[ab]3[cd]2[ef1[gh]]"
+            },
+            "expected": "abababababcdcdcdefghefgh"
+        },
+        {
+            "args": {
+                "s": "7[2[pq]3[rs]]"
+            },
+            "expected": "pqpqrsrsrspqpqrsrsrspqpqrsrsrspqpqrsrsrspqpqrsrsrspqpqrsrsrspqpqrsrsrs"
+        },
+        {
+            "args": {
+                "s": "2[3[a]b]4[c5[d]]"
+            },
+            "expected": "aaabaaabcdddddcdddddcdddddcddddd"
+        },
+        {
+            "args": {
+                "s": "3[2[3[4[a]]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "6[2[a]3[b]]"
+            },
+            "expected": "aabbbaabbbaabbbaabbbaabbbaabbb"
+        },
+        {
+            "args": {
+                "s": "2[abc3[def4[ghi5[jkl]]]]"
+            },
+            "expected": "abcdefghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljkldefghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljkldefghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklabcdefghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljkldefghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljkldefghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljklghijkljkljkljkljkl"
+        },
+        {
+            "args": {
+                "s": "8[7[6[5[4[3[2[1[x]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "2[a3[b4[c5[d6[e]]]]]"
+            },
+            "expected": "abcdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeebcdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeebcdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeeabcdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeebcdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeebcdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeeecdeeeeeedeeeeeedeeeeeedeeeeeedeeeeee"
+        },
+        {
+            "args": {
+                "s": "3[2[1[0[]]]]"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "10[f9[g]]"
+            },
+            "expected": "fgggggggggfgggggggggfgggggggggfgggggggggfgggggggggfgggggggggfgggggggggfgggggggggfgggggggggfggggggggg"
+        },
+        {
+            "args": {
+                "s": "15[abc10[de]]"
+            },
+            "expected": "abcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdedededededededededeabcdededededededededede"
+        },
+        {
+            "args": {
+                "s": "5[k9[l10[m]]]"
+            },
+            "expected": "klmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmklmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmklmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmklmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmklmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmmlmmmmmmmmmm"
+        },
+        {
+            "args": {
+                "s": "5[xy2[z3[w4[v]]]]"
+            },
+            "expected": "xyzwvvvvwvvvvwvvvvzwvvvvwvvvvwvvvvxyzwvvvvwvvvvwvvvvzwvvvvwvvvvwvvvvxyzwvvvvwvvvvwvvvvzwvvvvwvvvvwvvvvxyzwvvvvwvvvvwvvvvzwvvvvwvvvvwvvvvxyzwvvvvwvvvvwvvvvzwvvvvwvvvvwvvvv"
+        },
+        {
+            "args": {
+                "s": "1[1[1[1[ab]]]]"
+            },
+            "expected": "ab"
+        },
+        {
+            "args": {
+                "s": "5[1[2[3[4[5[a]]]]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "4[ab2[c]]"
+            },
+            "expected": "abccabccabccabcc"
+        },
+        {
+            "args": {
+                "s": "4[a2[b3[c]]]"
+            },
+            "expected": "abcccbcccabcccbcccabcccbcccabcccbccc"
+        },
+        {
+            "args": {
+                "s": "2[x3[y4[z]]]"
+            },
+            "expected": "xyzzzzyzzzzyzzzzxyzzzzyzzzzyzzzz"
+        },
+        {
+            "args": {
+                "s": "3[2[3[4[a]]]5[b]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaaaaaaaaaaabbbbb"
+        },
+        {
+            "args": {
+                "s": "10[ab2[cd]ef3[gh]]"
+            },
+            "expected": "abcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghghabcdcdefghghgh"
+        },
+        {
+            "args": {
+                "s": "5[abc2[def]]"
+            },
+            "expected": "abcdefdefabcdefdefabcdefdefabcdefdefabcdefdef"
+        },
+        {
+            "args": {
+                "s": "3[2[3[a2[b]]]]"
+            },
+            "expected": "abbabbabbabbabbabbabbabbabbabbabbabbabbabbabbabbabbabb"
+        },
+        {
+            "args": {
+                "s": "2[3[ab]]"
+            },
+            "expected": "abababababab"
+        },
+        {
+            "args": {
+                "s": "3[xy2[z]]2[ab]"
+            },
+            "expected": "xyzzxyzzxyzzabab"
+        },
+        {
+            "args": {
+                "s": "5[a2[b3[c4[d5[e6[f7[g8[h9[i10[j]]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "10[1[a]2[b]3[c]4[d]5[e]]"
+            },
+            "expected": "abbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeeeabbcccddddeeeee"
+        },
+        {
+            "args": {
+                "s": "3[2[3[4[x]]]]"
+            },
+            "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        {
+            "args": {
+                "s": "10[a]9[b8[c7[d6[e5[f4[g3[h2[i1[j]]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "2[3[a]b4[c]]"
+            },
+            "expected": "aaabccccaaabcccc"
+        },
+        {
+            "args": {
+                "s": "10[x]"
+            },
+            "expected": "xxxxxxxxxx"
+        },
+        {
+            "args": {
+                "s": "4[2[xy]z]"
+            },
+            "expected": "xyxyzxyxyzxyxyzxyxyz"
+        },
+        {
+            "args": {
+                "s": "6[a5[b4[c3[d2[e1[f]]]]]]"
+            },
+            "expected": "abcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefabcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefabcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefabcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefabcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefabcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefbcdefefdefefdefefcdefefdefefdefefcdefefdefefdefefcdefefdefefdefef"
+        },
+        {
+            "args": {
+                "s": "4[x5[yz]w]"
+            },
+            "expected": "xyzyzyzyzyzwxyzyzyzyzyzwxyzyzyzyzyzwxyzyzyzyzyzw"
+        },
+        {
+            "args": {
+                "s": "4[3[2[b1[c]]]]"
+            },
+            "expected": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc"
+        },
+        {
+            "args": {
+                "s": "2[x3[xy4[z]]]"
+            },
+            "expected": "xxyzzzzxyzzzzxyzzzzxxyzzzzxyzzzzxyzzzz"
+        },
+        {
+            "args": {
+                "s": "2[3[a2[b]]c]"
+            },
+            "expected": "abbabbabbcabbabbabbc"
+        },
+        {
+            "args": {
+                "s": "9[abc]8[def]7[ghi]"
+            },
+            "expected": "abcabcabcabcabcabcabcabcabcdefdefdefdefdefdefdefdefghighighighighighighi"
+        },
+        {
+            "args": {
+                "s": "4[ab]5[cd]"
+            },
+            "expected": "ababababcdcdcdcdcd"
+        },
+        {
+            "args": {
+                "s": "2[3[xy]z]"
+            },
+            "expected": "xyxyxyzxyxyxyz"
+        },
+        {
+            "args": {
+                "s": "4[x3[y2[z]]]"
+            },
+            "expected": "xyzzyzzyzzxyzzyzzyzzxyzzyzzyzzxyzzyzzyzz"
+        },
+        {
+            "args": {
+                "s": "3[2[a]b]"
+            },
+            "expected": "aabaabaab"
+        },
+        {
+            "args": {
+                "s": "abc2[3[de]fg]"
+            },
+            "expected": "abcdededefgdededefg"
+        },
+        {
+            "args": {
+                "s": "1[abc2[def3[ghi]]]"
+            },
+            "expected": "abcdefghighighidefghighighi"
+        },
+        {
+            "args": {
+                "s": "2[abc2[def3[ghi]]]"
+            },
+            "expected": "abcdefghighighidefghighighiabcdefghighighidefghighighi"
+        },
+        {
+            "args": {
+                "s": "1[2[3[4[5[a]]]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "5[ab3[cd]]"
+            },
+            "expected": "abcdcdcdabcdcdcdabcdcdcdabcdcdcdabcdcdcd"
+        },
+        {
+            "args": {
+                "s": "2[x3[y4[z]]]1[w]"
+            },
+            "expected": "xyzzzzyzzzzyzzzzxyzzzzyzzzzyzzzzw"
+        },
+        {
+            "args": {
+                "s": "7[2[a]3[b]]"
+            },
+            "expected": "aabbbaabbbaabbbaabbbaabbbaabbbaabbb"
+        },
+        {
+            "args": {
+                "s": "9[8[7[6[5[4[3[2[1[0[a]]]]]]]]]]"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "4[x5[y]]"
+            },
+            "expected": "xyyyyyxyyyyyxyyyyyxyyyyy"
+        },
+        {
+            "args": {
+                "s": "2[abc3[def4[ghi]]]"
+            },
+            "expected": "abcdefghighighighidefghighighighidefghighighighiabcdefghighighighidefghighighighidefghighighighi"
+        },
+        {
+            "args": {
+                "s": "5[ab2[c]]3[xy]2[de]"
+            },
+            "expected": "abccabccabccabccabccxyxyxydede"
+        },
+        {
+            "args": {
+                "s": "5[abc2[de]]"
+            },
+            "expected": "abcdedeabcdedeabcdedeabcdedeabcdede"
+        },
+        {
+            "args": {
+                "s": "7[k2[3[xyz]]]"
+            },
+            "expected": "kxyzxyzxyzxyzxyzxyzkxyzxyzxyzxyzxyzxyzkxyzxyzxyzxyzxyzxyzkxyzxyzxyzxyzxyzxyzkxyzxyzxyzxyzxyzxyzkxyzxyzxyzxyzxyzxyzkxyzxyzxyzxyzxyzxyz"
+        },
+        {
+            "args": {
+                "s": "1[abc2[def]]"
+            },
+            "expected": "abcdefdef"
+        },
+        {
+            "args": {
+                "s": "6[a2[b3[c4[d5[e6[f7[g8[h9[i]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "2[3[4[5[6[7[8[9[0[1[a]]]]]]]]]]"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "3[2[1[x]]]"
+            },
+            "expected": "xxxxxx"
+        },
+        {
+            "args": {
+                "s": "5[ab2[cd]]"
+            },
+            "expected": "abcdcdabcdcdabcdcdabcdcdabcdcd"
+        },
+        {
+            "args": {
+                "s": "6[5[4[3[2[1[a]]]]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "7[xyz]3[abc2[def1[ghi]]]"
+            },
+            "expected": "xyzxyzxyzxyzxyzxyzxyzabcdefghidefghiabcdefghidefghiabcdefghidefghi"
+        },
+        {
+            "args": {
+                "s": "x1[y2[z3[a4[b5[c]]]]]"
+            },
+            "expected": "xyzabcccccbcccccbcccccbcccccabcccccbcccccbcccccbcccccabcccccbcccccbcccccbccccczabcccccbcccccbcccccbcccccabcccccbcccccbcccccbcccccabcccccbcccccbcccccbccccc"
+        },
+        {
+            "args": {
+                "s": "x2[y3[z4[a5[b6[c7[d8[e9[f]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "3[ab2[c3[d]]]"
+            },
+            "expected": "abcdddcdddabcdddcdddabcdddcddd"
+        },
+        {
+            "args": {
+                "s": "6[a2[b3[c4[d]]]]"
+            },
+            "expected": "abcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcddddabcddddcddddcddddbcddddcddddcdddd"
+        },
+        {
+            "args": {
+                "s": "15[a]"
+            },
+            "expected": "aaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "5[2[3[a]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "abc2[def3[ghi4[jkl5[mno6[pqr7[stu8[vwx9[yz]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "2[xy3[z]]4[ab]"
+            },
+            "expected": "xyzzzxyzzzabababab"
+        },
+        {
+            "args": {
+                "s": "1[a2[b3[c4[d5[e]]]]]"
+            },
+            "expected": "abcdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeeebcdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeee"
+        },
+        {
+            "args": {
+                "s": "4[a3[b]]"
+            },
+            "expected": "abbbabbbabbbabbb"
+        },
+        {
+            "args": {
+                "s": "2[ab]3[cd]4[ef]"
+            },
+            "expected": "ababcdcdcdefefefef"
+        },
+        {
+            "args": {
+                "s": "1[2[3[4[5[6[7[8[9[0[x]]]]]]]]]]"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "9[abc8[def7[ghi6[jkl5[mno4[pqr3[stu2[vwx1[yz]]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "1[2[3[4[5[6[x]]]]]]"
+            },
+            "expected": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        {
+            "args": {
+                "s": "2[a3[b4[c5[d6[e7[f]]]]]]"
+            },
+            "expected": "abcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffbcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffbcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffabcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffbcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffbcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffcdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffffdefffffffefffffffefffffffefffffffefffffffefffffff"
+        },
+        {
+            "args": {
+                "s": "4[a3[b2[c1[d]]]]"
+            },
+            "expected": "abcdcdbcdcdbcdcdabcdcdbcdcdbcdcdabcdcdbcdcdbcdcdabcdcdbcdcdbcdcd"
+        },
+        {
+            "args": {
+                "s": "3[2[3[4[5[a]]]]]"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "1[xyz]2[uvw]3[2[abc]3[def]]4[ghi]"
+            },
+            "expected": "xyzuvwuvwabcabcdefdefdefabcabcdefdefdefabcabcdefdefdefghighighighi"
+        },
+        {
+            "args": {
+                "s": "3[xyz2[abc]4[def]]5[ghi]"
+            },
+            "expected": "xyzabcabcdefdefdefdefxyzabcabcdefdefdefdefxyzabcabcdefdefdefdefghighighighighi"
+        },
+        {
+            "args": {
+                "s": "2[2[2[2[2[abc]]]]]"
+            },
+            "expected": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc"
+        },
+        {
+            "args": {
+                "s": "3[b2[c]1[d]]4[e]"
+            },
+            "expected": "bccdbccdbccdeeee"
+        },
+        {
+            "args": {
+                "s": "1[2[3[4[5[a6[b7[c8[d9[e]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "s": "a2[b3[c4[d5[e]]]]"
+            },
+            "expected": "abcdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeeebcdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeeecdeeeeedeeeeedeeeeedeeeee"
+        },
+        {
+            "args": {
+                "s": "a2[b3[c4[d5[e6[f7[g8[h9[i]]]]]]]]"
+            },
+            "expected": "Execution timed out"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().decodeString",
+        "typescript": "Solution().decodeString"
+    }
+}

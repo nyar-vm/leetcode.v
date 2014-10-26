@@ -1,0 +1,334 @@
+{
+    "id": "count-k-subsequences-of-a-string-with-maximum-beauty",
+    "questionId": 2842,
+    "difficulty": "Hard",
+    "tags": ["Greedy", "Hash Table", "Math", "String", "Combinatorics"],
+    "tests": [
+        {
+            "args": {
+                "s": "aabbcc",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abbcd",
+                "k": 4
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz",
+                "k": 1
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijj",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaabbbbcccc",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 26
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 7
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbcccddd",
+                "k": 2
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 26
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "leetcode",
+                "k": 2
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "bcca",
+                "k": 2
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuv",
+                "k": 10
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "zzzz",
+                "k": 1
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "a",
+                "k": 1
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 4
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 26
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 10
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbcc",
+                "k": 2
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg",
+                "k": 7
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcdeabcdeabcdeabcde",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "nnnnooooooppppppqqqqqqqrrrrrrrrssssssssstttttttttuuuuuuuuuuuuuuuvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 4
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 15
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzaaabbbbccc",
+                "k": 4
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 13
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 20
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbbcccddddeeeeffffgggg",
+                "k": 2
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzaaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 26
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuuvwxyzaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 10
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz",
+                "k": 20
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "k": 3
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "k": 5
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 25
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 15
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 1
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 1
+            },
+            "expected": "Error: pow expected 2 arguments, got 3"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countKSubsequencesWithMaxBeauty",
+        "typescript": "Solution().countKSubsequencesWithMaxBeauty"
+    }
+}

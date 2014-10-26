@@ -1,0 +1,912 @@
+{
+    "id": "divide-a-string-into-groups-of-size-k",
+    "questionId": 2138,
+    "difficulty": "Easy",
+    "tags": ["String", "Simulation"],
+    "tests": [
+        {
+            "args": {
+                "s": "abcdefghij",
+                "k": 3,
+                "fill": "x"
+            },
+            "expected": ["abc", "def", "ghi", "jxx"]
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 2,
+                "fill": "z"
+            },
+            "expected": ["ab", "cd", "ef", "gz"]
+        },
+        {
+            "args": {
+                "s": "abcdefghi",
+                "k": 3,
+                "fill": "x"
+            },
+            "expected": ["abc", "def", "ghi"]
+        },
+        {
+            "args": {
+                "s": "a",
+                "k": 1,
+                "fill": "y"
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "s": "python",
+                "k": 6,
+                "fill": "q"
+            },
+            "expected": ["python"]
+        },
+        {
+            "args": {
+                "s": "hello world",
+                "k": 4,
+                "fill": "_"
+            },
+            "expected": ["hell", "o wo", "rld_"]
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 1,
+                "fill": "a"
+            },
+            "expected": ["p", "r", "o", "g", "r", "a", "m", "m", "i", "n", "g"]
+        },
+        {
+            "args": {
+                "s": "hello world",
+                "k": 2,
+                "fill": "_"
+            },
+            "expected": ["he", "ll", "o ", "wo", "rl", "d_"]
+        },
+        {
+            "args": {
+                "s": "",
+                "k": 3,
+                "fill": "b"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 2,
+                "fill": "q"
+            },
+            "expected": ["he", "ll", "oq"]
+        },
+        {
+            "args": {
+                "s": "abc",
+                "k": 5,
+                "fill": "z"
+            },
+            "expected": ["abczz"]
+        },
+        {
+            "args": {
+                "s": "a",
+                "k": 5,
+                "fill": "y"
+            },
+            "expected": ["ayyyy"]
+        },
+        {
+            "args": {
+                "s": "boundarycase",
+                "k": 8,
+                "fill": "b"
+            },
+            "expected": ["boundary", "casebbbb"]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstring",
+                "k": 5,
+                "fill": "p"
+            },
+            "expected": ["thisi", "saver", "ylong", "strin", "gpppp"]
+        },
+        {
+            "args": {
+                "s": "abcdexyz",
+                "k": 2,
+                "fill": "g"
+            },
+            "expected": ["ab", "cd", "ex", "yz"]
+        },
+        {
+            "args": {
+                "s": "repeatedcharacters",
+                "k": 7,
+                "fill": "e"
+            },
+            "expected": ["repeate", "dcharac", "terseee"]
+        },
+        {
+            "args": {
+                "s": "interview",
+                "k": 2,
+                "fill": "z"
+            },
+            "expected": ["in", "te", "rv", "ie", "wz"]
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 7,
+                "fill": "z"
+            },
+            "expected": ["abcdefg"]
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "k": 5,
+                "fill": "m"
+            },
+            "expected": ["abcde", "fghij", "kmmmm"]
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 8,
+                "fill": "n"
+            },
+            "expected": ["abcdefnn"]
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 3,
+                "fill": "a"
+            },
+            "expected": ["pro", "gra", "mmi", "nga"]
+        },
+        {
+            "args": {
+                "s": "complexstringwithfill",
+                "k": 9,
+                "fill": "r"
+            },
+            "expected": ["complexst", "ringwithf", "illrrrrrr"]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 5,
+                "fill": "t"
+            },
+            "expected": ["abcdt"]
+        },
+        {
+            "args": {
+                "s": "almostfill",
+                "k": 9,
+                "fill": "l"
+            },
+            "expected": ["almostfil", "lllllllll"]
+        },
+        {
+            "args": {
+                "s": "partitioning",
+                "k": 3,
+                "fill": "z"
+            },
+            "expected": ["par", "tit", "ion", "ing"]
+        },
+        {
+            "args": {
+                "s": "abcdefgxyz",
+                "k": 1,
+                "fill": "m"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "x", "y", "z"]
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 1,
+                "fill": "d"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g"]
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 4,
+                "fill": "o"
+            },
+            "expected": ["hell", "oooo"]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghij",
+                "k": 11,
+                "fill": "c"
+            },
+            "expected": ["abcdefghija", "bcdefghijcc"]
+        },
+        {
+            "args": {
+                "s": "repeatthispattern",
+                "k": 8,
+                "fill": "m"
+            },
+            "expected": ["repeatth", "ispatter", "nmmmmmmm"]
+        },
+        {
+            "args": {
+                "s": "ab",
+                "k": 2,
+                "fill": "l"
+            },
+            "expected": ["ab"]
+        },
+        {
+            "args": {
+                "s": "example",
+                "k": 2,
+                "fill": "z"
+            },
+            "expected": ["ex", "am", "pl", "ez"]
+        },
+        {
+            "args": {
+                "s": "fill",
+                "k": 1,
+                "fill": "f"
+            },
+            "expected": ["f", "i", "l", "l"]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatneedstobedivided",
+                "k": 5,
+                "fill": "a"
+            },
+            "expected": [
+                "thisi",
+                "saver",
+                "ylong",
+                "strin",
+                "gthat",
+                "needs",
+                "tobed",
+                "ivide",
+                "daaaa"
+            ]
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "k": 1,
+                "fill": "m"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
+        },
+        {
+            "args": {
+                "s": "short",
+                "k": 5,
+                "fill": "q"
+            },
+            "expected": ["short"]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstring",
+                "k": 5,
+                "fill": "m"
+            },
+            "expected": ["thisi", "saver", "ylong", "strin", "gmmmm"]
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "k": 2,
+                "fill": "w"
+            },
+            "expected": ["ab", "cd", "ef", "gh", "ij"]
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 4,
+                "fill": "p"
+            },
+            "expected": ["hell", "oppp"]
+        },
+        {
+            "args": {
+                "s": "almostfullgroup",
+                "k": 10,
+                "fill": "a"
+            },
+            "expected": ["almostfull", "groupaaaaa"]
+        },
+        {
+            "args": {
+                "s": "qwen",
+                "k": 2,
+                "fill": "q"
+            },
+            "expected": ["qw", "en"]
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 1,
+                "fill": "b"
+            },
+            "expected": ["h", "e", "l", "l", "o"]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 2,
+                "fill": "p"
+            },
+            "expected": ["ab", "cd"]
+        },
+        {
+            "args": {
+                "s": "partitioning",
+                "k": 5,
+                "fill": "p"
+            },
+            "expected": ["parti", "tioni", "ngppp"]
+        },
+        {
+            "args": {
+                "s": "thisisanexample",
+                "k": 3,
+                "fill": "y"
+            },
+            "expected": ["thi", "sis", "ane", "xam", "ple"]
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 10,
+                "fill": "q"
+            },
+            "expected": ["abcdefgqqq"]
+        },
+        {
+            "args": {
+                "s": "samecharacter",
+                "k": 2,
+                "fill": "s"
+            },
+            "expected": ["sa", "me", "ch", "ar", "ac", "te", "rs"]
+        },
+        {
+            "args": {
+                "s": "fillingwithx",
+                "k": 7,
+                "fill": "x"
+            },
+            "expected": ["filling", "withxxx"]
+        },
+        {
+            "args": {
+                "s": "longerstring",
+                "k": 6,
+                "fill": "p"
+            },
+            "expected": ["longer", "string"]
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "k": 4,
+                "fill": "m"
+            },
+            "expected": ["algo", "rith", "mmmm"]
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "k": 6,
+                "fill": "o"
+            },
+            "expected": ["xyloph", "oneooo"]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatneedstobedivided",
+                "k": 5,
+                "fill": "x"
+            },
+            "expected": [
+                "thisi",
+                "saver",
+                "ylong",
+                "strin",
+                "gthat",
+                "needs",
+                "tobed",
+                "ivide",
+                "dxxxx"
+            ]
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcdea",
+                "k": 4,
+                "fill": "w"
+            },
+            "expected": ["abcd", "eabc", "deab", "cdea"]
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "k": 1,
+                "fill": "v"
+            },
+            "expected": ["x", "y", "z"]
+        },
+        {
+            "args": {
+                "s": "evenlydivisible",
+                "k": 2,
+                "fill": "q"
+            },
+            "expected": ["ev", "en", "ly", "di", "vi", "si", "bl", "eq"]
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 3,
+                "fill": "w"
+            },
+            "expected": ["pro", "gra", "mmi", "ngw"]
+        },
+        {
+            "args": {
+                "s": "boundarycase",
+                "k": 9,
+                "fill": "b"
+            },
+            "expected": ["boundaryc", "asebbbbbb"]
+        },
+        {
+            "args": {
+                "s": "onemoretestcase",
+                "k": 6,
+                "fill": "t"
+            },
+            "expected": ["onemor", "etestc", "asettt"]
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 3,
+                "fill": "v"
+            },
+            "expected": ["abc", "def", "gvv"]
+        },
+        {
+            "args": {
+                "s": "equalgroups",
+                "k": 5,
+                "fill": "w"
+            },
+            "expected": ["equal", "group", "swwww"]
+        },
+        {
+            "args": {
+                "s": "equalgroups",
+                "k": 3,
+                "fill": "c"
+            },
+            "expected": ["equ", "alg", "rou", "psc"]
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "k": 3,
+                "fill": "y"
+            },
+            "expected": ["qui", "ckb", "row", "nfo", "xyy"]
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 7,
+                "fill": "n"
+            },
+            "expected": ["abcdefn"]
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "k": 4,
+                "fill": "x"
+            },
+            "expected": ["abcd", "efgh", "ijxx"]
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 7,
+                "fill": "z"
+            },
+            "expected": ["abcdefz"]
+        },
+        {
+            "args": {
+                "s": "zebra",
+                "k": 1,
+                "fill": "x"
+            },
+            "expected": ["z", "e", "b", "r", "a"]
+        },
+        {
+            "args": {
+                "s": "this is a test",
+                "k": 5,
+                "fill": "_"
+            },
+            "expected": ["this ", "is a ", "test_"]
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 2,
+                "fill": "o"
+            },
+            "expected": ["ab", "cd", "ef"]
+        },
+        {
+            "args": {
+                "s": "thisisalongstring",
+                "k": 4,
+                "fill": "x"
+            },
+            "expected": ["this", "isal", "ongs", "trin", "gxxx"]
+        },
+        {
+            "args": {
+                "s": "partitioning",
+                "k": 7,
+                "fill": "f"
+            },
+            "expected": ["partiti", "oningff"]
+        },
+        {
+            "args": {
+                "s": "example",
+                "k": 10,
+                "fill": "z"
+            },
+            "expected": ["examplezzz"]
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "k": 4,
+                "fill": "e"
+            },
+            "expected": ["abcd", "efgh", "ijee"]
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "k": 5,
+                "fill": "a"
+            },
+            "expected": ["progr", "ammin", "gisfu", "naaaa"]
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatwillneedfilling",
+                "k": 7,
+                "fill": "a"
+            },
+            "expected": ["thisisa", "verylon", "gstring", "thatwil", "lneedfi", "llingaa"]
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfive",
+                "k": 6,
+                "fill": "j"
+            },
+            "expected": ["onetwo", "threef", "ourfiv", "ejjjjj"]
+        },
+        {
+            "args": {
+                "s": "world",
+                "k": 10,
+                "fill": "c"
+            },
+            "expected": ["worldccccc"]
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "k": 10,
+                "fill": "a"
+            },
+            "expected": ["xyzaaaaaaa"]
+        },
+        {
+            "args": {
+                "s": "hello world",
+                "k": 4,
+                "fill": "x"
+            },
+            "expected": ["hell", "o wo", "rldx"]
+        },
+        {
+            "args": {
+                "s": "abcdefgxyz",
+                "k": 4,
+                "fill": "a"
+            },
+            "expected": ["abcd", "efgx", "yzaa"]
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "k": 4,
+                "fill": "x"
+            },
+            "expected": ["abcd", "efgh", "ijkx"]
+        },
+        {
+            "args": {
+                "s": "partition",
+                "k": 1,
+                "fill": "m"
+            },
+            "expected": ["p", "a", "r", "t", "i", "t", "i", "o", "n"]
+        },
+        {
+            "args": {
+                "s": "algorithms",
+                "k": 7,
+                "fill": "b"
+            },
+            "expected": ["algorit", "hmsbbbb"]
+        },
+        {
+            "args": {
+                "s": "repeatedcharacterstest",
+                "k": 7,
+                "fill": "z"
+            },
+            "expected": ["repeate", "dcharac", "terstes", "tzzzzzz"]
+        },
+        {
+            "args": {
+                "s": "almostfull",
+                "k": 4,
+                "fill": "i"
+            },
+            "expected": ["almo", "stfu", "llii"]
+        },
+        {
+            "args": {
+                "s": "filler",
+                "k": 11,
+                "fill": "l"
+            },
+            "expected": ["fillerlllll"]
+        },
+        {
+            "args": {
+                "s": "",
+                "k": 3,
+                "fill": "n"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "k": 3,
+                "fill": "n"
+            },
+            "expected": ["abc", "def", "ghi", "jkn"]
+        },
+        {
+            "args": {
+                "s": "elephants",
+                "k": 3,
+                "fill": "p"
+            },
+            "expected": ["ele", "pha", "nts"]
+        },
+        {
+            "args": {
+                "s": "short",
+                "k": 10,
+                "fill": "p"
+            },
+            "expected": ["shortppppp"]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 6,
+                "fill": "w"
+            },
+            "expected": ["abcdww"]
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 2,
+                "fill": "x"
+            },
+            "expected": ["ab", "cd", "ef"]
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "k": 4,
+                "fill": "x"
+            },
+            "expected": ["quic", "kbro", "wnfo", "xxxx"]
+        },
+        {
+            "args": {
+                "s": "qwert",
+                "k": 10,
+                "fill": "n"
+            },
+            "expected": ["qwertnnnnn"]
+        },
+        {
+            "args": {
+                "s": "machinelearning",
+                "k": 8,
+                "fill": "d"
+            },
+            "expected": ["machinel", "earningd"]
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 1,
+                "fill": "z"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "s": "short",
+                "k": 10,
+                "fill": "b"
+            },
+            "expected": ["shortbbbbb"]
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 7,
+                "fill": "a"
+            },
+            "expected": ["program", "mingaaa"]
+        },
+        {
+            "args": {
+                "s": "datastructure",
+                "k": 5,
+                "fill": "a"
+            },
+            "expected": ["datas", "truct", "ureaa"]
+        },
+        {
+            "args": {
+                "s": "helloWorld",
+                "k": 3,
+                "fill": "x"
+            },
+            "expected": ["hel", "loW", "orl", "dxx"]
+        },
+        {
+            "args": {
+                "s": "abcdefghijkmnopqrstuvwxyz",
+                "k": 5,
+                "fill": "x"
+            },
+            "expected": ["abcde", "fghij", "kmnop", "qrstu", "vwxyz"]
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "k": 3,
+                "fill": "p"
+            },
+            "expected": ["abc", "def", "ghi", "jkp"]
+        },
+        {
+            "args": {
+                "s": "divisiblebyk",
+                "k": 2,
+                "fill": "h"
+            },
+            "expected": ["di", "vi", "si", "bl", "eb", "yk"]
+        },
+        {
+            "args": {
+                "s": "qwenassistant",
+                "k": 7,
+                "fill": "a"
+            },
+            "expected": ["qwenass", "istanta"]
+        },
+        {
+            "args": {
+                "s": "cloudcomputing",
+                "k": 6,
+                "fill": "c"
+            },
+            "expected": ["cloudc", "omputi", "ngcccc"]
+        },
+        {
+            "args": {
+                "s": "longerstringexample",
+                "k": 6,
+                "fill": "n"
+            },
+            "expected": ["longer", "string", "exampl", "ennnnn"]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklnm",
+                "k": 4,
+                "fill": "r"
+            },
+            "expected": ["abcd", "efgh", "ijkl", "nmrr"]
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "k": 5,
+                "fill": "b"
+            },
+            "expected": ["algor", "ithmb"]
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "k": 3,
+                "fill": "m"
+            },
+            "expected": ["qui", "ckb", "row", "nfo", "xmm"]
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "k": 4,
+                "fill": "x"
+            },
+            "expected": ["abcd"]
+        },
+        {
+            "args": {
+                "s": "almostfull",
+                "k": 8,
+                "fill": "o"
+            },
+            "expected": ["almostfu", "lloooooo"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().divideString",
+        "typescript": "Solution().divideString"
+    }
+}

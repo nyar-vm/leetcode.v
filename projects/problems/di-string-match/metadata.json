@@ -1,0 +1,985 @@
+{
+    "id": "di-string-match",
+    "questionId": 942,
+    "difficulty": "Easy",
+    "tags": ["Greedy", "Array", "Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "DDI"
+            },
+            "expected": [3, 2, 0, 1]
+        },
+        {
+            "args": {
+                "s": "DDIDDI"
+            },
+            "expected": [6, 5, 0, 4, 3, 1, 2]
+        },
+        {
+            "args": {
+                "s": "IDDD"
+            },
+            "expected": [0, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDD"
+            },
+            "expected": [8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "I"
+            },
+            "expected": [0, 1]
+        },
+        {
+            "args": {
+                "s": "IIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6]
+        },
+        {
+            "args": {
+                "s": "D"
+            },
+            "expected": [1, 0]
+        },
+        {
+            "args": {
+                "s": "IIII"
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "IDDDIII"
+            },
+            "expected": [0, 7, 6, 5, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "DDII"
+            },
+            "expected": [4, 3, 0, 1, 2]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDID"
+            },
+            "expected": [0, 10, 1, 9, 2, 8, 3, 7, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        {
+            "args": {
+                "s": "DDDDDD"
+            },
+            "expected": [6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "III"
+            },
+            "expected": [0, 1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "IDID"
+            },
+            "expected": [0, 4, 1, 3, 2]
+        },
+        {
+            "args": {
+                "s": "DDDD"
+            },
+            "expected": [4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDIDDID"
+            },
+            "expected": [7, 6, 0, 5, 4, 1, 3, 2]
+        },
+        {
+            "args": {
+                "s": "IDIDIDID"
+            },
+            "expected": [0, 8, 1, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IIDDD"
+            },
+            "expected": [0, 1, 5, 4, 3, 2]
+        },
+        {
+            "args": {
+                "s": "DDDII"
+            },
+            "expected": [5, 4, 3, 0, 1, 2]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDDDDDD"
+            },
+            "expected": [0, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDIIIDDDIIID"
+            },
+            "expected": [12, 11, 0, 1, 2, 10, 9, 8, 3, 4, 5, 7, 6]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDII"
+            },
+            "expected": [0, 10, 9, 8, 7, 6, 5, 4, 1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "DDDDDDIIIII"
+            },
+            "expected": [11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDIIIII"
+            },
+            "expected": [0, 14, 13, 12, 11, 10, 9, 8, 7, 1, 2, 3, 4, 5, 6]
+        },
+        {
+            "args": {
+                "s": "IIDIIDIIDI"
+            },
+            "expected": [0, 1, 10, 2, 3, 9, 4, 5, 8, 6, 7]
+        },
+        {
+            "args": {
+                "s": "DDIDDIDDID"
+            },
+            "expected": [10, 9, 0, 8, 7, 1, 6, 5, 2, 4, 3]
+        },
+        {
+            "args": {
+                "s": "DDDDDDIDID"
+            },
+            "expected": [10, 9, 8, 7, 6, 5, 0, 4, 1, 3, 2]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDIDDDD"
+            },
+            "expected": [14, 13, 12, 11, 10, 9, 8, 7, 6, 0, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        {
+            "args": {
+                "s": "IDDDDDIIIIII"
+            },
+            "expected": [0, 12, 11, 10, 9, 8, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDDDDD"
+            },
+            "expected": [16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDDDDDIII"
+            },
+            "expected": [9, 8, 7, 6, 5, 4, 0, 1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "IIDDDDIIIDDD"
+            },
+            "expected": [0, 1, 12, 11, 10, 9, 2, 3, 4, 8, 7, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDIIIII"
+            },
+            "expected": [14, 13, 12, 11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDIIIID"
+            },
+            "expected": [9, 8, 7, 6, 0, 1, 2, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDIDIDID"
+            },
+            "expected": [0, 14, 1, 13, 2, 12, 3, 11, 4, 10, 5, 9, 6, 8, 7]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDI"
+            },
+            "expected": [10, 9, 8, 7, 6, 5, 4, 3, 2, 0, 1]
+        },
+        {
+            "args": {
+                "s": "DDDIDIDIDI"
+            },
+            "expected": [10, 9, 8, 0, 7, 1, 6, 2, 5, 3, 4]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDID"
+            },
+            "expected": [11, 10, 9, 8, 7, 6, 5, 4, 3, 0, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDIDIDIDID"
+            },
+            "expected": [12, 11, 10, 9, 0, 8, 1, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IIDIIIIIIIIDIDDDDD"
+            },
+            "expected": [0, 1, 18, 2, 3, 4, 5, 6, 7, 8, 9, 17, 10, 16, 15, 14, 13, 12, 11]
+        },
+        {
+            "args": {
+                "s": "IDDDIIIIIIII"
+            },
+            "expected": [0, 12, 11, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        },
+        {
+            "args": {
+                "s": "DDDDIIIIIIIDIDIDIDIDID"
+            },
+            "expected": [
+                22, 21, 20, 19, 0, 1, 2, 3, 4, 5, 6, 18, 7, 17, 8, 16, 9, 15, 10, 14, 11, 13, 12
+            ]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIID"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 13]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDIDID"
+            },
+            "expected": [0, 12, 1, 11, 2, 10, 3, 9, 4, 8, 5, 7, 6]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIDDDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 12, 11, 10, 9, 8, 7]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDDDDID"
+            },
+            "expected": [0, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 1, 3, 2]
+        },
+        {
+            "args": {
+                "s": "IIDIIIDDD"
+            },
+            "expected": [0, 1, 9, 2, 3, 4, 8, 7, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIID"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 10]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 10, 9, 8, 7]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDIIIIIIIIIID"
+            },
+            "expected": [
+                21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 10
+            ]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDIDI"
+            },
+            "expected": [0, 11, 1, 10, 2, 9, 3, 8, 4, 7, 5, 6]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDII"
+            },
+            "expected": [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 0, 1, 2]
+        },
+        {
+            "args": {
+                "s": "IDDDIIDDDIIDDDIIII"
+            },
+            "expected": [0, 18, 17, 16, 1, 2, 15, 14, 13, 3, 4, 12, 11, 10, 5, 6, 7, 8, 9]
+        },
+        {
+            "args": {
+                "s": "DDDDIIIIDDDD"
+            },
+            "expected": [12, 11, 10, 9, 0, 1, 2, 3, 8, 7, 6, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        },
+        {
+            "args": {
+                "s": "IDIDIDDDDD"
+            },
+            "expected": [0, 10, 1, 9, 2, 8, 7, 6, 5, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIDDDDDDDDIIIIIIIII"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 28, 27, 26, 25, 24, 23, 22, 21, 11, 12, 13, 14,
+                15, 16, 17, 18, 19, 20
+            ]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDDDD"
+            },
+            "expected": [0, 11, 1, 10, 2, 9, 3, 8, 7, 6, 5, 4]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDD"
+            },
+            "expected": [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "IIIIIDDDDDID"
+            },
+            "expected": [0, 1, 2, 3, 4, 12, 11, 10, 9, 8, 5, 7, 6]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDDDDDIIIIIIIII"
+            },
+            "expected": [
+                0, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            ]
+        },
+        {
+            "args": {
+                "s": "IIDIDIDIDI"
+            },
+            "expected": [0, 1, 10, 2, 9, 3, 8, 4, 7, 5, 6]
+        },
+        {
+            "args": {
+                "s": "IIIIIDDDDDDDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IIDIDIDIDID"
+            },
+            "expected": [0, 1, 11, 2, 10, 3, 9, 4, 8, 5, 7, 6]
+        },
+        {
+            "args": {
+                "s": "DDDIDIDIDID"
+            },
+            "expected": [11, 10, 9, 0, 8, 1, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IIIDDDIIID"
+            },
+            "expected": [0, 1, 2, 10, 9, 8, 3, 4, 5, 7, 6]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIIIIIIID"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 18]
+        },
+        {
+            "args": {
+                "s": "DDIIDDIDID"
+            },
+            "expected": [10, 9, 0, 1, 8, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "DDDDIDDDDDDD"
+            },
+            "expected": [12, 11, 10, 9, 0, 8, 7, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDDDD"
+            },
+            "expected": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DIIDIDIDID"
+            },
+            "expected": [10, 0, 1, 9, 2, 8, 3, 7, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDIII"
+            },
+            "expected": [0, 12, 11, 10, 9, 8, 7, 6, 5, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDD"
+            },
+            "expected": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDDIDDDDDDDD"
+            },
+            "expected": [12, 11, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "IIIIDDDDIII"
+            },
+            "expected": [0, 1, 2, 3, 11, 10, 9, 8, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "IIDIDID"
+            },
+            "expected": [0, 1, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        },
+        {
+            "args": {
+                "s": "IDIDDDIDID"
+            },
+            "expected": [0, 10, 1, 9, 8, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDDDDDDDDD"
+            },
+            "expected": [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDD"
+            },
+            "expected": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDI"
+            },
+            "expected": [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 0, 1]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDIDIDIDID"
+            },
+            "expected": [0, 16, 1, 15, 2, 14, 3, 13, 4, 12, 5, 11, 6, 10, 7, 9, 8]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDII"
+            },
+            "expected": [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 0, 1, 2]
+        },
+        {
+            "args": {
+                "s": "IIIIIDIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 12, 5, 6, 7, 8, 9, 10, 11]
+        },
+        {
+            "args": {
+                "s": "IIDDDDDDDDDD"
+            },
+            "expected": [0, 1, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIDDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 11, 10, 9, 8, 7]
+        },
+        {
+            "args": {
+                "s": "IIIIDDDDDDID"
+            },
+            "expected": [0, 1, 2, 3, 12, 11, 10, 9, 8, 7, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDIDDDDD"
+            },
+            "expected": [11, 10, 9, 8, 7, 0, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDIIII"
+            },
+            "expected": [8, 7, 6, 5, 0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIDDDDDDDDDD"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11
+            ]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDIIIII"
+            },
+            "expected": [12, 11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDDDDD"
+            },
+            "expected": [0, 12, 1, 11, 2, 10, 3, 9, 8, 7, 6, 5, 4]
+        },
+        {
+            "args": {
+                "s": "DDIDIDIDID"
+            },
+            "expected": [10, 9, 0, 8, 1, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "DDIIDDDIIID"
+            },
+            "expected": [11, 10, 0, 1, 9, 8, 7, 2, 3, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IIDDDDDDII"
+            },
+            "expected": [0, 1, 10, 9, 8, 7, 6, 5, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "IIDIDIDID"
+            },
+            "expected": [0, 1, 9, 2, 8, 3, 7, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDIIIIIII"
+            },
+            "expected": [14, 13, 12, 11, 10, 9, 8, 0, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIIIDDDDDDDDDDDD"
+            },
+            "expected": [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 26, 25, 24, 23, 22, 21, 20, 19, 18,
+                17, 16, 15, 14
+            ]
+        },
+        {
+            "args": {
+                "s": "IIIIIDDDDIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 12, 11, 10, 9, 5, 6, 7, 8]
+        },
+        {
+            "args": {
+                "s": "DIDIDIDIDIDIDIDIDIDIDIDID"
+            },
+            "expected": [
+                25, 0, 24, 1, 23, 2, 22, 3, 21, 4, 20, 5, 19, 6, 18, 7, 17, 8, 16, 9, 15, 10, 14,
+                11, 13, 12
+            ]
+        },
+        {
+            "args": {
+                "s": "DDDDIIIIIIIDDDIIIIIDDDIIII"
+            },
+            "expected": [
+                26, 25, 24, 23, 0, 1, 2, 3, 4, 5, 6, 22, 21, 20, 7, 8, 9, 10, 11, 19, 18, 17, 12,
+                13, 14, 15, 16
+            ]
+        },
+        {
+            "args": {
+                "s": "IIIDDDDDDD"
+            },
+            "expected": [0, 1, 2, 10, 9, 8, 7, 6, 5, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IIIIIDDDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 10, 9, 8, 7, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDIIII"
+            },
+            "expected": [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDDDD"
+            },
+            "expected": [0, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDIIIIIIIIIIIIDDDDD"
+            },
+            "expected": [
+                21, 20, 19, 18, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 16, 15, 14, 13, 12
+            ]
+        },
+        {
+            "args": {
+                "s": "IIIIIDDDDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 11, 10, 9, 8, 7, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IIDIIIIIDDDD"
+            },
+            "expected": [0, 1, 12, 2, 3, 4, 5, 6, 11, 10, 9, 8, 7]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDIII"
+            },
+            "expected": [11, 10, 9, 8, 7, 6, 5, 4, 0, 1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "DDIDIDIDIDID"
+            },
+            "expected": [12, 11, 0, 10, 1, 9, 2, 8, 3, 7, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDIDIDID"
+            },
+            "expected": [15, 14, 13, 12, 11, 10, 9, 8, 7, 0, 6, 1, 5, 2, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        },
+        {
+            "args": {
+                "s": "IIDDDIIIDDD"
+            },
+            "expected": [0, 1, 11, 10, 9, 2, 3, 4, 8, 7, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DIDIDIDIDI"
+            },
+            "expected": [10, 0, 9, 1, 8, 2, 7, 3, 6, 4, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDDD"
+            },
+            "expected": [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDDDDDIDDDII"
+            },
+            "expected": [12, 11, 10, 9, 8, 7, 0, 6, 5, 4, 1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "IDIDDDDDDD"
+            },
+            "expected": [0, 10, 1, 9, 8, 7, 6, 5, 4, 3, 2]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDIDIDIDIDIDIDIDID"
+            },
+            "expected": [
+                0, 24, 1, 23, 2, 22, 3, 21, 4, 20, 5, 19, 6, 18, 7, 17, 8, 16, 9, 15, 10, 14, 11,
+                13, 12
+            ]
+        },
+        {
+            "args": {
+                "s": "DDDDIIIIIII"
+            },
+            "expected": [11, 10, 9, 8, 0, 1, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "args": {
+                "s": "DDDDDDIIID"
+            },
+            "expected": [10, 9, 8, 7, 6, 5, 0, 1, 2, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IDIDIDIDIDIDIDIDIDID"
+            },
+            "expected": [0, 20, 1, 19, 2, 18, 3, 17, 4, 16, 5, 15, 6, 14, 7, 13, 8, 12, 9, 11, 10]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDD"
+            },
+            "expected": [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "IIDDDDDDID"
+            },
+            "expected": [0, 1, 10, 9, 8, 7, 6, 5, 2, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        },
+        {
+            "args": {
+                "s": "DDDDDDIIII"
+            },
+            "expected": [10, 9, 8, 7, 6, 5, 0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "DDDDIIDDII"
+            },
+            "expected": [10, 9, 8, 7, 0, 1, 6, 5, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "DIDIDIDIDID"
+            },
+            "expected": [11, 0, 10, 1, 9, 2, 8, 3, 7, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDID"
+            },
+            "expected": [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 0, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDD"
+            },
+            "expected": [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        },
+        {
+            "args": {
+                "s": "DDIIIDDDII"
+            },
+            "expected": [10, 9, 0, 1, 2, 8, 7, 6, 3, 4, 5]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDIIIIIIIIIIDDDDDDDD"
+            },
+            "expected": [
+                27, 26, 25, 24, 23, 22, 21, 20, 19, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 18, 17, 16, 15,
+                14, 13, 12, 11, 10
+            ]
+        },
+        {
+            "args": {
+                "s": "DDDDDIIIIII"
+            },
+            "expected": [11, 10, 9, 8, 7, 0, 1, 2, 3, 4, 5, 6]
+        },
+        {
+            "args": {
+                "s": "IIDDDDDIII"
+            },
+            "expected": [0, 1, 10, 9, 8, 7, 6, 2, 3, 4, 5]
+        },
+        {
+            "args": {
+                "s": "IDIDDDDDDDDDDD"
+            },
+            "expected": [0, 14, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDDIIIIIIIIIIIII"
+            },
+            "expected": [
+                26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                10, 11, 12, 13
+            ]
+        },
+        {
+            "args": {
+                "s": "IIDDDDIIID"
+            },
+            "expected": [0, 1, 10, 9, 8, 7, 2, 3, 4, 6, 5]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIID"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 12]
+        },
+        {
+            "args": {
+                "s": "DDIIDDDIID"
+            },
+            "expected": [10, 9, 0, 1, 8, 7, 6, 2, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "DIDIDIDID"
+            },
+            "expected": [9, 0, 8, 1, 7, 2, 6, 3, 5, 4]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIDDDDDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 14, 13, 12, 11, 10, 9, 8, 7]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDD"
+            },
+            "expected": [0, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIIIIID"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 11]
+        },
+        {
+            "args": {
+                "s": "IDIDIDDDDDD"
+            },
+            "expected": [0, 11, 1, 10, 2, 9, 8, 7, 6, 5, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IIDDDDDDDD"
+            },
+            "expected": [0, 1, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+        },
+        {
+            "args": {
+                "s": "IIDDDDDDDDID"
+            },
+            "expected": [0, 1, 12, 11, 10, 9, 8, 7, 6, 5, 2, 4, 3]
+        },
+        {
+            "args": {
+                "s": "IIIIIIIII"
+            },
+            "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        },
+        {
+            "args": {
+                "s": "IDDDDDDDDDD"
+            },
+            "expected": [0, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "IIIIIDIDIDIDIDIDIDDD"
+            },
+            "expected": [0, 1, 2, 3, 4, 20, 5, 19, 6, 18, 7, 17, 8, 16, 9, 15, 10, 14, 13, 12, 11]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDDDDDIDDD"
+            },
+            "expected": [19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 0, 4, 3, 2, 1]
+        },
+        {
+            "args": {
+                "s": "DDDDDDDDDDDIII"
+            },
+            "expected": [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 0, 1, 2, 3]
+        },
+        {
+            "args": {
+                "s": "DIIIDDDIIIID"
+            },
+            "expected": [12, 0, 1, 2, 11, 10, 9, 3, 4, 5, 6, 8, 7]
+        },
+        {
+            "args": {
+                "s": "IDDDIDDDID"
+            },
+            "expected": [0, 10, 9, 8, 1, 7, 6, 5, 2, 4, 3]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().diStringMatch",
+        "typescript": "Solution().diStringMatch"
+    }
+}

@@ -1,0 +1,943 @@
+{
+    "id": "maximum-total-area-occupied-by-pistons",
+    "questionId": 3279,
+    "difficulty": "Hard",
+    "tags": ["Array", "Hash Table", "String", "Counting", "Prefix Sum", "Simulation"],
+    "tests": [
+        {
+            "args": {
+                "height": 10,
+                "positions": [0, 1, 5, 10],
+                "directions": "UUDD"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "height": 100000,
+                "positions": [0, 0, 0, 0, 0],
+                "directions": "UUUUU"
+            },
+            "expected": 500000
+        },
+        {
+            "args": {
+                "height": 20,
+                "positions": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "directions": "UUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 200
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [0, 100, 50, 25, 75],
+                "directions": "UDUDU"
+            },
+            "expected": 300
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [5, 5, 5, 5],
+                "directions": "UUDD"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "height": 5,
+                "positions": [2, 5],
+                "directions": "UD"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [500, 500, 500, 500],
+                "directions": "UUUU"
+            },
+            "expected": 4000
+        },
+        {
+            "args": {
+                "height": 1,
+                "positions": [0, 1],
+                "directions": "UD"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [50, 50, 50, 50, 50],
+                "directions": "UUUUU"
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "height": 6,
+                "positions": [0, 0, 6, 3],
+                "directions": "UUDU"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "height": 3,
+                "positions": [0, 3],
+                "directions": "UD"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "height": 7,
+                "positions": [7, 6, 5, 4, 3, 2, 1],
+                "directions": "DDDDDDD"
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "height": 1000000,
+                "positions": [0, 1000000],
+                "directions": "UD"
+            },
+            "expected": 1000000
+        },
+        {
+            "args": {
+                "height": 7,
+                "positions": [1, 2, 3, 4, 5, 6, 7],
+                "directions": "UUUUUUU"
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "height": 1,
+                "positions": [0, 1],
+                "directions": "DU"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "height": 3,
+                "positions": [3, 3, 3],
+                "directions": "DDD"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "height": 6,
+                "positions": [0, 0, 6, 3],
+                "directions": "UUDU"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [10, 10, 10, 10, 10],
+                "directions": "DDDDD"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [1, 2, 3, 4, 5],
+                "directions": "UUUUU"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "height": 5,
+                "positions": [2, 5],
+                "directions": "UD"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [0, 5, 10],
+                "directions": "UDD"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "height": 200,
+                "positions": [
+                    100, 0, 200, 0, 100, 200, 0, 100, 200, 0, 100, 200, 0, 100, 200, 0, 100, 200, 0,
+                    100
+                ],
+                "directions": "UUDDUUDDUUUUDDUUDDUUUUDDUUDDUUDDUUUUDDUUDDUUUUDDUUDDUUDDUUUUDDUUDDUUUU"
+            },
+            "expected": 2100
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [0, 0, 0, 0, 100, 100, 100, 100, 100],
+                "directions": "UUUUUUUUU"
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "height": 50,
+                "positions": [25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "height": 500000,
+                "positions": [250000, 250000, 250000, 250000, 250000],
+                "directions": "UUUUU"
+            },
+            "expected": 2500000
+        },
+        {
+            "args": {
+                "height": 550,
+                "positions": [150, 400, 250, 350, 100, 500, 50, 450, 300, 200],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 4250
+        },
+        {
+            "args": {
+                "height": 300,
+                "positions": [1, 299, 2, 298, 3, 297, 4, 296, 5, 295],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 1530
+        },
+        {
+            "args": {
+                "height": 7,
+                "positions": [1, 1, 1, 6, 6, 6],
+                "directions": "UUUUUU"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "height": 50,
+                "positions": [25, 25, 25, 25, 25, 25],
+                "directions": "UUUUUU"
+            },
+            "expected": 300
+        },
+        {
+            "args": {
+                "height": 9,
+                "positions": [0, 9, 3, 6, 3, 6, 3, 6, 3, 6],
+                "directions": "UUDDUUDDUUDD"
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "height": 11,
+                "positions": [0, 11, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "directions": "UUDDDDDDDDDDD"
+            },
+            "expected": 121
+        },
+        {
+            "args": {
+                "height": 400,
+                "positions": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 400, 400, 400, 400, 400],
+                "directions": "UUUUUUUUUUDDDDDDDDDD"
+            },
+            "expected": 4000
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [0, 100, 50, 50, 0],
+                "directions": "UUDDU"
+            },
+            "expected": 350
+        },
+        {
+            "args": {
+                "height": 60,
+                "positions": [10, 50, 20, 40, 30, 30, 40, 20, 50, 10],
+                "directions": "UUDDUUDDUU"
+            },
+            "expected": 320
+        },
+        {
+            "args": {
+                "height": 150,
+                "positions": [75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75],
+                "directions": "UUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 2400
+        },
+        {
+            "args": {
+                "height": 20,
+                "positions": [0, 20, 0, 20, 0, 20, 0, 20, 0, 20],
+                "directions": "UDUDUDUDUD"
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "directions": "UUDUDDUDUU"
+            },
+            "expected": 550
+        },
+        {
+            "args": {
+                "height": 120,
+                "positions": [0, 30, 60, 90, 120, 0, 30, 60, 90, 120],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 840
+        },
+        {
+            "args": {
+                "height": 25,
+                "positions": [
+                    25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5,
+                    4, 3, 2, 1, 0
+                ],
+                "directions": "DDDDDDDDDDDDDDDDDDDDDDDD"
+            },
+            "expected": 456
+        },
+        {
+            "args": {
+                "height": 200,
+                "positions": [
+                    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+                    100, 100, 100, 100
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 4000
+        },
+        {
+            "args": {
+                "height": 75,
+                "positions": [25, 50, 75, 50, 25, 0, 75, 0, 50, 25],
+                "directions": "UUDDUUDDUU"
+            },
+            "expected": 475
+        },
+        {
+            "args": {
+                "height": 5000,
+                "positions": [1, 5000, 2500, 4999, 2, 4998],
+                "directions": "UUDDUUDD"
+            },
+            "expected": 17500
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [0, 1000, 500, 250, 750],
+                "directions": "UUDDU"
+            },
+            "expected": 3000
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [90, 80, 70, 60, 50, 40, 30, 20, 10],
+                "directions": "DDDDDDDDD"
+            },
+            "expected": 700
+        },
+        {
+            "args": {
+                "height": 1200,
+                "positions": [100, 1100, 200, 1000, 300, 900, 400, 800, 500, 700],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 9000
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [0, 250, 499, 1, 125, 375],
+                "directions": "UDUDUU"
+            },
+            "expected": 1750
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [0, 10, 5, 5, 0, 10, 5, 5, 0, 10, 5],
+                "directions": "UUDDUUDDUUDD"
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "directions": "UUUUUUUUUUU"
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "height": 750,
+                "positions": [375, 375, 375, 375, 375, 375],
+                "directions": "UUDDUU"
+            },
+            "expected": 3000
+        },
+        {
+            "args": {
+                "height": 12,
+                "positions": [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+                "directions": "DDDDDDDDDDDD"
+            },
+            "expected": 108
+        },
+        {
+            "args": {
+                "height": 999,
+                "positions": [0, 999, 1, 998, 2, 997, 3, 996, 4, 995],
+                "directions": "UDUDUDUDUD"
+            },
+            "expected": 4995
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 5000
+        },
+        {
+            "args": {
+                "height": 20,
+                "positions": [0, 20, 10, 10, 10, 10, 10],
+                "directions": "UUDDDDD"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "height": 2500,
+                "positions": [0, 1250, 2500, 625, 1875, 312, 2187, 437, 1562, 1937],
+                "directions": "UUDDUUDDUUDD"
+            },
+            "expected": 14813
+        },
+        {
+            "args": {
+                "height": 10000,
+                "positions": [1, 2, 3, 9998, 9999, 10000],
+                "directions": "UUUUUUDD"
+            },
+            "expected": 30009
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [99, 1, 98, 2, 97, 3, 96, 4],
+                "directions": "DDUUDDUU"
+            },
+            "expected": 404
+        },
+        {
+            "args": {
+                "height": 7,
+                "positions": [
+                    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+                    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 301
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [1, 499, 250, 100, 400],
+                "directions": "DDUUU"
+            },
+            "expected": 1698
+        },
+        {
+            "args": {
+                "height": 9,
+                "positions": [0, 9, 1, 8, 2, 7, 3, 6, 4, 5],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "height": 7,
+                "positions": [0, 1, 2, 3, 4, 5, 6, 7],
+                "directions": "UUUUUUUU"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [10, 90, 50, 60, 40, 30],
+                "directions": "UDDUDDUU"
+            },
+            "expected": 380
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [
+                    1, 99, 2, 98, 3, 97, 4, 96, 5, 95, 6, 94, 7, 93, 8, 92, 9, 91, 10, 90
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 1110
+        },
+        {
+            "args": {
+                "height": 200,
+                "positions": [0, 0, 0, 0, 0, 200, 200, 200, 200, 200],
+                "directions": "UUUUUDDDDD"
+            },
+            "expected": 1000
+        },
+        {
+            "args": {
+                "height": 120,
+                "positions": [
+                    0, 30, 60, 90, 120, 90, 60, 30, 0, 30, 60, 90, 120, 90, 60, 30, 0, 30, 60, 90
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 1800
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [
+                    1, 1, 1, 1, 1, 99, 99, 99, 99, 99, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 1510
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [0, 250, 500, 250, 0, 250, 500, 250],
+                "directions": "UDDUDDUDDU"
+            },
+            "expected": 2500
+        },
+        {
+            "args": {
+                "height": 1000000,
+                "positions": [0, 1000000, 500000, 500000],
+                "directions": "UUDD"
+            },
+            "expected": 3000000
+        },
+        {
+            "args": {
+                "height": 80,
+                "positions": [0, 16, 32, 48, 64, 80, 64, 48, 32, 16],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 592
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 4750
+        },
+        {
+            "args": {
+                "height": 450,
+                "positions": [100, 350, 200, 300, 150, 250, 50, 400, 450, 0],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 3250
+        },
+        {
+            "args": {
+                "height": 300,
+                "positions": [150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150],
+                "directions": "UUUUUUUUUUUU"
+            },
+            "expected": 3600
+        },
+        {
+            "args": {
+                "height": 50,
+                "positions": [10, 20, 30, 40, 50, 40, 30, 20, 10],
+                "directions": "UUUUUUUUU"
+            },
+            "expected": 350
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [500, 500, 500, 500, 500, 500, 500, 500, 500, 500],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 10000
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [250, 250, 250, 250, 250, 250],
+                "directions": "UUUUUU"
+            },
+            "expected": 3000
+        },
+        {
+            "args": {
+                "height": 12,
+                "positions": [0, 12, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+                "directions": "UUDDDDDDDDDDD"
+            },
+            "expected": 144
+        },
+        {
+            "args": {
+                "height": 20,
+                "positions": [0, 20, 10, 5, 15, 20, 0, 10, 5, 15],
+                "directions": "UUDDUDDUUDDUUDDU"
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "height": 150,
+                "positions": [30, 60, 90, 120, 150, 120, 90, 60, 30],
+                "directions": "UUUUUUUUU"
+            },
+            "expected": 1050
+        },
+        {
+            "args": {
+                "height": 750,
+                "positions": [10, 740, 380, 670, 100, 650, 150, 550],
+                "directions": "UDDUDDUDDU"
+            },
+            "expected": 3550
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [10, 90, 50, 60, 20],
+                "directions": "UUUUU"
+            },
+            "expected": 380
+        },
+        {
+            "args": {
+                "height": 10000,
+                "positions": [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000],
+                "directions": "DDDDDDDDDD"
+            },
+            "expected": 75000
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [0, 1000, 0, 1000, 0, 1000],
+                "directions": "UUDDUU"
+            },
+            "expected": 3000
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [0, 500, 250, 125, 375],
+                "directions": "UDDUU"
+            },
+            "expected": 1375
+        },
+        {
+            "args": {
+                "height": 10000,
+                "positions": [5000, 5000, 5000, 5000, 5000],
+                "directions": "UUUUU"
+            },
+            "expected": 50000
+        },
+        {
+            "args": {
+                "height": 200,
+                "positions": [0, 200, 100, 100, 100, 100, 100, 100],
+                "directions": "UUDDUUDD"
+            },
+            "expected": 1000
+        },
+        {
+            "args": {
+                "height": 150,
+                "positions": [0, 150, 75, 25, 125, 50, 100, 100, 50, 125, 25, 75],
+                "directions": "UUDDUDDUUDDUUDDUDDUUDDUUDDUUDD"
+            },
+            "expected": 950
+        },
+        {
+            "args": {
+                "height": 250,
+                "positions": [50, 150, 250, 200, 100, 50],
+                "directions": "UUUUUU"
+            },
+            "expected": 1100
+        },
+        {
+            "args": {
+                "height": 150,
+                "positions": [50, 51, 52, 53, 54, 99, 98, 97, 96, 95],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 1275
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [10, 90, 50, 75],
+                "directions": "UUDD"
+            },
+            "expected": 255
+        },
+        {
+            "args": {
+                "height": 1500,
+                "positions": [0, 1500, 750, 375, 1125, 250, 1250],
+                "directions": "UDDUDDUDDU"
+            },
+            "expected": 6000
+        },
+        {
+            "args": {
+                "height": 300,
+                "positions": [0, 300, 150, 150, 150, 150, 150, 150, 150, 150],
+                "directions": "UUDDUUDDUU"
+            },
+            "expected": 1500
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [1, 99, 2, 98, 3, 97],
+                "directions": "UUUUUU"
+            },
+            "expected": 312
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 7500
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [0, 0, 0, 0, 0, 0],
+                "directions": "UUDDUD"
+            },
+            "expected": 6000
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [0, 100, 50, 25, 75],
+                "directions": "UUUUU"
+            },
+            "expected": 350
+        },
+        {
+            "args": {
+                "height": 1200,
+                "positions": [0, 1200, 600, 300, 900, 150, 1050, 800],
+                "directions": "UUDDUUDDUU"
+            },
+            "expected": 5800
+        },
+        {
+            "args": {
+                "height": 1000,
+                "positions": [0, 1000, 500, 250, 750],
+                "directions": "UUDDDD"
+            },
+            "expected": 3500
+        },
+        {
+            "args": {
+                "height": 75,
+                "positions": [10, 20, 30, 40, 50, 60, 70, 65, 55, 45, 35, 25, 15, 5],
+                "directions": "UUUUUUUUUUUUUU"
+            },
+            "expected": 805
+        },
+        {
+            "args": {
+                "height": 200,
+                "positions": [200, 0, 100, 100, 100, 100],
+                "directions": "DDDUDU"
+            },
+            "expected": 600
+        },
+        {
+            "args": {
+                "height": 600,
+                "positions": [300, 200, 100, 0, 600, 500, 400],
+                "directions": "DDDDUUU"
+            },
+            "expected": 2400
+        },
+        {
+            "args": {
+                "height": 15,
+                "positions": [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0],
+                "directions": "UDUDUDUDUDUDUDUDU"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "height": 10,
+                "positions": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 75
+        },
+        {
+            "args": {
+                "height": 800,
+                "positions": [400, 400, 400, 400, 400, 400, 400, 400],
+                "directions": "UUUUUUUU"
+            },
+            "expected": 6400
+        },
+        {
+            "args": {
+                "height": 2000,
+                "positions": [500, 1000, 1500, 2000, 0, 1000, 1500],
+                "directions": "UUDDUUUU"
+            },
+            "expected": 9500
+        },
+        {
+            "args": {
+                "height": 20,
+                "positions": [
+                    10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 400
+        },
+        {
+            "args": {
+                "height": 8,
+                "positions": [0, 8, 4, 4, 4, 4, 4, 4, 4, 4],
+                "directions": "UUDDDDDDDD"
+            },
+            "expected": 72
+        },
+        {
+            "args": {
+                "height": 8,
+                "positions": [1, 7, 2, 6, 3, 5, 4, 4],
+                "directions": "UUUUUUUU"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "height": 200,
+                "positions": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+                "directions": "UUUUUUUUUU"
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [0, 100, 50, 25, 75],
+                "directions": "UUDDU"
+            },
+            "expected": 300
+        },
+        {
+            "args": {
+                "height": 100,
+                "positions": [10, 20, 30, 40, 50, 60, 70, 80, 90],
+                "directions": "UUUUUUUUU"
+            },
+            "expected": 700
+        },
+        {
+            "args": {
+                "height": 80,
+                "positions": [10, 70, 20, 60, 30, 50, 40],
+                "directions": "UUUUUU"
+            },
+            "expected": 360
+        },
+        {
+            "args": {
+                "height": 50,
+                "positions": [
+                    1, 49, 2, 48, 3, 47, 4, 46, 5, 45, 6, 44, 7, 43, 8, 42, 9, 41, 10, 40, 11, 39,
+                    12, 38, 13, 37, 14, 36, 15, 35, 16, 34, 17, 33, 18, 32, 19, 31, 20, 30, 21, 29,
+                    22, 28, 23, 27, 24, 26
+                ],
+                "directions": "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+            },
+            "expected": 1800
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [0, 100, 200, 300, 400, 500, 400, 300, 200, 100],
+                "directions": "UUDDUUDDUU"
+            },
+            "expected": 2700
+        },
+        {
+            "args": {
+                "height": 500,
+                "positions": [
+                    250, 0, 500, 250, 0, 500, 250, 0, 500, 250, 0, 500, 250, 0, 500, 250, 0, 500,
+                    250, 0
+                ],
+                "directions": "UUDDUUDDUUUUDDUUDDUUUUDDUUDDUUDDUUUUDDUUDDUUUUDDUUDDUUDDUUUUDDUUDDUUUU"
+            },
+            "expected": 5250
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maxArea",
+        "typescript": "Solution().maxArea"
+    }
+}

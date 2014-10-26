@@ -1,0 +1,2326 @@
+{
+    "id": "top-k-frequent-words",
+    "questionId": 692,
+    "difficulty": "Medium",
+    "tags": [
+        "Trie",
+        "Array",
+        "Hash Table",
+        "String",
+        "Bucket Sort",
+        "Counting",
+        "Sorting",
+        "Heap (Priority Queue)"
+    ],
+    "tests": [
+        {
+            "args": {
+                "words": ["a", "aa", "aaa"],
+                "k": 1
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa"],
+                "k": 2
+            },
+            "expected": ["a", "aa"]
+        },
+        {
+            "args": {
+                "words": ["i", "love", "leetcode", "i", "love", "coding"],
+                "k": 2
+            },
+            "expected": ["i", "love"]
+        },
+        {
+            "args": {
+                "words": ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"],
+                "k": 4
+            },
+            "expected": ["the", "is", "sunny", "day"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "apple", "orange", "banana", "apple"],
+                "k": 3
+            },
+            "expected": ["apple", "banana", "orange"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "dog", "duck", "dog", "zebra", "zebra"],
+                "k": 1
+            },
+            "expected": ["zebra"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hello", "world", "hello"],
+                "k": 2
+            },
+            "expected": ["hello", "world"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sun",
+                    "moon",
+                    "star",
+                    "star",
+                    "star",
+                    "star"
+                ],
+                "k": 2
+            },
+            "expected": ["star", "moon"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "orange",
+                    "banana",
+                    "grape",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "grape",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "grape",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "grape"
+                ],
+                "k": 4
+            },
+            "expected": ["apple", "banana", "grape", "orange"]
+        },
+        {
+            "args": {
+                "words": [
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "fox",
+                    "quick"
+                ],
+                "k": 2
+            },
+            "expected": ["quick", "fox"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "k": 10
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "abc",
+                    "abcd",
+                    "abc",
+                    "a",
+                    "abcde",
+                    "a",
+                    "abcdef",
+                    "a",
+                    "abcde",
+                    "a",
+                    "abcdef",
+                    "a"
+                ],
+                "k": 4
+            },
+            "expected": ["a", "abc", "abcde", "abcdef"]
+        },
+        {
+            "args": {
+                "words": [
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog"
+                ],
+                "k": 5
+            },
+            "expected": ["brown", "dog", "fox", "jumps", "lazy"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve"
+                ],
+                "k": 5
+            },
+            "expected": ["eight", "eleven", "five", "four", "nine"]
+        },
+        {
+            "args": {
+                "words": [
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog"
+                ],
+                "k": 4
+            },
+            "expected": ["brown", "dog", "fox", "jumps"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "cherry",
+                    "apple",
+                    "banana",
+                    "apple",
+                    "cherry",
+                    "cherry",
+                    "banana"
+                ],
+                "k": 2
+            },
+            "expected": ["apple", "banana"]
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa", "a", "aa", "aaa", "aaaa", "aaaaa"],
+                "k": 3
+            },
+            "expected": ["a", "aa", "aaa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "apple",
+                    "kiwi",
+                    "banana",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi"
+                ],
+                "k": 3
+            },
+            "expected": ["kiwi", "apple", "banana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "sun",
+                    "moon",
+                    "star",
+                    "moon",
+                    "moon",
+                    "sun",
+                    "star",
+                    "star",
+                    "star",
+                    "star"
+                ],
+                "k": 3
+            },
+            "expected": ["star", "moon", "sun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve"
+                ],
+                "k": 12
+            },
+            "expected": [
+                "eight",
+                "eleven",
+                "five",
+                "four",
+                "nine",
+                "one",
+                "seven",
+                "six",
+                "ten",
+                "three",
+                "twelve",
+                "two"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "cat",
+                    "cat",
+                    "cat",
+                    "dog",
+                    "cat"
+                ],
+                "k": 3
+            },
+            "expected": ["cat", "dog", "zebra"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "dog",
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "duck",
+                    "zebra",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "dog"
+                ],
+                "k": 3
+            },
+            "expected": ["zebra", "dog", "duck"]
+        },
+        {
+            "args": {
+                "words": [
+                    "coding",
+                    "programming",
+                    "hacking",
+                    "debugging",
+                    "coding",
+                    "programming",
+                    "debugging",
+                    "hacking",
+                    "hacking",
+                    "hacking"
+                ],
+                "k": 2
+            },
+            "expected": ["hacking", "coding"]
+        },
+        {
+            "args": {
+                "words": [
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y",
+                    "x",
+                    "y"
+                ],
+                "k": 2
+            },
+            "expected": ["x", "y"]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "alpha",
+                    "beta",
+                    "gamma"
+                ],
+                "k": 5
+            },
+            "expected": ["alpha", "beta", "gamma", "delta", "epsilon"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "a",
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef"
+                ],
+                "k": 2
+            },
+            "expected": ["a", "ab"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "red",
+                    "blue",
+                    "red",
+                    "green",
+                    "red",
+                    "blue",
+                    "green",
+                    "red",
+                    "red"
+                ],
+                "k": 3
+            },
+            "expected": ["red", "blue", "green"]
+        },
+        {
+            "args": {
+                "words": ["a", "abc", "abcd", "abc", "a", "abcde", "abcd", "abcde", "a", "abcd"],
+                "k": 3
+            },
+            "expected": ["a", "abcd", "abc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "red",
+                    "blue",
+                    "green",
+                    "red",
+                    "blue",
+                    "green",
+                    "red",
+                    "blue",
+                    "green",
+                    "red"
+                ],
+                "k": 2
+            },
+            "expected": ["red", "blue"]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "cat",
+                    "bat",
+                    "bat"
+                ],
+                "k": 3
+            },
+            "expected": ["bat", "cat", "rat"]
+        },
+        {
+            "args": {
+                "words": [
+                    "leetcode",
+                    "coding",
+                    "interview",
+                    "questions",
+                    "leetcode",
+                    "interview",
+                    "coding",
+                    "coding",
+                    "leetcode",
+                    "questions",
+                    "questions"
+                ],
+                "k": 3
+            },
+            "expected": ["coding", "leetcode", "questions"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve",
+                    "thirteen"
+                ],
+                "k": 5
+            },
+            "expected": ["eight", "eleven", "five", "four", "nine"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "apple",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi",
+                    "banana"
+                ],
+                "k": 2
+            },
+            "expected": ["apple", "banana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "banana",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi"
+                ],
+                "k": 2
+            },
+            "expected": ["kiwi", "banana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "cherry",
+                    "date",
+                    "elderberry",
+                    "fig",
+                    "grape",
+                    "honeydew",
+                    "kiwi",
+                    "lemon",
+                    "mango",
+                    "nectarine",
+                    "orange",
+                    "papaya",
+                    "quince",
+                    "raspberry",
+                    "strawberry",
+                    "tangerine",
+                    "ugli",
+                    "vanilla",
+                    "watermelon",
+                    "xigua",
+                    "yam",
+                    "zucchini"
+                ],
+                "k": 10
+            },
+            "expected": [
+                "apple",
+                "banana",
+                "cherry",
+                "date",
+                "elderberry",
+                "fig",
+                "grape",
+                "honeydew",
+                "kiwi",
+                "lemon"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "lion",
+                    "tiger",
+                    "lion",
+                    "tiger",
+                    "tiger",
+                    "lion",
+                    "zebra"
+                ],
+                "k": 3
+            },
+            "expected": ["zebra", "lion", "tiger"]
+        },
+        {
+            "args": {
+                "words": [
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "k": 3
+            },
+            "expected": ["x", "y", "z"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a"
+                ],
+                "k": 1
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "moon",
+                    "moon",
+                    "sun",
+                    "star",
+                    "planet",
+                    "planet",
+                    "star"
+                ],
+                "k": 4
+            },
+            "expected": ["moon", "planet", "star", "sun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa"
+                ],
+                "k": 4
+            },
+            "expected": ["a", "aa", "aaa", "aaaa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                ],
+                "k": 10
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "c",
+                    "c",
+                    "c",
+                    "c",
+                    "c",
+                    "d",
+                    "d",
+                    "d",
+                    "d",
+                    "d",
+                    "d",
+                    "e",
+                    "e",
+                    "e",
+                    "e",
+                    "e",
+                    "e",
+                    "e"
+                ],
+                "k": 2
+            },
+            "expected": ["e", "d"]
+        },
+        {
+            "args": {
+                "words": [
+                    "leetcode",
+                    "python",
+                    "java",
+                    "c",
+                    "cpp",
+                    "python",
+                    "java",
+                    "java",
+                    "c",
+                    "cpp",
+                    "cpp",
+                    "cpp",
+                    "c",
+                    "c",
+                    "java",
+                    "java",
+                    "java",
+                    "python"
+                ],
+                "k": 4
+            },
+            "expected": ["java", "c", "cpp", "python"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sky"
+                ],
+                "k": 4
+            },
+            "expected": ["moon", "sky", "star", "sun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "cat",
+                    "cat",
+                    "dog",
+                    "cat"
+                ],
+                "k": 3
+            },
+            "expected": ["cat", "dog", "zebra"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five"
+                ],
+                "k": 5
+            },
+            "expected": ["five", "four", "one", "three", "two"]
+        },
+        {
+            "args": {
+                "words": [
+                    "frequency",
+                    "of",
+                    "words",
+                    "frequency",
+                    "in",
+                    "a",
+                    "sentence",
+                    "frequency",
+                    "sentence",
+                    "frequency"
+                ],
+                "k": 3
+            },
+            "expected": ["frequency", "sentence", "a"]
+        },
+        {
+            "args": {
+                "words": [
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij",
+                    "abcdefghijk"
+                ],
+                "k": 4
+            },
+            "expected": ["ab", "abc", "abcd", "abcde"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "apple",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi"
+                ],
+                "k": 3
+            },
+            "expected": ["apple", "kiwi", "banana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "ccc"
+                ],
+                "k": 2
+            },
+            "expected": ["aaa", "bbb"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "cat",
+                    "cat",
+                    "cat",
+                    "bird",
+                    "bird",
+                    "bird",
+                    "bird"
+                ],
+                "k": 4
+            },
+            "expected": ["bird", "cat", "zebra", "dog"]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "eta",
+                    "theta",
+                    "iota",
+                    "kappa",
+                    "lambda",
+                    "mu",
+                    "nu",
+                    "xi",
+                    "omicron",
+                    "pi"
+                ],
+                "k": 5
+            },
+            "expected": ["alpha", "beta", "delta", "epsilon", "eta"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "dog",
+                    "dog",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "zebra",
+                    "zebra"
+                ],
+                "k": 2
+            },
+            "expected": ["zebra", "dog"]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "cat",
+                    "dog"
+                ],
+                "k": 2
+            },
+            "expected": ["cat", "dog"]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "hello",
+                    "world",
+                    "hello",
+                    "world",
+                    "hello",
+                    "world",
+                    "hello",
+                    "world",
+                    "hello",
+                    "world"
+                ],
+                "k": 1
+            },
+            "expected": ["hello"]
+        },
+        {
+            "args": {
+                "words": [
+                    "python",
+                    "java",
+                    "c",
+                    "cpp",
+                    "python",
+                    "java",
+                    "python",
+                    "java",
+                    "java",
+                    "c",
+                    "c",
+                    "cpp",
+                    "cpp",
+                    "cpp",
+                    "cpp"
+                ],
+                "k": 4
+            },
+            "expected": ["cpp", "java", "c", "python"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "data",
+                    "structure",
+                    "algorithm",
+                    "data",
+                    "data",
+                    "algorithm",
+                    "algorithm",
+                    "data",
+                    "structure",
+                    "structure",
+                    "structure",
+                    "structure"
+                ],
+                "k": 2
+            },
+            "expected": ["structure", "algorithm"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "a",
+                    "b",
+                    "c",
+                    "a",
+                    "b",
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "c",
+                    "d",
+                    "d",
+                    "e",
+                    "e",
+                    "e",
+                    "e"
+                ],
+                "k": 4
+            },
+            "expected": ["a", "b", "e", "c"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "apple",
+                    "banana",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi"
+                ],
+                "k": 3
+            },
+            "expected": ["kiwi", "apple", "banana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "panda",
+                    "polar",
+                    "bear",
+                    "panda",
+                    "polar",
+                    "polar",
+                    "polar",
+                    "bear",
+                    "bear",
+                    "bear",
+                    "bear",
+                    "bear"
+                ],
+                "k": 3
+            },
+            "expected": ["bear", "polar", "panda"]
+        },
+        {
+            "args": {
+                "words": [
+                    "flower",
+                    "flow",
+                    "flight",
+                    "flow",
+                    "flight",
+                    "flow",
+                    "flower",
+                    "flight",
+                    "flower",
+                    "flower"
+                ],
+                "k": 4
+            },
+            "expected": ["flower", "flight", "flow"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "zebra",
+                    "dog",
+                    "dog",
+                    "dog",
+                    "duck",
+                    "duck",
+                    "duck",
+                    "duck"
+                ],
+                "k": 2
+            },
+            "expected": ["dog", "duck"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "k": 5
+            },
+            "expected": ["eight", "five", "four", "nine", "one"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "k": 5
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat", "cat", "bat", "rat", "cat", "bat", "rat", "cat"],
+                "k": 2
+            },
+            "expected": ["cat", "bat"]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "cat",
+                    "bat",
+                    "rat"
+                ],
+                "k": 2
+            },
+            "expected": ["bat", "cat"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "k": 5
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue",
+                    "red",
+                    "blue"
+                ],
+                "k": 3
+            },
+            "expected": ["blue", "red", "green"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "banana",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi"
+                ],
+                "k": 3
+            },
+            "expected": ["kiwi", "banana", "apple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "banana",
+                    "grape",
+                    "grape",
+                    "grape"
+                ],
+                "k": 3
+            },
+            "expected": ["banana", "grape", "apple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "x",
+                    "y",
+                    "z",
+                    "w",
+                    "v",
+                    "u",
+                    "t",
+                    "s",
+                    "r",
+                    "q",
+                    "p",
+                    "o",
+                    "n",
+                    "m",
+                    "l",
+                    "k",
+                    "j",
+                    "i",
+                    "h",
+                    "g",
+                    "f",
+                    "e",
+                    "d",
+                    "c",
+                    "b",
+                    "a"
+                ],
+                "k": 5
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaaa",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaaa",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaaa",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaaa",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaaa",
+                    "aaa",
+                    "aa",
+                    "a"
+                ],
+                "k": 4
+            },
+            "expected": ["a", "aa", "aaa", "aaaaa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk",
+                    "jump",
+                    "run",
+                    "walk"
+                ],
+                "k": 2
+            },
+            "expected": ["jump", "run"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "zebra",
+                    "dog",
+                    "dog",
+                    "dog",
+                    "duck",
+                    "duck",
+                    "duck",
+                    "duck",
+                    "duck",
+                    "zebra"
+                ],
+                "k": 3
+            },
+            "expected": ["duck", "dog", "zebra"]
+        },
+        {
+            "args": {
+                "words": [
+                    "repeated",
+                    "word",
+                    "repeated",
+                    "word",
+                    "repeated",
+                    "word",
+                    "unique",
+                    "unique",
+                    "unique",
+                    "unique",
+                    "another",
+                    "another",
+                    "another",
+                    "another",
+                    "another"
+                ],
+                "k": 3
+            },
+            "expected": ["another", "unique", "repeated"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "moon",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sun",
+                    "star",
+                    "star",
+                    "star",
+                    "sun",
+                    "moon",
+                    "moon",
+                    "moon"
+                ],
+                "k": 3
+            },
+            "expected": ["moon", "star", "sun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "car",
+                    "bike",
+                    "train",
+                    "car",
+                    "bike",
+                    "car",
+                    "bike",
+                    "train",
+                    "car",
+                    "bike",
+                    "car",
+                    "bike",
+                    "train",
+                    "car",
+                    "train",
+                    "car",
+                    "bike",
+                    "train"
+                ],
+                "k": 3
+            },
+            "expected": ["car", "bike", "train"]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon"
+                ],
+                "k": 3
+            },
+            "expected": ["alpha", "beta", "delta"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa"
+                ],
+                "k": 3
+            },
+            "expected": ["a", "aa", "aaa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "bat",
+                    "rat",
+                    "hat",
+                    "mat",
+                    "pat",
+                    "sat",
+                    "fat",
+                    "tat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "hat",
+                    "mat",
+                    "pat",
+                    "sat",
+                    "fat",
+                    "tat",
+                    "cat",
+                    "bat",
+                    "rat",
+                    "hat",
+                    "mat",
+                    "pat",
+                    "sat",
+                    "fat",
+                    "tat"
+                ],
+                "k": 5
+            },
+            "expected": ["bat", "cat", "fat", "hat", "mat"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "dog",
+                    "duck",
+                    "dog",
+                    "zebra",
+                    "zebra",
+                    "lion",
+                    "tiger",
+                    "bear",
+                    "zebra",
+                    "dog",
+                    "duck"
+                ],
+                "k": 4
+            },
+            "expected": ["zebra", "dog", "duck", "bear"]
+        },
+        {
+            "args": {
+                "words": [
+                    "elephant",
+                    "giraffe",
+                    "lion",
+                    "tiger",
+                    "elephant",
+                    "lion",
+                    "giraffe",
+                    "tiger",
+                    "elephant",
+                    "lion",
+                    "giraffe",
+                    "tiger",
+                    "lion",
+                    "giraffe",
+                    "tiger",
+                    "elephant",
+                    "tiger",
+                    "giraffe",
+                    "lion",
+                    "tiger"
+                ],
+                "k": 4
+            },
+            "expected": ["tiger", "giraffe", "lion", "elephant"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon",
+                    "sunrise",
+                    "sunset",
+                    "midnight",
+                    "noon"
+                ],
+                "k": 4
+            },
+            "expected": ["midnight", "noon", "sunrise", "sunset"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "apple",
+                    "banana",
+                    "banana"
+                ],
+                "k": 2
+            },
+            "expected": ["banana", "apple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "flower",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush",
+                    "flower",
+                    "tree",
+                    "bush"
+                ],
+                "k": 2
+            },
+            "expected": ["flower", "bush"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "apple",
+                    "orange",
+                    "banana",
+                    "banana",
+                    "kiwi",
+                    "kiwi",
+                    "kiwi"
+                ],
+                "k": 3
+            },
+            "expected": ["banana", "kiwi", "apple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "a",
+                    "aa",
+                    "aaa"
+                ],
+                "k": 2
+            },
+            "expected": ["a", "aa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "galaxy",
+                    "universe",
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "galaxy",
+                    "universe",
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "galaxy",
+                    "universe",
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "galaxy",
+                    "universe"
+                ],
+                "k": 3
+            },
+            "expected": ["galaxy", "moon", "planet"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaa",
+                    "aa",
+                    "a",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaa",
+                    "aa",
+                    "a",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aaaa",
+                    "aa",
+                    "a",
+                    "aaa",
+                    "aa",
+                    "a"
+                ],
+                "k": 4
+            },
+            "expected": ["a", "aa", "aaa", "aaaa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "dog",
+                    "cat",
+                    "bird",
+                    "dog",
+                    "cat",
+                    "dog",
+                    "dog",
+                    "dog",
+                    "cat",
+                    "cat",
+                    "bird"
+                ],
+                "k": 3
+            },
+            "expected": ["cat", "dog", "bird"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "sun",
+                    "moon",
+                    "star",
+                    "sun",
+                    "moon",
+                    "star",
+                    "moon",
+                    "star",
+                    "star",
+                    "star"
+                ],
+                "k": 1
+            },
+            "expected": ["star"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue"
+                ],
+                "k": 2
+            },
+            "expected": ["blue", "red"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().topKFrequent",
+        "typescript": "Solution().topKFrequent"
+    }
+}

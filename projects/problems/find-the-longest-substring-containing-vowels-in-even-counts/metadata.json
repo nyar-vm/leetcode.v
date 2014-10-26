@@ -1,0 +1,474 @@
+{
+    "id": "find-the-longest-substring-containing-vowels-in-even-counts",
+    "questionId": 1371,
+    "difficulty": "Medium",
+    "tags": ["Bit Manipulation", "Hash Table", "String", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "s": "bcbcbc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "cbacdcdcdbacdbad"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiou"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "aaaaaeeeeeiioooouuuu"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "uuuuuuuuuuuuuuuuuuuuuuuuuuu"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aaeeiioouu"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aeiou"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "leetcodeisgreat"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "aeiaaioaaaaeiiiiouuuooaaaaea"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": ""
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aeeeeeiiiiioooouuuu"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "xyz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcdefghiijkeilmnopqrstuvwxyzaeiou"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "aabbeeaabbeeaabb"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "eiouaeiouaeiou"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "eleetminicoworoep"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "bbaeixaaaaooxu"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "aioieu"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxyz"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "aeiaaioaaaaeiiiiiioooeeeauuaeuia"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "leetcodeleetcode"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "zxcvbnmlkjhgfdsapoiuytrewq"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "aaaaaaaa"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiouxyzuvwaeiouaeiouaeiou"
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "s": "eeioouuuaeeioouuua"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiou"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "abacaxebecixodeoxou"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithvariousvowels"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "eiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "s": "uoieaouioeaoieauoi"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "mamad"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "leetcodeleetcodeleetcode"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "bbaaccddeeffgg"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "eiouaeiouaieouaeiouaeiouaeiou"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "xyzuvwaeiouaeiouxyzuvwaeiouaeiouxyzuvwaeiouaeiou"
+            },
+            "expected": 47
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcde"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiouaeiouabcdeffedcbaaeiouaeiou"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "xyzabcdeiouaeiouabcdeiouaeiouxyz"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "s": "bbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "bcbcbcbaeibcbcbcbaeibcbcbc"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aeeeeiiiooouuuuuuuuu"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "bcbcbcabcabcabcabcabcabc"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "abacaxebecixodeoxouabacaxebecixodeoxou"
+            },
+            "expected": 38
+        },
+        {
+            "args": {
+                "s": "zzzaeizzzaeiouzzzaeiouzzz"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "aeiouabcdefghijklmnopqrstuvwxyzaeiou"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "uvceeaieeaaceeaiaa"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "aebecixodeoxouaebecixodeoxou"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "vvvvvvvvvvvvvvvvvv"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "aebecidofugoeiaoeiu"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouabcdeffedcbaaeiouaeiou"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzaeiouaeiouaeiou"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "s": "leetcodeisgreataeiou"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouxyzuvw"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "abcdeffedcbabcdeffedcbabcdeffedcbabcdeffedcb"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "s": "xyzuvwaeiouxyzuvwaeiou"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnmaeiouaeiou"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "vwxyz"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgg"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "eleetminicoworoepzzzzzzzzzz"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "abecidofug"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "eiouaieouaieoua"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aeiaoeiuioeiuaeiaoeiuioeiuaeiaoeiuioeiaoeiu"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "eiouaeiouaeiouaeiouaeiouaeiou"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "eleetminicoworoepaeiou"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "eeioouuuaeeioouuuaeeioouuuaeeioouuua"
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffaabbccddeeff"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "leetcodeisgreatleetcodeisgreatleetcodeisgreat"
+            },
+            "expected": 35
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findTheLongestSubstring",
+        "typescript": "Solution().findTheLongestSubstring"
+    }
+}

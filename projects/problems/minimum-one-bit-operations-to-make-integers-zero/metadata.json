@@ -1,0 +1,438 @@
+{
+    "id": "minimum-one-bit-operations-to-make-integers-zero",
+    "questionId": 1611,
+    "difficulty": "Hard",
+    "tags": ["Bit Manipulation", "Memoization", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "n": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "n": 8
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "n": 3
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "n": 100
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "n": 15
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "n": 16
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "n": 31
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "n": 1000000000
+            },
+            "expected": 756249599
+        },
+        {
+            "args": {
+                "n": 32
+            },
+            "expected": 63
+        },
+        {
+            "args": {
+                "n": 6
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "n": 1023
+            },
+            "expected": 682
+        },
+        {
+            "args": {
+                "n": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "n": 500
+            },
+            "expected": 344
+        },
+        {
+            "args": {
+                "n": 7
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "n": 10
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "n": 1024
+            },
+            "expected": 2047
+        },
+        {
+            "args": {
+                "n": 2097152
+            },
+            "expected": 4194303
+        },
+        {
+            "args": {
+                "n": 63
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "n": 896
+            },
+            "expected": 767
+        },
+        {
+            "args": {
+                "n": 131071
+            },
+            "expected": 87381
+        },
+        {
+            "args": {
+                "n": 67108864
+            },
+            "expected": 134217727
+        },
+        {
+            "args": {
+                "n": 4096
+            },
+            "expected": 8191
+        },
+        {
+            "args": {
+                "n": 67108863
+            },
+            "expected": 44739242
+        },
+        {
+            "args": {
+                "n": 2147483647
+            },
+            "expected": 1431655765
+        },
+        {
+            "args": {
+                "n": 32767
+            },
+            "expected": 21845
+        },
+        {
+            "args": {
+                "n": 511
+            },
+            "expected": 341
+        },
+        {
+            "args": {
+                "n": 262143
+            },
+            "expected": 174762
+        },
+        {
+            "args": {
+                "n": 2047
+            },
+            "expected": 1365
+        },
+        {
+            "args": {
+                "n": 268435456
+            },
+            "expected": 536870911
+        },
+        {
+            "args": {
+                "n": 16383
+            },
+            "expected": 10922
+        },
+        {
+            "args": {
+                "n": 16384
+            },
+            "expected": 32767
+        },
+        {
+            "args": {
+                "n": 524287
+            },
+            "expected": 349525
+        },
+        {
+            "args": {
+                "n": 987654
+            },
+            "expected": 662532
+        },
+        {
+            "args": {
+                "n": 268435455
+            },
+            "expected": 178956970
+        },
+        {
+            "args": {
+                "n": 16777216
+            },
+            "expected": 33554431
+        },
+        {
+            "args": {
+                "n": 4194303
+            },
+            "expected": 2796202
+        },
+        {
+            "args": {
+                "n": 134217727
+            },
+            "expected": 89478485
+        },
+        {
+            "args": {
+                "n": 64
+            },
+            "expected": 127
+        },
+        {
+            "args": {
+                "n": 8388607
+            },
+            "expected": 5592405
+        },
+        {
+            "args": {
+                "n": 2097151
+            },
+            "expected": 1398101
+        },
+        {
+            "args": {
+                "n": 4194304
+            },
+            "expected": 8388607
+        },
+        {
+            "args": {
+                "n": 192
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "n": 134217728
+            },
+            "expected": 268435455
+        },
+        {
+            "args": {
+                "n": 1073741823
+            },
+            "expected": 715827882
+        },
+        {
+            "args": {
+                "n": 33554432
+            },
+            "expected": 67108863
+        },
+        {
+            "args": {
+                "n": 16777215
+            },
+            "expected": 11184810
+        },
+        {
+            "args": {
+                "n": 1073741824
+            },
+            "expected": 2147483647
+        },
+        {
+            "args": {
+                "n": 4095
+            },
+            "expected": 2730
+        },
+        {
+            "args": {
+                "n": 128
+            },
+            "expected": 255
+        },
+        {
+            "args": {
+                "n": 100000
+            },
+            "expected": 66752
+        },
+        {
+            "args": {
+                "n": 255
+            },
+            "expected": 170
+        },
+        {
+            "args": {
+                "n": 1048576
+            },
+            "expected": 2097151
+        },
+        {
+            "args": {
+                "n": 8192
+            },
+            "expected": 16383
+        },
+        {
+            "args": {
+                "n": 8191
+            },
+            "expected": 5461
+        },
+        {
+            "args": {
+                "n": 2048
+            },
+            "expected": 4095
+        },
+        {
+            "args": {
+                "n": 65536
+            },
+            "expected": 131071
+        },
+        {
+            "args": {
+                "n": 256
+            },
+            "expected": 511
+        },
+        {
+            "args": {
+                "n": 262144
+            },
+            "expected": 524287
+        },
+        {
+            "args": {
+                "n": 65535
+            },
+            "expected": 43690
+        },
+        {
+            "args": {
+                "n": 127
+            },
+            "expected": 85
+        },
+        {
+            "args": {
+                "n": 987654321
+            },
+            "expected": 747917089
+        },
+        {
+            "args": {
+                "n": 1048575
+            },
+            "expected": 699050
+        },
+        {
+            "args": {
+                "n": 500000000
+            },
+            "expected": 378124799
+        },
+        {
+            "args": {
+                "n": 536870911
+            },
+            "expected": 357913941
+        },
+        {
+            "args": {
+                "n": 1000000
+            },
+            "expected": 687231
+        },
+        {
+            "args": {
+                "n": 512
+            },
+            "expected": 1023
+        },
+        {
+            "args": {
+                "n": 123456789
+            },
+            "expected": 93489638
+        },
+        {
+            "args": {
+                "n": 1047552
+            },
+            "expected": 698368
+        },
+        {
+            "args": {
+                "n": 123456
+            },
+            "expected": 82816
+        },
+        {
+            "args": {
+                "n": 33554431
+            },
+            "expected": 22369621
+        },
+        {
+            "args": {
+                "n": 54321
+            },
+            "expected": 38945
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimumOneBitOperations",
+        "typescript": "Solution().minimumOneBitOperations"
+    }
+}

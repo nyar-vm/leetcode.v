@@ -1,0 +1,803 @@
+{
+    "id": "minimum-number-of-steps-to-make-two-strings-anagram",
+    "questionId": 1347,
+    "difficulty": "Medium",
+    "tags": ["Hash Table", "String", "Counting"],
+    "tests": [
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "t": "abcadbabacabaab"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "transform",
+                "t": "formartin"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "hello",
+                "t": "billion"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "aabbcc",
+                "t": "ccbbaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "minimum",
+                "t": "numinum"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "hello",
+                "t": "bello"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "leetcode",
+                "t": "practice"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aaabbb",
+                "t": "bbbaaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "transform",
+                "t": "formtrans"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "anagram",
+                "t": "mangaar"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "t": "dcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "transform",
+                "t": "formant"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bab",
+                "t": "aba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aaa",
+                "t": "bbb"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abc",
+                "t": "def"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcde",
+                "t": "edcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "t": "zyx"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "antidisestablishmentarianism",
+                "t": "staimnariesmedtahilbesdisantii"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxwwvvuuttrrssqqppoonnmmllkkjjiihhggffeeeeddccbbaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "optimization",
+                "t": "inipotizaton"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "t": "sinsivocnoclaocivlospercimicroscopoultraomneupnc"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatwearetesting",
+                "t": "testingaverylongstringthatwesarethis"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "pythonprogramming",
+                "t": "gnimmargorpnohtyp"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxwwvvuuttrrssqqppoonnmmllkkjjiihhggeeffddccbbaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "floccinaucinihilipilification",
+                "t": "nicihilopilicifinaucinnilociflloa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "t": "abcdefghijklmnopqrstuvwzyx"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "ppissimissim"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "t": "aquickbrownfoxjumpsoverthelazydog"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbccccddddd",
+                "t": "dddddaaaaabbbcccc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bbaacc",
+                "t": "aabacc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "t": "fedcbafedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "t": "poloxynhe"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "almostthere",
+                "t": "lmostahere"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "t": "ddddccccbbbaaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "strength",
+                "t": "grenstht"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "pythonprogramming",
+                "t": "prognimmargyphnot"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "algorithms",
+                "t": "logarithms"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "pythonprogramming",
+                "t": "programmingpython"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "t": "pseudopseudohypoparathyroidism"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "characterization",
+                "t": "carricahztinoe"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thequickbrownfoxjumpsoverthelazydog",
+                "t": "doglazythequickbrownfoxjumpsoverthelazy"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "longestword",
+                "t": "wordlongset"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "photosynthesis",
+                "t": "synthesphotosis"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttrrssqqppoonnmmllkkjjiihhggffeeddccbbaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "t": "ecilafragisticexpialidocuosspr"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeeeddccbbaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "onomatopoeia",
+                "t": "pneumonoultramicroscopicsilicovolcanoconiosis"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "ppissimisss"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "pississippi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "t": "jihgfedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "t": "arabracadab"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "permutations",
+                "t": "interpromust"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbcceeddffee",
+                "t": "eeddffccbbbaaa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "t": "funprogrammingis"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "t": "occipital"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "t": "zzzzyyxxwwvvuutt"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "elephant",
+                "t": "tehlanpe"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "elephant",
+                "t": "talehpen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "permutations",
+                "t": "pertumations"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "synchronized",
+                "t": "chronizedsyn"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "elevenletters",
+                "t": "twelvethletters"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstring",
+                "t": "stringlongaverythisis"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "interstellar",
+                "t": "stellarestri"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "pisissmipis"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "t": "ciousiliexpalodicisgratefulsuper"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "t": "polyphonex"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "elephant",
+                "t": "telephone"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "psissimippi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "t": "abcdefghijklmnopqrstuvwxyzzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "pissimissi"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "amazingrace",
+                "t": "raceingazam"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "pississimissm"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "t": "logarithmxx"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "reducibility",
+                "t": "reducibility"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "recharacterization",
+                "t": "characterizationre"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "programming",
+                "t": "gimmnoprram"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "frequencydistribution",
+                "t": "charactercount"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "thecommunistmanifesto",
+                "t": "theCommunistManifesto"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "characterization",
+                "t": "intercharacterization"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbcccccdddddeeeee",
+                "t": "eeeeeaaaaabbbbbcccccddddd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "t": "polyphonicx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithvariouscharacters",
+                "t": "thisisanotherlongstringwithdifferentcharacters"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "t": "ecilapersixfulicadogstcilxpiaiodisu"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "characterization",
+                "t": "charizmatation"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "programming",
+                "t": "remmprogain"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "t": "pronunciationdictionary"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "multimedia",
+                "t": "meediamult"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "t": "phonexylo"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "ssissippiim"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "development",
+                "t": "elopmentd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "interviewquestion",
+                "t": "questioverntein"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "anagramanagram",
+                "t": "mangaarmangaar"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "congratulations",
+                "t": "congratulations"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "programming",
+                "t": "pgmromanig"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thequickbrownfox",
+                "t": "quickbrownfoxt"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "algorithm",
+                "t": "logarithm"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "t": "carrace"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "congratulations",
+                "t": "gratulationscon"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "optimization",
+                "t": "tionsimipazy"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "rhythm",
+                "t": "myrthh"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "t": "mnbvcxzlkjhgfdsapoiuytrewq"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "t": "ffeeddccbbaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "t": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "unitedstates",
+                "t": "statedinutes"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "t": "expialidocioussupercalifragilistic"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "unanimous",
+                "t": "manusiousun"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadabacabad",
+                "t": "bacdabcdabcdabcdabcdabcd"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "characterization",
+                "t": "recharacterization"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abacaxi",
+                "t": "xicabaa"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "programming",
+                "t": "gnimmargorp"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "t": "ppiimississ"
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minSteps",
+        "typescript": "Solution().minSteps"
+    }
+}

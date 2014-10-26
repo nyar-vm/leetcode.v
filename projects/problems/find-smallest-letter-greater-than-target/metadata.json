@@ -1,0 +1,1396 @@
+{
+    "id": "find-smallest-letter-greater-than-target",
+    "questionId": 744,
+    "difficulty": "Easy",
+    "tags": ["Array", "Binary Search"],
+    "tests": [
+        {
+            "args": {
+                "letters": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "target": "d"
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "letters": ["c", "f", "j"],
+                "target": "c"
+            },
+            "expected": "f"
+        },
+        {
+            "args": {
+                "letters": ["x", "x", "y", "y"],
+                "target": "z"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": ["a", "b", "c", "d"],
+                "target": "d"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "f", "h"],
+                "target": "g"
+            },
+            "expected": "h"
+        },
+        {
+            "args": {
+                "letters": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "target": "k"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["m", "n", "n", "p", "q"],
+                "target": "l"
+            },
+            "expected": "m"
+        },
+        {
+            "args": {
+                "letters": ["s", "t", "u", "v"],
+                "target": "r"
+            },
+            "expected": "s"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "f", "h"],
+                "target": "f"
+            },
+            "expected": "h"
+        },
+        {
+            "args": {
+                "letters": ["k", "k", "l", "m", "m"],
+                "target": "m"
+            },
+            "expected": "k"
+        },
+        {
+            "args": {
+                "letters": ["b", "b", "c", "d"],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["a", "b", "b", "b"],
+                "target": "b"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["a", "b", "c", "d"],
+                "target": "z"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["d", "e", "f", "g"],
+                "target": "z"
+            },
+            "expected": "d"
+        },
+        {
+            "args": {
+                "letters": ["c", "f", "j"],
+                "target": "a"
+            },
+            "expected": "c"
+        },
+        {
+            "args": {
+                "letters": ["m", "n", "p", "q"],
+                "target": "o"
+            },
+            "expected": "p"
+        },
+        {
+            "args": {
+                "letters": ["a", "a", "a", "b"],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "f", "h"],
+                "target": "b"
+            },
+            "expected": "c"
+        },
+        {
+            "args": {
+                "letters": ["c", "g", "k", "o", "s", "w"],
+                "target": "o"
+            },
+            "expected": "s"
+        },
+        {
+            "args": {
+                "letters": [
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l"
+                ],
+                "target": "m"
+            },
+            "expected": "n"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "a"
+            },
+            "expected": "c"
+        },
+        {
+            "args": {
+                "letters": ["b", "b", "d", "d", "f", "f", "h", "h", "j", "j", "l", "l", "n", "n"],
+                "target": "f"
+            },
+            "expected": "h"
+        },
+        {
+            "args": {
+                "letters": [
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k"
+                ],
+                "target": "l"
+            },
+            "expected": "m"
+        },
+        {
+            "args": {
+                "letters": ["b", "b", "c", "c", "d", "d", "e", "e", "f", "f", "g", "g"],
+                "target": "f"
+            },
+            "expected": "g"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "t"
+            },
+            "expected": "u"
+        },
+        {
+            "args": {
+                "letters": [
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "z"
+            },
+            "expected": "d"
+        },
+        {
+            "args": {
+                "letters": ["a", "a", "a", "b", "b", "b", "c", "c", "c"],
+                "target": "c"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "f", "j", "o", "t", "z"],
+                "target": "z"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["b", "f", "j", "n", "r", "v", "z"],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": [
+                    "z",
+                    "z",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "w"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "f", "i", "l", "o", "r", "u", "x"],
+                "target": "x"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"],
+                "target": "s"
+            },
+            "expected": "t"
+        },
+        {
+            "args": {
+                "letters": ["d", "f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"],
+                "target": "k"
+            },
+            "expected": "l"
+        },
+        {
+            "args": {
+                "letters": ["a", "a", "a", "a", "b", "b", "b", "c", "c", "c"],
+                "target": "b"
+            },
+            "expected": "c"
+        },
+        {
+            "args": {
+                "letters": ["d", "f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"],
+                "target": "m"
+            },
+            "expected": "n"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "c",
+                    "c",
+                    "d",
+                    "d",
+                    "e",
+                    "e",
+                    "f",
+                    "f",
+                    "g",
+                    "g",
+                    "h",
+                    "h",
+                    "i",
+                    "i",
+                    "j",
+                    "j"
+                ],
+                "target": "j"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "x"
+            },
+            "expected": "y"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "l"
+            },
+            "expected": "m"
+        },
+        {
+            "args": {
+                "letters": ["a", "a", "b", "b", "c", "c", "d", "d", "e", "e"],
+                "target": "d"
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "letters": ["x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "target": "z"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "b",
+                    "d",
+                    "e",
+                    "g",
+                    "h",
+                    "j",
+                    "k",
+                    "m",
+                    "n",
+                    "p",
+                    "r",
+                    "s",
+                    "t",
+                    "v",
+                    "w",
+                    "y",
+                    "z"
+                ],
+                "target": "w"
+            },
+            "expected": "y"
+        },
+        {
+            "args": {
+                "letters": [
+                    "b",
+                    "b",
+                    "b",
+                    "c",
+                    "c",
+                    "d",
+                    "d",
+                    "e",
+                    "e",
+                    "f",
+                    "f",
+                    "g",
+                    "g",
+                    "h",
+                    "h",
+                    "i",
+                    "i",
+                    "j",
+                    "j",
+                    "k",
+                    "k"
+                ],
+                "target": "b"
+            },
+            "expected": "c"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "v"
+            },
+            "expected": "w"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "y"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "m"
+            },
+            "expected": "n"
+        },
+        {
+            "args": {
+                "letters": ["m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+                "target": "m"
+            },
+            "expected": "n"
+        },
+        {
+            "args": {
+                "letters": ["c", "e", "i", "m", "q", "u", "y"],
+                "target": "u"
+            },
+            "expected": "y"
+        },
+        {
+            "args": {
+                "letters": [
+                    "b",
+                    "c",
+                    "d",
+                    "f",
+                    "g",
+                    "h",
+                    "j",
+                    "k",
+                    "l",
+                    "n",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "u"
+            },
+            "expected": "v"
+        },
+        {
+            "args": {
+                "letters": [
+                    "d",
+                    "d",
+                    "d",
+                    "e",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "d"
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "letters": [
+                    "m",
+                    "m",
+                    "m",
+                    "m",
+                    "n",
+                    "n",
+                    "n",
+                    "n",
+                    "p",
+                    "p",
+                    "p",
+                    "p",
+                    "q",
+                    "q",
+                    "q",
+                    "q"
+                ],
+                "target": "q"
+            },
+            "expected": "m"
+        },
+        {
+            "args": {
+                "letters": ["a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "w"
+            },
+            "expected": "y"
+        },
+        {
+            "args": {
+                "letters": ["d", "d", "d", "d", "d", "d", "d", "d", "d", "e", "e", "e", "f"],
+                "target": "d"
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "letters": [
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l"
+                ],
+                "target": "l"
+            },
+            "expected": "m"
+        },
+        {
+            "args": {
+                "letters": ["l", "m", "n", "n", "n", "o", "p", "q", "q", "r", "s"],
+                "target": "p"
+            },
+            "expected": "q"
+        },
+        {
+            "args": {
+                "letters": ["x", "y", "z", "a", "b", "c"],
+                "target": "y"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": ["b", "c", "f", "h", "j", "m", "p", "r", "u", "x", "z"],
+                "target": "g"
+            },
+            "expected": "h"
+        },
+        {
+            "args": {
+                "letters": [
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "n"
+            },
+            "expected": "o"
+        },
+        {
+            "args": {
+                "letters": ["z", "z", "a", "a", "b", "b", "c"],
+                "target": "y"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "letters": [
+                    "l",
+                    "l",
+                    "m",
+                    "m",
+                    "n",
+                    "n",
+                    "o",
+                    "o",
+                    "p",
+                    "p",
+                    "q",
+                    "q",
+                    "r",
+                    "r",
+                    "s",
+                    "s",
+                    "t",
+                    "t",
+                    "u",
+                    "u",
+                    "v",
+                    "v",
+                    "w",
+                    "w",
+                    "x",
+                    "x",
+                    "y",
+                    "y",
+                    "z",
+                    "z"
+                ],
+                "target": "u"
+            },
+            "expected": "v"
+        },
+        {
+            "args": {
+                "letters": [
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c"
+                ],
+                "target": "w"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": [
+                    "s",
+                    "s",
+                    "t",
+                    "t",
+                    "u",
+                    "u",
+                    "v",
+                    "v",
+                    "w",
+                    "w",
+                    "x",
+                    "x",
+                    "y",
+                    "y",
+                    "z",
+                    "z"
+                ],
+                "target": "y"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "letters": ["b", "c", "d", "f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"],
+                "target": "t"
+            },
+            "expected": "v"
+        },
+        {
+            "args": {
+                "letters": ["a", "z"],
+                "target": "m"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "letters": ["p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+                "target": "z"
+            },
+            "expected": "p"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"],
+                "target": "m"
+            },
+            "expected": "o"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b"
+                ],
+                "target": "b"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b"
+                ],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["b", "d", "f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b"
+                ],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["d", "d", "d", "e", "f", "g", "g", "g", "h"],
+                "target": "g"
+            },
+            "expected": "h"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "b",
+                    "d",
+                    "e",
+                    "g",
+                    "h",
+                    "j",
+                    "k",
+                    "m",
+                    "n",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "f"
+            },
+            "expected": "g"
+        },
+        {
+            "args": {
+                "letters": ["a", "e", "i", "m", "q", "u", "y"],
+                "target": "z"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["a", "c", "f", "j", "o", "v", "y"],
+                "target": "z"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": ["b", "d", "f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"],
+                "target": "z"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["x", "x", "x", "x", "y", "y", "y", "y", "z", "z", "z", "z"],
+                "target": "x"
+            },
+            "expected": "y"
+        },
+        {
+            "args": {
+                "letters": ["z", "z", "z", "a", "a", "a", "b", "b", "c", "d"],
+                "target": "z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b",
+                    "b"
+                ],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": [
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "u"
+            },
+            "expected": "v"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "target": "z"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "letters": [
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w"
+                ],
+                "target": "w"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": [
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "a",
+                    "b"
+                ],
+                "target": "a"
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "letters": ["m", "o", "q", "s", "u", "w", "y"],
+                "target": "a"
+            },
+            "expected": "m"
+        },
+        {
+            "args": {
+                "letters": [
+                    "b",
+                    "b",
+                    "b",
+                    "c",
+                    "c",
+                    "c",
+                    "d",
+                    "d",
+                    "d",
+                    "e",
+                    "e",
+                    "e",
+                    "f",
+                    "f",
+                    "f",
+                    "g",
+                    "g",
+                    "g",
+                    "h",
+                    "h",
+                    "h"
+                ],
+                "target": "d"
+            },
+            "expected": "e"
+        },
+        {
+            "args": {
+                "letters": ["d", "h", "l", "p", "t", "x"],
+                "target": "m"
+            },
+            "expected": "p"
+        },
+        {
+            "args": {
+                "letters": ["z", "a", "a", "a", "a", "b", "b", "b", "c", "c", "c"],
+                "target": "y"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "letters": ["x", "y", "z", "a", "b", "c", "d"],
+                "target": "z"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": [
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g"
+                ],
+                "target": "g"
+            },
+            "expected": "h"
+        },
+        {
+            "args": {
+                "letters": [
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o"
+                ],
+                "target": "n"
+            },
+            "expected": "o"
+        },
+        {
+            "args": {
+                "letters": [
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w"
+                ],
+                "target": "x"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "letters": [
+                    "m",
+                    "m",
+                    "m",
+                    "m",
+                    "n",
+                    "n",
+                    "n",
+                    "n",
+                    "p",
+                    "p",
+                    "p",
+                    "p",
+                    "q",
+                    "q",
+                    "q",
+                    "q"
+                ],
+                "target": "m"
+            },
+            "expected": "n"
+        },
+        {
+            "args": {
+                "letters": ["z", "a", "b", "c", "d"],
+                "target": "y"
+            },
+            "expected": "z"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().nextGreatestLetter",
+        "typescript": "Solution().nextGreatestLetter"
+    }
+}

@@ -1,0 +1,631 @@
+{
+    "id": "probability-of-a-two-boxes-having-the-same-number-of-distinct-balls",
+    "questionId": 1467,
+    "difficulty": "Hard",
+    "tags": [
+        "Array",
+        "Math",
+        "Dynamic Programming",
+        "Backtracking",
+        "Combinatorics",
+        "Probability and Statistics"
+    ],
+    "tests": [
+        {
+            "args": {
+                "balls": [6, 6]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [4, 4, 4, 4]
+            },
+            "expected": 0.820979020979021
+        },
+        {
+            "args": {
+                "balls": [2, 1, 1]
+            },
+            "expected": 0.6666666666666666
+        },
+        {
+            "args": {
+                "balls": [1, 2, 2, 2, 2, 2, 2]
+            },
+            "expected": 0.8571428571428571
+        },
+        {
+            "args": {
+                "balls": [1, 2, 1, 2]
+            },
+            "expected": 0.6
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [6, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [6]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [3, 3]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": 0.5375089306977852
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [2, 1, 1, 1, 1]
+            },
+            "expected": 0.6
+        },
+        {
+            "args": {
+                "balls": [1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [3, 2, 1]
+            },
+            "expected": 0.3
+        },
+        {
+            "args": {
+                "balls": [1, 2, 3]
+            },
+            "expected": 0.3
+        },
+        {
+            "args": {
+                "balls": [6, 6, 6, 6, 6, 6, 6, 6]
+            },
+            "expected": 0.8557108876701283
+        },
+        {
+            "args": {
+                "balls": [1, 1, 1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [1, 1, 2, 2, 3, 3]
+            },
+            "expected": 0.38311688311688313
+        },
+        {
+            "args": {
+                "balls": [4, 2]
+            },
+            "expected": 0.6
+        },
+        {
+            "args": {
+                "balls": [5, 5, 1, 1, 1]
+            },
+            "expected": 0.032467532467532464
+        },
+        {
+            "args": {
+                "balls": [4, 3, 2, 1]
+            },
+            "expected": 0.30952380952380953
+        },
+        {
+            "args": {
+                "balls": [5, 5, 1, 1]
+            },
+            "expected": 0.5454545454545454
+        },
+        {
+            "args": {
+                "balls": [1, 2, 3, 4]
+            },
+            "expected": 0.30952380952380953
+        },
+        {
+            "args": {
+                "balls": [6, 2, 2, 2]
+            },
+            "expected": 0.4329004329004329
+        },
+        {
+            "args": {
+                "balls": [6, 4, 2, 2, 2]
+            },
+            "expected": 0.40792540792540793
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 1, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [5, 1, 1, 1, 1]
+            },
+            "expected": 0.8571428571428571
+        },
+        {
+            "args": {
+                "balls": [4, 4, 1]
+            },
+            "expected": 0.11428571428571428
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [6, 6]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [6, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [3, 2, 1, 1, 1]
+            },
+            "expected": 0.2571428571428571
+        },
+        {
+            "args": {
+                "balls": [3, 3, 3, 1]
+            },
+            "expected": 0.21428571428571427
+        },
+        {
+            "args": {
+                "balls": [3, 2, 2, 1]
+            },
+            "expected": 0.37142857142857144
+        },
+        {
+            "args": {
+                "balls": [1, 1, 1, 1, 1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [1, 1, 1, 1, 1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [5, 4, 3, 2, 1]
+            },
+            "expected": 0.5474941724941725
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 2, 1]
+            },
+            "expected": 0.8
+        },
+        {
+            "args": {
+                "balls": [6, 6, 6]
+            },
+            "expected": 0.9777869189633895
+        },
+        {
+            "args": {
+                "balls": [1, 2, 3, 4]
+            },
+            "expected": 0.30952380952380953
+        },
+        {
+            "args": {
+                "balls": [4, 2, 1]
+            },
+            "expected": 0.5
+        },
+        {
+            "args": {
+                "balls": [1, 2, 2, 1, 1]
+            },
+            "expected": 0.6
+        },
+        {
+            "args": {
+                "balls": [3, 2, 2, 1, 1, 1]
+            },
+            "expected": 0.30952380952380953
+        },
+        {
+            "args": {
+                "balls": [5, 3, 2]
+            },
+            "expected": 0.5555555555555556
+        },
+        {
+            "args": {
+                "balls": [6, 1, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [5, 3, 1]
+            },
+            "expected": 0.21428571428571427
+        },
+        {
+            "args": {
+                "balls": [4, 2, 1, 1]
+            },
+            "expected": 0.34285714285714286
+        },
+        {
+            "args": {
+                "balls": [3, 2, 1, 1]
+            },
+            "expected": 0.7
+        },
+        {
+            "args": {
+                "balls": [5, 3, 3]
+            },
+            "expected": 1.3531746031746033
+        },
+        {
+            "args": {
+                "balls": [6, 3, 3]
+            },
+            "expected": 0.7251082251082251
+        },
+        {
+            "args": {
+                "balls": [5, 1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [4, 2, 2]
+            },
+            "expected": 0.5142857142857142
+        },
+        {
+            "args": {
+                "balls": [3, 3, 1, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [3, 3, 3, 3, 3, 3]
+            },
+            "expected": 0.6334841628959276
+        },
+        {
+            "args": {
+                "balls": [4, 3, 2, 1]
+            },
+            "expected": 0.30952380952380953
+        },
+        {
+            "args": {
+                "balls": [2, 3, 2, 1]
+            },
+            "expected": 0.37142857142857144
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [4, 2, 2, 1]
+            },
+            "expected": 0.5857142857142857
+        },
+        {
+            "args": {
+                "balls": [4, 4, 4, 2]
+            },
+            "expected": 0.5664335664335665
+        },
+        {
+            "args": {
+                "balls": [1, 2, 2, 3, 3]
+            },
+            "expected": 0.6507936507936508
+        },
+        {
+            "args": {
+                "balls": [2, 2, 1, 1, 1, 1]
+            },
+            "expected": 0.5142857142857142
+        },
+        {
+            "args": {
+                "balls": [1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [3, 2, 2]
+            },
+            "expected": 1.1
+        },
+        {
+            "args": {
+                "balls": [6, 2, 1, 1]
+            },
+            "expected": 0.31746031746031744
+        },
+        {
+            "args": {
+                "balls": [5, 5, 5]
+            },
+            "expected": 1.7657342657342658
+        },
+        {
+            "args": {
+                "balls": [4, 3, 1]
+            },
+            "expected": 0.11428571428571428
+        },
+        {
+            "args": {
+                "balls": [5, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [4, 4, 1, 1]
+            },
+            "expected": 0.5555555555555556
+        },
+        {
+            "args": {
+                "balls": [6, 2, 2]
+            },
+            "expected": 0.47619047619047616
+        },
+        {
+            "args": {
+                "balls": [1, 3, 3, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [5, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [3, 3, 1, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [3, 3, 3, 3]
+            },
+            "expected": 0.7662337662337663
+        },
+        {
+            "args": {
+                "balls": [6, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [3, 3, 3, 3]
+            },
+            "expected": 0.7662337662337663
+        },
+        {
+            "args": {
+                "balls": [6, 2, 1, 1, 1]
+            },
+            "expected": 0.4166666666666667
+        },
+        {
+            "args": {
+                "balls": [4, 2]
+            },
+            "expected": 0.6
+        },
+        {
+            "args": {
+                "balls": [5, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [4, 2, 2]
+            },
+            "expected": 0.5142857142857142
+        },
+        {
+            "args": {
+                "balls": [2, 2, 1, 1, 1, 1]
+            },
+            "expected": 0.5142857142857142
+        },
+        {
+            "args": {
+                "balls": [4, 4, 4, 4]
+            },
+            "expected": 0.820979020979021
+        },
+        {
+            "args": {
+                "balls": [1, 1, 2, 2, 3, 3]
+            },
+            "expected": 0.38311688311688313
+        },
+        {
+            "args": {
+                "balls": [4, 4, 2, 2]
+            },
+            "expected": 0.5238095238095238
+        },
+        {
+            "args": {
+                "balls": [6, 1, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [4, 4, 1]
+            },
+            "expected": 0.11428571428571428
+        },
+        {
+            "args": {
+                "balls": [6, 6, 1, 1]
+            },
+            "expected": 0.5384615384615384
+        },
+        {
+            "args": {
+                "balls": [4, 4, 2]
+            },
+            "expected": 0.6190476190476191
+        },
+        {
+            "args": {
+                "balls": [6, 2, 2, 2, 2, 2, 2]
+            },
+            "expected": 0.38009049773755654
+        },
+        {
+            "args": {
+                "balls": [4, 4, 3, 2, 1]
+            },
+            "expected": 0.30186480186480186
+        },
+        {
+            "args": {
+                "balls": [3, 2, 1, 1, 1]
+            },
+            "expected": 0.2571428571428571
+        },
+        {
+            "args": {
+                "balls": [4, 4, 4]
+            },
+            "expected": 0.8961038961038961
+        },
+        {
+            "args": {
+                "balls": [6, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "balls": [6, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "balls": [6, 3, 1, 1, 1, 1]
+            },
+            "expected": 0.6818181818181818
+        },
+        {
+            "args": {
+                "balls": [1, 2, 3, 2]
+            },
+            "expected": 0.37142857142857144
+        },
+        {
+            "args": {
+                "balls": [5, 2, 2, 1]
+            },
+            "expected": 0.31746031746031744
+        },
+        {
+            "args": {
+                "balls": [3, 2, 1]
+            },
+            "expected": 0.3
+        },
+        {
+            "args": {
+                "balls": [3, 2, 1, 1, 1, 1]
+            },
+            "expected": 0.6
+        },
+        {
+            "args": {
+                "balls": [2, 2, 2, 1, 1]
+            },
+            "expected": 0.5714285714285714
+        },
+        {
+            "args": {
+                "balls": [3, 2, 2, 1]
+            },
+            "expected": 0.37142857142857144
+        }
+    ],
+    "invoke": {
+        "python": "Solution().getProbability",
+        "typescript": "Solution().getProbability"
+    }
+}

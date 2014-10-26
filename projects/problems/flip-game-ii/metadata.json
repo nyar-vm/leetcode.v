@@ -1,0 +1,918 @@
+{
+    "id": "flip-game-ii",
+    "questionId": 294,
+    "difficulty": "Medium",
+    "tags": ["Memoization", "Math", "Dynamic Programming", "Backtracking", "Game Theory"],
+    "tests": [
+        {
+            "args": {
+                "currentState": "+-+-+--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+-++-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--+-+++++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "+-+--++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "-++++-"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--++--++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++++-++++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++-++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+-+-+--+++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+++++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++-++++-++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++-++++-++++-++++-++++-++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++++++++++-++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++--++++++++++++++--++++++++++++++--++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "+++++++++++++--++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--+++++--+++++--+++++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++--++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+-++++-++++-+"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--++--++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--++++--++++--++++--++++--++++--++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++--+++++--+++++--+++++--+++++--+++++--+++++--+++++--+++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--+++++-+++++-+++++-+++++-+++++-+++++-+++++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-++-++-++-++-++-++-++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++-++++++-++++++-++++++-++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--++++++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "----------------------------------------------------------------------------------------"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++--++++++--++++++--++++++--++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--++--++--++--++--++--++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++-+--++++-+--++++-+--++++-+--++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+++++++++++++++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++--++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++--+++++--+++++--+++++--+++++--+++++--+++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--+--+--+--+--+--+--+--+--+--+"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++++++++++++++-++++++++++++++-++++++++++++++-"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "-++-++-++-++-++-++-++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+++++----+++++----+++++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++-++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++++++++++++++++++++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++--++++++++++--++++++++++--++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "-++-++++-++++-++++-++++-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++++--++++--++++--++++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++--++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--++--++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+--++-+--++-+--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+-+-+-++++-+-++++-+-++++-+-++++-+-++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "++++++++--++++++++--++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+-+-+-++++-+-++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++-++++++++-++++++++-++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++-++++-++++-++++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--+++++--+++++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++----++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "-+-+--++-+-+"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++--++++++++++--++++++++++--++++++++++--++++++++++--++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "-++-++-++-++-++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++++----+++++----+++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++----+++++----+++++----+++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--++--++--++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--------------------------------"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--+-++--+-++--+-++--+-++--+-++--+-++--+-++--+-++--+-++--+-++--+-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++--------------------------------"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "--++++++--+--++++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++-+-++++++++++-+-++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++-++-++--++-++-++--++-++-++--++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-++++++-++++++-++++++-++++++-++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++-++++++-++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++--++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "----++++++++++----++++++++++----++++++++++----"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-++++++++++++++++++++++++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+-++-+-++-+-++-+-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+-++-+-++-+-++-+-"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++++++++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-++-++-++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-++-++-++-++-++-++-++-++-++-++-++-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "------------------------------------------------------------"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "+++++-+++++-+++++-+++++-+++++-+++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+-++-+-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--++--++--++--++--++--++--++--++--++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "--++++--++++--++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++++++++--+++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++-++++++-++++++-++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "--++--++++++--++++++--++++++--++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "------------------------------------"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+-++-+-++-+-++-+-++-+-++-+-++-+-++-+-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++-++-++-++-++-++-++-++-++-++-++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-+++++----+++++----+++++----+++++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "+++++++++-++++--++++--++++-++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+-+++-+++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++--++++++++--++++++++--++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++--++++++++++--++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++---++++++---++++++---++++++---++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++++++++++++++++++++++++++++"
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "currentState": "-++++-++++-++++-++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "-++++++++++-++++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--++++++--++++++--++++++--"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++++++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++--++--++--++--++--++--++--++--"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++-++-++-++-++-++-++-++-++-++-++-++-++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-++++++-++++++-++++++-"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++-++-++++-++-++++-++-++++-++-++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++++--++++++--++++++"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-++++++++-++++++++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+-+--++-+--++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "--++++++++--++++++++--++++++++--++++++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+-++-+-++-+-++-+-++-+-++-+-++-"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++-++++-++++-++++-++++-++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "----------------------------------------------------------------"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++-++-++++-++-++++-++-++++-"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "-+++++++-++++++-"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "currentState": "++++-++++-++++-++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "++++--++++--++++--++++"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "currentState": "+++++-+++++-+++++-+++++"
+            },
+            "expected": false
+        }
+    ],
+    "invoke": {
+        "python": "Solution().canWin",
+        "typescript": "Solution().canWin"
+    }
+}

@@ -1,0 +1,772 @@
+{
+    "id": "find-all-possible-stable-binary-arrays-ii",
+    "questionId": 3130,
+    "difficulty": "Hard",
+    "tags": ["Dynamic Programming", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "zero": 5,
+                "one": 5,
+                "limit": 4
+            },
+            "expected": 242
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 50
+            },
+            "expected": 375840050
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 5,
+                "limit": 2
+            },
+            "expected": 84
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 4,
+                "limit": 3
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 2,
+                "limit": 3
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "zero": 1000,
+                "one": 1000,
+                "limit": 500
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 2,
+                "limit": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 4,
+                "limit": 2
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 4,
+                "limit": 4
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 10,
+                "limit": 5
+            },
+            "expected": 165114
+        },
+        {
+            "args": {
+                "zero": 500,
+                "one": 500,
+                "limit": 250
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 1,
+                "limit": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 5,
+                "limit": 3
+            },
+            "expected": 99
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 3,
+                "limit": 2
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 5,
+                "limit": 3
+            },
+            "expected": 194
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 10
+            },
+            "expected": 474184186
+        },
+        {
+            "args": {
+                "zero": 500,
+                "one": 500,
+                "limit": 50
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 3,
+                "limit": 4
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 3,
+                "limit": 2
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 2,
+                "limit": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 8,
+                "limit": 4
+            },
+            "expected": 5250
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 50,
+                "limit": 10
+            },
+            "expected": 10967566
+        },
+        {
+            "args": {
+                "zero": 300,
+                "one": 700,
+                "limit": 100
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 75,
+                "one": 25,
+                "limit": 3
+            },
+            "expected": 3276
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 10,
+                "limit": 4
+            },
+            "expected": 12948
+        },
+        {
+            "args": {
+                "zero": 9,
+                "one": 7,
+                "limit": 3
+            },
+            "expected": 4848
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 15,
+                "limit": 4
+            },
+            "expected": 30552957
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 100
+            },
+            "expected": 407336795
+        },
+        {
+            "args": {
+                "zero": 400,
+                "one": 400,
+                "limit": 25
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 15,
+                "limit": 3
+            },
+            "expected": 378412
+        },
+        {
+            "args": {
+                "zero": 999,
+                "one": 999,
+                "limit": 500
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 1000,
+                "limit": 1
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 800,
+                "one": 200,
+                "limit": 50
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 1000,
+                "one": 1000,
+                "limit": 100
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 500,
+                "one": 500,
+                "limit": 200
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 9,
+                "one": 11,
+                "limit": 2
+            },
+            "expected": 5344
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 150,
+                "limit": 25
+            },
+            "expected": 469749347
+        },
+        {
+            "args": {
+                "zero": 12,
+                "one": 9,
+                "limit": 4
+            },
+            "expected": 174530
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 10,
+                "limit": 3
+            },
+            "expected": 66486
+        },
+        {
+            "args": {
+                "zero": 12,
+                "one": 12,
+                "limit": 10
+            },
+            "expected": 2703832
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 10
+            },
+            "expected": 430250984
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 5
+            },
+            "expected": 256686735
+        },
+        {
+            "args": {
+                "zero": 750,
+                "one": 250,
+                "limit": 100
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 1000,
+                "one": 1,
+                "limit": 1
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 10,
+                "limit": 4
+            },
+            "expected": 3741210
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 18,
+                "limit": 6
+            },
+            "expected": 378141764
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 5,
+                "limit": 3
+            },
+            "expected": 546
+        },
+        {
+            "args": {
+                "zero": 8,
+                "one": 6,
+                "limit": 4
+            },
+            "expected": 2386
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 20,
+                "limit": 10
+            },
+            "expected": 431683431
+        },
+        {
+            "args": {
+                "zero": 450,
+                "one": 550,
+                "limit": 75
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 600,
+                "one": 400,
+                "limit": 50
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 14,
+                "one": 14,
+                "limit": 4
+            },
+            "expected": 21533230
+        },
+        {
+            "args": {
+                "zero": 300,
+                "one": 300,
+                "limit": 20
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 800,
+                "one": 200,
+                "limit": 200
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 12,
+                "limit": 5
+            },
+            "expected": 13147531
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 10,
+                "limit": 2
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 150,
+                "limit": 15
+            },
+            "expected": 120261210
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 150,
+                "limit": 15
+            },
+            "expected": 416993889
+        },
+        {
+            "args": {
+                "zero": 75,
+                "one": 25,
+                "limit": 5
+            },
+            "expected": 769798783
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 10,
+                "limit": 5
+            },
+            "expected": 2249276
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 5,
+                "limit": 2
+            },
+            "expected": 114
+        },
+        {
+            "args": {
+                "zero": 750,
+                "one": 750,
+                "limit": 75
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 13,
+                "one": 10,
+                "limit": 5
+            },
+            "expected": 914333
+        },
+        {
+            "args": {
+                "zero": 25,
+                "one": 25,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 800,
+                "one": 800,
+                "limit": 500
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 900,
+                "one": 100,
+                "limit": 100
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 300,
+                "one": 300,
+                "limit": 1
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 750,
+                "one": 250,
+                "limit": 75
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 17,
+                "one": 15,
+                "limit": 7
+            },
+            "expected": 539683360
+        },
+        {
+            "args": {
+                "zero": 400,
+                "one": 600,
+                "limit": 30
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 8,
+                "one": 12,
+                "limit": 2
+            },
+            "expected": 1391
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 20,
+                "limit": 5
+            },
+            "expected": 89895606
+        },
+        {
+            "args": {
+                "zero": 12,
+                "one": 12,
+                "limit": 6
+            },
+            "expected": 2555112
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 15,
+                "limit": 7
+            },
+            "expected": 957788108
+        },
+        {
+            "args": {
+                "zero": 8,
+                "one": 7,
+                "limit": 3
+            },
+            "expected": 3296
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 5,
+                "limit": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 4
+            },
+            "expected": 507669790
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 8,
+                "limit": 2
+            },
+            "expected": 720
+        },
+        {
+            "args": {
+                "zero": 500,
+                "one": 300,
+                "limit": 50
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 20,
+                "limit": 5
+            },
+            "expected": 983489078
+        },
+        {
+            "args": {
+                "zero": 6,
+                "one": 8,
+                "limit": 2
+            },
+            "expected": 300
+        },
+        {
+            "args": {
+                "zero": 500,
+                "one": 500,
+                "limit": 100
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 1000,
+                "one": 1000,
+                "limit": 1000
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 300,
+                "limit": 150
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 250,
+                "one": 250,
+                "limit": 20
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 5,
+                "limit": 4
+            },
+            "expected": 664
+        },
+        {
+            "args": {
+                "zero": 6,
+                "one": 6,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 15,
+                "limit": 5
+            },
+            "expected": 119126132
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 8,
+                "limit": 5
+            },
+            "expected": 277298
+        },
+        {
+            "args": {
+                "zero": 900,
+                "one": 900,
+                "limit": 900
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 1000,
+                "one": 1000,
+                "limit": 10
+            },
+            "expected": "Error: maximum recursion depth exceeded"
+        },
+        {
+            "args": {
+                "zero": 9,
+                "one": 15,
+                "limit": 3
+            },
+            "expected": 112216
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 8,
+                "limit": 3
+            },
+            "expected": 16025
+        },
+        {
+            "args": {
+                "zero": 12,
+                "one": 8,
+                "limit": 6
+            },
+            "expected": 114332
+        },
+        {
+            "args": {
+                "zero": 18,
+                "one": 12,
+                "limit": 5
+            },
+            "expected": 52051889
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numberOfStableArrays",
+        "typescript": "Solution().numberOfStableArrays"
+    }
+}

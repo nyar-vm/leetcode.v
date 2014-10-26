@@ -1,0 +1,1034 @@
+{
+    "id": "count-prefixes-of-a-given-string",
+    "questionId": 2255,
+    "difficulty": "Easy",
+    "tags": ["Array", "String"],
+    "tests": [
+        {
+            "args": {
+                "words": ["hello", "hell", "he", "h"],
+                "s": "hello"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["short"],
+                "s": "shorter"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["same", "same"],
+                "s": "same"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["hello"],
+                "s": "h"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["hello"],
+                "s": "hello"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["d", "do", "dog", "doge"],
+                "s": "doge"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["prefix"],
+                "s": "prefix"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["same", "same", "same"],
+                "s": "same"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["world"],
+                "s": "world"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "s": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a"],
+                "s": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["not", "a", "prefix"],
+                "s": "example"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "t"],
+                "s": "testing"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x"],
+                "s": "xyz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcd"],
+                "s": "abc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"],
+                "s": "d"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tested"],
+                "s": "testing"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["a", "a"],
+                "s": "aa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc"],
+                "s": "abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde"],
+                "s": "abcdef"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["z", "zz", "zzz"],
+                "s": "zzzz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["cat", "bat", "rat"],
+                "s": "car"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "ab", "bc", "abc"],
+                "s": "abc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["h"],
+                "s": "hello"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a"],
+                "s": "b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["yes", "no"],
+                "s": "yesman"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["prefix"],
+                "s": "prefixing"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["hello", "he", "h"],
+                "s": "hello"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["test"],
+                "s": "testing"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"],
+                "s": "abcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["subsequence", "subsequen", "subsequen", "subsequ", "subsequ", "subseq"],
+                "s": "subsequence"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["ab", "abc", "abcd"],
+                "s": "abcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tested", "te"],
+                "s": "testing"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["unique", "uniq", "un"],
+                "s": "unique"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["different", "dif", "diff", "differ"],
+                "s": "different"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["partial", "parti", "part", "par"],
+                "s": "partialmatch"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "pred"],
+                "s": "predicate"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["example", "examp", "exam", "exa", "ex", "e"],
+                "s": "example"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["prefix", "prefi", "pref", "pre"],
+                "s": "prefix"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "ab", "a"],
+                "s": "abcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["complex", "com", "comp", "comple", "complexe"],
+                "s": "complex"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["prefix", "prefi", "prefixe", "prefixex"],
+                "s": "prefixextension"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa"],
+                "s": "aaaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["example", "ex", "exa", "exam", "examp", "examp"],
+                "s": "example"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["complex", "comple", "compl", "comp"],
+                "s": "complexity"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "he"],
+                "s": "hello"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcde", "bcde", "cde", "de", "e"],
+                "s": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "s": "abcdefghi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["not", "no", "n"],
+                "s": "note"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["multiple", "multip", "multi", "mult", "mult"],
+                "s": "multiple"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["word", "words", "wording"],
+                "s": "word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "p"],
+                "s": "prefix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["overlap", "over", "ov", "o"],
+                "s": "overlap"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "s": "aaaaaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "s": "aaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["short", "shorter", "shortest"],
+                "s": "short"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd", "abcde", "abcdef", "abcdefg"],
+                "s": "abcdefgh"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["short", "shot", "sh", "s"],
+                "s": "shortstory"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcd", "abc", "ab", "a"],
+                "s": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["longword", "long", "lo", "l", "lon", "longw"],
+                "s": "longword"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e"],
+                "s": "abcde"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "p"],
+                "s": "prefix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "pref", "prefi", "prefixe"],
+                "s": "prefix"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a"],
+                "s": "aaaaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["word", "wording", "worded", "wordingword"],
+                "s": "wordingword"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "testi", "testin"],
+                "s": "testingstring"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "s": "one"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["different", "diff", "diffe", "differen", "differen"],
+                "s": "different"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["unique", "uniq", "un", "u"],
+                "s": "unique"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a", "aaaa"],
+                "s": "aaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg"],
+                "s": "abcd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["not", "no", "n"],
+                "s": "note"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["same", "same", "same", "same"],
+                "s": "same"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tea", "te"],
+                "s": "testing"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["longword", "long", "lo", "l"],
+                "s": "longwordexample"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["begin", "beg", "be", "b"],
+                "s": "beginning"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["overlap", "over", "o"],
+                "s": "overlap"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tes", "t"],
+                "s": "testing"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["xy", "xyz", "xyzz"],
+                "s": "xy"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "s": "fives"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["longword", "long", "lo", "l"],
+                "s": "longword"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["example", "ex", "exa", "exam", "examp"],
+                "s": "example"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "s": "onetwothree"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde"],
+                "s": "abcdef"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["multiple", "multi", "mul", "mu"],
+                "s": "multiples"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["word", "wor", "wo", "w"],
+                "s": "word"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["banana", "ban", "ba", "b"],
+                "s": "bananarama"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abcd", "abc", "ab", "a"],
+                "s": "abcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa"],
+                "s": "aaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "prefixx", "prefixxx", "prefixxxx"],
+                "s": "prefixx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["quick", "qui", "quic", "quicks", "quickb"],
+                "s": "quickbrownfox"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tested"],
+                "s": "testing"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["one", "onetwo", "onetwothree"],
+                "s": "onetwothree"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["programming", "prog", "pro"],
+                "s": "programming"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["part", "partial", "partially"],
+                "s": "partially"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a", "aaaa"],
+                "s": "aaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "s": "one"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "prex", "abc"],
+                "s": "prefix"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde"],
+                "s": "abcdefg"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["repeat", "repe", "rep", "re", "r"],
+                "s": "repeat"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd", "abcde"],
+                "s": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"],
+                "s": "aaaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["complex", "comp", "com", "co", "c"],
+                "s": "complexity"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["python", "pyth", "py"],
+                "s": "python"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x"],
+                "s": "xy"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x", ""],
+                "s": "xyz"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["complex", "com", "co", "c"],
+                "s": "complex"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["prefix", "prefixx", "prefixxx", "prefixxxx"],
+                "s": "prefix"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde"],
+                "s": "abcdefg"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "abc"],
+                "s": "abcdefghi"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["cat", "cattle", "cattleman"],
+                "s": "cattleman"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "x"],
+                "s": "xyz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["same", "same", "same"],
+                "s": "same"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "pref"],
+                "s": "prefix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd", "abcde", "abcdef"],
+                "s": "fghijkl"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "words": ["small", "smaller", "smallest", "smallerest"],
+                "s": "smallerest"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["substring", "subs", "sub", "su"],
+                "s": "substringexample"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde", "abcdef"],
+                "s": "abcdefg"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "testi"],
+                "s": "test"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["zz", "zzz", "zzzz"],
+                "s": "zzzz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["hello", "he", "hell"],
+                "s": "hello"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "pref", "prex"],
+                "s": "prefix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["z", "zz", "zzz", "zzzz"],
+                "s": "zzzzzz"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["unique", "uniq", "uni", "un", "u"],
+                "s": "unique"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "car", "catch", "cart"],
+                "s": "catch"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["consistent", "consist", "consi", "cons"],
+                "s": "consistency"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "s": "abcdefghij"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["unique", "uniq", "uni", "un"],
+                "s": "uniques"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hel", "wo", "wor"],
+                "s": "helloworld"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["overlap", "over", "ov", "overlaplap"],
+                "s": "overlap"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["matching", "match", "mat", "ma", "m"],
+                "s": "matching"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "he", "h", "hellohello"],
+                "s": "hellohello"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa"],
+                "s": "aaaaaaaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "testing123"],
+                "s": "test"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["match", "mat", "ma", "m"],
+                "s": "match"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["example", "exa", "ex", "e"],
+                "s": "example"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "he", "h"],
+                "s": "hello"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["word", "wording", "wordings"],
+                "s": "word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "p", "programming"],
+                "s": "prefix"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"],
+                "s": "abcde"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["unique", "uniqueness", "uni", "un"],
+                "s": "uniqueness"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["one", "on", "o", "ones"],
+                "s": "one"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["word", "wo", "w"],
+                "s": "word"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "words": ["prefix", "pre", "pr", "p"],
+                "s": "prefix"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["example", "exam", "ex", "e"],
+                "s": "examples"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["common", "commo", "comm", "com", "co", "c"],
+                "s": "common"
+            },
+            "expected": 6
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countPrefixes",
+        "typescript": "Solution().countPrefixes"
+    }
+}

@@ -1,0 +1,999 @@
+{
+    "id": "maximize-the-confusion-of-an-exam",
+    "questionId": 2024,
+    "difficulty": "Medium",
+    "tags": ["String", "Binary Search", "Prefix Sum", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "answerKey": "TTTTFFFF",
+                "k": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFF",
+                "k": 3
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTFFTFT",
+                "k": 3
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTF",
+                "k": 2
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "FFTFFT",
+                "k": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "answerKey": "FFTTFFTTFF",
+                "k": 5
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "FFTFFTFF",
+                "k": 2
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTF",
+                "k": 4
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "answerKey": "T",
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "answerKey": "FFTFFTFF",
+                "k": 3
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "TTFF",
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTF",
+                "k": 4
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFT",
+                "k": 2
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "TTFTTFTT",
+                "k": 1
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "TF TFT TFTF",
+                "k": 3
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFF",
+                "k": 5
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFT",
+                "k": 2
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFT",
+                "k": 5
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "answerKey": "TTTTFFT",
+                "k": 1
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTFTTTTT",
+                "k": 2
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTT",
+                "k": 0
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "answerKey": "TTTTT",
+                "k": 0
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTT",
+                "k": 3
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "answerKey": "TTTTFFTFFT",
+                "k": 3
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "FTFFTFFT",
+                "k": 3
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTT",
+                "k": 3
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "TFFT",
+                "k": 1
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFF",
+                "k": 3
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "answerKey": "FFFFF",
+                "k": 3
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "FFFFF",
+                "k": 0
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "TFFFFF",
+                "k": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                "k": 20
+            },
+            "expected": 38
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFT",
+                "k": 4
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFF",
+                "k": 10
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFT",
+                "k": 8
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTFFFFFFFFFFFFFFTTTTTTTTTTTTTTTTTTTTTT",
+                "k": 15
+            },
+            "expected": 43
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTT",
+                "k": 5
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 25
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFTFTFTFTFTFTFTFT",
+                "k": 10
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTTTTTTTTT",
+                "k": 15
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFFTFTF",
+                "k": 4
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "TFFFFFFFFFTTTTTTTTTT",
+                "k": 6
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFTFT",
+                "k": 4
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFT",
+                "k": 8
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTFFTFFTFFTFFTFFTFFTFFT",
+                "k": 21
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTFTF",
+                "k": 10
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 20
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFTTTTTTTT",
+                "k": 5
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFFTFT",
+                "k": 7
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 20
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFTTTTTTTTT",
+                "k": 5
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "answerKey": "FTTFTTFTTFFTFTTFFT",
+                "k": 11
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFTTTTTTFFFFFFFFTTTTTTTTT",
+                "k": 9
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTF",
+                "k": 10
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTT",
+                "k": 10
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFTTTTTTTTTTFT",
+                "k": 2
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 0
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "answerKey": "TTTFFFFTTTFFTFTFFF",
+                "k": 3
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 20
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "answerKey": "FTTTFTTFTTFTTFTTFT",
+                "k": 7
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTF",
+                "k": 5
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "FFFTTTFFFFTTTTFF",
+                "k": 5
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "TTFFFFFFFFTTTTTTTTTTTTFFFFFFF",
+                "k": 8
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "answerKey": "TTTFFFTTTFFFTTTFFF",
+                "k": 5
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFTTTTTTTTTTTTTT",
+                "k": 10
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFT",
+                "k": 2
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFTFTFTFTFT",
+                "k": 5
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "FFTTFFTTFFTTFFTTFF",
+                "k": 10
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TTTTFFFFFFFFFFFFTTTTTTTTTTTT",
+                "k": 15
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFTFTFTFTFTFTFTFT",
+                "k": 12
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTFFFFFFFFFFFFFFFFF",
+                "k": 11
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTFFFFFFF",
+                "k": 5
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "answerKey": "FTFFTFFTFFTFFTFFTFF",
+                "k": 10
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 7
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFTTTTT",
+                "k": 5
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFTFTFFTTFTFT",
+                "k": 3
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTF",
+                "k": 6
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "answerKey": "TTTFTFTFTFTFTFTF",
+                "k": 6
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTT",
+                "k": 15
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "answerKey": "FFTFTFTFTFFTFTFTFT",
+                "k": 6
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFTTTTTFFFFF",
+                "k": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFTTTTTTTTTTTTTTTT",
+                "k": 8
+            },
+            "expected": 38
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFTTTTTTTTTT",
+                "k": 12
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTFFTFFTFFFF",
+                "k": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTF",
+                "k": 9
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTFFTTFFTT",
+                "k": 5
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TTTFFFFTTTFFFFTTTFFFFTTT",
+                "k": 6
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TTFFTTFFTFFTFFTT",
+                "k": 7
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "FFTTFFFTTF",
+                "k": 2
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFF",
+                "k": 0
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFTTTTTTT",
+                "k": 6
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "TTFTTTFTFTFTFTFFTFTF",
+                "k": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTFFFFFFFFFF",
+                "k": 8
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 20
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "answerKey": "TTTFFFFTTTTFTTTFFTTT",
+                "k": 7
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFTFTFTFTFTFTFT",
+                "k": 8
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "answerKey": "TTFFFTFTFTFTFFFT",
+                "k": 6
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFT",
+                "k": 5
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 20
+            },
+            "expected": 38
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 25
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 15
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTF",
+                "k": 20
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFT",
+                "k": 9
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTFFTTTTFFTT",
+                "k": 4
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 15
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                "k": 0
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "answerKey": "FFTFTFFTFTFFTFTFFTFT",
+                "k": 5
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "answerKey": "TTFFFFFFFFFFFFFFFFFT",
+                "k": 3
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTFFTFFTFFTFF",
+                "k": 10
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFTTTTTTTTFFFFFFFFTTTTTTTT",
+                "k": 8
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTFTTTTTFTTTTTFTTTTT",
+                "k": 7
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "answerKey": "TFFFFFFFTTTTTTTTTT",
+                "k": 10
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTFTF",
+                "k": 15
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                "k": 25
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "answerKey": "FTTFTTFTTFFTFTTFFTFFTFTTFTT",
+                "k": 22
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "answerKey": "TTFFFFFFFFFFFFFFFFFF",
+                "k": 10
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFTTTTTTT",
+                "k": 7
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TFTFTFTFTFTFTFTFTFTFTFTFTFTF",
+                "k": 18
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 10
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTTTTTTT",
+                "k": 15
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "answerKey": "FFTTFFTFFTFFTFFT",
+                "k": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTFFFFF",
+                "k": 2
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "answerKey": "TTTFFFTTTFFFTTTFFFTTTFFFTTTFFTFTFFTT",
+                "k": 15
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTTFFTTFFTTFFTT",
+                "k": 9
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTTTTTFTFTFT",
+                "k": 6
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                "k": 20
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFF",
+                "k": 15
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFT",
+                "k": 8
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTFFTFFTFFTFFTFFTFFTFFT",
+                "k": 12
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "answerKey": "TTTTFFTTFFTTFF",
+                "k": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "answerKey": "FTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 12
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "answerKey": "TFFFFFFFTTTTTTTT",
+                "k": 7
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTT",
+                "k": 0
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "answerKey": "TFFTFFTFFTFFTFFTFFTFFT",
+                "k": 7
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 20
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFTFTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 24
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "answerKey": "TTFTTTTTTTTTTTTTTTTT",
+                "k": 1
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "answerKey": "TTFFTFTFFTFFTFTFFTFFTFFTTFFTFTFFTFFTFFTFFTFTFFTFF",
+                "k": 6
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "answerKey": "TTFTFTFTFTFTFTFTFTFTFTFT",
+                "k": 12
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "answerKey": "TTTTTTTTTFFFFFFF",
+                "k": 6
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "answerKey": "FFFFFFFFFFFFFFFFFFFFFFFF",
+                "k": 15
+            },
+            "expected": 24
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maxConsecutiveAnswers",
+        "typescript": "Solution().maxConsecutiveAnswers"
+    }
+}

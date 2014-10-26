@@ -1,0 +1,516 @@
+{
+    "id": "number-of-distinct-substrings-in-a-string",
+    "questionId": 1698,
+    "difficulty": "Medium",
+    "tags": ["Trie", "String", "Suffix Array", "Hash Function", "Rolling Hash"],
+    "tests": [
+        {
+            "args": {
+                "s": "aaaabbbb"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 351
+        },
+        {
+            "args": {
+                "s": "abac"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abababab"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "aaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "pwwkew"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "abcabcabc"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "p"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abracadabra"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "s": "ab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aa"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "xyxyxyxyxy"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "aaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "abcde"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "xyz"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "banana"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "abc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aabbaba"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "abcd"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aaaa"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "mississippi"
+            },
+            "expected": 53
+        },
+        {
+            "args": {
+                "s": "z"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abacaba"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "abcdefg"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccdddd"
+            },
+            "expected": 112
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzz"
+            },
+            "expected": 1760
+        },
+        {
+            "args": {
+                "s": "lkseropqwertyuiopasdfghjklzxcvbnmlkser"
+            },
+            "expected": 717
+        },
+        {
+            "args": {
+                "s": "longerstringwithmultiplesubstringsubstring"
+            },
+            "expected": 824
+        },
+        {
+            "args": {
+                "s": "elephantmanelephant"
+            },
+            "expected": 150
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": 200
+        },
+        {
+            "args": {
+                "s": "abbaabbaabba"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "s": "longstringwithrepeatedsubstringsubstring"
+            },
+            "expected": 742
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "s": "abacabacabac"
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "s": "nlpnlplpnlplp"
+            },
+            "expected": 57
+        },
+        {
+            "args": {
+                "s": "abcdefghijlkmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 1351
+        },
+        {
+            "args": {
+                "s": "aaaaabaaaabbbaabababab"
+            },
+            "expected": 193
+        },
+        {
+            "args": {
+                "s": "zzyzxzyzyxzyz"
+            },
+            "expected": 71
+        },
+        {
+            "args": {
+                "s": "hellohellogoodbyegoodbye"
+            },
+            "expected": 253
+        },
+        {
+            "args": {
+                "s": "xyxxxyxyxyxyxyxyxyxyxyxyxy"
+            },
+            "expected": 133
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba"
+            },
+            "expected": 85
+        },
+        {
+            "args": {
+                "s": "xyzyzyzyxzyzyzy"
+            },
+            "expected": 83
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "s": "xyzyxzyzyxzyzyxzyzyx"
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "s": "ababababab"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "ababaabababaababa"
+            },
+            "expected": 83
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "thelongeststringwithdistinctsubstringstothetestthesolution"
+            },
+            "expected": 1634
+        },
+        {
+            "args": {
+                "s": "nndbymxkbmsnnvkze"
+            },
+            "expected": 146
+        },
+        {
+            "args": {
+                "s": "abcdabcd"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaa"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": 351
+        },
+        {
+            "args": {
+                "s": "racecar"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaab"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "zxyxzyzxzyxzyxzy"
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghij"
+            },
+            "expected": 155
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbaaaaab"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "s": "repeatedsubstringsubstring"
+            },
+            "expected": 301
+        },
+        {
+            "args": {
+                "s": "aaaaaa"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 1027
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "s": "noon"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "noonnoonnoonnoonnoonnoonnoonnoon"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc"
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis"
+            },
+            "expected": 996
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc"
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "s": "hellohello"
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbaaaa"
+            },
+            "expected": 75
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": 1077
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbccccdddd"
+            },
+            "expected": 139
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatincludesmanyrepeatedsubstringstomakethetestmoreinteresting"
+            },
+            "expected": 3379
+        },
+        {
+            "args": {
+                "s": "abcdefghij"
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "s": "madamimadam"
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "s": "repeatedpatternrepeatedpattern"
+            },
+            "expected": 335
+        },
+        {
+            "args": {
+                "s": "aabbaabbbaaaabbbbaabbbaaabbaabbbaaaabbbbaabbbaaabbaabbbaaaabbbb"
+            },
+            "expected": 1102
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 1352
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmanysubstrings"
+            },
+            "expected": 738
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd"
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "s": "aaaaaaa"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithsomerepeatedpatterns"
+            },
+            "expected": 1000
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countDistinct",
+        "typescript": "Solution().countDistinct"
+    }
+}

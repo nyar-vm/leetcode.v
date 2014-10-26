@@ -1,0 +1,824 @@
+{
+    "id": "combination-sum-iv",
+    "questionId": 377,
+    "difficulty": "Medium",
+    "tags": ["Array", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "nums": [1, 5, 10],
+                "target": 100
+            },
+            "expected": 8437020668201
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30],
+                "target": 100
+            },
+            "expected": 274
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3],
+                "target": 4
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "nums": [5, 50, 75],
+                "target": 95
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "nums": [5, 1, 3],
+                "target": 8
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "nums": [5, 10, 20],
+                "target": 100
+            },
+            "expected": 46754
+        },
+        {
+            "args": {
+                "nums": [2, 1, 5],
+                "target": 10
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "nums": [4, 2, 1],
+                "target": 32
+            },
+            "expected": 39882198
+        },
+        {
+            "args": {
+                "nums": [9],
+                "target": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [1],
+                "target": 100
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "nums": [2, 5, 10, 20],
+                "target": 25
+            },
+            "expected": 119
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "target": 50
+            },
+            "expected": 256641310658978
+        },
+        {
+            "args": {
+                "nums": [3, 33, 333],
+                "target": 33333
+            },
+            "expected": null
+        },
+        {
+            "args": {
+                "nums": [2, 1, 5],
+                "target": 8
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "nums": [15, 25, 5, 50, 100],
+                "target": 100
+            },
+            "expected": 4600
+        },
+        {
+            "args": {
+                "nums": [7, 14],
+                "target": 300
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [1, 2, 5],
+                "target": 50
+            },
+            "expected": 237139442616
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "target": 10
+            },
+            "expected": 464
+        },
+        {
+            "args": {
+                "nums": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                "target": 20
+            },
+            "expected": 10000000000
+        },
+        {
+            "args": {
+                "nums": [4, 11, 3, 4, 1],
+                "target": 21
+            },
+            "expected": 46333
+        },
+        {
+            "args": {
+                "nums": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "target": 20
+            },
+            "expected": 1.048576e26
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30],
+                "target": 50
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "nums": [1, 2, 5],
+                "target": 25
+            },
+            "expected": 382396
+        },
+        {
+            "args": {
+                "nums": [18, 23, 50, 51],
+                "target": 200
+            },
+            "expected": 493
+        },
+        {
+            "args": {
+                "nums": [33, 29, 40, 12, 54, 23, 67, 34, 74],
+                "target": 1000
+            },
+            "expected": 1.0048033760747004e30
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "target": 50
+            },
+            "expected": 551742150354112
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "target": 50
+            },
+            "expected": 256641310658978
+        },
+        {
+            "args": {
+                "nums": [7, 14, 21, 28],
+                "target": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [1, 2, 4, 8, 16, 32, 64],
+                "target": 256
+            },
+            "expected": 1.0547879311726998e63
+        },
+        {
+            "args": {
+                "nums": [10, 15, 20, 25, 30, 35, 40, 45, 50],
+                "target": 500
+            },
+            "expected": 154640480926757700000
+        },
+        {
+            "args": {
+                "nums": [999, 1000],
+                "target": 1999
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "nums": [3, 6, 9, 12],
+                "target": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [2, 5, 10, 20],
+                "target": 30
+            },
+            "expected": 417
+        },
+        {
+            "args": {
+                "nums": [5, 10, 25, 50],
+                "target": 100
+            },
+            "expected": 27517
+        },
+        {
+            "args": {
+                "nums": [1, 2, 4, 8, 16],
+                "target": 32
+            },
+            "expected": 47350055
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30, 40],
+                "target": 100
+            },
+            "expected": 401
+        },
+        {
+            "args": {
+                "nums": [1, 10, 25, 50],
+                "target": 100
+            },
+            "expected": 37971048
+        },
+        {
+            "args": {
+                "nums": [4, 8, 15, 16, 23, 42],
+                "target": 100
+            },
+            "expected": 878907
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "target": 200
+            },
+            "expected": 2.787008976792839e58
+        },
+        {
+            "args": {
+                "nums": [2, 3, 5],
+                "target": 30
+            },
+            "expected": 15778
+        },
+        {
+            "args": {
+                "nums": [2, 6, 10, 14, 18, 22, 26, 30],
+                "target": 300
+            },
+            "expected": 9.697818790261047e30
+        },
+        {
+            "args": {
+                "nums": [1, 2],
+                "target": 100
+            },
+            "expected": 573147844013817100000
+        },
+        {
+            "args": {
+                "nums": [1, 3, 6, 9, 12, 15, 18],
+                "target": 100
+            },
+            "expected": 9103419367826083000
+        },
+        {
+            "args": {
+                "nums": [1, 2, 4, 5],
+                "target": 15
+            },
+            "expected": 4185
+        },
+        {
+            "args": {
+                "nums": [1, 2, 5, 10, 20, 50],
+                "target": 1000
+            },
+            "expected": 5.541861207736325e232
+        },
+        {
+            "args": {
+                "nums": [3, 7, 15],
+                "target": 120
+            },
+            "expected": 92796380
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7],
+                "target": 100
+            },
+            "expected": 2724220005886008
+        },
+        {
+            "args": {
+                "nums": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+                "target": 120
+            },
+            "expected": 541461698816
+        },
+        {
+            "args": {
+                "nums": [7, 14, 21, 28, 35],
+                "target": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [4, 10, 40, 100],
+                "target": 150
+            },
+            "expected": 3504031
+        },
+        {
+            "args": {
+                "nums": [3, 7, 8],
+                "target": 11
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7, 9],
+                "target": 20
+            },
+            "expected": 576
+        },
+        {
+            "args": {
+                "nums": [2, 3, 7, 8, 10],
+                "target": 200
+            },
+            "expected": 3.100714643409982e30
+        },
+        {
+            "args": {
+                "nums": [50, 25, 75, 20, 10],
+                "target": 200
+            },
+            "expected": 197308
+        },
+        {
+            "args": {
+                "nums": [1, 5, 10, 25],
+                "target": 100
+            },
+            "expected": 8577828731901
+        },
+        {
+            "args": {
+                "nums": [3, 33, 333],
+                "target": 1000
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [1, 10, 100, 1000],
+                "target": 1111
+            },
+            "expected": 3.676664487765004e86
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7],
+                "target": 12
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "nums": [3, 6, 9, 12],
+                "target": 30
+            },
+            "expected": 401
+        },
+        {
+            "args": {
+                "nums": [1, 5, 10],
+                "target": 25
+            },
+            "expected": 915
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7, 10],
+                "target": 300
+            },
+            "expected": 1.885220157798437e48
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500],
+                "target": 1000
+            },
+            "expected": 464
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "target": 500
+            },
+            "expected": 1.2862196417022734e150
+        },
+        {
+            "args": {
+                "nums": [3, 7, 11, 15, 19, 23, 27, 31],
+                "target": 300
+            },
+            "expected": 1.4374578728716948e25
+        },
+        {
+            "args": {
+                "nums": [5, 8, 12, 16, 20, 24, 28, 32, 36, 40],
+                "target": 500
+            },
+            "expected": 4.203441204380536e34
+        },
+        {
+            "args": {
+                "nums": [2, 5, 10, 20],
+                "target": 100
+            },
+            "expected": 11826629775
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30, 40, 50],
+                "target": 150
+            },
+            "expected": 13624
+        },
+        {
+            "args": {
+                "nums": [1, 2, 5, 10],
+                "target": 100
+            },
+            "expected": 1.1917997793646984e23
+        },
+        {
+            "args": {
+                "nums": [3, 8, 10],
+                "target": 120
+            },
+            "expected": 317567468
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "target": 15
+            },
+            "expected": 13624
+        },
+        {
+            "args": {
+                "nums": [1, 3, 5, 7, 9],
+                "target": 25
+            },
+            "expected": 70464
+        },
+        {
+            "args": {
+                "nums": [33, 39, 45, 51, 60],
+                "target": 150
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "nums": [3, 5, 7, 8, 9],
+                "target": 50
+            },
+            "expected": 252672
+        },
+        {
+            "args": {
+                "nums": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+                "target": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [5, 50, 500],
+                "target": 1000
+            },
+            "expected": 1816691941426948
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "target": 10
+            },
+            "expected": 464
+        },
+        {
+            "args": {
+                "nums": [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                "target": 250
+            },
+            "expected": 551742150354112
+        },
+        {
+            "args": {
+                "nums": [15, 25, 35, 45],
+                "target": 200
+            },
+            "expected": 6259
+        },
+        {
+            "args": {
+                "nums": [1, 5, 10],
+                "target": 50
+            },
+            "expected": 1919938
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30],
+                "target": 100
+            },
+            "expected": 274
+        },
+        {
+            "args": {
+                "nums": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29],
+                "target": 300
+            },
+            "expected": 2.2221772641185047e62
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "target": 100
+            },
+            "expected": 6.0614743455745955e29
+        },
+        {
+            "args": {
+                "nums": [50, 150, 250, 350, 450],
+                "target": 1000
+            },
+            "expected": 6475
+        },
+        {
+            "args": {
+                "nums": [50, 25, 75, 125],
+                "target": 250
+            },
+            "expected": 331
+        },
+        {
+            "args": {
+                "nums": [5, 10, 15, 20, 25, 30],
+                "target": 100
+            },
+            "expected": 463968
+        },
+        {
+            "args": {
+                "nums": [1, 5, 10, 25, 50, 100],
+                "target": 1000
+            },
+            "expected": 3.861392372529553e132
+        },
+        {
+            "args": {
+                "nums": [15, 25, 35],
+                "target": 100
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "nums": [1, 2, 4, 8, 16],
+                "target": 100
+            },
+            "expected": 3.001542533296577e24
+        },
+        {
+            "args": {
+                "nums": [2, 4, 6, 8, 10],
+                "target": 20
+            },
+            "expected": 464
+        },
+        {
+            "args": {
+                "nums": [1, 3, 4, 5, 6],
+                "target": 20
+            },
+            "expected": 22750
+        },
+        {
+            "args": {
+                "nums": [5, 15, 25, 35, 45, 55, 65, 75, 85, 95],
+                "target": 500
+            },
+            "expected": 353368918335207400000
+        },
+        {
+            "args": {
+                "nums": [1, 3, 4],
+                "target": 10
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "nums": [1, 10, 100, 1000],
+                "target": 1000
+            },
+            "expected": 7.537296729398485e77
+        },
+        {
+            "args": {
+                "nums": [1, 5, 10, 25],
+                "target": 50
+            },
+            "expected": 1931845
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7],
+                "target": 15
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "nums": [1, 3, 4, 5],
+                "target": 13
+            },
+            "expected": 424
+        },
+        {
+            "args": {
+                "nums": [13, 17, 19, 23, 29],
+                "target": 100
+            },
+            "expected": 256
+        },
+        {
+            "args": {
+                "nums": [3, 5, 7, 10],
+                "target": 20
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7],
+                "target": 30
+            },
+            "expected": 19096
+        },
+        {
+            "args": {
+                "nums": [7, 14, 28],
+                "target": 1000
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [2, 3, 6, 7, 9],
+                "target": 120
+            },
+            "expected": 14544576409221128000
+        },
+        {
+            "args": {
+                "nums": [7, 14, 21, 28, 35],
+                "target": 105
+            },
+            "expected": 13624
+        },
+        {
+            "args": {
+                "nums": [7, 14, 28, 35, 56],
+                "target": 100
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [4, 7, 9],
+                "target": 20
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "nums": [3, 5, 10, 15],
+                "target": 50
+            },
+            "expected": 12043
+        },
+        {
+            "args": {
+                "nums": [15, 25, 35],
+                "target": 1000
+            },
+            "expected": 48781528629177570000
+        },
+        {
+            "args": {
+                "nums": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "target": 50
+            },
+            "expected": 12574441114
+        },
+        {
+            "args": {
+                "nums": [3, 5, 7],
+                "target": 15
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "nums": [1, 2, 4, 8, 16, 32, 64, 128],
+                "target": 256
+            },
+            "expected": 1.0547879311726998e63
+        },
+        {
+            "args": {
+                "nums": [3, 5, 10, 20],
+                "target": 1000
+            },
+            "expected": 2.1439169340766275e92
+        },
+        {
+            "args": {
+                "nums": [1, 5, 10, 25, 50, 100],
+                "target": 200
+            },
+            "expected": 1.6912116130257982e26
+        },
+        {
+            "args": {
+                "nums": [3, 5, 7, 9],
+                "target": 150
+            },
+            "expected": 12883204547325702
+        },
+        {
+            "args": {
+                "nums": [4, 10, 40, 25],
+                "target": 100
+            },
+            "expected": 18984
+        },
+        {
+            "args": {
+                "nums": [1, 2, 4, 8, 16],
+                "target": 31
+            },
+            "expected": 26805983
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30, 40, 50],
+                "target": 200
+            },
+            "expected": 400096
+        },
+        {
+            "args": {
+                "nums": [1, 100, 101, 102],
+                "target": 300
+            },
+            "expected": 45158
+        }
+    ],
+    "invoke": {
+        "python": "Solution().combinationSum4",
+        "typescript": "Solution().combinationSum4"
+    }
+}

@@ -1,0 +1,974 @@
+{
+    "id": "substring-with-concatenation-of-all-words",
+    "questionId": 30,
+    "difficulty": "Hard",
+    "tags": ["Hash Table", "String", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s": "wordgoodgoodgoodbestword",
+                "words": ["word", "good", "best", "word"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "a",
+                "words": ["a", "a", "a"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abababab",
+                "words": ["a", "b", "a", "b"]
+            },
+            "expected": [0, 1, 2, 3, 4]
+        },
+        {
+            "args": {
+                "s": "lingmindraboofooowingdingbarrwingmonkeypoundcake",
+                "words": ["fooo", "barr", "wing", "ding", "wing"]
+            },
+            "expected": [13]
+        },
+        {
+            "args": {
+                "s": "barfoothefoobarman",
+                "words": ["foo", "bar"]
+            },
+            "expected": [0, 9]
+        },
+        {
+            "args": {
+                "s": "barfoofoobarthefoobarman",
+                "words": ["bar", "foo", "the"]
+            },
+            "expected": [6, 9, 12]
+        },
+        {
+            "args": {
+                "s": "aaa",
+                "words": ["a", "a"]
+            },
+            "expected": [0, 1]
+        },
+        {
+            "args": {
+                "s": "thisisjustafancysentencewithallthesewordsin",
+                "words": [
+                    "this",
+                    "is",
+                    "a",
+                    "just",
+                    "fancy",
+                    "sentence",
+                    "with",
+                    "all",
+                    "these",
+                    "words",
+                    "in"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "overlaplaplaplaplaplaplaplaplaplap",
+                "words": [
+                    "lap",
+                    "laplap",
+                    "laplap",
+                    "laplap",
+                    "laplap",
+                    "laplap",
+                    "laplap",
+                    "laplap"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefabcdefabcdefabcdefabcdef",
+                "words": ["abcdef", "abcdef", "abcdef", "abcdef", "abcdef"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "words": [
+                    "aabb",
+                    "ccdd",
+                    "eefg",
+                    "ghhi",
+                    "jklk",
+                    "llmm",
+                    "nnoo",
+                    "pqqr",
+                    "rstt",
+                    "uuvv",
+                    "wwxx",
+                    "yyzz"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "oneonetwoonethreetwothreeonetwothreeone",
+                "words": ["one", "two", "three"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefg",
+                "words": ["abc", "def", "gab", "cde", "fgh"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "zazbzczdzazbzczdzaz",
+                "words": ["zaz", "bz", "cz", "dz", "az", "bz", "cz", "dz"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfivesixseveneightnine",
+                "words": [
+                    "onetwo",
+                    "threefour",
+                    "fivesix",
+                    "seveneight",
+                    "ninetwo",
+                    "threefour",
+                    "fivesix"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzz",
+                "words": ["zzz", "zzz", "zzz", "zzz"]
+            },
+            "expected": [0, 3, 6, 1, 4, 2, 5]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "words": ["abc", "def", "ghi", "jkl", "abc", "def", "ghi", "jkl", "abc", "def"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd",
+                "words": ["abcd", "dcba", "abdc", "bacd"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "testtesttesttest",
+                "words": ["test", "test", "test"]
+            },
+            "expected": [0, 4]
+        },
+        {
+            "args": {
+                "s": "alibabacloudisfastgrowing",
+                "words": ["ali", "ba", "ba", "cloud", "is", "fast", "grow", "ing"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mississippiissippi",
+                "words": [
+                    "mis",
+                    "iss",
+                    "ssi",
+                    "ipp",
+                    "ppi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi",
+                    "ippi"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatcontainsmanywordsandwordstogether",
+                "words": [
+                    "this",
+                    "is",
+                    "avery",
+                    "long",
+                    "string",
+                    "that",
+                    "contains",
+                    "many",
+                    "words",
+                    "and",
+                    "words",
+                    "together"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "catdogcatdogcatdogcat",
+                "words": ["cat", "dog", "cat", "dog", "cat"]
+            },
+            "expected": [0, 6]
+        },
+        {
+            "args": {
+                "s": "abcdefghabcdefghabcdefgh",
+                "words": ["abcdef", "ghabcd", "efghab", "cdefgh", "defghi", "efghab", "fghabc"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "repeatedrepeatedrepeated",
+                "words": ["repeated", "repe", "atedre", "peated"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xylophoneclarinetxylophoneclarinet",
+                "words": ["xylo", "phone", "clar", "inet"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "words": ["quick", "brown", "fox", "jump", "over", "the", "lazy", "dog"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "repeatedrepeatedrepeatedword",
+                "words": ["repeated", "repeated", "repeated", "word"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aquickbrownfoxjumpsoverthelazydog",
+                "words": ["quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "onetwothreefour",
+                "words": ["one", "two", "three", "four"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "loremipsumdolorsitamet",
+                "words": ["lorem", "ipsum", "dolor", "sit", "amet"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "words": [
+                    "aabb",
+                    "ccdd",
+                    "eefg",
+                    "ghhi",
+                    "ijjk",
+                    "kllm",
+                    "mnnm",
+                    "nnoo",
+                    "ppqq",
+                    "rrss",
+                    "ttuu",
+                    "vvww",
+                    "xxyy",
+                    "zzaa"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababab",
+                "words": [
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab",
+                    "aba",
+                    "bab"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfivesixseveneightnine",
+                "words": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddeeeeffffgggghhhhiiii",
+                "words": ["aabb", "bbcc", "ccdd", "ddeeff", "ffgg", "gghh", "hhiiaa"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijj",
+                "words": ["aabb", "ccdd", "eeff", "gghh", "iijj"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "words": ["issi", "ippi"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaabbbbbbbbbbbcccccccccccddddddddddd",
+                "words": [
+                    "aaaaa",
+                    "bbbbb",
+                    "ccccc",
+                    "ddddd",
+                    "aaaaa",
+                    "bbbbb",
+                    "ccccc",
+                    "ddddd",
+                    "aaaaa",
+                    "bbbbb"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "complexcomplexcomplexcomplex",
+                "words": ["com", "ple", "xco", "mple", "com", "ple", "xco", "mple"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "words": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz", "zz"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "pythonprogramminglanguage",
+                "words": ["py", "thon", "pro", "gram", "ming", "lan", "guag", "e"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "exampleexampleexampleexample",
+                "words": ["example", "example", "example", "example"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "abcdefghabcdefgh",
+                "words": ["abcd", "efgh", "efgh", "abcd"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "hellohellohellohellohello",
+                "words": ["hello", "hello", "hello", "hello", "hello"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "xxyyyzzzzzyyyxx",
+                "words": ["xx", "yy", "zz", "yy", "xx"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "words": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "hellohellohellohellohellohellohello",
+                "words": ["hello", "hello"]
+            },
+            "expected": [0, 5, 10, 15, 20, 25]
+        },
+        {
+            "args": {
+                "s": "concatenationconcatenationconcatenation",
+                "words": ["concat", "enationc", "ationc", "tenation", "enationc", "oncatena"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "overlapoverlappingoverlapping",
+                "words": ["over", "lap", "over", "lapping"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xxyyzzxxyyzzxxyyzzxxyyzz",
+                "words": ["xxyy", "yyzz", "xxyy", "yyzz", "xxyy", "yyzz"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefg",
+                "words": ["abc", "def", "gab"]
+            },
+            "expected": [0, 7]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "words": ["abc", "def", "abb"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mississippiissississippi",
+                "words": ["issi", "ssis", "siss", "issi", "ssis", "siss", "issi", "ssis", "siss"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmno",
+                "words": ["abc", "def", "ghi", "jkl", "mno"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyz",
+                "words": ["xyz", "zyx", "yzx", "xzy", "zxy"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefabcdefabcdefabcdefabcdefabcdef",
+                "words": ["abcdef", "abcdef", "abcdef", "abcdef", "abcdef", "abcdef"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "thisisatargetstringwithtargetstring",
+                "words": ["this", "is", "a", "target", "string"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "thisisanexamplethisisanexamplethisisanexample",
+                "words": ["this", "isan", "example", "isan", "example"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "words": [
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz",
+                    "zzzz"
+                ]
+            },
+            "expected": [0, 4, 1, 5, 2, 6, 3]
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcd",
+                "words": ["abcd", "dcba", "abdc", "bacd", "cdab"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "words": ["abc", "def", "ghi", "jabc", "def", "ghij", "abc", "def", "ghi", "j"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghiabcdefghiabcdefghi",
+                "words": ["abc", "def", "ghi", "abc", "def", "ghi", "abc", "def", "ghi"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghij",
+                "words": ["abc", "def", "ghi", "jabc", "def", "ghi", "jabc", "def", "ghi", "j"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaab",
+                "words": [
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "aaaa",
+                    "a"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "onetwothreefourfivesix",
+                "words": ["one", "two", "three", "four", "five", "six"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababab",
+                "words": ["aba", "bab", "aba", "bab", "aba", "bab", "aba", "bab", "aba", "bab"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "words": ["bra", "cad"]
+            },
+            "expected": [1]
+        },
+        {
+            "args": {
+                "s": "amazinganduniquestring",
+                "words": ["amazing", "and", "unique", "string"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mississippiississi",
+                "words": ["issi", "ssis", "siss", "issi"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefabcdefabcdef",
+                "words": ["abc", "def", "cba", "fed"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "words": ["abc", "def", "ghi", "j"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "words": [
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa",
+                    "aaa"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mnopqrstuvmnopqrstuv",
+                "words": ["mnop", "qrst", "uv", "mnop", "qrst", "uv"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "lmnopqrlmnopqrlmnopqr",
+                "words": ["lmnop", "qr", "lmnop", "qr", "lmnop", "qr"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xyzzxyzzxyzzxyzzxyzzxyzzxyzz",
+                "words": [
+                    "xyz",
+                    "zxy",
+                    "zzx",
+                    "xyz",
+                    "zxy",
+                    "zzx",
+                    "xyz",
+                    "zxy",
+                    "zzx",
+                    "xyz",
+                    "zxy",
+                    "zzx"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghij",
+                "words": ["abcdefghij", "abcdefghij", "abcdefghij"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "anananananananananananananananananan",
+                "words": ["ana", "nan", "ana"]
+            },
+            "expected": [0, 6, 12, 18, 24, 4, 10, 16, 22, 2, 8, 14, 20, 26]
+        },
+        {
+            "args": {
+                "s": "hellohellohellohello",
+                "words": ["hello", "hello", "hello"]
+            },
+            "expected": [0, 5]
+        },
+        {
+            "args": {
+                "s": "abcdefabcdefabcdefabcdefabcdef",
+                "words": ["abc", "def"]
+            },
+            "expected": [0, 3, 6, 9, 12, 15, 18, 21, 24]
+        },
+        {
+            "args": {
+                "s": "qwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwerty",
+                "words": [
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty",
+                    "qwe",
+                    "rty"
+                ]
+            },
+            "expected": [0, 3, 6, 9, 12]
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccaaaabbbbcccc",
+                "words": ["aaaa", "bbbb", "cccc", "aaaa", "bbbb", "cccc"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "concatenatedsubstringthatappearsmultipleconcatenatedsubstring",
+                "words": ["concatenated", "substring", "that", "appears", "multiple"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+                "words": [
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc",
+                    "abc"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mississippiissimissing",
+                "words": ["issi", "ssis", "ippi", "ssip"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "words": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "longstringwithmanywordsoflengthfive",
+                "words": [
+                    "fivel",
+                    "ength",
+                    "withm",
+                    "nword",
+                    "stringw",
+                    "ongst",
+                    "rings",
+                    "words",
+                    "thefa"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "xxyzxyzyxzyzyzxzy",
+                "words": ["xyz", "zyx", "zyz", "zxy"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc",
+                "words": ["abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "qwertyuiopqwertyuiopqwertyuiop",
+                "words": ["qwerty", "uiop", "qwerty", "uiop", "qwerty", "uiop"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "mississippiississippi",
+                "words": ["miss", "issi", "ssip", "ippi"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+                "words": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jabc",
+                    "def",
+                    "ghi",
+                    "jabc",
+                    "def",
+                    "ghi",
+                    "jabc",
+                    "def",
+                    "ghi",
+                    "jabc",
+                    "def",
+                    "ghi",
+                    "j"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbccccdddd",
+                "words": ["aaaa", "bbbb", "cccc", "dddd"]
+            },
+            "expected": [2]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyz",
+                "words": ["xyz", "xyz", "xyz", "xyz"]
+            },
+            "expected": [0]
+        },
+        {
+            "args": {
+                "s": "mississippiissimissing",
+                "words": ["issi", "ssis", "ippi", "ssim"]
+            },
+            "expected": []
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findSubstring",
+        "typescript": "Solution().findSubstring"
+    }
+}

@@ -1,0 +1,754 @@
+{
+    "id": "maximum-points-after-enemy-battles",
+    "questionId": 3207,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Array"],
+    "tests": [
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1],
+                "currentEnergy": 1
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1000000000, 1],
+                "currentEnergy": 1000000001
+            },
+            "expected": 2000000002
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 5, 5, 5, 5],
+                "currentEnergy": 15
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "enemyEnergies": [2],
+                "currentEnergy": 10
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "enemyEnergies": [1],
+                "currentEnergy": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "currentEnergy": 25
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 55
+            },
+            "expected": 109
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "currentEnergy": 55
+            },
+            "expected": 109
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5],
+                "currentEnergy": 15
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 2, 2],
+                "currentEnergy": 2
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "currentEnergy": 5
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30],
+                "currentEnergy": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "enemyEnergies": [1000000000],
+                "currentEnergy": 1000000000
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 10, 10, 10, 10],
+                "currentEnergy": 50
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 4, 3, 2, 1],
+                "currentEnergy": 15
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1],
+                "currentEnergy": 5
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 5
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "currentEnergy": 1
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5],
+                "currentEnergy": 10
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30],
+                "currentEnergy": 15
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30, 40, 50],
+                "currentEnergy": 100
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300, 400, 500],
+                "currentEnergy": 150
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300, 400, 500],
+                "currentEnergy": 100
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5],
+                "currentEnergy": 10
+            },
+            "expected": 53
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300, 400, 500],
+                "currentEnergy": 250
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                "currentEnergy": 100
+            },
+            "expected": 219
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 10
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "currentEnergy": 99
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+                "currentEnergy": 10
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300, 400, 500],
+                "currentEnergy": 1000
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "currentEnergy": 100
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "enemyEnergies": [30, 20, 10, 5, 2, 1],
+                "currentEnergy": 20
+            },
+            "expected": 87
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "currentEnergy": 55
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 10, 100, 1000, 10000],
+                "currentEnergy": 5000
+            },
+            "expected": 16110
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "currentEnergy": 15
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "enemyEnergies": [9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 15
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                "currentEnergy": 10
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 10, 100, 1000, 10000],
+                "currentEnergy": 10000
+            },
+            "expected": 21110
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "currentEnergy": 1
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "enemyEnergies": [2, 3, 5, 7, 11, 13, 17, 19],
+                "currentEnergy": 50
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "enemyEnergies": [1000000000, 500000000, 250000000],
+                "currentEnergy": 1000000000
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "enemyEnergies": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+                "currentEnergy": 45
+            },
+            "expected": "Error: integer division or modulo by zero"
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+                "currentEnergy": 15
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "currentEnergy": 100
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 3, 1, 2, 4, 6],
+                "currentEnergy": 3
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "enemyEnergies": [9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 45
+            },
+            "expected": 89
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "currentEnergy": 5
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 4, 3, 2, 1],
+                "currentEnergy": 15
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 3, 8, 2, 10],
+                "currentEnergy": 7
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "currentEnergy": 0
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 3, 7, 2, 8, 1, 4],
+                "currentEnergy": 10
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                "currentEnergy": 27
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5],
+                "currentEnergy": 15
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 3, 8, 6, 2, 7],
+                "currentEnergy": 10
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 3, 5, 7, 9],
+                "currentEnergy": 20
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "enemyEnergies": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                "currentEnergy": 25
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 5, 15, 20, 25, 30, 35, 40, 45, 50],
+                "currentEnergy": 50
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "currentEnergy": 10
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "currentEnergy": 50
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 3, 6, 2, 8, 1],
+                "currentEnergy": 10
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "currentEnergy": 10
+            },
+            "expected": 109
+        },
+        {
+            "args": {
+                "enemyEnergies": [
+                    1000000000, 500000000, 250000000, 125000000, 62500000, 31250000, 15625000,
+                    7812500, 3906250, 1953125
+                ],
+                "currentEnergy": 500000000
+            },
+            "expected": 1278
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+                "currentEnergy": 2500
+            },
+            "expected": 79
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "currentEnergy": 10
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300, 400, 500],
+                "currentEnergy": 500
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024],
+                "currentEnergy": 1024
+            },
+            "expected": 3070
+        },
+        {
+            "args": {
+                "enemyEnergies": [9, 7, 5, 3, 1],
+                "currentEnergy": 15
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "enemyEnergies": [1000000000, 500000000, 250000000, 125000000, 62500000],
+                "currentEnergy": 1000000000
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "currentEnergy": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 15, 25, 35, 45, 55, 65, 75, 85, 95],
+                "currentEnergy": 50
+            },
+            "expected": 109
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "currentEnergy": 15
+            },
+            "expected": 69
+        },
+        {
+            "args": {
+                "enemyEnergies": [50, 25, 75, 100, 200, 300, 400],
+                "currentEnergy": 100
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "enemyEnergies": [7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+                "currentEnergy": 21
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "enemyEnergies": [50, 25, 75, 100, 200, 150],
+                "currentEnergy": 125
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "enemyEnergies": [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024],
+                "currentEnergy": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "enemyEnergies": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                "currentEnergy": 10
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 1
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 3, 8, 1, 9],
+                "currentEnergy": 10
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "enemyEnergies": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+                ],
+                "currentEnergy": 100
+            },
+            "expected": 309
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "currentEnergy": 25
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5],
+                "currentEnergy": 15
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "enemyEnergies": [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
+                "currentEnergy": 100
+            },
+            "expected": 113
+        },
+        {
+            "args": {
+                "enemyEnergies": [9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 20
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "enemyEnergies": [1000, 500, 250, 125, 62, 31, 15, 7, 3, 1],
+                "currentEnergy": 1000
+            },
+            "expected": 2993
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "currentEnergy": 10
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "enemyEnergies": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+                "currentEnergy": 100
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
+                "currentEnergy": 1023
+            },
+            "expected": 2045
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "currentEnergy": 55
+            },
+            "expected": 109
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
+                "currentEnergy": 1024
+            },
+            "expected": 2046
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "currentEnergy": 100
+            },
+            "expected": 119
+        },
+        {
+            "args": {
+                "enemyEnergies": [
+                    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71
+                ],
+                "currentEnergy": 100
+            },
+            "expected": 368
+        },
+        {
+            "args": {
+                "enemyEnergies": [5, 5, 5, 5, 5],
+                "currentEnergy": 15
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "enemyEnergies": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                "currentEnergy": 50
+            },
+            "expected": 79
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30, 40, 50],
+                "currentEnergy": 30
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 2, 3, 4, 5],
+                "currentEnergy": 10
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5],
+                "currentEnergy": 20
+            },
+            "expected": 63
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
+                "currentEnergy": 100
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "currentEnergy": 10
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "enemyEnergies": [9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "currentEnergy": 5
+            },
+            "expected": 49
+        },
+        {
+            "args": {
+                "enemyEnergies": [1000000000, 1000000000, 1000000000],
+                "currentEnergy": 1500000000
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "enemyEnergies": [100, 200, 300],
+                "currentEnergy": 1000
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "currentEnergy": 500
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "enemyEnergies": [3, 2, 2, 4, 1, 5],
+                "currentEnergy": 6
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "enemyEnergies": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "currentEnergy": 100
+            },
+            "expected": 199
+        },
+        {
+            "args": {
+                "enemyEnergies": [10, 15, 20, 25, 30, 35, 40, 45, 50],
+                "currentEnergy": 100
+            },
+            "expected": 36
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maximumPoints",
+        "typescript": "Solution().maximumPoints"
+    }
+}

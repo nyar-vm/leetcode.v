@@ -1,0 +1,1200 @@
+{
+    "id": "simplify-path",
+    "questionId": 71,
+    "difficulty": "Medium",
+    "tags": ["Stack", "String"],
+    "tests": [
+        {
+            "args": {
+                "path": "/.../a/../b/c/../d/./"
+            },
+            "expected": "/.../b/d"
+        },
+        {
+            "args": {
+                "path": "/a/../../b/../c///.//"
+            },
+            "expected": "/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/../../.."
+            },
+            "expected": "/a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../..//f/"
+            },
+            "expected": "/a/b/f"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/../"
+            },
+            "expected": "/a/b"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../../..///f/"
+            },
+            "expected": "/a/f"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../../"
+            },
+            "expected": "/a/b"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/"
+            },
+            "expected": "/a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../../../f/"
+            },
+            "expected": "/a/f"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/../../.."
+            },
+            "expected": "/a"
+        },
+        {
+            "args": {
+                "path": "/a//b////c/d//././/.."
+            },
+            "expected": "/a/b/c"
+        },
+        {
+            "args": {
+                "path": "/home/"
+            },
+            "expected": "/home"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/./../../f/"
+            },
+            "expected": "/a/b/c/f"
+        },
+        {
+            "args": {
+                "path": "/a/.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/.."
+            },
+            "expected": "/a/b/c/d/e/f"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/../../d/e/"
+            },
+            "expected": "/a/d/e"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/.."
+            },
+            "expected": "/a/b/c/d/e"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/../.."
+            },
+            "expected": "/a/b/c/d/e"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/../../"
+            },
+            "expected": "/a"
+        },
+        {
+            "args": {
+                "path": "/a/./b/../c/../../d/../../../e/../../../../f/"
+            },
+            "expected": "/f"
+        },
+        {
+            "args": {
+                "path": "/home/user/Documents/../Pictures"
+            },
+            "expected": "/home/user/Pictures"
+        },
+        {
+            "args": {
+                "path": "/a/./b/../../c/"
+            },
+            "expected": "/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g"
+            },
+            "expected": "/a/b/c/d/e/f/g"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../..///f/"
+            },
+            "expected": "/a/b/f"
+        },
+        {
+            "args": {
+                "path": "/a/./b/./c/./d/"
+            },
+            "expected": "/a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/home//foo/"
+            },
+            "expected": "/home/foo"
+        },
+        {
+            "args": {
+                "path": "/a/./b/./c/./"
+            },
+            "expected": "/a/b/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/./././"
+            },
+            "expected": "/a/b/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../../..//f/"
+            },
+            "expected": "/a/f"
+        },
+        {
+            "args": {
+                "path": "/../"
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../.././.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../..//"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../a/b/../../c/d/./e/f/../g/h/i/j/k/l/m/n/o/p/../../../q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../"
+            },
+            "expected": "/home/user/.../c/d/e/g/h/i/j/k/l/m"
+        },
+        {
+            "args": {
+                "path": "/..////../home/user/Documents"
+            },
+            "expected": "/home/user/Documents"
+        },
+        {
+            "args": {
+                "path": "/valid/./..../name/./with/./multiple/./dots/./in/./it"
+            },
+            "expected": "/valid/..../name/with/multiple/dots/in/it"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/./e/../../f/g/"
+            },
+            "expected": "/a/b/c/f/g"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/..."
+        },
+        {
+            "args": {
+                "path": "/valid/directory/name/./with/./multiple/./dots/./in/./it"
+            },
+            "expected": "/valid/directory/name/with/multiple/dots/in/it"
+        },
+        {
+            "args": {
+                "path": "/x/y/z/..../...../......./........"
+            },
+            "expected": "/x/y/z/..../...../......./........"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/..."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../..////"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i"
+        },
+        {
+            "args": {
+                "path": "/.../a/b/c/d/e/./f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/../../../"
+            },
+            "expected": "/.../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/home/user/../../../var/log/../../usr/local/bin/"
+            },
+            "expected": "/usr/local/bin"
+        },
+        {
+            "args": {
+                "path": "/home/user/./././Documents/"
+            },
+            "expected": "/home/user/Documents"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../Documents/.../Pictures/././../Videos"
+            },
+            "expected": "/home/user/.../Documents/.../Videos"
+        },
+        {
+            "args": {
+                "path": "/x/y/z/....//....//....//...."
+            },
+            "expected": "/x/y/z/..../..../..../...."
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../..///"
+            },
+            "expected": "/home/user/...."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./"
+            },
+            "expected": "/home/user/Pictures"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/..."
+        },
+        {
+            "args": {
+                "path": "/start/..//end"
+            },
+            "expected": "/end"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/..///./../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/././../d/e/f/.."
+            },
+            "expected": "/a/b/d/e"
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home"
+            },
+            "expected": "/home/user/..../...../home"
+        },
+        {
+            "args": {
+                "path": "/a/./b/./c/./d/./e/./f/./g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../Documents/././../Pictures/././..///"
+            },
+            "expected": "/home/user/..."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../.././.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../..///"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../..//////"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m"
+        },
+        {
+            "args": {
+                "path": "/one/two/three/../../../four/five/six/../../seven"
+            },
+            "expected": "/four/seven"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./../Videos/./../Music/./../Downloads/./../Documents/./../Pictures/./../Videos"
+            },
+            "expected": "/home/user/Videos"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../.././.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/..."
+        },
+        {
+            "args": {
+                "path": "/a/./b/./c/./d/./e/./f/./g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/..."
+        },
+        {
+            "args": {
+                "path": "/...../a/b/../../c/d/e/f/../g/h"
+            },
+            "expected": "/...../c/d/e/g/h"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/././"
+            },
+            "expected": "/a/b/c/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/valid/./name/./with/./multiple/./dots/./in/./..../it"
+            },
+            "expected": "/valid/name/with/multiple/dots/in/..../it"
+        },
+        {
+            "args": {
+                "path": "/user/./home/./.././..././...."
+            },
+            "expected": "/user/.../...."
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../.."
+            },
+            "expected": "/home/user/...."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/./"
+            },
+            "expected": "/a/b/c/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/../../../../e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/.../d/e/f/../../g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/../../../../z"
+            },
+            "expected": "/a/b/c/.../d/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/z"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./../Videos/./../Music/./../Downloads/./../"
+            },
+            "expected": "/home/user"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/..///././././..///"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x"
+        },
+        {
+            "args": {
+                "path": "/home/user//...///....//.....//home"
+            },
+            "expected": "/home/user/.../..../...../home"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/../../../..//../m/n/o/p/"
+            },
+            "expected": "/a/b/m/n/o/p"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../Documents/././../Pictures/././..///././././.."
+            },
+            "expected": "/home/user"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/..."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/..."
+        },
+        {
+            "args": {
+                "path": "/...."
+            },
+            "expected": "/...."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../..///u/"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g"
+        },
+        {
+            "args": {
+                "path": "/a/./b/./c/./d/./e"
+            },
+            "expected": "/a/b/c/d/e"
+        },
+        {
+            "args": {
+                "path": "/many/../../dots/../../../in/../../../../path/../../../../../root"
+            },
+            "expected": "/root"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/./f/g/././h/./i/./j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/home////user/..///Documents///"
+            },
+            "expected": "/home/Documents"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../a/b/../../c/d/./e/f/../g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/home/user/.../c/d/e/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/../../../../../../"
+            },
+            "expected": "/a"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/../../.././../../"
+            },
+            "expected": "/a/b"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/../../"
+            },
+            "expected": "/a/b/c/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x"
+        },
+        {
+            "args": {
+                "path": "/.../a/b/c/d/e/./f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/../../"
+            },
+            "expected": "/.../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../..///./../..///./../.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./../Videos/./../Music/./../Downloads/./../Documents/./../"
+            },
+            "expected": "/home/user"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/..."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/..."
+        },
+        {
+            "args": {
+                "path": "/home/user/.../a/b/../../c/d/./e/f/../g/h/i/j/k/l/m/n/o/p/../../../q/r/s/t/u/v/w/x/y/z/../../../../"
+            },
+            "expected": "/home/user/.../c/d/e/g/h/i/j/k/l/m/q/r/s/t/u/v"
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../..///./.."
+            },
+            "expected": "/home/user"
+        },
+        {
+            "args": {
+                "path": "/x/y/z/../../../../w/x/y"
+            },
+            "expected": "/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./../Videos/./../Music/./../Downloads/./../Documents/./../Pictures"
+            },
+            "expected": "/home/user/Pictures"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./.."
+            },
+            "expected": "/home/user/..../....."
+        },
+        {
+            "args": {
+                "path": "/x/y/z/../../w/../../v/..///u/"
+            },
+            "expected": "/u"
+        },
+        {
+            "args": {
+                "path": "/home/user/././././././././././././././././././././././././././././././././"
+            },
+            "expected": "/home/user"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../Documents/../Pictures/./../Videos"
+            },
+            "expected": "/home/user/.../Videos"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/.../d/e/f/../../g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/../../z"
+            },
+            "expected": "/a/b/c/.../d/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/../../h/i/../../j/k/../../l/m/../../n/o/p/../../q/r/s/t/../../u/v/w/x/../../y/z"
+            },
+            "expected": "/a/b/c/n/q/r/u/v/y/z"
+        },
+        {
+            "args": {
+                "path": "/user/..///////...///////"
+            },
+            "expected": "/..."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/././././.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/nested/../../deep/../../.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/././././..//.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/./.././.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v"
+        },
+        {
+            "args": {
+                "path": "/usr/local/../../local/bin/../../../bin"
+            },
+            "expected": "/bin"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/.../d/e/f/../../g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/.../d/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/../../d/e/../../f/g/h/../../../i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/var/log/../log/./error.log"
+            },
+            "expected": "/var/log/error.log"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/g/..."
+        },
+        {
+            "args": {
+                "path": "/valid/./name/./with/./multiple/./dots/./..../in/./it"
+            },
+            "expected": "/valid/name/with/multiple/dots/..../in/it"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/./.././h/i/j/k/l/.."
+            },
+            "expected": "/a/b/c/d/e/f/h/i/j/k"
+        },
+        {
+            "args": {
+                "path": "/multiple/////slashes/are/here/./../still/reduced"
+            },
+            "expected": "/multiple/slashes/are/still/reduced"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../a/b/../../c/d/./e/f/../g/h/i/j/k/l/m/n/o/p/../../../q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/home/user/.../c/d/e/g/h/i/j/k/l/m/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/foo/./bar/./baz/../qux/../.././quux"
+            },
+            "expected": "/foo/quux"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/./././././././././././././././././././././././././././././././././.././././././././././././././././././././././././././././././././././././././././."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../Documents/././../Pictures/././.."
+            },
+            "expected": "/home/user/..."
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../..///./../.."
+            },
+            "expected": "/home"
+        },
+        {
+            "args": {
+                "path": "/home/user/.../Documents/.../Pictures/././../Videos///"
+            },
+            "expected": "/home/user/.../Documents/.../Videos"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/./"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j"
+        },
+        {
+            "args": {
+                "path": "/.../a/b/c/d/e/./f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/../"
+            },
+            "expected": "/.../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../..."
+            },
+            "expected": "/a/b/c/..."
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./../Videos/./../Music/./../Downloads/./../Documents/./../Pictures/./../Videos/./../Music/./../Downloads"
+            },
+            "expected": "/home/user/Downloads"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/./i/../../j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/f/g/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/valid/./name/./with/./multiple/./..../dots/./in/./it"
+            },
+            "expected": "/valid/name/with/multiple/..../dots/in/it"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/././././././d/e/f/../g/h/i/j/k/l/m/n/o/p/../../../q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/g/h/i/j/k/l/m/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/././h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z"
+            },
+            "expected": "/a/b/c/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/home/user/../../../../../../"
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p"
+        },
+        {
+            "args": {
+                "path": "/.../a/./b/./c/./d/./e"
+            },
+            "expected": "/.../a/b/c/d/e"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/./.././.././../../"
+            },
+            "expected": "/a/b/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/../../d/e/../../f/g/h/./../"
+            },
+            "expected": "/a/f/g"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../..."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/..."
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/..////..////.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l"
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../..///./../..///./.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/x/y/z/../../../../../../../../../"
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/../../../"
+            },
+            "expected": "/a/b/c/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w"
+        },
+        {
+            "args": {
+                "path": "/trailing/./slashes/./should/./be/./removed"
+            },
+            "expected": "/trailing/slashes/should/be/removed"
+        },
+        {
+            "args": {
+                "path": "/home/user/../../root///"
+            },
+            "expected": "/root"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/./../../d/e/./f/../g"
+            },
+            "expected": "/a/d/e/g"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/../Pictures/./Vacation/../../Pictures"
+            },
+            "expected": "/home/user/Pictures"
+        },
+        {
+            "args": {
+                "path": "/x/y/z/./././././././"
+            },
+            "expected": "/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/x/y/z/....//....//....//....//a/b/c/d"
+            },
+            "expected": "/x/y/z/..../..../..../..../a/b/c/d"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/../../f/g/./h/./i/./j/./k/./l/./m/./n/./o/./p/./q/./r/./s/./t/./u/./v/./w/./x/./y/./z/../"
+            },
+            "expected": "/a/b/c/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/././././e/f/g/../././h"
+            },
+            "expected": "/a/b/c/d/e/f/h"
+        },
+        {
+            "args": {
+                "path": "/home/user////....///.....///home/./../..///./../..///"
+            },
+            "expected": "/home"
+        },
+        {
+            "args": {
+                "path": "/home/user/./Documents/./../Pictures/./../Videos/./../Music/./../Downloads/./../Documents/./../Pictures/./../Videos/./../Music"
+            },
+            "expected": "/home/user/Music"
+        },
+        {
+            "args": {
+                "path": "/user//.///...///file"
+            },
+            "expected": "/user/.../file"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/a/b/c/d/e"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../..////////"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../"
+            },
+            "expected": "/a/b/c/d/e/f"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../..///.."
+            },
+            "expected": "/a/b/c/d/e/f/g/h/i/j/k/l"
+        },
+        {
+            "args": {
+                "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z/../../../../../../../../../../../../../../../../../../../../../../../../.."
+            },
+            "expected": "/a"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().simplifyPath",
+        "typescript": "Solution().simplifyPath"
+    }
+}

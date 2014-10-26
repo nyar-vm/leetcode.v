@@ -1,0 +1,876 @@
+{
+    "id": "find-and-replace-in-string",
+    "questionId": 833,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "s": "abcd",
+                "indices": [0, 2],
+                "sources": ["a", "cd"],
+                "targets": ["eee", "ffff"]
+            },
+            "expected": "eeebffff"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "indices": [0, 1, 2, 3],
+                "sources": ["a", "b", "c", "d"],
+                "targets": ["aa", "bb", "cc", "dd"]
+            },
+            "expected": "aabbccdd"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "indices": [0, 2],
+                "sources": ["ab", "ec"],
+                "targets": ["eee", "ffff"]
+            },
+            "expected": "eeecd"
+        },
+        {
+            "args": {
+                "s": "vmokgggqzp",
+                "indices": [3, 5, 1],
+                "sources": ["kg", "gggg", "mo"],
+                "targets": ["s", "so", "bfr"]
+            },
+            "expected": "vbfrsggqzp"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "indices": [1, 4],
+                "sources": ["el", "o"],
+                "targets": ["ll", "oo"]
+            },
+            "expected": "hllloo"
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "indices": [0, 2, 4],
+                "sources": ["aa", "aa", "aa"],
+                "targets": ["AA", "BB", "CC"]
+            },
+            "expected": "AABBCC"
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbb",
+                "indices": [0, 5],
+                "sources": ["aaaaa", "bbbbb"],
+                "targets": ["z", "y"]
+            },
+            "expected": "zy"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnoopp",
+                "indices": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "sources": ["bb", "dd", "ff", "hh", "jj", "ll", "nn", "pp"],
+                "targets": ["XX", "YY", "ZZ", "WW", "VV", "UU", "TT", "SS"]
+            },
+            "expected": "aabbccddeeffgghhiijjkkllmmnnoopp"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "indices": [0, 4, 9],
+                "sources": ["pro", "gra", "ing"],
+                "targets": ["123", "456", "789"]
+            },
+            "expected": "123gramming"
+        },
+        {
+            "args": {
+                "s": "xylophone",
+                "indices": [2, 4],
+                "sources": ["lo", "ph"],
+                "targets": ["LOLO", "PH"]
+            },
+            "expected": "xyLOLOPHone"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [0, 4, 10],
+                "sources": ["mis", "issi", "i"],
+                "targets": ["xxx", "yyy", "zzz"]
+            },
+            "expected": "xxxsyyyppzzz"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "indices": [0, 1, 2, 3, 4, 5],
+                "sources": ["b", "a", "n", "a", "n", "a"],
+                "targets": ["B", "A", "N", "A", "N", "A"]
+            },
+            "expected": "BANANA"
+        },
+        {
+            "args": {
+                "s": "helloworld",
+                "indices": [0, 5],
+                "sources": ["hello", "world"],
+                "targets": ["HELLO", "WORLD"]
+            },
+            "expected": "HELLOWORLD"
+        },
+        {
+            "args": {
+                "s": "algorithms",
+                "indices": [2, 6, 8],
+                "sources": ["gor", "rith", "ms"],
+                "targets": ["GOR", "RITH", "MS"]
+            },
+            "expected": "alGORithMS"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [0, 4, 6],
+                "sources": ["mi", "iss", "ippi"],
+                "targets": ["MMM", "NNN", "OOO"]
+            },
+            "expected": "MMMssNNNippi"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["zz", "zz", "zz", "zz", "zz"],
+                "targets": ["1", "2", "3", "4", "5"]
+            },
+            "expected": 12345
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "indices": [1, 2, 3, 4, 5],
+                "sources": ["b", "c", "d", "e", "f"],
+                "targets": ["B", "C", "D", "E", "F"]
+            },
+            "expected": "aBCDEFg"
+        },
+        {
+            "args": {
+                "s": "abababab",
+                "indices": [0, 2, 4, 6],
+                "sources": ["ab", "ab", "ab", "ab"],
+                "targets": ["xy", "yz", "zx", "wv"]
+            },
+            "expected": "xyyzzxwv"
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "indices": [1, 3, 5, 7],
+                "sources": ["bc", "fg", "h", "a"],
+                "targets": ["X", "Y", "Z", "W"]
+            },
+            "expected": "aXdefgh"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["ab", "cd", "ef", "gh", "ij"],
+                "targets": ["12", "34", "56", "78", "90"]
+            },
+            "expected": 1234567890
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["ab", "ab", "ab", "ab", "ab"],
+                "targets": ["xy", "yx", "xy", "yx", "xy"]
+            },
+            "expected": "xyyxxyyxxy"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "indices": [1, 3, 5, 7, 9],
+                "sources": ["bc", "ef", "gh", "jk", "l"],
+                "targets": ["2", "3", "4", "5", "6"]
+            },
+            "expected": "a2defghijk"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["ab", "cd", "ef", "gh", "ij"],
+                "targets": ["A", "B", "C", "D", "E"]
+            },
+            "expected": "ABCDE"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [4, 6],
+                "sources": ["iss", "iss"],
+                "targets": ["42", "43"]
+            },
+            "expected": "miss42ippi"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [1, 4, 7],
+                "sources": ["bc", "ef", "hi"],
+                "targets": ["BCD", "EFG", "HIJ"]
+            },
+            "expected": "aBCDdEFGgHIJj"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "indices": [0, 3, 6, 9],
+                "sources": ["pro", "gra", "mming"],
+                "targets": ["123", "456", "789"]
+            },
+            "expected": 123456789
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "indices": [0, 5],
+                "sources": ["he", "th"],
+                "targets": ["hola", "allahuakbar"]
+            },
+            "expected": "holalloallahuakbarere"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "indices": [0, 3, 6, 9],
+                "sources": ["aab", "bcd", "cde", "def"],
+                "targets": ["AAB", "BCD", "CDE", "DEF"]
+            },
+            "expected": "AABbccddeeff"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "indices": [0, 3, 6, 9],
+                "sources": ["abc", "def", "ghi", "jk"],
+                "targets": ["XXX", "YYY", "ZZZ", "WWW"]
+            },
+            "expected": "XXXYYYZZZWWW"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "indices": [1, 3, 5, 7, 9, 11],
+                "sources": ["ab", "cd", "ef", "de", "fg", "ef"],
+                "targets": ["12", "34", "56", "43", "65", "65"]
+            },
+            "expected": "a12bccd43eff"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [4, 6],
+                "sources": ["iss", "issi"],
+                "targets": ["3", "4"]
+            },
+            "expected": "miss3ippi"
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "indices": [1, 4, 6],
+                "sources": ["bc", "ef", "gh"],
+                "targets": ["12", "34", "56"]
+            },
+            "expected": "a12d3456"
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "indices": [2, 6, 9],
+                "sources": ["is", "is", "est"],
+                "targets": ["IS", "IS", "EST"]
+            },
+            "expected": "thISisatest"
+        },
+        {
+            "args": {
+                "s": "thequickbrownfox",
+                "indices": [4, 9, 15],
+                "sources": ["qui", "bro", "fox"],
+                "targets": ["QUI", "BRO", "FOX"]
+            },
+            "expected": "thequickbrownfox"
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["ab", "ab", "ab", "ab", "ab"],
+                "targets": ["xy", "xy", "xy", "xy", "xy"]
+            },
+            "expected": "xyxyxyxyxy"
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "indices": [1, 5, 8],
+                "sources": ["ell", "the", "er"],
+                "targets": ["123", "456", "789"]
+            },
+            "expected": "h123o456re"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhii",
+                "indices": [0, 2, 4, 6, 8, 10, 12, 14, 16],
+                "sources": ["aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii"],
+                "targets": ["AA", "BB", "CC", "DD", "EE", "FF", "GG", "HH", "II"]
+            },
+            "expected": "AABBCCDDEEFFGGHHII"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "indices": [0, 4, 8],
+                "sources": ["abc", "efg", "ijk"],
+                "targets": ["123", "456", "789"]
+            },
+            "expected": "123d456h789"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [1, 3, 5, 7],
+                "sources": ["bc", "de", "fg", "hi"],
+                "targets": ["BCD", "EFG", "FGH", "HIJ"]
+            },
+            "expected": "aBCDEFGFGHHIJj"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "indices": [0, 2, 4, 6, 8, 10],
+                "sources": ["aa", "bb", "cc", "dd", "ee", "ff"],
+                "targets": ["AA", "BB", "CC", "DD", "EE", "FF"]
+            },
+            "expected": "AABBCCDDEEFF"
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["ab", "ba", "ab", "ba", "ab"],
+                "targets": ["A", "B", "C", "D", "E"]
+            },
+            "expected": "AabCabE"
+        },
+        {
+            "args": {
+                "s": "replacements",
+                "indices": [0, 5, 9],
+                "sources": ["rep", "lac", "tions"],
+                "targets": ["REP", "LAC", "TIONS"]
+            },
+            "expected": "REPlacements"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [0, 4, 6],
+                "sources": ["mis", "sis", "sip"],
+                "targets": ["miss", "sis", "sip"]
+            },
+            "expected": "misssissippi"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "indices": [0, 4, 8, 12],
+                "sources": ["this", "is", "a", "test"],
+                "targets": ["1", "2", "3", "4"]
+            },
+            "expected": "12ateststring"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [4, 6],
+                "sources": ["issi", "issi"],
+                "targets": ["XXXX", "YYYY"]
+            },
+            "expected": "missXXXXppi"
+        },
+        {
+            "args": {
+                "s": "ababab",
+                "indices": [0, 2, 4],
+                "sources": ["ab", "ab", "ab"],
+                "targets": ["xy", "yz", "zx"]
+            },
+            "expected": "xyyzzx"
+        },
+        {
+            "args": {
+                "s": "abcdefgh",
+                "indices": [1, 4, 7],
+                "sources": ["bc", "ef", "h"],
+                "targets": ["BBB", "EEE", "HHH"]
+            },
+            "expected": "aBBBdEEEgHHH"
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "indices": [0, 2, 4],
+                "sources": ["aa", "aa", "aa"],
+                "targets": ["AA", "AA", "AA"]
+            },
+            "expected": "AAAAAA"
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "indices": [0, 5],
+                "sources": ["hello", "there"],
+                "targets": ["hi", "bye"]
+            },
+            "expected": "hibye"
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "indices": [0, 1, 2, 3, 4, 5],
+                "sources": ["a", "a", "a", "a", "a", "a"],
+                "targets": ["b", "c", "d", "e", "f", "g"]
+            },
+            "expected": "bcdefg"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "sources": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "targets": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+            },
+            "expected": "ABCDEFGHIJ"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "indices": [0, 5, 10],
+                "sources": ["abc", "fgh", "ijk"],
+                "targets": ["123", "456", "789"]
+            },
+            "expected": "123de456ijk"
+        },
+        {
+            "args": {
+                "s": "replaceeverything",
+                "indices": [0, 7, 14],
+                "sources": ["rep", "ev", "ing"],
+                "targets": ["REPLACE", "EVERY", "THING"]
+            },
+            "expected": "REPLACElaceEVERYerythTHING"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [3, 7],
+                "sources": ["def", "hij"],
+                "targets": ["12345", "67890"]
+            },
+            "expected": "abc12345g67890"
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc",
+                "indices": [0, 4, 8],
+                "sources": ["aaaa", "bbbb", "cccc"],
+                "targets": ["AAAA", "BBBB", "CCCC"]
+            },
+            "expected": "AAAABBBBCCCC"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [1, 4, 7],
+                "sources": ["bc", "efg", "ij"],
+                "targets": ["XX", "YYY", "ZZ"]
+            },
+            "expected": "aXXdYYYhij"
+        },
+        {
+            "args": {
+                "s": "xxxyyyzzz",
+                "indices": [0, 3, 6],
+                "sources": ["xxx", "yyy", "zzz"],
+                "targets": ["aaa", "bbb", "ccc"]
+            },
+            "expected": "aaabbbccc"
+        },
+        {
+            "args": {
+                "s": "hello_world",
+                "indices": [0, 6],
+                "sources": ["hello", "world"],
+                "targets": ["hi", "earth"]
+            },
+            "expected": "hi_earth"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [0, 4, 7],
+                "sources": ["mi", "issi", "issi"],
+                "targets": ["MMMM", "IIII", "XXXX"]
+            },
+            "expected": "MMMMssIIIIppi"
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "indices": [0, 2, 4, 6, 8, 10],
+                "sources": ["this", "is", "a", "test", "xx", "xx"],
+                "targets": ["that", "was", "the", "exam", "yy", "zz"]
+            },
+            "expected": "thatisatest"
+        },
+        {
+            "args": {
+                "s": "hellohellohello",
+                "indices": [0, 5, 10],
+                "sources": ["hello", "hello", "hello"],
+                "targets": ["hi", "ho", "ha"]
+            },
+            "expected": "hihoha"
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefg",
+                "indices": [0, 7],
+                "sources": ["abcdefg", "abcdefg"],
+                "targets": ["ABCDEFG", "ABCDEFG"]
+            },
+            "expected": "ABCDEFGABCDEFG"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk",
+                "indices": [0, 3, 6, 9],
+                "sources": ["abc", "def", "ghi", "jk"],
+                "targets": ["1", "2", "3", "4"]
+            },
+            "expected": 1234
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [1, 4, 7],
+                "sources": ["is", "is", "is"],
+                "targets": ["aa", "bb", "cc"]
+            },
+            "expected": "maasbbsippi"
+        },
+        {
+            "args": {
+                "s": "oneonetwoonetwoone",
+                "indices": [0, 4, 8, 12],
+                "sources": ["one", "one", "two", "two"],
+                "targets": ["111", "222", "333", "444"]
+            },
+            "expected": "111onetwoone444one"
+        },
+        {
+            "args": {
+                "s": "hellohellohello",
+                "indices": [0, 5, 10],
+                "sources": ["hel", "ell", "llo"],
+                "targets": ["H", "E", "L"]
+            },
+            "expected": "Hlohellohello"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "indices": [0, 3, 6, 9],
+                "sources": ["pro", "gra", "mmi", "ng"],
+                "targets": ["PRO", "GRA", "MMI", "NG"]
+            },
+            "expected": "PROGRAMMING"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [0, 2, 4, 6, 8],
+                "sources": ["ab", "cd", "ef", "gh", "ij"],
+                "targets": ["xy", "zw", "00", "11", "22"]
+            },
+            "expected": "xyzw001122"
+        },
+        {
+            "args": {
+                "s": "alabama",
+                "indices": [0, 2, 4],
+                "sources": ["al", "ba", "ma"],
+                "targets": ["AL", "BA", "MA"]
+            },
+            "expected": "ALabama"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "indices": [0, 3, 7, 10],
+                "sources": ["abra", "cad", "abr", "a"],
+                "targets": ["1", "2", "3", "4"]
+            },
+            "expected": "1cad34"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [0, 4, 8],
+                "sources": ["mis", "iss", "ippi"],
+                "targets": ["misss", "issii", "ipppi"]
+            },
+            "expected": "missssissiiippi"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "indices": [0, 3, 5, 8],
+                "sources": ["pro", "gra", "mmi", "ng"],
+                "targets": ["1", "2", "3", "4"]
+            },
+            "expected": "12mming"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "indices": [0, 3, 5, 8],
+                "sources": ["pro", "g", "am", "mm"],
+                "targets": ["code", "G", "AM", "MM"]
+            },
+            "expected": "codeGrAMming"
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "indices": [0, 5],
+                "sources": ["he", "there"],
+                "targets": ["HELLO", "THERE"]
+            },
+            "expected": "HELLOlloTHERE"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "indices": [4, 6],
+                "sources": ["is", "ip"],
+                "targets": ["IS", "IP"]
+            },
+            "expected": "missISsippi"
+        },
+        {
+            "args": {
+                "s": "foobarbaz",
+                "indices": [0, 3, 6],
+                "sources": ["foo", "bar", "baz"],
+                "targets": ["FOO", "BAR", "BAZ"]
+            },
+            "expected": "FOOBARBAZ"
+        },
+        {
+            "args": {
+                "s": "abababab",
+                "indices": [0, 2, 4, 6],
+                "sources": ["ab", "ab", "ab", "ab"],
+                "targets": ["XX", "YY", "ZZ", "WW"]
+            },
+            "expected": "XXYYZZWW"
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "indices": [0, 5],
+                "sources": ["hello", "there"],
+                "targets": ["hi", "world"]
+            },
+            "expected": "hiworld"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "indices": [0, 2, 4],
+                "sources": ["ba", "na", "na"],
+                "targets": ["xx", "yy", "zz"]
+            },
+            "expected": "xxyyzz"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [2, 4, 6, 8],
+                "sources": ["cd", "ef", "gh", "ij"],
+                "targets": ["1234", "5678", "91011", "121314"]
+            },
+            "expected": "ab1234567891011121314"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "indices": [1, 3],
+                "sources": ["an", "na"],
+                "targets": ["xx", "yy"]
+            },
+            "expected": "bxxana"
+        },
+        {
+            "args": {
+                "s": "algorithms",
+                "indices": [1, 3, 5, 7],
+                "sources": ["l", "g", "m", "th"],
+                "targets": ["X", "Y", "Z", "ABC"]
+            },
+            "expected": "aXgorithms"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "indices": [0, 5, 7],
+                "sources": ["abra", "a", "abra"],
+                "targets": ["zzzz", "x", "yyyy"]
+            },
+            "expected": "zzzzcxdyyyy"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [1, 3, 5, 7],
+                "sources": ["bc", "de", "fg", "hi"],
+                "targets": ["XX", "YY", "ZZ", "QQ"]
+            },
+            "expected": "aXXYYZZQQj"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "indices": [1, 3, 5],
+                "sources": ["an", "an", "a"],
+                "targets": ["XX", "YY", "ZZ"]
+            },
+            "expected": "bXXYYZZ"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "indices": [1, 3, 5, 7, 9],
+                "sources": ["ab", "cd", "ef", "gh", "ij"],
+                "targets": ["xy", "zw", "XY", "ZW", "IJ"]
+            },
+            "expected": "axybccddeeff"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "indices": [0, 5, 10, 15, 20],
+                "sources": ["abc", "fgh", "klm", "pqr", "uvw"],
+                "targets": ["123", "456", "789", "012", "345"]
+            },
+            "expected": "123de456ij789no012st345xyz"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "indices": [0, 3, 7],
+                "sources": ["abr", "aca", "bra"],
+                "targets": ["A", "B", "C"]
+            },
+            "expected": "ABdabra"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "indices": [0, 5, 10, 15, 20],
+                "sources": ["abcde", "fghij", "klmno", "pqrst", "uvwxy"],
+                "targets": ["11111", "22222", "33333", "44444", "55555"]
+            },
+            "expected": "1111122222333334444455555z"
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "indices": [3, 10, 15],
+                "sources": ["gram", "is", "fun"],
+                "targets": ["code", "was", "great"]
+            },
+            "expected": "procodemingisfun"
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "indices": [0, 2, 4],
+                "sources": ["aa", "aa", "aa"],
+                "targets": ["1", "2", "3"]
+            },
+            "expected": 123
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "indices": [0, 3, 5],
+                "sources": ["abc", "de", "fg"],
+                "targets": ["xyz", "qrs", "tuv"]
+            },
+            "expected": "xyzqrstuv"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "indices": [0, 3, 6],
+                "sources": ["xyz", "xyz", "xyz"],
+                "targets": ["123", "456", "789"]
+            },
+            "expected": 123456789
+        },
+        {
+            "args": {
+                "s": "zzzzzzzz",
+                "indices": [0, 1, 2, 3, 4, 5, 6],
+                "sources": ["zz", "zz", "zz", "zz", "zz", "zz", "zz"],
+                "targets": ["ZZ", "YY", "XX", "WW", "VV", "UU", "TT"]
+            },
+            "expected": "ZZXXVVTT"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "indices": [1, 3, 5, 7, 9],
+                "sources": ["bc", "ef", "hi", "jk"],
+                "targets": ["XXX", "YYY", "ZZZ", "WWW"]
+            },
+            "expected": "aXXXdefghij"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "indices": [0, 3, 6],
+                "sources": ["xyz", "xyz", "xyz"],
+                "targets": ["XYZ", "XYZ", "XYZ"]
+            },
+            "expected": "XYZXYZXYZ"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findReplaceString",
+        "typescript": "Solution().findReplaceString"
+    }
+}

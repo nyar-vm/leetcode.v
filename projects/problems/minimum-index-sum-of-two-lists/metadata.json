@@ -1,0 +1,882 @@
+{
+    "id": "minimum-index-sum-of-two-lists",
+    "questionId": 599,
+    "difficulty": "Easy",
+    "tags": ["Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "list1": ["a", "b", "c", "d", "e"],
+                "list2": ["e", "d", "c", "b", "a"]
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "list1": ["happy", "sad", "good"],
+                "list2": ["sad", "happy", "good"]
+            },
+            "expected": ["happy", "sad"]
+        },
+        {
+            "args": {
+                "list1": ["apple", "banana"],
+                "list2": ["banana", "apple"]
+            },
+            "expected": ["apple", "banana"]
+        },
+        {
+            "args": {
+                "list1": ["Shogun", "Tapioca Express", "Burger King", "KFC"],
+                "list2": [
+                    "Piatti",
+                    "The Grill at Torrey Pines",
+                    "Hungry Hunter Steakhouse",
+                    "Shogun"
+                ]
+            },
+            "expected": ["Shogun"]
+        },
+        {
+            "args": {
+                "list1": ["Shogun", "Tapioca Express", "Burger King", "KFC"],
+                "list2": ["KFC", "Shogun", "Burger King"]
+            },
+            "expected": ["Shogun"]
+        },
+        {
+            "args": {
+                "list1": ["carrot", "apple", "banana", "date"],
+                "list2": ["banana", "date", "apple", "fig", "carrot"]
+            },
+            "expected": ["banana"]
+        },
+        {
+            "args": {
+                "list1": ["x", "y", "z"],
+                "list2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": ["x"]
+        },
+        {
+            "args": {
+                "list1": ["Hotel California", "Fever Tree", "Hotel Armenia", "Hotel Greece"],
+                "list2": ["Hotel Greece", "Hotel Armenia", "Fever Tree", "Hotel California"]
+            },
+            "expected": ["Hotel California", "Fever Tree", "Hotel Armenia", "Hotel Greece"]
+        },
+        {
+            "args": {
+                "list1": ["dog", "cat", "bird", "fish"],
+                "list2": ["fish", "bird", "cat", "dog", "ant", "bee", "fly", "spider"]
+            },
+            "expected": ["dog", "cat", "bird", "fish"]
+        },
+        {
+            "args": {
+                "list1": ["Quickly", "Brown", "Fox", "Jumps", "Over", "Lazy", "Dog"],
+                "list2": ["Dog", "Lazy", "Over", "Jumps", "Fox", "Brown", "Quickly"]
+            },
+            "expected": ["Quickly", "Brown", "Fox", "Jumps", "Over", "Lazy", "Dog"]
+        },
+        {
+            "args": {
+                "list1": ["RestaurantA", "RestaurantB", "RestaurantC"],
+                "list2": ["RestaurantD", "RestaurantB", "RestaurantE", "RestaurantA"]
+            },
+            "expected": ["RestaurantB"]
+        },
+        {
+            "args": {
+                "list1": ["Alpha", "Bravo", "Charlie", "Delta"],
+                "list2": ["Echo", "Delta", "Bravo", "Alpha"]
+            },
+            "expected": ["Alpha", "Bravo"]
+        },
+        {
+            "args": {
+                "list1": ["Shogun", "Tapioca Express", "Burger King", "KFC", "Pizza Hut"],
+                "list2": ["Pizza Hut", "KFC", "Burger King", "Tapioca Express", "Shogun"]
+            },
+            "expected": ["Shogun", "Tapioca Express", "Burger King", "KFC", "Pizza Hut"]
+        },
+        {
+            "args": {
+                "list1": [
+                    "restaurant1",
+                    "restaurant2",
+                    "restaurant3",
+                    "restaurant4",
+                    "restaurant5"
+                ],
+                "list2": ["restaurant5", "restaurant4", "restaurant3", "restaurant2", "restaurant1"]
+            },
+            "expected": ["restaurant1", "restaurant2", "restaurant3", "restaurant4", "restaurant5"]
+        },
+        {
+            "args": {
+                "list1": ["one", "two", "three", "four", "five"],
+                "list2": [
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "one",
+                    "ten",
+                    "eleven",
+                    "twelve",
+                    "thirteen",
+                    "fourteen",
+                    "fifteen"
+                ]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "list1": ["Fast Food", "Quick Eats", "Snack Bar", "Food Truck"],
+                "list2": ["Food Truck", "Quick Eats", "Snack Bar", "Fast Food"]
+            },
+            "expected": ["Quick Eats"]
+        },
+        {
+            "args": {
+                "list1": ["starbucks", "costa", "dunkin", "tim hortons"],
+                "list2": ["tim hortons", "dunkin", "costa", "starbucks"]
+            },
+            "expected": ["starbucks", "costa", "dunkin", "tim hortons"]
+        },
+        {
+            "args": {
+                "list1": ["pancakes", "waffles", "omelette"],
+                "list2": ["omelette", "pancakes", "waffles", "french toast"]
+            },
+            "expected": ["pancakes"]
+        },
+        {
+            "args": {
+                "list1": ["Steakhouse", "Seafood Grill", "Wine Bar"],
+                "list2": ["Wine Bar", "Seafood Grill", "Steakhouse"]
+            },
+            "expected": ["Steakhouse", "Seafood Grill", "Wine Bar"]
+        },
+        {
+            "args": {
+                "list1": ["Poke Bar", "Sushi Spot", "Tataki House"],
+                "list2": ["Tataki House", "Poke Bar", "Sushi Spot"]
+            },
+            "expected": ["Poke Bar"]
+        },
+        {
+            "args": {
+                "list1": ["laptop", "phone", "tablet", "monitor"],
+                "list2": ["monitor", "tablet", "phone", "laptop"]
+            },
+            "expected": ["laptop", "phone", "tablet", "monitor"]
+        },
+        {
+            "args": {
+                "list1": ["a", "b", "c", "d", "e", "f", "g"],
+                "list2": ["g", "f", "e", "d", "c", "b", "a"]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g"]
+        },
+        {
+            "args": {
+                "list1": ["coffee", "tea", "soda", "juice"],
+                "list2": ["juice", "soda", "coffee", "tea"]
+            },
+            "expected": ["coffee"]
+        },
+        {
+            "args": {
+                "list1": ["Pasta Palace", "Dumplings Galore", "Steakhouse", "Soup Kitchen"],
+                "list2": ["Soup Kitchen", "Steakhouse", "Dumplings Galore", "Pasta Palace"]
+            },
+            "expected": ["Pasta Palace", "Dumplings Galore", "Steakhouse", "Soup Kitchen"]
+        },
+        {
+            "args": {
+                "list1": ["one", "two", "three", "four", "five", "six"],
+                "list2": ["six", "five", "four", "three", "two", "one"]
+            },
+            "expected": ["one", "two", "three", "four", "five", "six"]
+        },
+        {
+            "args": {
+                "list1": ["X", "Y", "Z", "W", "V"],
+                "list2": ["V", "W", "X", "Y", "Z", "A", "B", "C", "D", "E"]
+            },
+            "expected": ["X"]
+        },
+        {
+            "args": {
+                "list1": ["One", "Two", "Three", "Four", "Five"],
+                "list2": ["Six", "Seven", "Eight", "One", "Five"]
+            },
+            "expected": ["One"]
+        },
+        {
+            "args": {
+                "list1": ["Red", "Blue", "Green", "Yellow", "Black"],
+                "list2": ["Orange", "Black", "Pink", "Green", "Purple", "Red"]
+            },
+            "expected": ["Red", "Green", "Black"]
+        },
+        {
+            "args": {
+                "list1": ["Shogun", "Tapioca Express", "Burger King", "KFC"],
+                "list2": ["KFC", "Burger King", "Tapioca Express", "Shogun"]
+            },
+            "expected": ["Shogun", "Tapioca Express", "Burger King", "KFC"]
+        },
+        {
+            "args": {
+                "list1": ["Paris", "Lyon", "Marseille", "Toulouse"],
+                "list2": ["Lyon", "Toulouse", "Marseille", "Paris"]
+            },
+            "expected": ["Lyon"]
+        },
+        {
+            "args": {
+                "list1": ["apple", "banana", "cherry", "date", "elderberry"],
+                "list2": ["elderberry", "date", "cherry", "banana", "apple"]
+            },
+            "expected": ["apple", "banana", "cherry", "date", "elderberry"]
+        },
+        {
+            "args": {
+                "list1": ["coke", "pepsi", "sprite", "fanta"],
+                "list2": ["fanta", "sprite", "pepsi", "coke"]
+            },
+            "expected": ["coke", "pepsi", "sprite", "fanta"]
+        },
+        {
+            "args": {
+                "list1": [
+                    "French Laundry",
+                    "California Bistro",
+                    "New England Clam Chowder",
+                    "Texas BBQ"
+                ],
+                "list2": [
+                    "Texas BBQ",
+                    "New England Clam Chowder",
+                    "California Bistro",
+                    "French Laundry"
+                ]
+            },
+            "expected": [
+                "French Laundry",
+                "California Bistro",
+                "New England Clam Chowder",
+                "Texas BBQ"
+            ]
+        },
+        {
+            "args": {
+                "list1": ["happy", "joy", "sad", "angry"],
+                "list2": ["sad", "happy", "angry", "joy"]
+            },
+            "expected": ["happy"]
+        },
+        {
+            "args": {
+                "list1": ["XYZ", "ABC", "DEF", "GHI"],
+                "list2": ["JKL", "MNO", "XYZ", "PQR"]
+            },
+            "expected": ["XYZ"]
+        },
+        {
+            "args": {
+                "list1": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+                "list2": ["J", "I", "H", "G", "F", "E", "D", "C", "B", "A"]
+            },
+            "expected": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        },
+        {
+            "args": {
+                "list1": ["Pizza Palace", "Pasta House", "Taco Bistro"],
+                "list2": ["Taco Bistro", "Pizza Palace", "Pasta House"]
+            },
+            "expected": ["Pizza Palace"]
+        },
+        {
+            "args": {
+                "list1": ["mexican", "italian", "japanese", "chinese"],
+                "list2": ["thai", "japanese", "italian", "mexican", "indian"]
+            },
+            "expected": ["mexican", "italian", "japanese"]
+        },
+        {
+            "args": {
+                "list1": ["coffee", "tea", "soda", "water"],
+                "list2": ["water", "soda", "coffee", "tea"]
+            },
+            "expected": ["coffee"]
+        },
+        {
+            "args": {
+                "list1": ["pizza", "burger", "sushi", "taco"],
+                "list2": ["taco", "burger", "pizza", "ramen"]
+            },
+            "expected": ["pizza", "burger"]
+        },
+        {
+            "args": {
+                "list1": ["Central Perk", "The Beanery", "Mocha Cafe"],
+                "list2": ["Latte Lounge", "The Beanery", "Central Perk", "Espresso Bar"]
+            },
+            "expected": ["Central Perk", "The Beanery"]
+        },
+        {
+            "args": {
+                "list1": ["hello", "world", "python", "programming"],
+                "list2": ["java", "programming", "python", "world", "hello"]
+            },
+            "expected": ["hello", "world", "python", "programming"]
+        },
+        {
+            "args": {
+                "list1": ["cat cafe", "dog cafe", "parrot cafe"],
+                "list2": ["parrot cafe", "dog cafe", "cat cafe", "rabbit cafe"]
+            },
+            "expected": ["cat cafe", "dog cafe", "parrot cafe"]
+        },
+        {
+            "args": {
+                "list1": ["India Gate", "Great Wall", "Berlin Wall", "Eiffel Tower"],
+                "list2": ["Eiffel Tower", "Berlin Wall", "Great Wall", "India Gate"]
+            },
+            "expected": ["India Gate", "Great Wall", "Berlin Wall", "Eiffel Tower"]
+        },
+        {
+            "args": {
+                "list1": ["Los Angeles", "New York", "Chicago"],
+                "list2": ["Chicago", "Los Angeles", "Houston", "New York"]
+            },
+            "expected": ["Los Angeles"]
+        },
+        {
+            "args": {
+                "list1": ["pasta", "pizza", "lasagna"],
+                "list2": ["pizza", "lasagna", "pasta", "ravioli"]
+            },
+            "expected": ["pizza"]
+        },
+        {
+            "args": {
+                "list1": ["Fast", "Food", "Place", "Awesome"],
+                "list2": ["Awesome", "Place", "Food", "Fast"]
+            },
+            "expected": ["Fast", "Food", "Place", "Awesome"]
+        },
+        {
+            "args": {
+                "list1": ["x", "y", "z"],
+                "list2": ["a", "b", "c", "d", "x", "y", "z"]
+            },
+            "expected": ["x"]
+        },
+        {
+            "args": {
+                "list1": ["red", "blue", "green", "yellow"],
+                "list2": ["yellow", "green", "blue", "red"]
+            },
+            "expected": ["red", "blue", "green", "yellow"]
+        },
+        {
+            "args": {
+                "list1": ["X", "Y", "Z"],
+                "list2": [
+                    "W",
+                    "V",
+                    "U",
+                    "X",
+                    "T",
+                    "S",
+                    "R",
+                    "Q",
+                    "P",
+                    "O",
+                    "N",
+                    "M",
+                    "L",
+                    "K",
+                    "J",
+                    "I",
+                    "H",
+                    "G",
+                    "F",
+                    "E",
+                    "D",
+                    "C",
+                    "B",
+                    "A",
+                    "Z"
+                ]
+            },
+            "expected": ["X"]
+        },
+        {
+            "args": {
+                "list1": ["apple pie", "cherry pie", "blueberry pie"],
+                "list2": ["blueberry pie", "cherry pie", "apple pie", "pumpkin pie"]
+            },
+            "expected": ["apple pie", "cherry pie", "blueberry pie"]
+        },
+        {
+            "args": {
+                "list1": ["x", "y", "z"],
+                "list2": [
+                    "z",
+                    "x",
+                    "y",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w"
+                ]
+            },
+            "expected": ["x"]
+        },
+        {
+            "args": {
+                "list1": ["taco", "burrito", "nachos", "enchilada"],
+                "list2": ["enchilada", "taco", "nachos", "burrito"]
+            },
+            "expected": ["taco"]
+        },
+        {
+            "args": {
+                "list1": ["mango", "pineapple", "kiwi", "grapefruit"],
+                "list2": ["grapefruit", "kiwi", "pineapple", "mango"]
+            },
+            "expected": ["mango", "pineapple", "kiwi", "grapefruit"]
+        },
+        {
+            "args": {
+                "list1": ["red", "blue", "green", "yellow"],
+                "list2": ["yellow", "green", "blue", "red", "purple", "orange", "pink", "brown"]
+            },
+            "expected": ["red", "blue", "green", "yellow"]
+        },
+        {
+            "args": {
+                "list1": ["orange", "grape", "melon", "kiwi"],
+                "list2": ["kiwi", "melon", "grape", "orange", "pineapple", "mango"]
+            },
+            "expected": ["orange", "grape", "melon", "kiwi"]
+        },
+        {
+            "args": {
+                "list1": ["A", "B", "C", "D", "E", "F"],
+                "list2": ["F", "E", "D", "C", "B", "A"]
+            },
+            "expected": ["A", "B", "C", "D", "E", "F"]
+        },
+        {
+            "args": {
+                "list1": ["FastFood", "Italian", "Chinese", "American", "Mexican"],
+                "list2": ["Thai", "Indian", "American", "Chinese", "Japanese"]
+            },
+            "expected": ["Chinese", "American"]
+        },
+        {
+            "args": {
+                "list1": ["apple", "orange", "banana", "grape"],
+                "list2": ["grape", "orange", "banana", "apple"]
+            },
+            "expected": ["orange"]
+        },
+        {
+            "args": {
+                "list1": ["Sushi Spot", "Ramen Joint", "BBQ Pit", "Pizza Place"],
+                "list2": ["Pizza Place", "BBQ Pit", "Ramen Joint", "Sushi Spot"]
+            },
+            "expected": ["Sushi Spot", "Ramen Joint", "BBQ Pit", "Pizza Place"]
+        },
+        {
+            "args": {
+                "list1": ["M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"],
+                "list2": ["W", "X", "Y", "Z", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M"]
+            },
+            "expected": ["M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"]
+        },
+        {
+            "args": {
+                "list1": ["bread", "butter", "jam", "cheese"],
+                "list2": ["cheese", "jam", "butter", "bread"]
+            },
+            "expected": ["bread", "butter", "jam", "cheese"]
+        },
+        {
+            "args": {
+                "list1": ["A", "B", "C", "D", "E", "F", "G"],
+                "list2": ["H", "I", "J", "K", "A", "L", "M", "F", "N"]
+            },
+            "expected": ["A"]
+        },
+        {
+            "args": {
+                "list1": ["Savory Bites", "Italian Delight", "Vegan Cafe", "Bakery"],
+                "list2": ["Bakery", "Vegan Cafe", "Italian Delight", "Savory Bites"]
+            },
+            "expected": ["Savory Bites", "Italian Delight", "Vegan Cafe", "Bakery"]
+        },
+        {
+            "args": {
+                "list1": ["XYZ", "ABC", "DEF", "GHI", "JKL"],
+                "list2": ["JKL", "GHI", "DEF", "ABC", "XYZ"]
+            },
+            "expected": ["XYZ", "ABC", "DEF", "GHI", "JKL"]
+        },
+        {
+            "args": {
+                "list1": ["salad", "steak", "soup", "chicken"],
+                "list2": ["chicken", "salad", "soup", "steak"]
+            },
+            "expected": ["salad"]
+        },
+        {
+            "args": {
+                "list1": ["pizza", "burger", "sushi", "taco"],
+                "list2": ["salad", "burger", "taco", "pizza"]
+            },
+            "expected": ["burger"]
+        },
+        {
+            "args": {
+                "list1": ["Unique", "String", "Here", "Now"],
+                "list2": ["Not", "Here", "Unique", "String"]
+            },
+            "expected": ["Unique"]
+        },
+        {
+            "args": {
+                "list1": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "list2": ["j", "i", "h", "g", "f", "e", "d", "c", "b", "a"]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "list1": ["Pizza", "Burger", "Pasta"],
+                "list2": ["Sushi", "Pizza", "Pasta", "Burger"]
+            },
+            "expected": ["Pizza"]
+        },
+        {
+            "args": {
+                "list1": ["Java Hut", "Code Brew", "Data Cafe"],
+                "list2": ["Algo Eatery", "Data Cafe", "Java Hut", "Code Brew"]
+            },
+            "expected": ["Java Hut"]
+        },
+        {
+            "args": {
+                "list1": ["Foo Bar", "Foo Baz", "Bar Baz", "Foo Bar Baz"],
+                "list2": ["Bar Baz", "Foo Baz", "Foo Bar", "Foo Bar Baz", "Baz Bar"]
+            },
+            "expected": ["Foo Bar", "Foo Baz", "Bar Baz"]
+        },
+        {
+            "args": {
+                "list1": ["Burger King", "Shogun", "KFC", "Tapioca Express"],
+                "list2": ["KFC", "Tapioca Express", "Shogun", "Burger King", "Sushi"]
+            },
+            "expected": ["KFC"]
+        },
+        {
+            "args": {
+                "list1": ["Breakfast", "Lunch", "Dinner"],
+                "list2": ["Dinner", "Breakfast", "Lunch"]
+            },
+            "expected": ["Breakfast"]
+        },
+        {
+            "args": {
+                "list1": ["x", "y", "z", "a", "b", "c"],
+                "list2": ["c", "b", "a", "z", "y", "x"]
+            },
+            "expected": ["x", "y", "z", "a", "b", "c"]
+        },
+        {
+            "args": {
+                "list1": ["pizza", "burger", "sushi", "taco"],
+                "list2": ["salad", "taco", "pizza", "burger"]
+            },
+            "expected": ["pizza"]
+        },
+        {
+            "args": {
+                "list1": ["Cafe 99", "Mediterranean Grill", "Taco Joint", "BBQ Pit"],
+                "list2": ["BBQ Pit", "Taco Joint", "Mediterranean Grill", "Cafe 99"]
+            },
+            "expected": ["Cafe 99", "Mediterranean Grill", "Taco Joint", "BBQ Pit"]
+        },
+        {
+            "args": {
+                "list1": ["alpha", "beta", "gamma", "delta", "epsilon"],
+                "list2": ["epsilon", "delta", "gamma", "beta", "alpha", "omega", "psi"]
+            },
+            "expected": ["alpha", "beta", "gamma", "delta", "epsilon"]
+        },
+        {
+            "args": {
+                "list1": ["One", "Two", "Three", "Four", "Five"],
+                "list2": ["Five", "Four", "Three", "Two", "One"]
+            },
+            "expected": ["One", "Two", "Three", "Four", "Five"]
+        },
+        {
+            "args": {
+                "list1": ["Coffee Spot", "Deluxe Lounge", "Burger Spot", "Pancake House"],
+                "list2": ["Pancake House", "Burger Spot", "Deluxe Lounge", "Coffee Spot"]
+            },
+            "expected": ["Coffee Spot", "Deluxe Lounge", "Burger Spot", "Pancake House"]
+        },
+        {
+            "args": {
+                "list1": ["hello", "world", "python", "programming"],
+                "list2": ["java", "c++", "programming", "hello", "ruby", "go", "swift"]
+            },
+            "expected": ["hello"]
+        },
+        {
+            "args": {
+                "list1": ["X", "Y", "Z", "W"],
+                "list2": ["W", "V", "U", "X", "Y", "Z"]
+            },
+            "expected": ["X", "W"]
+        },
+        {
+            "args": {
+                "list1": ["Restaurant1", "Restaurant2", "Restaurant3", "Restaurant4"],
+                "list2": ["Restaurant5", "Restaurant6", "Restaurant7", "Restaurant1", "Restaurant8"]
+            },
+            "expected": ["Restaurant1"]
+        },
+        {
+            "args": {
+                "list1": [
+                    "restaurant1",
+                    "restaurant2",
+                    "restaurant3",
+                    "restaurant4",
+                    "restaurant5"
+                ],
+                "list2": [
+                    "restaurant6",
+                    "restaurant5",
+                    "restaurant4",
+                    "restaurant3",
+                    "restaurant2",
+                    "restaurant1"
+                ]
+            },
+            "expected": ["restaurant1", "restaurant2", "restaurant3", "restaurant4", "restaurant5"]
+        },
+        {
+            "args": {
+                "list1": ["Alpha", "Beta", "Gamma", "Delta"],
+                "list2": ["Epsilon", "Zeta", "Delta", "Alpha", "Eta", "Theta"]
+            },
+            "expected": ["Alpha"]
+        },
+        {
+            "args": {
+                "list1": ["Paris Bistro", "La Belle Vie", "Sushi Place", "Taco Bell"],
+                "list2": ["Taco Bell", "Sushi Place", "La Belle Vie", "Pizza Hut"]
+            },
+            "expected": ["La Belle Vie", "Sushi Place", "Taco Bell"]
+        },
+        {
+            "args": {
+                "list1": ["m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+                "list2": ["z", "y", "x", "w", "v", "u", "t", "s", "r", "q", "p", "o", "n", "m"]
+            },
+            "expected": ["m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        },
+        {
+            "args": {
+                "list1": ["New York", "Los Angeles", "Chicago", "Houston"],
+                "list2": [
+                    "Phoenix",
+                    "San Antonio",
+                    "Houston",
+                    "San Diego",
+                    "Dallas",
+                    "San Jose",
+                    "Austin",
+                    "Jacksonville",
+                    "Fort Worth",
+                    "Columbus",
+                    "Charlotte",
+                    "San Francisco",
+                    "Indianapolis",
+                    "Seattle",
+                    "Denver",
+                    "Washington",
+                    "Boston",
+                    "El Paso",
+                    "Nashville",
+                    "Detroit",
+                    "Oklahoma City",
+                    "Portland",
+                    "Las Vegas",
+                    "Memphis",
+                    "Louisville",
+                    "Milwaukee",
+                    "Albuquerque",
+                    "Tucson",
+                    "Fresno",
+                    "Sacramento",
+                    "Long Beach",
+                    "Kansas City",
+                    "Mesa",
+                    "Virginia Beach",
+                    "Atlanta",
+                    "Colorado Springs",
+                    "Omaha",
+                    "Raleigh",
+                    "Miami",
+                    "Oakland",
+                    "Tulsa",
+                    "Orlando",
+                    "Minneapolis",
+                    "Wichita",
+                    "Arlington",
+                    "New Orleans",
+                    "Baltimore",
+                    "Honolulu",
+                    "Fort Wayne",
+                    "Cincinnati",
+                    "Alexandria",
+                    "Tampa",
+                    "Buffalo",
+                    "Greensboro",
+                    "Shreveport",
+                    "Akron",
+                    "Tacoma",
+                    "Grand Rapids",
+                    "Dayton",
+                    "Henderson",
+                    "Newark",
+                    "Anchorage",
+                    "Oxnard",
+                    "Santa Ana",
+                    "Riverside",
+                    "Moreno Valley",
+                    "Chesapeake",
+                    "Garland",
+                    "Irving",
+                    "Huntington Beach",
+                    "Santa Clarita",
+                    "Fremont",
+                    "Providence",
+                    "Glendale",
+                    "Oceanside",
+                    "Longview",
+                    "Knoxville",
+                    "Aurora",
+                    "Rockford",
+                    "Spokane",
+                    "Tacoma",
+                    "Modesto",
+                    "Fontana",
+                    "Columbus",
+                    "Springfield",
+                    "Ogdensburg",
+                    "Anaheim"
+                ]
+            },
+            "expected": ["Houston"]
+        },
+        {
+            "args": {
+                "list1": ["Alice", "Bob", "Charlie", "David"],
+                "list2": ["David", "Charlie", "Bob", "Alice"]
+            },
+            "expected": ["Alice", "Bob", "Charlie", "David"]
+        },
+        {
+            "args": {
+                "list1": ["apple", "banana", "cherry", "date", "elderberry"],
+                "list2": ["elderberry", "date", "cherry", "banana", "apple", "fig", "grape"]
+            },
+            "expected": ["apple", "banana", "cherry", "date", "elderberry"]
+        },
+        {
+            "args": {
+                "list1": ["Grill Room", "BBQ Joint", "Smokers Bar"],
+                "list2": ["Smokers Bar", "Grill Room", "BBQ Joint"]
+            },
+            "expected": ["Grill Room"]
+        },
+        {
+            "args": {
+                "list1": ["pasta", "burger", "pizza", "sushi"],
+                "list2": ["pizza", "sushi", "burger", "pasta"]
+            },
+            "expected": ["pizza"]
+        },
+        {
+            "args": {
+                "list1": ["Sushi Bar", "Pasta Place", "Taco Stand", "Burger Joint"],
+                "list2": ["Steak House", "Taco Stand", "Pasta Place", "Sushi Bar"]
+            },
+            "expected": ["Sushi Bar", "Pasta Place", "Taco Stand"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findRestaurant",
+        "typescript": "Solution().findRestaurant"
+    }
+}

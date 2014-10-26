@@ -1,0 +1,859 @@
+{
+    "id": "occurrences-after-bigram",
+    "questionId": 1078,
+    "difficulty": "Easy",
+    "tags": ["String"],
+    "tests": [
+        {
+            "args": {
+                "text": "hello world hello hello world",
+                "first": "hello",
+                "second": "world"
+            },
+            "expected": ["hello"]
+        },
+        {
+            "args": {
+                "text": "repeat repeat repeat repeat",
+                "first": "repeat",
+                "second": "repeat"
+            },
+            "expected": ["repeat", "repeat"]
+        },
+        {
+            "args": {
+                "text": "look at the stars look at the moon",
+                "first": "look",
+                "second": "at"
+            },
+            "expected": ["the", "the"]
+        },
+        {
+            "args": {
+                "text": "in the beginning there was the word",
+                "first": "the",
+                "second": "beginning"
+            },
+            "expected": ["there"]
+        },
+        {
+            "args": {
+                "text": "this is a test this is only a test",
+                "first": "this",
+                "second": "is"
+            },
+            "expected": ["a", "only"]
+        },
+        {
+            "args": {
+                "text": "one two three two three four three five",
+                "first": "two",
+                "second": "three"
+            },
+            "expected": ["two", "four"]
+        },
+        {
+            "args": {
+                "text": "every good boy does fine every good boy does fine",
+                "first": "good",
+                "second": "boy"
+            },
+            "expected": ["does", "does"]
+        },
+        {
+            "args": {
+                "text": "alice is a good girl she is a good student",
+                "first": "a",
+                "second": "good"
+            },
+            "expected": ["girl", "student"]
+        },
+        {
+            "args": {
+                "text": "we will we will rock you",
+                "first": "we",
+                "second": "will"
+            },
+            "expected": ["we", "rock"]
+        },
+        {
+            "args": {
+                "text": "foo bar foo bar foo",
+                "first": "foo",
+                "second": "bar"
+            },
+            "expected": ["foo", "foo"]
+        },
+        {
+            "args": {
+                "text": "in a village of la mancha the name of which i have no desire to call to mind",
+                "first": "village",
+                "second": "of"
+            },
+            "expected": ["la"]
+        },
+        {
+            "args": {
+                "text": "this is a test this is only a test",
+                "first": "is",
+                "second": "a"
+            },
+            "expected": ["test"]
+        },
+        {
+            "args": {
+                "text": "foo bar foo foo bar bar foo",
+                "first": "foo",
+                "second": "bar"
+            },
+            "expected": ["foo", "bar"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog",
+                "first": "the",
+                "second": "lazy"
+            },
+            "expected": ["dog"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog",
+                "first": "quick",
+                "second": "brown"
+            },
+            "expected": ["fox", "fox"]
+        },
+        {
+            "args": {
+                "text": "a b c a b c a b c a b c a b c a b c",
+                "first": "a",
+                "second": "b"
+            },
+            "expected": ["c", "c", "c", "c", "c", "c"]
+        },
+        {
+            "args": {
+                "text": "repeat repeat repeat repeat repeat repeat repeat repeat repeat",
+                "first": "repeat",
+                "second": "repeat"
+            },
+            "expected": ["repeat", "repeat", "repeat", "repeat", "repeat", "repeat", "repeat"]
+        },
+        {
+            "args": {
+                "text": "one two three four five six seven eight nine ten eleven twelve",
+                "first": "five",
+                "second": "six"
+            },
+            "expected": ["seven"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the quick brown fox",
+                "first": "quick",
+                "second": "brown"
+            },
+            "expected": ["fox", "fox"]
+        },
+        {
+            "args": {
+                "text": "a tale of two cities a tale of two brothers a tale of two sisters",
+                "first": "tale",
+                "second": "of"
+            },
+            "expected": ["two", "two", "two"]
+        },
+        {
+            "args": {
+                "text": "once upon a time in a land far far away once upon a time in a magical land",
+                "first": "once",
+                "second": "upon"
+            },
+            "expected": ["a", "a"]
+        },
+        {
+            "args": {
+                "text": "this is a simple test this is a more complex test this is a simple test",
+                "first": "is",
+                "second": "a"
+            },
+            "expected": ["simple", "more", "simple"]
+        },
+        {
+            "args": {
+                "text": "the rain in spain stays mainly in the plain the rain in spain",
+                "first": "rain",
+                "second": "in"
+            },
+            "expected": ["spain", "spain"]
+        },
+        {
+            "args": {
+                "text": "one fish two fish red fish blue fish one fish two fish red fish blue fish",
+                "first": "fish",
+                "second": "red"
+            },
+            "expected": ["fish", "fish"]
+        },
+        {
+            "args": {
+                "text": "one two three four five six seven eight nine ten one two three four five six",
+                "first": "three",
+                "second": "four"
+            },
+            "expected": ["five", "five"]
+        },
+        {
+            "args": {
+                "text": "x y z x y z x y z x y z x y z x y z x y z x y z",
+                "first": "x",
+                "second": "y"
+            },
+            "expected": ["z", "z", "z", "z", "z", "z", "z", "z"]
+        },
+        {
+            "args": {
+                "text": "this is a simple sentence to test the function this is a simple test",
+                "first": "simple",
+                "second": "sentence"
+            },
+            "expected": ["to"]
+        },
+        {
+            "args": {
+                "text": "a a a a a a a a a a a a a a a a a a a a a",
+                "first": "a",
+                "second": "a"
+            },
+            "expected": [
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a"
+            ]
+        },
+        {
+            "args": {
+                "text": "once upon a time in a land far far away once upon a time",
+                "first": "once",
+                "second": "upon"
+            },
+            "expected": ["a", "a"]
+        },
+        {
+            "args": {
+                "text": "repeated repeated repeated repeated repeated repeated",
+                "first": "repeated",
+                "second": "repeated"
+            },
+            "expected": ["repeated", "repeated", "repeated", "repeated"]
+        },
+        {
+            "args": {
+                "text": "abc def ghi jkl mno pqr stu vwx yz abc def ghi jkl mno",
+                "first": "def",
+                "second": "ghi"
+            },
+            "expected": ["jkl", "jkl"]
+        },
+        {
+            "args": {
+                "text": "a b c a b c a b c a b c a b c a b c a b c a b c a b c a b c",
+                "first": "a",
+                "second": "b"
+            },
+            "expected": ["c", "c", "c", "c", "c", "c", "c", "c", "c", "c"]
+        },
+        {
+            "args": {
+                "text": "a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d",
+                "first": "a",
+                "second": "b"
+            },
+            "expected": ["c", "c"]
+        },
+        {
+            "args": {
+                "text": "this is a simple test case this is a very simple test case",
+                "first": "is",
+                "second": "a"
+            },
+            "expected": ["simple", "very"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the quick brown fox jumps",
+                "first": "quick",
+                "second": "brown"
+            },
+            "expected": ["fox", "fox"]
+        },
+        {
+            "args": {
+                "text": "once upon a time in a land far far away once upon a time in a land",
+                "first": "once",
+                "second": "upon"
+            },
+            "expected": ["a", "a"]
+        },
+        {
+            "args": {
+                "text": "find these occurrences carefully find these occurrences again find these occurrences one more time",
+                "first": "find",
+                "second": "these"
+            },
+            "expected": ["occurrences", "occurrences", "occurrences"]
+        },
+        {
+            "args": {
+                "text": "a quick movement of the enemy will jeopardize six gunboats a quick and silent movement of the enemy will jeopardize five gunboats",
+                "first": "quick",
+                "second": "and"
+            },
+            "expected": ["silent"]
+        },
+        {
+            "args": {
+                "text": "complex example with multiple matches and no matches complex example with multiple matches and no matches",
+                "first": "with",
+                "second": "multiple"
+            },
+            "expected": ["matches", "matches"]
+        },
+        {
+            "args": {
+                "text": "she sells sea shells by the sea shore she sells sea shells by the sea shore",
+                "first": "sea",
+                "second": "shells"
+            },
+            "expected": ["by", "by"]
+        },
+        {
+            "args": {
+                "text": "complex scenario with different words complex scenario with different words complex",
+                "first": "with",
+                "second": "different"
+            },
+            "expected": ["words", "words"]
+        },
+        {
+            "args": {
+                "text": "repeated repeated repeated words words words in a sentence",
+                "first": "words",
+                "second": "in"
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "text": "unique words with no repetitions should return empty list",
+                "first": "no",
+                "second": "repetitions"
+            },
+            "expected": ["should"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the quick brown fox jumps over the quick brown fox",
+                "first": "quick",
+                "second": "brown"
+            },
+            "expected": ["fox", "fox", "fox"]
+        },
+        {
+            "args": {
+                "text": "x y z a b c x y z a b c x y z a b c x y z a b c",
+                "first": "x",
+                "second": "y"
+            },
+            "expected": ["z", "z", "z", "z"]
+        },
+        {
+            "args": {
+                "text": "word word word word word word word word word word word word word word word word word word word word",
+                "first": "word",
+                "second": "word"
+            },
+            "expected": [
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word",
+                "word"
+            ]
+        },
+        {
+            "args": {
+                "text": "edge case where the last word is the second",
+                "first": "second",
+                "second": "word"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "text": "a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "first": "f",
+                "second": "g"
+            },
+            "expected": ["h", "h"]
+        },
+        {
+            "args": {
+                "text": "the cat sat on the mat the dog sat on the log the cat sat on the mat the dog sat on the log",
+                "first": "sat",
+                "second": "on"
+            },
+            "expected": ["the", "the", "the", "the"]
+        },
+        {
+            "args": {
+                "text": "hello there hello there hello there hello there hello there",
+                "first": "hello",
+                "second": "there"
+            },
+            "expected": ["hello", "hello", "hello", "hello"]
+        },
+        {
+            "args": {
+                "text": "one fish two fish red fish blue fish one fish two fish red fish blue fish",
+                "first": "two",
+                "second": "fish"
+            },
+            "expected": ["red", "red"]
+        },
+        {
+            "args": {
+                "text": "repeat after me repeat after me repeat after me repeat after me",
+                "first": "repeat",
+                "second": "after"
+            },
+            "expected": ["me", "me", "me", "me"]
+        },
+        {
+            "args": {
+                "text": "one two three four five six seven eight nine ten eleven twelve",
+                "first": "three",
+                "second": "four"
+            },
+            "expected": ["five"]
+        },
+        {
+            "args": {
+                "text": "in the heart of the night the old owl hooted and the stars twinkled in the dark",
+                "first": "the",
+                "second": "old"
+            },
+            "expected": ["owl"]
+        },
+        {
+            "args": {
+                "text": "finding the third word after first second finding the third word after first",
+                "first": "finding",
+                "second": "the"
+            },
+            "expected": ["third", "third"]
+        },
+        {
+            "args": {
+                "text": "abracadabra abracadabra abracadabra abracadabra abracadabra",
+                "first": "abracadabra",
+                "second": "abracadabra"
+            },
+            "expected": ["abracadabra", "abracadabra", "abracadabra"]
+        },
+        {
+            "args": {
+                "text": "find the pattern in this text pattern in this text pattern in this text pattern",
+                "first": "pattern",
+                "second": "in"
+            },
+            "expected": ["this", "this", "this"]
+        },
+        {
+            "args": {
+                "text": "a longer sentence with a variety of words and phrases to test the function properly",
+                "first": "variety",
+                "second": "of"
+            },
+            "expected": ["words"]
+        },
+        {
+            "args": {
+                "text": "she sells sea shells by the sea shore and the shells she sells are sea shells",
+                "first": "sea",
+                "second": "shells"
+            },
+            "expected": ["by"]
+        },
+        {
+            "args": {
+                "text": "example of a longer sentence where the pattern can be found multiple times example of a longer",
+                "first": "example",
+                "second": "of"
+            },
+            "expected": ["a", "a"]
+        },
+        {
+            "args": {
+                "text": "multiple words in sequence are repeated multiple times multiple words in sequence",
+                "first": "multiple",
+                "second": "words"
+            },
+            "expected": ["in", "in"]
+        },
+        {
+            "args": {
+                "text": "abc def ghi jkl mno pqr stu vwx yza abc def ghi jkl mno pqr stu vwx yza",
+                "first": "ghi",
+                "second": "jkl"
+            },
+            "expected": ["mno", "mno"]
+        },
+        {
+            "args": {
+                "text": "abc abc abc abc abc abc abc abc abc abc",
+                "first": "abc",
+                "second": "abc"
+            },
+            "expected": ["abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc"]
+        },
+        {
+            "args": {
+                "text": "a quick movement of the enemy will jeopardize five gunboats a quick movement of the army will jeopardize five gunboats",
+                "first": "quick",
+                "second": "movement"
+            },
+            "expected": ["of", "of"]
+        },
+        {
+            "args": {
+                "text": "a quick movement of the enemy will jeopardize six gunboats a quick movement of the enemy will jeopardize five gunboats",
+                "first": "quick",
+                "second": "movement"
+            },
+            "expected": ["of", "of"]
+        },
+        {
+            "args": {
+                "text": "complex pattern with complex pattern and another complex pattern",
+                "first": "complex",
+                "second": "pattern"
+            },
+            "expected": ["with", "and"]
+        },
+        {
+            "args": {
+                "text": "a b c a b c a b c a b c a b c",
+                "first": "a",
+                "second": "b"
+            },
+            "expected": ["c", "c", "c", "c", "c"]
+        },
+        {
+            "args": {
+                "text": "this is a simple test to see if the function works correctly with multiple occurrences of first second third",
+                "first": "first",
+                "second": "second"
+            },
+            "expected": ["third"]
+        },
+        {
+            "args": {
+                "text": "once upon a time in a galaxy far far away once upon a time in a galaxy",
+                "first": "once",
+                "second": "upon"
+            },
+            "expected": ["a", "a"]
+        },
+        {
+            "args": {
+                "text": "cycling in the mountains mountains are beautiful cycling in the mountains",
+                "first": "cycling",
+                "second": "in"
+            },
+            "expected": ["the", "the"]
+        },
+        {
+            "args": {
+                "text": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty",
+                "first": "one",
+                "second": "two"
+            },
+            "expected": ["three"]
+        },
+        {
+            "args": {
+                "text": "this is a simple sentence with multiple occurrences of the same word word",
+                "first": "the",
+                "second": "same"
+            },
+            "expected": ["word"]
+        },
+        {
+            "args": {
+                "text": "if you are reading this text then you are doing a great job reading",
+                "first": "reading",
+                "second": "this"
+            },
+            "expected": ["text"]
+        },
+        {
+            "args": {
+                "text": "this is a simple test case with multiple matches this is a simple test",
+                "first": "this",
+                "second": "is"
+            },
+            "expected": ["a", "a"]
+        },
+        {
+            "args": {
+                "text": "to be or not to be that is the question to be or not to be that is the question",
+                "first": "be",
+                "second": "or"
+            },
+            "expected": ["not", "not"]
+        },
+        {
+            "args": {
+                "text": "in the heart of the city in the heart of the heart in the heart of the city",
+                "first": "heart",
+                "second": "of"
+            },
+            "expected": ["the", "the", "the"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the lazy dog jumps over the quick brown fox",
+                "first": "the",
+                "second": "lazy"
+            },
+            "expected": ["dog", "dog"]
+        },
+        {
+            "args": {
+                "text": "this is a simple test this is a simple test this is a simple test",
+                "first": "is",
+                "second": "a"
+            },
+            "expected": ["simple", "simple", "simple"]
+        },
+        {
+            "args": {
+                "text": "a b c d e f g h i j k l m n o p q r s t u v w x y z a b c",
+                "first": "a",
+                "second": "b"
+            },
+            "expected": ["c", "c"]
+        },
+        {
+            "args": {
+                "text": "last two words do not match first second",
+                "first": "first",
+                "second": "second"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "text": "every good boy does fine every good boy does fine every good boy does fine",
+                "first": "good",
+                "second": "boy"
+            },
+            "expected": ["does", "does", "does"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog again",
+                "first": "quick",
+                "second": "brown"
+            },
+            "expected": ["fox", "fox"]
+        },
+        {
+            "args": {
+                "text": "repeat repeat repeat repeat repeat repeat repeat",
+                "first": "repeat",
+                "second": "repeat"
+            },
+            "expected": ["repeat", "repeat", "repeat", "repeat", "repeat"]
+        },
+        {
+            "args": {
+                "text": "a b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "first": "x",
+                "second": "y"
+            },
+            "expected": ["z"]
+        },
+        {
+            "args": {
+                "text": "the quick brown fox jumps over the lazy dog the quick brown fox is quick",
+                "first": "quick",
+                "second": "brown"
+            },
+            "expected": ["fox", "fox"]
+        },
+        {
+            "args": {
+                "text": "cycling through the words cycling through the words cycling",
+                "first": "through",
+                "second": "the"
+            },
+            "expected": ["words", "words"]
+        },
+        {
+            "args": {
+                "text": "a b c a b c a b c d e f g h i j k l m n o p q r s t u v w x y z",
+                "first": "b",
+                "second": "c"
+            },
+            "expected": ["a", "a", "d"]
+        },
+        {
+            "args": {
+                "text": "she sells sea shells by the sea shore she sells sea shells",
+                "first": "sea",
+                "second": "shells"
+            },
+            "expected": ["by"]
+        },
+        {
+            "args": {
+                "text": "hello world hello world hello world hello world hello world hello world",
+                "first": "hello",
+                "second": "world"
+            },
+            "expected": ["hello", "hello", "hello", "hello", "hello"]
+        },
+        {
+            "args": {
+                "text": "consecutive consecutive words words words words in this sequence sequence",
+                "first": "words",
+                "second": "words"
+            },
+            "expected": ["words", "words", "in"]
+        },
+        {
+            "args": {
+                "text": "complex sentence with multiple occurrences of first second third first second third",
+                "first": "first",
+                "second": "second"
+            },
+            "expected": ["third", "third"]
+        },
+        {
+            "args": {
+                "text": "every good boy does fine every good boy does fine every good boy does fine",
+                "first": "every",
+                "second": "good"
+            },
+            "expected": ["boy", "boy", "boy"]
+        },
+        {
+            "args": {
+                "text": "this is a test this is only a test this is a test this is a test",
+                "first": "this",
+                "second": "is"
+            },
+            "expected": ["a", "only", "a", "a"]
+        },
+        {
+            "args": {
+                "text": "repeat repeat repeat repeat repeat repeat",
+                "first": "repeat",
+                "second": "repeat"
+            },
+            "expected": ["repeat", "repeat", "repeat", "repeat"]
+        },
+        {
+            "args": {
+                "text": "repeated repeated repeated repeated repeated repeated repeated repeated",
+                "first": "repeated",
+                "second": "repeated"
+            },
+            "expected": ["repeated", "repeated", "repeated", "repeated", "repeated", "repeated"]
+        },
+        {
+            "args": {
+                "text": "aa bb aa bb aa bb aa bb aa bb aa bb",
+                "first": "aa",
+                "second": "bb"
+            },
+            "expected": ["aa", "aa", "aa", "aa", "aa"]
+        },
+        {
+            "args": {
+                "text": "a quick movement of the enemy will jeopardize six gunboats a quick movement of the enemy will jeopardize six gunboats",
+                "first": "movement",
+                "second": "of"
+            },
+            "expected": ["the", "the"]
+        },
+        {
+            "args": {
+                "text": "x y z x y z x y z x y z x y z x y z x y z x y z x y z x y z x y z",
+                "first": "y",
+                "second": "z"
+            },
+            "expected": ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"]
+        },
+        {
+            "args": {
+                "text": "consecutive consecutive consecutive words words words in in in the the the sentence sentence sentence",
+                "first": "consecutive",
+                "second": "consecutive"
+            },
+            "expected": ["consecutive", "words"]
+        },
+        {
+            "args": {
+                "text": "this is a test this is only a test in case of an actual emergency this is a test",
+                "first": "this",
+                "second": "is"
+            },
+            "expected": ["a", "only", "a"]
+        },
+        {
+            "args": {
+                "text": "to be or not to be that is the question to be or not to be",
+                "first": "to",
+                "second": "be"
+            },
+            "expected": ["or", "that", "or"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findOcurrences",
+        "typescript": "Solution().findOcurrences"
+    }
+}

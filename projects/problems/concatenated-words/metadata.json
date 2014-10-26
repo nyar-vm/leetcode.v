@@ -1,0 +1,1682 @@
+{
+    "id": "concatenated-words",
+    "questionId": 472,
+    "difficulty": "Hard",
+    "tags": ["Depth-First Search", "Trie", "Array", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "words": ["hello", "world", "helloworld", "worldhello"]
+            },
+            "expected": ["helloworld", "worldhello"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "appbanana", "banapple", "app", "ban"]
+            },
+            "expected": ["banapple", "appbanana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "aaaaa",
+                    "aaaaaa",
+                    "aaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaaaa",
+                    "aaaaaaaaaa"
+                ]
+            },
+            "expected": [
+                "aa",
+                "aaa",
+                "aaaa",
+                "aaaaa",
+                "aaaaaa",
+                "aaaaaaa",
+                "aaaaaaaa",
+                "aaaaaaaaa",
+                "aaaaaaaaaa"
+            ]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "catdog"]
+            },
+            "expected": ["catdog"]
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"]
+            },
+            "expected": ["aa", "aaa", "aaaa", "aaaaa"]
+        },
+        {
+            "args": {
+                "words": ["fish", "dog", "cat", "dogfishcat"]
+            },
+            "expected": ["dogfishcat"]
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa"]
+            },
+            "expected": ["aa", "aaa", "aaaa"]
+        },
+        {
+            "args": {
+                "words": ["word", "world", "wordworld", "worldword", "wordworldword"]
+            },
+            "expected": ["wordworld", "worldword", "wordworldword"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "applepie", "apples", "pineapple", "pine", "pie"]
+            },
+            "expected": ["applepie", "pineapple"]
+        },
+        {
+            "args": {
+                "words": ["ab", "abc", "abcd", "abcde", "abcdef"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "cats",
+                    "catsdogcats",
+                    "dog",
+                    "dogcatsdog",
+                    "hippopotamuses",
+                    "rat",
+                    "ratcatdogcat"
+                ]
+            },
+            "expected": ["dogcatsdog", "catsdogcats", "ratcatdogcat"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "helloworld"]
+            },
+            "expected": ["helloworld"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "appbanana", "banapple"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "applebanana",
+                    "bananasplit",
+                    "applesplit",
+                    "splitbananaapple"
+                ]
+            },
+            "expected": ["applebanana"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "ab", "abc", "bc", "abcd"]
+            },
+            "expected": ["ab", "abc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "onetwo",
+                    "twotwo",
+                    "twoone",
+                    "onetwothree",
+                    "threetwoone",
+                    "onetwoonetwo",
+                    "twoonetwoone",
+                    "onethree",
+                    "threeone",
+                    "onethreeone",
+                    "threeoneone",
+                    "threeonetwo",
+                    "twothreeone",
+                    "onetwothreeone",
+                    "onetwoonetwothree"
+                ]
+            },
+            "expected": [
+                "onetwo",
+                "twotwo",
+                "twoone",
+                "onethree",
+                "threeone",
+                "onetwothree",
+                "threetwoone",
+                "onethreeone",
+                "threeoneone",
+                "threeonetwo",
+                "twothreeone",
+                "onetwoonetwo",
+                "twoonetwoone",
+                "onetwothreeone",
+                "onetwoonetwothree"
+            ]
+        },
+        {
+            "args": {
+                "words": ["car", "race", "racecar", "carrace", "racecarrace", "racecarcar"]
+            },
+            "expected": ["racecar", "carrace", "racecarcar", "racecarrace"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "applebanana",
+                    "bananaapple",
+                    "grape",
+                    "pineapple",
+                    "pineappleapple",
+                    "applegrapebanana"
+                ]
+            },
+            "expected": ["applebanana", "bananaapple", "pineappleapple", "applegrapebanana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "redblue",
+                    "bluegreen",
+                    "greenred",
+                    "redgreengreen",
+                    "blueredblueblue",
+                    "greenredblue"
+                ]
+            },
+            "expected": [
+                "redblue",
+                "greenred",
+                "bluegreen",
+                "greenredblue",
+                "redgreengreen",
+                "blueredblueblue"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "base",
+                    "ball",
+                    "baseball",
+                    "ballbase",
+                    "baseballbase",
+                    "basebaseball",
+                    "baseballball",
+                    "baseballbaseball"
+                ]
+            },
+            "expected": [
+                "baseball",
+                "ballbase",
+                "baseballbase",
+                "basebaseball",
+                "baseballball",
+                "baseballbaseball"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "sunny",
+                    "moonlight",
+                    "sunmoon",
+                    "moonsun",
+                    "sunnyday",
+                    "moonlightnight",
+                    "sunmoonlight"
+                ]
+            },
+            "expected": ["sunmoon", "moonsun", "sunmoonlight"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "onetwo",
+                    "twotwo",
+                    "threeone",
+                    "onetwothree",
+                    "twothreeone",
+                    "threeonetwo",
+                    "onetwothreeone"
+                ]
+            },
+            "expected": [
+                "onetwo",
+                "twotwo",
+                "threeone",
+                "onetwothree",
+                "twothreeone",
+                "threeonetwo",
+                "onetwothreeone"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "helloworld",
+                    "worldhello",
+                    "hellohello",
+                    "worldworld",
+                    "hellohellohello",
+                    "worldworldworld"
+                ]
+            },
+            "expected": [
+                "helloworld",
+                "worldhello",
+                "hellohello",
+                "worldworld",
+                "hellohellohello",
+                "worldworldworld"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "helloworld",
+                    "worldhello",
+                    "hellohello",
+                    "worldworld",
+                    "helloworldhello",
+                    "worldhelloworld"
+                ]
+            },
+            "expected": [
+                "helloworld",
+                "worldhello",
+                "hellohello",
+                "worldworld",
+                "helloworldhello",
+                "worldhelloworld"
+            ]
+        },
+        {
+            "args": {
+                "words": ["ab", "abc", "ababc", "abcabc", "aabbcc", "aabbaabb"]
+            },
+            "expected": ["ababc", "abcabc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "short",
+                    "long",
+                    "shortlong",
+                    "longshort",
+                    "shortshortlong",
+                    "longlongshort",
+                    "shortlongshort",
+                    "longshortlong"
+                ]
+            },
+            "expected": [
+                "shortlong",
+                "longshort",
+                "longlongshort",
+                "longshortlong",
+                "shortshortlong",
+                "shortlongshort"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "suffix",
+                    "prefixsuffix",
+                    "suffixprefix",
+                    "prefixprefix",
+                    "suffixsuffix",
+                    "prefixprefixsuffix",
+                    "suffixprefixprefix"
+                ]
+            },
+            "expected": [
+                "prefixsuffix",
+                "suffixprefix",
+                "prefixprefix",
+                "suffixsuffix",
+                "prefixprefixsuffix",
+                "suffixprefixprefix"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "suffix",
+                    "prefixsuffix",
+                    "suffixprefix",
+                    "prefixsuffixprefix",
+                    "suffixprefixsuffix",
+                    "prefixsuffixsuffixprefix",
+                    "suffixprefixprefixsuffix"
+                ]
+            },
+            "expected": [
+                "prefixsuffix",
+                "suffixprefix",
+                "prefixsuffixprefix",
+                "suffixprefixsuffix",
+                "prefixsuffixsuffixprefix",
+                "suffixprefixprefixsuffix"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "dog",
+                    "catdog",
+                    "dogcat",
+                    "bird",
+                    "catdogbird",
+                    "dogcatbird",
+                    "catbird",
+                    "birdcat",
+                    "dogdogcat",
+                    "catcatdog",
+                    "dogcatdog",
+                    "catdogcat",
+                    "birdbird",
+                    "catbirdcat",
+                    "dogcatdogcat",
+                    "birdcatdogbird"
+                ]
+            },
+            "expected": [
+                "catdog",
+                "dogcat",
+                "catbird",
+                "birdcat",
+                "birdbird",
+                "dogdogcat",
+                "catcatdog",
+                "dogcatdog",
+                "catdogcat",
+                "catdogbird",
+                "dogcatbird",
+                "catbirdcat",
+                "dogcatdogcat",
+                "birdcatdogbird"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "short",
+                    "longer",
+                    "longerword",
+                    "wordlonger",
+                    "shortword",
+                    "wordshort",
+                    "shortshortshort",
+                    "longerlongerlonger"
+                ]
+            },
+            "expected": ["shortshortshort", "longerlongerlonger"]
+        },
+        {
+            "args": {
+                "words": [
+                    "repetition",
+                    "reprepetition",
+                    "prepetition",
+                    "rep",
+                    "pre",
+                    "replication",
+                    "prepresentation",
+                    "replicationrepetition",
+                    "repetitionreplicationrepetition"
+                ]
+            },
+            "expected": [
+                "reprepetition",
+                "replicationrepetition",
+                "repetitionreplicationrepetition"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "suffix",
+                    "prefixsuffix",
+                    "suffixprefix",
+                    "prefixsuffixprefix",
+                    "suffixprefixsuffix",
+                    "prefixsuffixsuffixprefix",
+                    "prefixprefixsuffix",
+                    "suffixsuffixprefix"
+                ]
+            },
+            "expected": [
+                "prefixsuffix",
+                "suffixprefix",
+                "prefixsuffixprefix",
+                "suffixprefixsuffix",
+                "prefixprefixsuffix",
+                "suffixsuffixprefix",
+                "prefixsuffixsuffixprefix"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaa",
+                    "aaaab",
+                    "aaaaba",
+                    "aaaabaaa",
+                    "aaaabaaaa",
+                    "aaaaa",
+                    "aaaaaa",
+                    "aaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaaaa",
+                    "aaaaaaaaaa"
+                ]
+            },
+            "expected": ["aaaaaaaa", "aaaabaaaa", "aaaaaaaaa", "aaaaaaaaaa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "redblue",
+                    "bluered",
+                    "redbluered",
+                    "blueredblue",
+                    "redredblue",
+                    "blueredred"
+                ]
+            },
+            "expected": [
+                "redblue",
+                "bluered",
+                "redbluered",
+                "redredblue",
+                "blueredred",
+                "blueredblue"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "sunnymoon",
+                    "moonstar",
+                    "star",
+                    "sunmoonstar",
+                    "moonmoonsun"
+                ]
+            },
+            "expected": ["star", "moonstar", "sunmoonstar", "moonmoonsun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij",
+                    "abcdefghijk",
+                    "abcdefghijkl",
+                    "abcdefghijklm"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "ab",
+                    "ba",
+                    "aba",
+                    "baba",
+                    "abab",
+                    "bababa",
+                    "abababa",
+                    "babababa"
+                ]
+            },
+            "expected": ["ab", "ba", "aba", "baba", "abab", "bababa", "abababa", "babababa"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij",
+                    "hijk",
+                    "ijkl",
+                    "jklm",
+                    "klmn",
+                    "lmno",
+                    "mnop",
+                    "nopq",
+                    "opqr",
+                    "pqrs",
+                    "qrst",
+                    "rstu",
+                    "stuv",
+                    "tuvw",
+                    "uvwx",
+                    "vwxy",
+                    "wxyz",
+                    "xyz",
+                    "mnopqr",
+                    "qrstuv",
+                    "vwxyz",
+                    "mnopqrstuv",
+                    "mnopqrstuvwxy",
+                    "nopqrstuvwxyz"
+                ]
+            },
+            "expected": ["mnopqrstuv", "nopqrstuvwxyz"]
+        },
+        {
+            "args": {
+                "words": [
+                    "tiny",
+                    "medium",
+                    "mediumtiny",
+                    "tinytiny",
+                    "tinymedium",
+                    "mediummedium",
+                    "mediumtinytiny",
+                    "tinytinytiny",
+                    "tinytinytinytiny",
+                    "tinytinytinytinytiny"
+                ]
+            },
+            "expected": [
+                "tinytiny",
+                "mediumtiny",
+                "tinymedium",
+                "mediummedium",
+                "tinytinytiny",
+                "mediumtinytiny",
+                "tinytinytinytiny",
+                "tinytinytinytinytiny"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "word",
+                    "concatenate",
+                    "wordconcatenate",
+                    "concatenateword",
+                    "wordconcatenateword",
+                    "wordwordconcatenate",
+                    "concatenatethree",
+                    "concatenateconcatenate",
+                    "wordconcatenateconcatenate"
+                ]
+            },
+            "expected": [
+                "wordconcatenate",
+                "concatenateword",
+                "wordconcatenateword",
+                "wordwordconcatenate",
+                "concatenateconcatenate",
+                "wordconcatenateconcatenate"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "alphabeta",
+                    "betabeta",
+                    "betaalpha",
+                    "alphabetabet",
+                    "alphaalphabeta",
+                    "betaalphabeta"
+                ]
+            },
+            "expected": ["betabeta", "alphabeta", "betaalpha", "betaalphabeta", "alphaalphabeta"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "applebanana",
+                    "bananaapple",
+                    "appleapplebanana",
+                    "bananabananaapple"
+                ]
+            },
+            "expected": ["applebanana", "bananaapple", "appleapplebanana", "bananabananaapple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aabb",
+                    "bbaa",
+                    "aabbcc",
+                    "ccaabb",
+                    "aabbaa",
+                    "aabbccaabb",
+                    "aabbaabbcc",
+                    "ccccaabbaabb",
+                    "bbccccaabbaabb",
+                    "aabbcccaabbcccaabb"
+                ]
+            },
+            "expected": ["aabbccaabb", "aabbaabbcc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "onetwo",
+                    "twotwo",
+                    "threetwo",
+                    "onethree",
+                    "twothree",
+                    "threethree",
+                    "onetwothree",
+                    "twothreeone",
+                    "threetwoone",
+                    "onetwoonetwo",
+                    "twotwoonetwo",
+                    "threethreethree",
+                    "onetwothreeonetwo",
+                    "twothreeonethree",
+                    "threetwooneonetwo",
+                    "onetwoonetwoonetwo"
+                ]
+            },
+            "expected": [
+                "onetwo",
+                "twotwo",
+                "threetwo",
+                "onethree",
+                "twothree",
+                "threethree",
+                "onetwothree",
+                "twothreeone",
+                "threetwoone",
+                "onetwoonetwo",
+                "twotwoonetwo",
+                "threethreethree",
+                "twothreeonethree",
+                "onetwothreeonetwo",
+                "threetwooneonetwo",
+                "onetwoonetwoonetwo"
+            ]
+        },
+        {
+            "args": {
+                "words": ["tiny", "small", "tinysmall", "smallsmall", "tinytiny", "tinysmalltiny"]
+            },
+            "expected": ["tinytiny", "tinysmall", "smallsmall", "tinysmalltiny"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "abcdef", "defabc", "abcdefg", "abcdefabc", "abcabcabc"]
+            },
+            "expected": ["abcdef", "defabc", "abcdefabc", "abcabcabc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "suffix",
+                    "prefixsuffix",
+                    "suffixprefix",
+                    "prefixsuffixprefix",
+                    "suffixprefixsuffix",
+                    "prefixsuffixprefixsuffix"
+                ]
+            },
+            "expected": [
+                "prefixsuffix",
+                "suffixprefix",
+                "prefixsuffixprefix",
+                "suffixprefixsuffix",
+                "prefixsuffixprefixsuffix"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "aabb",
+                    "bbaa",
+                    "ab",
+                    "ba",
+                    "aabbab",
+                    "baabaa",
+                    "bbaabb",
+                    "aabbaa",
+                    "ababab",
+                    "babaab",
+                    "abbaba",
+                    "bababb",
+                    "aabbaabb",
+                    "bbaabaab"
+                ]
+            },
+            "expected": ["aabbab", "ababab", "babaab", "abbaba", "aabbaabb", "bbaabaab"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "onetwo",
+                    "twotwo",
+                    "onetwothree",
+                    "threethreeone",
+                    "onetwothreeone"
+                ]
+            },
+            "expected": ["onetwo", "twotwo", "onetwothree", "threethreeone", "onetwothreeone"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aabb",
+                    "abab",
+                    "bbaa",
+                    "aabbaa",
+                    "ababaa",
+                    "baaabb",
+                    "aabbab",
+                    "bbaaab",
+                    "aabbba",
+                    "abababab",
+                    "baabbaab",
+                    "aabbaaba"
+                ]
+            },
+            "expected": ["abababab"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "def",
+                    "gh",
+                    "abcdefgh",
+                    "defgh",
+                    "abcdefg",
+                    "abcdefghi",
+                    "abcdefghij",
+                    "abcdefghijk"
+                ]
+            },
+            "expected": ["defgh", "abcdefgh"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "def",
+                    "abcdef",
+                    "defabc",
+                    "abcabcabc",
+                    "defdefdef",
+                    "abcdefabcdef"
+                ]
+            },
+            "expected": ["abcdef", "defabc", "abcabcabc", "defdefdef", "abcdefabcdef"]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "helloworld",
+                    "worldhello",
+                    "hellotest",
+                    "testhello",
+                    "hellotesthello"
+                ]
+            },
+            "expected": ["helloworld", "worldhello", "hellotesthello"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apples", "banana", "bananas", "applesandbananas", "bananaapple"]
+            },
+            "expected": ["bananaapple"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "helloworld", "hellohello", "worldworldhello"]
+            },
+            "expected": ["helloworld", "hellohello", "worldworldhello"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "onel",
+                    "oneone",
+                    "two",
+                    "twotwo",
+                    "onetwo",
+                    "twotwoone",
+                    "onetwoone",
+                    "twoonetwo",
+                    "onetwotwo",
+                    "twoonetwotwo",
+                    "onetwoonetwoone"
+                ]
+            },
+            "expected": [
+                "oneone",
+                "twotwo",
+                "onetwo",
+                "twotwoone",
+                "onetwoone",
+                "twoonetwo",
+                "onetwotwo",
+                "twoonetwotwo",
+                "onetwoonetwoone"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "onetwo",
+                    "twotwo",
+                    "twoone",
+                    "onetwoone",
+                    "twoonetwo",
+                    "onetwoonetwo"
+                ]
+            },
+            "expected": ["onetwo", "twotwo", "twoone", "onetwoone", "twoonetwo", "onetwoonetwo"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "applebanana",
+                    "bananaapple",
+                    "grape",
+                    "grapeapple",
+                    "pineapple"
+                ]
+            },
+            "expected": ["grapeapple", "applebanana", "bananaapple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "happy",
+                    "sad",
+                    "happysad",
+                    "sadhappy",
+                    "happyhappy",
+                    "sadsad",
+                    "happyhappysad",
+                    "sadhappyhappy",
+                    "happysadsad"
+                ]
+            },
+            "expected": [
+                "sadsad",
+                "happysad",
+                "sadhappy",
+                "happyhappy",
+                "happysadsad",
+                "happyhappysad",
+                "sadhappyhappy"
+            ]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "peach", "applepie", "bananapeach", "peachapple"]
+            },
+            "expected": ["peachapple", "bananapeach"]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "suffix",
+                    "prefixsuffix",
+                    "suffixprefix",
+                    "prefixprefix",
+                    "suffixsuffix",
+                    "prefixsuffixprefix",
+                    "suffixprefixsuffix"
+                ]
+            },
+            "expected": [
+                "prefixsuffix",
+                "suffixprefix",
+                "prefixprefix",
+                "suffixsuffix",
+                "prefixsuffixprefix",
+                "suffixprefixsuffix"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "applebanana",
+                    "bananasplit",
+                    "split",
+                    "applebananasplit"
+                ]
+            },
+            "expected": ["applebanana", "bananasplit", "applebananasplit"]
+        },
+        {
+            "args": {
+                "words": ["abc", "ab", "bc", "abcabc", "abcab", "ababc", "aabbc", "abcababc"]
+            },
+            "expected": ["abcab", "ababc", "abcabc", "abcababc"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "abcdef", "defabc", "abcdefdef", "abcabcabc"]
+            },
+            "expected": ["abcdef", "defabc", "abcdefdef", "abcabcabc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "quick",
+                    "brown",
+                    "fox",
+                    "quickbrown",
+                    "brownfox",
+                    "foxquick",
+                    "quickbrownfox",
+                    "brownfoxquick"
+                ]
+            },
+            "expected": ["brownfox", "foxquick", "quickbrown", "quickbrownfox", "brownfoxquick"]
+        },
+        {
+            "args": {
+                "words": [
+                    "tiny",
+                    "small",
+                    "tinytiny",
+                    "tinysmall",
+                    "smalltiny",
+                    "smallsmall",
+                    "tinytinysmall",
+                    "tinytinysmalltiny",
+                    "smallsml",
+                    "tinysmalltinytiny",
+                    "smalltinytiny",
+                    "tinytinytiny",
+                    "tinysmallsmallsml"
+                ]
+            },
+            "expected": [
+                "tinytiny",
+                "tinysmall",
+                "smalltiny",
+                "smallsmall",
+                "tinytinytiny",
+                "tinytinysmall",
+                "smalltinytiny",
+                "tinytinysmalltiny",
+                "tinysmalltinytiny",
+                "tinysmallsmallsml"
+            ]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "applebanana", "bananaapple", "appleapplebanana"]
+            },
+            "expected": ["applebanana", "bananaapple", "appleapplebanana"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "helloworld", "worldhello", "hellohello", "worldworld"]
+            },
+            "expected": ["helloworld", "worldhello", "hellohello", "worldworld"]
+        },
+        {
+            "args": {
+                "words": [
+                    "repeat",
+                    "repeated",
+                    "repeatrepeat",
+                    "repeatedrepeat",
+                    "repeatrepeatedrepeat",
+                    "repeatedrepeatrepeatedrepeat",
+                    "repeatedrepeated",
+                    "repeatrepeatrepeat"
+                ]
+            },
+            "expected": [
+                "repeatrepeat",
+                "repeatedrepeat",
+                "repeatedrepeated",
+                "repeatrepeatrepeat",
+                "repeatrepeatedrepeat",
+                "repeatedrepeatrepeatedrepeat"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "cats",
+                    "catsdogcats",
+                    "dog",
+                    "dogcatsdog",
+                    "hippopotamuses",
+                    "rat",
+                    "ratcatdogcat",
+                    "hippo",
+                    "popo",
+                    "hippopop"
+                ]
+            },
+            "expected": ["dogcatsdog", "catsdogcats", "ratcatdogcat"]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "helloworld",
+                    "hellohello",
+                    "worldworld",
+                    "hellohelloworld"
+                ]
+            },
+            "expected": ["helloworld", "hellohello", "worldworld", "hellohelloworld"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "sunmoon",
+                    "moonsun",
+                    "sunsunmoon",
+                    "moonmoonsun",
+                    "sunmoonsunsun"
+                ]
+            },
+            "expected": ["sunmoon", "moonsun", "sunsunmoon", "moonmoonsun", "sunmoonsunsun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "onetwo",
+                    "twotwo",
+                    "onethree",
+                    "threeone",
+                    "onetwothree",
+                    "twothreeone"
+                ]
+            },
+            "expected": ["onetwo", "twotwo", "onethree", "threeone", "onetwothree", "twothreeone"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "def",
+                    "abcdef",
+                    "defabc",
+                    "ghijkl",
+                    "mnop",
+                    "mnopqrst",
+                    "qrst",
+                    "mnopqrstmnopqrst",
+                    "nopqrst",
+                    "nopqr",
+                    "mnopq"
+                ]
+            },
+            "expected": ["abcdef", "defabc", "mnopqrst", "mnopqrstmnopqrst"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "redblue",
+                    "bluegreen",
+                    "greenred",
+                    "redbluegreen",
+                    "bluegreenred",
+                    "greenredblue",
+                    "redgreenred",
+                    "bluegreenblue",
+                    "greenredgreen",
+                    "redgreenbluegreen",
+                    "bluegreenredblue",
+                    "greenredbluegreenred"
+                ]
+            },
+            "expected": [
+                "redblue",
+                "greenred",
+                "bluegreen",
+                "redgreenred",
+                "redbluegreen",
+                "bluegreenred",
+                "greenredblue",
+                "bluegreenblue",
+                "greenredgreen",
+                "bluegreenredblue",
+                "redgreenbluegreen",
+                "greenredbluegreenred"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "base",
+                    "ball",
+                    "baseball",
+                    "ballbase",
+                    "baseballbase",
+                    "ballbaseball",
+                    "baseballball",
+                    "baseballbaseball"
+                ]
+            },
+            "expected": [
+                "baseball",
+                "ballbase",
+                "baseballbase",
+                "ballbaseball",
+                "baseballball",
+                "baseballbaseball"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "onetwo",
+                    "twothree",
+                    "threeone",
+                    "onetwothree",
+                    "twothreeone",
+                    "threeonetwo"
+                ]
+            },
+            "expected": [
+                "onetwo",
+                "twothree",
+                "threeone",
+                "onetwothree",
+                "twothreeone",
+                "threeonetwo"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": ["abcdefghijklmnopqrstuvwxyz"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "applebanana", "bananapple", "bananaapplebanana"]
+            },
+            "expected": ["applebanana", "bananaapplebanana"]
+        },
+        {
+            "args": {
+                "words": [
+                    "small",
+                    "medium",
+                    "large",
+                    "smallmedium",
+                    "mediumlarge",
+                    "largesmall",
+                    "smallmediumlarge",
+                    "mediumlargesmall",
+                    "largesmallmedium",
+                    "smallmediumlargesmall"
+                ]
+            },
+            "expected": [
+                "largesmall",
+                "smallmedium",
+                "mediumlarge",
+                "smallmediumlarge",
+                "mediumlargesmall",
+                "largesmallmedium",
+                "smallmediumlargesmall"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij",
+                    "abcdefghijk",
+                    "abcdefghijkl",
+                    "abcdefghijklm",
+                    "abcdefghijklmn",
+                    "abcdefghijklmno",
+                    "abcdefghijklmnop",
+                    "abcdefghijklmnopq",
+                    "abcdefghijklmnopqr",
+                    "abcdefghijklmnopqrs",
+                    "abcdefghijklmnopqrst",
+                    "abcdefghijklmnopqrstu",
+                    "abcdefghijklmnopqrstuv",
+                    "abcdefghijklmnopqrstuvw",
+                    "abcdefghijklmnopqrstuvwx",
+                    "abcdefghijklmnopqrstuvwxy",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": [
+                    "bat",
+                    "ball",
+                    "batball",
+                    "ballbat",
+                    "batbatbat",
+                    "ballballball",
+                    "batballbat"
+                ]
+            },
+            "expected": ["batball", "ballbat", "batbatbat", "batballbat", "ballballball"]
+        },
+        {
+            "args": {
+                "words": [
+                    "partone",
+                    "parttwo",
+                    "partthree",
+                    "onetwo",
+                    "twothree",
+                    "onetwothree",
+                    "threeonetwo",
+                    "twopartone",
+                    "threeparttwo",
+                    "onetwothreeonetwo"
+                ]
+            },
+            "expected": ["onetwothreeonetwo"]
+        },
+        {
+            "args": {
+                "words": [
+                    "x",
+                    "xx",
+                    "xxx",
+                    "xxxx",
+                    "xxxxx",
+                    "xxxxxx",
+                    "xxxxxxx",
+                    "xxxxxxxx",
+                    "xxxxxxxxx",
+                    "xxxxxxxxxx"
+                ]
+            },
+            "expected": [
+                "xx",
+                "xxx",
+                "xxxx",
+                "xxxxx",
+                "xxxxxx",
+                "xxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxxx",
+                "xxxxxxxxxx"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "alphabeta",
+                    "betagamma",
+                    "alphagamma",
+                    "betaalpha",
+                    "gammaalpha",
+                    "betagammabetagamma",
+                    "gammabetagammaalpha"
+                ]
+            },
+            "expected": [
+                "alphabeta",
+                "betagamma",
+                "betaalpha",
+                "alphagamma",
+                "gammaalpha",
+                "betagammabetagamma",
+                "gammabetagammaalpha"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "def",
+                    "abcdef",
+                    "defabc",
+                    "abcdefabc",
+                    "abcabcabc",
+                    "defdefdef",
+                    "abcdefdef",
+                    "defabcdef"
+                ]
+            },
+            "expected": [
+                "abcdef",
+                "defabc",
+                "abcdefabc",
+                "abcabcabc",
+                "defdefdef",
+                "abcdefdef",
+                "defabcdef"
+            ]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "appbanana", "bananapple", "applebananaapple"]
+            },
+            "expected": ["applebananaapple"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "sunset",
+                    "moonlight",
+                    "starlight",
+                    "sunmoon",
+                    "moonstar",
+                    "sunmoonstar",
+                    "moonstarsun"
+                ]
+            },
+            "expected": ["sunmoon", "moonstar", "sunmoonstar", "moonstarsun"]
+        },
+        {
+            "args": {
+                "words": [
+                    "panda",
+                    "bear",
+                    "pandabear",
+                    "bearpanda",
+                    "pandapandabear",
+                    "bearpandapanda",
+                    "pandabearbear",
+                    "bearbearpanda",
+                    "pandapandapandabear",
+                    "bearpandapandapanda"
+                ]
+            },
+            "expected": [
+                "pandabear",
+                "bearpanda",
+                "pandabearbear",
+                "bearbearpanda",
+                "pandapandabear",
+                "bearpandapanda",
+                "pandapandapandabear",
+                "bearpandapandapanda"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij",
+                    "abcdefghijk",
+                    "abcdefghijkl",
+                    "abcdefghijklm",
+                    "abcdefghijklmn",
+                    "abcdefghijklmno",
+                    "abcdefghijklmnop",
+                    "abcdefghijklmnopq",
+                    "abcdefghijklmnopqr",
+                    "abcdefghijklmnopqrs",
+                    "abcdefghijklmnopqrst"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "abcd",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij",
+                    "hijk",
+                    "ijkl",
+                    "jklm",
+                    "klmn",
+                    "lmno",
+                    "mnop",
+                    "nopq",
+                    "opqr",
+                    "pqrs",
+                    "qrst",
+                    "rstu",
+                    "stuv",
+                    "tuvw",
+                    "uvwxy",
+                    "vwxyz",
+                    "wxyzabc",
+                    "xyzabcd",
+                    "zabcde"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": [
+                    "foo",
+                    "bar",
+                    "foobar",
+                    "barfoo",
+                    "foofoobar",
+                    "barfoobaz",
+                    "baz",
+                    "foobazbar"
+                ]
+            },
+            "expected": ["foobar", "barfoo", "foofoobar", "barfoobaz", "foobazbar"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "abcdef", "defabc", "ab", "bc", "de", "f", "abcd", "cdef"]
+            },
+            "expected": ["def", "abcdef", "defabc"]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "helloworld",
+                    "worldhello",
+                    "hellohellohello",
+                    "helloworldworld"
+                ]
+            },
+            "expected": ["helloworld", "worldhello", "hellohellohello", "helloworldworld"]
+        },
+        {
+            "args": {
+                "words": [
+                    "apple",
+                    "banana",
+                    "cherry",
+                    "applebanana",
+                    "bananaapple",
+                    "cherryapple",
+                    "applecherry",
+                    "bananaapplebanana"
+                ]
+            },
+            "expected": [
+                "applebanana",
+                "bananaapple",
+                "cherryapple",
+                "applecherry",
+                "bananaapplebanana"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "def",
+                    "abcdef",
+                    "defabc",
+                    "fedcba",
+                    "cab",
+                    "bac",
+                    "abcabc",
+                    "defdef",
+                    "ababab",
+                    "defdefdef",
+                    "abcdefgh",
+                    "ghijklmn",
+                    "opqrstuv",
+                    "wxyz",
+                    "abcdefghijk",
+                    "lmnopqrstuv",
+                    "wxyzabcd",
+                    "efghijklmnopqr",
+                    "stuvwxyzabcd"
+                ]
+            },
+            "expected": ["abcdef", "defabc", "abcabc", "defdef", "defdefdef"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findAllConcatenatedWordsInADict",
+        "typescript": "Solution().findAllConcatenatedWordsInADict"
+    }
+}

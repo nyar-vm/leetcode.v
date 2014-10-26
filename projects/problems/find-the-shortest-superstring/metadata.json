@@ -1,0 +1,1366 @@
+{
+    "id": "find-the-shortest-superstring",
+    "questionId": 943,
+    "difficulty": "Hard",
+    "tags": ["Bit Manipulation", "Array", "String", "Dynamic Programming", "Bitmask"],
+    "tests": [
+        {
+            "args": {
+                "words": ["a", "ab", "abc"]
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "words": ["abcde", "bcdef", "cdefg"]
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"]
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "words": ["shortest", "superstring", "string", "abc"]
+            },
+            "expected": "superstringshortestabc"
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "xyz", "zyx"]
+            },
+            "expected": "zyxyzabcd"
+        },
+        {
+            "args": {
+                "words": ["aaa", "bbb", "ccc"]
+            },
+            "expected": "aaabbbccc"
+        },
+        {
+            "args": {
+                "words": ["abcd", "cde", "efg", "ghij"]
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "words": ["catg", "ctaagt", "gcta", "ttca", "atgcatc"]
+            },
+            "expected": "gctaagttcatgcatc"
+        },
+        {
+            "args": {
+                "words": ["apple", "plea", "peach"]
+            },
+            "expected": "appleapeach"
+        },
+        {
+            "args": {
+                "words": ["unique", "ness", "super", "set"]
+            },
+            "expected": "nessuperuniqueset"
+        },
+        {
+            "args": {
+                "words": ["abcd", "cdab", "bcda", "dabc"]
+            },
+            "expected": "bcdabcd"
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "cd"]
+            },
+            "expected": "abcd"
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "abc"]
+            },
+            "expected": "helloworldabc"
+        },
+        {
+            "args": {
+                "words": ["alex", "loves", "leetcode"]
+            },
+            "expected": "alexlovesleetcode"
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def", "efg"]
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "words": ["short", "longer", "longest"]
+            },
+            "expected": "shortlongerlongest"
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"]
+            },
+            "expected": "twonethreefour"
+        },
+        {
+            "args": {
+                "words": ["abc", "bca", "cab"]
+            },
+            "expected": "bcabc"
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "word", "dlrow", "row"]
+            },
+            "expected": "wordlroworldhello"
+        },
+        {
+            "args": {
+                "words": ["abcd", "cdef", "efab", "fabc"]
+            },
+            "expected": "cdefabcd"
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop"
+                ]
+            },
+            "expected": "abcdefghijklmnop"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "cdabcd",
+                    "bcdaabcd",
+                    "dabcabcd",
+                    "abcdabcd",
+                    "bcabcd",
+                    "cdababcd",
+                    "dababcd",
+                    "abcabcd",
+                    "bcdabc",
+                    "cdabc",
+                    "dabc"
+                ]
+            },
+            "expected": "cdababcdabcabcdaabcdabcd"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefg",
+                    "bcdefgh",
+                    "cdefghi",
+                    "defghij",
+                    "efghijk",
+                    "fghijkl",
+                    "ghijklm",
+                    "hijklmn",
+                    "ijklmno",
+                    "jklmnop",
+                    "klmnopq",
+                    "lmnopqr",
+                    "mnopqrs",
+                    "nopqrst",
+                    "opqrstu",
+                    "pqrstuv",
+                    "qrstuvw",
+                    "rstuvwx",
+                    "stuvwxy",
+                    "tuvwxyz",
+                    "uvwxyzx",
+                    "vwxyzxy",
+                    "wxyzxyz",
+                    "xyzxyza",
+                    "yzxyzaa",
+                    "zxyzaab",
+                    "xyzaabc",
+                    "yzaabcd",
+                    "zaabcde",
+                    "aabcdef"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": ["aaaa", "bbba", "abbb", "baaa"]
+            },
+            "expected": "abbbaaaa"
+        },
+        {
+            "args": {
+                "words": ["abcde", "bcdef", "cdefg", "defgh", "efghi"]
+            },
+            "expected": "abcdefghi"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "bcdefg",
+                    "cdefgh",
+                    "defghi",
+                    "efghij",
+                    "fghijk",
+                    "ghijkl",
+                    "hijklm",
+                    "ijklmn"
+                ]
+            },
+            "expected": "abcdefghijklmn"
+        },
+        {
+            "args": {
+                "words": ["abcd", "cdab", "bcda", "dabc", "abdc", "dcba", "cadb", "bdac"]
+            },
+            "expected": "bdacadbdabcdabdcba"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "bcdefghijk",
+                    "cdefghijkl",
+                    "defghijklm",
+                    "efghijklmn",
+                    "fghijklmno",
+                    "ghijklmnop",
+                    "hijklmnopq",
+                    "ijklmnopqr",
+                    "jklmnopqrs",
+                    "klmnopqrst",
+                    "lmnopqrstu"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstu"
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ]
+            },
+            "expected": "sevenineightensixfivefourthreetwone"
+        },
+        {
+            "args": {
+                "words": [
+                    "aabb",
+                    "bbcc",
+                    "ccdd",
+                    "ddee",
+                    "eeff",
+                    "ffgg",
+                    "ggaa",
+                    "aacc",
+                    "ccbb",
+                    "ddeeff",
+                    "ffggaa",
+                    "aabbcc"
+                ]
+            },
+            "expected": "aaccddeeffggaabbccbb"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "cdab",
+                    "bcda",
+                    "dabc",
+                    "abcd",
+                    "cdab",
+                    "bcda",
+                    "dabc",
+                    "abcd",
+                    "cdab"
+                ]
+            },
+            "expected": "bcdabcd"
+        },
+        {
+            "args": {
+                "words": ["abcd", "cdab", "bcda", "dabc", "abcdabc", "bcdbcd"]
+            },
+            "expected": "abcdabcdbcdab"
+        },
+        {
+            "args": {
+                "words": [
+                    "unique",
+                    "words",
+                    "here",
+                    "are",
+                    "some",
+                    "more",
+                    "complex",
+                    "test",
+                    "cases"
+                ]
+            },
+            "expected": "casesomeareherewordsuniquemorecomplextest"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcde",
+                    "bcdef",
+                    "cdefg",
+                    "defgh",
+                    "efghi",
+                    "fghij",
+                    "ghijk",
+                    "hijkl",
+                    "ijklm"
+                ]
+            },
+            "expected": "abcdefghijklm"
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "ca", "ac", "ba"]
+            },
+            "expected": "bacabc"
+        },
+        {
+            "args": {
+                "words": [
+                    "xyz",
+                    "yzabc",
+                    "abcde",
+                    "cdefg",
+                    "efghi",
+                    "fghij",
+                    "ghijk",
+                    "hijkl",
+                    "ijklm",
+                    "jklmn",
+                    "klmno",
+                    "lmnop"
+                ]
+            },
+            "expected": "xyzabcdefghijklmnop"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij",
+                    "hijk",
+                    "ijkl",
+                    "jklm",
+                    "klmn",
+                    "lmno"
+                ]
+            },
+            "expected": "abcdefghijklmno"
+        },
+        {
+            "args": {
+                "words": [
+                    "concat",
+                    "oncata",
+                    "ncatat",
+                    "catati",
+                    "atatia",
+                    "tatiat",
+                    "atiata",
+                    "tiatap",
+                    "iatapr",
+                    "atapre",
+                    "taprep",
+                    "aprepr",
+                    "prepro",
+                    "epropr",
+                    "proprp",
+                    "roprps",
+                    "oprpsp",
+                    "prpspl",
+                    "rpsplc",
+                    "psplcb",
+                    "splcba",
+                    "plcbam",
+                    "lcbamk",
+                    "cbamkn",
+                    "bamkni",
+                    "amknio",
+                    "mknioj",
+                    "knioji",
+                    "niojij",
+                    "iojiji",
+                    "ojijih",
+                    "jijihg",
+                    "ijihgf",
+                    "ihgfge",
+                    "hgfgef",
+                    "gfgefe",
+                    "fgefee",
+                    "gefeef",
+                    "efeeef",
+                    "feeeee",
+                    "eeeeee"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": [
+                    "overlap",
+                    "lapover",
+                    "lover",
+                    "verlap",
+                    "overla",
+                    "verlapo",
+                    "verlapov",
+                    "overlapov",
+                    "verlapove",
+                    "lapoverla"
+                ]
+            },
+            "expected": "loverlapoverlapo"
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "fixpre",
+                    "refixp",
+                    "fixpref",
+                    "refixpr",
+                    "fixprefi",
+                    "refixpre",
+                    "fixprefix",
+                    "refixpref",
+                    "fixprefix"
+                ]
+            },
+            "expected": "fixprefixpref"
+        },
+        {
+            "args": {
+                "words": ["algorithm", "rhythm", "myth", "throttle", "thorn", "horn"]
+            },
+            "expected": "thornrhythmythrottlealgorithm"
+        },
+        {
+            "args": {
+                "words": ["aabbccdd", "bbccddaa", "ccddaabb", "ddaaaabb", "aaaabbbb", "bbbbaaaa"]
+            },
+            "expected": "ddaaaabbbbaaaabbccddaabb"
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "refix",
+                    "fix",
+                    "ix",
+                    "x",
+                    "suffix",
+                    "uffix",
+                    "ffix",
+                    "fixy",
+                    "xylophone",
+                    "phone",
+                    "honeymoon"
+                ]
+            },
+            "expected": "suffixylophoneymoonprefix"
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve"
+                ]
+            },
+            "expected": "twelvelevenineightensevensixfivefourthreetwone"
+        },
+        {
+            "args": {
+                "words": ["pqr", "qrs", "rst", "stu", "tuv", "uvw", "vwx", "wxy", "xyz"]
+            },
+            "expected": "pqrstuvwxyz"
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaa",
+                    "aabb",
+                    "abbb",
+                    "bbaa",
+                    "baab",
+                    "baba",
+                    "abba",
+                    "abaa",
+                    "baba",
+                    "abab",
+                    "baba",
+                    "abab"
+                ]
+            },
+            "expected": "ababaabbaaaabbb"
+        },
+        {
+            "args": {
+                "words": ["xyz", "yzw", "wxy", "uvw", "vwxy", "wxyz", "xyzu"]
+            },
+            "expected": "xyzuvwxyzw"
+        },
+        {
+            "args": {
+                "words": [
+                    "overlap",
+                    "laplong",
+                    "longer",
+                    "ergonomic",
+                    "nomics",
+                    "micronix",
+                    "nixos",
+                    "xenon",
+                    "nonya",
+                    "yonder",
+                    "nder",
+                    "derivation"
+                ]
+            },
+            "expected": "yonderivationxenonyamicronixosoverlaplongergonomics"
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bbccdd",
+                    "ccddee",
+                    "ddeeff",
+                    "eeffgg",
+                    "ffgghh",
+                    "gghhii",
+                    "hhijji",
+                    "iijjkk",
+                    "jjkklm",
+                    "kklmno",
+                    "lmnopq",
+                    "mnopqr",
+                    "nopqrs",
+                    "opqrst",
+                    "pqrsst",
+                    "qrsttu",
+                    "rsttuu",
+                    "sttuuv",
+                    "ttuuvw",
+                    "tuuvwv",
+                    "uvwvwx",
+                    "vwvwyx",
+                    "wvwyxy",
+                    "vwyxyz",
+                    "wyxyza",
+                    "yxyzab",
+                    "xyzabc"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "cdab",
+                    "bcda",
+                    "dabc",
+                    "abcd",
+                    "cdab",
+                    "bcda",
+                    "dabc",
+                    "abcd",
+                    "cdab",
+                    "bcda",
+                    "dabc"
+                ]
+            },
+            "expected": "bcdabcd"
+        },
+        {
+            "args": {
+                "words": [
+                    "xabc",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij",
+                    "hijk",
+                    "ijkl",
+                    "jklm",
+                    "klmn",
+                    "lmno",
+                    "mnop",
+                    "nopq",
+                    "opqr",
+                    "pqrt",
+                    "qrts",
+                    "rstu",
+                    "stuv",
+                    "tuvw",
+                    "uvwx",
+                    "vwxz"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "defghi", "ghijkl", "jklmno", "mnopqr", "nopqrs"]
+            },
+            "expected": "abcdefghijklmnopqrs"
+        },
+        {
+            "args": {
+                "words": [
+                    "unique",
+                    "niques",
+                    "iquesu",
+                    "quesun",
+                    "esuniq",
+                    "suniqu",
+                    "uniqeu",
+                    "niqueu",
+                    "iqueun",
+                    "queuni",
+                    "ueuniq",
+                    "enique",
+                    "niqeuq",
+                    "iqeunu",
+                    "qeuniq",
+                    "euniqe",
+                    "uniqen",
+                    "niqueu",
+                    "iqueun",
+                    "queuni",
+                    "ueuniq",
+                    "enique",
+                    "niqeuq",
+                    "iqeunu",
+                    "qeuniq",
+                    "euniqe",
+                    "uniqen"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "foobar",
+                    "barfoo",
+                    "foobaz",
+                    "bazfoo",
+                    "bazbar",
+                    "bazoof",
+                    "foobazoo",
+                    "oofbazfo"
+                ]
+            },
+            "expected": "bazbarfoobazoofbazfoobarworldhello"
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve"
+                ]
+            },
+            "expected": "twelvelevenineightensevensixfivefourthreetwone"
+        },
+        {
+            "args": {
+                "words": [
+                    "xyz",
+                    "yzab",
+                    "zabc",
+                    "abcd",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij"
+                ]
+            },
+            "expected": "xyzabcdefghij"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn"
+                ]
+            },
+            "expected": "abcdefghijklmn"
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "bca",
+                    "cab",
+                    "acb",
+                    "bac",
+                    "cba",
+                    "ab",
+                    "bc",
+                    "ca",
+                    "ba",
+                    "ac",
+                    "cb"
+                ]
+            },
+            "expected": "cbacbcabc"
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbccdd", "ccddee", "ddeeff", "eefggh", "fgghii"]
+            },
+            "expected": "eefgghiiaabbccddeeff"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcde",
+                    "bcdef",
+                    "cdefg",
+                    "defgh",
+                    "efghi",
+                    "fghij",
+                    "ghijk",
+                    "hijkl",
+                    "ijklm",
+                    "jklmn",
+                    "klmno",
+                    "lmnop"
+                ]
+            },
+            "expected": "abcdefghijklmnop"
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "refixa",
+                    "fixato",
+                    "fixatra",
+                    "ixatrace",
+                    "xatracer",
+                    "atracerp",
+                    "tracerpx",
+                    "racerpxy",
+                    "acerpxyz",
+                    "cerpxyzl",
+                    "erpxyzlh",
+                    "rpxyzlhe",
+                    "pxyzlhet",
+                    "xyzlhetr"
+                ]
+            },
+            "expected": "fixatracerpxyzlhetrprefixato"
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "cd", "da"]
+            },
+            "expected": "bcdab"
+        },
+        {
+            "args": {
+                "words": [
+                    "overlap",
+                    "lapping",
+                    "ping",
+                    "pingpong",
+                    "ong",
+                    "overlaplap",
+                    "laplaplap",
+                    "pingping"
+                ]
+            },
+            "expected": "overlaplaplappingpingpong"
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbccdd", "ccddeeff", "ddeeffgg", "eeffgghh"]
+            },
+            "expected": "aabbccddeeffgghh"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij",
+                    "hijk",
+                    "ijkl",
+                    "jklm",
+                    "klmn",
+                    "lmno"
+                ]
+            },
+            "expected": "abcdefghijklmno"
+        },
+        {
+            "args": {
+                "words": [
+                    "xyz",
+                    "yzx",
+                    "zxy",
+                    "xyx",
+                    "yxy",
+                    "xyy",
+                    "yxx",
+                    "yzy",
+                    "zyz",
+                    "zyx",
+                    "xzy",
+                    "yxz"
+                ]
+            },
+            "expected": "yxzyzyxxyxyzxyy"
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five", "six"]
+            },
+            "expected": "twonethreefourfivesix"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "defabc", "bcdefa", "cdefab", "defabc", "efabcd", "fabcde"]
+            },
+            "expected": "bcdefabcdef"
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bccdda",
+                    "cdddee",
+                    "ddeeff",
+                    "effggg",
+                    "ffgggh",
+                    "ggghhh",
+                    "hhhiii",
+                    "iiiijj",
+                    "jjjkkl",
+                    "kkllmm",
+                    "llmmnn"
+                ]
+            },
+            "expected": "cdddeeffggghhhiiiijjjkkllmmnnaabbccdda"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcde",
+                    "bcdef",
+                    "cdefg",
+                    "defgh",
+                    "efghi",
+                    "fghij",
+                    "ghijk",
+                    "hijkl",
+                    "ijklm",
+                    "jklmn",
+                    "klmno",
+                    "lmnop"
+                ]
+            },
+            "expected": "abcdefghijklmnop"
+        },
+        {
+            "args": {
+                "words": ["longest", "string", "that", "contains", "overlapping", "parts"]
+            },
+            "expected": "longestringthatcontainsoverlappingparts"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "defghi", "ghijkl", "ijklmn", "mnopqr"]
+            },
+            "expected": "abcdefghijklmnopqr"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "defghi", "ghijkl", "ijklmn", "mnopqr"]
+            },
+            "expected": "abcdefghijklmnopqr"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "efghijkl",
+                    "ghijklmn",
+                    "ijklmnop",
+                    "jklmnopq",
+                    "klmnopqr",
+                    "mnopqrst",
+                    "nopqrstu",
+                    "opqrstuv",
+                    "pqrstuvw",
+                    "qrstuvwx",
+                    "rstuvxyz"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxrstuvxyz"
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg", "efgh", "fghi", "ghij", "hijk"]
+            },
+            "expected": "abcdefghijk"
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "bbccdd",
+                    "ccddeeff",
+                    "ddeeffgg",
+                    "effgghh",
+                    "ffgghhiijj",
+                    "gghhiijjkk",
+                    "hhiijjkkll",
+                    "iijjkkllmm",
+                    "jjkkllmmnn",
+                    "kkllmmnnoo",
+                    "llmmnnoopp"
+                ]
+            },
+            "expected": "aabbccddeeffgghhiijjkkllmmnnoopp"
+        },
+        {
+            "args": {
+                "words": ["overlap", "lapping", "ping", "pingpong", "ong"]
+            },
+            "expected": "overlappingpong"
+        },
+        {
+            "args": {
+                "words": ["pqr", "qrp", "rqp", "prq", "rpq", "pqq", "qqp"]
+            },
+            "expected": "pqrpqqprqp"
+        },
+        {
+            "args": {
+                "words": ["abcxyz", "xyzuvw", "uvwdef", "defghj", "ghjklm", "klmnop", "mnopqr"]
+            },
+            "expected": "abcxyzuvwdefghjklmnopqr"
+        },
+        {
+            "args": {
+                "words": ["overlap", "laptime", "timefly", "flyby", "bymy", "myself"]
+            },
+            "expected": "overlaptimeflybymyself"
+        },
+        {
+            "args": {
+                "words": [
+                    "rotation",
+                    "otationr",
+                    "tationro",
+                    "ationrot",
+                    "tionrota",
+                    "ionrotat",
+                    "onrotate",
+                    "nrotate",
+                    "rotate"
+                ]
+            },
+            "expected": "rotationrotate"
+        },
+        {
+            "args": {
+                "words": [
+                    "aaa",
+                    "aab",
+                    "aba",
+                    "abb",
+                    "baa",
+                    "bab",
+                    "bba",
+                    "bbb",
+                    "aabbaa",
+                    "bbbaab"
+                ]
+            },
+            "expected": "bbababbbaabbaaa"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "defabc", "bcdefa", "cdefab"]
+            },
+            "expected": "abcdefabc"
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg"]
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj",
+                    "kkkk",
+                    "llll"
+                ]
+            },
+            "expected": "aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllll"
+        },
+        {
+            "args": {
+                "words": ["qwerty", "wertyu", "ertyui", "rtyuiop", "tyuiopq", "yuiopqr"]
+            },
+            "expected": "qwertyuiopqr"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefg",
+                    "bcdefgh",
+                    "cdefghi",
+                    "defghij",
+                    "efghijk",
+                    "fghijkl",
+                    "ghijklm",
+                    "hijklmn",
+                    "ijklmno",
+                    "jklmnop",
+                    "klmnopq",
+                    "lmnopqr",
+                    "mnopqrs",
+                    "nopqrst"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrst"
+        },
+        {
+            "args": {
+                "words": [
+                    "ab",
+                    "bc",
+                    "cd",
+                    "de",
+                    "ef",
+                    "fg",
+                    "gh",
+                    "hi",
+                    "ij",
+                    "jk",
+                    "kl",
+                    "lm",
+                    "mn",
+                    "no",
+                    "op",
+                    "pq",
+                    "qr",
+                    "rs",
+                    "st",
+                    "tu",
+                    "uv",
+                    "vw",
+                    "wx",
+                    "xy",
+                    "yz"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "words": [
+                    "unique",
+                    "strings",
+                    "for",
+                    "this",
+                    "problem",
+                    "are",
+                    "here",
+                    "and",
+                    "there",
+                    "everywhere"
+                ]
+            },
+            "expected": "thereverywhereareproblemforthistringsuniqueand"
+        },
+        {
+            "args": {
+                "words": ["abcdef", "cdefgh", "efghij", "ghijkl"]
+            },
+            "expected": "abcdefghijkl"
+        },
+        {
+            "args": {
+                "words": ["aabb", "bbaa", "abab", "baba", "abba", "baab"]
+            },
+            "expected": "bababbaabb"
+        },
+        {
+            "args": {
+                "words": ["apple", "pleas", "please", "ease", "asean", "anean", "nean", "east"]
+            },
+            "expected": "appleaseaneaneast"
+        },
+        {
+            "args": {
+                "words": [
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz",
+                    "yza",
+                    "zab"
+                ]
+            },
+            "expected": "pqrstuvwxyzab"
+        },
+        {
+            "args": {
+                "words": [
+                    "ab",
+                    "ba",
+                    "ac",
+                    "ca",
+                    "ad",
+                    "da",
+                    "ae",
+                    "ea",
+                    "af",
+                    "fa",
+                    "ag",
+                    "ga",
+                    "ah",
+                    "ha",
+                    "ai",
+                    "ia"
+                ]
+            },
+            "expected": "baiahagafaeadacab"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcxyz",
+                    "xyzuvw",
+                    "uvwdef",
+                    "defghi",
+                    "ghijkl",
+                    "jklmno",
+                    "mnopqr",
+                    "nopqrs",
+                    "pqrsuv",
+                    "qrstuv",
+                    "vwxyza"
+                ]
+            },
+            "expected": "qrstuvwxyzabcxyzuvwdefghijklmnopqrsuv"
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+            },
+            "expected": "abcdefghijkl"
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaa",
+                    "bbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj",
+                    "kkkk",
+                    "llll"
+                ]
+            },
+            "expected": "aaaabbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllll"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "defghi",
+                    "ghijkl",
+                    "jklmno",
+                    "mnopqr",
+                    "nopqrs",
+                    "pqrsuv",
+                    "qrstuv"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrsuvqrstuv"
+        },
+        {
+            "args": {
+                "words": ["abcd", "cdab", "bcda", "dabc", "abcd", "cdab", "bcda", "dabc"]
+            },
+            "expected": "bcdabcd"
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdef",
+                    "bcdegh",
+                    "cdefij",
+                    "defgkl",
+                    "efghmn",
+                    "fghnop",
+                    "ghnopq",
+                    "hnoqrs",
+                    "noqrst",
+                    "qrstuv",
+                    "rstuvw",
+                    "stuvwx"
+                ]
+            },
+            "expected": "bcdeghnoqrstuvwxfghnopqefghmndefgklabcdefij"
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "cd", "de", "ef", "fa"]
+            },
+            "expected": "bcdefab"
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "ghijklmn", "mnopqrst", "rstuvwxy", "xyzabcde"]
+            },
+            "expected": "ghijklmnopqrstuvwxyzabcdefgh"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().shortestSuperstring",
+        "typescript": "Solution().shortestSuperstring"
+    }
+}

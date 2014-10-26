@@ -1,0 +1,1811 @@
+{
+    "id": "swap-adjacent-in-lr-string",
+    "questionId": 777,
+    "difficulty": "Medium",
+    "tags": ["Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "start": "XXL",
+                "result": "LXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXL",
+                "result": "XRLXXRRLX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LLR",
+                "result": "RRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXL",
+                "result": "XRXL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XRXL",
+                "result": "LXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RL",
+                "result": "LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLX",
+                "result": "LXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXLXXXX",
+                "result": "LXXXXXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXRXXLXXXX",
+                "result": "XXXXRXXLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXRXXX",
+                "result": "XXXLXXRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXRRLL",
+                "result": "RXXRLXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXX",
+                "result": "XXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXR",
+                "result": "XRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXX",
+                "result": "XXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XRLR",
+                "result": "LRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXRX",
+                "result": "XXRRX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LL",
+                "result": "RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "X",
+                "result": "L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRRXXLRR",
+                "result": "XXLLRRRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXLXLRRXL",
+                "result": "LXXRXRXLRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXLXXR",
+                "result": "XXLXLXLRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXRXXRXX",
+                "result": "XXRXXRXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLXLXLXRXXR",
+                "result": "LXRXRXRXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLXXRXLXXL",
+                "result": "XRLXXXRXLXXL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RRXXLXXR",
+                "result": "RRXLXXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RRXLXXL",
+                "result": "XXLXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXLXL",
+                "result": "LXRXRXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LLLLLXXXXXX",
+                "result": "XXXXXXXXLLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXLXX",
+                "result": "XRLXLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXXLXXLR",
+                "result": "XLXXRXXRLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRRRRRXXXXX",
+                "result": "XXXXXRRRRRR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLXXLXXR",
+                "result": "XRLXXLXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXRXRXLR",
+                "result": "XXLRXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXRXLX",
+                "result": "XLXRLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXXXXXRXX",
+                "result": "XXLXXXXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXL",
+                "result": "XXLRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRXLRXLRXLR",
+                "result": "RXLRXLRXLRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLXXLXXR",
+                "result": "XXRXLXXRXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLRLRXRXRX",
+                "result": "LLRXRXRXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRRXLXXR",
+                "result": "XLLRXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXXXLXX",
+                "result": "XXXXXXLRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XLXRXLXRXLX",
+                "result": "LXRLXRLXRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXRXRXRXR",
+                "result": "XRXRXRXRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXLXRLX",
+                "result": "XRLXXRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLXLXXRL",
+                "result": "XLRXRXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXLRXLXXL",
+                "result": "XRLXXLRXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRRXLXXL",
+                "result": "XXLRXXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRLRLRLRLRL",
+                "result": "RLRLRLRLRLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRRXXXXXXXL",
+                "result": "XXXXXXLRRRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLRXXLXXR",
+                "result": "XXRXXLXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXLXXLXX",
+                "result": "LXXLXXLXXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXLRRXXL",
+                "result": "XXLRXRXRLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXXLXXRLXX",
+                "result": "XLXXLXXLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXLXXL",
+                "result": "XRLXXRRLXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXRXRXRXRLX",
+                "result": "XRLXRXRXLXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLXXLXXR",
+                "result": "LLXXRXRXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXRXR",
+                "result": "XLXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRXXLXXR",
+                "result": "LXXRXXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXXL",
+                "result": "XRLXXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXRXXL",
+                "result": "XLRXLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXLR",
+                "result": "XRLXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLXXR",
+                "result": "XXRXXRRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRXRXLXRXL",
+                "result": "RXLXLRXLRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXLXXXR",
+                "result": "XXLXXXRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXRXL",
+                "result": "XXLXRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXRXRXRXRX",
+                "result": "RXRXRXRXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXLX",
+                "result": "XRLXXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXLXXXXLXXX",
+                "result": "LXXXXXXXXXXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLXXRXLXX",
+                "result": "XXLRXRXLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLRXRXL",
+                "result": "LXXRXXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXRXLXX",
+                "result": "XXLXXRXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXRXRXRX",
+                "result": "XXRXXRXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLXXLXXL",
+                "result": "XXLXRXRXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXLXLXLXL",
+                "result": "XLXLXLXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXRXRXL",
+                "result": "LXRXRXRXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXLXXRXL",
+                "result": "XXLXXRXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXLXRXLL",
+                "result": "XXRXLRXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLRLXXLR",
+                "result": "XLRLXLRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXRXRXRX",
+                "result": "XRXRXRXRXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RRXXXXLL",
+                "result": "LLXXXXRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXRXRXLXX",
+                "result": "XXRXXRXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXXL",
+                "result": "LXXRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXLXLXLXL",
+                "result": "LXRXRXRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXLXL",
+                "result": "XLXLXLXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXXXXXXX",
+                "result": "XXXXXXXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLXXLXXR",
+                "result": "XXLXXRXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXLXR",
+                "result": "XRLXLXLXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXLXXRXXLXXR",
+                "result": "XXLXXLXXRXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRRXLX",
+                "result": "XRLXXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXRXXL",
+                "result": "XXLRXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXRXRXLXR",
+                "result": "XXLXLXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXRX",
+                "result": "LXRXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXLXRXL",
+                "result": "XRLXXRXLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLLRXXXR",
+                "result": "XXLRRLXXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXRXLX",
+                "result": "XXLXXRLRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XLRXLRXLRXL",
+                "result": "LXRLXRLXRLX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XRXXLXXRXL",
+                "result": "XRLXXRXLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRLRXXL",
+                "result": "LXXLRXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXXL",
+                "result": "XXLXXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXRXLXR",
+                "result": "XRLXRXRXLXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXRXRXRXLXXL",
+                "result": "XXLXXLXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXXRXLX",
+                "result": "XRLXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLRRXXLXXR",
+                "result": "LXXLXXRXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLRXXLXX",
+                "result": "LXXRXXLXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RRXXLXXL",
+                "result": "XXLXXLRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLXXXL",
+                "result": "XXLXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXRXRXRXL",
+                "result": "XXLXXRXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLXXR",
+                "result": "XXRRLXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LLRRLRRRLL",
+                "result": "RLLLLRRRLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXXXLXXXXR",
+                "result": "XXXXLXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXLXR",
+                "result": "XRLXRXLRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRXXLXRXXRL",
+                "result": "XRLXLXXRRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLXXLXXR",
+                "result": "LXXRXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRLXXRX",
+                "result": "XRLXXLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXXXXXRRRR",
+                "result": "RRRRXXXXXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXXLXX",
+                "result": "XLRXXLXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXXLXXL",
+                "result": "XXLXXLXXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRXXLXXRL",
+                "result": "LXXRXXLRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXRXLXRX",
+                "result": "LXRXRXRXRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRLXXLXXR",
+                "result": "LXXRXXRXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXXRXXR",
+                "result": "XXRXXLXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXRXLXXL",
+                "result": "XLXXLXXLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXRXRXR",
+                "result": "RRRRRXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXXLRXLX",
+                "result": "XXLXXRXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXXRXXL",
+                "result": "XXLRXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRRRRRXXL",
+                "result": "XXLRRRRRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXXLXXLX",
+                "result": "LXLXLXLXXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXXLXXRXXL",
+                "result": "XXLXXRXRXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXXXXXX",
+                "result": "XXXXXXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLR",
+                "result": "LXRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRLR",
+                "result": "RLLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXRXLXXR",
+                "result": "RLXXRXLXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXRXL",
+                "result": "XXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXXLXL",
+                "result": "XRLXXXL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLXRX",
+                "result": "XRLXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXR",
+                "result": "LRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXRXLXL",
+                "result": "XRLXXLRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXRXXL",
+                "result": "XXLXXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXLXLXX",
+                "result": "XLXXXLRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXRXRX",
+                "result": "XRXRXRXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RLXXXRRXXL",
+                "result": "RLXXXXXRRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXL",
+                "result": "LXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXR",
+                "result": "XLRXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXXXXXXXXRXXL",
+                "result": "XRLXXXXXXXXXXRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXRRXXL",
+                "result": "RLXXXRXLXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXXXXL",
+                "result": "LXXXXXXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXXXLXXXX",
+                "result": "XXXXXXXXLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLRXXRLLXL",
+                "result": "RLRXRLLXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXRXLX",
+                "result": "LXRXRXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLX",
+                "result": "XLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRLXXRLXXX",
+                "result": "XXXRLXXRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXXRXX",
+                "result": "XXLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXX",
+                "result": "XXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLR",
+                "result": "LXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXRXL",
+                "result": "XXRLXXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXXLXXX",
+                "result": "XXXXXXLRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXRXXLX",
+                "result": "XXXLXXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXLX",
+                "result": "XRLXXRRXLX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXXXXXXXXR",
+                "result": "XXXXXXXXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXL",
+                "result": "LXXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXR",
+                "result": "XRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LLRRLRLLRL",
+                "result": "LRLRLLRLRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXLXX",
+                "result": "XRLXXRRLXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RRXXLXXL",
+                "result": "XXRLXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXX",
+                "result": "XLRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRLR",
+                "result": "LRLR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXLXXRXXL",
+                "result": "LXXXXRXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXR",
+                "result": "RXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXXLXXXL",
+                "result": "XLRXXXXXXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLX",
+                "result": "LXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RLXXRXLXLX",
+                "result": "LRXXRXLXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LLRXXRXL",
+                "result": "LXXLRXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRXRXRXXLX",
+                "result": "XXLRXRXLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXL",
+                "result": "XRLXRXRXL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXXXLXXXX",
+                "result": "XXXXXXXXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXR",
+                "result": "XLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXLXRXRXXLXXXXL",
+                "result": "XXXLLXXXXXXLRLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXL",
+                "result": "XRLXXRRXL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXLXR",
+                "result": "LXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXXX",
+                "result": "XXXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXXLXXRXX",
+                "result": "XXLXXXXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXXXLXXXXL",
+                "result": "LXLXLXLXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXL",
+                "result": "LXRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXRXXXX",
+                "result": "XXXXXXXXXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRLR",
+                "result": "LRRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXXXXLRLX",
+                "result": "LXXXXXXXXXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXLXX",
+                "result": "LXXLXXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXRXL",
+                "result": "XRLXXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXRXRX",
+                "result": "XRXRXRXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXLXR",
+                "result": "XRLXXRRLXXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LLLL",
+                "result": "LLLL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXLXRLXXL",
+                "result": "XLLXRXXLXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRL",
+                "result": "LXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXL",
+                "result": "LXXRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRXXLXXR",
+                "result": "RXLXXRRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRRR",
+                "result": "RRRR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXLXXLXXXX",
+                "result": "LXLXXXXXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXRXRXL",
+                "result": "XLLXRXXRXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXL",
+                "result": "XRLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRXXRXLX",
+                "result": "LXRLXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXL",
+                "result": "XLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXXXLXX",
+                "result": "XXLXXXXLXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLXLXRXL",
+                "result": "XXRLXLXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXLXLXX",
+                "result": "LXXRXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXX",
+                "result": "XXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXL",
+                "result": "XRXXLXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXLXR",
+                "result": "LXRXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXXXLXX",
+                "result": "LXXXXXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXRXLXLXX",
+                "result": "XXRLXXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXL",
+                "result": "XLRXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXR",
+                "result": "XLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXLXL",
+                "result": "XRLXXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXLXXXX",
+                "result": "LXXXXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXXXXXR",
+                "result": "RXXXXXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXRLXX",
+                "result": "XLLXRXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLR",
+                "result": "LXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXLXXXX",
+                "result": "XXXXLXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXXLXRXRXXL",
+                "result": "XLLXRRLXXXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXR",
+                "result": "RXR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXXLXXXXXX",
+                "result": "XXXXXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXXXRXL",
+                "result": "XRLXXRXLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXLRXRXL",
+                "result": "LRXXRXLXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRLL",
+                "result": "LLRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXR",
+                "result": "XXLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXLXRXRXL",
+                "result": "XRLXXRRLX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LR",
+                "result": "LR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RLXXL",
+                "result": "XLRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXLXXXRXX",
+                "result": "LXXXXXXRX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXRX",
+                "result": "XLXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LLRR",
+                "result": "LLRR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LLRXRXL",
+                "result": "LRXRLXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXR",
+                "result": "XRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXL",
+                "result": "XRL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "XXRXL",
+                "result": "XRLXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXRLXXL",
+                "result": "XLLXRXLXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXRXLXR",
+                "result": "XRLXXLRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXXXXLXXXL",
+                "result": "XXXXXXXXLRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXXRRLL",
+                "result": "RLXXRXXLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXL",
+                "result": "XLRXXRRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXXXXL",
+                "result": "XXXXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXL",
+                "result": "XLXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXLX",
+                "result": "XRLXXRXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXXLRXRXL",
+                "result": "RXXLRXRXL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LLXXRRLXXL",
+                "result": "LXRXRLXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LR",
+                "result": "RL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RLXXLRXRXL",
+                "result": "LRXXLXLXXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXX",
+                "result": "XXXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LXR",
+                "result": "LRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRLXXRRLX",
+                "result": "RXXLRXRXL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LXXLXRXRXL",
+                "result": "XLLXRXRXLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXR",
+                "result": "RXX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LLRXXRXLX",
+                "result": "XLLXRXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXRXL",
+                "result": "LXXRX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XRLXL",
+                "result": "LXRLX"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "XXXXXLXXXX",
+                "result": "XXXXXLXXXX"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RXLR",
+                "result": "LRXR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RXRXXRXL",
+                "result": "XXRXLXRL"
+            },
+            "expected": false
+        }
+    ],
+    "invoke": {
+        "python": "Solution().canTransform",
+        "typescript": "Solution().canTransform"
+    }
+}

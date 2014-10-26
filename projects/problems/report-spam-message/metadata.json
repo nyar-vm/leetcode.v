@@ -1,0 +1,917 @@
+{
+    "id": "report-spam-message",
+    "questionId": 3295,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "message": ["spam", "egg", "ham"],
+                "bannedWords": ["spam", "bacon", "egg"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "eggs", "spam"],
+                "bannedWords": ["spam"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "spam", "spam"],
+                "bannedWords": ["spam"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "egg", "spam"],
+                "bannedWords": ["spam"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++"],
+                "bannedWords": ["ruby", "swift"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++"],
+                "bannedWords": ["java", "c#", "ruby"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["hello", "programming", "fun"],
+                "bannedWords": ["world", "programming", "leetcode"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["a", "b", "c", "d", "e"],
+                "bannedWords": ["a", "b"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["apple", "banana", "cherry"],
+                "bannedWords": ["date", "fig", "grape"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["code", "is", "fun"],
+                "bannedWords": ["code", "cool"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["apple", "banana", "cherry"],
+                "bannedWords": ["mango", "pineapple"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["coding", "is", "fun"],
+                "bannedWords": ["fun", "coding", "is", "cool"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["code", "code", "code"],
+                "bannedWords": ["code"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++"],
+                "bannedWords": ["ruby", "go", "swift"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "leetcode"],
+                "bannedWords": ["world", "hello"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++"],
+                "bannedWords": ["ruby", "go"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o"
+                ],
+                "bannedWords": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o"
+                ]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "python", "java"],
+                "bannedWords": ["python", "java", "c#"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "java"],
+                "bannedWords": ["java", "c#", "swift"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["one", "two", "three", "four", "five"],
+                "bannedWords": ["three", "four", "five", "six"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "ruby", "go", "swift"],
+                "bannedWords": ["python", "swift", "java", "c++", "go", "ruby"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["same", "same", "same", "different", "same"],
+                "bannedWords": ["same", "different"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["coding", "fun", "coding", "learning"],
+                "bannedWords": ["coding", "fun", "hello"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["cat", "dog", "mouse", "cat"],
+                "bannedWords": ["dog", "cat", "bird"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["this", "is", "a", "test", "case"],
+                "bannedWords": ["test", "case", "example", "input"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["short", "longer", "words", "in", "the", "message"],
+                "bannedWords": ["longer", "words", "phrase"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["unique", "words", "only", "here"],
+                "bannedWords": ["duplicate", "words", "overlap"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "hello", "world"],
+                "bannedWords": ["hello", "world", "programming"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["data", "science", "machine", "learning"],
+                "bannedWords": ["data", "science"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"],
+                "bannedWords": [
+                    "apple",
+                    "banana",
+                    "cherry",
+                    "date",
+                    "elderberry",
+                    "fig",
+                    "grape",
+                    "honeydew"
+                ]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "bannedWords": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["test", "test", "test", "test"],
+                "bannedWords": ["test", "example", "sample"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "hello", "hello", "hello"],
+                "bannedWords": ["world", "hello", "programming"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["example", "test", "case", "example", "test"],
+                "bannedWords": ["example", "test", "case", "input"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "programming", "code", "python"],
+                "bannedWords": ["python", "java", "c++"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["data", "science", "and", "ai"],
+                "bannedWords": ["ai", "machine", "learning"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["one", "two", "three", "four", "five"],
+                "bannedWords": ["one", "two", "three", "four", "five"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["lets", "go", "for", "a", "walk", "in", "the", "park"],
+                "bannedWords": ["walk", "run", "jog"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["coding", "python", "java", "coding"],
+                "bannedWords": ["java", "coding", "ruby"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["quick", "brown", "fox", "jumps", "over", "lazy", "dog"],
+                "bannedWords": ["fox", "dog", "lazy"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "leetcode", "world", "hello"],
+                "bannedWords": ["world", "hello"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["test", "test", "test", "test", "test"],
+                "bannedWords": ["test", "example", "case"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "python"],
+                "bannedWords": ["python", "ruby"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "bannedWords": ["one", "two", "three", "four", "five"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["happy", "birthday", "to", "you"],
+                "bannedWords": ["birthday", "to", "you", "happy"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["one", "two", "three", "four", "five"],
+                "bannedWords": ["two", "three", "four", "five"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "bannedWords": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "egg", "ham", "spam", "egg", "ham", "spam"],
+                "bannedWords": ["spam", "egg", "ham"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "this", "is", "a", "test"],
+                "bannedWords": ["test", "sample", "example"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "java"],
+                "bannedWords": ["java", "swift"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "spam", "eggs"],
+                "bannedWords": ["spam", "bacon", "eggs"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["secure", "your", "data", "with", "encryption"],
+                "bannedWords": ["data", "with", "secure"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "eggs", "ham", "spam"],
+                "bannedWords": ["spam", "bacon"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["alice", "bob", "charlie", "david", "eve"],
+                "bannedWords": ["bob", "charlie", "frank"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["unique", "words", "here", "no", "matches"],
+                "bannedWords": ["match", "found", "here"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "python"],
+                "bannedWords": ["ruby", "go", "c++", "python"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["algorithm", "data", "structure", "algorithm"],
+                "bannedWords": ["data", "algorithm", "structure", "code"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["one", "two", "three", "four", "five", "six"],
+                "bannedWords": ["one", "two", "three", "four", "five"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["repeat", "repeat", "repeat", "repeat"],
+                "bannedWords": ["repeat", "duplicate"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["programming", "is", "fun", "and", "challenging"],
+                "bannedWords": ["boring", "difficult"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["spam", "is", "bad", "spam"],
+                "bannedWords": ["spam", "junk", "garbage"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "python", "java"],
+                "bannedWords": ["c", "c++", "java", "python"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["apple", "banana", "cherry", "apple", "banana"],
+                "bannedWords": ["banana", "cherry", "apple"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "leetcode"],
+                "bannedWords": ["leetcode", "world", "hello", "code"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["algorithm", "data", "structure", "algorithm", "data"],
+                "bannedWords": ["algorithm", "graph", "tree", "data"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["apple", "banana", "apple", "cherry"],
+                "bannedWords": ["banana", "cherry", "apple"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["first", "second", "third", "fourth", "fifth"],
+                "bannedWords": ["third", "fourth", "fifth", "sixth"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "eggs", "spam", "ham"],
+                "bannedWords": ["spam", "bacon", "eggs"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "python", "c++", "java"],
+                "bannedWords": ["java", "python", "c#"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["cat", "dog", "bird", "fish"],
+                "bannedWords": ["dog", "fish", "cat", "bird"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["repeat", "repeat", "repeat", "repeat"],
+                "bannedWords": ["repeat", "again", "once"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["cat", "dog", "bird", "cat", "dog"],
+                "bannedWords": ["cat", "dog", "fish"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["repeat", "repeat", "repeat", "unique"],
+                "bannedWords": ["repeat", "distinct", "clone"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["data", "science", "machine", "learning"],
+                "bannedWords": ["deep", "learning", "data"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["lets", "play", "some", "games"],
+                "bannedWords": ["play", "games", "watch"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "bannedWords": ["three", "six", "nine"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "leetcode", "programming"],
+                "bannedWords": ["world", "programming", "leetcode"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "spam", "spam", "spam"],
+                "bannedWords": ["ham", "spam", "eggs"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world"],
+                "bannedWords": ["hello", "world", "hello", "world"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["one", "two", "three", "four", "five", "six"],
+                "bannedWords": ["one", "three", "five", "seven", "nine"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "hello", "world", "hello"],
+                "bannedWords": ["hello", "world", "test"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["spam", "is", "bad", "for", "health"],
+                "bannedWords": ["spam", "junk", "rubbish"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "bannedWords": ["a", "b", "c"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["test", "test", "test", "test"],
+                "bannedWords": ["test", "example", "case"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "hello", "world"],
+                "bannedWords": ["hello", "world", "goodbye"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "bannedWords": ["a", "b", "c", "d", "e"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["coding", "is", "awesome"],
+                "bannedWords": ["coding", "programming", "hacking"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": [
+                    "longwordexample",
+                    "anotherlongword",
+                    "shortword",
+                    "averylongwordindeed"
+                ],
+                "bannedWords": ["longwordexample", "averylongwordindeed"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["one", "two", "three", "four", "five"],
+                "bannedWords": ["four", "six", "seven"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["red", "blue", "green", "yellow"],
+                "bannedWords": ["blue", "green", "purple"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["unique", "words", "only"],
+                "bannedWords": ["different", "words", "unique"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "this", "is", "a", "test"],
+                "bannedWords": ["hello", "test", "example"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["unique", "words", "only", "here"],
+                "bannedWords": ["not", "here", "any"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "python"],
+                "bannedWords": ["python", "java", "c#"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "hello", "world"],
+                "bannedWords": ["world", "hello", "code"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["repeat", "repeat", "repeat", "repeat", "repeat"],
+                "bannedWords": ["repeat", "different", "words"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["banana", "apple", "cherry", "mango", "pineapple", "kiwi"],
+                "bannedWords": ["banana", "apple", "cherry", "mango", "pineapple"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yz"],
+                "bannedWords": ["mnopqr", "stuvwx", "yz", "abcdef"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["optimize", "code", "efficiency", "optimize"],
+                "bannedWords": ["optimize", "performance", "speed"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["unique", "words", "only", "here"],
+                "bannedWords": ["not", "here", "found", "words", "unique"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["python", "java", "c++", "java", "python"],
+                "bannedWords": ["java", "python", "swift"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "leetcode", "hello"],
+                "bannedWords": ["world", "hello"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["hello", "world", "hello", "world"],
+                "bannedWords": ["hello", "world"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["algorithm", "data", "structure", "code"],
+                "bannedWords": ["code", "data", "algorithm", "structure"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["find", "me", "if", "you", "can"],
+                "bannedWords": ["me", "can", "find", "you", "if"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["fast", "and", "furious"],
+                "bannedWords": ["slow", "steady", "fast"]
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "message": ["spam", "ham", "eggs", "spam", "eggs", "spam"],
+                "bannedWords": ["spam", "eggs", "bacon"]
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "message": ["quick", "brown", "fox", "jumps", "over", "lazy", "dog"],
+                "bannedWords": ["quick", "lazy", "cat", "dog"]
+            },
+            "expected": true
+        }
+    ],
+    "invoke": {
+        "python": "Solution().reportSpam",
+        "typescript": "Solution().reportSpam"
+    }
+}

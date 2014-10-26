@@ -1,0 +1,567 @@
+{
+    "id": "web-crawler-multithreaded",
+    "questionId": 1242,
+    "difficulty": "Medium",
+    "tags": ["Depth-First Search", "Breadth-First Search", "Concurrency"],
+    "tests": [
+        {
+            "args": {
+                "startUrl": "http://news.yahoo.com/news/topics/",
+                "htmlParser": "HtmlParser()"
+            },
+            "expected": ["http://news.yahoo.com/news/topics/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://news.yahoo.com/news/topics/",
+                "htmlParser": {}
+            },
+            "expected": ["http://news.yahoo.com/news/topics/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://news.google.com",
+                "htmlParser": "HtmlParser()"
+            },
+            "expected": ["http://news.google.com"]
+        },
+        {
+            "args": {
+                "startUrl": "http://news.google.com",
+                "htmlParser": {}
+            },
+            "expected": ["http://news.google.com"]
+        },
+        {
+            "args": {
+                "startUrl": "http://news.yahoo.com",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://news.yahoo.com"]
+        },
+        {
+            "args": {
+                "startUrl": "http://news.google.com",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://news.google.com"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.org/info",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.org/info"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.co.uk/home",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.co.uk/home"]
+        },
+        {
+            "args": {
+                "startUrl": "http://circular-links.com/page1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://circular-links.com/page1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/special-chars-allowed",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/special-chars-allowed"]
+        },
+        {
+            "args": {
+                "startUrl": "http://subdomain.example.com/page",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://subdomain.example.com/page"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.net/index",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.net/index"]
+        },
+        {
+            "args": {
+                "startUrl": "http://long-domain-name-very-long-sub-domain.example.com/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://long-domain-name-very-long-sub-domain.example.com/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://special-chars.com/valid-url-!@#-with-some-specials",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://special-chars.com/valid-url-!@#-with-some-specials"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/deep1/deep2/deep3/deep4",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/deep1/deep2/deep3/deep4"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.org/nested/path/page2",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.org/nested/path/page2"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/services/info",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/services/info"]
+        },
+        {
+            "args": {
+                "startUrl": "http://hyphenated-host-name.com/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://hyphenated-host-name.com/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.net/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.net/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://deep.example.com/level1/level2/level3",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://deep.example.com/level1/level2/level3"]
+        },
+        {
+            "args": {
+                "startUrl": "http://mixed-links.com",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://mixed-links.com"]
+        },
+        {
+            "args": {
+                "startUrl": "http://longhostname.example.com/very/long/path/to/resource",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://longhostname.example.com/very/long/path/to/resource"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/page1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/page1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://site.net/level1/level2/level3",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://site.net/level1/level2/level3"]
+        },
+        {
+            "args": {
+                "startUrl": "http://another-example.net/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://another-example.net/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.org/subpage/section1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.org/subpage/section1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.io/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.io/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/home",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/home"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/contact",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/contact"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/products/item2",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/products/item2"]
+        },
+        {
+            "args": {
+                "startUrl": "http://test.example.com/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://test.example.com/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://deepsite.com/level1/level2/level3/level4/level5",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://deepsite.com/level1/level2/level3/level4/level5"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/long/url/path/that/needs/to/be/handled/correctly",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/long/url/path/that/needs/to/be/handled/correctly"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.org/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.org/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://mywebsite.org/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://mywebsite.org/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/level1/level2",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/level1/level2"]
+        },
+        {
+            "args": {
+                "startUrl": "http://multi-level.com/deep/nested/page",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://multi-level.com/deep/nested/page"]
+        },
+        {
+            "args": {
+                "startUrl": "http://testsite.com/startpage",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://testsite.com/startpage"]
+        },
+        {
+            "args": {
+                "startUrl": "http://mixedcase.EXAMPLE.com/path",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://mixedcase.EXAMPLE.com/path"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/subsite/index.html",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/subsite/index.html"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example-with-hyphen.com/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example-with-hyphen.com/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/blog/post2",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/blog/post2"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/store/category1/itemA",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/store/category1/itemA"]
+        },
+        {
+            "args": {
+                "startUrl": "http://complexsite.org/main",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://complexsite.org/main"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/level1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/level1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/multiple/levels/and/pages",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/multiple/levels/and/pages"]
+        },
+        {
+            "args": {
+                "startUrl": "http://bigsite.com/index",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://bigsite.com/index"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.net",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.net"]
+        },
+        {
+            "args": {
+                "startUrl": "http://longhostnameabcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890.com/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": [
+                "http://longhostnameabcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890.com/"
+            ]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.org/pageA",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.org/pageA"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/redirect",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/redirect"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/about",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/about"]
+        },
+        {
+            "args": {
+                "startUrl": "http://deep.example.org/nested/deep/link",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://deep.example.org/nested/deep/link"]
+        },
+        {
+            "args": {
+                "startUrl": "http://smallset.com/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://smallset.com/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/circular/page1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/circular/page1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.co.uk/deep/link",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.co.uk/deep/link"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/support",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/support"]
+        },
+        {
+            "args": {
+                "startUrl": "http://manylinks.com/page",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://manylinks.com/page"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/pageA",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/pageA"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/nested/page1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/nested/page1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/product1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/product1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/blog/post1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/blog/post1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/forum/topic1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/forum/topic1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://anotherdomain.com/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://anotherdomain.com/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/section1/subsection1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/section1/subsection1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/index",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/index"]
+        },
+        {
+            "args": {
+                "startUrl": "http://subdomain.example.com/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://subdomain.example.com/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://diverse.org/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://diverse.org/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://cycliclink1.com/",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://cycliclink1.com/"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/news/2023/10/01",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/news/2023/10/01"]
+        },
+        {
+            "args": {
+                "startUrl": "http://specialchars.com/~!@#$%^&*()_+=-{}|:<>?",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://specialchars.com/~!@#$%^&*()_+=-{}|:<>?"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/loop1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/loop1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://many-links.com/start",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://many-links.com/start"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.com/products/item1",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.com/products/item1"]
+        },
+        {
+            "args": {
+                "startUrl": "http://deep.nested.sub.example.com/level1/level2",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://deep.nested.sub.example.com/level1/level2"]
+        },
+        {
+            "args": {
+                "startUrl": "http://example.net/index.html",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://example.net/index.html"]
+        },
+        {
+            "args": {
+                "startUrl": "http://multiple.example.com/links/to/other/links",
+                "htmlParser": "HtmlParserObject"
+            },
+            "expected": ["http://multiple.example.com/links/to/other/links"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().crawl",
+        "typescript": "Solution().crawl"
+    }
+}

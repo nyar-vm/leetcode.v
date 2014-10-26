@@ -1,0 +1,720 @@
+{
+    "id": "split-a-string-in-balanced-strings",
+    "questionId": 1221,
+    "difficulty": "Easy",
+    "tags": ["Greedy", "String", "Counting"],
+    "tests": [
+        {
+            "args": {
+                "s": "RRLLRRLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRRRLLRLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRRLLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LRRLLRRL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRLLRRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLLLLRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLLRRLRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "RRLLRRLLRL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RRLRRLRLRL"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "RRLLRRLLRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRRLLRL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LRRLRLLRRL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "LLRRLLRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRLRLRL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "RRRRLLLL"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "RRLRLLRLRL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LRLRLRLRLR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "LLRRRLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LRLRLRLR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "LLLLRRRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "RLRRLLRRLLRRRRLLLLRRLLRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RRLLRRLLRRLLRRLL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "LLLLLLLLRRRRRRRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "LLLLRRRLLLLRRRLLLLRRR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "RRRLLLRRRLLLRRRLLL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRR"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "LRLRLRLRLRRRRLLLLRRRRLLLL"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "RLLLLRRRRLLRLRRLRRLLRLRLRL"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRLRLRLRLRL"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRRLLRLRRLLRLRRLLRLRLRRLLRLRRLLRLRLRR"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRLRLRLRL"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "RLLLLRRRRLLRRRRLLR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRRLLRLRLRRLLRLRL"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "LRRLRLRLRLRLRLRLRL"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "RRRRRRLLLLLLRRRRLL"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RRLRRLRRLRRLRRLRRL"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRRLLRLRLRRLLRLRLRRLLRLRLRRLLRLRL"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "RRRLLLLLRRRLLLLLRRRLLLLL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LRLRLRLRRRLLLLRRRLLLLRRRLRLR"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "LLRRLRRLRRLRRLRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRLRLRLRLRLRL"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRRLLLL"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "RLLLLLLLLLLLLLLLLRRRRRRRRRRRRRRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RRLLRRLRLRRLRLRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRRRRLLLL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "LRLRLRLRLRLRLRLRLR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "RLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLL"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "LLLLLLLLRRRRRRRRLLLLLLLLRRRRRRRRLLLLLLLLRRRRRRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RLLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRR"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "LRRRLLRRLRRRLLRRRLLR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRL"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRRRRRLLLLRRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LLLLLLLLRRRRRRRRRRRRRRRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "LLRRRLLLLRRRRLLLLRRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLLLLRRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRR"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRRRRLLLLLLLLRRRRLLLLLLLLRRRRLLLL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLLRRRRLLLLLRRRRLLLLLRRRRLLLLL"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "LLLLLLRRRRRRLLLLLLRRRRRRLLLLLLRRRRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RRRRRRLLLLLLRRRRRRLLLLLLRRRRRRLLLLLL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LRRRRLLLLLRRRRLLLLLRRRRLLLLLRRRRLLLLL"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRLRLRRLLRLRLRRLLRLRL"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRLLLLRRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRRLRRLLRRLLRRLLRRRRLLLLRRLLRRRRLLLLRRLLRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "RRRRRRLLLLLLLLRRRRRRLLLLLLLLRRRRRRLLLLLLLL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RRRRRRRRRRLLLLLLLLLLRRRRRRRRRRLLLLLLLLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LRRLRLRLRLRLRLRL"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "RRRLLRLLRRLRRLLRLLRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRLRRLLRLRLRRLLRLRL"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLLRRLLRRLLRRLLRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRLLLLRRRRLLLLRRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RRLLRRLLRRLLRRLLRRLL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRRLLLLRRRRLLLLRRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RLLLLLLLLLLLLLLRRRRRRRRRRRRRRRRRRRRLLLLLLLLLLLLL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLRLR"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRRLLRLRL"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "LRLRLRLRLRLRLRLR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "RRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRRLL"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "RLLLLRRRRRLRRRLLLLLRRRRRLLLL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RRLLRRLLRRLLRRLLRRLLRRLL"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRRLLLLRRRRLLLLRRRRLLLL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "LLLLLLLLLLLLRRRRRRRRRRRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "RRLLRLRLRRLLRLRL"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "RRRRRRRRLLLLLLLL"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRLRLRRLLRLRRLLRLRL"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLLRRLLRRLLRRLLRRLLRRLLRR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "RLLLLLLLLLLLLRRRRRRRRRRRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRRRRRLLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RRRLLLLRRRLLLLRRRLLLL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLLRLRRLLRLR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRLLLLRRRRLLLLRRRLLLLRRRRLLLLRRRLLLLRRR"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRLRRLLRLRL"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRRLLRLRLRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLLLLLRRRRLLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRRRLRRRLRRRLRRRLRRRLRRRLRRRLRRRLRRRLRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRLLRRLLRRLLRRLL"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "RRRRRRRRLLLLLLLLRRRRRRRRLLLLLLLLRRRRRRRRLLLLLLLL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "LLRRLLRRLLRRLLRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "LRRRLLLRRLRRLLRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "LLLLRRRRLLLLRRRRLLLLRRRRLLLLRRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRLRLRLRRLLRLRLRRLLRLRLRLRRLLRLRL"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "RLLLLRRRRLLRRLLRRLRRLRL"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "RRRRLLLLRRRRLLLLRRRRLLLL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RRLLLLRRLLLLRRLLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "LRRLLRRLLRRLLRRLLRRLLRRLL"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "RLRRLLRLRRLLRLRRLLRLRRLL"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "LRRRRLLLLRRRRLLLL"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "RRRLLRLLRRRLLRLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLRLRLRLRLRRLLRRLLRLRLRLRL"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "LLRRLRRLRRLRRLRRLRRL"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "RRRRRRRRLLLLLLLLRRRRRRRRLLLLLLLL"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "RLLLLLRRRRLLRRRLLLRLLLLLRRRRRRLLLLRRRLLRRRRLLRLLL"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "LLLLLLLLLLLLLLLLRRRRRRRRRRRRRRRR"
+            },
+            "expected": 1
+        }
+    ],
+    "invoke": {
+        "python": "Solution().balancedStringSplit",
+        "typescript": "Solution().balancedStringSplit"
+    }
+}

@@ -1,0 +1,1247 @@
+{
+    "id": "rank-teams-by-votes",
+    "questionId": 1366,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String", "Counting", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "votes": ["ABC", "ACB", "ABC", "ACB", "ACB"]
+            },
+            "expected": "ACB"
+        },
+        {
+            "args": {
+                "votes": ["WXYZ", "XYZW"]
+            },
+            "expected": "XWYZ"
+        },
+        {
+            "args": {
+                "votes": ["BCA", "CAB", "ACB", "BAC", "CBA", "ABC"]
+            },
+            "expected": "ABC"
+        },
+        {
+            "args": {
+                "votes": ["A", "B", "C", "D", "E"]
+            },
+            "expected": "ABCDE"
+        },
+        {
+            "args": {
+                "votes": ["ABCDEF", "BCDEFA", "CDEFAB", "DEFABC", "EFABCD", "FABCDE"]
+            },
+            "expected": "ABCDEF"
+        },
+        {
+            "args": {
+                "votes": ["BCA", "CAB", "CBA", "ABC", "ACB", "BAC"]
+            },
+            "expected": "ABC"
+        },
+        {
+            "args": {
+                "votes": ["A", "A", "A", "A", "A"]
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "votes": ["BCA", "CAB", "ACB", "ABC", "ABC", "ACB"]
+            },
+            "expected": "ACB"
+        },
+        {
+            "args": {
+                "votes": ["A", "A", "A", "A"]
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "votes": ["ZMNAGUEDSJYLBOPHRQICWFXTVK"]
+            },
+            "expected": "ZMNAGUEDSJYLBOPHRQICWFXTVK"
+        },
+        {
+            "args": {
+                "votes": ["RGB", "GBR", "BRG", "RBB", "BBR", "RBB", "RRG", "GRR"]
+            },
+            "expected": "RBG"
+        },
+        {
+            "args": {
+                "votes": ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ZYXWVUTSRQPONMLKJIHGFEDCBA"]
+            },
+            "expected": "AZBYCXDWEVFUGTHSIRJQKPLOMN"
+        },
+        {
+            "args": {
+                "votes": ["BCA", "CAB", "ABC", "ACB", "BAC"]
+            },
+            "expected": "ABC"
+        },
+        {
+            "args": {
+                "votes": ["GHIJKL", "LKHGJI", "HKLGJI", "IGJLKH", "JIGKHL", "KGLHJI", "GHILJK"]
+            },
+            "expected": "GHKILJ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "LMNO",
+                    "NOLM",
+                    "OLMN",
+                    "MNLO",
+                    "LNMO",
+                    "ONML",
+                    "MLOL",
+                    "LONM",
+                    "MOLN",
+                    "NOML",
+                    "OMNL",
+                    "LMON",
+                    "NLMO",
+                    "OMLN",
+                    "LMNO",
+                    "NOLM",
+                    "OLMN",
+                    "MNLO",
+                    "LNMO",
+                    "ONML",
+                    "MLOL",
+                    "LONM",
+                    "MOLN",
+                    "NOML",
+                    "OMNL"
+                ]
+            },
+            "expected": "OLMN"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABCDEFGH",
+                    "BCDEFGHA",
+                    "CDEFGHAB",
+                    "DEFGHABC",
+                    "EFGHABCD",
+                    "FGHABCDE",
+                    "GHABCDEF",
+                    "HABCDEFG"
+                ]
+            },
+            "expected": "ABCDEFGH"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABCDEFG",
+                    "GFEDCBA",
+                    "FBCDEAG",
+                    "BCDEAFG",
+                    "CDEABGF",
+                    "DEABCFG",
+                    "EABCDFG"
+                ]
+            },
+            "expected": "BCEDAFG"
+        },
+        {
+            "args": {
+                "votes": ["ABCD", "BCDA", "CDAB", "DABC", "ABCD", "ABCD"]
+            },
+            "expected": "ABCD"
+        },
+        {
+            "args": {
+                "votes": ["QWOP", "WOPQ", "OPQW", "PQWO", "QWPO", "WPOQ", "OPWQ", "POWQ"]
+            },
+            "expected": "PWOQ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "MNBVCXZLKJHGFDSAPOIUYTREWQ",
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "MNBVCXZLKJHGFDSAPOIUYTREWQ",
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "MNBVCXZLKJHGFDSAPOIUYTREWQ",
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "MNBVCXZLKJHGFDSAPOIUYTREWQ",
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "MNBVCXZLKJHGFDSAPOIUYTREWQ"
+                ]
+            },
+            "expected": "MQNWBERVCTXYUZILKOJPAHGSDF"
+        },
+        {
+            "args": {
+                "votes": ["MNO", "OMN", "NMO", "MON", "NMN", "OMM", "NMM", "MMM"]
+            },
+            "expected": "MNO"
+        },
+        {
+            "args": {
+                "votes": [
+                    "UVWXYZ",
+                    "VWXYZU",
+                    "WXYZUV",
+                    "XYZUVW",
+                    "YZUVWX",
+                    "ZUVWXY",
+                    "UVWXYZ",
+                    "VWXYZU",
+                    "WXYZUV",
+                    "XYZUVW",
+                    "YZUVWX",
+                    "ZUVWXY",
+                    "UVWXYZ",
+                    "VWXYZU",
+                    "WXYZUV",
+                    "XYZUVW",
+                    "YZUVWX",
+                    "ZUVWXY",
+                    "UVWXYZ"
+                ]
+            },
+            "expected": "UVWXYZ"
+        },
+        {
+            "args": {
+                "votes": ["MATH", "TEAM", "META", "HATE", "HEAT", "MATE", "TAME", "TIME"]
+            },
+            "expected": "TMHAEI"
+        },
+        {
+            "args": {
+                "votes": ["ZYX", "XYZ", "YZX", "XZY", "YXZ", "ZXY"]
+            },
+            "expected": "XYZ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "PQRST",
+                    "QPRST",
+                    "RQPST",
+                    "SPQRT",
+                    "TQPRS",
+                    "PQRST",
+                    "QPRST",
+                    "RQPST",
+                    "SPQRT",
+                    "TQPRS",
+                    "PQRST",
+                    "QPRST",
+                    "RQPST",
+                    "SPQRT",
+                    "TQPRS"
+                ]
+            },
+            "expected": "QPRST"
+        },
+        {
+            "args": {
+                "votes": [
+                    "LION",
+                    "LION",
+                    "LION",
+                    "LION",
+                    "LION",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES",
+                    "EARTHTONES"
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "votes": ["ABCD", "BCDA", "CDAB", "DABC", "ACBD"]
+            },
+            "expected": "ACBD"
+        },
+        {
+            "args": {
+                "votes": ["PQR", "QPR", "RQP", "PRQ", "RPQ", "QRP", "PQR", "RQP", "QRP", "PRQ"]
+            },
+            "expected": "PQR"
+        },
+        {
+            "args": {
+                "votes": ["ZYX", "YZX", "XZY", "XYZ", "YXZ", "ZXY", "YZX", "ZXY"]
+            },
+            "expected": "ZYX"
+        },
+        {
+            "args": {
+                "votes": ["ABCDE", "EDCBA", "CBADE", "BCADE", "DECAB"]
+            },
+            "expected": "BCDEA"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABC",
+                    "BAC",
+                    "BCA",
+                    "CAB",
+                    "CBA",
+                    "ACB",
+                    "BAC",
+                    "CAB",
+                    "CBA",
+                    "BCA",
+                    "ACB",
+                    "CAB",
+                    "CBA",
+                    "BCA",
+                    "ACB",
+                    "BAC",
+                    "CAB",
+                    "CBA",
+                    "BCA",
+                    "ACB",
+                    "BAC",
+                    "CAB",
+                    "CBA",
+                    "BCA",
+                    "ACB"
+                ]
+            },
+            "expected": "CBA"
+        },
+        {
+            "args": {
+                "votes": [
+                    "TEAM",
+                    "MEAT",
+                    "TEAM",
+                    "EMAT",
+                    "AMTE",
+                    "MATE",
+                    "ATEM",
+                    "TAME",
+                    "EMTA",
+                    "ETAM",
+                    "METE",
+                    "MATE",
+                    "TEMA",
+                    "TEAM",
+                    "MATETE",
+                    "AMTE",
+                    "ETAM",
+                    "TAME",
+                    "EMTA",
+                    "ETAM",
+                    "METE",
+                    "MATE",
+                    "TEMA",
+                    "TEAM"
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "votes": ["ABCD", "BCDA", "CDAB", "DABC"]
+            },
+            "expected": "ABCD"
+        },
+        {
+            "args": {
+                "votes": [
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA",
+                    "AB",
+                    "BA"
+                ]
+            },
+            "expected": "AB"
+        },
+        {
+            "args": {
+                "votes": [
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "QWERTYUIOPASDFGHJKLZXCVBNM"
+                ]
+            },
+            "expected": "QWERTYUIOPASDFGHJKLZXCVBNM"
+        },
+        {
+            "args": {
+                "votes": [
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY",
+                    "XYZ",
+                    "YZX",
+                    "ZXY"
+                ]
+            },
+            "expected": "XYZ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "MNBVCXZLKJHGFDSAPORIUYTREWQ",
+                    "WQERTYUIOPASDFGHJKLZXCVBNM",
+                    "ZXCVBNMLKJHGFDSAPOIUYTREWQ"
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABCDEF",
+                    "BCDEFA",
+                    "CDEFAB",
+                    "DEFABC",
+                    "EFGABC",
+                    "FGABCDE",
+                    "GABCDEF",
+                    "HABCDEFG",
+                    "IABCDEFG",
+                    "JABCDEFG"
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "votes": [
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG"
+                ]
+            },
+            "expected": "IHGFEJ"
+        },
+        {
+            "args": {
+                "votes": ["XYZ", "YZX", "ZXY", "YXZ", "XZY", "ZYX", "XYZ", "YZX"]
+            },
+            "expected": "YXZ"
+        },
+        {
+            "args": {
+                "votes": ["AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA"]
+            },
+            "expected": "AB"
+        },
+        {
+            "args": {
+                "votes": ["TLI", "LIT", "ITL", "TIL", "ILT", "LTI", "TIL", "LTI", "ILT", "TLI"]
+            },
+            "expected": "TLI"
+        },
+        {
+            "args": {
+                "votes": ["QWERTY", "QWRETY", "QWRTEY", "QWRTYE", "QWRYTE"]
+            },
+            "expected": "QWRETY"
+        },
+        {
+            "args": {
+                "votes": ["ZEBRA", "BRACE", "BEZAR", "RABZE", "AREBZ", "ZERBA"]
+            },
+            "expected": "BZRAEC"
+        },
+        {
+            "args": {
+                "votes": ["ZYX", "YXZ", "XYZ", "YZX", "XZY", "ZXY"]
+            },
+            "expected": "XYZ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "GHIJK",
+                    "HIJKG",
+                    "IJKGH",
+                    "JKGHI",
+                    "KGIJH",
+                    "GHIJK",
+                    "HGIJK",
+                    "IGHJK",
+                    "JGIHK",
+                    "KGIJH"
+                ]
+            },
+            "expected": "GHIJK"
+        },
+        {
+            "args": {
+                "votes": ["WXYZ", "YZWX", "ZWXY", "XWYZ", "WZYX", "XYZW"]
+            },
+            "expected": "WXZY"
+        },
+        {
+            "args": {
+                "votes": [
+                    "PQRSTU",
+                    "QPRSTU",
+                    "QRPTSU",
+                    "QRSTUP",
+                    "QPRTSU",
+                    "QTRPSU",
+                    "QTRSPU",
+                    "QTSRPU",
+                    "QTSPUR",
+                    "QTPRSU",
+                    "QTPSUR",
+                    "QTUSPR",
+                    "QTUSRP",
+                    "QTURPS",
+                    "QTURSP",
+                    "QTUPRS",
+                    "QTUPSR",
+                    "QTRSPU",
+                    "QTSRPU",
+                    "QTRPUS",
+                    "QTRUPS",
+                    "QTPRSU",
+                    "QTPSUR",
+                    "QTUSPR",
+                    "QTURPS",
+                    "QTURSP",
+                    "QTUPRS",
+                    "QTUPSR"
+                ]
+            },
+            "expected": "QPTRUS"
+        },
+        {
+            "args": {
+                "votes": ["ABCD", "DCBA", "BCAD", "CADB", "ACDB", "DABC", "BCDA"]
+            },
+            "expected": "ABDC"
+        },
+        {
+            "args": {
+                "votes": ["LOVE", "VOTE", "LEVO", "OVEL", "VOLE", "ELOV"]
+            },
+            "expected": "VLOET"
+        },
+        {
+            "args": {
+                "votes": [
+                    "LMNO",
+                    "MLON",
+                    "OLNM",
+                    "NOLM",
+                    "ONML",
+                    "MNLO",
+                    "LOMN",
+                    "LONM",
+                    "NMLO",
+                    "OMNL",
+                    "NOLM",
+                    "OLNM"
+                ]
+            },
+            "expected": "OLNM"
+        },
+        {
+            "args": {
+                "votes": [
+                    "A",
+                    "A",
+                    "A",
+                    "A",
+                    "B",
+                    "B",
+                    "B",
+                    "B",
+                    "C",
+                    "C",
+                    "C",
+                    "C",
+                    "D",
+                    "D",
+                    "D",
+                    "D",
+                    "E",
+                    "E",
+                    "E",
+                    "E",
+                    "F",
+                    "F",
+                    "F",
+                    "F",
+                    "G",
+                    "G",
+                    "G",
+                    "G",
+                    "H",
+                    "H",
+                    "H",
+                    "H",
+                    "I",
+                    "I",
+                    "I",
+                    "I",
+                    "J",
+                    "J",
+                    "J",
+                    "J",
+                    "K",
+                    "K",
+                    "K",
+                    "K",
+                    "L",
+                    "L",
+                    "L",
+                    "L",
+                    "M",
+                    "M",
+                    "M",
+                    "M",
+                    "N",
+                    "N",
+                    "N",
+                    "N",
+                    "O",
+                    "O",
+                    "O",
+                    "O",
+                    "P",
+                    "P",
+                    "P",
+                    "P",
+                    "Q",
+                    "Q",
+                    "Q",
+                    "Q",
+                    "R",
+                    "R",
+                    "R",
+                    "R",
+                    "S",
+                    "S",
+                    "S",
+                    "S",
+                    "T",
+                    "T",
+                    "T",
+                    "T",
+                    "U",
+                    "U",
+                    "U",
+                    "U",
+                    "V",
+                    "V",
+                    "V",
+                    "V",
+                    "W",
+                    "W",
+                    "W",
+                    "W",
+                    "X",
+                    "X",
+                    "X",
+                    "X",
+                    "Y",
+                    "Y",
+                    "Y",
+                    "Y",
+                    "Z",
+                    "Z",
+                    "Z",
+                    "Z"
+                ]
+            },
+            "expected": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        },
+        {
+            "args": {
+                "votes": ["ABCDEF", "FEDCBA", "DEFABC", "BCDAFE", "CBAFED", "AFECBD", "BDFECA"]
+            },
+            "expected": "BAFDCE"
+        },
+        {
+            "args": {
+                "votes": ["AC", "CA", "AC", "CA", "AC", "CA", "AC", "CA", "AC", "CA"]
+            },
+            "expected": "AC"
+        },
+        {
+            "args": {
+                "votes": [
+                    "LMNO",
+                    "MLNO",
+                    "NOLM",
+                    "OLMN",
+                    "NOML",
+                    "OMNL",
+                    "LONM",
+                    "OLNM",
+                    "MOLN",
+                    "LNOM",
+                    "LOMN",
+                    "MONL",
+                    "NLOM",
+                    "LNMO",
+                    "LNMN",
+                    "OMLN",
+                    "NOLM",
+                    "NLMO",
+                    "MOLN",
+                    "ONLM",
+                    "OMNL",
+                    "LONM",
+                    "OLNM",
+                    "MOLN",
+                    "LNOM",
+                    "LOMN",
+                    "MONL",
+                    "NLOM",
+                    "LNMO",
+                    "LNMN"
+                ]
+            },
+            "expected": "LONM"
+        },
+        {
+            "args": {
+                "votes": [
+                    "PQRST",
+                    "QPRST",
+                    "RSPTQ",
+                    "TRPQS",
+                    "SQPTR",
+                    "PRQST",
+                    "PQRST",
+                    "RQPTS",
+                    "TQRS",
+                    "SPRQT"
+                ]
+            },
+            "expected": "PRSTQ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "PQR",
+                    "QRP",
+                    "RPQ",
+                    "PRQ",
+                    "QPR",
+                    "RQP",
+                    "PQR",
+                    "QRP",
+                    "RPQ",
+                    "PRQ",
+                    "QPR",
+                    "RQP"
+                ]
+            },
+            "expected": "PQR"
+        },
+        {
+            "args": {
+                "votes": ["ABCDE", "ACBDE", "CABDE", "BCADE", "DCABE"]
+            },
+            "expected": "ACBDE"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABCDEFGHIJKL",
+                    "LJKJIHGFEDCBA",
+                    "ABCDEFGHIJKL",
+                    "LJKJIHGFEDCBA",
+                    "ABCDEFGHIJKL",
+                    "LJKJIHGFEDCBA"
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "votes": [
+                    "XYZ",
+                    "YXZ",
+                    "YZX",
+                    "ZXY",
+                    "ZYX",
+                    "XZY",
+                    "YZX",
+                    "ZYX",
+                    "XYZ",
+                    "YXZ",
+                    "XZY",
+                    "XYZ"
+                ]
+            },
+            "expected": "XYZ"
+        },
+        {
+            "args": {
+                "votes": [
+                    "FGHIJK",
+                    "GHIJKF",
+                    "HIJKFG",
+                    "IJKFGH",
+                    "JKFGHI",
+                    "KFGHIJ",
+                    "FGHIJK",
+                    "GHIJKF",
+                    "HIJKFG",
+                    "IJKFGH"
+                ]
+            },
+            "expected": "IHGFJK"
+        },
+        {
+            "args": {
+                "votes": [
+                    "QWERTYUIOPASDFGHJKLZXCVBNM",
+                    "ASDFGHJKLZXCVBNMQWERTYUIOP",
+                    "ZXCVBNMQWERTYUIOPASDFGHJKL",
+                    "WERTYUIOPASDFGHJKLZXCVBNM",
+                    "QWERTYUIOPZXCVBNMLKJIHGFDSA",
+                    "ASDFGHJKLZXCVBNMPOIUYTREWQ",
+                    "ZXCVBNMPOIUYTREWQASDFGHJKL",
+                    "WERTYUIOPZXCVBNMLKJIHGFDSA",
+                    "QWERTYUIOPZXCVBNMLKJIHGFDSA",
+                    "ASDFGHJKLZXCVBNMPOIUYTREWQ",
+                    "ZXCVBNMPOIUYTREWQASDFGHJKL",
+                    "WERTYUIOPZXCVBNMLKJIHGFDSA"
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ACBD",
+                    "BDAC",
+                    "CDAB",
+                    "DABC",
+                    "ABCD",
+                    "BACD",
+                    "CABD",
+                    "DABC",
+                    "ACDB",
+                    "BCDA"
+                ]
+            },
+            "expected": "ABCD"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABCD",
+                    "ABDC",
+                    "ACBD",
+                    "ACDB",
+                    "ADBC",
+                    "ADCB",
+                    "BACD",
+                    "BADC",
+                    "BCAD",
+                    "BCDA",
+                    "BDAC",
+                    "BDCA",
+                    "CABD",
+                    "CADB",
+                    "CBAD",
+                    "CBDA",
+                    "CDAB",
+                    "CDBA",
+                    "DABC",
+                    "DACB",
+                    "DBAC",
+                    "DBCA",
+                    "DCAB",
+                    "DCBA"
+                ]
+            },
+            "expected": "ABCD"
+        },
+        {
+            "args": {
+                "votes": [
+                    "UVWX",
+                    "VWXU",
+                    "WXUV",
+                    "XUVW",
+                    "UVWX",
+                    "VWXU",
+                    "WXUV",
+                    "XUVW",
+                    "UVWX",
+                    "VWXU"
+                ]
+            },
+            "expected": "VUWX"
+        },
+        {
+            "args": {
+                "votes": ["ZR", "RZ", "ZR", "RZ", "ZR"]
+            },
+            "expected": "ZR"
+        },
+        {
+            "args": {
+                "votes": ["SUNNY", "UNNYS", "NUNYS", "NNYSU", "NUYNS", "USNNY", "NSUNY"]
+            },
+            "expected": "NUSY"
+        },
+        {
+            "args": {
+                "votes": [
+                    "HELLO",
+                    "OLLEH",
+                    "LOHEL",
+                    "LLOEH",
+                    "HLOEL",
+                    "ELOHL",
+                    "ELLOH",
+                    "OLEHL",
+                    "LELOH",
+                    "OHELL"
+                ]
+            },
+            "expected": "LOEH"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ACB",
+                    "BAC",
+                    "CBA",
+                    "BCA",
+                    "CAB",
+                    "ACB",
+                    "BAC",
+                    "CBA",
+                    "BCA",
+                    "CAB",
+                    "ACB",
+                    "BAC",
+                    "CBA"
+                ]
+            },
+            "expected": "CBA"
+        },
+        {
+            "args": {
+                "votes": [
+                    "EFGHI",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "JEFGH",
+                    "EFGIH",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "JEFGH",
+                    "EFGIH",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "JEFGH",
+                    "EFGIH",
+                    "FGHIJ",
+                    "GHIJE",
+                    "HIJEF",
+                    "IJEFG",
+                    "JEFGH",
+                    "EFGIH"
+                ]
+            },
+            "expected": "EFGIJH"
+        },
+        {
+            "args": {
+                "votes": [
+                    "QWRTY",
+                    "QWYRT",
+                    "WQRTY",
+                    "WQYRT",
+                    "RTQWY",
+                    "RTYQW",
+                    "YRQWT",
+                    "YRTQW",
+                    "TWQRY",
+                    "TYWQR"
+                ]
+            },
+            "expected": "WQRTY"
+        },
+        {
+            "args": {
+                "votes": ["PYTHON", "TYHONP", "YHTNPO", "HNOTYP", "NOTYHP", "OTHNYP"]
+            },
+            "expected": "YTHONP"
+        },
+        {
+            "args": {
+                "votes": ["MNO", "NOM", "OMN", "MON", "NMO", "OMN", "MNO"]
+            },
+            "expected": "MNO"
+        },
+        {
+            "args": {
+                "votes": ["MNO", "OMN", "NMO", "MON", "NOM", "OMN"]
+            },
+            "expected": "MON"
+        },
+        {
+            "args": {
+                "votes": [
+                    "ABCD",
+                    "DCBA",
+                    "BCDA",
+                    "CBAD",
+                    "ADBC",
+                    "BDAC",
+                    "ACBD",
+                    "CADB",
+                    "DABC",
+                    "DBCA"
+                ]
+            },
+            "expected": "ADBC"
+        },
+        {
+            "args": {
+                "votes": ["FGHIJ", "IJFGH", "JFGHI", "HGIJF", "IGHFJ", "GFHIJ"]
+            },
+            "expected": "IGFJH"
+        },
+        {
+            "args": {
+                "votes": [
+                    "VWXYZ",
+                    "YZWXV",
+                    "ZWXYV",
+                    "XWYZV",
+                    "WZYXV",
+                    "XYZWV",
+                    "VWYZX",
+                    "WVXYZ",
+                    "XYZVW",
+                    "YZXVW",
+                    "ZXYVW",
+                    "VZWXY",
+                    "WXYVZ",
+                    "XVZXY",
+                    "YZVWX",
+                    "ZVXYW",
+                    "VXYWZ",
+                    "XYWVZ",
+                    "YWVZX",
+                    "YVZXW",
+                    "VZXWY",
+                    "ZXWYV",
+                    "XWYVZ"
+                ]
+            },
+            "expected": "XVYZW"
+        },
+        {
+            "args": {
+                "votes": ["ABCDE", "ABCDE", "ABCDE", "EABCD", "DEABC"]
+            },
+            "expected": "AEDBC"
+        },
+        {
+            "args": {
+                "votes": [
+                    "UV",
+                    "VU",
+                    "UV",
+                    "UV",
+                    "VU",
+                    "UV",
+                    "UV",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "UV",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "VU",
+                    "VU"
+                ]
+            },
+            "expected": "VU"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().rankTeams",
+        "typescript": "Solution().rankTeams"
+    }
+}

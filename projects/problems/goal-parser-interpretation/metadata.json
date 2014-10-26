@@ -1,0 +1,582 @@
+{
+    "id": "goal-parser-interpretation",
+    "questionId": 1678,
+    "difficulty": "Easy",
+    "tags": ["String"],
+    "tests": [
+        {
+            "args": {
+                "command": "G()()()()(al)"
+            },
+            "expected": "Gooooal"
+        },
+        {
+            "args": {
+                "command": "G"
+            },
+            "expected": "G"
+        },
+        {
+            "args": {
+                "command": "()"
+            },
+            "expected": "o"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)()()G"
+            },
+            "expected": "alGalooG"
+        },
+        {
+            "args": {
+                "command": "G()(G)()"
+            },
+            "expected": "Go(G)o"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)"
+            },
+            "expected": "GalGal"
+        },
+        {
+            "args": {
+                "command": "G()(al)"
+            },
+            "expected": "Goal"
+        },
+        {
+            "args": {
+                "command": "()()()()"
+            },
+            "expected": "oooo"
+        },
+        {
+            "args": {
+                "command": "G()G(al)G()"
+            },
+            "expected": "GoGalGo"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGal"
+        },
+        {
+            "args": {
+                "command": "(al)(al)(al)"
+            },
+            "expected": "alalal"
+        },
+        {
+            "args": {
+                "command": "(al)"
+            },
+            "expected": "al"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "alGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)()()G(al)()()G(al)()()"
+            },
+            "expected": "GalooGalooGaloo"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)G(al)(al)G(al)(al)"
+            },
+            "expected": "GalalGalalGalal"
+        },
+        {
+            "args": {
+                "command": "()()()()G(al)G(al)G(al)G(al)"
+            },
+            "expected": "ooooGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "()()()G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "oooGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "()G(al)G()G(al)()"
+            },
+            "expected": "oGalGoGalo"
+        },
+        {
+            "args": {
+                "command": "()G(al)()G(al)()G(al)()"
+            },
+            "expected": "oGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "G()G()G()G()G()G()G()G()G()G()G()G()G()G()G(al)"
+            },
+            "expected": "GoGoGoGoGoGoGoGoGoGoGoGoGoGoGal"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)(al)"
+            },
+            "expected": "Galalal"
+        },
+        {
+            "args": {
+                "command": "()(G(al)G(al))(G(al)G(al))"
+            },
+            "expected": "o(GalGal)(GalGal)"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "()G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "oGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)G()G(al)G()G(al)"
+            },
+            "expected": "GalGoGalGoGal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "alGalGalGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G()(al)G()(al)G()(al)"
+            },
+            "expected": "GoalGoalGoal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)()G(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "alGaloGaloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "alGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "()G(al)G()G(al)"
+            },
+            "expected": "oGalGoGal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)()()G(al)G(al)()()G(al)G(al)()()G"
+            },
+            "expected": "alGalooGalGalooGalGalooG"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)(al)(al)"
+            },
+            "expected": "Galalalal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)(G(al)(G(al)G(al)))G(al)"
+            },
+            "expected": "alGal(Gal(GalGal))Gal"
+        },
+        {
+            "args": {
+                "command": "G()()G()()G()()"
+            },
+            "expected": "GooGooGoo"
+        },
+        {
+            "args": {
+                "command": "G(al)()G(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "GaloGaloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "GaloGaloGaloGaloGaloGaloGaloGaloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "G()G()G(al)(al)G()"
+            },
+            "expected": "GoGoGalalGo"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)()()G(al)G(al)G(al)"
+            },
+            "expected": "GalGalooGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G()(G()(G()(G())))"
+            },
+            "expected": "Go(Go(Go(Go)))"
+        },
+        {
+            "args": {
+                "command": "()G()G(al)()G(al)()G(al)"
+            },
+            "expected": "oGoGaloGaloGal"
+        },
+        {
+            "args": {
+                "command": "()G()()G()()G()()G(al)G()"
+            },
+            "expected": "oGooGooGooGalGo"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G()(al)G()(al)G()(al)G()(al)"
+            },
+            "expected": "GoalGoalGoalGoal"
+        },
+        {
+            "args": {
+                "command": "G()()()()(al)G(al)G(al)G(al)"
+            },
+            "expected": "GooooalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)()()G(al)G(al)()()"
+            },
+            "expected": "GalGalooGalGaloo"
+        },
+        {
+            "args": {
+                "command": "G()(G(al))(G(al))G()(G(al))(G(al))"
+            },
+            "expected": "Go(Gal)(Gal)Go(Gal)(Gal)"
+        },
+        {
+            "args": {
+                "command": "(al)(al)G(al)(al)G(al)(al)"
+            },
+            "expected": "alalGalalGalal"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)(al)G"
+            },
+            "expected": "GalalalG"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "alGaloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)(al)G(al)(al)(al)G(al)(al)(al)G"
+            },
+            "expected": "GalalalGalalalGalalalG"
+        },
+        {
+            "args": {
+                "command": "G(al)(G(al)G(al))(G(al))"
+            },
+            "expected": "Gal(GalGal)(Gal)"
+        },
+        {
+            "args": {
+                "command": "G()(G(al))G()(G(al))"
+            },
+            "expected": "Go(Gal)Go(Gal)"
+        },
+        {
+            "args": {
+                "command": "G()G()G()G()G()G()G()G()"
+            },
+            "expected": "GoGoGoGoGoGoGoGo"
+        },
+        {
+            "args": {
+                "command": "G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "GaloGaloGaloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "()()()G(al)G(al)G(al)()()()"
+            },
+            "expected": "oooGalGalGalooo"
+        },
+        {
+            "args": {
+                "command": "(al)()G(al)()G(al)G(al)"
+            },
+            "expected": "aloGaloGalGal"
+        },
+        {
+            "args": {
+                "command": "(al)(al)(al)(al)G(al)G()"
+            },
+            "expected": "alalalalGalGo"
+        },
+        {
+            "args": {
+                "command": "(al)(G)(al)(G)(al)(G)(al)"
+            },
+            "expected": "al(G)al(G)al(G)al"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)G(al)"
+            },
+            "expected": "GalalGal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "alGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "()G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "oGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)G()(al)G()(al)G()(al)G()"
+            },
+            "expected": "GalGoalGoalGoalGo"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G()(G()(G)())"
+            },
+            "expected": "Go(Go(G)o)"
+        },
+        {
+            "args": {
+                "command": "()()()()()()()()()()()()()()()()()()()()()G(al)"
+            },
+            "expected": "oooooooooooooooooooooGal"
+        },
+        {
+            "args": {
+                "command": "G(al)()G(al)()G(al)()G(al)()G(al)"
+            },
+            "expected": "GaloGaloGaloGaloGal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)(al)G(al)G"
+            },
+            "expected": "alGalalGalG"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "aloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "G(al)(G()(G)(G)())G(al)"
+            },
+            "expected": "Gal(Go(G)(G)o)Gal"
+        },
+        {
+            "args": {
+                "command": "G()G(al)G()G(al)"
+            },
+            "expected": "GoGalGoGal"
+        },
+        {
+            "args": {
+                "command": "(al)(al)(al)G(al)"
+            },
+            "expected": "alalalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GalGalGalGalGalGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "alGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "(al)(G(al))(G(al))(G(al))(G(al))(G(al))"
+            },
+            "expected": "al(Gal)(Gal)(Gal)(Gal)(Gal)"
+        },
+        {
+            "args": {
+                "command": "()()()()()G(al)()()"
+            },
+            "expected": "oooooGaloo"
+        },
+        {
+            "args": {
+                "command": "()G(al)()G(al)()"
+            },
+            "expected": "oGaloGalo"
+        },
+        {
+            "args": {
+                "command": "(al)(al)(al)(al)(al)(al)(al)(al)"
+            },
+            "expected": "alalalalalalalal"
+        },
+        {
+            "args": {
+                "command": "()()()()(al)()()()(al)()()()"
+            },
+            "expected": "ooooaloooalooo"
+        },
+        {
+            "args": {
+                "command": "G(al)G()G(al)G()G(al)G()"
+            },
+            "expected": "GalGoGalGoGalGo"
+        },
+        {
+            "args": {
+                "command": "G()(G()(G()(G)())())"
+            },
+            "expected": "Go(Go(Go(G)o)o)"
+        },
+        {
+            "args": {
+                "command": "G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()G(al)()"
+            },
+            "expected": "GaloGaloGaloGaloGaloGaloGaloGalo"
+        },
+        {
+            "args": {
+                "command": "G(al)(al)G(al)G(al)"
+            },
+            "expected": "GalalGalGal"
+        },
+        {
+            "args": {
+                "command": "G(al)(G(al))(G(al))(G(al))G(al)"
+            },
+            "expected": "Gal(Gal)(Gal)(Gal)Gal"
+        },
+        {
+            "args": {
+                "command": "G()()()()(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "GooooalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G()(G()(G()(G()())))"
+            },
+            "expected": "Go(Go(Go(Goo)))"
+        },
+        {
+            "args": {
+                "command": "G(al)()G(al)()G(al)()G(al)()G(al)G(al)"
+            },
+            "expected": "GaloGaloGaloGaloGalGal"
+        },
+        {
+            "args": {
+                "command": "(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "alGalGalGalGalGalGalGalGalGalGalGal"
+        },
+        {
+            "args": {
+                "command": "G()G()G()G()G()G()G()G()G()G()G()G()G()G()G()G()"
+            },
+            "expected": "GoGoGoGoGoGoGoGoGoGoGoGoGoGoGoGo"
+        },
+        {
+            "args": {
+                "command": "(al)()()()()()()()()()()()()()()()()()()()()()()()()()()()()"
+            },
+            "expected": "aloooooooooooooooooooooooooooo"
+        },
+        {
+            "args": {
+                "command": "G()G()G()G()G(al)G(al)G(al)"
+            },
+            "expected": "GoGoGoGoGalGalGal"
+        },
+        {
+            "args": {
+                "command": "()()()()()()()()()()G(al)G(al)G(al)G(al)G(al)"
+            },
+            "expected": "ooooooooooGalGalGalGalGal"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().interpret",
+        "typescript": "Solution().interpret"
+    }
+}

@@ -1,0 +1,1128 @@
+{
+    "id": "split-strings-by-separator",
+    "questionId": 2788,
+    "difficulty": "Easy",
+    "tags": ["Array", "String"],
+    "tests": [
+        {
+            "args": {
+                "words": ["no-separator"],
+                "separator": ","
+            },
+            "expected": ["no-separator"]
+        },
+        {
+            "args": {
+                "words": ["hello.world", "foo.bar.baz"],
+                "separator": "."
+            },
+            "expected": ["hello", "world", "foo", "bar", "baz"]
+        },
+        {
+            "args": {
+                "words": ["test|test|test"],
+                "separator": "|"
+            },
+            "expected": ["test", "test", "test"]
+        },
+        {
+            "args": {
+                "words": ["#a#b#", "c#d", "e#f#g"],
+                "separator": "#"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g"]
+        },
+        {
+            "args": {
+                "words": ["a,b,c", "d,e", "f,g,h"],
+                "separator": ","
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h"]
+        },
+        {
+            "args": {
+                "words": ["..."],
+                "separator": "."
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["multiple,,,commas"],
+                "separator": ","
+            },
+            "expected": ["multiple", "commas"]
+        },
+        {
+            "args": {
+                "words": ["@a@", "b@c@d", "e@f@g@h"],
+                "separator": "@"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h"]
+        },
+        {
+            "args": {
+                "words": ["no-separator-here"],
+                "separator": "-"
+            },
+            "expected": ["no", "separator", "here"]
+        },
+        {
+            "args": {
+                "words": ["|a|b|c|", "d|e|f", "g|h|i|j"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": ["|a|b|c|d|"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "separator": "."
+            },
+            "expected": ["abc", "def", "ghi"]
+        },
+        {
+            "args": {
+                "words": ["hello.world", "how.are.you"],
+                "separator": "."
+            },
+            "expected": ["hello", "world", "how", "are", "you"]
+        },
+        {
+            "args": {
+                "words": ["1.2.3", "4.5.6.7"],
+                "separator": "."
+            },
+            "expected": ["1", "2", "3", "4", "5", "6", "7"]
+        },
+        {
+            "args": {
+                "words": ["test|string|data"],
+                "separator": "|"
+            },
+            "expected": ["test", "string", "data"]
+        },
+        {
+            "args": {
+                "words": [",,", ",,"],
+                "separator": ","
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["hello.world", "example.test"],
+                "separator": "."
+            },
+            "expected": ["hello", "world", "example", "test"]
+        },
+        {
+            "args": {
+                "words": ["#abc#", "#def#", "#ghi#"],
+                "separator": "#"
+            },
+            "expected": ["abc", "def", "ghi"]
+        },
+        {
+            "args": {
+                "words": ["hello.world", "python.is.awesome"],
+                "separator": "."
+            },
+            "expected": ["hello", "world", "python", "is", "awesome"]
+        },
+        {
+            "args": {
+                "words": ["###", "@#@", "$#$"],
+                "separator": "#"
+            },
+            "expected": ["@", "@", "$", "$"]
+        },
+        {
+            "args": {
+                "words": ["hello.world", "python.code"],
+                "separator": "."
+            },
+            "expected": ["hello", "world", "python", "code"]
+        },
+        {
+            "args": {
+                "words": ["@hello@world", "@foo@bar@baz"],
+                "separator": "@"
+            },
+            "expected": ["hello", "world", "foo", "bar", "baz"]
+        },
+        {
+            "args": {
+                "words": ["$easy$", "$problem$"],
+                "separator": "$"
+            },
+            "expected": ["easy", "problem"]
+        },
+        {
+            "args": {
+                "words": ["|||"],
+                "separator": "|"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["a,b,c", "d,e,f", "g,h"],
+                "separator": ","
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "separator": ","
+            },
+            "expected": ["abc", "def", "ghi"]
+        },
+        {
+            "args": {
+                "words": ["#a#b#c#"],
+                "separator": "#"
+            },
+            "expected": ["a", "b", "c"]
+        },
+        {
+            "args": {
+                "words": ["one.two.three", "four.five", "six"],
+                "separator": "."
+            },
+            "expected": ["one", "two", "three", "four", "five", "six"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c", "d.e", "f"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "words": ["same|same|same", "different|path|here"],
+                "separator": "|"
+            },
+            "expected": ["same", "same", "same", "different", "path", "here"]
+        },
+        {
+            "args": {
+                "words": ["special,characters|.,|$#@|example"],
+                "separator": "|"
+            },
+            "expected": ["special,characters", ".,", "$#@", "example"]
+        },
+        {
+            "args": {
+                "words": [".,.", ".a.b.", ".c.d.e."],
+                "separator": "."
+            },
+            "expected": [",", "a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["hello|world|foo|bar", "baz|qux|quux", "corge|grault|garply"],
+                "separator": "|"
+            },
+            "expected": [
+                "hello",
+                "world",
+                "foo",
+                "bar",
+                "baz",
+                "qux",
+                "quux",
+                "corge",
+                "grault",
+                "garply"
+            ]
+        },
+        {
+            "args": {
+                "words": ["this$that", "and", "the$other", "thing"],
+                "separator": "$"
+            },
+            "expected": ["this", "that", "and", "the", "other", "thing"]
+        },
+        {
+            "args": {
+                "words": [".a.b.c.", ".d.e.", ".f.g.h."],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g", "h", "i..j", "k..l..m"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d", "e.f.g", "h.i"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+        },
+        {
+            "args": {
+                "words": ["complex..string", "string..with..multiple..dots", "empty.."],
+                "separator": "."
+            },
+            "expected": ["complex", "string", "string", "with", "multiple", "dots", "empty"]
+        },
+        {
+            "args": {
+                "words": ["##word1##", "##word2##word3##", "word4##word5##"],
+                "separator": "#"
+            },
+            "expected": ["word1", "word2", "word3", "word4", "word5"]
+        },
+        {
+            "args": {
+                "words": ["1,2,3", "4,,5", ",6,"],
+                "separator": ","
+            },
+            "expected": ["1", "2", "3", "4", "5", "6"]
+        },
+        {
+            "args": {
+                "words": ["start|end", "middle|middle|middle", "no|change"],
+                "separator": "|"
+            },
+            "expected": ["start", "end", "middle", "middle", "middle", "no", "change"]
+        },
+        {
+            "args": {
+                "words": ["noSeparatorHere", "neitherHere", "orHere"],
+                "separator": "|"
+            },
+            "expected": ["noSeparatorHere", "neitherHere", "orHere"]
+        },
+        {
+            "args": {
+                "words": ["a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z"],
+                "separator": "|"
+            },
+            "expected": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z"
+            ]
+        },
+        {
+            "args": {
+                "words": ["|||", "||||", "|||||"],
+                "separator": "|"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["nested..dots.and||pipes", "and#hashes", "mixed##..|||characters"],
+                "separator": "."
+            },
+            "expected": ["nested", "dots", "and||pipes", "and#hashes", "mixed##", "|||characters"]
+        },
+        {
+            "args": {
+                "words": ["nested|split|.|string|example"],
+                "separator": "|"
+            },
+            "expected": ["nested", "split", ".", "string", "example"]
+        },
+        {
+            "args": {
+                "words": ["|a||b||c|", "|d||e|", "f|||g"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g"]
+        },
+        {
+            "args": {
+                "words": ["a|b|c", "d.e.f", "g#h#i"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d.e.f", "g#h#i"]
+        },
+        {
+            "args": {
+                "words": ["abc#def#ghi#jkl", "mno#pqr", "stu#vw"],
+                "separator": "#"
+            },
+            "expected": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vw"]
+        },
+        {
+            "args": {
+                "words": ["a|b|c|d|e", "f|g|h|i", "j|k|l|m|n|o"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"]
+        },
+        {
+            "args": {
+                "words": ["@start@middle@end", "@multiple@parts@here", "@only@one"],
+                "separator": "@"
+            },
+            "expected": ["start", "middle", "end", "multiple", "parts", "here", "only", "one"]
+        },
+        {
+            "args": {
+                "words": ["abc...def...ghi", "jkl...mno", "pqr...stu...vwx...yz"],
+                "separator": "..."
+            },
+            "expected": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"]
+        },
+        {
+            "args": {
+                "words": ["one..two...three", "four....five", "six......"],
+                "separator": "."
+            },
+            "expected": ["one", "two", "three", "four", "five", "six"]
+        },
+        {
+            "args": {
+                "words": ["abc.def.ghi", "jklmno.pqr.stu", "vwxyz.123.456"],
+                "separator": "."
+            },
+            "expected": ["abc", "def", "ghi", "jklmno", "pqr", "stu", "vwxyz", "123", "456"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e.f.g"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g"]
+        },
+        {
+            "args": {
+                "words": ["hello###world", "###foo###bar", "baz###"],
+                "separator": "###"
+            },
+            "expected": ["hello", "world", "foo", "bar", "baz"]
+        },
+        {
+            "args": {
+                "words": ["###abc###", "def###ghi", "###jkl###"],
+                "separator": "#"
+            },
+            "expected": ["abc", "def", "ghi", "jkl"]
+        },
+        {
+            "args": {
+                "words": ["|a||b|c|", "|d|e||f|", "g|h|i||j"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": ["no|separator", "only|one|separator", "two|separators|here"],
+                "separator": "|"
+            },
+            "expected": ["no", "separator", "only", "one", "separator", "two", "separators", "here"]
+        },
+        {
+            "args": {
+                "words": ["test$test$test", "$test$test", "test$$test"],
+                "separator": "$"
+            },
+            "expected": ["test", "test", "test", "test", "test", "test", "test"]
+        },
+        {
+            "args": {
+                "words": ["nested|separators|are|here", "nested|separators|again"],
+                "separator": "|"
+            },
+            "expected": ["nested", "separators", "are", "here", "nested", "separators", "again"]
+        },
+        {
+            "args": {
+                "words": ["noSeparatorHere", "norHere", "stillNotHere"],
+                "separator": "."
+            },
+            "expected": ["noSeparatorHere", "norHere", "stillNotHere"]
+        },
+        {
+            "args": {
+                "words": ["||||", "...", "####"],
+                "separator": "|"
+            },
+            "expected": ["...", "####"]
+        },
+        {
+            "args": {
+                "words": ["one$two$three", "four$five", "$six$"],
+                "separator": "$"
+            },
+            "expected": ["one", "two", "three", "four", "five", "six"]
+        },
+        {
+            "args": {
+                "words": ["hello|world|python|programming"],
+                "separator": "|"
+            },
+            "expected": ["hello", "world", "python", "programming"]
+        },
+        {
+            "args": {
+                "words": ["abc@def@ghi", "jkl@@mno@pqr", "stu@vwx@@yz"],
+                "separator": "@"
+            },
+            "expected": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"]
+        },
+        {
+            "args": {
+                "words": ["word1@word2", "word3", "word4@word5@word6"],
+                "separator": "@"
+            },
+            "expected": ["word1", "word2", "word3", "word4", "word5", "word6"]
+        },
+        {
+            "args": {
+                "words": ["example.com", "user@example.co.uk"],
+                "separator": "."
+            },
+            "expected": ["example", "com", "user@example", "co", "uk"]
+        },
+        {
+            "args": {
+                "words": ["abc", "def", "ghi"],
+                "separator": "z"
+            },
+            "expected": ["abc", "def", "ghi"]
+        },
+        {
+            "args": {
+                "words": ["@@@@", "####", "&&&&"],
+                "separator": "@"
+            },
+            "expected": ["####", "&&&&"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g", "h"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h"]
+        },
+        {
+            "args": {
+                "words": ["@#$|%|^&*", "!@#$%^&*()", "|{}[]<>:"],
+                "separator": "$"
+            },
+            "expected": ["@#", "|%|^&*", "!@#", "%^&*()", "|{}[]<>:"]
+        },
+        {
+            "args": {
+                "words": ["startmiddleend", "doubletriplequadruple"],
+                "separator": "#"
+            },
+            "expected": ["startmiddleend", "doubletriplequadruple"]
+        },
+        {
+            "args": {
+                "words": ["hello###world", "foo###bar", "baz###qux"],
+                "separator": "###"
+            },
+            "expected": ["hello", "world", "foo", "bar", "baz", "qux"]
+        },
+        {
+            "args": {
+                "words": ["hello.world$,another.world", "yet.another.world", "one.more.world"],
+                "separator": "$"
+            },
+            "expected": ["hello.world", ",another.world", "yet.another.world", "one.more.world"]
+        },
+        {
+            "args": {
+                "words": ["a,b,c,d,e", "f,g,h,i,j", "k,l,m,n,o"],
+                "separator": ","
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"]
+        },
+        {
+            "args": {
+                "words": ["||a||b||c||", "|||", "d|||e"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["multiple...dots...here", "and...here", "and...and...and"],
+                "separator": "..."
+            },
+            "expected": ["multiple", "dots", "here", "and", "here", "and", "and", "and"]
+        },
+        {
+            "args": {
+                "words": ["multiple$$$dollar$$$signs", "another$$$test$$$case"],
+                "separator": "$$$"
+            },
+            "expected": ["multiple", "dollar", "signs", "another", "test", "case"]
+        },
+        {
+            "args": {
+                "words": ["hello||world", "foo|bar|baz", "qux|||quux"],
+                "separator": "|"
+            },
+            "expected": ["hello", "world", "foo", "bar", "baz", "qux", "quux"]
+        },
+        {
+            "args": {
+                "words": ["word1#word2#word3", "word4#word5", "word6"],
+                "separator": "#"
+            },
+            "expected": ["word1", "word2", "word3", "word4", "word5", "word6"]
+        },
+        {
+            "args": {
+                "words": ["x|y|z|w|v|u|t", "s|r|q", "p|o|n|m"],
+                "separator": "|"
+            },
+            "expected": ["x", "y", "z", "w", "v", "u", "t", "s", "r", "q", "p", "o", "n", "m"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g", "h.i.j"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": ["|||", "|a|b|c|", "d|e|f|"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "words": ["###", "@#@"],
+                "separator": "#"
+            },
+            "expected": ["@", "@"]
+        },
+        {
+            "args": {
+                "words": [
+                    "......",
+                    "$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$.|$."
+                ],
+                "separator": "$"
+            },
+            "expected": [
+                "......",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                ".|",
+                "."
+            ]
+        },
+        {
+            "args": {
+                "words": ["start.with.dot.", ".end.with.dot", ".both.ends."],
+                "separator": "."
+            },
+            "expected": ["start", "with", "dot", "end", "with", "dot", "both", "ends"]
+        },
+        {
+            "args": {
+                "words": ["nested|path|to|file", "another|path|with|multiple|segments"],
+                "separator": "|"
+            },
+            "expected": [
+                "nested",
+                "path",
+                "to",
+                "file",
+                "another",
+                "path",
+                "with",
+                "multiple",
+                "segments"
+            ]
+        },
+        {
+            "args": {
+                "words": ["..", "$.$", "#@#@"],
+                "separator": "."
+            },
+            "expected": ["$", "$", "#@#@"]
+        },
+        {
+            "args": {
+                "words": [",,a,,b,,c,,", ",,,", "d,,,e"],
+                "separator": ","
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g.h", "i.j"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": ["#start#middle#end", "##double##triple###", "###quadruple####"],
+                "separator": "#"
+            },
+            "expected": ["start", "middle", "end", "double", "triple", "quadruple"]
+        },
+        {
+            "args": {
+                "words": ["###abc###", "###def###ghi###", "###"],
+                "separator": "#"
+            },
+            "expected": ["abc", "def", "ghi"]
+        },
+        {
+            "args": {
+                "words": ["multiple$$$separators", "here$$$again$$$and$$$again"],
+                "separator": "$"
+            },
+            "expected": ["multiple", "separators", "here", "again", "and", "again"]
+        },
+        {
+            "args": {
+                "words": ["noSeparator", "alsoNoSeparatorHere"],
+                "separator": "$"
+            },
+            "expected": ["noSeparator", "alsoNoSeparatorHere"]
+        },
+        {
+            "args": {
+                "words": ["abc#def#ghi", "jkl|mno|pqr", "stu,vwx,yz"],
+                "separator": "#"
+            },
+            "expected": ["abc", "def", "ghi", "jkl|mno|pqr", "stu,vwx,yz"]
+        },
+        {
+            "args": {
+                "words": [",,comma,,", "separated,,values", ",,"],
+                "separator": ","
+            },
+            "expected": ["comma", "separated", "values"]
+        },
+        {
+            "args": {
+                "words": ["leading|trailing|", "|trailing|only", "only|leading|"],
+                "separator": "|"
+            },
+            "expected": ["leading", "trailing", "trailing", "only", "only", "leading"]
+        },
+        {
+            "args": {
+                "words": ["no|separators", "here", "either"],
+                "separator": "|"
+            },
+            "expected": ["no", "separators", "here", "either"]
+        },
+        {
+            "args": {
+                "words": ["a@b@c@d", "e@f@g", "h@i@j@k@l"],
+                "separator": "@"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+        },
+        {
+            "args": {
+                "words": ["1234567890", "", "0987654321"],
+                "separator": "5"
+            },
+            "expected": ["1234", "67890", "09876", "4321"]
+        },
+        {
+            "args": {
+                "words": ["x|y|z|w|v|u", "t|s|r|q", "p|o|n|m|l|k|j|i|h|g|f|e|d|c|b|a"],
+                "separator": "|"
+            },
+            "expected": [
+                "x",
+                "y",
+                "z",
+                "w",
+                "v",
+                "u",
+                "t",
+                "s",
+                "r",
+                "q",
+                "p",
+                "o",
+                "n",
+                "m",
+                "l",
+                "k",
+                "j",
+                "i",
+                "h",
+                "g",
+                "f",
+                "e",
+                "d",
+                "c",
+                "b",
+                "a"
+            ]
+        },
+        {
+            "args": {
+                "words": ["###", "@@@", "$$$"],
+                "separator": "#"
+            },
+            "expected": ["@@@", "$$$"]
+        },
+        {
+            "args": {
+                "words": ["|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|", "|"],
+                "separator": "|"
+            },
+            "expected": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z"
+            ]
+        },
+        {
+            "args": {
+                "words": ["|a||b||c|", "d||e|f||", "|g|h|i|"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+        },
+        {
+            "args": {
+                "words": ["nested.delimiters|inside|string", "another|one|here"],
+                "separator": "|"
+            },
+            "expected": ["nested.delimiters", "inside", "string", "another", "one", "here"]
+        },
+        {
+            "args": {
+                "words": ["....", "|||", "@@@"],
+                "separator": "."
+            },
+            "expected": ["|||", "@@@"]
+        },
+        {
+            "args": {
+                "words": ["$first$$second$$third", "fourth$$$$fifth", "sixth$$$$"],
+                "separator": "$"
+            },
+            "expected": ["first", "second", "third", "fourth", "fifth", "sixth"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g", "h"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h"]
+        },
+        {
+            "args": {
+                "words": ["@start", "end@", "@both@"],
+                "separator": "@"
+            },
+            "expected": ["start", "end", "both"]
+        },
+        {
+            "args": {
+                "words": ["###", "#foo#bar#", "###baz##"],
+                "separator": "#"
+            },
+            "expected": ["foo", "bar", "baz"]
+        },
+        {
+            "args": {
+                "words": ["repeated..dots", "triple|||pipes", "quadruple@@@@at"],
+                "separator": "."
+            },
+            "expected": ["repeated", "dots", "triple|||pipes", "quadruple@@@@at"]
+        },
+        {
+            "args": {
+                "words": ["a@b@c@d", "e@f", "g@h@i@j@k"],
+                "separator": "@"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
+        },
+        {
+            "args": {
+                "words": ["multiple.separators.in.one.string", "another|string|with|separators"],
+                "separator": "."
+            },
+            "expected": [
+                "multiple",
+                "separators",
+                "in",
+                "one",
+                "string",
+                "another|string|with|separators"
+            ]
+        },
+        {
+            "args": {
+                "words": ["complex@punctuation@marks", "@leading@", "@trailing@", "@@multiple@@@"],
+                "separator": "@"
+            },
+            "expected": ["complex", "punctuation", "marks", "leading", "trailing", "multiple"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d", "e.f", "g.h.i.j.k"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
+        },
+        {
+            "args": {
+                "words": ["end.with.dot.", ".start.with.dot", ".middle.dot."],
+                "separator": "."
+            },
+            "expected": ["end", "with", "dot", "start", "with", "dot", "middle", "dot"]
+        },
+        {
+            "args": {
+                "words": ["x##y##z", "##", "w####v"],
+                "separator": "#"
+            },
+            "expected": ["x", "y", "z", "w", "v"]
+        },
+        {
+            "args": {
+                "words": ["|||abc|||", "def|||ghi|||", "|||jkl|||mno|||"],
+                "separator": "|"
+            },
+            "expected": ["abc", "def", "ghi", "jkl", "mno"]
+        },
+        {
+            "args": {
+                "words": ["word", "anotherword", "yetanotherword"],
+                "separator": "x"
+            },
+            "expected": ["word", "anotherword", "yetanotherword"]
+        },
+        {
+            "args": {
+                "words": ["........", "...", "."],
+                "separator": "."
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["#example#test#case", "##", "no#separator"],
+                "separator": "#"
+            },
+            "expected": ["example", "test", "case", "no", "separator"]
+        },
+        {
+            "args": {
+                "words": ["........"],
+                "separator": "."
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["apple,banana,cherry", "date,elderberry", "fig,grape"],
+                "separator": ","
+            },
+            "expected": ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
+        },
+        {
+            "args": {
+                "words": ["..", "...", "...."],
+                "separator": "."
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["|||||||"],
+                "separator": "|"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["abc.def.ghi", "jkl..mno", "pqr"],
+                "separator": "."
+            },
+            "expected": ["abc", "def", "ghi", "jkl", "mno", "pqr"]
+        },
+        {
+            "args": {
+                "words": [
+                    "nested#(separators)#inside#strings",
+                    "#multiple##hashes##here",
+                    "#no#trailing#hash"
+                ],
+                "separator": "#"
+            },
+            "expected": [
+                "nested",
+                "(separators)",
+                "inside",
+                "strings",
+                "multiple",
+                "hashes",
+                "here",
+                "no",
+                "trailing",
+                "hash"
+            ]
+        },
+        {
+            "args": {
+                "words": ["multiple...dots", "here||||are", "pipes", "and###hashes"],
+                "separator": "."
+            },
+            "expected": ["multiple", "dots", "here||||are", "pipes", "and###hashes"]
+        },
+        {
+            "args": {
+                "words": ["a|b||c|||d||||e"],
+                "separator": "|"
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": [",,apple,,,banana,,,", "cherry,,,", "date,"],
+                "separator": ","
+            },
+            "expected": ["apple", "banana", "cherry", "date"]
+        },
+        {
+            "args": {
+                "words": ["@start@", "middle@", "@end"],
+                "separator": "@"
+            },
+            "expected": ["start", "middle", "end"]
+        },
+        {
+            "args": {
+                "words": ["#a#b#c#d", "#e##f#", "g#h#i#"],
+                "separator": "#"
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g.h", "i.j.k.l"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+        },
+        {
+            "args": {
+                "words": ["a.b.c.d.e", "f.g.h", "i.j.k.l.m"],
+                "separator": "."
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"]
+        },
+        {
+            "args": {
+                "words": ["special$characters$@#|$|@$#|", "@|#$|$#@|", "|@#$#@$|"],
+                "separator": "|"
+            },
+            "expected": ["special$characters$@#", "$", "@$#", "@", "#$", "$#@", "@#$#@$"]
+        },
+        {
+            "args": {
+                "words": ["foo$bar$baz", "qux$quux", "corge$grault$garply"],
+                "separator": "$"
+            },
+            "expected": ["foo", "bar", "baz", "qux", "quux", "corge", "grault", "garply"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().splitWordsBySeparator",
+        "typescript": "Solution().splitWordsBySeparator"
+    }
+}

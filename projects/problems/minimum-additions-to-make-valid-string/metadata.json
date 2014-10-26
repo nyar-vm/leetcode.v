@@ -1,0 +1,660 @@
+{
+    "id": "minimum-additions-to-make-valid-string",
+    "questionId": 2645,
+    "difficulty": "Medium",
+    "tags": ["Stack", "Greedy", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "word": "aab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "abc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word": "bacbac"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "aabbcc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "acbac"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "aababacaba"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "abcabc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word": "bbcc"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "cccc"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "aaaaa"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "cab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "bb"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "aaa"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "b"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word": "ac"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "word": "aaabbbccc"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word": "abac"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word": "bbbbbbb"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "word": "aabccba"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "bbccaa"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "cba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "ccbaab"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "ccc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "bcab"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word": "ccccab"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "aababab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "aaaaaabbbbbc"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "word": "cccbbaaa"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word": "cbac"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "abcabcabc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word": "ba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "cccccccc"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word": "abbbccca"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "abcbac"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "bbbb"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "caabbac"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "babbabcabcbacbacbacb"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word": "aaaab"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "bcaabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "bbbbbb"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word": "cabababc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "bacbacbac"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "bcaacb"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "abcababc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "word": "abacbacbac"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "bcbcbc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "aaaaaaaa"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word": "bbbaccc"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "word": "babcbcbcabc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "bcbcb"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "aacaabbc"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "abacbac"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "aaaaaa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word": "acb"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "ababab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "cabcabc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word": "aabbccabc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "abab"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word": "abacab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "bcabc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "word": "accba"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "aabacbac"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "bababab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "bbbbbbbb"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "word": "acbabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "aabcbc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "abcaabcbacbacb"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "aabcbabccba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "abccccba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "baabbcc"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "cabcab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "cbacba"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "bac"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "aaaa"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "abcbbca"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "bca"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "ababac"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "cbacbacb"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "abccba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "cabcabcab"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "abcabcabcabcabc"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "word": "bbbacabc"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "acbacbac"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "aaac"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "bbaaac"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "abcacbac"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "abacbc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "ccca"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "word": "cccccc"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word": "aabbaacc"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "acbacbacbac"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "abcba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "acbacbacb"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "word": "ccccbbbaaa"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "word": "acabca"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "abbbcccaa"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word": "aabbbccc"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "word": "abcabcbac"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "abcabca"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "word": "ccababca"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "word": "bababacbcabc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "accab"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "abbbac"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "acbbca"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "word": "bcabca"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "word": "bcbcbcbc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "aabcbcbc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "word": "abcabcabcabc"
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().addMinimum",
+        "typescript": "Solution().addMinimum"
+    }
+}

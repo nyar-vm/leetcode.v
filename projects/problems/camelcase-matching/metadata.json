@@ -1,0 +1,1182 @@
+{
+    "id": "camelcase-matching",
+    "questionId": 1023,
+    "difficulty": "Medium",
+    "tags": ["Trie", "Array", "Two Pointers", "String", "String Matching"],
+    "tests": [
+        {
+            "args": {
+                "queries": ["FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack"],
+                "pattern": "FB"
+            },
+            "expected": [true, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": ["FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack"],
+                "pattern": "FoBa"
+            },
+            "expected": [true, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack"],
+                "pattern": "FoBaT"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Interleaving", "InTerLeaVing", "InterLeaving", "InterLEAVING"],
+                "pattern": "InLeV"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["MixedCASE", "MxCs", "MxCASE", "MixCsE", "MxCsECASE"],
+                "pattern": "MxCsE"
+            },
+            "expected": [false, false, false, true, false]
+        },
+        {
+            "args": {
+                "queries": ["AaAaAaAaAa", "aAaAaAaAa", "AaAaAaA", "AaAa", "Aa"],
+                "pattern": "Aa"
+            },
+            "expected": [false, false, false, false, true]
+        },
+        {
+            "args": {
+                "queries": ["samePattern", "samePatternEverywhere", "same", "pattern"],
+                "pattern": "sP"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["ComplexPattern", "CompPat", "ComplexPatt", "ComplPtn", "CompPattn"],
+                "pattern": "CompPtn"
+            },
+            "expected": [true, false, false, true, true]
+        },
+        {
+            "args": {
+                "queries": [
+                    "SoftwareEngineering",
+                    "softwareENGINEERING",
+                    "SoftWaReEnGiNeErInG",
+                    "SOFTWAREENGINEERING"
+                ],
+                "pattern": "SWE"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "PatternMatching",
+                    "Pattern",
+                    "Pat",
+                    "PatMatch",
+                    "PatternMatchInString"
+                ],
+                "pattern": "Pat"
+            },
+            "expected": [false, true, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["testCase", "testCase1", "testCase2", "testCase3", "testCase4"],
+                "pattern": "testCase"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "xYzAbCdEfG",
+                    "xYzAbCdEfGhI",
+                    "xYzAbCd",
+                    "xYzAbCdEfGhIjK",
+                    "xYzAbCdEfGhIjKlM"
+                ],
+                "pattern": "xYzAbCd"
+            },
+            "expected": [false, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPattern",
+                    "ComplexPatternQuery",
+                    "ComplexPatternMatch",
+                    "ComplexPatternMismatch",
+                    "ComplexPatternCase"
+                ],
+                "pattern": "CPM"
+            },
+            "expected": [false, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPatternMatching",
+                    "ComplexPattern",
+                    "ComplexMatch",
+                    "PatternMatching",
+                    "PatternMatch"
+                ],
+                "pattern": "CPM"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Java", "JavaScript", "JavaS", "JavaScr", "JavaScriptAndMore"],
+                "pattern": "JS"
+            },
+            "expected": [false, true, true, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "TestCase1",
+                    "TestCase2",
+                    "TestCase3",
+                    "testCase4",
+                    "testCase5",
+                    "testCase6"
+                ],
+                "pattern": "TestCase"
+            },
+            "expected": [false, false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["CamelCase", "CamelCasePattern", "Camel", "Case"],
+                "pattern": "CCP"
+            },
+            "expected": [false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "MultipleUpperCaseLetters",
+                    "MultipleLowerCaseLetters",
+                    "MixOfUpperAndLowerCase",
+                    "OnlyUpperCase",
+                    "OnlyLowerCase"
+                ],
+                "pattern": "MUCL"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "LongPatternMatchingExample",
+                    "LongPattern",
+                    "Long",
+                    "LongPatternExample",
+                    "LongPatternMatchingExampleInPython"
+                ],
+                "pattern": "Long"
+            },
+            "expected": [false, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelHump",
+                    "CamelHumpQuery",
+                    "CamelHouse",
+                    "CamelHousekeeping",
+                    "CamelHorseRace"
+                ],
+                "pattern": "CH"
+            },
+            "expected": [true, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "EdgeCase",
+                    "EdgeCaseQuery",
+                    "EdgeCaseMatch",
+                    "EdgeCaseMismatch",
+                    "EdgeCaseCase"
+                ],
+                "pattern": "ECMc"
+            },
+            "expected": [false, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ABcDeFgHiJkLmNoPqRsTuVwXyZ",
+                    "abcdefgHIJKLmnopQRstUVwxYZ",
+                    "AbCdEfGhIjKlMnOpQrStUvWxYz"
+                ],
+                "pattern": "AbCdEfG"
+            },
+            "expected": [false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["MixedCasePattern", "Mixed", "Case", "Pattern", "MixedPatternCase"],
+                "pattern": "Mix"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["ExamplePattern", "Ex", "ExPat", "Example", "PatternExample"],
+                "pattern": "Ex"
+            },
+            "expected": [false, true, false, true, false]
+        },
+        {
+            "args": {
+                "queries": ["DeepLearning", "deepLEARNING", "DeEpLeArNiNg", "DEEPLEARNING"],
+                "pattern": "DL"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["veryComplexPattern", "veryComplexPat", "veryComp", "very"],
+                "pattern": "vCP"
+            },
+            "expected": [true, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["LeetCode", "Leet_Code", "Leet_Co_Dee", "L_C_D", "L_C_D_E_T"],
+                "pattern": "LCDE"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPatternMatching",
+                    "Complex",
+                    "Pat",
+                    "ComplexPat",
+                    "PatternComplex"
+                ],
+                "pattern": "Com"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "aAaAaAaA",
+                    "AAAAAAAA",
+                    "aAaAaAa",
+                    "AaAaAaAaAaAaAaAa",
+                    "aAaAaAaAaAaAaAaAa",
+                    "AaAaAaAaAaAaAaAaAaAa",
+                    "AaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAa"
+                ],
+                "pattern": "aAaAaAaA"
+            },
+            "expected": [true, false, false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["CamelCase", "camelCase", "Camelcase", "camelCASE"],
+                "pattern": "Camel"
+            },
+            "expected": [false, false, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelCaseExample",
+                    "CamelCase",
+                    "CamelExample",
+                    "ExampleCamel",
+                    "Camel"
+                ],
+                "pattern": "CamEx"
+            },
+            "expected": [false, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelCase",
+                    "Camel",
+                    "CamelCasePattern",
+                    "CamelPattern",
+                    "PatternCamel"
+                ],
+                "pattern": "Cam"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Match", "MaTch", "MatCh", "MatcH", "MatchiNg"],
+                "pattern": "Match"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["aAbBcC", "aabbcc", "aaBbCc", "aAaBbCc", "aAbbcC"],
+                "pattern": "abc"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["testCase", "TestCase", "testCase1", "testCase2", "testCase3"],
+                "pattern": "tc"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["VariableLength", "VarLen", "VarLenPattern", "VL", "VariablePatLen"],
+                "pattern": "VarPatLen"
+            },
+            "expected": [false, false, false, false, true]
+        },
+        {
+            "args": {
+                "queries": [
+                    "lowerCasePattern",
+                    "lowercasepattern",
+                    "LOWERCASEPATTERN",
+                    "lowerCASE"
+                ],
+                "pattern": "lCP"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Python", "PythoN", "PythOn", "PyThOn", "PYTHOn", "PYTHOnS"],
+                "pattern": "PyTh"
+            },
+            "expected": [false, false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["aAbBcCdDeEfF", "aabbccddeeff", "Aabbccddeeff", "aAbbccddeeff"],
+                "pattern": "aBcDeF"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Programming", "PrograMMing", "PROGRAMMING", "programming"],
+                "pattern": "PrM"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["helloWorld", "HELLOworld", "hElLoWoRlD", "HeLLoWoRLd", "HELLOWORLD"],
+                "pattern": "hELo"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["aAbB", "aabb", "AABB", "aAaA"],
+                "pattern": "aAbB"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["aAbBcCdDeE", "aabbccddeeff", "AaBbCcDdEeFf", "AABBCCDDEEFF"],
+                "pattern": "aBcDeF"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["DataScience", "Data_Science", "DaSc", "DaTaSci", "DaTaSceNiCe"],
+                "pattern": "DaS"
+            },
+            "expected": [true, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["AlGoRiThM", "algoRiThm", "AlgorIthM", "Algorithm"],
+                "pattern": "AlGoRiThM"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ThisIsJustARandomQuery",
+                    "ThisIsJustAQuery",
+                    "ThisIsARandomQuery",
+                    "ThisJustARandomQuery",
+                    "ThisIsJustARandomQ"
+                ],
+                "pattern": "TIJARQ"
+            },
+            "expected": [true, false, false, false, true]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPattern",
+                    "ComplexPAttern",
+                    "ComplexPattern1",
+                    "ComplexPattern2",
+                    "ComplexPattern3"
+                ],
+                "pattern": "ComplexPat"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "QuantumComputing",
+                    "quantumCOMPUTING",
+                    "QuAnTuMCoMpUtInG",
+                    "QUANTUMCOMPUTING"
+                ],
+                "pattern": "QC"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPattern",
+                    "complexPattern",
+                    "ComplexPATTERN",
+                    "complexpATTERN",
+                    "ComplexpAtTeRn"
+                ],
+                "pattern": "CP"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "pattern": "a"
+            },
+            "expected": [
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        },
+        {
+            "args": {
+                "queries": [
+                    "aBcDeFgHiJ",
+                    "aBcDeFgHiJkLmNoPqR",
+                    "aBcDeFgHiJkL",
+                    "aBcDeFgHiJkLmNoP",
+                    "aBcDeFgHiJkLmNoPqRsTuVwXyZ"
+                ],
+                "pattern": "aBcDeFgHiJ"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "EdgeCase",
+                    "EdgeCaseQuery",
+                    "EdgeCaseMatch",
+                    "EdgeCaseMismatch",
+                    "EdgeCaseCase"
+                ],
+                "pattern": "ECq"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "EdgeCase",
+                    "EdgeCaseQuery",
+                    "EdgeCaseMatch",
+                    "EdgeCaseMismatch",
+                    "EdgeCaseCase"
+                ],
+                "pattern": "ECM"
+            },
+            "expected": [false, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": ["Pattern", "Pattern1", "Pattern2", "Pattern3", "Pattern4"],
+                "pattern": "Pattern"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ArtificialIntelligence",
+                    "artificialINTELLIGENCE",
+                    "ArTiFiCiAlInTeLlIgEnCe",
+                    "ARTIFICIALINTELLIGENCE"
+                ],
+                "pattern": "AI"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPattern",
+                    "ComplexPatternQuery",
+                    "ComplexPatternMatch",
+                    "ComplexPatternMismatch",
+                    "ComplexPatternCase"
+                ],
+                "pattern": "CPMc"
+            },
+            "expected": [false, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "camelMatch",
+                    "CamelMatch",
+                    "camelMATCH",
+                    "CamelMATCH",
+                    "camelMatchTEST"
+                ],
+                "pattern": "CMt"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "MiXeDcAsE",
+                    "MiXeDcAsEc",
+                    "MiXeDcAsEcc",
+                    "MiXeDcAsEcce",
+                    "MiXeDcAsEcces",
+                    "MiXeDcAsEccese"
+                ],
+                "pattern": "MiXeDcAsEcces"
+            },
+            "expected": [false, false, false, false, true, true]
+        },
+        {
+            "args": {
+                "queries": ["upperCASE", "UpperCASE", "upperCase", "UPPERcase", "uPPERCase"],
+                "pattern": "uPR"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["AbCdEfGh", "AbCdEfGhIj", "AbCdEfGhIjKl", "AbCdEfGhIjKlMn"],
+                "pattern": "ACEGIK"
+            },
+            "expected": [false, false, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "SubsequenceMatching",
+                    "SubseqMatch",
+                    "SubSeqMatch",
+                    "SbqMtch",
+                    "SubsqMtch"
+                ],
+                "pattern": "SbqMtch"
+            },
+            "expected": [true, true, false, true, true]
+        },
+        {
+            "args": {
+                "queries": [
+                    "TestPattern",
+                    "TestPatternQuery",
+                    "TestPatternMatch",
+                    "TestPatternMismatch",
+                    "TestPatternCase"
+                ],
+                "pattern": "TPq"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["xYzXyZ", "xyzyxzyx", "XYXYXY", "xyXyXy"],
+                "pattern": "XyZ"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "multipleUpperCases",
+                    "multipleUPPERCASES",
+                    "MULTIPLEUPPERCASES",
+                    "multipleUPPER"
+                ],
+                "pattern": "mUC"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["CamelMatch", "camelMatch", "CaMeLmAtCh", "CAMELMATCH", "camelMATCH"],
+                "pattern": "CaM"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "PatternMatching",
+                    "PatternMATching",
+                    "PatternMATCHing",
+                    "PatternMATCHINg"
+                ],
+                "pattern": "PatternMATCHINg"
+            },
+            "expected": [false, false, false, true]
+        },
+        {
+            "args": {
+                "queries": [
+                    "ComplexPattern",
+                    "ComplexPatternQuery",
+                    "ComplexPatternMatch",
+                    "ComplexPatternMismatch",
+                    "ComplexPatternCase"
+                ],
+                "pattern": "CPq"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["XyZ", "XYZabc", "xYzAbC", "xyZabc", "XyZABC"],
+                "pattern": "XyZ"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "MachineLearning",
+                    "machineLEARNING",
+                    "MaChInELeArNiNg",
+                    "MACHINELEARNING"
+                ],
+                "pattern": "ML"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "aBcDeFgHiJ",
+                    "aBcDeFgHiJkL",
+                    "aBcDeFgHiJkLmN",
+                    "aBcDeFgHiJkLmNoP",
+                    "aBcDeFgHiJkLmNoPqR"
+                ],
+                "pattern": "aBcFj"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["SamePatternSamePattern", "SamePattern", "Pattern", "Same", ""],
+                "pattern": "SPSP"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelCasePatternMatching",
+                    "camelCasePatternMatching",
+                    "CamelCasePattern",
+                    "CamelCasePatternMatch",
+                    "CamelCasePatt"
+                ],
+                "pattern": "CCPM"
+            },
+            "expected": [true, false, false, true, false]
+        },
+        {
+            "args": {
+                "queries": ["AbCdEfG", "AbcDeFG", "AbCDefg", "AbcDefgHiJk", "AbCdEfGhIjk"],
+                "pattern": "ACEG"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "TestPattern",
+                    "TestPatternQuery",
+                    "TestPatternMatch",
+                    "TestPatternMismatch",
+                    "TestPatternCase"
+                ],
+                "pattern": "TPM"
+            },
+            "expected": [false, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": ["CamelCase", "camelCase", "CamelCASE", "CAMELcase"],
+                "pattern": "CaC"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                    "aBcDeFgHiJkLmNoPqRsTuVwXyZ",
+                    "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+                ],
+                "pattern": "aBcEfHjLpTz"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "OneTwoThreeFourFiveSixSevenEightNineTen",
+                    "OneTwoThreeFourFiveSixSevenEightNine",
+                    "OneTwoThreeFourFiveSixSevenEight",
+                    "OneTwoThreeFourFiveSixSeven",
+                    "OneTwoThreeFourFiveSix"
+                ],
+                "pattern": "OTFSF"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelCasePatternMatching",
+                    "camelCasePatternMatching",
+                    "CAMELCASEPATTERNMATCHING",
+                    "camelcasepatternmatching"
+                ],
+                "pattern": "CamElCaSePaTtErNmAtChInG"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ",
+                    "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyY"
+                ],
+                "pattern": "aBcDeFgHiJkLmNoPqRsTuVwXyZ"
+            },
+            "expected": [false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "AnotherExample",
+                    "Another",
+                    "An",
+                    "AnotherExampleString",
+                    "ExampleAnotherString"
+                ],
+                "pattern": "An"
+            },
+            "expected": [false, true, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["TestCase", "Test", "TestCasePattern", "TestPattern", "PatternTest"],
+                "pattern": "Tes"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "MachineLearning",
+                    "ML",
+                    "MaChine_Learning",
+                    "MachLeaRning",
+                    "MachineLearNiNg"
+                ],
+                "pattern": "MLe"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["PatternMatching", "PatternMatchingExample", "PatMatch", "PatMatchEx"],
+                "pattern": "PM"
+            },
+            "expected": [true, false, true, false]
+        },
+        {
+            "args": {
+                "queries": ["abAB", "abab", "ABab", "abABab", "abABAB"],
+                "pattern": "abAB"
+            },
+            "expected": [true, false, false, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "PatternMatchingIsFun",
+                    "PatternMatching",
+                    "PatternMatchingIs",
+                    "PatternIsFun",
+                    "PatternMatchingFun"
+                ],
+                "pattern": "PMIF"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["AlGoRiThM", "algoR", "alGOrIthM", "aLGOrIth", "AlgOrIthM"],
+                "pattern": "aGI"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "aBcDeFgHiJ",
+                    "aBcDeFgHiJkL",
+                    "aBcDeFgHiJkLmN",
+                    "aBcDeFgHiJkLmNoP",
+                    "aBcDeFgHiJkLmNoPqR"
+                ],
+                "pattern": "aBcDFgHj"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "PaTtErN123",
+                    "Pattern123",
+                    "pAtTeRn123",
+                    "PaTtErN",
+                    "Pattern",
+                    "pAtTeRn"
+                ],
+                "pattern": "PaTtErN"
+            },
+            "expected": [false, false, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["aBCdEf", "abcdef", "abDef", "aBcDE", "aBcDeF", "aBcDEf"],
+                "pattern": "aBcEf"
+            },
+            "expected": [false, false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "TestCasesWithDifferentLengths",
+                    "TestCasesWithDifferentLength",
+                    "TestCasesWithDifferent",
+                    "TestCasesWith",
+                    "TestCases"
+                ],
+                "pattern": "TCWDL"
+            },
+            "expected": [true, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Pattern", "pattern", "PatternMatch", "PAtTERNmAtCH", "PaTtErNmAtCh"],
+                "pattern": "PaT"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["ComputerVision", "computerVISION", "CoMpUtErViSiOn", "COMPUTERVISION"],
+                "pattern": "CV"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Xylophone", "xylophone", "XyLopHone", "XyLoPhone", "xyLoPhOnE"],
+                "pattern": "XyLoPhOnE"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CoMpLeXqUeRiEs",
+                    "complexqueries",
+                    "CoMpLeXqUeRiE",
+                    "CoMpLeXqUeRiEz",
+                    "CoMpLeXqUeRiEsZ",
+                    "CoMpLeXqUeRiEsZz"
+                ],
+                "pattern": "CoMpLeXqUeRiEs"
+            },
+            "expected": [true, false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelHump",
+                    "CamelHumpQuery",
+                    "CamelHouse",
+                    "CamelHousekeeping",
+                    "CamelHorseRace"
+                ],
+                "pattern": "CHq"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["OpenAI", "Open_Artificial_Intelligence", "O_A_I", "OpenA", "OpenAIAI"],
+                "pattern": "OAI"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "looongPattern",
+                    "looongPattern",
+                    "longPattern",
+                    "lOnGPattern",
+                    "LoNgPatTerN"
+                ],
+                "pattern": "LoNgPat"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["Algorithm", "AlgoRhythm", "AlGoRiThM", "ALGORITHM"],
+                "pattern": "AlGM"
+            },
+            "expected": [false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["TestString", "TestingString", "TeststrIng", "TstStr", "TestStrng"],
+                "pattern": "TstStr"
+            },
+            "expected": [true, true, false, true, true]
+        },
+        {
+            "args": {
+                "queries": ["OneTwoThreeFour", "OTFT", "OneTwoF", "OneTwoThrFor", "OTFTF"],
+                "pattern": "OTFT"
+            },
+            "expected": [false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["qWeRtY", "qwerty", "QwErTy", "QwErTyUiOp"],
+                "pattern": "qWeRtY"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "TestPattern",
+                    "TestPatternQuery",
+                    "TestPatternMatch",
+                    "TestPatternMismatch",
+                    "TestPatternCase"
+                ],
+                "pattern": "TPMc"
+            },
+            "expected": [false, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "NaturalLanguageProcessing",
+                    "naturalLANGUAGEPROCESSING",
+                    "NaTuRaLlAnGuAgEPrOcEsSiNg",
+                    "NATURALLANGUAGEPROCESSING"
+                ],
+                "pattern": "NLP"
+            },
+            "expected": [true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["MIXEDcase", "MiXEDcase", "MiXeDCase", "MIXeDCase", "MiXEdCASE"],
+                "pattern": "MXc"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["MiXeDcASe", "MiXeDCase", "MiXeD", "MiX", "MixeDCase"],
+                "pattern": "MiX"
+            },
+            "expected": [false, false, false, true, false]
+        },
+        {
+            "args": {
+                "queries": ["aAaAaA", "aaaaaa", "Aaaaaa", "aAaaaa", "aaaaAa"],
+                "pattern": "aAa"
+            },
+            "expected": [false, false, false, true, true]
+        },
+        {
+            "args": {
+                "queries": [
+                    "CamelHump",
+                    "CamelHumpQuery",
+                    "CamelHouse",
+                    "CamelHousekeeping",
+                    "CamelHorseRace"
+                ],
+                "pattern": "CHH"
+            },
+            "expected": [false, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["PatternMatching", "PatMat", "PatrnMtch", "PatternMtching", "PatMatch"],
+                "pattern": "PtnMtch"
+            },
+            "expected": [true, false, true, true, false]
+        },
+        {
+            "args": {
+                "queries": ["AlphabetPattern", "Al", "Alpha", "Pattern", "AlphabetPatternInString"],
+                "pattern": "Al"
+            },
+            "expected": [false, true, true, false, false]
+        },
+        {
+            "args": {
+                "queries": ["lowercase", "Lowercase", "LOWERCASE", "lowerCASE", "lowERCASE"],
+                "pattern": "lwr"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["aAbBcCdDeEfFgG", "aBcDeFg", "aBcD", "aB", "a"],
+                "pattern": "aBcD"
+            },
+            "expected": [false, false, true, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "AlGoRiThM",
+                    "algorithm",
+                    "AlGoRiThMs",
+                    "AlGoRiThMuS",
+                    "algorithms",
+                    "AlGoRiThmSUs",
+                    "AlGoRiThMuSiC"
+                ],
+                "pattern": "AlGoRiThMuS"
+            },
+            "expected": [false, false, false, true, false, false, false]
+        },
+        {
+            "args": {
+                "queries": [
+                    "exampleQuery",
+                    "ExampleQUERY",
+                    "exampleQUERY",
+                    "exampleQueryTest",
+                    "exampleQueryTestTest"
+                ],
+                "pattern": "eQ"
+            },
+            "expected": [true, false, false, false, false]
+        },
+        {
+            "args": {
+                "queries": ["DataStructure", "dataStructure", "DataSTRUCTURE", "DATAstructure"],
+                "pattern": "DtS"
+            },
+            "expected": [true, false, false, false]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().camelMatch",
+        "typescript": "Solution().camelMatch"
+    }
+}

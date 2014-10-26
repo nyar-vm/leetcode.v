@@ -1,0 +1,294 @@
+{
+    "id": "minimum-number-of-pushes-to-type-word-ii",
+    "questionId": 3016,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Hash Table", "String", "Counting", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "word": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "word": "abcde"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "word": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "word": "mississippi"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "word": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "word": "aaaabbbbccccddddeeeeffffgggghhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkkllllllllllllmmmmmmmmmmmmmmmnnnnnnnnnnnnnnnnoooooooppppppppppppppppqqqqqqqqqqqqqqqqrrrrrrrrrrrrrrrrrsssssssssssssssstttttttttttttttttuuuuuuuuuuuuuuuuuvvvvvvvvvvvvvvvvvwwwwwwwwwwwwwwwwwxxxxxxxxxyyyyyyyyyyyyyyyyyzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 499
+        },
+        {
+            "args": {
+                "word": "hellohellohellohellohellohellohellohellohellohello"
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "word": "abacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabad"
+            },
+            "expected": 88
+        },
+        {
+            "args": {
+                "word": "xyzxyzxyzxyz"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "word": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "word": "aaabbbcccdddeeefffggghhhiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz"
+            },
+            "expected": 198
+        },
+        {
+            "args": {
+                "word": "ababababababababababababababababababababab"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiiiiii"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "word": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 98
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 168
+        },
+        {
+            "args": {
+                "word": "abacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabadabacabad"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "word": "ppppppppppppppppppppppppppppppppppppppppppppppppppppqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "word": "mississippimississippimississippimississippi"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 162
+        },
+        {
+            "args": {
+                "word": "loremipsumdolorsitametconsecteturadipiscingelitloremipsumdolorsitametconsecteturadipiscingelitloremipsumdolorsitametconsecteturadipiscingelit"
+            },
+            "expected": 183
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 79
+        },
+        {
+            "args": {
+                "word": "abcdefghijklmnopqrstuvwxyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 143
+        },
+        {
+            "args": {
+                "word": "onelongwordwithoutrepetitionsonelongwordwithoutrepetitions"
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "word": "thequickbrownfoxjumpsoverthelazydogthequickbrownfoxjumpsoverthelazydog"
+            },
+            "expected": 130
+        },
+        {
+            "args": {
+                "word": "uniquelettersabcdefghijklmnopqrstuvwxyzuniqueletters"
+            },
+            "expected": 84
+        },
+        {
+            "args": {
+                "word": "aaaaaaaaaabbbbbbbbccccccccddddddddeeeeeeeffffffffggggggghhhhhhhh"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "word": "nnnnneeeeffffddddeeeeffffddddddddddddeeeeeeeeeeeeeeeeffffffddddddddddddddeeeeeeeeeeeeeeeeffffffdddddddddddddeeeeeeeeeeeeee"
+            },
+            "expected": 122
+        },
+        {
+            "args": {
+                "word": "equalprobabilityabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 136
+        },
+        {
+            "args": {
+                "word": "ppppoooolllliiiihhhhggggffffeeeeeeeedddddccccbbbaaa"
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzz"
+            },
+            "expected": 114
+        },
+        {
+            "args": {
+                "word": "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": 112
+        },
+        {
+            "args": {
+                "word": "mnbvcxzvbnmzxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnmxcvbnm"
+            },
+            "expected": 102
+        },
+        {
+            "args": {
+                "word": "aaaabbbbccccddddeeeeffffgggghhhhiiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz"
+            },
+            "expected": 225
+        },
+        {
+            "args": {
+                "word": "repeatedrepeatedrepeatedrepeatedrepeatedrepeated"
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "word": "aabbcdeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 104
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": 112
+        },
+        {
+            "args": {
+                "word": "frequencydistributionfrequencydistribution"
+            },
+            "expected": 54
+        },
+        {
+            "args": {
+                "word": "programmingproblemsolvingprogramming"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "word": "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop"
+            },
+            "expected": 132
+        },
+        {
+            "args": {
+                "word": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "word": "mississippiissippiissippi"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": 170
+        },
+        {
+            "args": {
+                "word": "abcdefghijklnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": 108
+        },
+        {
+            "args": {
+                "word": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzz"
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "word": "frequentfrequentfrequentfrequentfrequentfrequentfrequentfrequentfrequentfrequent"
+            },
+            "expected": 80
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimumPushes",
+        "typescript": "Solution().minimumPushes"
+    }
+}

@@ -1,0 +1,698 @@
+{
+    "id": "find-common-characters",
+    "questionId": 1002,
+    "difficulty": "Easy",
+    "tags": ["Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "words": ["abc", "abc", "abc"]
+            },
+            "expected": ["a", "b", "c"]
+        },
+        {
+            "args": {
+                "words": ["bella", "label", "roller"]
+            },
+            "expected": ["e", "l", "l"]
+        },
+        {
+            "args": {
+                "words": ["python", "java", "javascript"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hold"]
+            },
+            "expected": ["l", "o"]
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "aabbc", "abc"]
+            },
+            "expected": ["a", "b", "c"]
+        },
+        {
+            "args": {
+                "words": ["cool", "lock", "cook"]
+            },
+            "expected": ["c", "o"]
+        },
+        {
+            "args": {
+                "words": ["a", "a", "a", "a"]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apricot", "peach"]
+            },
+            "expected": ["a", "p"]
+        },
+        {
+            "args": {
+                "words": ["happy", "happy", "happy"]
+            },
+            "expected": ["h", "a", "p", "p", "y"]
+        },
+        {
+            "args": {
+                "words": ["a", "a", "a"]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["flower", "flow", "flight"]
+            },
+            "expected": ["f", "l"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words": ["common", "commons", "commonground"]
+            },
+            "expected": ["c", "o", "o", "m", "m", "n"]
+        },
+        {
+            "args": {
+                "words": ["sophistication", "sophisticated", "sophisticating"]
+            },
+            "expected": ["s", "s", "o", "p", "h", "i", "i", "t", "t", "c", "a"]
+        },
+        {
+            "args": {
+                "words": ["encyclopedia", "encyclopedia", "encyclopedic"]
+            },
+            "expected": ["e", "e", "n", "c", "c", "y", "l", "o", "p", "d", "i"]
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "abrakadabrac", "abrakadabracd"]
+            },
+            "expected": ["a", "a", "a", "a", "a", "b", "b", "r", "r", "c", "d"]
+        },
+        {
+            "args": {
+                "words": ["multifaceted", "multimodal", "multiplicity"]
+            },
+            "expected": ["m", "u", "l", "t", "i"]
+        },
+        {
+            "args": {
+                "words": ["encyclopedia", "encyclopedic", "encyclopediae"]
+            },
+            "expected": ["e", "e", "n", "c", "c", "y", "l", "o", "p", "d", "i"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "perception", "competition"]
+            },
+            "expected": ["e", "p", "t", "i", "o", "n"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "logarithm", "rhythm", "harmony"]
+            },
+            "expected": ["r", "h", "m"]
+        },
+        {
+            "args": {
+                "words": ["xylophone", "zoo", "ozone"]
+            },
+            "expected": ["o", "o"]
+        },
+        {
+            "args": {
+                "words": ["banana", "bandana", "panama"]
+            },
+            "expected": ["a", "a", "a", "n"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "logarithm", "altruism"]
+            },
+            "expected": ["a", "l", "r", "i", "t", "m"]
+        },
+        {
+            "args": {
+                "words": [
+                    "floccinaucinihilipilification",
+                    "pneumonoultramicroscopicsilicovolcanoconiosis",
+                    "supercalifragilisticexpialidocious"
+                ]
+            },
+            "expected": [
+                "l",
+                "l",
+                "l",
+                "o",
+                "o",
+                "c",
+                "c",
+                "c",
+                "i",
+                "i",
+                "i",
+                "i",
+                "i",
+                "i",
+                "a",
+                "a",
+                "u",
+                "p",
+                "t"
+            ]
+        },
+        {
+            "args": {
+                "words": ["environment", "venture", "ambient"]
+            },
+            "expected": ["e", "n", "t"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "algorithms", "algebra"]
+            },
+            "expected": ["a", "l", "g", "r"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "replication", "repetitive"]
+            },
+            "expected": ["r", "e", "p", "t", "i", "i"]
+        },
+        {
+            "args": {
+                "words": ["characterization", "character", "charisma"]
+            },
+            "expected": ["c", "h", "a", "a", "r"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "petition", "portion"]
+            },
+            "expected": ["p", "t", "i", "o", "n"]
+        },
+        {
+            "args": {
+                "words": ["unbelievable", "believable", "believability"]
+            },
+            "expected": ["b", "b", "e", "e", "l", "l", "i", "v", "a"]
+        },
+        {
+            "args": {
+                "words": ["xylophone", "xylophones", "xylophonist"]
+            },
+            "expected": ["x", "y", "l", "o", "o", "p", "h", "n"]
+        },
+        {
+            "args": {
+                "words": ["environment", "ambient", "administrate"]
+            },
+            "expected": ["e", "n", "i", "m", "t"]
+        },
+        {
+            "args": {
+                "words": ["environment", "environments", "environmental"]
+            },
+            "expected": ["e", "e", "n", "n", "n", "v", "i", "r", "o", "m", "t"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "intersects", "intercept"]
+            },
+            "expected": ["i", "n", "t", "t", "e", "e", "r", "c"]
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "abrakadabras", "abrakadabratic"]
+            },
+            "expected": ["a", "a", "a", "a", "a", "b", "b", "r", "r", "d"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "interact", "interstellar"]
+            },
+            "expected": ["i", "n", "t", "t", "e", "r"]
+        },
+        {
+            "args": {
+                "words": ["fantastic", "fantasy", "fantasia"]
+            },
+            "expected": ["f", "a", "a", "n", "t", "s"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missouri", "missile"]
+            },
+            "expected": ["m", "i", "i", "s", "s"]
+        },
+        {
+            "args": {
+                "words": ["reducibility", "reductiveness", "reductive"]
+            },
+            "expected": ["r", "e", "d", "u", "c", "i", "t"]
+        },
+        {
+            "args": {
+                "words": ["alphabet", "alphabetic", "alphanumeric"]
+            },
+            "expected": ["a", "a", "l", "p", "h", "e"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "petition", "representation"]
+            },
+            "expected": ["e", "p", "t", "t", "i", "o", "n"]
+        },
+        {
+            "args": {
+                "words": ["congratulations", "congratulate", "congratulatory"]
+            },
+            "expected": ["c", "o", "n", "g", "r", "a", "a", "t", "t", "u", "l"]
+        },
+        {
+            "args": {
+                "words": ["zzzzzz", "zzzzzzzzzz", "zzzzzzzzzzzzzzzzzzzzzzzz"]
+            },
+            "expected": ["z", "z", "z", "z", "z", "z"]
+        },
+        {
+            "args": {
+                "words": ["programming", "program", "pro"]
+            },
+            "expected": ["p", "r", "o"]
+        },
+        {
+            "args": {
+                "words": ["environment", "environmental", "environments"]
+            },
+            "expected": ["e", "e", "n", "n", "n", "v", "i", "r", "o", "m", "t"]
+        },
+        {
+            "args": {
+                "words": ["abbreviation", "abbreviate", "abbreviations"]
+            },
+            "expected": ["a", "a", "b", "b", "r", "e", "v", "i", "t"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "interior", "interesting"]
+            },
+            "expected": ["i", "i", "n", "t", "e", "r"]
+        },
+        {
+            "args": {
+                "words": ["abcdefghij", "jihgfedcba", "fedcba", "abcdefghij"]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "words": [
+                    "supercalifragilisticexpialidocious",
+                    "supercalifragilistic",
+                    "supercalifragilisticexpialidos"
+                ]
+            },
+            "expected": [
+                "s",
+                "s",
+                "u",
+                "p",
+                "e",
+                "r",
+                "r",
+                "c",
+                "c",
+                "a",
+                "a",
+                "l",
+                "l",
+                "i",
+                "i",
+                "i",
+                "i",
+                "f",
+                "g",
+                "t"
+            ]
+        },
+        {
+            "args": {
+                "words": ["development", "delivery", "department"]
+            },
+            "expected": ["d", "e", "e"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missionary", "pessimism"]
+            },
+            "expected": ["m", "i", "i", "s", "s"]
+        },
+        {
+            "args": {
+                "words": ["programming", "gramming", "paring"]
+            },
+            "expected": ["r", "g", "a", "i", "n"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzz",
+                    "zzzzzzzz",
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z"
+                ]
+            },
+            "expected": ["z"]
+        },
+        {
+            "args": {
+                "words": ["programming", "programmer", "program"]
+            },
+            "expected": ["p", "r", "r", "o", "g", "a", "m"]
+        },
+        {
+            "args": {
+                "words": ["xylophone", "xylography", "xylophonist"]
+            },
+            "expected": ["x", "y", "l", "o", "p", "h"]
+        },
+        {
+            "args": {
+                "words": ["characterization", "characterization", "characterize"]
+            },
+            "expected": ["c", "c", "h", "a", "a", "r", "r", "t", "e", "i", "z"]
+        },
+        {
+            "args": {
+                "words": ["orchestration", "orchestrated", "orchestrator"]
+            },
+            "expected": ["o", "r", "r", "c", "h", "e", "s", "t", "t", "a"]
+        },
+        {
+            "args": {
+                "words": ["characterization", "character", "characterization"]
+            },
+            "expected": ["c", "c", "h", "a", "a", "r", "r", "t", "e"]
+        },
+        {
+            "args": {
+                "words": ["intersectionality", "interact", "interstellar"]
+            },
+            "expected": ["i", "n", "t", "t", "e", "r", "a"]
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "academia", "barbara"]
+            },
+            "expected": ["a", "a", "a"]
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "bbaacc", "ccaabb", "aabbc", "abbcc", "aaccb", "abcabc"]
+            },
+            "expected": ["a", "b", "c"]
+        },
+        {
+            "args": {
+                "words": ["abacaxi", "bacana", "cabana"]
+            },
+            "expected": ["a", "a", "a", "b", "c"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "interact", "interactive"]
+            },
+            "expected": ["i", "n", "t", "t", "e", "r", "c"]
+        },
+        {
+            "args": {
+                "words": ["programming", "programmer", "programmatic"]
+            },
+            "expected": ["p", "r", "r", "o", "g", "a", "m", "m"]
+        },
+        {
+            "args": {
+                "words": ["exemplification", "exemplary", "exemplify"]
+            },
+            "expected": ["e", "e", "x", "m", "p", "l"]
+        },
+        {
+            "args": {
+                "words": ["congratulations", "congratulate", "congratulations"]
+            },
+            "expected": ["c", "o", "n", "g", "r", "a", "a", "t", "t", "u", "l"]
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "alakazam", "alchemy"]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missouri", "missed"]
+            },
+            "expected": ["m", "i", "s", "s"]
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a"]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["xylophone", "xylophones", "xylophonist", "xylophonists"]
+            },
+            "expected": ["x", "y", "l", "o", "o", "p", "h", "n"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "misstep", "misspell"]
+            },
+            "expected": ["m", "i", "s", "s", "p"]
+        },
+        {
+            "args": {
+                "words": ["bookkeeper", "bookstore", "keeper"]
+            },
+            "expected": ["k", "e", "r"]
+        },
+        {
+            "args": {
+                "words": ["multifaceted", "multifarious", "multitude"]
+            },
+            "expected": ["m", "u", "l", "t", "i"]
+        },
+        {
+            "args": {
+                "words": ["multiple", "multiplication", "multiplicity"]
+            },
+            "expected": ["m", "u", "l", "l", "t", "i", "p"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbccddeeff",
+                    "bbaacceeddff",
+                    "ccaabbeeffdd",
+                    "aabbeeffccdd",
+                    "aabbccdde",
+                    "bbccddeeff",
+                    "aaccbbeeff"
+                ]
+            },
+            "expected": ["b", "b", "c", "c", "e"]
+        },
+        {
+            "args": {
+                "words": ["xylophone", "xenon", "xerox", "xylography"]
+            },
+            "expected": ["x", "o"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "repetitions", "repetitive"]
+            },
+            "expected": ["r", "e", "e", "p", "t", "t", "i", "i"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missouri", "missisipi"]
+            },
+            "expected": ["m", "i", "i", "s", "s"]
+        },
+        {
+            "args": {
+                "words": ["beautiful", "beautify", "beautification"]
+            },
+            "expected": ["b", "e", "a", "u", "t", "i", "f"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "algebra", "alignment"]
+            },
+            "expected": ["a", "l", "g"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "interact", "interaction"]
+            },
+            "expected": ["i", "n", "t", "t", "e", "r", "c"]
+        },
+        {
+            "args": {
+                "words": ["exceedingly", "excellent", "exceptional"]
+            },
+            "expected": ["e", "e", "x", "c", "n", "l"]
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "cadabra", "abraca"]
+            },
+            "expected": ["a", "a", "a", "b", "r", "c"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "logarithm", "rhythm"]
+            },
+            "expected": ["r", "t", "h", "m"]
+        },
+        {
+            "args": {
+                "words": ["quizzing", "quizzes", "quizzed"]
+            },
+            "expected": ["q", "u", "i", "z", "z"]
+        },
+        {
+            "args": {
+                "words": ["sophisticated", "sophistication", "sophistry"]
+            },
+            "expected": ["s", "s", "o", "p", "h", "i", "t"]
+        },
+        {
+            "args": {
+                "words": ["strength", "strengths", "stressed"]
+            },
+            "expected": ["s", "t", "r", "e"]
+        },
+        {
+            "args": {
+                "words": ["encyclopedia", "encyclopediae", "encyclopedias"]
+            },
+            "expected": ["e", "e", "n", "c", "c", "y", "l", "o", "p", "d", "i", "a"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "petition", "competition"]
+            },
+            "expected": ["e", "p", "t", "t", "i", "i", "o", "n"]
+        },
+        {
+            "args": {
+                "words": ["unbelievable", "unbeliever", "unbelievably"]
+            },
+            "expected": ["u", "n", "b", "e", "e", "l", "i", "v"]
+        },
+        {
+            "args": {
+                "words": ["interpolation", "interpretation", "internationalization"]
+            },
+            "expected": ["i", "i", "n", "n", "t", "t", "e", "r", "o", "a"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "intercept", "interstellar"]
+            },
+            "expected": ["i", "n", "t", "t", "e", "e", "r"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg"]
+            },
+            "expected": ["d"]
+        },
+        {
+            "args": {
+                "words": ["pterodactyl", "pterodactyl", "pterodactyls"]
+            },
+            "expected": ["p", "t", "t", "e", "r", "o", "d", "a", "c", "y", "l"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missouri", "missed", "missives"]
+            },
+            "expected": ["m", "i", "s", "s"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "replicate", "repetitive"]
+            },
+            "expected": ["r", "e", "e", "p", "t", "i"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "algorithmic", "algorithms"]
+            },
+            "expected": ["a", "l", "g", "o", "r", "i", "t", "h", "m"]
+        },
+        {
+            "args": {
+                "words": ["encyclopedia", "encyclopedia", "encyclopedia"]
+            },
+            "expected": ["e", "e", "n", "c", "c", "y", "l", "o", "p", "d", "i", "a"]
+        },
+        {
+            "args": {
+                "words": ["banana", "bandana", "bananas"]
+            },
+            "expected": ["b", "a", "a", "a", "n", "n"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "perpetuation", "petition"]
+            },
+            "expected": ["e", "p", "t", "t", "i", "o", "n"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "logarithm", "anthology"]
+            },
+            "expected": ["a", "l", "g", "o", "t", "h"]
+        },
+        {
+            "args": {
+                "words": ["intersection", "interview", "interstellar"]
+            },
+            "expected": ["i", "n", "t", "e", "e", "r"]
+        },
+        {
+            "args": {
+                "words": ["mississippi", "missouri", "dismiss"]
+            },
+            "expected": ["m", "i", "i", "s", "s"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().commonChars",
+        "typescript": "Solution().commonChars"
+    }
+}

@@ -1,0 +1,406 @@
+{
+    "id": "partition-labels",
+    "questionId": 763,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Hash Table", "Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "abcdabcde"
+            },
+            "expected": [8, 1]
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbbccccc"
+            },
+            "expected": [6, 5, 5]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz"
+            },
+            "expected": [9]
+        },
+        {
+            "args": {
+                "s": "aaaabbbbbccccc"
+            },
+            "expected": [4, 5, 5]
+        },
+        {
+            "args": {
+                "s": "abcdabcdeabcdabcde"
+            },
+            "expected": [18]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": [
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+            ]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": [
+                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+            ]
+        },
+        {
+            "args": {
+                "s": "zab"
+            },
+            "expected": [1, 1, 1]
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": [1]
+        },
+        {
+            "args": {
+                "s": "zabbcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": [28]
+        },
+        {
+            "args": {
+                "s": "aabbccddeee"
+            },
+            "expected": [2, 2, 2, 2, 3]
+        },
+        {
+            "args": {
+                "s": "abcdcba"
+            },
+            "expected": [7]
+        },
+        {
+            "args": {
+                "s": "ababababab"
+            },
+            "expected": [10]
+        },
+        {
+            "args": {
+                "s": "zabzabc"
+            },
+            "expected": [6, 1]
+        },
+        {
+            "args": {
+                "s": "abababab"
+            },
+            "expected": [8]
+        },
+        {
+            "args": {
+                "s": "abcde"
+            },
+            "expected": [1, 1, 1, 1, 1]
+        },
+        {
+            "args": {
+                "s": "ababcbacadefegdehijhklij"
+            },
+            "expected": [9, 7, 8]
+        },
+        {
+            "args": {
+                "s": "eccbbbbdec"
+            },
+            "expected": [10]
+        },
+        {
+            "args": {
+                "s": "abcabcdabcdeabcdefabcdefg"
+            },
+            "expected": [24, 1]
+        },
+        {
+            "args": {
+                "s": "xyzzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyxzyx"
+            },
+            "expected": [66]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbccccccccddddddddeeeeeeeefffffffffghhhhhhhhiiiiiiiijjjjjjjjkkkkkkkkllllllllmmmmmmmmnnnnnnnnooooooooppppppppqqqqqqqqrrrrrrrrssssssssttttttttuuuuuuuuvvvvvvvvwwwwwwwwxxxxxxxxxyyyyyyyyzzzzzzzz"
+            },
+            "expected": [
+                10, 8, 8, 8, 8, 9, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 8, 8
+            ]
+        },
+        {
+            "args": {
+                "s": "abcdabcdeabcde"
+            },
+            "expected": [14]
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddeeeeffffgggg"
+            },
+            "expected": [4, 4, 4, 4, 4, 4, 4]
+        },
+        {
+            "args": {
+                "s": "abcadefeghijklmnopqrstuvwxyzzxywvutsrqponmlkjihgfedcba"
+            },
+            "expected": [54]
+        },
+        {
+            "args": {
+                "s": "xyzzyxzyxzzyxzyxzyxzzyxzyxzyxzzyxzyxzzyxzyxzyxzzyxzyxzyxzzyxzyxzyxzyxzzyxzyxzyxzyx"
+            },
+            "expected": [82]
+        },
+        {
+            "args": {
+                "s": "zzyzxzyzxzyz"
+            },
+            "expected": [12]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": [30]
+        },
+        {
+            "args": {
+                "s": "abacabadabacabadabacabadabacabad"
+            },
+            "expected": [32]
+        },
+        {
+            "args": {
+                "s": "abcdexyzabcdexyzabcdexyzabcdexyz"
+            },
+            "expected": [32]
+        },
+        {
+            "args": {
+                "s": "abcdefghfedcba"
+            },
+            "expected": [14]
+        },
+        {
+            "args": {
+                "s": "abcdefghihgfedcbaijklmnopqrstuvutsrqponmlkjihgfedcba"
+            },
+            "expected": [52]
+        },
+        {
+            "args": {
+                "s": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij"
+            },
+            "expected": [80]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [78]
+        },
+        {
+            "args": {
+                "s": "mnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [66]
+        },
+        {
+            "args": {
+                "s": "ababcbacadeafgafghijghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [66]
+        },
+        {
+            "args": {
+                "s": "zzzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbaaazzzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbaaazzzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbaaazzzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbaaa"
+            },
+            "expected": [212]
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefg"
+            },
+            "expected": [21]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": [70]
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": [62]
+        },
+        {
+            "args": {
+                "s": "abcdefghihgfedcba"
+            },
+            "expected": [17]
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg"
+            },
+            "expected": [63]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": [66]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": [
+                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 36
+            ]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": [52]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyzxyzxyzxyzxyzxyz"
+            },
+            "expected": [30]
+        },
+        {
+            "args": {
+                "s": "mnopqrsmnopqrstuvwpqrstuv"
+            },
+            "expected": [25]
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc"
+            },
+            "expected": [18]
+        },
+        {
+            "args": {
+                "s": "lkjihgfedcbaedcba"
+            },
+            "expected": [1, 1, 1, 1, 1, 1, 1, 10]
+        },
+        {
+            "args": {
+                "s": "abcdefghijkabcdefghijk"
+            },
+            "expected": [22]
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": [52]
+        },
+        {
+            "args": {
+                "s": "abcdefedcbafedcba"
+            },
+            "expected": [17]
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbccccdddddeeeeefffffggggghhhhiiiiijjjjkkkkllllmmmmnnnnoooo"
+            },
+            "expected": [5, 4, 4, 5, 5, 5, 5, 4, 5, 4, 4, 4, 4, 4, 4]
+        },
+        {
+            "args": {
+                "s": "mnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [28, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcbaabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": [78]
+        },
+        {
+            "args": {
+                "s": "zabacabadefegdehijhklijkmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [63]
+        },
+        {
+            "args": {
+                "s": "mnopqrstuabcrstuvwxyzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [47]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": [
+                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 18
+            ]
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyz"
+            },
+            "expected": [12]
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": [51]
+        },
+        {
+            "args": {
+                "s": "abacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbac"
+            },
+            "expected": [64]
+        },
+        {
+            "args": {
+                "s": "aabababababcabcabcabcdabcdabcdabcdeabcdeabcdefabcdef"
+            },
+            "expected": [52]
+        },
+        {
+            "args": {
+                "s": "zababzabz"
+            },
+            "expected": [9]
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffaabbccddeeff"
+            },
+            "expected": [24]
+        },
+        {
+            "args": {
+                "s": "aaaabbbbccccddddeeeeffffgggghhhh"
+            },
+            "expected": [4, 4, 4, 4, 4, 4, 4, 4]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().partitionLabels",
+        "typescript": "Solution().partitionLabels"
+    }
+}

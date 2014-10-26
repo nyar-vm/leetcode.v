@@ -1,0 +1,474 @@
+{
+    "id": "minimum-remove-to-make-valid-parentheses",
+    "questionId": 1249,
+    "difficulty": "Medium",
+    "tags": ["Stack", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "(a(b)c)d(e(fg)h"
+            },
+            "expected": "(a(b)c)de(fg)h"
+        },
+        {
+            "args": {
+                "s": "()"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "))(()"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "ab(c(d)e)f(g(h)i)j(kl)"
+            },
+            "expected": "ab(c(d)e)f(g(h)i)j(kl)"
+        },
+        {
+            "args": {
+                "s": "a)b(c)d"
+            },
+            "expected": "ab(c)d"
+        },
+        {
+            "args": {
+                "s": "()()"
+            },
+            "expected": "()()"
+        },
+        {
+            "args": {
+                "s": ""
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "(a(b)c)d(e(f)g)h(i)"
+            },
+            "expected": "(a(b)c)d(e(f)g)h(i)"
+        },
+        {
+            "args": {
+                "s": "))(())"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "(a(b)c)d(e(f)g)h"
+            },
+            "expected": "(a(b)c)d(e(f)g)h"
+        },
+        {
+            "args": {
+                "s": "lee(t(c)o)de)"
+            },
+            "expected": "lee(t(c)o)de"
+        },
+        {
+            "args": {
+                "s": "a(b)c)d(e(fg)h)i(j(k(l)m)n)o(pq(r)s)t(uv(w)x)y(z)"
+            },
+            "expected": "a(b)cd(e(fg)h)i(j(k(l)m)n)o(pq(r)s)t(uv(w)x)y(z)"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d)e(f(g(h)i)j)k(l(m)n)o(p)q(r)s)t(u)v(w(x)y)z(((())"
+            },
+            "expected": "a(b(c)d)e(f(g(h)i)j)k(l(m)n)o(p)q(r)st(u)v(w(x)y)z(())"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p)q(r)s)t(u)v(w(x)y)z"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p)q(r)st(u)v(w(x)y)z"
+        },
+        {
+            "args": {
+                "s": "a((b)c)d(e(f)g)h(i(j(k(l)m)n)o(p(q(r)s)t(uv(w)x)y(z))))"
+            },
+            "expected": "a((b)c)d(e(f)g)h(i(j(k(l)m)n)o(p(q(r)s)t(uv(w)x)y(z)))"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f)g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y(z)"
+            },
+            "expected": "a(b(c)d(e(f)g)h)i(j(k(l)m)n)o(p)q(r)st(u)v(w)xy(z)"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f)g(h)i)j)k"
+            },
+            "expected": "a(b(c)d(e(f)g(h)i)j)k"
+        },
+        {
+            "args": {
+                "s": "(())((()())())(()(()))(()(()())())(()(()))(()(()())())"
+            },
+            "expected": "(())((()())())(()(()))(()(()())())(()(()))(()(()())())"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z))))"
+            },
+            "expected": "a(b(c)d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)))"
+        },
+        {
+            "args": {
+                "s": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p)"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p)"
+        },
+        {
+            "args": {
+                "s": "(x(y(z)))a(b(c)d(e(f)g)h)i)j)k"
+            },
+            "expected": "(x(y(z)))a(b(c)d(e(f)g)h)ijk"
+        },
+        {
+            "args": {
+                "s": "a(b)c(d(e(f)g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+            },
+            "expected": "a(b)c(d(e(f)g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+        },
+        {
+            "args": {
+                "s": "(a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z"
+            },
+            "expected": "(a(b(c)d(e(f(g(h)i)j)k)l)m)nopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "((((((((((a))))))))))"
+            },
+            "expected": "((((((((((a))))))))))"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f)g)h)i(j(k(l)m)n)o"
+            },
+            "expected": "a(b(c)d(e(f)g)h)i(j(k(l)m)n)o"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o)p(q(r)s)t(u(v(w)x)y(z))"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)op(q(r)s)t(u(v(w)x)y(z))"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o)p(q(r)s)t(u(v(w)x)y(z)))"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)op(q(r)s)t(u(v(w)x)y(z))"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+            },
+            "expected": "abcde(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z"
+            },
+            "expected": "a(b(c)d(e(f(g(h)i)j)k)l)mnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z)"
+            },
+            "expected": "a(b(c)d(e(f(g(h)i)j)k)l)mnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "((abc)(def))ghi(jkl(mno)pqr)stu(vwx(yz)"
+            },
+            "expected": "((abc)(def))ghi(jkl(mno)pqr)stuvwx(yz)"
+        },
+        {
+            "args": {
+                "s": "((a(b)c)d)e(f(g(h)i)j)k(lmno)p(q(rst)uvw)x(y(z))"
+            },
+            "expected": "((a(b)c)d)e(f(g(h)i)j)k(lmno)p(q(rst)uvw)x(y(z))"
+        },
+        {
+            "args": {
+                "s": "((((((((a))))))))"
+            },
+            "expected": "((((((((a))))))))"
+        },
+        {
+            "args": {
+                "s": "(a(b(c)d(e(f)g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z))))"
+            },
+            "expected": "(a(b(c)d(e(f)g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z))"
+        },
+        {
+            "args": {
+                "s": "(())((())())(((())))"
+            },
+            "expected": "(())((())())(((())))"
+        },
+        {
+            "args": {
+                "s": "a((((((((((b))))))))))"
+            },
+            "expected": "a((((((((((b))))))))))"
+        },
+        {
+            "args": {
+                "s": "((((a)bb)ccc)d)eeee(f)ggg(h)iii"
+            },
+            "expected": "((((a)bb)ccc)d)eeee(f)ggg(h)iii"
+        },
+        {
+            "args": {
+                "s": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p)q(r)s)t(u)v(w)x(y)z"
+            },
+            "expected": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p)q(r)s)t(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "a(b)c)d(e(f(g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z"
+            },
+            "expected": "a(b)cd(e(f(g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "abc(def(ghi)jkl)mno(pqr)stu(vwxyz)"
+            },
+            "expected": "abc(def(ghi)jkl)mno(pqr)stu(vwxyz)"
+        },
+        {
+            "args": {
+                "s": "((a(b)c)d(e(f)g)h(i)j)k(l(m)n)o(p)q(r)s)t"
+            },
+            "expected": "((a(b)c)d(e(f)g)h(i)j)k(l(m)n)o(p)q(r)st"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d)e(f(g(h)i)j)k(l(m)n)o(p)q(r)s)t(u)v(w(x)y)z)()(()"
+            },
+            "expected": "a(b(c)d)e(f(g(h)i)j)k(l(m)n)o(p)q(r)st(u)v(w(x)y)z()()"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f)g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+            },
+            "expected": "a(b(c)d(e(f)g)h)i(j(k(l)m)n)o(p)q(r)st(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "(abc(def(ghi(jkl(mnopqr(stu(vwx(yz)))))))"
+            },
+            "expected": "abc(def(ghi(jkl(mnopqr(stu(vwx(yz)))))))"
+        },
+        {
+            "args": {
+                "s": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z)))"
+            },
+            "expected": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i(j)k)l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i(j)k)l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+        },
+        {
+            "args": {
+                "s": "((((((((((((((((((((((()))))))))))))))))))))))))"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "(((((a(b)c)d)e)f)g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w(x)y)z"
+            },
+            "expected": "(((((a(b)c)d)e)f)g)hi(j(k(l)m)n)o(p)q(r)st(u)v(w(x)y)z"
+        },
+        {
+            "args": {
+                "s": "((((((((((a))))))))))b"
+            },
+            "expected": "((((((((((a))))))))))b"
+        },
+        {
+            "args": {
+                "s": "()()()((()))(())(((()))(()(()))(())(()))"
+            },
+            "expected": "()()()((()))(())(((()))(()(()))(())(()))"
+        },
+        {
+            "args": {
+                "s": "((((((((((()))))))))))"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "(((abc)def)ghijklmnopqrst)uv(wxyz)"
+            },
+            "expected": "(((abc)def)ghijklmnopqrst)uv(wxyz)"
+        },
+        {
+            "args": {
+                "s": "abc)def(ghi)jkl(mno)pqr(stu)vwx(yz"
+            },
+            "expected": "abcdef(ghi)jkl(mno)pqr(stu)vwxyz"
+        },
+        {
+            "args": {
+                "s": "((a)(b)(c)(d))"
+            },
+            "expected": "((a)(b)(c)(d))"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz(abcdefghijklmnopqrstuvwxyz)"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz(abcdefghijklmnopqrstuvwxyz)"
+        },
+        {
+            "args": {
+                "s": "((((((((((((((((((((()))))))))))))))))))))))))))))()"
+            },
+            "expected": "((((((((((((((((((((()))))))))))))))))))))()"
+        },
+        {
+            "args": {
+                "s": "((((a(b)c)d(e(f)g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z))))"
+            },
+            "expected": "((((a(b)c)d(e(f)g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z)"
+        },
+        {
+            "args": {
+                "s": "(a(b)c)d(e(f(g)h)i(j(k(l)m)n)o)p(q(r)s)t(u(v(w)x)y(z)))"
+            },
+            "expected": "(a(b)c)d(e(f(g)h)i(j(k(l)m)n)o)p(q(r)s)t(u(v(w)x)y(z))"
+        },
+        {
+            "args": {
+                "s": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z)"
+            },
+            "expected": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i(j)k)l)m)n)o(p(q(r)s)t)u(v(w(x)y(z)u)v)w)x)y)z"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i(j)k)l)m)n)o(p(q(r)s)t)u(v(w(x)y(z)u)v)w)x)yz"
+        },
+        {
+            "args": {
+                "s": "((((((a(b)c)d))))))"
+            },
+            "expected": "((((((a(b)c)d)))))"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y(z))))"
+            },
+            "expected": "ab(c)d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y(z))))"
+        },
+        {
+            "args": {
+                "s": "((((((((((((((((((((((()"
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "s": "a(b)c)d(e(f)g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z"
+            },
+            "expected": "a(b)cd(e(f)g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "(a(b)c)d(e(f(g)h)i(j(k(l)m)n)o)p(q(r)s)t(u(v)w)x(y(z)))"
+            },
+            "expected": "(a(b)c)d(e(f(g)h)i(j(k(l)m)n)o)p(q(r)s)t(u(v)w)x(y(z))"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d)e(f(g)h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w(x)y)z"
+            },
+            "expected": "a(b(c)d)e(f(g)h)i(j(k(l)m)n)o(p)q(r)st(u)v(w(x)y)z"
+        },
+        {
+            "args": {
+                "s": "a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z(abc)"
+            },
+            "expected": "a(b(c)d(e(f(g(h)i)j)k)l)mnopqrstuvwxyz(abc)"
+        },
+        {
+            "args": {
+                "s": "((a(b)c)d(e(f)g)h)i(j(k(l)m)n)o(p)"
+            },
+            "expected": "((a(b)c)d(e(f)g)h)i(j(k(l)m)n)o(p)"
+        },
+        {
+            "args": {
+                "s": "(a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z)"
+            },
+            "expected": "(a(b(c)d(e(f(g(h)i)j)k)l)m)nopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q(r)s)t)u(v(w(x)y)z)"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q(r)s)t)u(v(w(x)y)z)"
+        },
+        {
+            "args": {
+                "s": "(a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z)abc(def)"
+            },
+            "expected": "(a(b(c)d(e(f(g(h)i)j)k)l)m)nopqrstuvwxyzabc(def)"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz)abcdefghijklmnopqrstuvwxyz("
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q(r)s)t(u(v(w)x)y)z)"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q(r)s)t(u(v(w)x)y)z)"
+        },
+        {
+            "args": {
+                "s": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)(z)"
+            },
+            "expected": "(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)(z)"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z)(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z)"
+            },
+            "expected": "a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)st(u)v(w)x(y)z(a(b(c(d(e(f(g(h)i)j)k)l)m)n)o(p(q)r)s)t(u)v(w)x(y)z"
+        },
+        {
+            "args": {
+                "s": "(a(b(c)d(e(f(g(h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z)abc"
+            },
+            "expected": "(a(b(c)d(e(f(g(h)i)j)k)l)m)nopqrstuvwxyzabc"
+        },
+        {
+            "args": {
+                "s": "a(b(c(d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z))))"
+            },
+            "expected": "ab(c(d(e(f(g(h)i(j(k(l)m)n)o(p)q(r)s)t(u)v(w)x(y)z))))"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minRemoveToMakeValid",
+        "typescript": "Solution().minRemoveToMakeValid"
+    }
+}

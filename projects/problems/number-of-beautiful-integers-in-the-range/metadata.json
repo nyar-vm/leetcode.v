@@ -1,0 +1,804 @@
+{
+    "id": "number-of-beautiful-integers-in-the-range",
+    "questionId": 2827,
+    "difficulty": "Hard",
+    "tags": ["Math", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "low": 100,
+                "high": 200,
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 200,
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 10,
+                "high": 20,
+                "k": 3
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "low": 1,
+                "high": 10,
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 200,
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123,
+                "high": 456,
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1000,
+                "high": 10000,
+                "k": 7
+            },
+            "expected": 483
+        },
+        {
+            "args": {
+                "low": 123,
+                "high": 456,
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 5,
+                "high": 5,
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1000,
+                "high": 10000,
+                "k": 11
+            },
+            "expected": 460
+        },
+        {
+            "args": {
+                "low": 999999,
+                "high": 999999,
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123456,
+                "high": 654321,
+                "k": 15
+            },
+            "expected": 11026
+        },
+        {
+            "args": {
+                "low": 1000,
+                "high": 9999,
+                "k": 11
+            },
+            "expected": 460
+        },
+        {
+            "args": {
+                "low": 100000,
+                "high": 999999,
+                "k": 19
+            },
+            "expected": 14801
+        },
+        {
+            "args": {
+                "low": 9876543,
+                "high": 12345678,
+                "k": 16
+            },
+            "expected": 44999
+        },
+        {
+            "args": {
+                "low": 111111,
+                "high": 222222,
+                "k": 12
+            },
+            "expected": 3183
+        },
+        {
+            "args": {
+                "low": 99999,
+                "high": 100001,
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1000000,
+                "high": 8000000,
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 100000,
+                "high": 500000,
+                "k": 19
+            },
+            "expected": 6575
+        },
+        {
+            "args": {
+                "low": 1234567,
+                "high": 7654321,
+                "k": 18
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 345678,
+                "high": 876543,
+                "k": 20
+            },
+            "expected": 6510
+        },
+        {
+            "args": {
+                "low": 5000,
+                "high": 15000,
+                "k": 13
+            },
+            "expected": 147
+        },
+        {
+            "args": {
+                "low": 100000,
+                "high": 1000000,
+                "k": 17
+            },
+            "expected": 16544
+        },
+        {
+            "args": {
+                "low": 1234,
+                "high": 5678,
+                "k": 9
+            },
+            "expected": 251
+        },
+        {
+            "args": {
+                "low": 10000000,
+                "high": 20000000,
+                "k": 9
+            },
+            "expected": 306040
+        },
+        {
+            "args": {
+                "low": 5000,
+                "high": 50000,
+                "k": 3
+            },
+            "expected": 627
+        },
+        {
+            "args": {
+                "low": 250000,
+                "high": 350000,
+                "k": 5
+            },
+            "expected": 6500
+        },
+        {
+            "args": {
+                "low": 1000000,
+                "high": 10000000,
+                "k": 19
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 50000000,
+                "high": 60000000,
+                "k": 20
+            },
+            "expected": 156250
+        },
+        {
+            "args": {
+                "low": 99999,
+                "high": 100000,
+                "k": 13
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 111111111,
+                "high": 222222222,
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1000000,
+                "high": 2000000,
+                "k": 19
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 777777,
+                "high": 888888,
+                "k": 18
+            },
+            "expected": 1644
+        },
+        {
+            "args": {
+                "low": 1000,
+                "high": 10000,
+                "k": 12
+            },
+            "expected": 276
+        },
+        {
+            "args": {
+                "low": 987654321,
+                "high": 987654321,
+                "k": 11
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1234,
+                "high": 5678,
+                "k": 17
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "low": 100000000,
+                "high": 999999999,
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123456,
+                "high": 789012,
+                "k": 17
+            },
+            "expected": 12253
+        },
+        {
+            "args": {
+                "low": 1111111,
+                "high": 2222222,
+                "k": 14
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 10000,
+                "high": 99999,
+                "k": 17
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123456789,
+                "high": 987654321,
+                "k": 9
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1000,
+                "high": 10000,
+                "k": 13
+            },
+            "expected": 263
+        },
+        {
+            "args": {
+                "low": 12345,
+                "high": 67890,
+                "k": 17
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 500000000,
+                "high": 600000000,
+                "k": 13
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 50000,
+                "high": 60000,
+                "k": 15
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 100000000,
+                "high": 999999999,
+                "k": 17
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 500,
+                "high": 2000,
+                "k": 17
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "low": 11111,
+                "high": 22222,
+                "k": 14
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123456,
+                "high": 789012,
+                "k": 15
+            },
+            "expected": 13887
+        },
+        {
+            "args": {
+                "low": 2000,
+                "high": 3000,
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 3333333,
+                "high": 4444444,
+                "k": 16
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 987654321,
+                "high": 987654321,
+                "k": 19
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 10000,
+                "high": 100000,
+                "k": 13
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123456,
+                "high": 654321,
+                "k": 3
+            },
+            "expected": 55100
+        },
+        {
+            "args": {
+                "low": 555555,
+                "high": 666666,
+                "k": 16
+            },
+            "expected": 1899
+        },
+        {
+            "args": {
+                "low": 500000,
+                "high": 600000,
+                "k": 20
+            },
+            "expected": 1875
+        },
+        {
+            "args": {
+                "low": 111111,
+                "high": 222222,
+                "k": 13
+            },
+            "expected": 2615
+        },
+        {
+            "args": {
+                "low": 123456,
+                "high": 654321,
+                "k": 17
+            },
+            "expected": 9719
+        },
+        {
+            "args": {
+                "low": 234567,
+                "high": 765432,
+                "k": 25
+            },
+            "expected": 6663
+        },
+        {
+            "args": {
+                "low": 99990,
+                "high": 100000,
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 12345678,
+                "high": 87654321,
+                "k": 16
+            },
+            "expected": 1236425
+        },
+        {
+            "args": {
+                "low": 987654,
+                "high": 9876543,
+                "k": 3
+            },
+            "expected": 1120
+        },
+        {
+            "args": {
+                "low": 1000,
+                "high": 9999,
+                "k": 12
+            },
+            "expected": 276
+        },
+        {
+            "args": {
+                "low": 123456789,
+                "high": 987654321,
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 100000,
+                "high": 1000000,
+                "k": 19
+            },
+            "expected": 14801
+        },
+        {
+            "args": {
+                "low": 123456,
+                "high": 654321,
+                "k": 19
+            },
+            "expected": 8693
+        },
+        {
+            "args": {
+                "low": 500000,
+                "high": 550000,
+                "k": 20
+            },
+            "expected": 875
+        },
+        {
+            "args": {
+                "low": 1234567,
+                "high": 8765432,
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 10000000,
+                "high": 20000000,
+                "k": 5
+            },
+            "expected": 546875
+        },
+        {
+            "args": {
+                "low": 11111111,
+                "high": 22222222,
+                "k": 7
+            },
+            "expected": 426428
+        },
+        {
+            "args": {
+                "low": 55555555,
+                "high": 88888888,
+                "k": 9
+            },
+            "expected": 1034831
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 1000,
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 999,
+                "high": 1000000,
+                "k": 13
+            },
+            "expected": 21897
+        },
+        {
+            "args": {
+                "low": 100000,
+                "high": 999999,
+                "k": 3
+            },
+            "expected": 93760
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 1000,
+                "k": 9
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 999,
+                "k": 9
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 123456789,
+                "high": 987654321,
+                "k": 18
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 200000,
+                "high": 300000,
+                "k": 5
+            },
+            "expected": 6250
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 1000,
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 111111,
+                "high": 222222,
+                "k": 19
+            },
+            "expected": 1785
+        },
+        {
+            "args": {
+                "low": 500000,
+                "high": 600000,
+                "k": 19
+            },
+            "expected": 1643
+        },
+        {
+            "args": {
+                "low": 10000000,
+                "high": 20000000,
+                "k": 18
+            },
+            "expected": 174880
+        },
+        {
+            "args": {
+                "low": 100000,
+                "high": 999999,
+                "k": 17
+            },
+            "expected": 16544
+        },
+        {
+            "args": {
+                "low": 111111,
+                "high": 222222,
+                "k": 21
+            },
+            "expected": 1614
+        },
+        {
+            "args": {
+                "low": 1000000,
+                "high": 10000000,
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 333333,
+                "high": 444444,
+                "k": 14
+            },
+            "expected": 2525
+        },
+        {
+            "args": {
+                "low": 1111111,
+                "high": 8888888,
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 10000,
+                "high": 100000,
+                "k": 11
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 100,
+                "high": 1000,
+                "k": 11
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1234,
+                "high": 8765,
+                "k": 11
+            },
+            "expected": 386
+        },
+        {
+            "args": {
+                "low": 750000,
+                "high": 850000,
+                "k": 7
+            },
+            "expected": 4287
+        },
+        {
+            "args": {
+                "low": 1000000,
+                "high": 10000000,
+                "k": 15
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 111111,
+                "high": 222222,
+                "k": 18
+            },
+            "expected": 2196
+        },
+        {
+            "args": {
+                "low": 234567,
+                "high": 765432,
+                "k": 18
+            },
+            "expected": 10488
+        },
+        {
+            "args": {
+                "low": 11111,
+                "high": 99999,
+                "k": 13
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 333333333,
+                "high": 666666666,
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 1,
+                "high": 1000000000,
+                "k": 20
+            },
+            "expected": 1105750
+        },
+        {
+            "args": {
+                "low": 1000000,
+                "high": 2000000,
+                "k": 15
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "low": 10000,
+                "high": 99999,
+                "k": 13
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numberOfBeautifulIntegers",
+        "typescript": "Solution().numberOfBeautifulIntegers"
+    }
+}

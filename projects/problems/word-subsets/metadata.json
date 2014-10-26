@@ -1,0 +1,1384 @@
+{
+    "id": "word-subsets",
+    "questionId": 916,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "words1": ["acaac", "cccbb", "aacbb", "caacc", "bcbbb"],
+                "words2": ["c", "cc", "b"]
+            },
+            "expected": ["cccbb"]
+        },
+        {
+            "args": {
+                "words1": ["amazon", "apple", "facebook", "google", "leetcode"],
+                "words2": ["e", "o"]
+            },
+            "expected": ["facebook", "google", "leetcode"]
+        },
+        {
+            "args": {
+                "words1": ["amazon", "apple", "facebook", "google", "leetcode"],
+                "words2": ["lc", "eo"]
+            },
+            "expected": ["leetcode"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefg",
+                    "bcdefga",
+                    "cdefgab",
+                    "defgabc",
+                    "efgabcd",
+                    "fgabcde",
+                    "gabcdef"
+                ],
+                "words2": ["def", "efg", "fgh", "ghi", "hij", "ijk", "jkl"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij"
+                ],
+                "words2": [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "aaaaa",
+                    "aaaaaa",
+                    "aaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaaaa"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["hello", "world", "python", "programming"],
+                "words2": ["hello", "world", "helo", "rowdl"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "zzzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa"
+                ],
+                "words2": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "zyx",
+                    "wvu",
+                    "tsr",
+                    "qpo",
+                    "nml",
+                    "kji",
+                    "hgf",
+                    "edc",
+                    "baa",
+                    "ccc",
+                    "bb",
+                    "aa"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["aaaaaa", "bbbbbb", "cccccc", "dddddd", "eeeeee"],
+                "words2": ["a", "b", "c", "d", "e"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc", "dddddddddd", "eeeeeeeeee"],
+                "words2": [
+                    "aabbccddeeffgghhii",
+                    "bbaacceeggiikkooss",
+                    "ccccdddddddddddddd",
+                    "eeeeddddccccbbbaaa"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abacax", "bacaba", "caxaba", "axbaca"],
+                "words2": ["aba", "bac", "cab", "abc"]
+            },
+            "expected": ["abacax", "bacaba", "caxaba", "axbaca"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabbccddeeff",
+                    "ffeeddccbb",
+                    "aabbccddeeff",
+                    "eeddccbb",
+                    "bbccdd",
+                    "ccddeeff",
+                    "ddeeff",
+                    "eeff",
+                    "ff",
+                    "ffeedd",
+                    "eeddcc",
+                    "bbcc",
+                    "ccdd",
+                    "ddeeff",
+                    "ee",
+                    "ff"
+                ],
+                "words2": [
+                    "abc",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abcd", "abdc", "cabd", "dabc", "adbc"],
+                "words2": ["aabb", "bbcc", "ccdd", "aabbccdd"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["unique", "strings", "for", "testing", "purposes"],
+                "words2": ["un", "iq", "st", "ri", "gs", "for", "tes", "tin", "ing", "pur", "pose"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "supercalifragilisticexpialidocious",
+                    "pseudopseudohypoparathyroidism",
+                    "floccinaucinihilipilification",
+                    "antidisestablishmentarianism",
+                    "honorificabilitudinitatibus"
+                ],
+                "words2": [
+                    "super",
+                    "pseudo",
+                    "floccinaucinihilipilification",
+                    "antidisestablishmentarianism",
+                    "honorificabilitudinitatibus"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["zzzzzzzzzz", "yyyyyyyyyy", "xxxxxxxxxx", "wwwwwwwwww", "vvvvvvvvvv"],
+                "words2": ["zz", "yy", "xx", "ww", "vv"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "bbaacckkddffgghhiijj",
+                    "mmmnnnoooppqqrrsssttuuvvwwxx",
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+                ],
+                "words2": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "cdef",
+                    "ghij",
+                    "klmn",
+                    "opqr",
+                    "stuv",
+                    "wxyz",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyzab",
+                    "cdefgh",
+                    "ijklmn",
+                    "opqrst",
+                    "vwxyz",
+                    "abcdefghijklmnop",
+                    "qrstuvwxyz",
+                    "mnopqrstuvwx",
+                    "abcdefg",
+                    "hijklmn",
+                    "opqrstu",
+                    "vwxyzab",
+                    "cdefghij",
+                    "klmnopqr",
+                    "stuvwxyz",
+                    "abcdefghijklmnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyzab",
+                    "cdefghij",
+                    "klmnopqr",
+                    "stuvwxyz",
+                    "abcdefghijklmnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyzab",
+                    "cdefghij",
+                    "klmnopqr",
+                    "stuvwxyz"
+                ]
+            },
+            "expected": [
+                "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "zyxwvutsrqponmlkjihgfedcba",
+                "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            ]
+        },
+        {
+            "args": {
+                "words1": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "qwertyuiopasdfghjklzxcvbnm",
+                    "mnbvcxzlkjhgfdsapoiuytrewq"
+                ],
+                "words2": ["zzz", "yyy", "xxx", "www"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "supercalifragilisticexpialidocious",
+                    "pneumonoultramicroscopicsilicovolcanoconiosis",
+                    "floccinaucinihilipilification",
+                    "antidisestablishmentarianism"
+                ],
+                "words2": [
+                    "super",
+                    "cali",
+                    "fragilistic",
+                    "expiali",
+                    "docious",
+                    "pneumo",
+                    "ultra",
+                    "micro",
+                    "scopic",
+                    "silico",
+                    "volcano",
+                    "conio",
+                    "sisi",
+                    "flocci",
+                    "nauci",
+                    "nihili",
+                    "pipili",
+                    "anti",
+                    "dis",
+                    "establish",
+                    "ment",
+                    "aria",
+                    "nism"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abcdabcdabcd", "efefefefef", "ghighighighi", "jkljkljklj"],
+                "words2": ["abcd", "ef", "ghi", "jkl", "aabbccdd"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["example", "samples", "problems", "challenges", "code", "interview"],
+                "words2": ["e", "m", "p", "l", "e", "s", "a", "m", "p", "l", "e", "s"]
+            },
+            "expected": ["samples"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+                ],
+                "words2": ["xyz", "zyx", "aaa", "zzz", "mnopqr"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["aaaaa", "bbbbbb", "cccccc", "dddddddd", "eeeeeeee"],
+                "words2": ["aa", "bb", "cc", "dd", "ee", "abcd"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["programming", "coding", "debugging", "optimization", "algorithm"],
+                "words2": ["gram", "code", "debug", "algo", "opti"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "aaaaaaaaaa",
+                    "bbbbbbbbbb",
+                    "cccccccccc",
+                    "dddddddddd",
+                    "eeeeeeeeee",
+                    "ffffffffff",
+                    "gggggggggg",
+                    "hhhhhhhhhh",
+                    "iiiiiiiiii",
+                    "jjjjjjjjjj"
+                ],
+                "words2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "aa",
+                    "bb",
+                    "cc",
+                    "dd",
+                    "ee",
+                    "ff",
+                    "gg",
+                    "hh",
+                    "ii",
+                    "jj",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "ddd",
+                    "eee",
+                    "fff",
+                    "ggg",
+                    "hhh",
+                    "iii",
+                    "jjj",
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj",
+                    "aaaaa",
+                    "bbbbb",
+                    "ccccc",
+                    "ddddd",
+                    "eeeee",
+                    "fffff",
+                    "ggggg",
+                    "hhhhh",
+                    "iiiii",
+                    "jjjjj"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["quick", "brown", "fox", "jumps", "over", "lazy", "dogs"],
+                "words2": [
+                    "qu",
+                    "ck",
+                    "bro",
+                    "wn",
+                    "fox",
+                    "jum",
+                    "ps",
+                    "ove",
+                    "r",
+                    "laz",
+                    "y",
+                    "dog",
+                    "s"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abacabacab", "bacabacaba", "cabcabcabc", "ababcabcab", "bcabcabcab"],
+                "words2": ["abac", "bcab", "cabc", "abcabc"]
+            },
+            "expected": ["abacabacab", "bacabacaba", "cabcabcabc", "ababcabcab", "bcabcabcab"]
+        },
+        {
+            "args": {
+                "words1": ["abacabadaba", "bacbab", "cab", "abcabcabcabcabc", "bcabcabcabcabcab"],
+                "words2": ["ab", "ba", "abc", "cba", "bca"]
+            },
+            "expected": ["abacabadaba", "bacbab", "cab", "abcabcabcabcabc", "bcabcabcabcabcab"]
+        },
+        {
+            "args": {
+                "words1": ["internationalization", "universality", "generalization", "specificity"],
+                "words2": ["inter", "nation", "alize"]
+            },
+            "expected": ["internationalization", "generalization"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabbccddeeffgghhii",
+                    "bbaacceeggiikkooss",
+                    "ccccdddddddddddddd",
+                    "eeeeddddccccbbbaaa"
+                ],
+                "words2": [
+                    "abcdefghi",
+                    "ijklmnopq",
+                    "qrstuvwxyz",
+                    "mnopqrstuvwxyz",
+                    "vwxyzuvwxy",
+                    "stuvwxyzstuvwx",
+                    "rstuvwrstuvw",
+                    "qrsrtqrsrstq"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abababa", "bbbbbbb", "acacaca", "cacacac", "abcabcabc"],
+                "words2": ["aab", "bb", "ac", "aaa"]
+            },
+            "expected": ["abcabcabc"]
+        },
+        {
+            "args": {
+                "words1": ["xylophone", "piano", "guitar", "drum", "violin"],
+                "words2": ["x", "y", "p", "i", "o"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc", "dddddddddd", "eeeeeeeeee"],
+                "words2": ["abcde", "fghij", "klmno", "pqrst", "uvwxy"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["xyzz", "xyzy", "zzxy", "zyxz", "xzzy"],
+                "words2": ["xyz", "zz", "xy", "zyx"]
+            },
+            "expected": ["xyzz", "zzxy", "zyxz", "xzzy"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "abracadabra",
+                    "supercalifragilisticexpialidocious",
+                    "antidisestablishmentarianism",
+                    "honorificabilitudinitatibus",
+                    "pneumonoultramicroscopicsilicovolcanoconiosis"
+                ],
+                "words2": [
+                    "abra",
+                    "supercali",
+                    "disestablish",
+                    "honorifica",
+                    "pneumono",
+                    "microscopic",
+                    "silicovolcano",
+                    "coniosis"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["unique", "words", "arrays", "strings", "characters"],
+                "words2": ["unique", "words", "strings", "chars", "arrays"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabbccddeeff",
+                    "bbccddeeffgg",
+                    "ccddeeffgghh",
+                    "ddeeffgghhiijj",
+                    "eeffgghhiijjkk"
+                ],
+                "words2": ["abc", "bcd", "cde", "def", "efg"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "xenodochial",
+                    "quisquillious",
+                    "floccinaucinihilipilification",
+                    "antidisestablishmentarianism",
+                    "supercalifragilisticexpialidocious"
+                ],
+                "words2": [
+                    "xeno",
+                    "dox",
+                    "chial",
+                    "qui",
+                    "squillious",
+                    "floc",
+                    "cinau",
+                    "cinhi",
+                    "lili",
+                    "pipili",
+                    "anti",
+                    "dis",
+                    "est",
+                    "abe",
+                    "lish",
+                    "ment",
+                    "aria",
+                    "nism",
+                    "super",
+                    "cali",
+                    "fragilistic",
+                    "expiali",
+                    "docious"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ],
+                "words2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": [
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz"
+            ]
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefghijklmnop",
+                    "bcdefghijklmno",
+                    "cdefghijklmnop",
+                    "defghijklmnopq",
+                    "efghijklmnopqr"
+                ],
+                "words2": [
+                    "abc",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabb",
+                    "ccdd",
+                    "eefg",
+                    "hhiijj",
+                    "kkll",
+                    "mmnn",
+                    "oopp",
+                    "qqrr",
+                    "sstt",
+                    "uuvv",
+                    "wwxx",
+                    "yyzz"
+                ],
+                "words2": [
+                    "aa",
+                    "bb",
+                    "cc",
+                    "dd",
+                    "ee",
+                    "ff",
+                    "gg",
+                    "hh",
+                    "ii",
+                    "jj",
+                    "kk",
+                    "ll",
+                    "mm",
+                    "nn",
+                    "oo",
+                    "pp",
+                    "qq",
+                    "rr",
+                    "ss",
+                    "tt",
+                    "uu",
+                    "vv",
+                    "ww",
+                    "xx",
+                    "yy",
+                    "zz"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "supercalifragilisticexpialidocious",
+                    "antidisestablishmentarianism",
+                    "honorificabilitudinitatibus",
+                    "pneumonoultramicroscopicsilicovolcanoconiosis"
+                ],
+                "words2": [
+                    "super",
+                    "califragilistic",
+                    "expialidocious",
+                    "anti",
+                    "establishment",
+                    "arianism",
+                    "honorificabilitudinitatibus",
+                    "pneumonoultramicroscopicsilicovolcanoconiosis"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abcd", "abdc", "dabc", "cabd", "bcad"],
+                "words2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "ab",
+                    "bc",
+                    "cd",
+                    "da",
+                    "ac",
+                    "bd",
+                    "dc",
+                    "ad",
+                    "ba",
+                    "cb"
+                ]
+            },
+            "expected": ["abcd", "abdc", "dabc", "cabd", "bcad"]
+        },
+        {
+            "args": {
+                "words1": ["hello", "world", "python", "programming", "code", "challenge"],
+                "words2": [
+                    "hello",
+                    "world",
+                    "python",
+                    "programming",
+                    "code",
+                    "challenge",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "ruby",
+                    "swift",
+                    "go",
+                    "rust",
+                    "typescript",
+                    "php"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["this", "is", "a", "complex", "testcase"],
+                "words2": ["this", "is", "a", "complex", "test", "case"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabb",
+                    "ccdd",
+                    "eeff",
+                    "gghh",
+                    "iijj",
+                    "kkll",
+                    "mmnn",
+                    "oopp",
+                    "qqrr",
+                    "sstt",
+                    "uuvv",
+                    "wwxx",
+                    "yyzz"
+                ],
+                "words2": [
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz",
+                    "aab",
+                    "ccd",
+                    "eeff",
+                    "gghh",
+                    "iijj",
+                    "kkll",
+                    "mmnn",
+                    "oopp",
+                    "qqrr",
+                    "sstt",
+                    "uuvv",
+                    "wwxx",
+                    "yyzz"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["universe", "galaxy", "cosmos", "planet", "star", "nebula"],
+                "words2": ["u", "v", "e", "r", "s", "e"]
+            },
+            "expected": ["universe"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "zzzzzzzzzz",
+                    "yyyyyyyyyy",
+                    "xxxxxxxxxx",
+                    "wwwwwwwwww",
+                    "vvvvvvvvvv",
+                    "uuuuuuuuuu"
+                ],
+                "words2": ["zzzzz", "yyyyy", "xxxxx", "wwwww", "vvvvv", "uuuuu"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["alphabet", "brazil", "critical", "dynamic", "economic"],
+                "words2": ["a", "b", "c", "d", "e"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["mississippi", "elephant", "alligator", "hippopotamus"],
+                "words2": ["issi", "lpha", "gat", "popo", "tamu", "hipo"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+                ],
+                "words2": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+                ]
+            },
+            "expected": ["aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "aaaabbbbccccddddeeeeffffgggghhhhiiii",
+                    "jjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwwxxxxxyyyyyzzzzz"
+                ],
+                "words2": [
+                    "abc",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abacaxi", "manga", "naruto", "onepiece", "dragonball"],
+                "words2": ["aba", "nan", "ope", "dra"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefghijk",
+                    "bcdefghijkl",
+                    "cdefghijklm",
+                    "defghijklmn",
+                    "efghijklmno"
+                ],
+                "words2": [
+                    "abc",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "example",
+                    "universal",
+                    "programming"
+                ],
+                "words2": ["abc", "xyz", "mnop", "qrst"]
+            },
+            "expected": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"]
+        },
+        {
+            "args": {
+                "words1": ["zebra", "elephant", "giraffe", "hippopotamus", "antelope"],
+                "words2": ["e", "ee", "alp", "h"]
+            },
+            "expected": ["elephant"]
+        },
+        {
+            "args": {
+                "words1": ["aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc", "dddddddddd", "eeeeeeeeee"],
+                "words2": ["abc", "bcd", "cde", "def", "efg"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["programming", "python", "java", "csharp", "javascript", "ruby"],
+                "words2": [
+                    "pro",
+                    "gram",
+                    "ming",
+                    "py",
+                    "th",
+                    "on",
+                    "java",
+                    "script",
+                    "ruby",
+                    "csharp"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["abcdefghijklmnopqrstuvwxyz", "zzzzzzzzzz", "aaaaaaaaaa", "bbbbbbbbbb"],
+                "words2": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": ["abcdefghijklmnopqrstuvwxyz"]
+        },
+        {
+            "args": {
+                "words1": ["this", "is", "a", "test", "of", "subset", "matching"],
+                "words2": [
+                    "is",
+                    "a",
+                    "test",
+                    "this",
+                    "of",
+                    "subset",
+                    "matching",
+                    "mm",
+                    "ss",
+                    "tt",
+                    "ee"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "mnopqrstuvwxyza",
+                    "nopqrstuvwxyzb",
+                    "opqrstuvwxyzc",
+                    "pqrstuvwxyzd",
+                    "qrstuvwxyze",
+                    "rstuvwxyzf",
+                    "stuvwxy zg",
+                    "tuvwxyzh",
+                    "uvwxyzi",
+                    "vwxyzj",
+                    "wxyzk",
+                    "xyzl",
+                    "yzm",
+                    "zno",
+                    "opq",
+                    "rst",
+                    "uvw",
+                    "xyz"
+                ],
+                "words2": ["mnop", "qrst", "uvwx", "yz", "no", "pq", "rs", "tu", "vw", "xy", "z"]
+            },
+            "expected": ["mnopqrstuvwxyza"]
+        },
+        {
+            "args": {
+                "words1": ["data", "science", "machine", "learning", "artificial"],
+                "words2": ["data", "art", "sci", "learn"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "onomatopoeia",
+                    "panegyric",
+                    "philanthropy",
+                    "antidisestablishmentarianism",
+                    "supercalifragilisticexpialidocious"
+                ],
+                "words2": [
+                    "ono",
+                    "mat",
+                    "peo",
+                    "poe",
+                    "i",
+                    "pa",
+                    "ne",
+                    "gy",
+                    "ric",
+                    "ph",
+                    "ila",
+                    "nth",
+                    "ropy",
+                    "dis",
+                    "anti",
+                    "est",
+                    "abe",
+                    "lish",
+                    "ment",
+                    "aria",
+                    "nism",
+                    "super",
+                    "cali",
+                    "fragilistic",
+                    "expiali",
+                    "docious"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["aaaaaaaa", "bbbbbbbb", "cccccccc", "dddddddd", "eeeeeeee", "ffffffff"],
+                "words2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "aa",
+                    "bb",
+                    "cc",
+                    "dd",
+                    "ee",
+                    "ff",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "ddd",
+                    "eee",
+                    "fff",
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "characterization",
+                    "representation",
+                    "classification",
+                    "standardization"
+                ],
+                "words2": ["char", "act", "repre", "sent", "class", "stan", "dard", "iz"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "words2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": ["zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz"],
+                "words2": ["zzzz", "zzzzz", "zzzzzz", "zzzzzzz"]
+            },
+            "expected": ["zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz", "zzzzzzzzzz"]
+        },
+        {
+            "args": {
+                "words1": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"],
+                "words2": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "words1": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzz",
+                    "zzzzzzzz",
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z"
+                ],
+                "words2": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzz",
+                    "zzzzzzzz",
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z"
+                ]
+            },
+            "expected": ["zzzzzzzzzz"]
+        },
+        {
+            "args": {
+                "words1": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yz"
+                ],
+                "words2": [
+                    "az",
+                    "bx",
+                    "cy",
+                    "dw",
+                    "ev",
+                    "fu",
+                    "gt",
+                    "hs",
+                    "ir",
+                    "jq",
+                    "kp",
+                    "lo",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz"
+                ]
+            },
+            "expected": [
+                "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "zyxwvutsrqponmlkjihgfedcba"
+            ]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().wordSubsets",
+        "typescript": "Solution().wordSubsets"
+    }
+}

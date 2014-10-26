@@ -1,0 +1,417 @@
+{
+    "id": "smallest-k-length-subsequence-with-occurrences-of-a-letter",
+    "questionId": 2030,
+    "difficulty": "Hard",
+    "tags": ["Stack", "Greedy", "String", "Monotonic Stack"],
+    "tests": [
+        {
+            "args": {
+                "s": "bb",
+                "k": 2,
+                "letter": "b",
+                "repetition": 2
+            },
+            "expected": "bb"
+        },
+        {
+            "args": {
+                "s": "leetcode",
+                "k": 4,
+                "letter": "e",
+                "repetition": 2
+            },
+            "expected": "ecde"
+        },
+        {
+            "args": {
+                "s": "leet",
+                "k": 3,
+                "letter": "e",
+                "repetition": 1
+            },
+            "expected": "eet"
+        },
+        {
+            "args": {
+                "s": "aabbc",
+                "k": 3,
+                "letter": "a",
+                "repetition": 1
+            },
+            "expected": "aab"
+        },
+        {
+            "args": {
+                "s": "abacabad",
+                "k": 4,
+                "letter": "a",
+                "repetition": 2
+            },
+            "expected": "aaaa"
+        },
+        {
+            "args": {
+                "s": "zzzzz",
+                "k": 3,
+                "letter": "z",
+                "repetition": 3
+            },
+            "expected": "zzz"
+        },
+        {
+            "args": {
+                "s": "abcdedcba",
+                "k": 5,
+                "letter": "d",
+                "repetition": 1
+            },
+            "expected": "abcda"
+        },
+        {
+            "args": {
+                "s": "zzzzzaaaaa",
+                "k": 5,
+                "letter": "a",
+                "repetition": 3
+            },
+            "expected": "aaaaa"
+        },
+        {
+            "args": {
+                "s": "apple",
+                "k": 3,
+                "letter": "p",
+                "repetition": 1
+            },
+            "expected": "ape"
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "k": 7,
+                "letter": "a",
+                "repetition": 3
+            },
+            "expected": "aaaaaaa"
+        },
+        {
+            "args": {
+                "s": "azbzczdz",
+                "k": 4,
+                "letter": "z",
+                "repetition": 2
+            },
+            "expected": "abzz"
+        },
+        {
+            "args": {
+                "s": "abcdedcba",
+                "k": 5,
+                "letter": "c",
+                "repetition": 1
+            },
+            "expected": "abcba"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "k": 5,
+                "letter": "z",
+                "repetition": 2
+            },
+            "expected": "xxyzz"
+        },
+        {
+            "args": {
+                "s": "abcdedcba",
+                "k": 5,
+                "letter": "c",
+                "repetition": 2
+            },
+            "expected": "abcca"
+        },
+        {
+            "args": {
+                "s": "zzzz",
+                "k": 2,
+                "letter": "z",
+                "repetition": 2
+            },
+            "expected": "zz"
+        },
+        {
+            "args": {
+                "s": "abcabcabc",
+                "k": 6,
+                "letter": "a",
+                "repetition": 2
+            },
+            "expected": "aababc"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "k": 9,
+                "letter": "b",
+                "repetition": 3
+            },
+            "expected": "ababcabcd"
+        },
+        {
+            "args": {
+                "s": "elephant",
+                "k": 4,
+                "letter": "e",
+                "repetition": 1
+            },
+            "expected": "eant"
+        },
+        {
+            "args": {
+                "s": "zazbzazbzazb",
+                "k": 8,
+                "letter": "z",
+                "repetition": 4
+            },
+            "expected": "abzazbzz"
+        },
+        {
+            "args": {
+                "s": "babcbabcbabc",
+                "k": 5,
+                "letter": "b",
+                "repetition": 3
+            },
+            "expected": "aabbb"
+        },
+        {
+            "args": {
+                "s": "abcdedcbaabcdedcbaabcdedcba",
+                "k": 15,
+                "letter": "c",
+                "repetition": 3
+            },
+            "expected": "aaabcaabcdedcba"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaabbbbbbbbbbccccccccccdddddddddd",
+                "k": 20,
+                "letter": "c",
+                "repetition": 4
+            },
+            "expected": "aaaaaaaaaaaabbbbcccc"
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbbbcccccc",
+                "k": 12,
+                "letter": "b",
+                "repetition": 4
+            },
+            "expected": "aaaaaabbbbbb"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+                "k": 26,
+                "letter": "z",
+                "repetition": 1
+            },
+            "expected": "aabcdefghijklmnopqrstuvwxz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 13,
+                "letter": "m",
+                "repetition": 1
+            },
+            "expected": "abcdefghijklm"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 5,
+                "letter": "i",
+                "repetition": 2
+            },
+            "expected": "iiipi"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba",
+                "k": 26,
+                "letter": "a",
+                "repetition": 2
+            },
+            "expected": "ayxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "ababababababababababababababababababababababab",
+                "k": 10,
+                "letter": "a",
+                "repetition": 3
+            },
+            "expected": "aaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "xyzyxyzyxyzyxyzyzyzyxyzyzyzyzyzyxyzyxyzyzyzyzyzy",
+                "k": 15,
+                "letter": "x",
+                "repetition": 3
+            },
+            "expected": "xxxxxxxyyyyzyzy"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 8,
+                "letter": "c",
+                "repetition": 3
+            },
+            "expected": "aabbccd"
+        },
+        {
+            "args": {
+                "s": "zzzzzaaaaabbbb",
+                "k": 10,
+                "letter": "a",
+                "repetition": 4
+            },
+            "expected": "zaaaaabbbb"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 4,
+                "letter": "i",
+                "repetition": 2
+            },
+            "expected": "iiii"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 6,
+                "letter": "i",
+                "repetition": 2
+            },
+            "expected": "iiippi"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 50,
+                "letter": "z",
+                "repetition": 10
+            },
+            "expected": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 20,
+                "letter": "a",
+                "repetition": 2
+            },
+            "expected": "aabbccddeeffgghhiijj"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "k": 4,
+                "letter": "a",
+                "repetition": 2
+            },
+            "expected": "aana"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "k": 8,
+                "letter": "b",
+                "repetition": 3
+            },
+            "expected": "abababcd"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 10,
+                "letter": "m",
+                "repetition": 2
+            },
+            "expected": "abcdefghm"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "k": 7,
+                "letter": "a",
+                "repetition": 3
+            },
+            "expected": "aaaabra"
+        },
+        {
+            "args": {
+                "s": "zyxzyxzyx",
+                "k": 5,
+                "letter": "x",
+                "repetition": 2
+            },
+            "expected": "xxzyx"
+        },
+        {
+            "args": {
+                "s": "abracadabraabracadabra",
+                "k": 12,
+                "letter": "a",
+                "repetition": 4
+            },
+            "expected": "aaaaaaaaabra"
+        },
+        {
+            "args": {
+                "s": "racecar",
+                "k": 5,
+                "letter": "e",
+                "repetition": 1
+            },
+            "expected": "acear"
+        },
+        {
+            "args": {
+                "s": "abcdabcabcabc",
+                "k": 9,
+                "letter": "c",
+                "repetition": 3
+            },
+            "expected": "aabcabcac"
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnmqwerty",
+                "k": 12,
+                "letter": "r",
+                "repetition": 2
+            },
+            "expected": "erabnmqwerty"
+        },
+        {
+            "args": {
+                "s": "xyzyzyzyzyx",
+                "k": 7,
+                "letter": "y",
+                "repetition": 3
+            },
+            "expected": "xyyyyyx"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().smallestSubsequence",
+        "typescript": "Solution().smallestSubsequence"
+    }
+}

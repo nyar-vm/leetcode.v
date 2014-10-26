@@ -1,0 +1,882 @@
+{
+    "id": "number-of-ways-to-divide-a-long-corridor",
+    "questionId": 2147,
+    "difficulty": "Hard",
+    "tags": ["Math", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "corridor": "PPPPSSPPPPSSPPPP"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SPSPSPSP"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "corridor": "SSSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PSSPSPSPPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "PPPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPSSSS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "SSPSSP"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "corridor": "SSPSSPSS"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPSSPPPPSS"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "corridor": "SSPSPSPSPS"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "corridor": "SSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSSPPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSPPS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSPP"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSS"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPPS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "S"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPSPSP"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SPPSPPSPPS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "PPSPSPSPSPSPSPSPSP"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "corridor": "SSSPSSSSPPSSPPSSSSPPSSSSPPSSSSSSSSSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SPPSPSPSPSPSPSPSPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPSSPSSPSSPSSPSSPSS"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSPSSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSSSSSSSPPSSSSSSSSPPSSSSSSSSSS"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSS"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "corridor": "SPSSPSSPSSPSSPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPSSPPPPSSPPPP"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPSSPPPPSSPPPPSSPPSS"
+            },
+            "expected": 525
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSPPSSPPSS"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "corridor": "PPPPSSPPPPSSPPPPSSPPPPSSPPPPSSPPPP"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "corridor": "SSSPSPSPSPSPSSSSPSPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSPSSSSPPPPSS"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSSSSSSSSSSSSS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPPPPPPPPPPPPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SPPSPSPSPSPSPSPSPSPS"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "corridor": "SPSPPSPSPPSPSPPSPSPP"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSPPSSPP"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SSPSPSPSPSPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSPSSSPSSSPSSSPSS"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSSSSSSSSSSS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPPPSSPPPPSS"
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSSSSSPPSS"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPSSPPPPPSS"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPPPSSPPSSPPSSSSPPPPSSSSSS"
+            },
+            "expected": 225
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSSPPSS"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPPPSSPPPPSSSSPPPPSS"
+            },
+            "expected": 125
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSSPPPPSSPPPPSSPPPPSS"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSSSSSSSSSSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SPPSPPSPPSPPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPSPPSPSPSPSPPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 177147
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPSPPPPSPPPPSPPPPS"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSSSSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSSPPSPSSPPSPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSPPSS"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSPSPSPSPSPSPSPSPSPSPSPSPSPSPSPSPSPSPS"
+            },
+            "expected": 1536
+        },
+        {
+            "args": {
+                "corridor": "SSSPSSPPSSPPSSSSPPSSPPSSPPSSSSPPSSSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSSSPPSSSSPPSSSS"
+            },
+            "expected": 729
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPPPSPSPPS"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSSPPPPSSPPSSPPPPSS"
+            },
+            "expected": 375
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPSPPPPPSSSSPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPSSSSPPPPSS"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPPPSSSSPPSPSS"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPSSPPSS"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSSPPSPSSPPSPSSPPSPSS"
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "corridor": "SSSPSSSPSSSPSSSPSSSPSSSPSSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSPSSSSPPSSPPSSSSPPSSSSPPSSSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SPPPPPPPPPPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPPPSPSPPPPSPSPPPPSP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 729
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPPPPPPPPPPPPPPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPSSPSSPSSPSSPSSPSSPSS"
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSPSPPPSS"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "corridor": "PPSSPSSPPSSPSSPPSSPSSPPSS"
+            },
+            "expected": 216
+        },
+        {
+            "args": {
+                "corridor": "SSPPPSSPPPSSPPPSS"
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "corridor": "SSPSSSPSSPSSPSSPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 729
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPPPSSPPPPSS"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "corridor": "SPSSSPSSSPSSSPSSSPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PSPSPSPSPSPSPSPSPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPSPSPSSP"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSSSSSSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSPSSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSPPPSSSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSSSPPSSSSPPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPSSSSSSSSSS"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSSPPPPSSSSPPPPSSSSPPPPSSSS"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSSPPPPPPSS"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPSSSSSSPPSSSS"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SSPSSPSSPSSPSSPSSPSSPSSPSSPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSPSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPPPSSPPSSPP"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "corridor": "SPSSSPSSSPSSSPSS"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "corridor": "PSPPSPSPSPSPSPSPSPSP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSPPSSSSSSPPSSSSSSPPSSSSSS"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPSSPPSSPSSPPSS"
+            },
+            "expected": 108
+        },
+        {
+            "args": {
+                "corridor": "SSSPSPSPSPSPSPSPSPSPSP"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPSSPPPP"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "PPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 19683
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSSPSPSSPSPSSPSPSS"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "corridor": "SSSPPSSSPPPSSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSSSSPPPSSSSSPPPSSSS"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSPPPPPPPPSSSSSSSSPPPPPPPPSSSS"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "corridor": "SSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPSSSSSSPPSSPP"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "corridor": "SSPSPSPSPSPSPSPSPSPSPSPSPSPSPS"
+            },
+            "expected": 128
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPPPSSSSPPPPSSSS"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "corridor": "SSPSPPSSPSPPSSPSPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SPSPSP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSPSSPPPSS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSSPSPSPSPS"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "corridor": "PPPPPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPPPPPPPSSPPPPSSPPSS"
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 6561
+        },
+        {
+            "args": {
+                "corridor": "SSPPPPSSPPPPSSPPSS"
+            },
+            "expected": 75
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSSSSSSSSSSSSSSS"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPPPSSSSPPSSSS"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "corridor": "PPPPPPPPPPPPPPPP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSSPSPSPSPSPSPSPSPSS"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSSSSPPSPSSSS"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "corridor": "SSPSSPSSPSSPSSPSS"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSPP"
+            },
+            "expected": 81
+        },
+        {
+            "args": {
+                "corridor": "PPPPSSPPPPSSPPPPSSPPPPSSPPPPSS"
+            },
+            "expected": 625
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 2187
+        },
+        {
+            "args": {
+                "corridor": "SSSSPPSSSSPPSSSS"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SSSSSSPPPPSSSSPPPPSSSSSSPPPP"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSPPSSPPSS"
+            },
+            "expected": 243
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSSS"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "corridor": "SSPSPSPSPSPSPSPS"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "SSPPSPSPSPSPSS"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "corridor": "SPSPSPSPSPSPSPSPSPSP"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSSSPPPPSSSSSSSS"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "corridor": "PPPPSSPPSSPPSSPPPP"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "corridor": "SPSPPSPSPPSPSPPSPSPPSP"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "corridor": "PPSPSPSPSPSPPSPSPS"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "corridor": "SPSPSPSPPSPS"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "corridor": "SSPPSSPPSSPPSSSSPPSSPPSSSSPPSS"
+            },
+            "expected": 729
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numberOfWays",
+        "typescript": "Solution().numberOfWays"
+    }
+}

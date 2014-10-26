@@ -1,0 +1,624 @@
+{
+    "id": "lexicographically-smallest-string-after-substring-operation",
+    "questionId": 2734,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "abz"
+            },
+            "expected": "aay"
+        },
+        {
+            "args": {
+                "s": "azazaz"
+            },
+            "expected": "ayazaz"
+        },
+        {
+            "args": {
+                "s": "zzzz"
+            },
+            "expected": "yyyy"
+        },
+        {
+            "args": {
+                "s": "azaza"
+            },
+            "expected": "ayaza"
+        },
+        {
+            "args": {
+                "s": "acbbc"
+            },
+            "expected": "abaab"
+        },
+        {
+            "args": {
+                "s": "cbabc"
+            },
+            "expected": "baabc"
+        },
+        {
+            "args": {
+                "s": "azaz"
+            },
+            "expected": "ayaz"
+        },
+        {
+            "args": {
+                "s": "z"
+            },
+            "expected": "y"
+        },
+        {
+            "args": {
+                "s": "aaa"
+            },
+            "expected": "aaz"
+        },
+        {
+            "args": {
+                "s": "aa"
+            },
+            "expected": "az"
+        },
+        {
+            "args": {
+                "s": "abcdzxyz"
+            },
+            "expected": "aabcywxy"
+        },
+        {
+            "args": {
+                "s": "abcd"
+            },
+            "expected": "aabc"
+        },
+        {
+            "args": {
+                "s": "zzz"
+            },
+            "expected": "yyy"
+        },
+        {
+            "args": {
+                "s": "leetcode"
+            },
+            "expected": "kddsbncd"
+        },
+        {
+            "args": {
+                "s": "xyz"
+            },
+            "expected": "wxy"
+        },
+        {
+            "args": {
+                "s": "mnopqrstuvsxyz"
+            },
+            "expected": "lmnopqrsturwxy"
+        },
+        {
+            "args": {
+                "s": "zzabcd"
+            },
+            "expected": "yyabcd"
+        },
+        {
+            "args": {
+                "s": "zazbzczdz"
+            },
+            "expected": "yazbzczdz"
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbb"
+            },
+            "expected": "aaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "abczzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": "aabyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "abxyzmnopqrstu"
+            },
+            "expected": "aawxylmnopqrst"
+        },
+        {
+            "args": {
+                "s": "aczzzzza"
+            },
+            "expected": "abyyyyya"
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabb"
+            },
+            "expected": "aaaaaabbaabb"
+        },
+        {
+            "args": {
+                "s": "aabbaabb"
+            },
+            "expected": "aaaaaabb"
+        },
+        {
+            "args": {
+                "s": "abcabcabc"
+            },
+            "expected": "aababcabc"
+        },
+        {
+            "args": {
+                "s": "abracadabra"
+            },
+            "expected": "aaqacadabra"
+        },
+        {
+            "args": {
+                "s": "aaaaazzzzz"
+            },
+            "expected": "aaaaayyyyy"
+        },
+        {
+            "args": {
+                "s": "aaaaz"
+            },
+            "expected": "aaaay"
+        },
+        {
+            "args": {
+                "s": "zaz"
+            },
+            "expected": "yaz"
+        },
+        {
+            "args": {
+                "s": "cbabczzzz"
+            },
+            "expected": "baabczzzz"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "aaabaaab"
+            },
+            "expected": "aaaaaaab"
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc"
+            },
+            "expected": "aaaaaaaabbbb"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzz"
+            },
+            "expected": "yyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd"
+            },
+            "expected": "aabcabcdabcd"
+        },
+        {
+            "args": {
+                "s": "zzzzzaa"
+            },
+            "expected": "yyyyyaa"
+        },
+        {
+            "args": {
+                "s": "zzzzz"
+            },
+            "expected": "yyyyy"
+        },
+        {
+            "args": {
+                "s": "aaabaaaabaaa"
+            },
+            "expected": "aaaaaaaabaaa"
+        },
+        {
+            "args": {
+                "s": "zzyyzzyyzzyy"
+            },
+            "expected": "yyxxyyxxyyxx"
+        },
+        {
+            "args": {
+                "s": "aaaabaaa"
+            },
+            "expected": "aaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "xyzyxzyzyxzyz"
+            },
+            "expected": "wxyxwyxyxwyxy"
+        },
+        {
+            "args": {
+                "s": "leetcodeisfun"
+            },
+            "expected": "kddsbncdhretm"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaabczzzzzzzz"
+            },
+            "expected": "aaaaaaaaabyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "babababababababab"
+            },
+            "expected": "aabababababababab"
+        },
+        {
+            "args": {
+                "s": "zaa"
+            },
+            "expected": "yaa"
+        },
+        {
+            "args": {
+                "s": "mnopqrstu"
+            },
+            "expected": "lmnopqrst"
+        },
+        {
+            "args": {
+                "s": "aaaaaz"
+            },
+            "expected": "aaaaay"
+        },
+        {
+            "args": {
+                "s": "abacabad"
+            },
+            "expected": "aaacabad"
+        },
+        {
+            "args": {
+                "s": "leetcodez"
+            },
+            "expected": "kddsbncdy"
+        },
+        {
+            "args": {
+                "s": "zabz"
+            },
+            "expected": "yabz"
+        },
+        {
+            "args": {
+                "s": "abzab"
+            },
+            "expected": "aayab"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaa"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaz"
+        },
+        {
+            "args": {
+                "s": "azz"
+            },
+            "expected": "ayy"
+        },
+        {
+            "args": {
+                "s": "qwertypoiuytrewq"
+            },
+            "expected": "pvdqsxonhtxsqdvp"
+        },
+        {
+            "args": {
+                "s": "aabbccdd"
+            },
+            "expected": "aaaabbcc"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabc"
+            },
+            "expected": "aabcdefghijklmnopqrstuvwxyabc"
+        },
+        {
+            "args": {
+                "s": "zzabc"
+            },
+            "expected": "yyabc"
+        },
+        {
+            "args": {
+                "s": "zzzzza"
+            },
+            "expected": "yyyyya"
+        },
+        {
+            "args": {
+                "s": "abczzzzabc"
+            },
+            "expected": "aabyyyyabc"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": "yyyyyyyyyyyyyyyyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "abzabzabz"
+            },
+            "expected": "aayabzabz"
+        },
+        {
+            "args": {
+                "s": "azzzzzz"
+            },
+            "expected": "ayyyyyy"
+        },
+        {
+            "args": {
+                "s": "hellozworld"
+            },
+            "expected": "gdkknyvnqkc"
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba"
+            },
+            "expected": "aaacabadabacaba"
+        },
+        {
+            "args": {
+                "s": "abcxyzzyxabc"
+            },
+            "expected": "aabwxyyxwabc"
+        },
+        {
+            "args": {
+                "s": "zabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": "yabcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": "yyyyyyyyyyyyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "aaaabczzzz"
+            },
+            "expected": "aaaaabyyyy"
+        },
+        {
+            "args": {
+                "s": "abcdz"
+            },
+            "expected": "aabcy"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgg"
+            },
+            "expected": "aaaabbccddeeff"
+        },
+        {
+            "args": {
+                "s": "bbbb"
+            },
+            "expected": "aaaa"
+        },
+        {
+            "args": {
+                "s": "abcdefghij"
+            },
+            "expected": "aabcdefghi"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": "aaaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy"
+        },
+        {
+            "args": {
+                "s": "aaaazzzz"
+            },
+            "expected": "aaaayyyy"
+        },
+        {
+            "args": {
+                "s": "bababababab"
+            },
+            "expected": "aababababab"
+        },
+        {
+            "args": {
+                "s": "abcxyzabc"
+            },
+            "expected": "aabwxyabc"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": "yxwvutsrqponmlkjihgfedcbaa"
+        },
+        {
+            "args": {
+                "s": "abcdefg"
+            },
+            "expected": "aabcdef"
+        },
+        {
+            "args": {
+                "s": "baaaaaaaaaa"
+            },
+            "expected": "aaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "expected": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": "aabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "s": "xyzabcdefghijklmnopqrstu"
+            },
+            "expected": "wxyabcdefghijklmnopqrstu"
+        },
+        {
+            "args": {
+                "s": "abzzz"
+            },
+            "expected": "aayyy"
+        },
+        {
+            "args": {
+                "s": "abcxyz"
+            },
+            "expected": "aabwxy"
+        },
+        {
+            "args": {
+                "s": "abczyx"
+            },
+            "expected": "aabyxw"
+        },
+        {
+            "args": {
+                "s": "zabxyzmnopqrstu"
+            },
+            "expected": "yabxyzmnopqrstu"
+        },
+        {
+            "args": {
+                "s": "aaaab"
+            },
+            "expected": "aaaaa"
+        },
+        {
+            "args": {
+                "s": "zzzzzyyyy"
+            },
+            "expected": "yyyyyxxxx"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": "aabcdefghijklmnopqrstuvwxyabcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcz"
+            },
+            "expected": "aaby"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaz"
+        },
+        {
+            "args": {
+                "s": "zzzabzzz"
+            },
+            "expected": "yyyabzzz"
+        },
+        {
+            "args": {
+                "s": "xyzaabbcc"
+            },
+            "expected": "wxyaabbcc"
+        },
+        {
+            "args": {
+                "s": "mississippi"
+            },
+            "expected": "lhrrhrrhooh"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": "yxwvutsrqponmlkjihgfedcbaazyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc"
+            },
+            "expected": "aababcabcabcabc"
+        },
+        {
+            "args": {
+                "s": "hello world"
+            },
+            "expected": "gdkkn\u001fvnqkc"
+        },
+        {
+            "args": {
+                "s": "baaaa"
+            },
+            "expected": "aaaaa"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzz"
+            },
+            "expected": "yyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "aaaazzzzzzzzzz"
+            },
+            "expected": "aaaayyyyyyyyyy"
+        },
+        {
+            "args": {
+                "s": "zyxzyxzyxzyx"
+            },
+            "expected": "yxwyxwyxwyxw"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().smallestString",
+        "typescript": "Solution().smallestString"
+    }
+}

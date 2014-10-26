@@ -1,0 +1,1404 @@
+{
+    "id": "short-encoding-of-words",
+    "questionId": 820,
+    "difficulty": "Medium",
+    "tags": ["Trie", "Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "words": ["abc", "def", "ghi", "jkl", "mno"]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tested", "testable"]
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "he", "h"]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["aaa", "aa", "a"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg"]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["apple", "ple", "le", "e"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["test", "testcase", "cases", "ase", "se", "e"]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming"]
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "words": ["apple", "pple", "ple", "le", "e"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "cd", "da"]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["aa", "aaa", "aaaa", "aaaaa"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": ["aa", "aaa", "aaaa"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "y", "z"]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g"]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "rat", "car"]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "hold"]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": ["time", "me", "bell"]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["at", "ac", "bc", "abc"]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "code", "word"]
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde"]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["t"]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "word", "hello"]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd", "abcde"]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def", "efg", "fgh"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["banana", "nana", "ana", "na", "a", "nan", "nanan"]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "words": [
+                    "sequence",
+                    "equence",
+                    "quence",
+                    "uence",
+                    "ence",
+                    "nce",
+                    "ce",
+                    "e",
+                    "sq",
+                    "qu",
+                    "uen",
+                    "en"
+                ]
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "words": ["xyz", "xy", "xz", "yz", "x", "y", "z"]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "yzx", "yxz", "zxy", "xzy", "zy", "yx", "xz", "zx", "xy"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": [
+                    "random",
+                    "andom",
+                    "dom",
+                    "om",
+                    "m",
+                    "rando",
+                    "and",
+                    "nd",
+                    "d",
+                    "rand",
+                    "ran",
+                    "ra",
+                    "ndom"
+                ]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcde", "cdef", "defg", "efgh"]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": ["abc", "bc", "c", "abcd", "bcd"]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["apple", "ple", "leetcode", "code", "ode", "de"]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "aaaaa",
+                    "aaaaaa",
+                    "aaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaaaa",
+                    "aaaaaaaaaa",
+                    "aaaaaaaaaaa",
+                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaaa",
+                    "aaaaaaaaaaaaaa",
+                    "aaaaaaaaaaaaaaa"
+                ]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["aa", "aaa", "aaaa", "aab", "aabaa", "aabaaa", "aabaaaa"]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "efgh",
+                    "fgh",
+                    "gh",
+                    "h",
+                    "abcdefghijk",
+                    "ghijk",
+                    "hijk",
+                    "ijk",
+                    "jk",
+                    "k"
+                ]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": [
+                    "xylophone",
+                    "ylophone",
+                    "lophone",
+                    "ophone",
+                    "phone",
+                    "hone",
+                    "one",
+                    "ne",
+                    "e"
+                ]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd", "abcde", "abcdef", "abcdefg"]
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve",
+                    "thirteen",
+                    "fourteen",
+                    "fifteen",
+                    "sixteen",
+                    "seventeen",
+                    "eighteen",
+                    "nineteen",
+                    "twenty",
+                    "twentyone",
+                    "twentytwo",
+                    "twentythree",
+                    "twentyfour",
+                    "twentyfive"
+                ]
+            },
+            "expected": 162
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcd", "cd", "d", "abcde", "bcde", "cde", "de", "e"]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "hel", "he", "h", "world", "worl", "wor", "wo", "w"]
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "words": [
+                    "supercalifragilisticexpialidocious",
+                    "supercalifragilisticexpialidocio",
+                    "supercalifragilisticexpialido",
+                    "supercalifragilisticexpalia",
+                    "supercalifragilisticexpali",
+                    "supercalifragilisticexpal",
+                    "supercalifragilisticexpa",
+                    "supercalifragilisticex",
+                    "supercalifragilistice",
+                    "supercalifragilistic",
+                    "supercalifragilisti",
+                    "supercalifragilist",
+                    "supercalifragilis",
+                    "supercalifragili",
+                    "supercalifragil",
+                    "supercalifragi",
+                    "supercalifrag",
+                    "supercalifra",
+                    "supercalifr",
+                    "supercalif",
+                    "supercali",
+                    "supercal",
+                    "superc",
+                    "super",
+                    "supe",
+                    "sup",
+                    "su",
+                    "s"
+                ]
+            },
+            "expected": 469
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcd", "cd", "d", "a", "ab", "abc", "bc", "c"]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "abracadabra",
+                    "bracadabr",
+                    "racadabr",
+                    "acadabr",
+                    "cadabr",
+                    "adabr",
+                    "dabr",
+                    "abr",
+                    "br",
+                    "r"
+                ]
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "words": [
+                    "xylophone",
+                    "ylophone",
+                    "lophone",
+                    "ophone",
+                    "phone",
+                    "hone",
+                    "one",
+                    "ne",
+                    "e",
+                    "x"
+                ]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": [
+                    "qwerty",
+                    "werty",
+                    "erty",
+                    "rty",
+                    "ty",
+                    "y",
+                    "qwertyuiop",
+                    "ertyuiop",
+                    "rtyuiop",
+                    "tyuiop",
+                    "yuiop",
+                    "uiop",
+                    "iop",
+                    "op",
+                    "p"
+                ]
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaaaa",
+                    "aaaaa",
+                    "aaaa",
+                    "aaa",
+                    "aa",
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "aaaaa",
+                    "aaaaaa"
+                ]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "bra",
+                    "ra",
+                    "a",
+                    "abacaxi",
+                    "bacaxi",
+                    "acaxi",
+                    "caxi",
+                    "axi",
+                    "xi",
+                    "i"
+                ]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z",
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["ab", "abc", "abcd", "abcde", "abcdef"]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcd",
+                    "cd",
+                    "d",
+                    "efgh",
+                    "fgh",
+                    "gh",
+                    "h",
+                    "ijkl",
+                    "jkl",
+                    "kl",
+                    "l"
+                ]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": [
+                    "test",
+                    "testing",
+                    "tests",
+                    "tes",
+                    "te",
+                    "t",
+                    "testcase",
+                    "cases",
+                    "ase",
+                    "se",
+                    "e"
+                ]
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "words": ["banana", "anana", "nana", "ana", "na", "a", "ban"]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcd", "cd", "d", "def", "ef", "f", "fgh", "gh", "h"]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "words": ["banana", "anana", "nana", "ana", "na", "a", "nabana", "bananab"]
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "words": ["ab", "abc", "abcd", "abcde", "abcdef", "abcdefg", "abcdefgh"]
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "logarithm",
+                    "rhythm",
+                    "syzygy",
+                    "zymurgy",
+                    "zymurgy",
+                    "zymurgy",
+                    "zymurgy",
+                    "zymurgy"
+                ]
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcde",
+                    "cdef",
+                    "defg",
+                    "efgh",
+                    "fghi",
+                    "ghij",
+                    "hijk",
+                    "ijkl",
+                    "jkl",
+                    "kl",
+                    "l"
+                ]
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z",
+                    "aa",
+                    "bb",
+                    "cc",
+                    "dd",
+                    "ee",
+                    "ff",
+                    "gg",
+                    "hh",
+                    "ii",
+                    "jj",
+                    "kk",
+                    "ll",
+                    "mm",
+                    "nn",
+                    "oo",
+                    "pp",
+                    "qq",
+                    "rr",
+                    "ss",
+                    "tt",
+                    "uu",
+                    "vv",
+                    "ww",
+                    "xx",
+                    "yy",
+                    "zz"
+                ]
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "words": ["hello", "hell", "helo", "he", "h", "e"]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "words": ["abacaxi", "bacaxi", "caxi", "axi", "xi", "i"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["xyz", "zyx", "yzx", "yxz", "xzy", "zxy"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["algorithm", "rhythm", "rhythmically", "thym", "hym", "ym", "m"]
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "words": ["flower", "flow", "flight", "flighting", "flour"]
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": [
+                    "word",
+                    "ord",
+                    "rd",
+                    "d",
+                    "word",
+                    "ord",
+                    "rd",
+                    "d",
+                    "word",
+                    "ord",
+                    "rd",
+                    "d",
+                    "word",
+                    "ord",
+                    "rd",
+                    "d",
+                    "word",
+                    "ord",
+                    "rd",
+                    "d"
+                ]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["apple", "peel", "pale", "ale", "le"]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["apple", "ple", "le", "e", "app", "ppl"]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "bcdefghi",
+                    "cdefghij",
+                    "defghijk",
+                    "efghijkl",
+                    "fghijklm",
+                    "ghijklmn",
+                    "hijklmno",
+                    "ijklmnop",
+                    "jklmnopq"
+                ]
+            },
+            "expected": 90
+        },
+        {
+            "args": {
+                "words": ["ab", "bc", "abc", "abcd", "abcde"]
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "words": [
+                    "overlap",
+                    "lap",
+                    "ap",
+                    "p",
+                    "nolap",
+                    "olap",
+                    "lapo",
+                    "lapor",
+                    "laporator",
+                    "laporatory"
+                ]
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "words": [
+                    "panorama",
+                    "anorama",
+                    "norama",
+                    "orama",
+                    "rama",
+                    "ama",
+                    "ma",
+                    "a",
+                    "planet",
+                    "lanet",
+                    "anet",
+                    "net",
+                    "et",
+                    "t"
+                ]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["apple", "ple", "le", "e", "app", "pple", "plea"]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "words": ["zebra", "ebra", "bra", "ra", "a", "z"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "god", "tac", "act", "gat"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "words": ["abc", "bcd", "cde", "def", "efg"]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["coding", "ing", "ode", "de", "e"]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "words": ["aaa", "aab", "aba", "abb", "baa", "bab", "bba", "bbb", "bbb", "bbb"]
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "bcd",
+                    "cd",
+                    "d",
+                    "abcds",
+                    "bcde",
+                    "cde",
+                    "de",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz"
+                ]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "words": ["unique", "un", "iq", "que", "eue", "eu", "ue", "eq", "qu", "uq"]
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "words": ["banana", "ana", "nana", "anaconda", "conda"]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "words": ["zebra", "ebra", "bra", "ra", "a", "cab", "ab", "b"]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": ["programming", "ming", "gram", "ing", "am", "m"]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij"
+                ]
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "lgorithm",
+                    "gorithm",
+                    "orithm",
+                    "rithm",
+                    "ithm",
+                    "thm",
+                    "hm",
+                    "m"
+                ]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "lgorithm",
+                    "gorithm",
+                    "rhythm",
+                    "hythm",
+                    "hythm",
+                    "thm",
+                    "hm",
+                    "m",
+                    "a"
+                ]
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "bcdefgh", "cdefgh", "defgh", "efgh", "fgh", "gh", "h"]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["sun", "un", "n", "moon", "oon", "on", "noon", "oon", "on", "n"]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "longest",
+                    "longer",
+                    "long",
+                    "lo",
+                    "l",
+                    "longestword",
+                    "word",
+                    "ord",
+                    "rd",
+                    "d"
+                ]
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "words": ["apple", "peach", "pear", "leap", "lead", "meat", "heat", "seat"]
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "words": [
+                    "watermelon",
+                    "atermelon",
+                    "termelon",
+                    "ermelon",
+                    "rmelon",
+                    "melon",
+                    "elon",
+                    "lon",
+                    "on",
+                    "n",
+                    "w"
+                ]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaab", "aabb", "abbb", "bbbb"]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "words": [
+                    "banana",
+                    "ananas",
+                    "nana",
+                    "ana",
+                    "na",
+                    "a",
+                    "banana",
+                    "ananas",
+                    "nana",
+                    "ana",
+                    "na",
+                    "a"
+                ]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj",
+                    "kkkk",
+                    "llll",
+                    "mmmm",
+                    "nnnn",
+                    "oooo",
+                    "pppp",
+                    "qqqq",
+                    "rrrr",
+                    "ssss",
+                    "tttt"
+                ]
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "words": [
+                    "aaa",
+                    "aab",
+                    "aac",
+                    "aba",
+                    "abc",
+                    "aca",
+                    "baa",
+                    "bab",
+                    "bac",
+                    "bba",
+                    "bbb",
+                    "bbc",
+                    "bca",
+                    "bcb",
+                    "bcc",
+                    "caa",
+                    "cab",
+                    "cac",
+                    "cba",
+                    "cbb",
+                    "cbc",
+                    "cca",
+                    "ccb",
+                    "ccc"
+                ]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "words": ["aaaa", "aaa", "aa", "a", "aaaaa"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "words": [
+                    "banana",
+                    "nana",
+                    "ana",
+                    "na",
+                    "a",
+                    "anana",
+                    "ananana",
+                    "anananana",
+                    "ananananana"
+                ]
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "words": ["abcdexyz", "bcdexyz", "cdexyz", "dexyz", "exyz", "xyz", "yz", "z"]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "words": ["banana", "anana", "nana", "ana", "na", "a", "cat", "at", "t"]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "words": [
+                    "xyz",
+                    "yz",
+                    "z",
+                    "xy",
+                    "x",
+                    "yx",
+                    "zxy",
+                    "zyx",
+                    "yxz",
+                    "zyxz",
+                    "xyzz",
+                    "zyzzz",
+                    "zyzyz"
+                ]
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefgh",
+                    "bcdefghi",
+                    "cdefghij",
+                    "defghijk",
+                    "efghijkl",
+                    "fghijklm",
+                    "ghijklmn",
+                    "hijklmno",
+                    "ijklmnop",
+                    "jklmnopq",
+                    "klmnopqr",
+                    "lmnopqrs",
+                    "mnopqrst",
+                    "nopqrstu",
+                    "opqrstuv",
+                    "pqrstuvw",
+                    "qrstuvwx",
+                    "rstuvwxy",
+                    "stuvwxyz"
+                ]
+            },
+            "expected": 171
+        },
+        {
+            "args": {
+                "words": ["programming", "gramming", "mming", "ming", "ing", "ng", "g"]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": [
+                    "abcde",
+                    "bcdef",
+                    "cdefg",
+                    "defgh",
+                    "efghi",
+                    "fghij",
+                    "ghijk",
+                    "hijkl",
+                    "ijklm",
+                    "jklmn",
+                    "klmno",
+                    "lmnop",
+                    "mnopq",
+                    "nopqr",
+                    "opqrs",
+                    "pqrst",
+                    "qrstu",
+                    "rstuv",
+                    "stuvw",
+                    "tuvwx",
+                    "uvwxy",
+                    "vwxyz",
+                    "wxyz",
+                    "xyz",
+                    "yz",
+                    "z"
+                ]
+            },
+            "expected": 132
+        },
+        {
+            "args": {
+                "words": ["apple", "app", "ple", "le", "e"]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "words": [
+                    "pqr",
+                    "pqs",
+                    "prq",
+                    "prs",
+                    "psq",
+                    "psr",
+                    "rpq",
+                    "rps",
+                    "rsp",
+                    "rsq",
+                    "spq",
+                    "spr"
+                ]
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "words": [
+                    "ab",
+                    "bc",
+                    "cd",
+                    "de",
+                    "ef",
+                    "fg",
+                    "gh",
+                    "hi",
+                    "ij",
+                    "jk",
+                    "kl",
+                    "lm",
+                    "mn",
+                    "no",
+                    "op",
+                    "pq",
+                    "qr",
+                    "rs",
+                    "st",
+                    "tu",
+                    "uv",
+                    "vw",
+                    "wx",
+                    "xy",
+                    "yz"
+                ]
+            },
+            "expected": 75
+        },
+        {
+            "args": {
+                "words": ["apple", "ple", "le", "e", "orange", "range", "age", "ge"]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "words": ["abcd", "bcd", "cd", "d", "abcd", "bcd", "cd", "d"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "words": ["apple", "ple", "app", "le", "p", "l", "e", "a"]
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "words": [
+                    "abc",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz"
+                ]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "words": [
+                    "optimization",
+                    "ptimization",
+                    "timization",
+                    "imization",
+                    "mization",
+                    "ization",
+                    "zation",
+                    "ation",
+                    "tion",
+                    "ion",
+                    "on",
+                    "n"
+                ]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "words": [
+                    "sequence",
+                    "equence",
+                    "quence",
+                    "uence",
+                    "ence",
+                    "nce",
+                    "ce",
+                    "e",
+                    "s",
+                    "sequ",
+                    "seq"
+                ]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "words": ["abcdefg", "cdefg", "defg", "efg", "fg", "g"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "words": [
+                    "abracadabra",
+                    "racadabra",
+                    "cadabra",
+                    "adabra",
+                    "dabra",
+                    "abra",
+                    "bra",
+                    "ra",
+                    "a"
+                ]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "words": ["kitten", "ten", "en", "n", "sitting", "ting", "ing", "ng", "g"]
+            },
+            "expected": 15
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimumLengthEncoding",
+        "typescript": "Solution().minimumLengthEncoding"
+    }
+}

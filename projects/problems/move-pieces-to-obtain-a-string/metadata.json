@@ -1,0 +1,964 @@
+{
+    "id": "move-pieces-to-obtain-a-string",
+    "questionId": 2337,
+    "difficulty": "Medium",
+    "tags": ["Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "start": "_R",
+                "target": "R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "___",
+                "target": "___"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LR",
+                "target": "LR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "_LL_R",
+                "target": "LL__R"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "____",
+                "target": "____"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "L_R",
+                "target": "_LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L",
+                "target": "L__R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_L_R",
+                "target": "LL_R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_R",
+                "target": "_RR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "_L__R__R_",
+                "target": "L______RR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "L___R",
+                "target": "_L__R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LL_R",
+                "target": "R_L_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "__L___",
+                "target": "L_____"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LRRL",
+                "target": "LRRL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RL",
+                "target": "LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L",
+                "target": "__LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRLR",
+                "target": "LRLR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "LL_RR",
+                "target": "L_RLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_L",
+                "target": "LL_"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RLRL",
+                "target": "LRLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R",
+                "target": "L___R"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R___L",
+                "target": "L___R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_",
+                "target": "__LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_LRL",
+                "target": "RLR_L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRLL____",
+                "target": "____RRLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L__R",
+                "target": "__LR___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R___L___L___R___R",
+                "target": "_______LL___RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LR___LR___LR____",
+                "target": "_L__L___R___R___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R_L__",
+                "target": "L______LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "____L___R___",
+                "target": "L___________R"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R_____L_______",
+                "target": "_________LR____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_R_R_R_R",
+                "target": "RRRRR_____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R____L_____",
+                "target": "_____R____L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R______L",
+                "target": "_____LR_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___L__R_L",
+                "target": "_____LR__L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L______R______L",
+                "target": "_______LR______"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_L___R_R",
+                "target": "__LR___LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L___L_",
+                "target": "___LR___L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L____R____L___",
+                "target": "________LR____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R____R",
+                "target": "_LR_____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L_____R",
+                "target": "_______LR___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_R_R_R_",
+                "target": "____RRRR"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R",
+                "target": "_L__L__RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__LR_R__",
+                "target": "__LR___R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "___L_R___L___R___",
+                "target": "L_____L____R____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LR_L_R_L_R",
+                "target": "L_R_L_R_L_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R_L_R",
+                "target": "_L__L_R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L___R_L",
+                "target": "____LR__RL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRR_______LLL",
+                "target": "________RRRLLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "__LR__R",
+                "target": "____LRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___L",
+                "target": "____L__LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R__L_R__L",
+                "target": "_______L___LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L___L_R",
+                "target": "___LL______R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_R__L_R",
+                "target": "L______LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_L_L_L_L",
+                "target": "_____LLLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "____L_R_L____",
+                "target": "_________LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_R__L__R",
+                "target": "__LR____R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R_L",
+                "target": "_LR_L_L_R_L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_R_L_R",
+                "target": "L___L___R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L___",
+                "target": "__LR____L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R",
+                "target": "___R_L_RL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R",
+                "target": "_LR_L__RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___L___R___L",
+                "target": "_____R___L___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___L___R___L___",
+                "target": "_____R____L____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LR_LRL__",
+                "target": "LRL_L___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R____L",
+                "target": "______LR_L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___R___R___L___L___",
+                "target": "_______RRR____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_R____L____R",
+                "target": "____L___R_R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_____R__L",
+                "target": "L_________RL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___L___R___L___",
+                "target": "__________LRLRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "____R_L_R___",
+                "target": "R_L_____R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "___L__R___",
+                "target": "L_______R__"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R____L____R",
+                "target": "____R___L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LR__LR__LR___",
+                "target": "L___R___L___RRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L____R____",
+                "target": "____LR____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "RRR___LLL",
+                "target": "___LLLRRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R_L___R",
+                "target": "L___L_R__"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R___R___R___R___L",
+                "target": "___L_____RRR___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R_L_R_L_R",
+                "target": "LL______RRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L__R_L_R",
+                "target": "L_____RLR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R__L",
+                "target": "_R___L_RL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___R___L___R___L",
+                "target": "_____RR____L___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R_L_R___",
+                "target": "_L_R_L_R_L_R____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___L___R",
+                "target": "__LR___R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "______L_R",
+                "target": "L______R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R__L_L___R",
+                "target": "___LR____R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___L___R___R___L___",
+                "target": "_____R____R____L___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_L_L_L",
+                "target": "LLLL____"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "_L_R_L_R_",
+                "target": "L_____R_R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R_L_R_L_R",
+                "target": "_LR_L_R_L_R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R_L_R_L_R",
+                "target": "_L_L_L_RLR_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___R___L",
+                "target": "_____L___RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_______L",
+                "target": "________LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_____R_L____",
+                "target": "________L_R__"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R___L_R___",
+                "target": "_L_R_L___R____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_R__L__R",
+                "target": "____L___LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_R__L___R",
+                "target": "L_____R____R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R___L",
+                "target": "_LR______"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R_L___R",
+                "target": "L___LR___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R",
+                "target": "_LR_L_R_L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "LRLR_LRL",
+                "target": "LRLR_LRL"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R_____L__",
+                "target": "_____LR__"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L",
+                "target": "__LR__L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L_R_L_R_L",
+                "target": "LR_L_R_L_R_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_____R___L",
+                "target": "________LRL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L____R_____",
+                "target": "L_____R_____"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R__R__L",
+                "target": "_____RR_L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "___LR___R",
+                "target": "L_____RR_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L___R_L_R",
+                "target": "L_____RR__"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R__L_R",
+                "target": "LL______RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "______",
+                "target": "______"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "R_L_R___L_R",
+                "target": "_L_R_L___RR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_L_L__L___",
+                "target": "_L_L___L___L_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R________L",
+                "target": "________LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L___L_R",
+                "target": "__LR__L_R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R___________L",
+                "target": "____________LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___L",
+                "target": "__L___R_L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R___R__L",
+                "target": "____L___R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_______L_L_R_R",
+                "target": "L______L___R_R"
+            },
+            "expected": true
+        },
+        {
+            "args": {
+                "start": "RRRLLL___",
+                "target": "___RRRLLL"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L__R__L___R____",
+                "target": "L___L__R__R____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R___R___R___L",
+                "target": "___L_____RR___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R__L___",
+                "target": "_L_____RL__"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___L___R",
+                "target": "L___L___R___R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "____L___R__",
+                "target": "L_____R____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R__L_R",
+                "target": "_LR__LR_"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L___LR__L____",
+                "target": "__LR__LR__L____"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___R",
+                "target": "___L____R"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L___R___L_R",
+                "target": "L_____RL___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "__L_R__R_L",
+                "target": "L_____R__L"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L___R__L",
+                "target": "L_____R__"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "L_R___R___L___",
+                "target": "___L_____R___"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L_R_L_R_R",
+                "target": "L______RRR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_L___R_L_R",
+                "target": "L______LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "_R_L_R_L____",
+                "target": "____LR____LR"
+            },
+            "expected": false
+        },
+        {
+            "args": {
+                "start": "R_L__R",
+                "target": "__LR__"
+            },
+            "expected": false
+        }
+    ],
+    "invoke": {
+        "python": "Solution().canChange",
+        "typescript": "Solution().canChange"
+    }
+}

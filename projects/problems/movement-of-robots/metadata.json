@@ -1,0 +1,958 @@
+{
+    "id": "movement-of-robots",
+    "questionId": 2731,
+    "difficulty": "Medium",
+    "tags": ["Brainteaser", "Array", "Prefix Sum", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "nums": [-1, 2, -3, 4],
+                "s": "RLRL",
+                "d": 5
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "nums": [-5, 1, 4],
+                "s": "RLR",
+                "d": 4
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "nums": [-5, -1, 0, 3, 7],
+                "s": "RLLLR",
+                "d": 5
+            },
+            "expected": 82
+        },
+        {
+            "args": {
+                "nums": [-10, -20, -30],
+                "s": "LLL",
+                "d": 1
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "nums": [0, 1, 2, 3, 4],
+                "s": "RRRRR",
+                "d": 1
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "nums": [-2, 0, 2],
+                "s": "RLL",
+                "d": 3
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "nums": [2, -1, 0],
+                "s": "LRR",
+                "d": 5
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "nums": [10, -10, 0],
+                "s": "RLR",
+                "d": 10
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "nums": [-2, 0, 2],
+                "s": "RLL",
+                "d": 3
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30],
+                "s": "RRR",
+                "d": 1
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "nums": [-1, 2, -3, 4],
+                "s": "LRRL",
+                "d": 5
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "nums": [-5, 1, 7],
+                "s": "LRRL",
+                "d": 4
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [10, -10, 0],
+                "s": "RLR",
+                "d": 5
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "nums": [1, 0],
+                "s": "RL",
+                "d": 2
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "nums": [-5, 1, 3],
+                "s": "RRL",
+                "d": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "nums": [1, 0],
+                "s": "RL",
+                "d": 2
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "nums": [0, 0, 0, 0],
+                "s": "RRLL",
+                "d": 1
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "nums": [3, 2, 1],
+                "s": "RRR",
+                "d": 1
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "nums": [10, -10, 20, -20],
+                "s": "RLRL",
+                "d": 10
+            },
+            "expected": 220
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10],
+                "s": "RRRLL",
+                "d": 7
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "nums": [1, -1, 2, -2, 3, -3],
+                "s": "RLRLRL",
+                "d": 15
+            },
+            "expected": 314
+        },
+        {
+            "args": {
+                "nums": [-1, 2, -3, 4, -5, 6, -7, 8, -9, 10],
+                "s": "RLRLRLRLRL",
+                "d": 5
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "nums": [-2000000000, -1000000000, 0, 1000000000, 2000000000],
+                "s": "RLRLRL",
+                "d": 999999999
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [-1, 2, -3, 4, -5],
+                "s": "RLLRL",
+                "d": 3
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10, 15, 20, 25, 30],
+                "s": "LRRLLRRLL",
+                "d": 10
+            },
+            "expected": 680
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5],
+                "s": "RLRLR",
+                "d": 2
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "nums": [0, 1, 2, 3, 4, 5],
+                "s": "RRRRR",
+                "d": 3
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "nums": [-1000000000, 0, 1000000000],
+                "s": "RLR",
+                "d": 500000000
+            },
+            "expected": 999999979
+        },
+        {
+            "args": {
+                "nums": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "s": "RRRRRRRRRR",
+                "d": 5
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "nums": [-1000, -800, -600, -400, -200, 200, 400, 600, 800, 1000],
+                "s": "RRRRRRRRRR",
+                "d": 300
+            },
+            "expected": 38000
+        },
+        {
+            "args": {
+                "nums": [-20, -10, 0, 10, 20],
+                "s": "LRRLL",
+                "d": 15
+            },
+            "expected": 220
+        },
+        {
+            "args": {
+                "nums": [-10, -5, -1, 0, 1, 5, 10],
+                "s": "LRRLLRR",
+                "d": 7
+            },
+            "expected": 304
+        },
+        {
+            "args": {
+                "nums": [-1000, -500, 0, 500, 1000],
+                "s": "RLRLR",
+                "d": 500
+            },
+            "expected": 12000
+        },
+        {
+            "args": {
+                "nums": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                "s": "RRRRRRRRRRRRRRRRRRRR",
+                "d": 2
+            },
+            "expected": 1330
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500],
+                "s": "RRRRR",
+                "d": 1
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10],
+                "s": "LRLRL",
+                "d": 5
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10],
+                "s": "RLRLR",
+                "d": 7
+            },
+            "expected": 136
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10],
+                "s": "RLRRL",
+                "d": 3
+            },
+            "expected": 92
+        },
+        {
+            "args": {
+                "nums": [-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50],
+                "s": "LRRLRRRLRRRL",
+                "d": 10
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [-5, 0, 5, 10],
+                "s": "RLRR",
+                "d": 20
+            },
+            "expected": 160
+        },
+        {
+            "args": {
+                "nums": [-500, -300, -100, 100, 300, 500],
+                "s": "LLRRLR",
+                "d": 10
+            },
+            "expected": 7100
+        },
+        {
+            "args": {
+                "nums": [-2, -1, 0, 1, 2],
+                "s": "RLRLR",
+                "d": 7
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "nums": [-20, -10, 0, 10, 20, 30, 40, 50, 60, 70],
+                "s": "LRRLLRRLLR",
+                "d": 15
+            },
+            "expected": 1840
+        },
+        {
+            "args": {
+                "nums": [-50, -25, 0, 25, 50],
+                "s": "LRRRL",
+                "d": 25
+            },
+            "expected": 550
+        },
+        {
+            "args": {
+                "nums": [-9, -7, -5, -3, -1, 1, 3, 5, 7, 9],
+                "s": "RRRRRRRRRR",
+                "d": 2
+            },
+            "expected": 330
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10, 15, 20],
+                "s": "LRRLRLRLR",
+                "d": 8
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [-9, -6, -3, 0, 3, 6, 9],
+                "s": "RRRRRRR",
+                "d": 4
+            },
+            "expected": 168
+        },
+        {
+            "args": {
+                "nums": [-1, 1, -2, 2, -3, 3, -4, 4, -5, 5],
+                "s": "RLRLRLRLRL",
+                "d": 3
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "s": "RRRRRRRRRR",
+                "d": 1
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "nums": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+                "s": "LRLRLRLRLR",
+                "d": 5
+            },
+            "expected": 468
+        },
+        {
+            "args": {
+                "nums": [-20, -15, -10, -5, 0, 5, 10, 15, 20],
+                "s": "RLRLRLRLR",
+                "d": 3
+            },
+            "expected": 608
+        },
+        {
+            "args": {
+                "nums": [0, 1, 2, 3, 4, 5],
+                "s": "RRRRRR",
+                "d": 10
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "s": "RRRRRRRRRL",
+                "d": 1
+            },
+            "expected": 149
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500],
+                "s": "LLLLL",
+                "d": 50
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [100, 101, 102, 103, 104, 105],
+                "s": "LLLLLR",
+                "d": 5
+            },
+            "expected": 85
+        },
+        {
+            "args": {
+                "nums": [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "s": "RRRRRRRRRR",
+                "d": 1
+            },
+            "expected": 210
+        },
+        {
+            "args": {
+                "nums": [-9, -7, -5, -3, -1],
+                "s": "RRRRR",
+                "d": 6
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "nums": [-50, -20, -10, 0, 10, 20, 50],
+                "s": "LRRLLRR",
+                "d": 10
+            },
+            "expected": 900
+        },
+        {
+            "args": {
+                "nums": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "s": "RLRLRLRLRL",
+                "d": 20
+            },
+            "expected": 1110
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "s": "RRRRRRRRRR",
+                "d": 10
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "nums": [-1, 0, 1, 2, 3, 4, 5],
+                "s": "LLLLLL",
+                "d": 3
+            },
+            "expected": 74
+        },
+        {
+            "args": {
+                "nums": [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "s": "LRLRLRLRLRL",
+                "d": 1
+            },
+            "expected": 230
+        },
+        {
+            "args": {
+                "nums": [-50, -30, -10, 10, 30, 50],
+                "s": "LLRRLL",
+                "d": 15
+            },
+            "expected": 720
+        },
+        {
+            "args": {
+                "nums": [-10, -8, -6, -4, -2, 2, 4, 6, 8, 10],
+                "s": "LLLLLLLLLL",
+                "d": 3
+            },
+            "expected": 380
+        },
+        {
+            "args": {
+                "nums": [-20, -15, -10, -5, 0, 5, 10, 15, 20],
+                "s": "RRRRLLLLL",
+                "d": 3
+            },
+            "expected": 482
+        },
+        {
+            "args": {
+                "nums": [
+                    -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+                ],
+                "s": "RRRRRRRRRRLLLLLLLLLL",
+                "d": 5
+            },
+            "expected": 1101
+        },
+        {
+            "args": {
+                "nums": [-100, -200, -300, -400, -500],
+                "s": "LLLLL",
+                "d": 100
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [-1, 1, -2, 2, -3, 3, -4, 4],
+                "s": "RLRLRLRL",
+                "d": 1
+            },
+            "expected": 68
+        },
+        {
+            "args": {
+                "nums": [1, 3, 5, 7, 9],
+                "s": "LLLLL",
+                "d": 2
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10],
+                "s": "RLRRLL",
+                "d": 5
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [1, -1, 2, -2, 3, -3, 4, -4, 5, -5],
+                "s": "RLRLRLRLRL",
+                "d": 4
+            },
+            "expected": 390
+        },
+        {
+            "args": {
+                "nums": [-300, -200, -100, 0, 100, 200, 300],
+                "s": "LRRLLRR",
+                "d": 100
+            },
+            "expected": 6600
+        },
+        {
+            "args": {
+                "nums": [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10],
+                "s": "RRRRRRRRRR",
+                "d": 2
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "nums": [-1000000000, 1000000000],
+                "s": "RL",
+                "d": 1000000000
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "nums": [10, 20, 30, 40, 50],
+                "s": "LLLLL",
+                "d": 5
+            },
+            "expected": 200
+        },
+        {
+            "args": {
+                "nums": [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6],
+                "s": "RLLRLRLRLRL",
+                "d": 2
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10],
+                "s": "RRLRR",
+                "d": 7
+            },
+            "expected": 126
+        },
+        {
+            "args": {
+                "nums": [-1000, -500, 0, 500, 1000],
+                "s": "RLLRL",
+                "d": 1000
+            },
+            "expected": 14000
+        },
+        {
+            "args": {
+                "nums": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "s": "LLLLLLLLLL",
+                "d": 1
+            },
+            "expected": 330
+        },
+        {
+            "args": {
+                "nums": [5, 3, 8, 1, 6],
+                "s": "RRLLR",
+                "d": 7
+            },
+            "expected": 98
+        },
+        {
+            "args": {
+                "nums": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "s": "RRRRRRRRRR",
+                "d": 2
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "nums": [-9, -6, -3, 0, 3, 6, 9],
+                "s": "RLRLRLR",
+                "d": 6
+            },
+            "expected": 234
+        },
+        {
+            "args": {
+                "nums": [-5, -3, 1, 4, 7],
+                "s": "LRRRL",
+                "d": 2
+            },
+            "expected": 64
+        },
+        {
+            "args": {
+                "nums": [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "s": "RRRRRRRRRRRR",
+                "d": 3
+            },
+            "expected": 286
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10, 15, 20],
+                "s": "RRRLLLL",
+                "d": 7
+            },
+            "expected": 146
+        },
+        {
+            "args": {
+                "nums": [-19, -17, -15, -13, -11, -9, -7, -5, -3, -1],
+                "s": "RRRRRRRRRR",
+                "d": 2
+            },
+            "expected": 330
+        },
+        {
+            "args": {
+                "nums": [-20, -15, -10, -5, 0, 5, 10, 15, 20],
+                "s": "RRRRLLLL",
+                "d": 20
+            },
+            "expected": 600
+        },
+        {
+            "args": {
+                "nums": [-500000000, -250000000, 0, 250000000, 500000000],
+                "s": "RLLLR",
+                "d": 500000000
+            },
+            "expected": 999999951
+        },
+        {
+            "args": {
+                "nums": [-1000000000, 0, 1000000000],
+                "s": "RL",
+                "d": 500000000
+            },
+            "expected": 999999986
+        },
+        {
+            "args": {
+                "nums": [0, 10, 20, 30, 40],
+                "s": "LLLLL",
+                "d": 5
+            },
+            "expected": 200
+        },
+        {
+            "args": {
+                "nums": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "s": "LRRLLRRLL",
+                "d": 10
+            },
+            "expected": 531
+        },
+        {
+            "args": {
+                "nums": [-500, -300, -100, 100, 300, 500],
+                "s": "RLLRLR",
+                "d": 200
+            },
+            "expected": 8200
+        },
+        {
+            "args": {
+                "nums": [-1000000000, 1000000000],
+                "s": "LR",
+                "d": 500000000
+            },
+            "expected": 999999986
+        },
+        {
+            "args": {
+                "nums": [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                "s": "RLLLLRLLLL",
+                "d": 5
+            },
+            "expected": 406
+        },
+        {
+            "args": {
+                "nums": [-100, 0, 100, 200, 300],
+                "s": "RRLLRR",
+                "d": 50
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [-500, -400, -300, -200, -100],
+                "s": "RRRRR",
+                "d": 100
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [5, 10, 15, 20],
+                "s": "RRRR",
+                "d": 5
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "nums": [-100, -50, 0, 50, 100, 150, 200],
+                "s": "RLLRLLR",
+                "d": 150
+            },
+            "expected": 4900
+        },
+        {
+            "args": {
+                "nums": [-9, -6, -3, 0, 3, 6, 9],
+                "s": "LRRLRL",
+                "d": 15
+            },
+            "expected": 396
+        },
+        {
+            "args": {
+                "nums": [-9, -7, -5, -3, -1, 1, 3, 5, 7, 9],
+                "s": "LRLRLRLRLR",
+                "d": 10
+            },
+            "expected": 710
+        },
+        {
+            "args": {
+                "nums": [-1, 1, -2, 2, -3, 3],
+                "s": "RLRLRL",
+                "d": 5
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500],
+                "s": "LLLLL",
+                "d": 10
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [-1000000000, 1000000000],
+                "s": "LR",
+                "d": 1000000000
+            },
+            "expected": 999999979
+        },
+        {
+            "args": {
+                "nums": [-20, -15, -10, -5, 0, 5, 10, 15, 20],
+                "s": "LRRRLRRRL",
+                "d": 7
+            },
+            "expected": 652
+        },
+        {
+            "args": {
+                "nums": [5, 15, 25, 35, 45],
+                "s": "LRRLL",
+                "d": 10
+            },
+            "expected": 180
+        },
+        {
+            "args": {
+                "nums": [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30],
+                "s": "RRRRRRRRRRRR",
+                "d": 12
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "nums": [-50, -20, -10, 0, 10, 20, 50],
+                "s": "LRLRLRL",
+                "d": 30
+            },
+            "expected": 1140
+        },
+        {
+            "args": {
+                "nums": [-20, -10, 0, 10, 20],
+                "s": "LRLLR",
+                "d": 3
+            },
+            "expected": 212
+        },
+        {
+            "args": {
+                "nums": [-10, -5, 0, 5, 10, 15],
+                "s": "RLRLRL",
+                "d": 1
+            },
+            "expected": 169
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500],
+                "s": "RRRRR",
+                "d": 50
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500, 600],
+                "s": "LLLLLR",
+                "d": 150
+            },
+            "expected": 5000
+        },
+        {
+            "args": {
+                "nums": [-500, -400, -300, -200, -100],
+                "s": "RRRRR",
+                "d": 15
+            },
+            "expected": 2000
+        },
+        {
+            "args": {
+                "nums": [-3, -2, -1, 0, 1, 2, 3],
+                "s": "LLRLRLR",
+                "d": 1
+            },
+            "expected": 72
+        },
+        {
+            "args": {
+                "nums": [-1000000000, 0, 1000000000],
+                "s": "RLR",
+                "d": 1000000000
+            },
+            "expected": 999999965
+        },
+        {
+            "args": {
+                "nums": [-1000000, 0, 1000000],
+                "s": "RLR",
+                "d": 1000000
+            },
+            "expected": 6000000
+        },
+        {
+            "args": {
+                "nums": [250, 500, 750, 1000, 1250],
+                "s": "LLLLL",
+                "d": 250
+            },
+            "expected": 5000
+        },
+        {
+            "args": {
+                "nums": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+                "s": "LLLLLLLLLL",
+                "d": 500
+            },
+            "expected": 16500
+        },
+        {
+            "args": {
+                "nums": [-25, -15, -5, 5, 15, 25],
+                "s": "RLRRRL",
+                "d": 10
+            },
+            "expected": 350
+        }
+    ],
+    "invoke": {
+        "python": "Solution().sumDistance",
+        "typescript": "Solution().sumDistance"
+    }
+}

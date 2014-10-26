@@ -1,0 +1,850 @@
+{
+    "id": "words-within-two-edits-of-dictionary",
+    "questionId": 2452,
+    "difficulty": "Medium",
+    "tags": ["Trie", "Array", "String"],
+    "tests": [
+        {
+            "args": {
+                "queries": ["test", "text", "sett"],
+                "dictionary": ["test", "text", "sett", "best"]
+            },
+            "expected": ["test", "text", "sett"]
+        },
+        {
+            "args": {
+                "queries": ["abc", "bcd", "cde"],
+                "dictionary": ["xyz", "zyx", "abc"]
+            },
+            "expected": ["abc"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply"],
+                "dictionary": ["appla", "apple", "apply"]
+            },
+            "expected": ["apple", "apply"]
+        },
+        {
+            "args": {
+                "queries": ["test", "text", "sett"],
+                "dictionary": ["text", "test", "sett", "best"]
+            },
+            "expected": ["test", "text", "sett"]
+        },
+        {
+            "args": {
+                "queries": ["hello", "world"],
+                "dictionary": ["hallo", "wurld", "holdo"]
+            },
+            "expected": ["hello", "world"]
+        },
+        {
+            "args": {
+                "queries": ["word", "note", "ants", "wood"],
+                "dictionary": ["wood", "joke", "moat"]
+            },
+            "expected": ["word", "note", "wood"]
+        },
+        {
+            "args": {
+                "queries": ["test", "sett", "best"],
+                "dictionary": ["rest", "test", "best"]
+            },
+            "expected": ["test", "sett", "best"]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abce", "abcf"],
+                "dictionary": ["abef", "abcf", "abcd"]
+            },
+            "expected": ["abcd", "abce", "abcf"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "spoil"],
+                "dictionary": ["appla", "appie", "spoil"]
+            },
+            "expected": ["apple", "apply", "spoil"]
+        },
+        {
+            "args": {
+                "queries": ["hello", "world"],
+                "dictionary": ["hallo", "werld"]
+            },
+            "expected": ["hello", "world"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "happy"],
+                "dictionary": ["pally", "apple", "happy"]
+            },
+            "expected": ["apple", "apply", "happy"]
+        },
+        {
+            "args": {
+                "queries": ["test", "text", "sett"],
+                "dictionary": ["best", "text", "west"]
+            },
+            "expected": ["test", "text", "sett"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply"],
+                "dictionary": ["spale", "spaly"]
+            },
+            "expected": ["apple", "apply"]
+        },
+        {
+            "args": {
+                "queries": ["aabb", "abab", "baba"],
+                "dictionary": ["aaaa", "bbbb", "abab"]
+            },
+            "expected": ["aabb", "abab", "baba"]
+        },
+        {
+            "args": {
+                "queries": ["yes"],
+                "dictionary": ["not"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "queries": ["test"],
+                "dictionary": ["tast", "test", "sett"]
+            },
+            "expected": ["test"]
+        },
+        {
+            "args": {
+                "queries": ["elephant", "giraffe", "hippo"],
+                "dictionary": ["elefant", "giraff", "hippo"]
+            },
+            "expected": ["giraffe", "hippo"]
+        },
+        {
+            "args": {
+                "queries": ["xylophone", "balloon", "umbrella"],
+                "dictionary": ["xylofune", "baloone", "umbrelia", "xylophine", "balloon"]
+            },
+            "expected": ["xylophone", "balloon", "umbrella"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abcdefghi", "abcdefghj"],
+                "dictionary": ["abcdefghj", "abcdefghi", "abcdefghk"]
+            },
+            "expected": ["abcdefgh", "abcdefghi", "abcdefghj"]
+        },
+        {
+            "args": {
+                "queries": ["banana", "bananb", "bananc"],
+                "dictionary": ["banana", "bananb", "bananc", "banand"]
+            },
+            "expected": ["banana", "bananb", "bananc"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abcdefgh"],
+                "dictionary": ["abcdefgh", "abcdefgh", "abcdefgh"]
+            },
+            "expected": ["abcdefgh", "abcdefgh"]
+        },
+        {
+            "args": {
+                "queries": ["algorithm", "datastructure", "binarysearch"],
+                "dictionary": ["alorithm", "datstructure", "binrysearch"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "queries": ["banana", "ananas"],
+                "dictionary": ["banana", "ananas", "bandana", "panama", "kanana"]
+            },
+            "expected": ["banana", "ananas"]
+        },
+        {
+            "args": {
+                "queries": ["racecar", "level", "rotor"],
+                "dictionary": ["racecer", "levek", "roter"]
+            },
+            "expected": ["racecar", "level", "rotor"]
+        },
+        {
+            "args": {
+                "queries": ["xylophone", "clarinet"],
+                "dictionary": ["xylophon", "clarinat", "xylopane", "clarinet", "xylophen"]
+            },
+            "expected": ["xylophone", "clarinet"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "fedcba"],
+                "dictionary": ["fedcba", "abcdefg", "bacdef"]
+            },
+            "expected": ["abcdef", "fedcba"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "klmnopqrst"],
+                "dictionary": ["abcdeffhij", "klmnopqrts", "abcdefghij"]
+            },
+            "expected": ["abcdefghij", "klmnopqrst"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr"],
+                "dictionary": ["abcdeg", "ghijkm", "mnopqs"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr"]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abce", "abcf"],
+                "dictionary": ["abcf", "abcg", "abcd", "abch"]
+            },
+            "expected": ["abcd", "abce", "abcf"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "jihgfedcba"],
+                "dictionary": ["abcdefghij", "jihgfedcba", "abcdefghij", "jihgfedcba", "abcdefghij"]
+            },
+            "expected": ["abcdefghij", "jihgfedcba"]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abdc", "acbd", "acdb"],
+                "dictionary": ["abcd", "abdc", "acbd", "acdb", "dcba", "bdca"]
+            },
+            "expected": ["abcd", "abdc", "acbd", "acdb"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abcdefghi"],
+                "dictionary": ["abcdefgh", "abcdefghij", "abcdefghi", "abcdefghijj"]
+            },
+            "expected": ["abcdefgh", "abcdefghi"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "dictionary": ["abcdefghij", "abcdefghik", "abcdefghil", "abcdefghim", "abcdefghin"]
+            },
+            "expected": ["abcdefghij", "abcdefghij", "abcdefghij"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl"],
+                "dictionary": ["abchef", "ghijkl", "abcdeg", "ghijkl", "abcfeg"]
+            },
+            "expected": ["abcdef", "ghijkl"]
+        },
+        {
+            "args": {
+                "queries": ["algorithm", "data", "structure"],
+                "dictionary": ["algorith", "datq", "strcuture"]
+            },
+            "expected": ["algorithm", "data", "structure"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "jihgfedcba"],
+                "dictionary": ["abcdefghij", "jihgfedcba", "abcdefghij", "jihgfedcba"]
+            },
+            "expected": ["abcdefghij", "jihgfedcba"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "jihgfedcba"],
+                "dictionary": ["abcdefghij", "jihgfedcba", "abcdefghij", "abcdefghij"]
+            },
+            "expected": ["abcdefghij", "jihgfedcba"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abceghij", "abcdefij"],
+                "dictionary": ["abcdefgh", "abceghij", "abcdefij", "abcdefgj"]
+            },
+            "expected": ["abcdefgh", "abceghij", "abcdefij"]
+        },
+        {
+            "args": {
+                "queries": ["testcase", "unittest", "performance"],
+                "dictionary": ["testcases", "unitstest", "performence"]
+            },
+            "expected": ["testcase", "performance"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "klmnopqrst", "uvwxyz"],
+                "dictionary": ["abcdefghig", "klmnopqrsu", "uvwxyg"]
+            },
+            "expected": ["abcdefghij", "klmnopqrst", "uvwxyz"]
+        },
+        {
+            "args": {
+                "queries": ["abcde", "edcba", "bacde"],
+                "dictionary": [
+                    "abcde",
+                    "edcba",
+                    "bacde",
+                    "cabed",
+                    "abcde",
+                    "edcba",
+                    "bacde",
+                    "cabed"
+                ]
+            },
+            "expected": ["abcde", "edcba", "bacde"]
+        },
+        {
+            "args": {
+                "queries": ["sequence", "consequence", "subsequence"],
+                "dictionary": ["sequences", "consequense", "subsequense", "sequence"]
+            },
+            "expected": ["sequence", "consequence", "subsequence"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl"],
+                "dictionary": ["abcgef", "ghikjl", "abcdef"]
+            },
+            "expected": ["abcdef", "ghijkl"]
+        },
+        {
+            "args": {
+                "queries": ["abcd", "abce", "abcf"],
+                "dictionary": ["abcf", "abce", "abcc"]
+            },
+            "expected": ["abcd", "abce", "abcf"]
+        },
+        {
+            "args": {
+                "queries": ["programming", "development", "debugging"],
+                "dictionary": ["proogramming", "develpopment", "debguggin"]
+            },
+            "expected": []
+        },
+        {
+            "args": {
+                "queries": ["programming", "python"],
+                "dictionary": ["programmmg", "pythoon", "progrqmig"]
+            },
+            "expected": ["programming", "python"]
+        },
+        {
+            "args": {
+                "queries": ["python", "pyhton", "pythpn"],
+                "dictionary": ["python", "pyhton", "pythpn", "pythun"]
+            },
+            "expected": ["python", "pyhton", "pythpn"]
+        },
+        {
+            "args": {
+                "queries": ["cat", "bat", "rat"],
+                "dictionary": ["cap", "bap", "rap", "tap"]
+            },
+            "expected": ["cat", "bat", "rat"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "klmnopqrst"],
+                "dictionary": ["abcdefghij", "klmnopqrts", "abcdefghik", "klmnopqrst", "abcdefghim"]
+            },
+            "expected": ["abcdefghij", "klmnopqrst"]
+        },
+        {
+            "args": {
+                "queries": ["programming", "programing", "progrmaing"],
+                "dictionary": ["programming", "programing", "progrmaing", "prograaming"]
+            },
+            "expected": ["programming", "programing", "progrmaing"]
+        },
+        {
+            "args": {
+                "queries": ["kitten", "sitten", "bitten"],
+                "dictionary": ["sitten", "kitten", "biting", "bitten"]
+            },
+            "expected": ["kitten", "sitten", "bitten"]
+        },
+        {
+            "args": {
+                "queries": ["test", "tast", "rest"],
+                "dictionary": ["best", "rest", "tast", "test"]
+            },
+            "expected": ["test", "tast", "rest"]
+        },
+        {
+            "args": {
+                "queries": ["algorithm", "data", "structure"],
+                "dictionary": ["algorithim", "datum", "struckture"]
+            },
+            "expected": ["algorithm", "data"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "banana", "cherry"],
+                "dictionary": ["appla", "banna", "chhery"]
+            },
+            "expected": ["apple", "banana", "cherry"]
+        },
+        {
+            "args": {
+                "queries": ["programming", "coding", "debugging"],
+                "dictionary": ["programing", "codding", "debagging"]
+            },
+            "expected": ["debugging"]
+        },
+        {
+            "args": {
+                "queries": ["transform", "transforn", "tranformt"],
+                "dictionary": ["transfarm", "transform", "transfurm"]
+            },
+            "expected": ["transform", "transforn"]
+        },
+        {
+            "args": {
+                "queries": ["mississippi", "delaware", "rhodeisland"],
+                "dictionary": ["mississipp", "delawere", "rhodeiland"]
+            },
+            "expected": ["mississippi", "delaware"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr", "stuvwx"],
+                "dictionary": ["abcdef", "ghijkl", "mnopqr", "stuvwx"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr", "stuvwx"]
+        },
+        {
+            "args": {
+                "queries": ["hello", "hallo", "hxllo"],
+                "dictionary": ["hallo", "hell", "hxllo", "hxllx"]
+            },
+            "expected": ["hello", "hallo", "hxllo"]
+        },
+        {
+            "args": {
+                "queries": ["kitten", "sitting", "flask"],
+                "dictionary": ["kitchen", "sitting", "fask"]
+            },
+            "expected": ["kitten", "sitting"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "abcdefghik", "abcdefghil"],
+                "dictionary": ["abcdefghio", "abcdefghij", "abcdefghim"]
+            },
+            "expected": ["abcdefghij", "abcdefghik", "abcdefghil"]
+        },
+        {
+            "args": {
+                "queries": ["qwertyuiop", "asdfghjklz", "xcvbnm"],
+                "dictionary": ["qwertyuioz", "asdfghjklx", "xcvbnml"]
+            },
+            "expected": ["qwertyuiop", "asdfghjklz", "xcvbnm"]
+        },
+        {
+            "args": {
+                "queries": ["algorithm", "algorith", "algoritm"],
+                "dictionary": ["algorithm", "algorith", "algoritm", "algorithn", "aloritum"]
+            },
+            "expected": ["algorithm", "algorith", "algoritm"]
+        },
+        {
+            "args": {
+                "queries": ["elephant", "giraffe", "hippopotamus"],
+                "dictionary": ["elephont", "giraff", "hippopotamuse", "elephant"]
+            },
+            "expected": ["elephant", "giraffe", "hippopotamus"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "pally"],
+                "dictionary": ["appel", "abble", "appie"]
+            },
+            "expected": ["apple", "apply"]
+        },
+        {
+            "args": {
+                "queries": ["zzzzzz", "yyyyyy", "xxxxxx"],
+                "dictionary": ["zzzzzz", "yyyyyy", "xxxxxx", "wwwwww", "vvvvvv", "uuuuuu", "tttttt"]
+            },
+            "expected": ["zzzzzz", "yyyyyy", "xxxxxx"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "pally"],
+                "dictionary": ["appla", "appli", "apple", "pally", "polly"]
+            },
+            "expected": ["apple", "apply", "pally"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "appla"],
+                "dictionary": ["apple", "apply", "appel", "appla"]
+            },
+            "expected": ["apple", "apply", "appla"]
+        },
+        {
+            "args": {
+                "queries": ["aaaaaa", "bbbbbb", "cccccc"],
+                "dictionary": ["aaaaab", "bbbbc", "cccccd"]
+            },
+            "expected": ["aaaaaa", "bbbbbb", "cccccc"]
+        },
+        {
+            "args": {
+                "queries": ["kitten", "sitting"],
+                "dictionary": ["sitting", "kitten", "bitten", "biting"]
+            },
+            "expected": ["kitten", "sitting"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "dictionary": ["abcdeg", "ghijkm", "mnopqs", "stuvwx", "yzabcd"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "hgfedcba", "abcdefgh"],
+                "dictionary": ["abcdefgh", "hgfedcba", "zyxwvuts", "qrstuvwx"]
+            },
+            "expected": ["abcdefgh", "hgfedcba", "abcdefgh"]
+        },
+        {
+            "args": {
+                "queries": ["kitten", "sitting", "kitten"],
+                "dictionary": ["sitting", "kitten", "bitten", "kettle"]
+            },
+            "expected": ["kitten", "sitting", "kitten"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghijk", "lmnopqrstuv"],
+                "dictionary": [
+                    "abcdefghij",
+                    "lmnopqrstv",
+                    "abcdefghijk",
+                    "lmnopqrstuv",
+                    "abcdefghikl"
+                ]
+            },
+            "expected": ["abcdefghijk", "lmnopqrstuv"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "dictionary": ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"]
+            },
+            "expected": ["abcdefghij", "abcdefghij", "abcdefghij"]
+        },
+        {
+            "args": {
+                "queries": ["unbelievable", "incredible", "believable"],
+                "dictionary": ["unbelieveble", "incredibile", "believeble"]
+            },
+            "expected": ["unbelievable", "incredible", "believable"]
+        },
+        {
+            "args": {
+                "queries": ["abcde", "fghij", "klmno"],
+                "dictionary": ["abxde", "fghij", "klmnp"]
+            },
+            "expected": ["abcde", "fghij", "klmno"]
+        },
+        {
+            "args": {
+                "queries": ["repetition", "repetitions", "repetitive"],
+                "dictionary": ["repetion", "repetitons", "repetite"]
+            },
+            "expected": ["repetition", "repetitions", "repetitive"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "appla"],
+                "dictionary": ["appel", "apply", "ample"]
+            },
+            "expected": ["apple", "apply", "appla"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abcdefgh", "abcdefgh"],
+                "dictionary": ["abcdefgh", "abcdefgh", "abcdefgh", "abcdefgh", "abcdefgh"]
+            },
+            "expected": ["abcdefgh", "abcdefgh", "abcdefgh"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr"],
+                "dictionary": ["abcdeg", "ghikjl", "mnopqg"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "abcdeg", "abcdeh"],
+                "dictionary": ["abcdef", "abcdeg", "abcdeh", "abcdei"]
+            },
+            "expected": ["abcdef", "abcdeg", "abcdeh"]
+        },
+        {
+            "args": {
+                "queries": ["aabbcc", "ddeeff", "gghhii"],
+                "dictionary": ["aabbcc", "ddeeff", "gghhij"]
+            },
+            "expected": ["aabbcc", "ddeeff", "gghhii"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "hgfedcba"],
+                "dictionary": ["abcdefgh", "hgfedcba", "abcdefgh"]
+            },
+            "expected": ["abcdefgh", "hgfedcba"]
+        },
+        {
+            "args": {
+                "queries": ["kitten", "sitting", "flask"],
+                "dictionary": ["kitchen", "kitten", "flasky"]
+            },
+            "expected": ["kitten", "sitting", "flask"]
+        },
+        {
+            "args": {
+                "queries": ["cat", "dog", "rat"],
+                "dictionary": ["bat", "bag", "rat", "tag"]
+            },
+            "expected": ["cat", "dog", "rat"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl"],
+                "dictionary": ["fedcba", "lkjihg", "abcdeg", "ghijkl", "mnopqr", "stuvwx", "yzabcd"]
+            },
+            "expected": ["abcdef", "ghijkl"]
+        },
+        {
+            "args": {
+                "queries": ["aaaaaaaaaa", "bbbbbbbbbb", "cccccccccc"],
+                "dictionary": [
+                    "aaaaaaaaaa",
+                    "aaaaaaaabb",
+                    "aaaaaaabbb",
+                    "aaaaaabbbb",
+                    "aaaaabbbbb",
+                    "aaaabbbbbb",
+                    "aabbbbbbbb",
+                    "abbbbbbbbb",
+                    "bbbbbbbbbb"
+                ]
+            },
+            "expected": ["aaaaaaaaaa", "bbbbbbbbbb"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "abcdefghik"],
+                "dictionary": ["abcdefghix", "abcdefghiy", "abcdefghij"]
+            },
+            "expected": ["abcdefghij", "abcdefghik"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr"],
+                "dictionary": ["abcdej", "ghijkl", "mnopqr", "mnopqs", "mnopqt"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr"]
+        },
+        {
+            "args": {
+                "queries": ["dictionary", "queries", "solution"],
+                "dictionary": ["dictionry", "querries", "soultion"]
+            },
+            "expected": ["dictionary", "solution"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr"],
+                "dictionary": ["abcdef", "ghijkl", "mnopqt"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr"]
+        },
+        {
+            "args": {
+                "queries": ["mississippi", "mississipp", "mississippa"],
+                "dictionary": ["mississippi", "mississippa", "mississippb"]
+            },
+            "expected": ["mississippi", "mississipp", "mississippa"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefg", "hijklmn", "opqrstu"],
+                "dictionary": ["abcdefg", "hijklmn", "opqrsuv"]
+            },
+            "expected": ["abcdefg", "hijklmn", "opqrstu"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abcdefgh"],
+                "dictionary": ["abcdwxyz", "abcdefgz", "abcdefgh"]
+            },
+            "expected": ["abcdefgh", "abcdefgh"]
+        },
+        {
+            "args": {
+                "queries": ["qwerty", "asdfgh", "zxcvbn"],
+                "dictionary": ["qwerty", "qwertr", "asdwgh", "zxcvbn", "qwertx"]
+            },
+            "expected": ["qwerty", "asdfgh", "zxcvbn"]
+        },
+        {
+            "args": {
+                "queries": ["aaaaaa", "bbbbbb", "cccccc"],
+                "dictionary": ["aaaaaa", "bbbbbb", "cccccc", "dddddd", "eeeeee", "ffffff"]
+            },
+            "expected": ["aaaaaa", "bbbbbb", "cccccc"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "jihgfedcba", "abcdefghij"],
+                "dictionary": [
+                    "abcdefghij",
+                    "jihgfedcba",
+                    "abcdefghji",
+                    "jihgfedcbj",
+                    "abcdefghii",
+                    "jihgfedcbi"
+                ]
+            },
+            "expected": ["abcdefghij", "jihgfedcba", "abcdefghij"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefgh", "abcdefgh"],
+                "dictionary": ["abcdefgh", "abcdefgh", "abcdefgh", "abcdefgh"]
+            },
+            "expected": ["abcdefgh", "abcdefgh"]
+        },
+        {
+            "args": {
+                "queries": ["algorithm", "alorithgm", "alohrithm"],
+                "dictionary": ["algorithm", "alorithgm", "alohrithm", "aloritrhm"]
+            },
+            "expected": ["algorithm", "alorithgm", "alohrithm"]
+        },
+        {
+            "args": {
+                "queries": ["programming", "prograiming", "prograimng"],
+                "dictionary": ["programming", "prograiming", "prograimng", "prograimnig"]
+            },
+            "expected": ["programming", "prograiming", "prograimng"]
+        },
+        {
+            "args": {
+                "queries": ["education", "educatiom", "educatiin"],
+                "dictionary": ["education", "educatiom", "educatiin", "educatiomn"]
+            },
+            "expected": ["education", "educatiom", "educatiin"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "dictionary": ["abcdefg", "ghijklm", "nopqrs", "stuvwxy", "yzabcdf"]
+            },
+            "expected": ["abcdef", "ghijkl", "stuvwx", "yzabcd"]
+        },
+        {
+            "args": {
+                "queries": ["compiler", "comipler", "comipler"],
+                "dictionary": ["compiler", "comipler", "compilir", "comiplir"]
+            },
+            "expected": ["compiler", "comipler", "comipler"]
+        },
+        {
+            "args": {
+                "queries": ["zzzzz", "yyyyy", "xxxxx"],
+                "dictionary": ["zzzzz", "xyzyx", "zxyxz"]
+            },
+            "expected": ["zzzzz"]
+        },
+        {
+            "args": {
+                "queries": ["zxywvutsrqponmlkjihgfedcba"],
+                "dictionary": ["zyxwvutsrqponmlkjihgfedcba", "zxywvutsrqponmlkjihgfedcbb"]
+            },
+            "expected": ["zxywvutsrqponmlkjihgfedcba"]
+        },
+        {
+            "args": {
+                "queries": ["programming", "language"],
+                "dictionary": ["progrgmmg", "langauge", "programming"]
+            },
+            "expected": ["programming", "language"]
+        },
+        {
+            "args": {
+                "queries": ["apple", "apply", "ample"],
+                "dictionary": ["ample", "appli", "appel"]
+            },
+            "expected": ["apple", "apply", "ample"]
+        },
+        {
+            "args": {
+                "queries": ["kitten", "sitting"],
+                "dictionary": ["kitten", "sitting", "biting", "kiting", "kitting"]
+            },
+            "expected": ["kitten", "sitting"]
+        },
+        {
+            "args": {
+                "queries": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"],
+                "dictionary": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"]
+            },
+            "expected": ["abcdef", "ghijkl", "mnopqr", "stuvwx", "yzabcd"]
+        },
+        {
+            "args": {
+                "queries": ["algorithm", "algorith", "algoritm"],
+                "dictionary": ["algorithm", "algorith", "algoritm", "algorimt"]
+            },
+            "expected": ["algorithm", "algorith", "algoritm"]
+        },
+        {
+            "args": {
+                "queries": ["aaaaaa", "bbbbbb", "cccccc"],
+                "dictionary": ["aabbaa", "bbccbb", "ccddcc"]
+            },
+            "expected": ["aaaaaa", "bbbbbb", "cccccc"]
+        },
+        {
+            "args": {
+                "queries": ["abcdefghij", "abcdefghij", "abcdefghij"],
+                "dictionary": [
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij",
+                    "abcdefghij"
+                ]
+            },
+            "expected": ["abcdefghij", "abcdefghij", "abcdefghij"]
+        },
+        {
+            "args": {
+                "queries": ["sunshine", "rainbow", "cloud"],
+                "dictionary": ["sunshn", "rainbw", "clodu"]
+            },
+            "expected": ["sunshine", "rainbow", "cloud"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().twoEditWords",
+        "typescript": "Solution().twoEditWords"
+    }
+}

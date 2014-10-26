@@ -1,0 +1,1830 @@
+{
+    "id": "word-abbreviation",
+    "questionId": 527,
+    "difficulty": "Hard",
+    "tags": ["Greedy", "Trie", "Array", "String", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "words": ["aa", "aaa"]
+            },
+            "expected": ["aa", "aaa"]
+        },
+        {
+            "args": {
+                "words": ["test", "testing", "tester", "testify", "testament"]
+            },
+            "expected": ["t2t", "t5g", "t4r", "t5y", "t7t"]
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "aabbc", "aab", "abc", "abcd", "abcde", "abcdef"]
+            },
+            "expected": ["a4c", "a3c", "aab", "abc", "a2d", "a3e", "a4f"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hellp", "heaven", "heavy"]
+            },
+            "expected": ["h3o", "h3p", "h4n", "h3y"]
+        },
+        {
+            "args": {
+                "words": ["abcdef", "abacdf", "abacde", "abacdd", "abaced"]
+            },
+            "expected": ["abc2f", "aba2f", "a4e", "abacdd", "abaced"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hellp", "heaven"]
+            },
+            "expected": ["he2o", "ha2o", "h3p", "h4n"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hell", "he"]
+            },
+            "expected": ["he2o", "ha2o", "h2l", "he"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde", "abcdef"]
+            },
+            "expected": ["abc", "a2d", "a3e", "a4f"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apples", "banana", "bananas", "bandana", "bandanas", "bandanna"]
+            },
+            "expected": ["a3e", "a4s", "b4a", "b5s", "b5a", "b6s", "b6a"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "angle", "ample", "appet"]
+            },
+            "expected": ["ap2e", "a3y", "an2e", "am2e", "a3t"]
+        },
+        {
+            "args": {
+                "words": ["aaabbb", "aabbb", "aabb", "aab", "aa"]
+            },
+            "expected": ["a4b", "a3b", "a2b", "aab", "aa"]
+        },
+        {
+            "args": {
+                "words": ["banana", "bandana", "banner", "bandage", "banjo"]
+            },
+            "expected": ["b4a", "b5a", "b4r", "b5e", "b3o"]
+        },
+        {
+            "args": {
+                "words": [
+                    "like",
+                    "god",
+                    "internal",
+                    "me",
+                    "internet",
+                    "interval",
+                    "intension",
+                    "face",
+                    "intrusion"
+                ]
+            },
+            "expected": [
+                "l2e",
+                "god",
+                "internal",
+                "me",
+                "i6t",
+                "interval",
+                "inte4n",
+                "f2e",
+                "intr4n"
+            ]
+        },
+        {
+            "args": {
+                "words": ["a", "ab", "abc", "abcd"]
+            },
+            "expected": ["a", "ab", "abc", "a2d"]
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "aabbc", "aab", "aa"]
+            },
+            "expected": ["a4c", "a3c", "aab", "aa"]
+        },
+        {
+            "args": {
+                "words": ["aabbcc", "aabbc", "aabb", "aab", "aa"]
+            },
+            "expected": ["a4c", "a3c", "a2b", "aab", "aa"]
+        },
+        {
+            "args": {
+                "words": ["unique", "uniques", "unicorn", "united", "unity"]
+            },
+            "expected": ["u4e", "u5s", "u5n", "u4d", "u3y"]
+        },
+        {
+            "args": {
+                "words": ["abc", "abcd", "abcde"]
+            },
+            "expected": ["abc", "a2d", "a3e"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abcde", "abcdef", "abcdeg"]
+            },
+            "expected": ["a2d", "a3e", "a4f", "a4g"]
+        },
+        {
+            "args": {
+                "words": ["abcd", "abdd", "acdd", "aedd", "aegd"]
+            },
+            "expected": ["abcd", "abdd", "acdd", "aedd", "aegd"]
+        },
+        {
+            "args": {
+                "words": ["apple", "apply", "ape", "apricot", "application"]
+            },
+            "expected": ["a3e", "a3y", "ape", "a5t", "a9n"]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "preprocessor",
+                    "presentation",
+                    "preference",
+                    "prefer",
+                    "prelude"
+                ]
+            },
+            "expected": ["p4x", "p10r", "p10n", "p8e", "p4r", "p5e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "implementation",
+                    "implement",
+                    "implementations",
+                    "implementable",
+                    "implementing",
+                    "implemented"
+                ]
+            },
+            "expected": ["i12n", "i7t", "i13s", "i11e", "i10g", "i9d"]
+        },
+        {
+            "args": {
+                "words": [
+                    "technology",
+                    "technique",
+                    "technical",
+                    "technician",
+                    "technological",
+                    "technological",
+                    "technological",
+                    "technological",
+                    "technological",
+                    "technological"
+                ]
+            },
+            "expected": [
+                "t8y",
+                "t7e",
+                "t7l",
+                "t8n",
+                "technological",
+                "technological",
+                "technological",
+                "technological",
+                "technological",
+                "technological"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "abbreviation",
+                    "abbreviate",
+                    "abbreviated",
+                    "abbreviates",
+                    "abbreviating"
+                ]
+            },
+            "expected": ["a10n", "a8e", "a9d", "a9s", "a10g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "algorithmic",
+                    "algebra",
+                    "algebraic",
+                    "alibi",
+                    "alibi",
+                    "align",
+                    "alignment"
+                ]
+            },
+            "expected": ["a7m", "a9c", "a5a", "a7c", "alibi", "alibi", "a3n", "a7t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "example",
+                    "examine",
+                    "exhibit",
+                    "exactly",
+                    "exhibition",
+                    "exempt",
+                    "exemplify",
+                    "exhaust"
+                ]
+            },
+            "expected": ["example", "examine", "exhi2t", "e5y", "e8n", "e4t", "e7y", "exha2t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "algebra",
+                    "alien",
+                    "alignment",
+                    "alteration",
+                    "altitude",
+                    "alpine",
+                    "altitude",
+                    "altitude",
+                    "allegory"
+                ]
+            },
+            "expected": [
+                "a7m",
+                "a5a",
+                "a3n",
+                "a7t",
+                "a8n",
+                "altitude",
+                "a4e",
+                "altitude",
+                "altitude",
+                "a6y"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "visualization",
+                    "visualize",
+                    "visual",
+                    "visually",
+                    "visualizer",
+                    "visualizing"
+                ]
+            },
+            "expected": ["v11n", "v7e", "v4l", "v6y", "v8r", "v9g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "algebra",
+                    "altitude",
+                    "alignment",
+                    "album",
+                    "alcohol",
+                    "alabama",
+                    "alaska"
+                ]
+            },
+            "expected": ["a7m", "alg3a", "a6e", "a7t", "a3m", "a5l", "ala3a", "a4a"]
+        },
+        {
+            "args": {
+                "words": [
+                    "supercalifragilisticexpialidocious",
+                    "supercalifragilisticexpialidociouss",
+                    "supercalifragilisticexpialidociousss",
+                    "supercalifragilisticexpialidocioussss",
+                    "supercalifragilisticexpialidociousssss"
+                ]
+            },
+            "expected": ["s32s", "s33s", "s34s", "s35s", "s36s"]
+        },
+        {
+            "args": {
+                "words": [
+                    "photography",
+                    "photograph",
+                    "photographing",
+                    "photographer",
+                    "photographic",
+                    "photogenic",
+                    "photograph",
+                    "photochemical"
+                ]
+            },
+            "expected": ["p9y", "photograph", "p11g", "p10r", "p10c", "p8c", "photograph", "p11l"]
+        },
+        {
+            "args": {
+                "words": [
+                    "banana",
+                    "bandana",
+                    "bananna",
+                    "bandanna",
+                    "bananastand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand",
+                    "bandstand"
+                ]
+            },
+            "expected": [
+                "b4a",
+                "band2a",
+                "bana2a",
+                "b6a",
+                "b9d",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand",
+                "bandstand"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "xylophone",
+                    "xenon",
+                    "xenophobe",
+                    "xerox",
+                    "xerxes",
+                    "xylem",
+                    "xylography",
+                    "xylophoneist"
+                ]
+            },
+            "expected": ["xy6e", "x3n", "xe6e", "x3x", "x4s", "x3m", "x8y", "x10t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "reproductive",
+                    "reproduction",
+                    "reproduce",
+                    "reproductive",
+                    "reproductive",
+                    "reproductive",
+                    "reproductive",
+                    "reproductive",
+                    "reproductive",
+                    "reproductive"
+                ]
+            },
+            "expected": [
+                "reproductive",
+                "r10n",
+                "r7e",
+                "reproductive",
+                "reproductive",
+                "reproductive",
+                "reproductive",
+                "reproductive",
+                "reproductive",
+                "reproductive"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "aabbcc",
+                    "aabbc",
+                    "aabc",
+                    "aab",
+                    "abc",
+                    "ab",
+                    "a",
+                    "bbcc",
+                    "bcc",
+                    "bc",
+                    "b",
+                    "cc",
+                    "c"
+                ]
+            },
+            "expected": [
+                "a4c",
+                "a3c",
+                "a2c",
+                "aab",
+                "abc",
+                "ab",
+                "a",
+                "b2c",
+                "bcc",
+                "bc",
+                "b",
+                "cc",
+                "c"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "elephant",
+                    "elephantine",
+                    "elephantiasis",
+                    "elephantomaniac",
+                    "elephantine",
+                    "elephants"
+                ]
+            },
+            "expected": ["e6t", "elephantine", "e11s", "e13c", "elephantine", "e7s"]
+        },
+        {
+            "args": {
+                "words": [
+                    "microscopically",
+                    "microscopical",
+                    "microscopic",
+                    "microscopicallyy",
+                    "microscopicallyyy"
+                ]
+            },
+            "expected": ["m13y", "m11l", "m9c", "m14y", "m15y"]
+        },
+        {
+            "args": {
+                "words": [
+                    "interdisciplinary",
+                    "interim",
+                    "interior",
+                    "interiority",
+                    "interiorise",
+                    "interiorize",
+                    "interject",
+                    "interjection"
+                ]
+            },
+            "expected": ["i15y", "i5m", "i6r", "i9y", "interiorise", "interiorize", "i7t", "i10n"]
+        },
+        {
+            "args": {
+                "words": ["repetition", "repetitive", "repetitious", "repetend", "repetitiveness"]
+            },
+            "expected": ["r8n", "r8e", "r9s", "r6d", "r12s"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "algorithms", "algebra", "algorithmically", "algorithmist"]
+            },
+            "expected": ["a7m", "a8s", "a5a", "a13y", "a10t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "algorithms",
+                    "alligator",
+                    "algorithmic",
+                    "algebra",
+                    "alabama",
+                    "alaskan",
+                    "albatross",
+                    "alchemist",
+                    "alchemy",
+                    "alert",
+                    "alfalfa",
+                    "algebraic",
+                    "algorithmically",
+                    "algorithmically",
+                    "alibi",
+                    "alien",
+                    "alight",
+                    "align",
+                    "alignment",
+                    "alkaline",
+                    "alkaloid",
+                    "alkali",
+                    "allay",
+                    "allied",
+                    "alliteration",
+                    "allocate",
+                    "allot",
+                    "allow",
+                    "allowance",
+                    "alloy",
+                    "allude",
+                    "allure",
+                    "ally",
+                    "almanac",
+                    "almighty",
+                    "almond",
+                    "aloe",
+                    "aloft",
+                    "alone",
+                    "along",
+                    "alongside",
+                    "aloof",
+                    "aloud",
+                    "alphabet",
+                    "alphabetical",
+                    "alphabetize",
+                    "already",
+                    "alright",
+                    "also",
+                    "altar",
+                    "alter",
+                    "alteration",
+                    "alternative",
+                    "although",
+                    "altimeter",
+                    "altitude",
+                    "alto",
+                    "altruism",
+                    "altruist",
+                    "altruistic",
+                    "aluminum",
+                    "always",
+                    "amass",
+                    "amateur",
+                    "amateurish",
+                    "amatory",
+                    "amaze",
+                    "amazed",
+                    "amazement",
+                    "amazing",
+                    "amazingly",
+                    "ambassador",
+                    "ambassadorial",
+                    "amber",
+                    "ambiguity",
+                    "ambiguous",
+                    "ambition",
+                    "ambitious",
+                    "ambitiously",
+                    "ambivalence",
+                    "ambivalent",
+                    "ambrose",
+                    "ambush",
+                    "ambushment",
+                    "ambulatory",
+                    "ambulate",
+                    "ambulation",
+                    "ambulance",
+                    "ambulate",
+                    "ambulatory",
+                    "ambulatory",
+                    "ambulatory",
+                    "ambulatory"
+                ]
+            },
+            "expected": [
+                "a7m",
+                "a8s",
+                "all5r",
+                "a9c",
+                "alg3a",
+                "ala3a",
+                "a5n",
+                "al6s",
+                "alc5t",
+                "alc3y",
+                "alert",
+                "alf3a",
+                "a7c",
+                "algorithmically",
+                "algorithmically",
+                "a3i",
+                "alien",
+                "a4t",
+                "align",
+                "ali5t",
+                "alk4e",
+                "a6d",
+                "a4i",
+                "allay",
+                "all2d",
+                "a10n",
+                "all4e",
+                "allot",
+                "a3w",
+                "all5e",
+                "alloy",
+                "allude",
+                "allure",
+                "a2y",
+                "a5c",
+                "a6y",
+                "alm2d",
+                "a2e",
+                "aloft",
+                "al2e",
+                "a3g",
+                "alo5e",
+                "a3f",
+                "a3d",
+                "alp4t",
+                "a10l",
+                "alp7e",
+                "alr3y",
+                "a5t",
+                "also",
+                "altar",
+                "alter",
+                "al7n",
+                "alt7e",
+                "a6h",
+                "alt5r",
+                "alt4e",
+                "alto",
+                "alt4m",
+                "alt4t",
+                "a8c",
+                "alu4m",
+                "a4s",
+                "a3s",
+                "a5r",
+                "a8h",
+                "am4y",
+                "am2e",
+                "am3d",
+                "am6t",
+                "a5g",
+                "ama5y",
+                "a8r",
+                "a11l",
+                "am2r",
+                "amb5y",
+                "ambig3s",
+                "a6n",
+                "ambit3s",
+                "a9y",
+                "am8e",
+                "ambi5t",
+                "a5e",
+                "a4h",
+                "ambu5t",
+                "ambulatory",
+                "ambulate",
+                "am7n",
+                "am6e",
+                "ambulate",
+                "ambulatory",
+                "ambulatory",
+                "ambulatory",
+                "ambulatory"
+            ]
+        },
+        {
+            "args": {
+                "words": ["caterpillar", "category", "cater", "catapult", "caterwaul", "catalog"]
+            },
+            "expected": ["c9r", "c6y", "c3r", "c6t", "c7l", "c5g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "configuration",
+                    "conflict",
+                    "congratulations",
+                    "congruity",
+                    "congruence",
+                    "congratulate",
+                    "congregate",
+                    "congruity"
+                ]
+            },
+            "expected": [
+                "c11n",
+                "c6t",
+                "c13s",
+                "congruity",
+                "congru3e",
+                "c10e",
+                "congre3e",
+                "congruity"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "characterization",
+                    "character",
+                    "charisma",
+                    "charm",
+                    "charter",
+                    "chase",
+                    "chase",
+                    "chat",
+                    "cheap",
+                    "cheat"
+                ]
+            },
+            "expected": ["c14n", "c7r", "c6a", "c3m", "c5r", "chase", "chase", "c2t", "c3p", "c3t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "algorithmic",
+                    "algorithmically",
+                    "algorithmics",
+                    "algorithmical",
+                    "algorithmization",
+                    "algorithmize",
+                    "algorithmizer",
+                    "algorithmizers",
+                    "algorithmizerx"
+                ]
+            },
+            "expected": [
+                "a7m",
+                "a9c",
+                "a13y",
+                "a10s",
+                "a11l",
+                "a14n",
+                "a10e",
+                "a11r",
+                "a12s",
+                "a12x"
+            ]
+        },
+        {
+            "args": {
+                "words": ["ambiguity", "ambiguities", "ambiguous", "ambiguously", "ambiguify"]
+            },
+            "expected": ["ambiguity", "a9s", "a7s", "a9y", "ambiguify"]
+        },
+        {
+            "args": {
+                "words": [
+                    "xylophone",
+                    "xylophonist",
+                    "xylophones",
+                    "xylophonic",
+                    "xylophone",
+                    "xylophoneist"
+                ]
+            },
+            "expected": ["xylophone", "x9t", "x8s", "x8c", "xylophone", "x10t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "optimization",
+                    "optimizer",
+                    "optimize",
+                    "optimal",
+                    "optimally",
+                    "optimum"
+                ]
+            },
+            "expected": ["o10n", "o7r", "o6e", "o5l", "o7y", "o5m"]
+        },
+        {
+            "args": {
+                "words": [
+                    "unpredictable",
+                    "unpredictably",
+                    "unpredicted",
+                    "unpredict",
+                    "unpredictive",
+                    "unpredictability",
+                    "unpredicting"
+                ]
+            },
+            "expected": ["u11e", "u11y", "u9d", "u7t", "u10e", "u14y", "u10g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "development",
+                    "developer",
+                    "deviation",
+                    "device",
+                    "device",
+                    "devise",
+                    "devising",
+                    "devote",
+                    "devotion",
+                    "devour"
+                ]
+            },
+            "expected": [
+                "d9t",
+                "d7r",
+                "d7n",
+                "device",
+                "device",
+                "devise",
+                "d6g",
+                "devote",
+                "d6n",
+                "d4r"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "photosynthesis",
+                    "photosynthesisers",
+                    "photosynthesizing",
+                    "photosynthetic",
+                    "photosynthesisism"
+                ]
+            },
+            "expected": ["p12s", "p15s", "p15g", "p12c", "p15m"]
+        },
+        {
+            "args": {
+                "words": ["abcdefgh", "abefghij", "abxyzuvw", "abcdexyz", "abcdeghj"]
+            },
+            "expected": ["a6h", "abe4j", "a6w", "a6z", "abc4j"]
+        },
+        {
+            "args": {
+                "words": [
+                    "environment",
+                    "envelop",
+                    "envelope",
+                    "envious",
+                    "evening",
+                    "event",
+                    "eventual",
+                    "every",
+                    "everyday",
+                    "evidence"
+                ]
+            },
+            "expected": ["e9t", "e5p", "en5e", "e5s", "e5g", "e3t", "e6l", "e3y", "e6y", "ev5e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "university",
+                    "universe",
+                    "unique",
+                    "unit",
+                    "unity",
+                    "unity",
+                    "unitary",
+                    "unified",
+                    "uniform",
+                    "unify"
+                ]
+            },
+            "expected": ["u8y", "u6e", "u4e", "u2t", "unity", "unity", "u5y", "u5d", "u5m", "unify"]
+        },
+        {
+            "args": {
+                "words": [
+                    "recombination",
+                    "recombinant",
+                    "recombinase",
+                    "recombine",
+                    "recombinational",
+                    "recombinase",
+                    "recombination"
+                ]
+            },
+            "expected": [
+                "recombination",
+                "r9t",
+                "recombinase",
+                "r7e",
+                "r13l",
+                "recombinase",
+                "recombination"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "qwertyuiop",
+                    "qazwsxedcrfvtgbyhnujmiklop",
+                    "qwertyuiopasdfghjklzxcvbnm",
+                    "qwertyuiopasdfghjklzxcvbn",
+                    "qwertyuiopasdfghjklzxcvb",
+                    "qwertyuiopasdfghjklzxcv",
+                    "qwertyuiopasdfghjklzxc",
+                    "qwertyuiopasdfghjklzx",
+                    "qwertyuiopasdfghjklz",
+                    "qwertyuiopasdfghjkl"
+                ]
+            },
+            "expected": [
+                "q8p",
+                "q24p",
+                "q24m",
+                "q23n",
+                "q22b",
+                "q21v",
+                "q20c",
+                "q19x",
+                "q18z",
+                "q17l"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "metabolism",
+                    "metabolisms",
+                    "metabolic",
+                    "metabolize",
+                    "metabolized",
+                    "metabolizing",
+                    "metabolizes",
+                    "metabolism"
+                ]
+            },
+            "expected": [
+                "metabolism",
+                "metabolisms",
+                "m7c",
+                "m8e",
+                "m9d",
+                "m10g",
+                "metabolizes",
+                "metabolism"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "repetition",
+                    "repetitive",
+                    "repetitions",
+                    "repetitively",
+                    "repertoire",
+                    "repeat"
+                ]
+            },
+            "expected": ["r8n", "repet4e", "r9s", "r10y", "reper4e", "r4t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "prefix",
+                    "prepend",
+                    "presume",
+                    "prelude",
+                    "prevent",
+                    "preach",
+                    "pressure"
+                ]
+            },
+            "expected": ["p4x", "p5d", "pres2e", "prel2e", "p5t", "p4h", "p6e"]
+        },
+        {
+            "args": {
+                "words": ["algorithm", "algebra", "analysis", "alibi", "aloe", "alpaca"]
+            },
+            "expected": ["a7m", "a5a", "a6s", "a3i", "a2e", "a4a"]
+        },
+        {
+            "args": {
+                "words": [
+                    "descriptive",
+                    "description",
+                    "descriptors",
+                    "describe",
+                    "described",
+                    "describing"
+                ]
+            },
+            "expected": ["d9e", "d9n", "d9s", "d6e", "d7d", "d8g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "congratulations",
+                    "congratulate",
+                    "congratulated",
+                    "congratulating",
+                    "congratulatory"
+                ]
+            },
+            "expected": ["c13s", "c10e", "c11d", "c12g", "c12y"]
+        },
+        {
+            "args": {
+                "words": [
+                    "incomprehensibilities",
+                    "incomprehensibility",
+                    "incomprehensible",
+                    "incomprehensibleness",
+                    "incomprehensibles"
+                ]
+            },
+            "expected": ["i19s", "i17y", "i14e", "i18s", "i15s"]
+        },
+        {
+            "args": {
+                "words": [
+                    "transport",
+                    "transformation",
+                    "transform",
+                    "transient",
+                    "transition",
+                    "transit",
+                    "transplant",
+                    "transpose",
+                    "transport",
+                    "transpose"
+                ]
+            },
+            "expected": [
+                "transport",
+                "t12n",
+                "t7m",
+                "transi2t",
+                "t8n",
+                "t5t",
+                "t8t",
+                "transpose",
+                "transport",
+                "transpose"
+            ]
+        },
+        {
+            "args": {
+                "words": ["sequence", "sequential", "sequencer", "sequences", "sequencing"]
+            },
+            "expected": ["s6e", "s8l", "s7r", "s7s", "s8g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": [
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz",
+                "abcdefghijklmnopqrstuvwxyz"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "unbelievable",
+                    "unbelievably",
+                    "unbelieving",
+                    "unbelievable",
+                    "unbelievably",
+                    "unbelievingly"
+                ]
+            },
+            "expected": [
+                "unbelievable",
+                "unbelievably",
+                "u9g",
+                "unbelievable",
+                "unbelievably",
+                "u11y"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "encyclopedia",
+                    "encyclopedias",
+                    "encyclopedia",
+                    "encyclopedic",
+                    "encyclopedically",
+                    "encyclopedia",
+                    "encyclopedia",
+                    "encyclopedia"
+                ]
+            },
+            "expected": [
+                "encyclopedia",
+                "e11s",
+                "encyclopedia",
+                "e10c",
+                "e14y",
+                "encyclopedia",
+                "encyclopedia",
+                "encyclopedia"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "supercalifragilisticexpialidocious",
+                    "supercalifragilisticexpialidociously",
+                    "supercalifragilisticexpialidociousness",
+                    "supercalifragilisticexpialidocioussness",
+                    "supercalifragilisticexpialidociousness"
+                ]
+            },
+            "expected": [
+                "s32s",
+                "s34y",
+                "supercalifragilisticexpialidociousness",
+                "s37s",
+                "supercalifragilisticexpialidociousness"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdefghij",
+                    "abcdefghijk",
+                    "abcdefghijkl",
+                    "abcdefghijklm",
+                    "abcdefghijklmn",
+                    "abcdefghijklmnop",
+                    "abcdefghijklmnopq",
+                    "abcdefghijklmnopqr",
+                    "abcdefghijklmnopqrs",
+                    "abcdefghijklmnopqrst"
+                ]
+            },
+            "expected": [
+                "a8j",
+                "a9k",
+                "a10l",
+                "a11m",
+                "a12n",
+                "a14p",
+                "a15q",
+                "a16r",
+                "a17s",
+                "a18t"
+            ]
+        },
+        {
+            "args": {
+                "words": ["longword", "longwording", "longworded", "longworder", "longworden"]
+            },
+            "expected": ["l6d", "l9g", "l8d", "l8r", "l8n"]
+        },
+        {
+            "args": {
+                "words": [
+                    "algorithm",
+                    "algorithms",
+                    "algebra",
+                    "algorithmically",
+                    "alibi",
+                    "altruism"
+                ]
+            },
+            "expected": ["a7m", "a8s", "a5a", "a13y", "a3i", "a6m"]
+        },
+        {
+            "args": {
+                "words": [
+                    "responsibility",
+                    "responsible",
+                    "responsibilities",
+                    "responsibility",
+                    "respond",
+                    "response"
+                ]
+            },
+            "expected": ["responsibility", "r9e", "r14s", "responsibility", "r5d", "r6e"]
+        },
+        {
+            "args": {
+                "words": ["parallel", "paralleled", "parentheses", "parent", "partisan", "partake"]
+            },
+            "expected": ["p6l", "p8d", "p9s", "p4t", "p6n", "p5e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "communication",
+                    "commune",
+                    "communal",
+                    "comment",
+                    "commerce",
+                    "commodity",
+                    "commit",
+                    "committee",
+                    "common",
+                    "communist"
+                ]
+            },
+            "expected": ["c11n", "c5e", "c6l", "c5t", "c6e", "c7y", "c4t", "c7e", "c4n", "c7t"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abacaxi",
+                    "banana",
+                    "abacax",
+                    "bacana",
+                    "abacaxix",
+                    "bacaxa",
+                    "bacaxi",
+                    "bacanaa",
+                    "bacanab",
+                    "bacanac"
+                ]
+            },
+            "expected": [
+                "a5i",
+                "ban2a",
+                "a4x",
+                "bacana",
+                "a6x",
+                "bacaxa",
+                "b4i",
+                "b5a",
+                "b5b",
+                "b5c"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "communication",
+                    "communicate",
+                    "communicator",
+                    "communications",
+                    "communicative",
+                    "communicatory"
+                ]
+            },
+            "expected": ["c11n", "c9e", "c10r", "c12s", "c11e", "c11y"]
+        },
+        {
+            "args": {
+                "words": [
+                    "antidisestablishmentarianism",
+                    "antidisestablishmentarianisms",
+                    "antidisestablishmentarianist",
+                    "antidisestablishmentarianists",
+                    "antidisestablishmentarianize"
+                ]
+            },
+            "expected": [
+                "a26m",
+                "antidisestablishmentarianisms",
+                "a26t",
+                "antidisestablishmentarianists",
+                "a26e"
+            ]
+        },
+        {
+            "args": {
+                "words": ["abracadabra", "abrakadabre", "abracadabba", "abracadabro", "abracadabri"]
+            },
+            "expected": ["abracadabra", "a9e", "abracadabba", "a9o", "a9i"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abcdexyz",
+                    "abcdefxy",
+                    "abcdezyx",
+                    "abcdefyz",
+                    "abcdexyx",
+                    "abcdefxz",
+                    "abcdefzy",
+                    "abcdefyx"
+                ]
+            },
+            "expected": [
+                "abcdexyz",
+                "abcdefxy",
+                "abcdezyx",
+                "abcdefyz",
+                "abcdexyx",
+                "abcdefxz",
+                "abcdefzy",
+                "abcdefyx"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "abbreviation",
+                    "abbreviate",
+                    "abbreviated",
+                    "abbreviating",
+                    "abbreviation",
+                    "abbreviations",
+                    "abbreviates",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations",
+                    "abbreviations"
+                ]
+            },
+            "expected": [
+                "abbreviation",
+                "a8e",
+                "a9d",
+                "a10g",
+                "abbreviation",
+                "abbreviations",
+                "a9s",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations",
+                "abbreviations"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "computer",
+                    "computing",
+                    "compute",
+                    "computation",
+                    "computational",
+                    "computerize"
+                ]
+            },
+            "expected": ["c6r", "c7g", "c5e", "c9n", "c11l", "c9e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "dictionary",
+                    "diction",
+                    "diet",
+                    "died",
+                    "dialogue",
+                    "dial",
+                    "dietary",
+                    "dioxide"
+                ]
+            },
+            "expected": ["d8y", "d5n", "d2t", "d2d", "d6e", "d2l", "d5y", "d5e"]
+        },
+        {
+            "args": {
+                "words": ["hello", "hallo", "hullo", "hella", "hollo", "heilo"]
+            },
+            "expected": ["hello", "ha2o", "hu2o", "h3a", "ho2o", "heilo"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abbreviation",
+                    "abbreviate",
+                    "abacus",
+                    "abdomen",
+                    "abdominal",
+                    "abduct",
+                    "abduction",
+                    "aberration"
+                ]
+            },
+            "expected": ["a10n", "a8e", "a4s", "a5n", "a7l", "a4t", "a7n", "a8n"]
+        },
+        {
+            "args": {
+                "words": [
+                    "environment",
+                    "enormous",
+                    "enthusiasm",
+                    "enterprise",
+                    "entertainment",
+                    "entitle",
+                    "entrance",
+                    "entranceway"
+                ]
+            },
+            "expected": ["e9t", "e6s", "e8m", "e8e", "e11t", "e5e", "e6e", "e9y"]
+        },
+        {
+            "args": {
+                "words": ["development", "developments", "developer", "develop", "developing"]
+            },
+            "expected": ["d9t", "d10s", "d7r", "d5p", "d8g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "distinct",
+                    "distingu",
+                    "distinguisher",
+                    "distinguishing",
+                    "distinguished"
+                ]
+            },
+            "expected": ["d6t", "d6u", "d11r", "d12g", "d11d"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abbreviation",
+                    "abbreviate",
+                    "abridge",
+                    "abrupt",
+                    "absent",
+                    "absolute",
+                    "absorb",
+                    "abstract",
+                    "absurd",
+                    "abundant"
+                ]
+            },
+            "expected": [
+                "a10n",
+                "a8e",
+                "a5e",
+                "abr2t",
+                "abs2t",
+                "a6e",
+                "a4b",
+                "abs4t",
+                "a4d",
+                "abu4t"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "distinct",
+                    "distinguish",
+                    "distance",
+                    "distant",
+                    "dismantle",
+                    "disorder",
+                    "disaster",
+                    "disagree"
+                ]
+            },
+            "expected": ["d6t", "d9h", "dist3e", "d5t", "d7e", "diso3r", "disa3r", "disa3e"]
+        },
+        {
+            "args": {
+                "words": [
+                    "university",
+                    "universe",
+                    "uniform",
+                    "unique",
+                    "unit",
+                    "unity",
+                    "unite",
+                    "universal"
+                ]
+            },
+            "expected": ["u8y", "u6e", "u5m", "u4e", "u2t", "u3y", "u3e", "u7l"]
+        },
+        {
+            "args": {
+                "words": [
+                    "quantum",
+                    "quantitative",
+                    "quantization",
+                    "quantified",
+                    "quantifiable",
+                    "quantify",
+                    "quantifies",
+                    "quantifying"
+                ]
+            },
+            "expected": ["q5m", "quantit4e", "q10n", "q8d", "quantif4e", "q6y", "q8s", "q9g"]
+        },
+        {
+            "args": {
+                "words": [
+                    "same",
+                    "sames",
+                    "samese",
+                    "samesea",
+                    "sameseas",
+                    "sameseasi",
+                    "sameseasiy",
+                    "sameseasiys",
+                    "sameseasiyst",
+                    "sameseasiyste",
+                    "sameseasiystes",
+                    "sameseasiystess",
+                    "sameseasiystesss",
+                    "sameseasiystesssa",
+                    "sameseasiystesssan",
+                    "sameseasiystesssanc"
+                ]
+            },
+            "expected": [
+                "s2e",
+                "s3s",
+                "s4e",
+                "s5a",
+                "s6s",
+                "s7i",
+                "s8y",
+                "s9s",
+                "s10t",
+                "s11e",
+                "s12s",
+                "s13s",
+                "s14s",
+                "s15a",
+                "s16n",
+                "s17c"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "abracadabra",
+                    "abracadabrat",
+                    "abracadabrator",
+                    "abracadabratory",
+                    "abracadabras"
+                ]
+            },
+            "expected": ["a9a", "a10t", "a12r", "a13y", "a10s"]
+        },
+        {
+            "args": {
+                "words": ["complex", "complexity", "complexer", "complexify", "complexed"]
+            },
+            "expected": ["c5x", "complexity", "c7r", "complexify", "c7d"]
+        },
+        {
+            "args": {
+                "words": ["unbelievable", "unbelievably", "unbeliever", "unbelievers", "unbelief"]
+            },
+            "expected": ["u10e", "u10y", "u8r", "u9s", "u6f"]
+        },
+        {
+            "args": {
+                "words": ["short", "shorthand", "shot", "shore", "show", "shoreline", "shower"]
+            },
+            "expected": ["s3t", "s7d", "s2t", "s3e", "s2w", "s7e", "s4r"]
+        },
+        {
+            "args": {
+                "words": ["establishment", "establish", "estABLishment", "estimated", "establisher"]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": [
+                    "unbelievable",
+                    "unbelievably",
+                    "unbeliever",
+                    "unbelievable",
+                    "unbelieving"
+                ]
+            },
+            "expected": ["unbelievable", "u10y", "u8r", "unbelievable", "u9g"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().wordsAbbreviation",
+        "typescript": "Solution().wordsAbbreviation"
+    }
+}

@@ -1,0 +1,714 @@
+{
+    "id": "greatest-english-letter-in-upper-and-lower-case",
+    "questionId": 2309,
+    "difficulty": "Easy",
+    "tags": ["Hash Table", "String", "Enumeration"],
+    "tests": [
+        {
+            "args": {
+                "s": "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "mMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "zZyYxXwWeE"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "zZyYxXwWvVuUtTrRsSqQpPoOnNmMlLkKiIjJhHgGfFeEdDcCbBaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "bBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyY"
+            },
+            "expected": "Y"
+        },
+        {
+            "args": {
+                "s": "alluppercase"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "ALLLOWERCASE"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "AbCdEfGhIjK"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "a"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "NoUpperCaseHere"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "bA"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "AbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "NnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "lEeTcOdE"
+            },
+            "expected": "E"
+        },
+        {
+            "args": {
+                "s": "aBcDeFgHiJkLmNoPqRsTuVwXyZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": ""
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "arRAzFif"
+            },
+            "expected": "R"
+        },
+        {
+            "args": {
+                "s": "abcdefgHIJKLMnoPQRSTuVwxyz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "QwErTyUiOpAsDfGhJkLzXcVbNm"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aA"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "A"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "AaBbCc"
+            },
+            "expected": "C"
+        },
+        {
+            "args": {
+                "s": "zZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "MmQqEe"
+            },
+            "expected": "Q"
+        },
+        {
+            "args": {
+                "s": "aB"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "AbCdEfGhIjKlMnOpQrStUvWxYz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "qUICkBrOwNBROWNfOX"
+            },
+            "expected": "W"
+        },
+        {
+            "args": {
+                "s": "pUrPLe"
+            },
+            "expected": "P"
+        },
+        {
+            "args": {
+                "s": "ZzYyXxWwVvUuTtSsRrQqPpOoNnMmLlKkJjIiHhGgFfEeDdCcBbAa"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aBcD"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "bLuE"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "xYzZaAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwW"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "bBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "bAcBdCeCdFdEgFhG"
+            },
+            "expected": "G"
+        },
+        {
+            "args": {
+                "s": "zZyYxXwWvVuUtTsSrRpPqQoOnNmMlLkKjJiIhHgGfFeEdDcCbBaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZzZyYxXwWvVuUtTsSrRpPqQoOnNmMlLkKjJiIhHgGfFeEdDcCbBaAaAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "hYsS"
+            },
+            "expected": "S"
+        },
+        {
+            "args": {
+                "s": "thisIsAtEsTString"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "xyzXYZuvwUVWtTqsSRpqPRonmNMlLkKjJiIhHgGfFeEdDcCbBaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "AaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAa"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "aAaaAAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "noUpperLower"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "UnIqUe"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "mAgEnTa"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaAaA"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "AaaaBBbbbCCCCDDDdeeeFFGHHHIIIJJJ"
+            },
+            "expected": "D"
+        },
+        {
+            "args": {
+                "s": "xyzABCxyzABC"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aNdSoMeSpEcIaLChArAcTeRs"
+            },
+            "expected": "S"
+        },
+        {
+            "args": {
+                "s": "withSomeDuPpLicaTeS"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "bBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb"
+            },
+            "expected": "B"
+        },
+        {
+            "args": {
+                "s": "mNnOoPpQqRrSsTtUuVvWwXxYyZzLlKkJjIiHhGgFfEeDdCcBbAa"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "abcdefghiJklmnopqrStuvWxyzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "abcdefGHIJKLmnopQRStuvWXYZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "mMnNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlL"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aBcDdEfGgHiJjKlMmNoPpQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "gRaY"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "butNoVaLiDgReaTtEsT"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "mIXeDuPpLeTeXt"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "nNoOlLkKiIjJhHgGfFeEdDcCbBaA"
+            },
+            "expected": "O"
+        },
+        {
+            "args": {
+                "s": "cYaN"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "sUpErCoMpLeXtExT"
+            },
+            "expected": "X"
+        },
+        {
+            "args": {
+                "s": "AbCdEfGhIjKlMnOpQrStUvWxYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "mIxEdCaSeStRiNg"
+            },
+            "expected": "I"
+        },
+        {
+            "args": {
+                "s": "MmLlKkJjIiHhGgFfEeDdCcBbAa"
+            },
+            "expected": "M"
+        },
+        {
+            "args": {
+                "s": "abcdefgHIJKLmnopqRSTUVWxyz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "mM"
+            },
+            "expected": "M"
+        },
+        {
+            "args": {
+                "s": "AbcDefGhIjKlMnopQRStuvWXYZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "ZZZaaaBBBcccDDDeeeFFFgggHHHiiiJJJkkkLLLmmmNNNoooPPPqqqRRRsssTTTuuuVVVwwwXXXyyyzzz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "tEsTiNgUpPeRaNdLoWeRcAsE"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "sUnShInESoNnY"
+            },
+            "expected": "S"
+        },
+        {
+            "args": {
+                "s": "xYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxYxY"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "mNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "zZyYxXwWvVuUtTsSrRpPqQoOnNmMlLkKjJiIhHgGfFeEdDcCbBaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "zZaAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyY"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aNkLmNpQrStUvWxYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "sTrInGtEsTcAsE"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "aAaAaAbBbBcCcCdDdDeEeEfFfFgGgGhHhHiIiIjJjJkKkKlLlLmMmMnNnNoOpPqQrRsStTuUvVwWxXyYzZzZyYxXwWvVuUtTsSrRpPqQoOnNmMlLkKjJiIhHgGfFeEdDcCbBaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "gReEn"
+            },
+            "expected": "E"
+        },
+        {
+            "args": {
+                "s": "mnopQRstUVwXYZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "mnopqrStuvWxyzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aBcDeFgHiJkLmNoPqRsTuVwXyZaBcDeFgHiJkLmNoPqRsTuVwXyZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "zZyYxXwWvVuUtTsSrRqQpPoOnNmMlLkKjJiIhHgGfFeEdDcCbBaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaAaAaAaAaAaAaAaA"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "abcdefghijkLmnopqrstUvwxyz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "AbCdEfGhIjKlMnOpQrStUvWxYzAaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aNnBmMlLkKiIjJhHgGfFeEdDcCbBaA"
+            },
+            "expected": "N"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmooppqqrrssttuuvvwwxxyyzz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzAaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aBcDxyzXYZaBcD"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "fUnNyCaSe"
+            },
+            "expected": "N"
+        },
+        {
+            "args": {
+                "s": "oRaNgE"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aBcDfEgHiJkLmNoPqRsTuVwXyZ"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "xyZzXyZzXyZzXyZzXyZzXyZzXyZzXyZzXyZz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "bAcAdAeAfAgAhAiAjAkAlAmAnAoApAqArAsAtAuAvAwAxAyAz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA"
+            },
+            "expected": "A"
+        },
+        {
+            "args": {
+                "s": "qQwWeErRtTyYuUiIoOpPlLkKjJhHgGfFdDsSaAzZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "xyzXYZabcABCdefDEFghiGHIjklJKLmnopMNOpqrQRstSTuvwUVWxyzXYZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "MiXeDcAsEnOnCaSeTeStStRiNg"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "jUmBlEdTeXt"
+            },
+            "expected": "T"
+        },
+        {
+            "args": {
+                "s": "aBcDefGHiJkLmNoPqRsTuVwXyZZzz"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "aAeEiIoOuUaAeEiIoOuUaAeEiIoOuU"
+            },
+            "expected": "U"
+        },
+        {
+            "args": {
+                "s": "abCDxyzXYZ"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "oNeTwOThReEfOuRfIvEsIxTEnElEvEnTiGoNeVeNtWeNtYtHrEe"
+            },
+            "expected": "W"
+        },
+        {
+            "args": {
+                "s": "mAgIc"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA"
+            },
+            "expected": "Z"
+        },
+        {
+            "args": {
+                "s": "ABCDEFGhijklmNopqrStuvWxyz"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "AbCdEfGhIjKlMnOpQrStUvWxYzAbCdEfGhIjKlMnOpQrStUvWxYz"
+            },
+            "expected": ""
+        }
+    ],
+    "invoke": {
+        "python": "Solution().greatestLetter",
+        "typescript": "Solution().greatestLetter"
+    }
+}

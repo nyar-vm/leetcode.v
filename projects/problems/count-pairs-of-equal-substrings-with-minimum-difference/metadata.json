@@ -1,0 +1,586 @@
+{
+    "id": "count-pairs-of-equal-substrings-with-minimum-difference",
+    "questionId": 1794,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "firstString": "abcdefghijklmnopqrstuvwxyz",
+                "secondString": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcabcabc",
+                "secondString": "cbacbacba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abc",
+                "secondString": "cab"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "firstString": "xyz",
+                "secondString": "zyxzyxzyx"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaabbbb",
+                "secondString": "bbbbaaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaaa",
+                "secondString": "bbbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "world"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "unique",
+                "secondString": "uniquestrings"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "ababababab",
+                "secondString": "bababababa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "python",
+                "secondString": "nohtypython"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "firstString": "abcde",
+                "secondString": "fghij"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "olleh"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "mississippi",
+                "secondString": "ppississimm"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcdabcd",
+                "secondString": "dcbaabcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "firstString": "z",
+                "secondString": "z"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abacabadabacaba",
+                "secondString": "abcabcabc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "firstString": "aabbcc",
+                "secondString": "abcabc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abc",
+                "secondString": "abc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "firstString": "zzzz",
+                "secondString": "zzzzzzzz"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaa",
+                "secondString": "bbbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "abc",
+                "secondString": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "firstString": "banana",
+                "secondString": "nabana"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaa",
+                "secondString": "aaaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "hello"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcdefg",
+                "secondString": "ghfedcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "xyz",
+                "secondString": "zyxzyx"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaa",
+                "secondString": "aaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcabc",
+                "secondString": "cbacba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "ollhe"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "firstString": "leetcode",
+                "secondString": "leetcode"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "ohell"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abababab",
+                "secondString": "babababa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "mississippi",
+                "secondString": "ississippi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "zzzz",
+                "secondString": "zzzz"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaa",
+                "secondString": "bbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "zzzz",
+                "secondString": "zzzzzzzzz"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "banana",
+                "secondString": "nanaba"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "firstString": "abcdxyz",
+                "secondString": "xyzabcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "firstString": "mississippi",
+                "secondString": "issipi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcde",
+                "secondString": "edcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "a",
+                "secondString": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcdefg",
+                "secondString": "gfedcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "xyz",
+                "secondString": "zyx"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "a",
+                "secondString": "aaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "xyz",
+                "secondString": "zyxwvut"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaaab",
+                "secondString": "bbbaaaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "xyz",
+                "secondString": "zyxzyxzyxzyx"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcdef",
+                "secondString": "ghijkl"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "abcd",
+                "secondString": "bccda"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "software",
+                "secondString": "ware"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "firstString": "abcabc",
+                "secondString": "bcbcbcb"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abc",
+                "secondString": "def"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "mississippi",
+                "secondString": "pississippi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aabbcc",
+                "secondString": "ccbbaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aabbccdd",
+                "secondString": "ddbbaacc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaaa",
+                "secondString": "bbbbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "ab",
+                "secondString": "cd"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "leetcode",
+                "secondString": "etco"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "programming",
+                "secondString": "gnimmargorp"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcabcabc",
+                "secondString": "abc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "yellow"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaabbbbb",
+                "secondString": "bbbbbbaaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaabbbbcccc",
+                "secondString": "bbbbaaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcdef",
+                "secondString": "fedcba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "engineer",
+                "secondString": "engine"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abc",
+                "secondString": "defg"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "abcabcabcabc",
+                "secondString": "abcabcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "firstString": "abababab",
+                "secondString": "bababa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcabcabcabc",
+                "secondString": "abcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "firstString": "zzzzz",
+                "secondString": "zzzzz"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcabcabcabc",
+                "secondString": "cbacbacbacba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaaaaa",
+                "secondString": "bbbbbbb"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "firstString": "xyza",
+                "secondString": "ayzx"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "zzzzzz",
+                "secondString": "zzzzzz"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abab",
+                "secondString": "baba"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "abcabcabc",
+                "secondString": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "firstString": "testcase",
+                "secondString": "casesensitive"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "test",
+                "secondString": "sett"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaa",
+                "secondString": "aaaa"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "aaaa",
+                "secondString": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "firstString": "hello",
+                "secondString": "llhe"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "firstString": "aaaa",
+                "secondString": "aaaa"
+            },
+            "expected": 1
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countQuadruples",
+        "typescript": "Solution().countQuadruples"
+    }
+}

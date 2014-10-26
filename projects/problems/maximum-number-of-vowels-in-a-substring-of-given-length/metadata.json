@@ -1,0 +1,572 @@
+{
+    "id": "maximum-number-of-vowels-in-a-substring-of-given-length",
+    "questionId": 1456,
+    "difficulty": "Medium",
+    "tags": ["String", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s": "aooiiieeec",
+                "k": 6
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "a",
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "happy",
+                "k": 2
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "rhythms",
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "fluffy",
+                "k": 2
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "leetcode",
+                "k": 3
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aeiou",
+                "k": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "beautiful",
+                "k": 4
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "rhythms",
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bbbb",
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "k": 5
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abciiidef",
+                "k": 3
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 4
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "quartz",
+                "k": 3
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "uuuuuuuuuuuuuuuuuuuuuuuuuu",
+                "k": 5
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "eiuaooeiuaooeiuaooeiuaoo",
+                "k": 8
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxyz",
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "understanding",
+                "k": 4
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "k": 5
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+                "k": 100
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "aeiouaeiou",
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "bbbbbbaaaaa",
+                "k": 5
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "bbaeixixixixxxeiiixieeiix",
+                "k": 15
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 50
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "uoieaouieaouieaouieaouieaouieao",
+                "k": 15
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 4
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiouaeiou",
+                "k": 20
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "iouaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "k": 50
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 12
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "xyzvowelsabcdefg",
+                "k": 5
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "leetcodeisawesome",
+                "k": 5
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "lovelaceeinstein",
+                "k": 7
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 13
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithsomevowelsinside",
+                "k": 20
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "aaaaaaaabbbbbbbbcccccccc",
+                "k": 12
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "bbaeiooacaioiiceiue",
+                "k": 11
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 26
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiou",
+                "k": 10
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzz",
+                "k": 20
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "uvvwxyz",
+                "k": 3
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "abcdeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou",
+                "k": 15
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "uoieaouieaouieaouieaouieaouiea",
+                "k": 7
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "mnoabcdeioufghijkl",
+                "k": 7
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "k": 15
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "leetcodeisaverygoodplatform",
+                "k": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "k": 5
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+                "k": 30
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "s": "bcdafg",
+                "k": 6
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaaaaaaaaaaaaaa",
+                "k": 10
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "bcdfghjklmnpqrstvwxyz",
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithseveralvowelsinside",
+                "k": 15
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioieiaioiei",
+                "k": 20
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou",
+                "k": 15
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "uoieaouioeaouioeaouioe",
+                "k": 12
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "aeiouaeiouaeiouaeiou",
+                "k": 7
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbc",
+                "k": 7
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "uqeiouqeiouqeiouqeiouqeiouqe",
+                "k": 11
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 10
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "qqqwwweee",
+                "k": 4
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "bbaeixoubb",
+                "k": 5
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 26
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "aeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeiioooooooouuuuuuuuuuuaaaaaaaa",
+                "k": 25
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "s": "bvflkqmbvkjgnqmfqlqjflvngqnvfkvnqjvfbvmqjbfvmlkjbfnvqjgbfnvqjbngfjkqnvbmfkqjbgfnjkbv",
+                "k": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "vowelsarebeautiful",
+                "k": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzz",
+                "k": 15
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbaaaaaa",
+                "k": 10
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "aeiaaioaaaaeiiiiiiooooaauuaeiu",
+                "k": 15
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyzxyzxyzxyzxyz",
+                "k": 8
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithlotsofvowelsandconsonants",
+                "k": 18
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "environmentally",
+                "k": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "leetcodeisacommunityforcoders",
+                "k": 8
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "leetcodeisfun",
+                "k": 7
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "leetcodeisawesome",
+                "k": 7
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "k": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "aaabbbcccdddeeefffggghhhiii",
+                "k": 5
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "bcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+                "k": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "uoieaooooieau",
+                "k": 7
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "abecidofugihanukleomnonuopqrstuvwxyz",
+                "k": 20
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "aeiaaioaaaaeiiiiouuuu",
+                "k": 12
+            },
+            "expected": 12
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maxVowels",
+        "typescript": "Solution().maxVowels"
+    }
+}

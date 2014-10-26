@@ -1,0 +1,593 @@
+{
+    "id": "find-the-winner-of-the-circular-game",
+    "questionId": 1823,
+    "difficulty": "Medium",
+    "tags": ["Recursion", "Queue", "Array", "Math", "Simulation"],
+    "tests": [
+        {
+            "args": {
+                "n": 3,
+                "k": 1
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "n": 3,
+                "k": 3
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "n": 5,
+                "k": 2
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "n": 7,
+                "k": 3
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "n": 7,
+                "k": 1
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "n": 6,
+                "k": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "n": 7,
+                "k": 7
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "n": 1,
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "n": 4,
+                "k": 4
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "n": 10,
+                "k": 4
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "n": 10,
+                "k": 3
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "n": 250,
+                "k": 125
+            },
+            "expected": 173
+        },
+        {
+            "args": {
+                "n": 300,
+                "k": 150
+            },
+            "expected": 152
+        },
+        {
+            "args": {
+                "n": 250,
+                "k": 150
+            },
+            "expected": 76
+        },
+        {
+            "args": {
+                "n": 200,
+                "k": 100
+            },
+            "expected": 189
+        },
+        {
+            "args": {
+                "n": 150,
+                "k": 50
+            },
+            "expected": 138
+        },
+        {
+            "args": {
+                "n": 300,
+                "k": 300
+            },
+            "expected": 265
+        },
+        {
+            "args": {
+                "n": 450,
+                "k": 450
+            },
+            "expected": 87
+        },
+        {
+            "args": {
+                "n": 123,
+                "k": 123
+            },
+            "expected": 94
+        },
+        {
+            "args": {
+                "n": 499,
+                "k": 250
+            },
+            "expected": 134
+        },
+        {
+            "args": {
+                "n": 300,
+                "k": 200
+            },
+            "expected": 139
+        },
+        {
+            "args": {
+                "n": 100,
+                "k": 13
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "n": 500,
+                "k": 1
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "n": 37,
+                "k": 37
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "n": 500,
+                "k": 250
+            },
+            "expected": 384
+        },
+        {
+            "args": {
+                "n": 20,
+                "k": 19
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "n": 200,
+                "k": 199
+            },
+            "expected": 163
+        },
+        {
+            "args": {
+                "n": 100,
+                "k": 99
+            },
+            "expected": 88
+        },
+        {
+            "args": {
+                "n": 30,
+                "k": 15
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 7
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "n": 30,
+                "k": 29
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 2
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "n": 250,
+                "k": 89
+            },
+            "expected": 225
+        },
+        {
+            "args": {
+                "n": 250,
+                "k": 3
+            },
+            "expected": 41
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 10
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "n": 100,
+                "k": 37
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "n": 40,
+                "k": 7
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "n": 45,
+                "k": 23
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "n": 45,
+                "k": 19
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "n": 100,
+                "k": 50
+            },
+            "expected": 95
+        },
+        {
+            "args": {
+                "n": 123,
+                "k": 45
+            },
+            "expected": 116
+        },
+        {
+            "args": {
+                "n": 45,
+                "k": 13
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "n": 500,
+                "k": 2
+            },
+            "expected": 489
+        },
+        {
+            "args": {
+                "n": 499,
+                "k": 300
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "n": 200,
+                "k": 1
+            },
+            "expected": 200
+        },
+        {
+            "args": {
+                "n": 300,
+                "k": 299
+            },
+            "expected": 145
+        },
+        {
+            "args": {
+                "n": 400,
+                "k": 399
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "n": 125,
+                "k": 124
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "n": 150,
+                "k": 75
+            },
+            "expected": 125
+        },
+        {
+            "args": {
+                "n": 20,
+                "k": 7
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "n": 350,
+                "k": 7
+            },
+            "expected": 211
+        },
+        {
+            "args": {
+                "n": 150,
+                "k": 2
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "n": 123,
+                "k": 57
+            },
+            "expected": 77
+        },
+        {
+            "args": {
+                "n": 150,
+                "k": 41
+            },
+            "expected": 79
+        },
+        {
+            "args": {
+                "n": 200,
+                "k": 67
+            },
+            "expected": 163
+        },
+        {
+            "args": {
+                "n": 499,
+                "k": 499
+            },
+            "expected": 122
+        },
+        {
+            "args": {
+                "n": 500,
+                "k": 499
+            },
+            "expected": 121
+        },
+        {
+            "args": {
+                "n": 500,
+                "k": 500
+            },
+            "expected": 69
+        },
+        {
+            "args": {
+                "n": 400,
+                "k": 100
+            },
+            "expected": 313
+        },
+        {
+            "args": {
+                "n": 499,
+                "k": 5
+            },
+            "expected": 327
+        },
+        {
+            "args": {
+                "n": 200,
+                "k": 50
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "n": 20,
+                "k": 5
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "n": 250,
+                "k": 249
+            },
+            "expected": 204
+        },
+        {
+            "args": {
+                "n": 40,
+                "k": 13
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 11
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "n": 450,
+                "k": 3
+            },
+            "expected": 286
+        },
+        {
+            "args": {
+                "n": 450,
+                "k": 449
+            },
+            "expected": 143
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 13
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "n": 15,
+                "k": 11
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "n": 37,
+                "k": 13
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "n": 15,
+                "k": 7
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "n": 30,
+                "k": 11
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "n": 300,
+                "k": 100
+            },
+            "expected": 59
+        },
+        {
+            "args": {
+                "n": 40,
+                "k": 19
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "n": 120,
+                "k": 1
+            },
+            "expected": 120
+        },
+        {
+            "args": {
+                "n": 299,
+                "k": 299
+            },
+            "expected": 146
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 17
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "n": 150,
+                "k": 1
+            },
+            "expected": 150
+        },
+        {
+            "args": {
+                "n": 250,
+                "k": 100
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "n": 45,
+                "k": 20
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "n": 373,
+                "k": 186
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "n": 499,
+                "k": 2
+            },
+            "expected": 487
+        },
+        {
+            "args": {
+                "n": 50,
+                "k": 25
+            },
+            "expected": 5
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findTheWinner",
+        "typescript": "Solution().findTheWinner"
+    }
+}

@@ -1,0 +1,1152 @@
+{
+    "id": "shortest-uncommon-substring-in-an-array",
+    "questionId": 3076,
+    "difficulty": "Medium",
+    "tags": ["Trie", "Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "arr": ["abcabc", "bcabc", "cabc", "abcd"]
+            },
+            "expected": ["abca", "", "", "d"]
+        },
+        {
+            "args": {
+                "arr": ["aaa", "aab", "aba", "abb"]
+            },
+            "expected": ["aaa", "aab", "ba", "bb"]
+        },
+        {
+            "args": {
+                "arr": ["abc", "bcd", "abcd"]
+            },
+            "expected": ["", "", "abcd"]
+        },
+        {
+            "args": {
+                "arr": ["abcd", "bcde", "cdef", "defg"]
+            },
+            "expected": ["a", "bcde", "cdef", "g"]
+        },
+        {
+            "args": {
+                "arr": ["hello", "world", "hel", "wor", "ld"]
+            },
+            "expected": ["ll", "rl", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["unique", "strings", "array", "test"]
+            },
+            "expected": ["q", "g", "a", "es"]
+        },
+        {
+            "args": {
+                "arr": ["cab", "ad", "bad", "c"]
+            },
+            "expected": ["ab", "", "ba", ""]
+        },
+        {
+            "args": {
+                "arr": ["aaaa", "aaab", "aabb", "abbb"]
+            },
+            "expected": ["aaaa", "aaab", "aabb", "bbb"]
+        },
+        {
+            "args": {
+                "arr": ["xyz", "zyx", "yzx"]
+            },
+            "expected": ["xy", "yx", "zx"]
+        },
+        {
+            "args": {
+                "arr": ["abcde", "bcdef", "cdefg", "defgh"]
+            },
+            "expected": ["a", "bcdef", "cdefg", "h"]
+        },
+        {
+            "args": {
+                "arr": ["a", "b", "c", "d"]
+            },
+            "expected": ["a", "b", "c", "d"]
+        },
+        {
+            "args": {
+                "arr": ["hello", "world", "python", "programming"]
+            },
+            "expected": ["e", "d", "t", "a"]
+        },
+        {
+            "args": {
+                "arr": ["same", "same", "same", "same"]
+            },
+            "expected": ["", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["banana", "bandana", "band"]
+            },
+            "expected": ["nan", "da", ""]
+        },
+        {
+            "args": {
+                "arr": ["aaa", "aab", "aac", "abc"]
+            },
+            "expected": ["aaa", "aab", "ac", "bc"]
+        },
+        {
+            "args": {
+                "arr": ["abc", "def", "ghi", "jkl", "mno"]
+            },
+            "expected": ["a", "d", "g", "j", "m"]
+        },
+        {
+            "args": {
+                "arr": ["banana", "ananas", "nana", "ana", "nan"]
+            },
+            "expected": ["b", "s", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["xyz", "xyzz", "xyzzz", "xyzzzz"]
+            },
+            "expected": ["", "", "", "zzzz"]
+        },
+        {
+            "args": {
+                "arr": ["mississippi", "missouri", "mismatch", "misinterpret", "misspoke"]
+            },
+            "expected": ["ip", "u", "a", "n", "k"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghij",
+                    "bcdefghijk",
+                    "cdefghijkl",
+                    "defghijklm",
+                    "efghijklmn",
+                    "fghijklmno",
+                    "ghijklmnop",
+                    "hijklmnopq",
+                    "ijklmnopqr",
+                    "jklmnopqrs"
+                ]
+            },
+            "expected": [
+                "a",
+                "bcdefghijk",
+                "cdefghijkl",
+                "defghijklm",
+                "efghijklmn",
+                "fghijklmno",
+                "ghijklmnop",
+                "hijklmnopq",
+                "ijklmnopqr",
+                "s"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["mississippi", "missouri", "miss", "mis", "is", "sip", "pip"]
+            },
+            "expected": ["pp", "o", "", "", "", "", "pip"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abacabadabacaba",
+                    "bacabadaba",
+                    "acabadaba",
+                    "cabacaba",
+                    "abacaba",
+                    "bacaba",
+                    "acaba",
+                    "cabaca"
+                ]
+            },
+            "expected": ["dabac", "", "", "cabacab", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["banana", "anana", "nana", "ana", "na", "a", "bandana", "band"]
+            },
+            "expected": ["bana", "", "", "", "", "", "da", ""]
+        },
+        {
+            "args": {
+                "arr": ["aabbcc", "bbccdd", "ccddaa", "ddeaab"]
+            },
+            "expected": ["abb", "bccd", "da", "e"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbccddeeff",
+                    "bbaacceeffdd",
+                    "ccddeeffaabb",
+                    "ddeeffaabbcc",
+                    "eeffddbbaacc",
+                    "ffddbbaaccee"
+                ]
+            },
+            "expected": ["bccd", "ceef", "cddeeffa", "faabbc", "effddb", "dbbaacce"]
+        },
+        {
+            "args": {
+                "arr": ["zxyzyx", "zyxzyx", "yzyxzy", "xyzyxz", "yzyxzyx", "zyxzyxzy"]
+            },
+            "expected": ["zx", "", "", "xyzyxz", "yzyxzyx", "xzyxz"]
+        },
+        {
+            "args": {
+                "arr": ["banana", "ananas", "nana", "anan"]
+            },
+            "expected": ["b", "s", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["abacabadaba", "bacabadabac", "acabadabaca", "cadabacabad", "adabacabadab"]
+            },
+            "expected": ["abacabadaba", "bacabadabac", "badabaca", "cad", "dabacabada"]
+        },
+        {
+            "args": {
+                "arr": ["xyxyxy", "yxyx", "xyx", "yx", "xyz", "zyx"]
+            },
+            "expected": ["xyxy", "", "", "", "yz", "zy"]
+        },
+        {
+            "args": {
+                "arr": ["xyx", "yxy", "xyxy", "yxyx", "xyxyx", "yxyxy"]
+            },
+            "expected": ["", "", "", "", "xyxyx", "yxyxy"]
+        },
+        {
+            "args": {
+                "arr": ["abacabad", "bacabadab", "acabadabc", "cababad"]
+            },
+            "expected": ["abac", "bacabada", "bc", "bab"]
+        },
+        {
+            "args": {
+                "arr": ["zzzzz", "zzzz", "zzz", "zz", "z"]
+            },
+            "expected": ["zzzzz", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbccddeeff",
+                    "bbccddeeffaa",
+                    "ccddeeffaabb",
+                    "ddeeffaabbcc",
+                    "eeffaabbc",
+                    "ffaabbcdd",
+                    "aabbcdd",
+                    "bbccdd",
+                    "ccdd",
+                    "ddee",
+                    "eff",
+                    "ff",
+                    "ee",
+                    "dd",
+                    "cc",
+                    "bb",
+                    "aa"
+                ]
+            },
+            "expected": [
+                "abbccd",
+                "bccddeeffa",
+                "cddeeffaab",
+                "faabbcc",
+                "",
+                "faabbcd",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "arr": [
+                    "longstring",
+                    "longstringa",
+                    "longstringb",
+                    "longstringc",
+                    "longstringd",
+                    "longstringe"
+                ]
+            },
+            "expected": ["", "a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aaaaab",
+                    "bbbbb",
+                    "cccc",
+                    "dddd",
+                    "eeeee",
+                    "aaaaabbbb",
+                    "bbbbbcccc",
+                    "ccccdddd",
+                    "ddddeeee"
+                ]
+            },
+            "expected": ["", "", "", "", "eeeee", "abb", "bc", "cd", "de"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbccddeeff",
+                    "bbaacceeffgg",
+                    "ccaabbeeffhh",
+                    "ddbbccffeeii",
+                    "eekkllmmnn",
+                    "ffggklllnnoo",
+                    "gggghhkkllmm",
+                    "hhhiiikkllmm",
+                    "iiijjkklmmnn",
+                    "jjjjkkklnnnoo"
+                ]
+            },
+            "expected": ["cd", "ac", "be", "cf", "ek", "gk", "gh", "hi", "ij", "jjj"]
+        },
+        {
+            "args": {
+                "arr": ["abcdef", "bcdefg", "cdefgh", "defghi", "efghij", "fghijk", "ghijkl"]
+            },
+            "expected": ["a", "bcdefg", "cdefgh", "defghi", "efghij", "fghijk", "l"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abacaba",
+                    "cabcabc",
+                    "babcbab",
+                    "abcabca",
+                    "babcabc",
+                    "cacacac",
+                    "abcabcabc",
+                    "bcabcbc",
+                    "abcbcab",
+                    "cacbcac"
+                ]
+            },
+            "expected": ["aba", "", "cba", "", "babca", "acac", "bcabcab", "cabcb", "bcbca", "acb"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "mississippi",
+                    "mississippis",
+                    "mississippii",
+                    "mississippiii",
+                    "mississippiiii"
+                ]
+            },
+            "expected": ["", "pis", "", "", "iiii"]
+        },
+        {
+            "args": {
+                "arr": ["xyz", "xyzz", "xyzzy", "xyzzz", "zyxzyx"]
+            },
+            "expected": ["", "", "zzy", "zzz", "xz"]
+        },
+        {
+            "args": {
+                "arr": ["aaaabbbb", "bbbbaaaa", "aabbaabb", "baabbaab", "bbaabbab"]
+            },
+            "expected": ["aaab", "baaa", "abbaabb", "baabbaa", "bab"]
+        },
+        {
+            "args": {
+                "arr": ["abacaba", "bacabab", "acababa"]
+            },
+            "expected": ["abac", "bacabab", "baba"]
+        },
+        {
+            "args": {
+                "arr": ["pqr", "pqs", "pqt", "pqu", "pqv", "pqw", "pqx", "pqy", "pqz"]
+            },
+            "expected": ["r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        },
+        {
+            "args": {
+                "arr": ["abcdefgh", "efghijkl", "ghijklmn", "hijklmno", "ijklmnop"]
+            },
+            "expected": ["a", "fghi", "ghijklm", "hijklmno", "p"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "banana",
+                    "nanana",
+                    "anana",
+                    "bananaaa",
+                    "anananan",
+                    "ananan",
+                    "anan",
+                    "ana",
+                    "a",
+                    "n",
+                    "an",
+                    "na"
+                ]
+            },
+            "expected": ["", "", "", "aa", "ananana", "", "", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefg",
+                    "bcd",
+                    "cde",
+                    "def",
+                    "efg",
+                    "fgh",
+                    "ghi",
+                    "hij",
+                    "ijk",
+                    "jkl",
+                    "klm",
+                    "lmn",
+                    "mno",
+                    "nop",
+                    "opq",
+                    "pqr",
+                    "qrs",
+                    "rst",
+                    "stu",
+                    "tuv",
+                    "uvw",
+                    "vwx",
+                    "wxy",
+                    "xyz"
+                ]
+            },
+            "expected": [
+                "a",
+                "",
+                "",
+                "",
+                "",
+                "fgh",
+                "ghi",
+                "hij",
+                "ijk",
+                "jkl",
+                "klm",
+                "lmn",
+                "mno",
+                "nop",
+                "opq",
+                "pqr",
+                "qrs",
+                "rst",
+                "stu",
+                "tuv",
+                "uvw",
+                "vwx",
+                "wxy",
+                "z"
+            ]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghij",
+                    "jabcdefghi",
+                    "ijabcdefgh",
+                    "hijabcdefg",
+                    "ghijabcdef",
+                    "fghijabcde",
+                    "efghijabcd",
+                    "defghijabc",
+                    "cdefghijab",
+                    "bcdefghija"
+                ]
+            },
+            "expected": [
+                "abcdefghij",
+                "jabcdefghi",
+                "ijabcdefgh",
+                "hijabcdefg",
+                "ghijabcdef",
+                "fghijabcde",
+                "efghijabcd",
+                "defghijabc",
+                "cdefghijab",
+                "bcdefghija"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["abcdefg", "bcdefgh", "cdefghi", "defghij", "efghijk", "fghijkl", "ghijklm"]
+            },
+            "expected": ["a", "bcdefgh", "cdefghi", "defghij", "efghijk", "fghijkl", "m"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "mamma",
+                    "pappa",
+                    "bappa",
+                    "kappa",
+                    "dappa",
+                    "lappa",
+                    "sappa",
+                    "tappa",
+                    "gappa",
+                    "yappa",
+                    "xappa"
+                ]
+            },
+            "expected": ["m", "pap", "b", "k", "d", "l", "s", "t", "g", "y", "x"]
+        },
+        {
+            "args": {
+                "arr": ["algorithm", "logarithm", "rhythm", "algorithmic", "algorhythm"]
+            },
+            "expected": ["", "ar", "", "c", "orh"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "pqrstuvw",
+                    "qrstuvwx",
+                    "rstuvwxy",
+                    "stuvwxyz",
+                    "tuvwxyzx",
+                    "uvwxyzxy",
+                    "vwxyzxyz"
+                ]
+            },
+            "expected": ["p", "qrstuvwx", "rstuvwxy", "stuvwxyz", "tuvwxyzx", "uvwxyzxy", "zxyz"]
+        },
+        {
+            "args": {
+                "arr": ["xyxzyxzyx", "yxyxzyxzx", "xzyxzyxzy", "zyxzyxzyx", "yxzxzyxzy"]
+            },
+            "expected": ["xyxzyxzy", "yxy", "xzyxzyxz", "zyxzyxzyx", "zxz"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghij",
+                    "bcdefghija",
+                    "cdefghijab",
+                    "defghijabc",
+                    "efghijabcd",
+                    "fghijabcde",
+                    "ghijabcdef",
+                    "hijabcdefg",
+                    "ijabcdefgh",
+                    "jabcdefghi"
+                ]
+            },
+            "expected": [
+                "abcdefghij",
+                "bcdefghija",
+                "cdefghijab",
+                "defghijabc",
+                "efghijabcd",
+                "fghijabcde",
+                "ghijabcdef",
+                "hijabcdefg",
+                "ijabcdefgh",
+                "jabcdefghi"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["mississippi", "missouri", "miss", "issi", "siss"]
+            },
+            "expected": ["p", "o", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["hello", "world", "hold", "hellohold", "holdworld"]
+            },
+            "expected": ["", "", "", "oh", "dw"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "elephant",
+                    "elephantology",
+                    "elephantine",
+                    "elephantmania",
+                    "elephantdom",
+                    "elephants"
+                ]
+            },
+            "expected": ["", "g", "in", "ia", "d", "s"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdabcd",
+                    "cdabcdab",
+                    "bcabcdab",
+                    "ababcdcd",
+                    "abcdabcd",
+                    "cdabcdabcd",
+                    "abcdabcda",
+                    "bcdabcdabc",
+                    "abcdabcdab",
+                    "abcdabcdabc"
+                ]
+            },
+            "expected": ["", "", "ca", "ba", "", "dabcdabcd", "", "", "", "abcdabcdabc"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "hellohello",
+                    "elloworld",
+                    "loworldhe",
+                    "oworldhel",
+                    "worldhell",
+                    "orldhello",
+                    "rldhelloe",
+                    "ldhelloel",
+                    "dhelloell"
+                ]
+            },
+            "expected": [
+                "oh",
+                "llow",
+                "loworldh",
+                "oworldhel",
+                "worldhell",
+                "orldhello",
+                "rldhelloe",
+                "ldhelloel",
+                "oell"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["nancy", "randy", "bandy", "pancy", "pandy", "landy"]
+            },
+            "expected": ["na", "r", "b", "panc", "pand", "l"]
+        },
+        {
+            "args": {
+                "arr": ["abcdabc", "bcdbcda", "cdabcdab"]
+            },
+            "expected": ["bcdabc", "db", "dabcd"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcabcabc",
+                    "bcabcabca",
+                    "cabcabcab",
+                    "abcabcaaa",
+                    "abcaaacab",
+                    "caaacabca",
+                    "aaacabcab"
+                ]
+            },
+            "expected": [
+                "abcabcabc",
+                "bcabcabca",
+                "cabcabcab",
+                "cabcaa",
+                "bcaaac",
+                "caaacabc",
+                "acabcab"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["abcdefg", "bcdefga", "cdefgab", "defgabc", "efgabcd", "fgabcde", "gabcdef"]
+            },
+            "expected": [
+                "abcdefg",
+                "bcdefga",
+                "cdefgab",
+                "defgabc",
+                "efgabcd",
+                "fgabcde",
+                "gabcdef"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["abcdabcd", "bcdbcdbd", "cdabcdab", "dabcdabc", "abcdabca"]
+            },
+            "expected": ["bcdabcd", "bd", "cdabcda", "dabcdabc", "ca"]
+        },
+        {
+            "args": {
+                "arr": ["xxyyyzzz", "yyzzzxxy", "zzxxyyyz", "xzzyyxxy", "yzzxxyyy", "zxyyyzzx"]
+            },
+            "expected": ["yyyzzz", "zzzx", "zxxyyyz", "xz", "yzzxx", "zxy"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "algorithm",
+                    "logarithm",
+                    "rhythm",
+                    "algorithmic",
+                    "logarithmic",
+                    "rhythmical"
+                ]
+            },
+            "expected": ["", "", "", "orithmi", "arithmi", "ca"]
+        },
+        {
+            "args": {
+                "arr": ["abcdefg", "bcdefgh", "cdefghi", "defghij", "efghijk"]
+            },
+            "expected": ["a", "bcdefgh", "cdefghi", "defghij", "k"]
+        },
+        {
+            "args": {
+                "arr": ["abacabad", "bacabad", "acabad", "cabad", "abad", "bad", "ad", "d"]
+            },
+            "expected": ["abac", "", "", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["zxy", "zyx", "xyz", "yzx", "xzy", "yxz", "zyxz", "zxzy", "yxzx", "xyzy"]
+            },
+            "expected": ["zxy", "", "", "yzx", "", "", "zyxz", "zxz", "xzx", "yzy"]
+        },
+        {
+            "args": {
+                "arr": ["aaaabc", "aabbb", "acabc", "bbccc", "aabbcc"]
+            },
+            "expected": ["aaa", "bbb", "ac", "ccc", "abbc"]
+        },
+        {
+            "args": {
+                "arr": ["zzzzzz", "zzzzzy", "zzzyzz", "zzyzzz"]
+            },
+            "expected": ["zzzzzz", "zzzzy", "zzzyz", "yzzz"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "mississippi",
+                    "mississippis",
+                    "mississippiss",
+                    "mississippisss",
+                    "mississippi",
+                    "mississippis",
+                    "mississippiss",
+                    "mississippisss",
+                    "mississippi"
+                ]
+            },
+            "expected": ["", "", "", "", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["xyzzxyzz", "zzyxzyzx", "yzyzyzyz"]
+            },
+            "expected": ["xy", "xz", "yzy"]
+        },
+        {
+            "args": {
+                "arr": ["zxy", "zyx", "yzx", "xyz", "yxz", "xzy", "zyx"]
+            },
+            "expected": ["zxy", "", "yzx", "xyz", "yxz", "xzy", ""]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbccddeeff",
+                    "bbccddeeffgg",
+                    "ccddeeffgghh",
+                    "ddeeffgghhii",
+                    "eeffgghhiijj"
+                ]
+            },
+            "expected": ["a", "bccddeeffg", "cddeeffggh", "deeffgghhi", "j"]
+        },
+        {
+            "args": {
+                "arr": ["aabbccdd", "bbaacccd", "ccddaabb", "ddccbbaa", "aabbddcc"]
+            },
+            "expected": ["bc", "ac", "da", "cb", "bd"]
+        },
+        {
+            "args": {
+                "arr": ["xyxyxyxy", "yxyxyxyx", "xyxyxyyx", "xyxxyxyx", "xxyxyxyx"]
+            },
+            "expected": ["xyxyxyxy", "yxyxyxyx", "yy", "yxx", "xxyxyxy"]
+        },
+        {
+            "args": {
+                "arr": ["aaaaabbbbb", "bbbbbccccc", "cccccddddd", "dddddeeeee", "eeeeefffff"]
+            },
+            "expected": ["a", "bc", "cd", "de", "f"]
+        },
+        {
+            "args": {
+                "arr": ["abcdabcd", "bcdbcdbcd", "cdcdcdcd", "dcdcdcdc", "cdcdcd"]
+            },
+            "expected": ["a", "db", "cdcdcdcd", "dcdcdcdc", ""]
+        },
+        {
+            "args": {
+                "arr": ["zzzzzzz", "zzzzzzzz", "zzzzzzzzz", "zzzzzzzzzz"]
+            },
+            "expected": ["", "", "", "zzzzzzzzzz"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "mnopqrst",
+                    "nopqrstu",
+                    "opqrstuv",
+                    "pqrstuvw",
+                    "qrstuvwx",
+                    "rstuvwxy",
+                    "stuvwxyz",
+                    "tuvwxyzx"
+                ]
+            },
+            "expected": [
+                "m",
+                "nopqrstu",
+                "opqrstuv",
+                "pqrstuvw",
+                "qrstuvwx",
+                "rstuvwxy",
+                "stuvwxyz",
+                "zx"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["abababab", "baba", "ab", "ba", "aba", "bab"]
+            },
+            "expected": ["abab", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["aabbcc", "bbaacc", "aabbbc", "aabbccdd", "aabccdde", "aabbccde"]
+            },
+            "expected": ["", "ac", "bbb", "bbccdd", "abc", "cde"]
+        },
+        {
+            "args": {
+                "arr": ["abcdef", "defgh", "fghij", "ghijkl", "hijklm", "ijklmn"]
+            },
+            "expected": ["a", "efg", "fghi", "ghijk", "hijklm", "n"]
+        },
+        {
+            "args": {
+                "arr": ["abcabc", "bcabc", "cabc", "abcd", "bcde", "cdef"]
+            },
+            "expected": ["abca", "", "", "abcd", "bcde", "f"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzzzy",
+                    "zzzzzzzzzx",
+                    "zzzzzzzzww",
+                    "zzzzzzzvvv",
+                    "zzzzzzuuuu",
+                    "zzzzzttttt",
+                    "zzzzsssss",
+                    "zzzrrrrr",
+                    "zzqqqqq",
+                    "zppppp",
+                    "oooooo"
+                ]
+            },
+            "expected": ["zzzzzzzzzz", "y", "x", "w", "v", "u", "t", "s", "r", "q", "p", "o"]
+        },
+        {
+            "args": {
+                "arr": ["abcde", "bcdef", "cdefg", "defgh", "efghi"]
+            },
+            "expected": ["a", "bcdef", "cdefg", "defgh", "i"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aaa",
+                    "aab",
+                    "aba",
+                    "baa",
+                    "aabbaa",
+                    "baabaa",
+                    "aabaab",
+                    "baabaa",
+                    "abaaab",
+                    "aababa"
+                ]
+            },
+            "expected": ["", "", "", "", "bb", "", "abaab", "", "aaab", "bab"]
+        },
+        {
+            "args": {
+                "arr": ["mississippi", "missouri", "missed", "miss", "mississippi"]
+            },
+            "expected": ["", "o", "d", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["aaaabbbb", "aabbbbaa", "abbaabba", "bbaaaabb"]
+            },
+            "expected": ["aaabbb", "bbba", "abba", "baaa"]
+        },
+        {
+            "args": {
+                "arr": ["aaaaab", "bbbba", "abbbb", "baaaa", "abba", "baba"]
+            },
+            "expected": ["aab", "bbba", "abbb", "baa", "abba", "aba"]
+        },
+        {
+            "args": {
+                "arr": ["aabbcc", "bbaacc", "ccaabb", "aabbbc", "bbccaa"]
+            },
+            "expected": ["abbc", "ac", "caab", "bbb", "bcca"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcde",
+                    "bcdef",
+                    "cdefg",
+                    "defgh",
+                    "efghi",
+                    "fghij",
+                    "ghijk",
+                    "hijkl",
+                    "ijklm",
+                    "jklmn"
+                ]
+            },
+            "expected": [
+                "a",
+                "bcdef",
+                "cdefg",
+                "defgh",
+                "efghi",
+                "fghij",
+                "ghijk",
+                "hijkl",
+                "ijklm",
+                "n"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["elephant", "elphant", "lphant", "phant", "hant", "ant", "nt", "t"]
+            },
+            "expected": ["ep", "elp", "", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["abcdabcd", "bcdabcda", "cdabcdab", "dabcabcd"]
+            },
+            "expected": ["abcdabc", "bcdabcda", "dabcdab", "ca"]
+        },
+        {
+            "args": {
+                "arr": ["aaaaaaa", "aaaaaab", "aaaaabb", "aaaabb", "aaabb", "aabb", "abb", "bb"]
+            },
+            "expected": ["aaaaaaa", "aaaaaab", "aaaaabb", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["apple", "application", "applet", "app"]
+            },
+            "expected": ["", "c", "et", ""]
+        },
+        {
+            "args": {
+                "arr": ["xzy", "zyx", "xyzzy", "zyxzyx"]
+            },
+            "expected": ["", "", "xy", "yxz"]
+        },
+        {
+            "args": {
+                "arr": ["abcdefg", "bcdefgh", "cdefghi", "defghij", "efghijk", "fghijkl"]
+            },
+            "expected": ["a", "bcdefgh", "cdefghi", "defghij", "efghijk", "l"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aaaaabbbbb",
+                    "bbbbbccccc",
+                    "cccccaaaaa",
+                    "dddddeeeee",
+                    "eeeeeaaaaa",
+                    "fffffbbbbb",
+                    "gggggccccc",
+                    "hhhhhdddd",
+                    "iiiiieeeee",
+                    "jjjjjfffff",
+                    "kkkkkggggg",
+                    "lllllhhhhh",
+                    "mmmmmiiiii",
+                    "nnnnnjjjjj",
+                    "oooookkkkk",
+                    "ppppplllll"
+                ]
+            },
+            "expected": [
+                "ab",
+                "bc",
+                "ca",
+                "de",
+                "ea",
+                "fb",
+                "gc",
+                "hd",
+                "ie",
+                "jf",
+                "kg",
+                "lh",
+                "m",
+                "n",
+                "o",
+                "p"
+            ]
+        },
+        {
+            "args": {
+                "arr": ["qwertyuiop", "asdfghjkl", "zxcvbnm", "qwerty", "asdfg", "zxcvb"]
+            },
+            "expected": ["i", "h", "m", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghij",
+                    "bcdefghij",
+                    "cdefghij",
+                    "defghij",
+                    "efghij",
+                    "fghij",
+                    "ghij",
+                    "hij",
+                    "ij",
+                    "j"
+                ]
+            },
+            "expected": ["a", "", "", "", "", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyzab",
+                    "cdefgh"
+                ]
+            },
+            "expected": ["bcde", "jk", "pq", "vw", "zabc", "fghi", "lm", "rs", "xy", "defg"]
+        },
+        {
+            "args": {
+                "arr": ["unique", "uneque", "uniquely", "uniqely", "unieqly"]
+            },
+            "expected": ["", "ne", "uel", "qe", "ie"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbcc",
+                    "ababab",
+                    "abcabc",
+                    "aabb",
+                    "abbb",
+                    "bbcc",
+                    "acca",
+                    "bbac",
+                    "aabbccdd",
+                    "bbccddaa"
+                ]
+            },
+            "expected": ["", "aba", "abc", "", "bbb", "", "acc", "bac", "abbccd", "da"]
+        },
+        {
+            "args": {
+                "arr": ["aaaaaabbbbb", "bbbbbccccc", "cccccaaaaa", "aacccbbbbb", "bbcccaaaaa"]
+            },
+            "expected": ["ab", "bbbc", "cccca", "ac", "bccca"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "algorithm",
+                    "algorith",
+                    "algorit",
+                    "algori",
+                    "algor",
+                    "algo",
+                    "algr",
+                    "alg",
+                    "al",
+                    "a",
+                    "bmw",
+                    "bmv",
+                    "bvw",
+                    "b",
+                    "m",
+                    "w"
+                ]
+            },
+            "expected": ["hm", "", "", "", "", "", "gr", "", "", "", "mw", "mv", "bv", "", "", ""]
+        },
+        {
+            "args": {
+                "arr": ["abcabc", "bcabcabc", "cabcabcab", "abcabcabc"]
+            },
+            "expected": ["", "", "cabcabca", "abcabcabc"]
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbccddeeff",
+                    "bbccddeeffgg",
+                    "ccddeeffgghh",
+                    "ddeeffgghhii",
+                    "eeffgghhiijj",
+                    "ffgghhiijjkk"
+                ]
+            },
+            "expected": ["a", "bccddeeffg", "cddeeffggh", "deeffgghhi", "effgghhiij", "k"]
+        },
+        {
+            "args": {
+                "arr": ["abcdabcd", "bcdbcd", "cdabcd", "dabcabcd", "abcddabc"]
+            },
+            "expected": ["bcda", "db", "", "ca", "dd"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().shortestSubstrings",
+        "typescript": "Solution().shortestSubstrings"
+    }
+}

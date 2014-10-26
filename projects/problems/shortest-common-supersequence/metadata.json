@@ -1,0 +1,705 @@
+{
+    "id": "shortest-common-supersequence",
+    "questionId": 1092,
+    "difficulty": "Hard",
+    "tags": ["String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "str1": "xyz",
+                "str2": "xyx"
+            },
+            "expected": "xyxz"
+        },
+        {
+            "args": {
+                "str1": "short",
+                "str2": "sorts"
+            },
+            "expected": "shorts"
+        },
+        {
+            "args": {
+                "str1": "algorithm",
+                "str2": "altruistic"
+            },
+            "expected": "altgoruistichm"
+        },
+        {
+            "args": {
+                "str1": "ab",
+                "str2": "ba"
+            },
+            "expected": "bab"
+        },
+        {
+            "args": {
+                "str1": "abc",
+                "str2": "def"
+            },
+            "expected": "defabc"
+        },
+        {
+            "args": {
+                "str1": "aaaaaaaa",
+                "str2": "aaaaaaaa"
+            },
+            "expected": "aaaaaaaa"
+        },
+        {
+            "args": {
+                "str1": "abc",
+                "str2": "cba"
+            },
+            "expected": "cbabc"
+        },
+        {
+            "args": {
+                "str1": "abc",
+                "str2": "abc"
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "str1": "sequence",
+                "str2": "subsequence"
+            },
+            "expected": "subsequence"
+        },
+        {
+            "args": {
+                "str1": "dynamic",
+                "str2": "programming"
+            },
+            "expected": "progrdynammingc"
+        },
+        {
+            "args": {
+                "str1": "abac",
+                "str2": "cab"
+            },
+            "expected": "cabac"
+        },
+        {
+            "args": {
+                "str1": "xyz",
+                "str2": "zyx"
+            },
+            "expected": "zyxyz"
+        },
+        {
+            "args": {
+                "str1": "abcde",
+                "str2": "ace"
+            },
+            "expected": "abcde"
+        },
+        {
+            "args": {
+                "str1": "a",
+                "str2": "b"
+            },
+            "expected": "ba"
+        },
+        {
+            "args": {
+                "str1": "abcd",
+                "str2": "aebd"
+            },
+            "expected": "aebcd"
+        },
+        {
+            "args": {
+                "str1": "datastructure",
+                "str2": "algorithm"
+            },
+            "expected": "dalgotastriucthmure"
+        },
+        {
+            "args": {
+                "str1": "xyzuvw",
+                "str2": "uvwzyx"
+            },
+            "expected": "xyzuvwzyx"
+        },
+        {
+            "args": {
+                "str1": "kitten",
+                "str2": "sitting"
+            },
+            "expected": "skittieng"
+        },
+        {
+            "args": {
+                "str1": "intersection",
+                "str2": "introduction"
+            },
+            "expected": "interodusection"
+        },
+        {
+            "args": {
+                "str1": "sequences",
+                "str2": "supersequence"
+            },
+            "expected": "supersequences"
+        },
+        {
+            "args": {
+                "str1": "abracadabra",
+                "str2": "cadabraabra"
+            },
+            "expected": "cadabracadabra"
+        },
+        {
+            "args": {
+                "str1": "mississippi",
+                "str2": "missouri"
+            },
+            "expected": "missourissippi"
+        },
+        {
+            "args": {
+                "str1": "interview",
+                "str2": "environment"
+            },
+            "expected": "eintervironmentw"
+        },
+        {
+            "args": {
+                "str1": "abcdabcdabcd",
+                "str2": "cdabcdabcdab"
+            },
+            "expected": "cdabcdabcdabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdefghij",
+                "str2": "jihgfedcba"
+            },
+            "expected": "jihgfedcbabcdefghij"
+        },
+        {
+            "args": {
+                "str1": "ababab",
+                "str2": "bababa"
+            },
+            "expected": "bababab"
+        },
+        {
+            "args": {
+                "str1": "abcdabcdabcd",
+                "str2": "bcdabcda"
+            },
+            "expected": "abcdabcdabcd"
+        },
+        {
+            "args": {
+                "str1": "optimization",
+                "str2": "generalization"
+            },
+            "expected": "generaloptimization"
+        },
+        {
+            "args": {
+                "str1": "interview",
+                "str2": "intermission"
+            },
+            "expected": "intermvissionew"
+        },
+        {
+            "args": {
+                "str1": "partiallyoverlapping",
+                "str2": "overlapping"
+            },
+            "expected": "partiallyoverlapping"
+        },
+        {
+            "args": {
+                "str1": "abcdabcd",
+                "str2": "dcbaabcd"
+            },
+            "expected": "dcabcdaabcd"
+        },
+        {
+            "args": {
+                "str1": "uniquecharacters",
+                "str2": "charactersunique"
+            },
+            "expected": "uniquecharactersunique"
+        },
+        {
+            "args": {
+                "str1": "abcxyz",
+                "str2": "xyzabc"
+            },
+            "expected": "xyzabcxyz"
+        },
+        {
+            "args": {
+                "str1": "longest",
+                "str2": "longestcommonsubsequence"
+            },
+            "expected": "longestcommonsubsequence"
+        },
+        {
+            "args": {
+                "str1": "abcdefgxyz",
+                "str2": "zyxabcdefg"
+            },
+            "expected": "zyxabcdefgxyz"
+        },
+        {
+            "args": {
+                "str1": "longestcommonsubsequence",
+                "str2": "shortestuncommonsupersequence"
+            },
+            "expected": "shlortngestuncommonsuperbsequence"
+        },
+        {
+            "args": {
+                "str1": "abracadabra",
+                "str2": "bracadabrac"
+            },
+            "expected": "abracadabrac"
+        },
+        {
+            "args": {
+                "str1": "abcde",
+                "str2": "fghij"
+            },
+            "expected": "fghijabcde"
+        },
+        {
+            "args": {
+                "str1": "mississippi",
+                "str2": "pississippi"
+            },
+            "expected": "pmississippi"
+        },
+        {
+            "args": {
+                "str1": "abcdabcdabcd",
+                "str2": "dcba"
+            },
+            "expected": "dabcdabcdabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdefghiklmnopqrstuvwxyz",
+                "str2": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcbabcdefghiklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "str1": "complexity",
+                "str2": "simplicity"
+            },
+            "expected": "sicomplexicity"
+        },
+        {
+            "args": {
+                "str1": "longest",
+                "str2": "shortest"
+            },
+            "expected": "shlortngest"
+        },
+        {
+            "args": {
+                "str1": "programming",
+                "str2": "grammingpro"
+            },
+            "expected": "programmingpro"
+        },
+        {
+            "args": {
+                "str1": "abcdefghijk",
+                "str2": "mnopqrstuvwxyz"
+            },
+            "expected": "mnopqrstuvwxyzabcdefghijk"
+        },
+        {
+            "args": {
+                "str1": "supercalifragilisticexpialidocious",
+                "str2": "california"
+            },
+            "expected": "supercalifornagilisticexpialidocious"
+        },
+        {
+            "args": {
+                "str1": "aabbccddeeff",
+                "str2": "ffeeddccbbaa"
+            },
+            "expected": "ffeeddccbbaabbccddeeff"
+        },
+        {
+            "args": {
+                "str1": "abcdefg",
+                "str2": "xyzabc"
+            },
+            "expected": "xyzabcdefg"
+        },
+        {
+            "args": {
+                "str1": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "str2": "congratulations"
+            },
+            "expected": "cpneumongratoulatramicroscopicsilicovolcanoconiosis"
+        },
+        {
+            "args": {
+                "str1": "supersequence",
+                "str2": "subsequence"
+            },
+            "expected": "subpersequence"
+        },
+        {
+            "args": {
+                "str1": "abababab",
+                "str2": "babababa"
+            },
+            "expected": "babababab"
+        },
+        {
+            "args": {
+                "str1": "abracadabra",
+                "str2": "bracadabra"
+            },
+            "expected": "abracadabra"
+        },
+        {
+            "args": {
+                "str1": "abcdexyz",
+                "str2": "xyzab"
+            },
+            "expected": "abcdexyzab"
+        },
+        {
+            "args": {
+                "str1": "abcdefgh",
+                "str2": "efghijkl"
+            },
+            "expected": "abcdefghijkl"
+        },
+        {
+            "args": {
+                "str1": "shortest",
+                "str2": "common"
+            },
+            "expected": "cshommonrtest"
+        },
+        {
+            "args": {
+                "str1": "abcdxyz",
+                "str2": "xyzabcd"
+            },
+            "expected": "xyzabcdxyz"
+        },
+        {
+            "args": {
+                "str1": "abracadabra",
+                "str2": "avadakedavra"
+            },
+            "expected": "avbradcakedavbra"
+        },
+        {
+            "args": {
+                "str1": "abcdefgh",
+                "str2": "efghabcd"
+            },
+            "expected": "efghabcdefgh"
+        },
+        {
+            "args": {
+                "str1": "super",
+                "str2": "supercalifragilisticexpialidocious"
+            },
+            "expected": "supercalifragilisticexpialidocious"
+        },
+        {
+            "args": {
+                "str1": "overlapping",
+                "str2": "lappingover"
+            },
+            "expected": "overlappingover"
+        },
+        {
+            "args": {
+                "str1": "abracadabra",
+                "str2": "cabracadabrac"
+            },
+            "expected": "cabracadabrac"
+        },
+        {
+            "args": {
+                "str1": "programming",
+                "str2": "development"
+            },
+            "expected": "developrogramemintg"
+        },
+        {
+            "args": {
+                "str1": "abcd",
+                "str2": "abcdeabcde"
+            },
+            "expected": "abcdeabcde"
+        },
+        {
+            "args": {
+                "str1": "abcdexyz",
+                "str2": "yzabcdex"
+            },
+            "expected": "yzabcdexyz"
+        },
+        {
+            "args": {
+                "str1": "programming",
+                "str2": "gramming"
+            },
+            "expected": "programming"
+        },
+        {
+            "args": {
+                "str1": "aabbccdd",
+                "str2": "dddccccbbbaa"
+            },
+            "expected": "dddccccbbbaabbccdd"
+        },
+        {
+            "args": {
+                "str1": "longestcommonsubsequence",
+                "str2": "shortestcommonsupersequence"
+            },
+            "expected": "shlortngestcommonsuperbsequence"
+        },
+        {
+            "args": {
+                "str1": "abcdefghijklmnopqrstuvwxyz",
+                "str2": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcbabcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "str1": "longest",
+                "str2": "longer"
+            },
+            "expected": "longerst"
+        },
+        {
+            "args": {
+                "str1": "abcdefghijk",
+                "str2": "abcdefghij"
+            },
+            "expected": "abcdefghijk"
+        },
+        {
+            "args": {
+                "str1": "abcd",
+                "str2": "efgh"
+            },
+            "expected": "efghabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdabcdabcd",
+                "str2": "abcd"
+            },
+            "expected": "abcdabcdabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdabcdabcd",
+                "str2": "dcbaabcdabcd"
+            },
+            "expected": "dcabcdaabcdabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdexyz",
+                "str2": "yzabcd"
+            },
+            "expected": "yzabcdexyz"
+        },
+        {
+            "args": {
+                "str1": "repeatedcharactersin",
+                "str2": "charactersinrepeated"
+            },
+            "expected": "repeatedcharactersinrepeated"
+        },
+        {
+            "args": {
+                "str1": "abcdefgh",
+                "str2": "hgfedcba"
+            },
+            "expected": "hgfedcbabcdefgh"
+        },
+        {
+            "args": {
+                "str1": "repeatedcharacters",
+                "str2": "charactersrepeated"
+            },
+            "expected": "repeatedcharactersrepeated"
+        },
+        {
+            "args": {
+                "str1": "thisisatest",
+                "str2": "atestisthis"
+            },
+            "expected": "atehistisathiest"
+        },
+        {
+            "args": {
+                "str1": "shortest",
+                "str2": "subsequence"
+            },
+            "expected": "subshortequencest"
+        },
+        {
+            "args": {
+                "str1": "aaaaabbbbb",
+                "str2": "bbbbbbaaaa"
+            },
+            "expected": "aaaaabbbbbbaaaa"
+        },
+        {
+            "args": {
+                "str1": "abcabcabc",
+                "str2": "cbacbacba"
+            },
+            "expected": "cbacbacabcabc"
+        },
+        {
+            "args": {
+                "str1": "interview",
+                "str2": "interstellar"
+            },
+            "expected": "interstviellarw"
+        },
+        {
+            "args": {
+                "str1": "abcdexyz",
+                "str2": "xyzabcd"
+            },
+            "expected": "xyzabcdexyz"
+        },
+        {
+            "args": {
+                "str1": "longest",
+                "str2": "longshort"
+            },
+            "expected": "longeshort"
+        },
+        {
+            "args": {
+                "str1": "aaaaabbbb",
+                "str2": "bbbaaaaa"
+            },
+            "expected": "bbbaaaaabbbb"
+        },
+        {
+            "args": {
+                "str1": "abcd",
+                "str2": "dcba"
+            },
+            "expected": "dcbabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdexyz",
+                "str2": "xyzabcdexyz"
+            },
+            "expected": "xyzabcdexyz"
+        },
+        {
+            "args": {
+                "str1": "aaaaaaaaaa",
+                "str2": "bbbbbbbbbb"
+            },
+            "expected": "bbbbbbbbbbaaaaaaaaaa"
+        },
+        {
+            "args": {
+                "str1": "abcd",
+                "str2": "efghijklmnopqrstuvwxyz"
+            },
+            "expected": "efghijklmnopqrstuvwxyzabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdefghijk",
+                "str2": "jihgfedcba"
+            },
+            "expected": "jihgfedcbabcdefghijk"
+        },
+        {
+            "args": {
+                "str1": "aabbcc",
+                "str2": "abcabc"
+            },
+            "expected": "abcabbcc"
+        },
+        {
+            "args": {
+                "str1": "abcabcabc",
+                "str2": "bcabcabc"
+            },
+            "expected": "abcabcabc"
+        },
+        {
+            "args": {
+                "str1": "intersection",
+                "str2": "interstellar"
+            },
+            "expected": "interstellarction"
+        },
+        {
+            "args": {
+                "str1": "abcdabcdabcd",
+                "str2": "abcdabcdabcdabcd"
+            },
+            "expected": "abcdabcdabcdabcd"
+        },
+        {
+            "args": {
+                "str1": "abcdeffedcba",
+                "str2": "defgfedcba"
+            },
+            "expected": "abcdefgfedcba"
+        },
+        {
+            "args": {
+                "str1": "supercalifragilisticexpialidocious",
+                "str2": "supercalifragilisticexpialidocious"
+            },
+            "expected": "supercalifragilisticexpialidocious"
+        },
+        {
+            "args": {
+                "str1": "dynamic",
+                "str2": "program"
+            },
+            "expected": "progrdynamic"
+        },
+        {
+            "args": {
+                "str1": "interview",
+                "str2": "terviewin"
+            },
+            "expected": "interviewin"
+        },
+        {
+            "args": {
+                "str1": "longerstring",
+                "str2": "short"
+            },
+            "expected": "shlongerstring"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().shortestCommonSupersequence",
+        "typescript": "Solution().shortestCommonSupersequence"
+    }
+}

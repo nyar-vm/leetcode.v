@@ -1,0 +1,732 @@
+{
+    "id": "earliest-possible-day-of-full-bloom",
+    "questionId": 2136,
+    "difficulty": "Hard",
+    "tags": ["Greedy", "Array", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "plantTime": [1],
+                "growTime": [1]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "plantTime": [2, 2, 2],
+                "growTime": [3, 3, 3]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "plantTime": [2, 2, 2],
+                "growTime": [3, 2, 1]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "plantTime": [10000, 10000],
+                "growTime": [10000, 10000]
+            },
+            "expected": 30000
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1],
+                "growTime": [5, 4, 3, 2, 1]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "plantTime": [3, 2, 1],
+                "growTime": [10, 20, 30]
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "plantTime": [1, 3, 5, 7],
+                "growTime": [7, 5, 3, 1]
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30],
+                "growTime": [1, 2, 3]
+            },
+            "expected": 61
+        },
+        {
+            "args": {
+                "plantTime": [5, 5, 5],
+                "growTime": [5, 5, 5]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "plantTime": [5, 4, 3, 2, 1],
+                "growTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "plantTime": [3, 2, 1],
+                "growTime": [2, 1, 3]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "plantTime": [2, 3, 4],
+                "growTime": [3, 2, 1]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "plantTime": [10000, 10000],
+                "growTime": [1, 1]
+            },
+            "expected": 20001
+        },
+        {
+            "args": {
+                "plantTime": [1, 4, 3],
+                "growTime": [2, 3, 1]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 300],
+                "growTime": [100, 200, 300]
+            },
+            "expected": 700
+        },
+        {
+            "args": {
+                "plantTime": [2, 2, 2, 2],
+                "growTime": [4, 3, 2, 1]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "plantTime": [1, 2, 3, 2],
+                "growTime": [2, 1, 2, 1]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1],
+                "growTime": [1, 1, 1, 1]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "plantTime": [10, 5, 7],
+                "growTime": [4, 6, 8]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "plantTime": [5, 2, 4],
+                "growTime": [3, 1, 2]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "plantTime": [3, 3, 3],
+                "growTime": [3, 3, 3]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "plantTime": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "growTime": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+            },
+            "expected": 105
+        },
+        {
+            "args": {
+                "plantTime": [5, 10, 15, 20],
+                "growTime": [20, 15, 10, 5]
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "plantTime": [5, 10, 15, 20],
+                "growTime": [20, 15, 10, 5]
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "plantTime": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "growTime": [19, 17, 15, 13, 11, 9, 7, 5, 3, 1]
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 300, 400],
+                "growTime": [1000, 500, 700, 200]
+            },
+            "expected": 1200
+        },
+        {
+            "args": {
+                "plantTime": [500, 500, 500, 500, 500],
+                "growTime": [500, 500, 500, 500, 500]
+            },
+            "expected": 3000
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [
+                    100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500
+                ]
+            },
+            "expected": 1501
+        },
+        {
+            "args": {
+                "plantTime": [1000, 2000, 3000, 4000, 5000],
+                "growTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 15001
+        },
+        {
+            "args": {
+                "plantTime": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30, 40, 50],
+                "growTime": [50, 40, 30, 20, 10]
+            },
+            "expected": 160
+        },
+        {
+            "args": {
+                "plantTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "plantTime": [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
+                "growTime": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6]
+            },
+            "expected": 556
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 300, 400, 500],
+                "growTime": [500, 400, 300, 200, 100]
+            },
+            "expected": 1600
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30, 40, 50],
+                "growTime": [5, 10, 15, 20, 25]
+            },
+            "expected": 155
+        },
+        {
+            "args": {
+                "plantTime": [5, 10, 4, 6, 8],
+                "growTime": [10, 2, 7, 4, 5]
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "plantTime": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                "growTime": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "plantTime": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+                "growTime": [16, 15, 14, 13, 12, 11, 10, 9, 8, 7]
+            },
+            "expected": 122
+        },
+        {
+            "args": {
+                "plantTime": [5, 4, 1, 3, 2],
+                "growTime": [8, 7, 6, 5, 4]
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "plantTime": [5, 3, 8, 6],
+                "growTime": [10, 7, 2, 4]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "plantTime": [1, 3, 5, 7, 9],
+                "growTime": [9, 7, 5, 3, 1]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "plantTime": [5, 4, 3, 2, 1],
+                "growTime": [10, 20, 30, 40, 50]
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "plantTime": [15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+                "growTime": [60, 55, 50, 45, 40, 35, 30, 25, 20, 15]
+            },
+            "expected": 390
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "growTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 551
+        },
+        {
+            "args": {
+                "plantTime": [7, 5, 9, 3, 6, 4, 8],
+                "growTime": [2, 8, 1, 5, 4, 7, 3]
+            },
+            "expected": 43
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 150, 300],
+                "growTime": [50, 100, 200, 150]
+            },
+            "expected": 800
+        },
+        {
+            "args": {
+                "plantTime": [5, 3, 8, 6],
+                "growTime": [10, 7, 2, 4]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "plantTime": [10, 5, 7, 3, 8],
+                "growTime": [15, 12, 6, 4, 9]
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "plantTime": [7, 6, 5, 4, 3, 2, 1],
+                "growTime": [1, 2, 3, 4, 5, 6, 7]
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "plantTime": [10, 5, 15, 20],
+                "growTime": [1, 1, 1, 1]
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "plantTime": [5, 10, 3, 1, 4],
+                "growTime": [10, 5, 7, 8, 2]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "plantTime": [5, 1, 8, 3, 2],
+                "growTime": [10, 6, 2, 4, 5]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "plantTime": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+            },
+            "expected": 61
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "growTime": [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+            },
+            "expected": 560
+        },
+        {
+            "args": {
+                "plantTime": [500, 400, 300, 200, 100],
+                "growTime": [5, 4, 3, 2, 1]
+            },
+            "expected": 1501
+        },
+        {
+            "args": {
+                "plantTime": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            },
+            "expected": 121
+        },
+        {
+            "args": {
+                "plantTime": [100, 50, 75, 25],
+                "growTime": [50, 100, 75, 25]
+            },
+            "expected": 275
+        },
+        {
+            "args": {
+                "plantTime": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100],
+                "growTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "expected": 5510
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1],
+                "growTime": [1000, 1000, 1000, 1000, 1000]
+            },
+            "expected": 1005
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+                "growTime": [5, 4, 3, 2, 1, 10, 9, 8, 7, 6]
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "plantTime": [
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+                ],
+                "growTime": [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 211
+        },
+        {
+            "args": {
+                "plantTime": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "growTime": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+            },
+            "expected": 110
+        },
+        {
+            "args": {
+                "plantTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "growTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 300, 400, 500],
+                "growTime": [1000, 2000, 3000, 4000, 5000]
+            },
+            "expected": 5500
+        },
+        {
+            "args": {
+                "plantTime": [1000, 2000, 3000, 4000, 5000],
+                "growTime": [5000, 4000, 3000, 2000, 1000]
+            },
+            "expected": 16000
+        },
+        {
+            "args": {
+                "plantTime": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "plantTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "plantTime": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "growTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "expected": 105
+        },
+        {
+            "args": {
+                "plantTime": [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5],
+                "growTime": [9, 7, 3, 8, 5, 3, 8, 2, 9, 4, 6]
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "plantTime": [4, 4, 4, 4, 4, 4, 4, 4],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "plantTime": [1, 3, 5, 7, 9],
+                "growTime": [9, 7, 5, 3, 1]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "plantTime": [10, 10, 10, 10, 10],
+                "growTime": [20, 20, 20, 20, 20]
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [10000, 9000, 8000, 7000, 6000, 5000, 4000, 3000, 2000, 1000]
+            },
+            "expected": 10001
+        },
+        {
+            "args": {
+                "plantTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "growTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "expected": 110
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1],
+                "growTime": [10000, 9999, 9998, 9997, 9996]
+            },
+            "expected": 10001
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "plantTime": [1, 10, 100, 1000, 10000],
+                "growTime": [10000, 1000, 100, 10, 1]
+            },
+            "expected": 11112
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 300, 400, 500],
+                "growTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 1501
+        },
+        {
+            "args": {
+                "plantTime": [7, 14, 21, 28, 35],
+                "growTime": [10, 20, 30, 40, 50]
+            },
+            "expected": 118
+        },
+        {
+            "args": {
+                "plantTime": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+                "growTime": [
+                    10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10
+                ]
+            },
+            "expected": 110
+        },
+        {
+            "args": {
+                "plantTime": [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5],
+                "growTime": [9, 7, 3, 8, 5, 3, 0, 9, 4, 6, 8]
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "plantTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                "growTime": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 121
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 150, 300],
+                "growTime": [500, 400, 300, 200]
+            },
+            "expected": 950
+        },
+        {
+            "args": {
+                "plantTime": [4, 4, 4, 4, 4],
+                "growTime": [9, 8, 7, 6, 5]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "plantTime": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                "growTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "plantTime": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+                "growTime": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+            },
+            "expected": 103
+        },
+        {
+            "args": {
+                "plantTime": [3, 5, 7, 9, 11, 13, 15],
+                "growTime": [2, 4, 6, 8, 10, 12, 14]
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "plantTime": [100, 200, 300, 400, 500],
+                "growTime": [1, 1, 1, 1, 1]
+            },
+            "expected": 1501
+        },
+        {
+            "args": {
+                "plantTime": [4, 3, 2, 1, 5, 6, 7, 8, 9, 10],
+                "growTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "plantTime": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                "growTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "plantTime": [50, 40, 30, 20, 10],
+                "growTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 151
+        },
+        {
+            "args": {
+                "plantTime": [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+                "growTime": [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 101
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "growTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 551
+        },
+        {
+            "args": {
+                "plantTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                "growTime": [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+            },
+            "expected": 560
+        },
+        {
+            "args": {
+                "plantTime": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                "growTime": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "plantTime": [7, 6, 5, 4, 3, 2, 1],
+                "growTime": [1, 2, 3, 4, 5, 6, 7]
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "plantTime": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                "growTime": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+            },
+            "expected": 46
+        }
+    ],
+    "invoke": {
+        "python": "Solution().earliestFullBloom",
+        "typescript": "Solution().earliestFullBloom"
+    }
+}

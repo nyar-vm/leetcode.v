@@ -1,0 +1,1655 @@
+{
+    "id": "search-suggestions-system",
+    "questionId": 1268,
+    "difficulty": "Medium",
+    "tags": ["Trie", "Array", "String", "Binary Search", "Sorting", "Heap (Priority Queue)"],
+    "tests": [
+        {
+            "args": {
+                "products": ["keyboard", "keypad", "keys", "kick"],
+                "searchWord": "key"
+            },
+            "expected": [
+                ["keyboard", "keypad", "keys"],
+                ["keyboard", "keypad", "keys"],
+                ["keyboard", "keypad", "keys"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["keyboard", "keypad", "mousepad"],
+                "searchWord": "key"
+            },
+            "expected": [["keyboard", "keypad"], ["keyboard", "keypad"], ["keyboard", "keypad"]]
+        },
+        {
+            "args": {
+                "products": ["apple", "banana", "grape", "orange"],
+                "searchWord": "or"
+            },
+            "expected": [["orange"], ["orange"]]
+        },
+        {
+            "args": {
+                "products": ["aaa", "aaab", "aaac", "aab"],
+                "searchWord": "aa"
+            },
+            "expected": [["aaa", "aaab", "aaac"], ["aaa", "aaab", "aaac"]]
+        },
+        {
+            "args": {
+                "products": ["charger", "cable", "case"],
+                "searchWord": "ca"
+            },
+            "expected": [["cable", "case", "charger"], ["cable", "case"]]
+        },
+        {
+            "args": {
+                "products": ["bag", "bags", "banner", "box", "car"],
+                "searchWord": "ba"
+            },
+            "expected": [["bag", "bags", "banner"], ["bag", "bags", "banner"]]
+        },
+        {
+            "args": {
+                "products": ["aaa", "aab", "aac", "aad", "aae"],
+                "searchWord": "aa"
+            },
+            "expected": [["aaa", "aab", "aac"], ["aaa", "aab", "aac"]]
+        },
+        {
+            "args": {
+                "products": ["aaa", "aab", "aac", "aad"],
+                "searchWord": "aa"
+            },
+            "expected": [["aaa", "aab", "aac"], ["aaa", "aab", "aac"]]
+        },
+        {
+            "args": {
+                "products": ["apple", "apples", "application"],
+                "searchWord": "app"
+            },
+            "expected": [
+                ["apple", "apples", "application"],
+                ["apple", "apples", "application"],
+                ["apple", "apples", "application"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["apple", "banana", "grape", "orange"],
+                "searchWord": "ba"
+            },
+            "expected": [["banana"], ["banana"]]
+        },
+        {
+            "args": {
+                "products": ["keyboard", "keypad", "keyboard", "keychain"],
+                "searchWord": "key"
+            },
+            "expected": [
+                ["keyboard", "keyboard", "keychain"],
+                ["keyboard", "keyboard", "keychain"],
+                ["keyboard", "keyboard", "keychain"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["havana"],
+                "searchWord": "havana"
+            },
+            "expected": [["havana"], ["havana"], ["havana"], ["havana"], ["havana"], ["havana"]]
+        },
+        {
+            "args": {
+                "products": ["keyboard", "keypad", "kiosk"],
+                "searchWord": "key"
+            },
+            "expected": [
+                ["keyboard", "keypad", "kiosk"],
+                ["keyboard", "keypad"],
+                ["keyboard", "keypad"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["apple", "banana", "grape", "orange", "peach"],
+                "searchWord": "app"
+            },
+            "expected": [["apple"], ["apple"], ["apple"]]
+        },
+        {
+            "args": {
+                "products": ["apple", "apricot", "banana", "bat", "berry"],
+                "searchWord": "ba"
+            },
+            "expected": [["banana", "bat", "berry"], ["banana", "bat"]]
+        },
+        {
+            "args": {
+                "products": ["keyboard", "keypad", "keyboardpad"],
+                "searchWord": "key"
+            },
+            "expected": [
+                ["keyboard", "keyboardpad", "keypad"],
+                ["keyboard", "keyboardpad", "keypad"],
+                ["keyboard", "keyboardpad", "keypad"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["mobile", "mouse", "moneypot", "monitor", "mousepad"],
+                "searchWord": "mouse"
+            },
+            "expected": [
+                ["mobile", "moneypot", "monitor"],
+                ["mobile", "moneypot", "monitor"],
+                ["mouse", "mousepad"],
+                ["mouse", "mousepad"],
+                ["mouse", "mousepad"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "aardvark",
+                    "aardwolf",
+                    "albatross",
+                    "alligator",
+                    "alpaca",
+                    "antelope",
+                    "anteater"
+                ],
+                "searchWord": "aa"
+            },
+            "expected": [["aardvark", "aardwolf", "albatross"], ["aardvark", "aardwolf"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "xylophone",
+                    "xylography",
+                    "xylem",
+                    "xenon",
+                    "xerox",
+                    "xerophyte",
+                    "xenodochial"
+                ],
+                "searchWord": "xero"
+            },
+            "expected": [
+                ["xenodochial", "xenon", "xerophyte"],
+                ["xenodochial", "xenon", "xerophyte"],
+                ["xerophyte", "xerox"],
+                ["xerophyte", "xerox"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["jacket", "jaguar", "jar", "jasmine", "jeep"],
+                "searchWord": "ja"
+            },
+            "expected": [["jacket", "jaguar", "jar"], ["jacket", "jaguar", "jar"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "ant",
+                    "anteater",
+                    "antelope",
+                    "antenna",
+                    "antique",
+                    "antfarm",
+                    "antler"
+                ],
+                "searchWord": "ant"
+            },
+            "expected": [
+                ["ant", "anteater", "antelope"],
+                ["ant", "anteater", "antelope"],
+                ["ant", "anteater", "antelope"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["television", "telescope", "temperature", "tennis", "tense"],
+                "searchWord": "te"
+            },
+            "expected": [
+                ["telescope", "television", "temperature"],
+                ["telescope", "television", "temperature"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "apple",
+                    "apricot",
+                    "banana",
+                    "bat",
+                    "berry",
+                    "blackberry",
+                    "blueberry"
+                ],
+                "searchWord": "b"
+            },
+            "expected": [["banana", "bat", "berry"]]
+        },
+        {
+            "args": {
+                "products": ["grape", "grapefruit", "grapevine", "graph", "grapejuice"],
+                "searchWord": "gr"
+            },
+            "expected": [
+                ["grape", "grapefruit", "grapejuice"],
+                ["grape", "grapefruit", "grapejuice"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["dog", "dolphin", "dome", "domestic", "domino"],
+                "searchWord": "dom"
+            },
+            "expected": [
+                ["dog", "dolphin", "dome"],
+                ["dog", "dolphin", "dome"],
+                ["dome", "domestic", "domino"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["magnifier", "magnificent", "magnet", "magnolia", "magnitude"],
+                "searchWord": "magn"
+            },
+            "expected": [
+                ["magnet", "magnificent", "magnifier"],
+                ["magnet", "magnificent", "magnifier"],
+                ["magnet", "magnificent", "magnifier"],
+                ["magnet", "magnificent", "magnifier"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["apple", "application", "appliance", "appropriate", "appetizer"],
+                "searchWord": "appl"
+            },
+            "expected": [
+                ["appetizer", "apple", "appliance"],
+                ["appetizer", "apple", "appliance"],
+                ["appetizer", "apple", "appliance"],
+                ["apple", "appliance", "application"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "grape",
+                    "grapefruit",
+                    "grapejuice",
+                    "graphite",
+                    "grapevine",
+                    "grapefruitjuice"
+                ],
+                "searchWord": "grape"
+            },
+            "expected": [
+                ["grape", "grapefruit", "grapefruitjuice"],
+                ["grape", "grapefruit", "grapefruitjuice"],
+                ["grape", "grapefruit", "grapefruitjuice"],
+                ["grape", "grapefruit", "grapefruitjuice"],
+                ["grape", "grapefruit", "grapefruitjuice"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "algorithm",
+                    "array",
+                    "binary",
+                    "bit",
+                    "bitset",
+                    "bucket",
+                    "class",
+                    "collection",
+                    "datatype",
+                    "enumerate",
+                    "file",
+                    "float",
+                    "function",
+                    "garbage",
+                    "graph",
+                    "hash",
+                    "id",
+                    "implementation",
+                    "integer",
+                    "java",
+                    "keyword",
+                    "list",
+                    "map",
+                    "namespace",
+                    "null",
+                    "object",
+                    "operator",
+                    "pair",
+                    "pointer",
+                    "queue",
+                    "range",
+                    "reference",
+                    "set",
+                    "stack",
+                    "string",
+                    "struct",
+                    "template",
+                    "typedef",
+                    "union",
+                    "variable",
+                    "while",
+                    "xor"
+                ],
+                "searchWord": "algo"
+            },
+            "expected": [["algorithm", "array"], ["algorithm"], ["algorithm"], ["algorithm"]]
+        },
+        {
+            "args": {
+                "products": ["hamburger", "hammock", "hammer", "hammerhead", "handheld"],
+                "searchWord": "ham"
+            },
+            "expected": [
+                ["hamburger", "hammer", "hammerhead"],
+                ["hamburger", "hammer", "hammerhead"],
+                ["hamburger", "hammer", "hammerhead"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["watermelon", "water", "wave", "wonder", "wonderland"],
+                "searchWord": "wat"
+            },
+            "expected": [
+                ["water", "watermelon", "wave"],
+                ["water", "watermelon", "wave"],
+                ["water", "watermelon"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["amazon", "amazing", "ambassador", "ambient", "amplifier"],
+                "searchWord": "ambi"
+            },
+            "expected": [
+                ["amazing", "amazon", "ambassador"],
+                ["amazing", "amazon", "ambassador"],
+                ["ambassador", "ambient"],
+                ["ambient"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["xylophone", "xylography", "xylophone", "xylophone", "xylophone"],
+                "searchWord": "xylo"
+            },
+            "expected": [
+                ["xylography", "xylophone", "xylophone"],
+                ["xylography", "xylophone", "xylophone"],
+                ["xylography", "xylophone", "xylophone"],
+                ["xylography", "xylophone", "xylophone"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["car", "card", "cardboard", "cargo", "cartoon"],
+                "searchWord": "car"
+            },
+            "expected": [
+                ["car", "card", "cardboard"],
+                ["car", "card", "cardboard"],
+                ["car", "card", "cardboard"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "abcd",
+                    "abce",
+                    "abcf",
+                    "abcg",
+                    "abch",
+                    "abci",
+                    "abcj",
+                    "abck",
+                    "abcl",
+                    "abcm"
+                ],
+                "searchWord": "abc"
+            },
+            "expected": [
+                ["abcd", "abce", "abcf"],
+                ["abcd", "abce", "abcf"],
+                ["abcd", "abce", "abcf"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["zebra", "zinc", "zoo", "zesty", "zoning", "zest", "zookeeper"],
+                "searchWord": "ze"
+            },
+            "expected": [["zebra", "zest", "zesty"], ["zebra", "zest", "zesty"]]
+        },
+        {
+            "args": {
+                "products": ["aardvark", "aardwolf", "aardvark", "aardvark", "aardvark"],
+                "searchWord": "aard"
+            },
+            "expected": [
+                ["aardvark", "aardvark", "aardvark"],
+                ["aardvark", "aardvark", "aardvark"],
+                ["aardvark", "aardvark", "aardvark"],
+                ["aardvark", "aardvark", "aardvark"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["umbrella", "umber", "umbilical", "umbrella", "umbrella"],
+                "searchWord": "umb"
+            },
+            "expected": [
+                ["umber", "umbilical", "umbrella"],
+                ["umber", "umbilical", "umbrella"],
+                ["umber", "umbilical", "umbrella"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "a",
+                    "ab",
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij"
+                ],
+                "searchWord": "abcdefghijk"
+            },
+            "expected": [
+                ["a", "ab", "abc"],
+                ["ab", "abc", "abcd"],
+                ["abc", "abcd", "abcde"],
+                ["abcd", "abcde", "abcdef"],
+                ["abcde", "abcdef", "abcdefg"],
+                ["abcdef", "abcdefg", "abcdefgh"],
+                ["abcdefg", "abcdefgh", "abcdefghi"],
+                ["abcdefgh", "abcdefghi", "abcdefghij"],
+                ["abcdefghi", "abcdefghij"],
+                ["abcdefghij"],
+                []
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "apple",
+                    "apricot",
+                    "banana",
+                    "bat",
+                    "berry",
+                    "blueberry",
+                    "blackberry"
+                ],
+                "searchWord": "ba"
+            },
+            "expected": [["banana", "bat", "berry"], ["banana", "bat"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "zebra",
+                    "zebrafish",
+                    "zebrafly",
+                    "zebratail",
+                    "zebralight",
+                    "zebrashoe",
+                    "zebragram",
+                    "zebratic",
+                    "zebrastriped"
+                ],
+                "searchWord": "zebra"
+            },
+            "expected": [
+                ["zebra", "zebrafish", "zebrafly"],
+                ["zebra", "zebrafish", "zebrafly"],
+                ["zebra", "zebrafish", "zebrafly"],
+                ["zebra", "zebrafish", "zebrafly"],
+                ["zebra", "zebrafish", "zebrafly"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["infinite", "infinity", "infinitesimal", "infinity", "infinitary"],
+                "searchWord": "inf"
+            },
+            "expected": [
+                ["infinitary", "infinite", "infinitesimal"],
+                ["infinitary", "infinite", "infinitesimal"],
+                ["infinitary", "infinite", "infinitesimal"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["orange", "oregano", "organ", "organize", "organism"],
+                "searchWord": "org"
+            },
+            "expected": [
+                ["orange", "oregano", "organ"],
+                ["orange", "oregano", "organ"],
+                ["organ", "organism", "organize"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "xenon",
+                    "xerox",
+                    "xenophobe",
+                    "xenial",
+                    "xenolith",
+                    "xenoliths",
+                    "xenonarc",
+                    "xenonarcosis",
+                    "xenolithologist"
+                ],
+                "searchWord": "xen"
+            },
+            "expected": [
+                ["xenial", "xenolith", "xenolithologist"],
+                ["xenial", "xenolith", "xenolithologist"],
+                ["xenial", "xenolith", "xenolithologist"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["a", "aa", "aaa", "aaaa", "aaaaa", "aab", "aac", "aad", "aaf", "aag"],
+                "searchWord": "aa"
+            },
+            "expected": [["a", "aa", "aaa"], ["aa", "aaa", "aaaa"]]
+        },
+        {
+            "args": {
+                "products": ["laptop", "laptopbag", "laser", "lateral", "latitude"],
+                "searchWord": "lap"
+            },
+            "expected": [
+                ["laptop", "laptopbag", "laser"],
+                ["laptop", "laptopbag", "laser"],
+                ["laptop", "laptopbag"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["cherry", "cranberry", "cantaloupe", "carrot", "corn", "cucumber"],
+                "searchWord": "car"
+            },
+            "expected": [["cantaloupe", "carrot", "cherry"], ["cantaloupe", "carrot"], ["carrot"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella",
+                    "umbrella"
+                ],
+                "searchWord": "umbrella"
+            },
+            "expected": [
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"],
+                ["umbrella", "umbrella", "umbrella"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "umbrella",
+                    "umbrella stand",
+                    "umbrella frame",
+                    "umbrella holder",
+                    "umbrella cover"
+                ],
+                "searchWord": "umb"
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "products": [
+                    "aardvark",
+                    "aardwolf",
+                    "albatross",
+                    "albino",
+                    "alligator",
+                    "alpaca",
+                    "almighty"
+                ],
+                "searchWord": "al"
+            },
+            "expected": [
+                ["aardvark", "aardwolf", "albatross"],
+                ["albatross", "albino", "alligator"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["zebra", "zealot", "zealous", "zebrafish", "zebra", "zebrahead"],
+                "searchWord": "ze"
+            },
+            "expected": [["zealot", "zealous", "zebra"], ["zealot", "zealous", "zebra"]]
+        },
+        {
+            "args": {
+                "products": ["navigate", "navigation", "navigator", "navy", "navel"],
+                "searchWord": "nav"
+            },
+            "expected": [
+                ["navel", "navigate", "navigation"],
+                ["navel", "navigate", "navigation"],
+                ["navel", "navigate", "navigation"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["electronics", "electric", "elephant", "elbow", "eleven"],
+                "searchWord": "ele"
+            },
+            "expected": [
+                ["elbow", "electric", "electronics"],
+                ["elbow", "electric", "electronics"],
+                ["electric", "electronics", "elephant"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "apple",
+                    "apricot",
+                    "banana",
+                    "bat",
+                    "berry",
+                    "blackberry",
+                    "blueberry",
+                    "bluebird",
+                    "bluetooth"
+                ],
+                "searchWord": "bl"
+            },
+            "expected": [["banana", "bat", "berry"], ["blackberry", "blueberry", "bluebird"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "abacaxi",
+                    "abalone",
+                    "abana",
+                    "abanga",
+                    "abaperture",
+                    "abara",
+                    "abaraxas",
+                    "abarth",
+                    "abart",
+                    "abat",
+                    "abate",
+                    "abati",
+                    "abatis",
+                    "abator",
+                    "abatt",
+                    "abature",
+                    "abavure",
+                    "abaya",
+                    "abaze",
+                    "abba",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe",
+                    "abbe"
+                ],
+                "searchWord": "ab"
+            },
+            "expected": [["abacaxi", "abalone", "abana"], ["abacaxi", "abalone", "abana"]]
+        },
+        {
+            "args": {
+                "products": ["applepie", "applesauce", "appleskin", "apple", "applejack"],
+                "searchWord": "appl"
+            },
+            "expected": [
+                ["apple", "applejack", "applepie"],
+                ["apple", "applejack", "applepie"],
+                ["apple", "applejack", "applepie"],
+                ["apple", "applejack", "applepie"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "camera",
+                    "camcorder",
+                    "cameralens",
+                    "cameraman",
+                    "cameraobscura",
+                    "camouflage",
+                    "camcorder",
+                    "camera",
+                    "camcorder"
+                ],
+                "searchWord": "cam"
+            },
+            "expected": [
+                ["camcorder", "camcorder", "camcorder"],
+                ["camcorder", "camcorder", "camcorder"],
+                ["camcorder", "camcorder", "camcorder"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "chocolate",
+                    "chocolatebar",
+                    "chocolatechip",
+                    "chocolate",
+                    "chocolatefudge"
+                ],
+                "searchWord": "chocolate"
+            },
+            "expected": [
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"],
+                ["chocolate", "chocolate", "chocolatebar"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["queen", "queens", "queenship", "queer", "queue"],
+                "searchWord": "quee"
+            },
+            "expected": [
+                ["queen", "queens", "queenship"],
+                ["queen", "queens", "queenship"],
+                ["queen", "queens", "queenship"],
+                ["queen", "queens", "queenship"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "apple",
+                    "apricot",
+                    "avocado",
+                    "banana",
+                    "bat",
+                    "berry",
+                    "blackberry",
+                    "blueberry",
+                    "cherry",
+                    "cantaloupe",
+                    "cranberry"
+                ],
+                "searchWord": "ap"
+            },
+            "expected": [["apple", "apricot", "avocado"], ["apple", "apricot"]]
+        },
+        {
+            "args": {
+                "products": ["applepie", "applesauce", "apple", "appletart", "apples", "apricot"],
+                "searchWord": "apple"
+            },
+            "expected": [
+                ["apple", "applepie", "apples"],
+                ["apple", "applepie", "apples"],
+                ["apple", "applepie", "apples"],
+                ["apple", "applepie", "apples"],
+                ["apple", "applepie", "apples"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "guitar",
+                    "guitarcase",
+                    "guitarhero",
+                    "guitarpick",
+                    "guitarstand",
+                    "guitartuner",
+                    "guitarstring"
+                ],
+                "searchWord": "gu"
+            },
+            "expected": [
+                ["guitar", "guitarcase", "guitarhero"],
+                ["guitar", "guitarcase", "guitarhero"]
+            ]
+        },
+        {
+            "args": {},
+            "expected": "Error: Solution.suggestedProducts() missing 2 required positional arguments: 'products' and 'searchWord'"
+        },
+        {
+            "args": {
+                "products": ["ocean", "ocelot", "octopus", "octagon", "octagonal"],
+                "searchWord": "oct"
+            },
+            "expected": [
+                ["ocean", "ocelot", "octagon"],
+                ["ocean", "ocelot", "octagon"],
+                ["octagon", "octagonal", "octopus"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant",
+                    "elephant"
+                ],
+                "searchWord": "elephant"
+            },
+            "expected": [
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"],
+                ["elephant", "elephant", "elephant"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["chocolate", "chips", "chipmunk", "cheese", "cherry", "chili"],
+                "searchWord": "ch"
+            },
+            "expected": [["cheese", "cherry", "chili"], ["cheese", "cherry", "chili"]]
+        },
+        {
+            "args": {
+                "products": ["abcd", "abce", "abcf", "abcg", "abch"],
+                "searchWord": "abc"
+            },
+            "expected": [
+                ["abcd", "abce", "abcf"],
+                ["abcd", "abce", "abcf"],
+                ["abcd", "abce", "abcf"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "zebra",
+                    "zulu",
+                    "zymurgy",
+                    "zestful",
+                    "zestfully",
+                    "zestless",
+                    "zippy",
+                    "zoo",
+                    "zoology",
+                    "zucchini"
+                ],
+                "searchWord": "zoo"
+            },
+            "expected": [["zebra", "zestful", "zestfully"], ["zoo", "zoology"], ["zoo", "zoology"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "fishing",
+                    "fishtank",
+                    "fish",
+                    "fishmonger",
+                    "fisherman",
+                    "fishhook",
+                    "fishnet"
+                ],
+                "searchWord": "fish"
+            },
+            "expected": [
+                ["fish", "fisherman", "fishhook"],
+                ["fish", "fisherman", "fishhook"],
+                ["fish", "fisherman", "fishhook"],
+                ["fish", "fisherman", "fishhook"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "watermelon",
+                    "water",
+                    "waterproof",
+                    "watering",
+                    "waterfall",
+                    "watermelon",
+                    "watercolor",
+                    "watergun",
+                    "watermelon",
+                    "watermark"
+                ],
+                "searchWord": "waterm"
+            },
+            "expected": [
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["watermark", "watermelon", "watermelon"]
+            ]
+        },
+        {
+            "args": {},
+            "expected": "Error: Solution.suggestedProducts() missing 2 required positional arguments: 'products' and 'searchWord'"
+        },
+        {
+            "args": {
+                "products": ["banana", "band", "bangalore", "bank", "banner"],
+                "searchWord": "ban"
+            },
+            "expected": [
+                ["banana", "band", "bangalore"],
+                ["banana", "band", "bangalore"],
+                ["banana", "band", "bangalore"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["paint", "painter", "painting", "paintball", "paintbrush"],
+                "searchWord": "pain"
+            },
+            "expected": [
+                ["paint", "paintball", "paintbrush"],
+                ["paint", "paintball", "paintbrush"],
+                ["paint", "paintball", "paintbrush"],
+                ["paint", "paintball", "paintbrush"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "xyz",
+                    "xylophone",
+                    "xylography",
+                    "xylograph",
+                    "xylography",
+                    "xylographer",
+                    "xylographs",
+                    "xylography",
+                    "xylography"
+                ],
+                "searchWord": "xylo"
+            },
+            "expected": [
+                ["xylograph", "xylographer", "xylographs"],
+                ["xylograph", "xylographer", "xylographs"],
+                ["xylograph", "xylographer", "xylographs"],
+                ["xylograph", "xylographer", "xylographs"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "microphone",
+                    "microwave",
+                    "microscope",
+                    "microphone",
+                    "micronutrient"
+                ],
+                "searchWord": "micr"
+            },
+            "expected": [
+                ["micronutrient", "microphone", "microphone"],
+                ["micronutrient", "microphone", "microphone"],
+                ["micronutrient", "microphone", "microphone"],
+                ["micronutrient", "microphone", "microphone"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["flower", "flour", "flow", "flourish", "flourmill"],
+                "searchWord": "flow"
+            },
+            "expected": [
+                ["flour", "flourish", "flourmill"],
+                ["flour", "flourish", "flourmill"],
+                ["flour", "flourish", "flourmill"],
+                ["flow", "flower"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["car", "card", "care", "careful", "careless"],
+                "searchWord": "ca"
+            },
+            "expected": [["car", "card", "care"], ["car", "card", "care"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "football",
+                    "footwear",
+                    "footbridge",
+                    "footnote",
+                    "footrest",
+                    "footlocker",
+                    "footrace",
+                    "footlight"
+                ],
+                "searchWord": "foot"
+            },
+            "expected": [
+                ["football", "footbridge", "footlight"],
+                ["football", "footbridge", "footlight"],
+                ["football", "footbridge", "footlight"],
+                ["football", "footbridge", "footlight"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["bicycle", "bicycling", "bicycle", "bicycle", "bicycle"],
+                "searchWord": "bicy"
+            },
+            "expected": [
+                ["bicycle", "bicycle", "bicycle"],
+                ["bicycle", "bicycle", "bicycle"],
+                ["bicycle", "bicycle", "bicycle"],
+                ["bicycle", "bicycle", "bicycle"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe",
+                    "giraffe"
+                ],
+                "searchWord": "giraff"
+            },
+            "expected": [
+                ["giraffe", "giraffe", "giraffe"],
+                ["giraffe", "giraffe", "giraffe"],
+                ["giraffe", "giraffe", "giraffe"],
+                ["giraffe", "giraffe", "giraffe"],
+                ["giraffe", "giraffe", "giraffe"],
+                ["giraffe", "giraffe", "giraffe"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["strawberry", "straw", "stratosphere", "stranger", "strategy"],
+                "searchWord": "stra"
+            },
+            "expected": [
+                ["stranger", "strategy", "stratosphere"],
+                ["stranger", "strategy", "stratosphere"],
+                ["stranger", "strategy", "stratosphere"],
+                ["stranger", "strategy", "stratosphere"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "apple",
+                    "apricot",
+                    "banana",
+                    "bat",
+                    "berry",
+                    "blackberry",
+                    "blueberry"
+                ],
+                "searchWord": "ba"
+            },
+            "expected": [["banana", "bat", "berry"], ["banana", "bat"]]
+        },
+        {
+            "args": {
+                "products": ["watermelon", "water", "waterfall", "watershed", "watercolor"],
+                "searchWord": "water"
+            },
+            "expected": [
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"],
+                ["water", "watercolor", "waterfall"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["computer", "computational", "compute", "computing", "computerized"],
+                "searchWord": "compute"
+            },
+            "expected": [
+                ["computational", "compute", "computer"],
+                ["computational", "compute", "computer"],
+                ["computational", "compute", "computer"],
+                ["computational", "compute", "computer"],
+                ["computational", "compute", "computer"],
+                ["computational", "compute", "computer"],
+                ["compute", "computer", "computerized"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "photography",
+                    "photoalbum",
+                    "photobook",
+                    "photoframe",
+                    "photograph",
+                    "photokino",
+                    "photocopy",
+                    "photography"
+                ],
+                "searchWord": "phot"
+            },
+            "expected": [
+                ["photoalbum", "photobook", "photocopy"],
+                ["photoalbum", "photobook", "photocopy"],
+                ["photoalbum", "photobook", "photocopy"],
+                ["photoalbum", "photobook", "photocopy"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["strawberry", "straw", "strange", "strategy", "stranger"],
+                "searchWord": "stra"
+            },
+            "expected": [
+                ["strange", "stranger", "strategy"],
+                ["strange", "stranger", "strategy"],
+                ["strange", "stranger", "strategy"],
+                ["strange", "stranger", "strategy"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["elephant", "elephantine", "elegant", "elevate", "elementary"],
+                "searchWord": "ele"
+            },
+            "expected": [
+                ["elegant", "elementary", "elephant"],
+                ["elegant", "elementary", "elephant"],
+                ["elegant", "elementary", "elephant"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["orange", "ornament", "organ", "orchid", "orchard", "organize"],
+                "searchWord": "or"
+            },
+            "expected": [["orange", "orchard", "orchid"], ["orange", "orchard", "orchid"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "aaab",
+                    "aaac",
+                    "aaad",
+                    "aaae",
+                    "aaaf",
+                    "aaag",
+                    "aaah",
+                    "aaai",
+                    "aaaj",
+                    "aaak",
+                    "aaal",
+                    "aaam",
+                    "aaan",
+                    "aaao",
+                    "aaap",
+                    "aaaq",
+                    "aaar",
+                    "aaas",
+                    "aaat",
+                    "aaau",
+                    "aaav",
+                    "aaaw",
+                    "aaax",
+                    "aaay",
+                    "aaaz"
+                ],
+                "searchWord": "aaa"
+            },
+            "expected": [
+                ["aaab", "aaac", "aaad"],
+                ["aaab", "aaac", "aaad"],
+                ["aaab", "aaac", "aaad"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano",
+                    "piano"
+                ],
+                "searchWord": "piano"
+            },
+            "expected": [
+                ["piano", "piano", "piano"],
+                ["piano", "piano", "piano"],
+                ["piano", "piano", "piano"],
+                ["piano", "piano", "piano"],
+                ["piano", "piano", "piano"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "firefly",
+                    "fireworks",
+                    "firefly",
+                    "firearm",
+                    "firetruck",
+                    "firewall",
+                    "firefly",
+                    "firefly",
+                    "firefly",
+                    "firefly"
+                ],
+                "searchWord": "fire"
+            },
+            "expected": [
+                ["firearm", "firefly", "firefly"],
+                ["firearm", "firefly", "firefly"],
+                ["firearm", "firefly", "firefly"],
+                ["firearm", "firefly", "firefly"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["internet", "interact", "interest", "interior", "interfere"],
+                "searchWord": "inte"
+            },
+            "expected": [
+                ["interact", "interest", "interfere"],
+                ["interact", "interest", "interfere"],
+                ["interact", "interest", "interfere"],
+                ["interact", "interest", "interfere"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "computer",
+                    "compute",
+                    "computation",
+                    "compositor",
+                    "composite",
+                    "compress",
+                    "compression",
+                    "compressor",
+                    "compressed"
+                ],
+                "searchWord": "compre"
+            },
+            "expected": [
+                ["composite", "compositor", "compress"],
+                ["composite", "compositor", "compress"],
+                ["composite", "compositor", "compress"],
+                ["composite", "compositor", "compress"],
+                ["compress", "compressed", "compression"],
+                ["compress", "compressed", "compression"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "apple",
+                    "banana",
+                    "cherry",
+                    "date",
+                    "elderberry",
+                    "fig",
+                    "grape",
+                    "honeydew",
+                    "kiwi",
+                    "lemon",
+                    "mango",
+                    "nectarine",
+                    "orange",
+                    "papaya",
+                    "quince",
+                    "raspberry",
+                    "strawberry",
+                    "tangerine",
+                    "ugli",
+                    "vanilla",
+                    "watermelon",
+                    "xigua",
+                    "yellow",
+                    "zucchini"
+                ],
+                "searchWord": "a"
+            },
+            "expected": [["apple"]]
+        },
+        {
+            "args": {
+                "products": ["dog", "doghouse", "dogwood", "dog", "doghouse"],
+                "searchWord": "dog"
+            },
+            "expected": [
+                ["dog", "dog", "doghouse"],
+                ["dog", "dog", "doghouse"],
+                ["dog", "dog", "doghouse"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "abcd",
+                    "abce",
+                    "abcg",
+                    "abch",
+                    "abci",
+                    "abcj",
+                    "abck",
+                    "abcl",
+                    "abcm",
+                    "abcn",
+                    "abcd",
+                    "abce",
+                    "abcg",
+                    "abch",
+                    "abci",
+                    "abcj",
+                    "abck",
+                    "abcl",
+                    "abcm",
+                    "abcn"
+                ],
+                "searchWord": "abc"
+            },
+            "expected": [
+                ["abcd", "abcd", "abce"],
+                ["abcd", "abcd", "abce"],
+                ["abcd", "abcd", "abce"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["radio", "radiance", "radiant", "radioactive", "radioactivity"],
+                "searchWord": "radi"
+            },
+            "expected": [
+                ["radiance", "radiant", "radio"],
+                ["radiance", "radiant", "radio"],
+                ["radiance", "radiant", "radio"],
+                ["radiance", "radiant", "radio"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["keyboard", "keychain", "keyhole", "keylogger", "keynote"],
+                "searchWord": "key"
+            },
+            "expected": [
+                ["keyboard", "keychain", "keyhole"],
+                ["keyboard", "keychain", "keyhole"],
+                ["keyboard", "keychain", "keyhole"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["starship", "stars", "start", "star", "startrek", "starfish"],
+                "searchWord": "star"
+            },
+            "expected": [
+                ["star", "starfish", "stars"],
+                ["star", "starfish", "stars"],
+                ["star", "starfish", "stars"],
+                ["star", "starfish", "stars"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "ant",
+                    "antelope",
+                    "antibody",
+                    "antacid",
+                    "antaeus",
+                    "antarctica",
+                    "anteater",
+                    "antelope",
+                    "antelope",
+                    "antler"
+                ],
+                "searchWord": "ante"
+            },
+            "expected": [
+                ["ant", "antacid", "antaeus"],
+                ["ant", "antacid", "antaeus"],
+                ["ant", "antacid", "antaeus"],
+                ["anteater", "antelope", "antelope"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["dog", "dove", "donkey", "dragon", "drone", "drill", "door"],
+                "searchWord": "dr"
+            },
+            "expected": [["dog", "donkey", "door"], ["dragon", "drill", "drone"]]
+        },
+        {
+            "args": {
+                "products": ["guitar", "guitarist", "guilt", "guilty", "gully"],
+                "searchWord": "guil"
+            },
+            "expected": [
+                ["guilt", "guilty", "guitar"],
+                ["guilt", "guilty", "guitar"],
+                ["guilt", "guilty", "guitar"],
+                ["guilt", "guilty"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["algorithm", "algebra", "alabama", "alaska", "alligator"],
+                "searchWord": "al"
+            },
+            "expected": [["alabama", "alaska", "algebra"], ["alabama", "alaska", "algebra"]]
+        },
+        {
+            "args": {
+                "products": ["zebra", "zebrafish", "zebra", "zebrahead", "zebra"],
+                "searchWord": "zebra"
+            },
+            "expected": [
+                ["zebra", "zebra", "zebra"],
+                ["zebra", "zebra", "zebra"],
+                ["zebra", "zebra", "zebra"],
+                ["zebra", "zebra", "zebra"],
+                ["zebra", "zebra", "zebra"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "abcd",
+                    "abce",
+                    "abcf",
+                    "abcg",
+                    "abch",
+                    "abci",
+                    "abcj",
+                    "abck",
+                    "abcl",
+                    "abcm",
+                    "abcn"
+                ],
+                "searchWord": "abcd"
+            },
+            "expected": [
+                ["abcd", "abce", "abcf"],
+                ["abcd", "abce", "abcf"],
+                ["abcd", "abce", "abcf"],
+                ["abcd"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["zebra", "zeal", "zero", "zone", "zoo", "zap", "zest"],
+                "searchWord": "ze"
+            },
+            "expected": [["zap", "zeal", "zebra"], ["zeal", "zebra", "zero"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "zebra",
+                    "zoo",
+                    "zoom",
+                    "zoning",
+                    "zone",
+                    "zany",
+                    "zap",
+                    "zest",
+                    "zigzag",
+                    "zither"
+                ],
+                "searchWord": "z"
+            },
+            "expected": [["zany", "zap", "zebra"]]
+        },
+        {
+            "args": {
+                "products": ["piano", "piccolo", "pipe", "pipeorgan", "pitchfork"],
+                "searchWord": "pi"
+            },
+            "expected": [["piano", "piccolo", "pipe"], ["piano", "piccolo", "pipe"]]
+        },
+        {
+            "args": {
+                "products": [
+                    "umbrella",
+                    "underwear",
+                    "universe",
+                    "unique",
+                    "unit",
+                    "unity",
+                    "university",
+                    "unicycle",
+                    "unicorn",
+                    "unzip"
+                ],
+                "searchWord": "uni"
+            },
+            "expected": [
+                ["umbrella", "underwear", "unicorn"],
+                ["underwear", "unicorn", "unicycle"],
+                ["unicorn", "unicycle", "unique"]
+            ]
+        },
+        {
+            "args": {
+                "products": [
+                    "product",
+                    "produces",
+                    "productivity",
+                    "productive",
+                    "productize",
+                    "production",
+                    "productivity",
+                    "productize",
+                    "productivity",
+                    "productize"
+                ],
+                "searchWord": "product"
+            },
+            "expected": [
+                ["produces", "product", "production"],
+                ["produces", "product", "production"],
+                ["produces", "product", "production"],
+                ["produces", "product", "production"],
+                ["produces", "product", "production"],
+                ["produces", "product", "production"],
+                ["product", "production", "productive"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["umbrella", "umbilical", "umbrella", "umbrella", "umbrella"],
+                "searchWord": "umb"
+            },
+            "expected": [
+                ["umbilical", "umbrella", "umbrella"],
+                ["umbilical", "umbrella", "umbrella"],
+                ["umbilical", "umbrella", "umbrella"]
+            ]
+        },
+        {
+            "args": {
+                "products": ["banana", "bandanna", "bandage", "band", "bandwidth"],
+                "searchWord": "band"
+            },
+            "expected": [
+                ["banana", "band", "bandage"],
+                ["banana", "band", "bandage"],
+                ["banana", "band", "bandage"],
+                ["band", "bandage", "bandanna"]
+            ]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().suggestedProducts",
+        "typescript": "Solution().suggestedProducts"
+    }
+}

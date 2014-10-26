@@ -1,0 +1,816 @@
+{
+    "id": "minimize-result-by-adding-parentheses-to-expression",
+    "questionId": 2232,
+    "difficulty": "Medium",
+    "tags": ["String", "Enumeration"],
+    "tests": [
+        {
+            "args": {
+                "expression": "56+78"
+            },
+            "expected": "(56+78)"
+        },
+        {
+            "args": {
+                "expression": "5+6"
+            },
+            "expected": "(5+6)"
+        },
+        {
+            "args": {
+                "expression": "3+8"
+            },
+            "expected": "(3+8)"
+        },
+        {
+            "args": {
+                "expression": "111+222"
+            },
+            "expected": "1(11+22)2"
+        },
+        {
+            "args": {
+                "expression": "3+2"
+            },
+            "expected": "(3+2)"
+        },
+        {
+            "args": {
+                "expression": "5+678"
+            },
+            "expected": "(5+67)8"
+        },
+        {
+            "args": {
+                "expression": "247+38"
+            },
+            "expected": "2(47+38)"
+        },
+        {
+            "args": {
+                "expression": "3+12"
+            },
+            "expected": "(3+1)2"
+        },
+        {
+            "args": {
+                "expression": "11+11"
+            },
+            "expected": "1(1+1)1"
+        },
+        {
+            "args": {
+                "expression": "8+9"
+            },
+            "expected": "(8+9)"
+        },
+        {
+            "args": {
+                "expression": "1+2"
+            },
+            "expected": "(1+2)"
+        },
+        {
+            "args": {
+                "expression": "123+456"
+            },
+            "expected": "1(23+45)6"
+        },
+        {
+            "args": {
+                "expression": "9+9"
+            },
+            "expected": "(9+9)"
+        },
+        {
+            "args": {
+                "expression": "12+34"
+            },
+            "expected": "1(2+3)4"
+        },
+        {
+            "args": {
+                "expression": "88+11"
+            },
+            "expected": "8(8+1)1"
+        },
+        {
+            "args": {
+                "expression": "999+999"
+            },
+            "expected": "(999+999)"
+        },
+        {
+            "args": {
+                "expression": "1+9"
+            },
+            "expected": "(1+9)"
+        },
+        {
+            "args": {
+                "expression": "333+444"
+            },
+            "expected": "(333+444)"
+        },
+        {
+            "args": {
+                "expression": "555+666"
+            },
+            "expected": "(555+666)"
+        },
+        {
+            "args": {
+                "expression": "9+99"
+            },
+            "expected": "(9+99)"
+        },
+        {
+            "args": {
+                "expression": "9+1"
+            },
+            "expected": "(9+1)"
+        },
+        {
+            "args": {
+                "expression": "5+9"
+            },
+            "expected": "(5+9)"
+        },
+        {
+            "args": {
+                "expression": "1+1"
+            },
+            "expected": "(1+1)"
+        },
+        {
+            "args": {
+                "expression": "10+1"
+            },
+            "expected": "1(0+1)"
+        },
+        {
+            "args": {
+                "expression": "12+3"
+            },
+            "expected": "1(2+3)"
+        },
+        {
+            "args": {
+                "expression": "555+555"
+            },
+            "expected": "(555+555)"
+        },
+        {
+            "args": {
+                "expression": "123+4"
+            },
+            "expected": "1(23+4)"
+        },
+        {
+            "args": {
+                "expression": "9+876"
+            },
+            "expected": "(9+87)6"
+        },
+        {
+            "args": {
+                "expression": "12345+6789"
+            },
+            "expected": "1(2345+6789)"
+        },
+        {
+            "args": {
+                "expression": "56+789"
+            },
+            "expected": "(56+789)"
+        },
+        {
+            "args": {
+                "expression": "1111+2222"
+            },
+            "expected": "1(111+222)2"
+        },
+        {
+            "args": {
+                "expression": "123+4567"
+            },
+            "expected": "1(23+456)7"
+        },
+        {
+            "args": {
+                "expression": "6666+7777"
+            },
+            "expected": "(6666+7777)"
+        },
+        {
+            "args": {
+                "expression": "9999+1"
+            },
+            "expected": "9(999+1)"
+        },
+        {
+            "args": {
+                "expression": "12+345"
+            },
+            "expected": "1(2+34)5"
+        },
+        {
+            "args": {
+                "expression": "567+89"
+            },
+            "expected": "(567+89)"
+        },
+        {
+            "args": {
+                "expression": "8+7654"
+            },
+            "expected": "(8+765)4"
+        },
+        {
+            "args": {
+                "expression": "987+654"
+            },
+            "expected": "(987+654)"
+        },
+        {
+            "args": {
+                "expression": "33+44"
+            },
+            "expected": "(33+44)"
+        },
+        {
+            "args": {
+                "expression": "1234+56789"
+            },
+            "expected": "1(234+5678)9"
+        },
+        {
+            "args": {
+                "expression": "7000+8000"
+            },
+            "expected": "(7000+8)000"
+        },
+        {
+            "args": {
+                "expression": "99+11"
+            },
+            "expected": "9(9+1)1"
+        },
+        {
+            "args": {
+                "expression": "333+666"
+            },
+            "expected": "(333+666)"
+        },
+        {
+            "args": {
+                "expression": "345+678"
+            },
+            "expected": "(345+678)"
+        },
+        {
+            "args": {
+                "expression": "50+50"
+            },
+            "expected": "(50+5)0"
+        },
+        {
+            "args": {
+                "expression": "123+45"
+            },
+            "expected": "1(23+45)"
+        },
+        {
+            "args": {
+                "expression": "5+55"
+            },
+            "expected": "(5+5)5"
+        },
+        {
+            "args": {
+                "expression": "678+9"
+            },
+            "expected": "6(78+9)"
+        },
+        {
+            "args": {
+                "expression": "12+345678"
+            },
+            "expected": "1(2+34)5678"
+        },
+        {
+            "args": {
+                "expression": "900000+100000"
+            },
+            "expected": "(900000+1)00000"
+        },
+        {
+            "args": {
+                "expression": "10+20"
+            },
+            "expected": "(10+2)0"
+        },
+        {
+            "args": {
+                "expression": "12+3456789"
+            },
+            "expected": "1(2+34)56789"
+        },
+        {
+            "args": {
+                "expression": "123456+789012"
+            },
+            "expected": "1(23456+78901)2"
+        },
+        {
+            "args": {
+                "expression": "99+88"
+            },
+            "expected": "(99+88)"
+        },
+        {
+            "args": {
+                "expression": "56+7890"
+            },
+            "expected": "(56+789)0"
+        },
+        {
+            "args": {
+                "expression": "9+1234"
+            },
+            "expected": "(9+123)4"
+        },
+        {
+            "args": {
+                "expression": "55555+66666"
+            },
+            "expected": "(55555+66666)"
+        },
+        {
+            "args": {
+                "expression": "1234+56"
+            },
+            "expected": "1(234+56)"
+        },
+        {
+            "args": {
+                "expression": "678+90123"
+            },
+            "expected": "(678+9012)3"
+        },
+        {
+            "args": {
+                "expression": "44+555"
+            },
+            "expected": "(44+55)5"
+        },
+        {
+            "args": {
+                "expression": "9+87654321"
+            },
+            "expected": "(9+8765432)1"
+        },
+        {
+            "args": {
+                "expression": "2222+3333"
+            },
+            "expected": "2(222+333)3"
+        },
+        {
+            "args": {
+                "expression": "1+999"
+            },
+            "expected": "(1+99)9"
+        },
+        {
+            "args": {
+                "expression": "9876+5432"
+            },
+            "expected": "(9876+5432)"
+        },
+        {
+            "args": {
+                "expression": "4321+9"
+            },
+            "expected": "43(21+9)"
+        },
+        {
+            "args": {
+                "expression": "5678+910"
+            },
+            "expected": "(5678+91)0"
+        },
+        {
+            "args": {
+                "expression": "987654+321098"
+            },
+            "expected": "(987654+321098)"
+        },
+        {
+            "args": {
+                "expression": "100000+200000"
+            },
+            "expected": "(100000+2)00000"
+        },
+        {
+            "args": {
+                "expression": "3000+4000"
+            },
+            "expected": "(3000+4)000"
+        },
+        {
+            "args": {
+                "expression": "300000+400000"
+            },
+            "expected": "(300000+4)00000"
+        },
+        {
+            "args": {
+                "expression": "100+100"
+            },
+            "expected": "(100+1)00"
+        },
+        {
+            "args": {
+                "expression": "10+999"
+            },
+            "expected": "1(0+9)99"
+        },
+        {
+            "args": {
+                "expression": "500000+600000"
+            },
+            "expected": "(500000+6)00000"
+        },
+        {
+            "args": {
+                "expression": "5432+1"
+            },
+            "expected": "543(2+1)"
+        },
+        {
+            "args": {
+                "expression": "1+9999"
+            },
+            "expected": "(1+999)9"
+        },
+        {
+            "args": {
+                "expression": "3456+789"
+            },
+            "expected": "3(456+789)"
+        },
+        {
+            "args": {
+                "expression": "5555+666"
+            },
+            "expected": "5(555+666)"
+        },
+        {
+            "args": {
+                "expression": "123+6"
+            },
+            "expected": "1(23+6)"
+        },
+        {
+            "args": {
+                "expression": "8888+9999"
+            },
+            "expected": "(8888+9999)"
+        },
+        {
+            "args": {
+                "expression": "213+456"
+            },
+            "expected": "(213+456)"
+        },
+        {
+            "args": {
+                "expression": "23+4567"
+            },
+            "expected": "(23+456)7"
+        },
+        {
+            "args": {
+                "expression": "100+200"
+            },
+            "expected": "(100+2)00"
+        },
+        {
+            "args": {
+                "expression": "9+8765432"
+            },
+            "expected": "(9+876543)2"
+        },
+        {
+            "args": {
+                "expression": "111+111"
+            },
+            "expected": "1(11+11)1"
+        },
+        {
+            "args": {
+                "expression": "77777+88888"
+            },
+            "expected": "(77777+88888)"
+        },
+        {
+            "args": {
+                "expression": "99+1"
+            },
+            "expected": "9(9+1)"
+        },
+        {
+            "args": {
+                "expression": "3+9999"
+            },
+            "expected": "(3+999)9"
+        },
+        {
+            "args": {
+                "expression": "234+567"
+            },
+            "expected": "(234+567)"
+        },
+        {
+            "args": {
+                "expression": "2+9999"
+            },
+            "expected": "(2+999)9"
+        },
+        {
+            "args": {
+                "expression": "4321+876"
+            },
+            "expected": "4(321+876)"
+        },
+        {
+            "args": {
+                "expression": "9000+1000"
+            },
+            "expected": "(9000+1)000"
+        },
+        {
+            "args": {
+                "expression": "11+111"
+            },
+            "expected": "1(1+11)1"
+        },
+        {
+            "args": {
+                "expression": "5+6789"
+            },
+            "expected": "(5+678)9"
+        },
+        {
+            "args": {
+                "expression": "1+23456"
+            },
+            "expected": "(1+2)3456"
+        },
+        {
+            "args": {
+                "expression": "1098+231"
+            },
+            "expected": "1(098+23)1"
+        },
+        {
+            "args": {
+                "expression": "999+1"
+            },
+            "expected": "9(99+1)"
+        },
+        {
+            "args": {
+                "expression": "4444+5555"
+            },
+            "expected": "(4444+5555)"
+        },
+        {
+            "args": {
+                "expression": "55+55"
+            },
+            "expected": "(55+55)"
+        },
+        {
+            "args": {
+                "expression": "777+888"
+            },
+            "expected": "(777+888)"
+        },
+        {
+            "args": {
+                "expression": "98765+4321"
+            },
+            "expected": "9(8765+432)1"
+        },
+        {
+            "args": {
+                "expression": "654+321"
+            },
+            "expected": "6(54+32)1"
+        },
+        {
+            "args": {
+                "expression": "77+88"
+            },
+            "expected": "(77+88)"
+        },
+        {
+            "args": {
+                "expression": "33333+44444"
+            },
+            "expected": "(33333+44444)"
+        },
+        {
+            "args": {
+                "expression": "222+333"
+            },
+            "expected": "2(22+33)3"
+        },
+        {
+            "args": {
+                "expression": "2+987654321"
+            },
+            "expected": "(2+98765432)1"
+        },
+        {
+            "args": {
+                "expression": "123+45678"
+            },
+            "expected": "1(23+4567)8"
+        },
+        {
+            "args": {
+                "expression": "9+8765"
+            },
+            "expected": "(9+876)5"
+        },
+        {
+            "args": {
+                "expression": "5678+123"
+            },
+            "expected": "5(678+123)"
+        },
+        {
+            "args": {
+                "expression": "1234+567"
+            },
+            "expected": "1(234+567)"
+        },
+        {
+            "args": {
+                "expression": "234+56789"
+            },
+            "expected": "(234+5678)9"
+        },
+        {
+            "args": {
+                "expression": "987654+321"
+            },
+            "expected": "987(654+32)1"
+        },
+        {
+            "args": {
+                "expression": "876+54"
+            },
+            "expected": "(876+54)"
+        },
+        {
+            "args": {
+                "expression": "123456+789"
+            },
+            "expected": "1(23456+789)"
+        },
+        {
+            "args": {
+                "expression": "2000+1000"
+            },
+            "expected": "(2000+1)000"
+        },
+        {
+            "args": {
+                "expression": "99999+11111"
+            },
+            "expected": "9(9999+1111)1"
+        },
+        {
+            "args": {
+                "expression": "9876+543"
+            },
+            "expected": "(9876+543)"
+        },
+        {
+            "args": {
+                "expression": "5000+6000"
+            },
+            "expected": "(5000+6)000"
+        },
+        {
+            "args": {
+                "expression": "789+12"
+            },
+            "expected": "7(89+12)"
+        },
+        {
+            "args": {
+                "expression": "1111+1111"
+            },
+            "expected": "1(111+111)1"
+        },
+        {
+            "args": {
+                "expression": "700000+800000"
+            },
+            "expected": "(700000+8)00000"
+        },
+        {
+            "args": {
+                "expression": "55+5"
+            },
+            "expected": "5(5+5)"
+        },
+        {
+            "args": {
+                "expression": "1+99999"
+            },
+            "expected": "(1+9999)9"
+        },
+        {
+            "args": {
+                "expression": "11+22"
+            },
+            "expected": "1(1+2)2"
+        },
+        {
+            "args": {
+                "expression": "321+654"
+            },
+            "expected": "(321+654)"
+        },
+        {
+            "args": {
+                "expression": "55+66"
+            },
+            "expected": "(55+66)"
+        },
+        {
+            "args": {
+                "expression": "56789+12"
+            },
+            "expected": "5(6789+12)"
+        },
+        {
+            "args": {
+                "expression": "1000+2000"
+            },
+            "expected": "(1000+2)000"
+        },
+        {
+            "args": {
+                "expression": "1234+5678"
+            },
+            "expected": "1(234+5678)"
+        },
+        {
+            "args": {
+                "expression": "11111+22222"
+            },
+            "expected": "1(1111+2222)2"
+        },
+        {
+            "args": {
+                "expression": "6+66"
+            },
+            "expected": "(6+6)6"
+        },
+        {
+            "args": {
+                "expression": "54321+6789"
+            },
+            "expected": "5(4321+6789)"
+        },
+        {
+            "args": {
+                "expression": "123+456789"
+            },
+            "expected": "1(23+456)789"
+        },
+        {
+            "args": {
+                "expression": "54+32"
+            },
+            "expected": "5(4+3)2"
+        },
+        {
+            "args": {
+                "expression": "21+89"
+            },
+            "expected": "(21+89)"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimizeResult",
+        "typescript": "Solution().minimizeResult"
+    }
+}

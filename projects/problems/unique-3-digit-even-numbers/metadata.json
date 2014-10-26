@@ -1,0 +1,780 @@
+{
+    "id": "unique-3-digit-even-numbers",
+    "questionId": 3483,
+    "difficulty": "Easy",
+    "tags": ["Recursion", "Array", "Hash Table", "Enumeration"],
+    "tests": [
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [8, 8, 8, 8, 8, 8, 8, 8, 8, 8]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [6, 6, 6]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 0, 2, 3, 5, 7, 9]
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "digits": [9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [2, 0, 0, 2]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "digits": [2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [2, 1, 3, 4, 2, 4, 2, 4, 2, 2]
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "digits": [2, 2, 0, 0, 2, 2]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "digits": [0, 2, 2]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "digits": [0, 1, 3, 5, 7, 9]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "digits": [8, 6, 8, 6, 8, 6, 8, 6, 8, 6]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0]
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [8, 0, 7, 4, 9, 3, 0, 3, 0, 9]
+            },
+            "expected": 63
+        },
+        {
+            "args": {
+                "digits": [1, 0, 1, 0, 1, 0]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "digits": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [1, 1, 2, 2, 3, 3]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "digits": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [1, 0, 0, 2]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "digits": [0, 0, 2, 2, 4, 4, 6, 6, 8, 8]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 0, 0, 0, 0, 3]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 1, 1, 1, 2, 2, 2]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [0, 2, 4, 6, 8, 0, 2, 4, 6, 8, 0, 2, 4, 6]
+            },
+            "expected": 99
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 2, 2, 2, 2]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+            },
+            "expected": 446
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 5, 6, 7, 8, 0]
+            },
+            "expected": 260
+        },
+        {
+            "args": {
+                "digits": [9, 9, 9, 9, 9, 9, 9, 9, 9, 0]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 2, 3, 4, 5]
+            },
+            "expected": 63
+        },
+        {
+            "args": {
+                "digits": [9, 9, 9, 9, 9, 9, 8, 8, 8, 8]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 2, 2, 2, 3, 3, 3, 4]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 1, 3, 5, 7, 9, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 2, 2, 3, 4, 4, 5, 6, 7, 8]
+            },
+            "expected": 202
+        },
+        {
+            "args": {
+                "digits": [0, 2, 4, 6, 8, 0, 2, 4, 6, 8, 0, 2]
+            },
+            "expected": 97
+        },
+        {
+            "args": {
+                "digits": [5, 5, 5, 5, 5, 5, 5, 5, 5, 0]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 1, 1, 1, 1, 2, 2]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [5, 5, 5, 5, 7, 7, 7, 7, 9, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [0, 2, 4, 6, 8, 0, 2, 4, 6, 8]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [0, 1, 1, 2, 2, 3, 3, 4, 4, 5]
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 1, 3, 5, 7, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 2, 2, 2, 2, 3, 3]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 1, 3, 5, 7, 9, 2]
+            },
+            "expected": 349
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 1, 3, 5, 7, 9, 0]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9]
+            },
+            "expected": 228
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6]
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "digits": [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
+            },
+            "expected": 58
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4]
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "digits": [8, 8, 8, 8, 8, 8, 8, 8, 8, 8]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [5, 5, 5, 5, 5, 5, 5, 5, 5, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 2, 4, 6, 8, 0]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 1, 3, 5, 7, 9, 1, 3]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4]
+            },
+            "expected": 380
+        },
+        {
+            "args": {
+                "digits": [0, 2, 4, 6, 8, 2, 4, 6, 8, 0]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [7, 7, 7, 7, 7, 7, 7, 7, 7, 0]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            "expected": 224
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 0, 0, 0, 0, 0]
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 1, 3, 5, 7, 9]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 3]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 2]
+            },
+            "expected": 349
+        },
+        {
+            "args": {
+                "digits": [7, 7, 7, 7, 7, 7, 7, 7, 7, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [2, 2, 2, 2, 2, 2, 2, 2, 2, 0]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 1, 3, 5, 7, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 1, 3, 5, 7, 9, 9]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 9]
+            },
+            "expected": 228
+        },
+        {
+            "args": {
+                "digits": [2, 2, 4, 4, 6, 6, 8, 8, 0, 0]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 1, 1, 1, 2, 2, 2]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "digits": [7, 7, 7, 8, 8, 8, 9, 9, 9, 0]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 0, 2, 4, 6, 8]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]
+            },
+            "expected": 333
+        },
+        {
+            "args": {
+                "digits": [0, 2, 4, 6, 8, 0, 2, 4, 6, 8]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 2, 4, 6, 8, 0]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "digits": [9, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 0, 0, 1, 3, 5]
+            },
+            "expected": 193
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 0, 2, 4, 6, 8, 0, 2, 4]
+            },
+            "expected": 98
+        },
+        {
+            "args": {
+                "digits": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "digits": [1, 2, 2, 3, 3, 3, 4, 5, 6, 6]
+            },
+            "expected": 87
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 2, 2, 2, 3, 3, 3, 4]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "digits": [2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [2, 2, 4, 4, 6, 6, 8, 8, 0, 0]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [1, 2, 2, 3, 3, 4, 4, 5, 5, 6]
+            },
+            "expected": 90
+        },
+        {
+            "args": {
+                "digits": [9, 9, 8, 8, 7, 7, 6, 6, 5, 5]
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 2, 2, 2, 2, 3, 3]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [7, 7, 8, 8, 9, 9, 0, 0]
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 4, 5, 6, 7, 8]
+            },
+            "expected": 271
+        },
+        {
+            "args": {
+                "digits": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "digits": [9, 9, 9, 8, 8, 8, 7, 7, 7, 6, 6, 6]
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 0, 0, 0, 1, 3]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "digits": [1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
+            },
+            "expected": 228
+        },
+        {
+            "args": {
+                "digits": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "digits": [1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
+            },
+            "expected": 102
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 3]
+            },
+            "expected": 232
+        },
+        {
+            "args": {
+                "digits": [2, 4, 6, 8, 2, 4, 6, 8, 0, 0]
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "digits": [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0]
+            },
+            "expected": 337
+        },
+        {
+            "args": {
+                "digits": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            "expected": 328
+        },
+        {
+            "args": {
+                "digits": [0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "digits": [7, 8, 9, 0, 2, 4, 6, 8, 0, 2]
+            },
+            "expected": 166
+        },
+        {
+            "args": {
+                "digits": [0, 0, 2, 2, 4, 4, 6, 6, 8, 8]
+            },
+            "expected": 96
+        }
+    ],
+    "invoke": {
+        "python": "Solution().totalNumbers",
+        "typescript": "Solution().totalNumbers"
+    }
+}

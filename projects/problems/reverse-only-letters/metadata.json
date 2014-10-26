@@ -1,0 +1,600 @@
+{
+    "id": "reverse-only-letters",
+    "questionId": 917,
+    "difficulty": "Easy",
+    "tags": ["Two Pointers", "String"],
+    "tests": [
+        {
+            "args": {
+                "s": "s-123-p"
+            },
+            "expected": "p-123-s"
+        },
+        {
+            "args": {
+                "s": "Test1ng-Leet=code-Q!"
+            },
+            "expected": "Qedo1ct-eeLg=ntse-T!"
+        },
+        {
+            "args": {
+                "s": "-a-b-"
+            },
+            "expected": "-b-a-"
+        },
+        {
+            "args": {
+                "s": "a-bC-dEf-ghIj"
+            },
+            "expected": "j-Ih-gfE-dCba"
+        },
+        {
+            "args": {
+                "s": "A-b-C-d-E"
+            },
+            "expected": "E-d-C-b-A"
+        },
+        {
+            "args": {
+                "s": "12345"
+            },
+            "expected": 12345
+        },
+        {
+            "args": {
+                "s": "!@#$%^&*()"
+            },
+            "expected": "!@#$%^&*()"
+        },
+        {
+            "args": {
+                "s": "ab-cd"
+            },
+            "expected": "dc-ba"
+        },
+        {
+            "args": {
+                "s": "abcdefg"
+            },
+            "expected": "gfedcba"
+        },
+        {
+            "args": {
+                "s": "!@#$%^&*()_+-=[]{}|\\:;'<>,.?/1234567890"
+            },
+            "expected": "!@#$%^&*()_+-=[]{}|\\:;'<>,.?/1234567890"
+        },
+        {
+            "args": {
+                "s": "P@y-P@l"
+            },
+            "expected": "l@P-y@P"
+        },
+        {
+            "args": {
+                "s": "UPPERlower123"
+            },
+            "expected": "rewolREPPU123"
+        },
+        {
+            "args": {
+                "s": "a-bC-dEf-ghIj-kLmNoP-qRsTuV-wXyZ"
+            },
+            "expected": "Z-yX-wVu-TsRq-PoNmLk-jIhgfE-dCba"
+        },
+        {
+            "args": {
+                "s": "!a-bC-dEf-ghIj!"
+            },
+            "expected": "!j-Ih-gfE-dCba!"
+        },
+        {
+            "args": {
+                "s": "a-zA-Z0-9"
+            },
+            "expected": "Z-Az-a0-9"
+        },
+        {
+            "args": {
+                "s": "No lemon, no melon"
+            },
+            "expected": "no lemon, no meloN"
+        },
+        {
+            "args": {
+                "s": "Z-y-x-W-v-U-t-S-r-Q-p-O-n-M-l-K-j-I-h-G-f-E-d-C-b-A"
+            },
+            "expected": "A-b-C-d-E-f-G-h-I-j-K-l-M-n-O-p-Q-r-S-t-U-v-W-x-y-Z"
+        },
+        {
+            "args": {
+                "s": "M-r-2-0-D-1-E-3-N-o-5-r-7-L-8-e-9-t-0-s-1-w-2-e-3-r-4-q-5-u-6-i-7-o-8-n-9-D-0"
+            },
+            "expected": "D-n-2-0-o-1-i-3-u-q-5-r-7-e-8-w-9-s-0-t-1-e-2-L-3-r-4-o-5-N-6-E-7-D-8-r-9-M-0"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            "expected": "ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "Reverse!This@String#With$Non%Letters^In&It*"
+            },
+            "expected": "tInIsre!tteL@noNhti#Wgni$rtS%sihTesr^ev&eR*"
+        },
+        {
+            "args": {
+                "s": "a!b@c#d$e%f^g&h*i(j)k-l+m,n/o\\p;q:r<s>t?u.v[w]x{y}z|"
+            },
+            "expected": "z!y@x#w$v%u^t&s*r(q)p-o+n,m/l\\k;j:i<h>g?f.e[d]c{b}a|"
+        },
+        {
+            "args": {
+                "s": "Hello, World!"
+            },
+            "expected": "dlroW, olleH!"
+        },
+        {
+            "args": {
+                "s": "1234567890qwertyuiopasdfghjklzxcvbnm-=-+=!@#$%^&*()"
+            },
+            "expected": "1234567890mnbvcxzlkjhgfdsapoiuytrewq-=-+=!@#$%^&*()"
+        },
+        {
+            "args": {
+                "s": "Python3.9"
+            },
+            "expected": "nohtyP3.9"
+        },
+        {
+            "args": {
+                "s": "aAaAaAaAaA"
+            },
+            "expected": "AaAaAaAaAa"
+        },
+        {
+            "args": {
+                "s": "a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z"
+            },
+            "expected": "z-y-x-w-v-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a"
+        },
+        {
+            "args": {
+                "s": "A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z"
+            },
+            "expected": "Z-Y-X-W-V-U-T-S-R-Q-P-O-N-M-L-K-J-I-H-G-F-E-D-C-B-A"
+        },
+        {
+            "args": {
+                "s": "Ae-IoU-aeiou-1-2-3-4-5-6-7-8-9-0"
+            },
+            "expected": "uo-iea-UoIeA-1-2-3-4-5-6-7-8-9-0"
+        },
+        {
+            "args": {
+                "s": "P3r#G4m!n@G"
+            },
+            "expected": "G3n#m4G!r@P"
+        },
+        {
+            "args": {
+                "s": "--aZ--"
+            },
+            "expected": "--Za--"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            },
+            "expected": "ZYXWVUTSRQPONMLKJIHGFEDCBA-zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "A man, a plan, a canal: Panama"
+            },
+            "expected": "a man, a Plan, a canal: panamA"
+        },
+        {
+            "args": {
+                "s": "Z-y-x-W-v-U-t-S-r-Q-p-O-n-M-l-K-j-I-h-G-f-E-d-C-b-A-1-2-3"
+            },
+            "expected": "A-b-C-d-E-f-G-h-I-j-K-l-M-n-O-p-Q-r-S-t-U-v-W-x-y-Z-1-2-3"
+        },
+        {
+            "args": {
+                "s": "No'Matter'How'Hard'You'Try"
+            },
+            "expected": "yr'TuoYdr'aHw'oHre'tta'MoN"
+        },
+        {
+            "args": {
+                "s": "aA-bB-cC-dD-eE-fF-gG-hH-iI-jJ-kK-lL-mM-nN-oO-pP-qQ-rR-sS-tT-uU-vV-wW-xX-yY-zZ"
+            },
+            "expected": "Zz-Yy-Xx-Ww-Vv-Uu-Tt-Ss-Rr-Qq-Pp-Oo-Nn-Mm-Ll-Kk-Jj-Ii-Hh-Gg-Ff-Ee-Dd-Cc-Bb-Aa"
+        },
+        {
+            "args": {
+                "s": "aBcDeFgHiJkLmNoPqRsTuVwXyZ"
+            },
+            "expected": "ZyXwVuTsRqPoNmLkJiHgFeDcBa"
+        },
+        {
+            "args": {
+                "s": "a-bC-dEf-ghIj-kLmNoP"
+            },
+            "expected": "P-oN-mLk-jIhg-fEdCba"
+        },
+        {
+            "args": {
+                "s": "7_28hT!@#%$q9"
+            },
+            "expected": "7_28qT!@#%$h9"
+        },
+        {
+            "args": {
+                "s": "---abcXYZ---"
+            },
+            "expected": "---ZYXcba---"
+        },
+        {
+            "args": {
+                "s": "H2O-is-a-good-solvent"
+            },
+            "expected": "t2n-ev-l-osdo-ogasiOH"
+        },
+        {
+            "args": {
+                "s": "123-abc-456-def-789"
+            },
+            "expected": "123-fed-456-cba-789"
+        },
+        {
+            "args": {
+                "s": "Hello-World!!!"
+            },
+            "expected": "dlroW-olleH!!!"
+        },
+        {
+            "args": {
+                "s": "N0-Sc3n4r10-1-f0r-R3v3rs1ng"
+            },
+            "expected": "g0-ns3r4v10-1-R0r-f3r3nc1SN"
+        },
+        {
+            "args": {
+                "s": "1234567890qwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": "1234567890mnbvcxzlkjhgfdsapoiuytrewq"
+        },
+        {
+            "args": {
+                "s": "A1B!C2@D3#E4$F5%G6^H7&I8*J9(L0)"
+            },
+            "expected": "L1J!I2@H3#G4$F5%E6^D7&C8*B9(A0)"
+        },
+        {
+            "args": {
+                "s": "mIxEd-CaSe-123-!@#"
+            },
+            "expected": "eSaCd-ExIm-123-!@#"
+        },
+        {
+            "args": {
+                "s": "12345!@#$%"
+            },
+            "expected": "12345!@#$%"
+        },
+        {
+            "args": {
+                "s": "a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z!@#$%^&*()"
+            },
+            "expected": "z-y-x-w-v-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a!@#$%^&*()"
+        },
+        {
+            "args": {
+                "s": "a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z-0-9-8-7-6-5-4-3-2-1"
+            },
+            "expected": "z-y-x-w-v-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a-0-9-8-7-6-5-4-3-2-1"
+        },
+        {
+            "args": {
+                "s": "--a--b--"
+            },
+            "expected": "--b--a--"
+        },
+        {
+            "args": {
+                "s": "rE9-!vA5#xY2$"
+            },
+            "expected": "Yx9-!Av5#Er2$"
+        },
+        {
+            "args": {
+                "s": "7_8A-9B-10C-11D"
+            },
+            "expected": "7_8D-9C-10B-11A"
+        },
+        {
+            "args": {
+                "s": "NoLettersHere123"
+            },
+            "expected": "ereHsretteLoN123"
+        },
+        {
+            "args": {
+                "s": "a1B2C3D4E5F6G7H8I9J0"
+            },
+            "expected": "J1I2H3G4F5E6D7C8B9a0"
+        },
+        {
+            "args": {
+                "s": "T1h2i3s4I5s6t7h8e9F1i2n3a4l5T6e7s8t9C0a5s6e7"
+            },
+            "expected": "e1s2a3C4t5s6e7T8l9a1n2i3F4e5h6t7s8I9s0i5h6T7"
+        },
+        {
+            "args": {
+                "s": "P@y-2-P@l-1-O!n-0-G!a-5-p%e+L-4-5-h%6-."
+            },
+            "expected": "h@L-2-e@p-1-a!G-0-n!O-5-l%P+y-4-5-P%6-."
+        },
+        {
+            "args": {
+                "s": "z-a-y-b-x-c-w-d-v-e-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a"
+            },
+            "expected": "a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-e-v-d-w-c-x-b-y-a-z"
+        },
+        {
+            "args": {
+                "s": "M-2y-3r-4o-5p"
+            },
+            "expected": "p-2o-3r-4y-5M"
+        },
+        {
+            "args": {
+                "s": "M-i-c-r-o-s-o-f-t-2-0-2-3"
+            },
+            "expected": "t-f-o-s-o-r-c-i-M-2-0-2-3"
+        },
+        {
+            "args": {
+                "s": "A1B2C3D4E5"
+            },
+            "expected": "E1D2C3B4A5"
+        },
+        {
+            "args": {
+                "s": "p-yt_h-nm_g-f_d-c_b-a"
+            },
+            "expected": "a-bc_d-fg_m-n_h-t_y-p"
+        },
+        {
+            "args": {
+                "s": "a1B2C3d4E5f6G7H8"
+            },
+            "expected": "H1G2f3E4d5C6B7a8"
+        },
+        {
+            "args": {
+                "s": "123abc-456def-789ghi"
+            },
+            "expected": "123ihg-456fed-789cba"
+        },
+        {
+            "args": {
+                "s": "x-89y-76z-54w-32v-10u"
+            },
+            "expected": "u-89v-76w-54z-32y-10x"
+        },
+        {
+            "args": {
+                "s": "a-bC-dEf-ghIj-kLmNoP-qRstUv-wXyz"
+            },
+            "expected": "z-yX-wvU-tsRq-PoNmLk-jIhgfE-dCba"
+        },
+        {
+            "args": {
+                "s": "12345-abc-67890"
+            },
+            "expected": "12345-cba-67890"
+        },
+        {
+            "args": {
+                "s": "!@#$%^&*()_+"
+            },
+            "expected": "!@#$%^&*()_+"
+        },
+        {
+            "args": {
+                "s": "Z-y-x-w-v-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a-Z"
+            },
+            "expected": "Z-a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-Z"
+        },
+        {
+            "args": {
+                "s": "a1B2c3D4e5F6g7h8i9j0"
+            },
+            "expected": "j1i2h3g4F5e6D7c8B9a0"
+        },
+        {
+            "args": {
+                "s": "12345-abc!def@gh#ij$kl%mn^op&q*r(s)t+u-v+w,x-y.z/"
+            },
+            "expected": "12345-zyx!wvu@ts#rq$po%nm^lk&j*i(h)g+f-e+d,c-b.a/"
+        },
+        {
+            "args": {
+                "s": "Zebra-123-Quokka"
+            },
+            "expected": "akkou-123-QarbeZ"
+        },
+        {
+            "args": {
+                "s": "-a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z-"
+            },
+            "expected": "-z-y-x-w-v-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a-"
+        },
+        {
+            "args": {
+                "s": "NoChangeHere"
+            },
+            "expected": "ereHegnahCoN"
+        },
+        {
+            "args": {
+                "s": "1234567890"
+            },
+            "expected": 1234567890
+        },
+        {
+            "args": {
+                "s": "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            },
+            "expected": "zZyYxXwWvVuUtTsSrRqQpPoOnNmMlLkKjJiIhHgGfFeEdDcCbBaA"
+        },
+        {
+            "args": {
+                "s": "--hello-+++world---"
+            },
+            "expected": "--dlrow-+++olleh---"
+        },
+        {
+            "args": {
+                "s": "M4ng0_Le3t!"
+            },
+            "expected": "t4eL0_gn3M!"
+        },
+        {
+            "args": {
+                "s": "The quick brown fox jumps over the lazy dog. 123"
+            },
+            "expected": "god yzale htrev osp mujxo fnwo rbk ciuq ehT. 123"
+        },
+        {
+            "args": {
+                "s": "Z-a-Y-b-X-c-W-d-V-e-U-f-T-g-S-h-R-i-Q-j-P-k-L-m-N-o-M-l-K-j-I-h-G-f-E-d-C-b-A"
+            },
+            "expected": "A-b-C-d-E-f-G-h-I-j-K-l-M-o-N-m-L-k-P-j-Q-i-R-h-S-g-T-f-U-e-V-d-W-c-X-b-Y-a-Z"
+        },
+        {
+            "args": {
+                "s": "12345abc!@#def$%^ghi&*()"
+            },
+            "expected": "12345ihg!@#fed$%^cba&*()"
+        },
+        {
+            "args": {
+                "s": "a-bC-dEf-ghIj-klMnOp-QrStUv-WxYz"
+            },
+            "expected": "z-Yx-WvU-tSrQ-pOnMlk-jIhgfE-dCba"
+        },
+        {
+            "args": {
+                "s": "a!b@c#d$e%f^g&h*i(j)k_l+m-n+o*p*q*r-s*t*u*v*w*x*y*z"
+            },
+            "expected": "z!y@x#w$v%u^t&s*r(q)p_o+n-m+l*k*j*i-h*g*f*e*d*c*b*a"
+        },
+        {
+            "args": {
+                "s": "---"
+            },
+            "expected": "---"
+        },
+        {
+            "args": {
+                "s": "sToP-If-YoU-CaN"
+            },
+            "expected": "NaCU-oY-fIP-oTs"
+        },
+        {
+            "args": {
+                "s": "Test1ng-Leet=code-Q!!@#"
+            },
+            "expected": "Qedo1ct-eeLg=ntse-T!!@#"
+        },
+        {
+            "args": {
+                "s": "123-abc-456-def"
+            },
+            "expected": "123-fed-456-cba"
+        },
+        {
+            "args": {
+                "s": "H-e-l-l-o-,-W-o-r-l-d-!"
+            },
+            "expected": "d-l-r-o-W-,-o-l-l-e-H-!"
+        },
+        {
+            "args": {
+                "s": "!@#$%^&*()_+-=[]{}|;':,.<>?"
+            },
+            "expected": "!@#$%^&*()_+-=[]{}|;':,.<>?"
+        },
+        {
+            "args": {
+                "s": "a-bC-dEf-ghIj-kLmNoP-qRsTuVwXyZ"
+            },
+            "expected": "Z-yX-wVu-TsRq-PoNmLk-jIhgfEdCba"
+        },
+        {
+            "args": {
+                "s": "A-man,a-plan,a-canal-Panama!"
+            },
+            "expected": "a-man,a-Plan,a-canal-panamA!"
+        },
+        {
+            "args": {
+                "s": "123--abcXYZ!"
+            },
+            "expected": "123--ZYXcba!"
+        },
+        {
+            "args": {
+                "s": "Python3.8"
+            },
+            "expected": "nohtyP3.8"
+        },
+        {
+            "args": {
+                "s": "M-k-e-e-t-i-n-g-2-0-2-3"
+            },
+            "expected": "g-n-i-t-e-e-k-M-2-0-2-3"
+        },
+        {
+            "args": {
+                "s": "a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z-A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z"
+            },
+            "expected": "Z-Y-X-W-V-U-T-S-R-Q-P-O-N-M-L-K-J-I-H-G-F-E-D-C-B-A-z-y-x-w-v-u-t-s-r-q-p-o-n-m-l-k-j-i-h-g-f-e-d-c-b-a"
+        },
+        {
+            "args": {
+                "s": "a-zA-Z0-9!@#$%^&*()_+=-"
+            },
+            "expected": "Z-Az-a0-9!@#$%^&*()_+=-"
+        },
+        {
+            "args": {
+                "s": "A1B2C3D4E5F6G7H8I9J0"
+            },
+            "expected": "J1I2H3G4F5E6D7C8B9A0"
+        },
+        {
+            "args": {
+                "s": "Reverse-This-String-123"
+            },
+            "expected": "gnirtSs-ihTe-sreveR-123"
+        },
+        {
+            "args": {
+                "s": "M-I-L-O-N"
+            },
+            "expected": "N-O-L-I-M"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().reverseOnlyLetters",
+        "typescript": "Solution().reverseOnlyLetters"
+    }
+}

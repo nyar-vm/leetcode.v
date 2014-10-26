@@ -1,0 +1,565 @@
+{
+    "id": "number-of-ways-of-cutting-a-pizza",
+    "questionId": 1444,
+    "difficulty": "Hard",
+    "tags": ["Memoization", "Array", "Dynamic Programming", "Matrix", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "pizza": ["A", "A", "A"],
+                "k": 3
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "pizza": ["AA", "AA"],
+                "k": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "pizza": ["A.A", "A.A", "A.A"],
+                "k": 4
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "pizza": ["A.A", "A.A", "A.A"],
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": ["...", "...", "...", "...", "...", "...", "AAA"],
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": ["AAA", "...", "AAA"],
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["A..", "A..", "..."],
+                "k": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "pizza": ["AAA", "AAA", "AAA"],
+                "k": 4
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "pizza": ["AA.", "AA.", "..A"],
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["AAA", "AAA", "AAA"],
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["A..", "AA.", "..."],
+                "k": 3
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "pizza": ["A.A", ".A.", "A.A"],
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["A..", "A.."],
+                "k": 2
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "pizza": ["A.A", "A.A"],
+                "k": 2
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "pizza": ["...", "...", "..."],
+                "k": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": ["A..", "AAA", "..."],
+                "k": 3
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "pizza": ["AAAAA", "AA.AA", "AA.AA", "AA.AA", "AAAAA"],
+                "k": 5
+            },
+            "expected": 346
+        },
+        {
+            "args": {
+                "pizza": ["AAAA", "A.AA", "AA.A", "AAAA"],
+                "k": 4
+            },
+            "expected": 56
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", "A....", "A.A.A"],
+                "k": 3
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "pizza": ["A.A", "A.A", "A.A"],
+                "k": 3
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "pizza": ["A...A", ".....", "A...A", ".....", "A...A"],
+                "k": 3
+            },
+            "expected": 36
+        },
+        {
+            "args": {
+                "pizza": ["...A", "...A", "...A"],
+                "k": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "pizza": ["A...", "....", "....", "A..."],
+                "k": 2
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "pizza": ["A...A", ".A.A.", "A...A", ".A.A.", "A...A"],
+                "k": 5
+            },
+            "expected": 198
+        },
+        {
+            "args": {
+                "pizza": ["A.A", ".A.", "A.A"],
+                "k": 3
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "pizza": ["A.A", ".A.", "A.A", ".A.", "A.A"],
+                "k": 3
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "pizza": ["A..A.", "A..A.", "A..A.", "A..A.", "A..A."],
+                "k": 3
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "pizza": ["AAAAAA", "A...A.", "A...A.", "A...A.", "AAAAAA"],
+                "k": 4
+            },
+            "expected": 212
+        },
+        {
+            "args": {
+                "pizza": ["AAAAA", ".....", "AAAAA", ".....", "AAAAA"],
+                "k": 3
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "pizza": ["A...A", ".....", ".....", "A...A"],
+                "k": 3
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A.A.A", ".A.A.A.A.", "A.A.A.A.A", ".A.A.A.A.", "A.A.A.A.A"],
+                "k": 5
+            },
+            "expected": 1955
+        },
+        {
+            "args": {
+                "pizza": ["AAAA", "AAAA", "AAAA", "AAAA"],
+                "k": 5
+            },
+            "expected": 78
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", "A.A.A", "A.A.A"],
+                "k": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", "A.A.A", "A.A.A"],
+                "k": 3
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A.A", "A.A.A.A", "A.A.A.A"],
+                "k": 4
+            },
+            "expected": 98
+        },
+        {
+            "args": {
+                "pizza": ["AAAA", "AAAA", "AAAA"],
+                "k": 3
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "pizza": ["A", "A", "A", "A", "A"],
+                "k": 3
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "pizza": ["A..", "...", "A..", "...", "A.."],
+                "k": 3
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["AA.AA", "A...A", "A...A", "AA.AA"],
+                "k": 3
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "pizza": ["A.....A", "A.....A", "A.....A", "A.....A", "A.....A"],
+                "k": 2
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "pizza": ["AA.", "A..", ".AA"],
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", "A...A", "A.A.A"],
+                "k": 3
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "pizza": ["A....A", "......", "......", "A....A"],
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": ["AAA..", "AAA..", "AAA.."],
+                "k": 3
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "pizza": ["...A", "...A", "A...", "A..."],
+                "k": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", "A.A.A", "A.A.A", "A.A.A", "A.A.A"],
+                "k": 4
+            },
+            "expected": 124
+        },
+        {
+            "args": {
+                "pizza": ["A....", ".....", ".....", ".....", "A...."],
+                "k": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["A...", ".A..", "..A.", "...A"],
+                "k": 4
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "pizza": [".A.A.", "A.A.A", ".A.A.", "A.A.A", ".A.A."],
+                "k": 6
+            },
+            "expected": 256
+        },
+        {
+            "args": {
+                "pizza": ["AAAAA", "A...A", "A...A", "A...A", "AAAAA"],
+                "k": 5
+            },
+            "expected": 346
+        },
+        {
+            "args": {
+                "pizza": ["A....", ".....", ".....", ".....", "....."],
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A.A", ".A.A.A.", "A.A.A.A"],
+                "k": 3
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "pizza": [
+                    "A.A.A.A",
+                    "A.A.A.A",
+                    "A.A.A.A",
+                    "A.A.A.A",
+                    "A.A.A.A",
+                    "A.A.A.A",
+                    "A.A.A.A",
+                    "A.A.A.A"
+                ],
+                "k": 8
+            },
+            "expected": 15387
+        },
+        {
+            "args": {
+                "pizza": ["A...", ".A.A", "....", "A..."],
+                "k": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A.A", ".A.A.", "A.A.A.A", ".A.A.", "A.A.A.A"],
+                "k": 6
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": [
+                    "........",
+                    "...A....",
+                    "........",
+                    "........",
+                    "........",
+                    "........",
+                    "........",
+                    "........"
+                ],
+                "k": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": [".A..A.", "A..A..", ".A..A.", "A..A..", ".A..A."],
+                "k": 3
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "pizza": ["A..A", "....", "A..A", "...."],
+                "k": 3
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", ".A.A.", "A.A.A"],
+                "k": 3
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "pizza": ["A.AAA.A", "AAAAAAA", "AA.AAA.A", "AAAAAAA", "A.AAA.A"],
+                "k": 5
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A.A", ".A.A.A.", "A.A.A.A", ".A.A.A."],
+                "k": 3
+            },
+            "expected": 51
+        },
+        {
+            "args": {
+                "pizza": ["AAAAA", "A...A", "A...A", "A...A", "AAAAA"],
+                "k": 4
+            },
+            "expected": 152
+        },
+        {
+            "args": {
+                "pizza": ["A......", "A......", "A......", ".......", ".......", "......."],
+                "k": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "pizza": ["A.A", "A.A", "A.A", "A.A", "A.A"],
+                "k": 4
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", "A...A", "A...A", "A...A", "A.A.A"],
+                "k": 5
+            },
+            "expected": 209
+        },
+        {
+            "args": {
+                "pizza": ["AAAAA", "AAAAA", ".....", ".....", "....."],
+                "k": 3
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", ".A.A.", "A.A.A"],
+                "k": 4
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A", ".....", "A.A.A", ".....", "A.A.A"],
+                "k": 5
+            },
+            "expected": 96
+        },
+        {
+            "args": {
+                "pizza": [
+                    "A.A.A.A",
+                    ".A.A.A.",
+                    "A.A.A.A",
+                    ".A.A.A.",
+                    "A.A.A.A",
+                    ".A.A.A.",
+                    "A.A.A.A",
+                    ".A.A.A."
+                ],
+                "k": 6
+            },
+            "expected": 8692
+        },
+        {
+            "args": {
+                "pizza": ["A.A..", ".A.A.", "..A.A"],
+                "k": 3
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "pizza": ["A....", ".A...", "..A.."],
+                "k": 3
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "pizza": ["A....", "..A..", "....A", ".....", "....."],
+                "k": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": ["A.A.A.A", ".....", "A.A.A.A", ".....", "A.A.A.A"],
+                "k": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "pizza": [
+                    "A......A",
+                    ".......A",
+                    "....A...",
+                    "A........A",
+                    ".......A",
+                    ".......A",
+                    ".......A"
+                ],
+                "k": 5
+            },
+            "expected": "Error: list index out of range"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().ways",
+        "typescript": "Solution().ways"
+    }
+}

@@ -1,0 +1,2246 @@
+{
+    "id": "vowel-spellchecker",
+    "questionId": 966,
+    "difficulty": "Medium",
+    "tags": ["Array", "Hash Table", "String"],
+    "tests": [
+        {
+            "args": {
+                "wordlist": ["aeiou", "AEIOU"],
+                "queries": ["aeio", "aeiou", "AEIOU", "eioua"]
+            },
+            "expected": ["", "aeiou", "AEIOU", "aeiou"]
+        },
+        {
+            "args": {
+                "wordlist": ["aaaaa", "Aaaaa"],
+                "queries": ["Aaaaa", "aaaaa", "aaAaa", "aAaaa", "AaAaa"]
+            },
+            "expected": ["Aaaaa", "aaaaa", "aaaaa", "aaaaa", "aaaaa"]
+        },
+        {
+            "args": {
+                "wordlist": ["yellow"],
+                "queries": ["YellOw"]
+            },
+            "expected": ["yellow"]
+        },
+        {
+            "args": {
+                "wordlist": ["apple", "Apple", "apples"],
+                "queries": ["apples", "APPLES", "applesa", "applee"]
+            },
+            "expected": ["apples", "apples", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["KiTe", "kite", "hare", "Hare"],
+                "queries": [
+                    "kite",
+                    "Kite",
+                    "KiTe",
+                    "Hare",
+                    "HARE",
+                    "Hear",
+                    "hear",
+                    "keti",
+                    "keet",
+                    "keto"
+                ]
+            },
+            "expected": ["kite", "KiTe", "KiTe", "Hare", "hare", "", "", "KiTe", "", "KiTe"]
+        },
+        {
+            "args": {
+                "wordlist": ["onomatopoeia", "ONOMATOPOEIA", "Onomatopoeia", "oNomatopoeia"],
+                "queries": [
+                    "onomatopoeia",
+                    "ONOMATOPOEIA",
+                    "Onomatopoeia",
+                    "oNomatopoeia",
+                    "onomatopeiaa",
+                    "onomatopoei"
+                ]
+            },
+            "expected": [
+                "onomatopoeia",
+                "ONOMATOPOEIA",
+                "Onomatopoeia",
+                "oNomatopoeia",
+                "onomatopoeia",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "university", "underground", "unicorn", "uppercut"],
+                "queries": [
+                    "UMBRELLA",
+                    "UNIVERSITY",
+                    "UNDERGROUND",
+                    "UNICORN",
+                    "UPPERCUT",
+                    "umbrlla",
+                    "universit",
+                    "undergroand",
+                    "unicor",
+                    "upperct",
+                    "Umbrella",
+                    "Unversity",
+                    "Uderground",
+                    "Uinicorn",
+                    "Uppercut"
+                ]
+            },
+            "expected": [
+                "umbrella",
+                "university",
+                "underground",
+                "unicorn",
+                "uppercut",
+                "",
+                "",
+                "underground",
+                "",
+                "",
+                "umbrella",
+                "",
+                "",
+                "",
+                "uppercut"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["bicycle", "Bicycle", "BIcycle", "bIcycle", "biCycle", "bicyCLE"],
+                "queries": [
+                    "bicycle",
+                    "Bicycle",
+                    "BIcycle",
+                    "bIcycle",
+                    "biCycle",
+                    "bicyCLE",
+                    "bicyclE",
+                    "bicyclE",
+                    "bicycLe",
+                    "bicyclE",
+                    "bicycleE"
+                ]
+            },
+            "expected": [
+                "bicycle",
+                "Bicycle",
+                "BIcycle",
+                "bIcycle",
+                "biCycle",
+                "bicyCLE",
+                "bicycle",
+                "bicycle",
+                "bicycle",
+                "bicycle",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["dictionary", "Dictionary", "DICTIONARY", "DictIoNaRy"],
+                "queries": [
+                    "dictioNary",
+                    "DICTIONARY",
+                    "dictionary",
+                    "dIctionarY",
+                    "DictioNaryy",
+                    "dictionar"
+                ]
+            },
+            "expected": ["dictionary", "DICTIONARY", "dictionary", "dictionary", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["banana", "Banana", "BANANA", "banAnA"],
+                "queries": ["banana", "Banana", "BANANA", "banAnA", "bananA", "bananaa", "BANANAS"]
+            },
+            "expected": ["banana", "Banana", "BANANA", "banAnA", "banana", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["interview", "INTERVIEW", "Interview", "inTerView"],
+                "queries": [
+                    "interview",
+                    "INTERVIEW",
+                    "Interview",
+                    "inTerView",
+                    "interviw",
+                    "intervew"
+                ]
+            },
+            "expected": ["interview", "INTERVIEW", "Interview", "inTerView", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "university",
+                    "UNIVERSITY",
+                    "University",
+                    "universitry",
+                    "universitie"
+                ],
+                "queries": [
+                    "university",
+                    "UNIVERSITY",
+                    "University",
+                    "universitry",
+                    "universitie",
+                    "universitry"
+                ]
+            },
+            "expected": [
+                "university",
+                "UNIVERSITY",
+                "University",
+                "universitry",
+                "universitie",
+                "universitry"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["AbCdE", "abcdE", "aBcDe", "abCDE", "abcde"],
+                "queries": [
+                    "AbCdE",
+                    "Abcde",
+                    "abcde",
+                    "aBcDe",
+                    "abCDE",
+                    "ABCDE",
+                    "abcde",
+                    "AbCdF",
+                    "AbCdEe"
+                ]
+            },
+            "expected": ["AbCdE", "AbCdE", "abcde", "aBcDe", "abCDE", "AbCdE", "abcde", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "AbCdE",
+                    "abCDe",
+                    "aBcDe",
+                    "ABCDe",
+                    "abcde",
+                    "aBcde",
+                    "abCde",
+                    "ABCDE"
+                ],
+                "queries": [
+                    "abcde",
+                    "ABCDE",
+                    "AbCdE",
+                    "abcde",
+                    "aBcDe",
+                    "ABcDe",
+                    "abcdef",
+                    "aBcde",
+                    "ABCDe",
+                    "abCDe"
+                ]
+            },
+            "expected": [
+                "abcde",
+                "ABCDE",
+                "AbCdE",
+                "abcde",
+                "aBcDe",
+                "AbCdE",
+                "",
+                "aBcde",
+                "ABCDe",
+                "abCDe"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["xylophone", "Xylophone", "XYLOPHONE", "xYlOpHoNe"],
+                "queries": [
+                    "xylophone",
+                    "Xylophone",
+                    "XYLOPHONE",
+                    "xYlOpHoNe",
+                    "xylopon",
+                    "xylofon"
+                ]
+            },
+            "expected": ["xylophone", "Xylophone", "XYLOPHONE", "xYlOpHoNe", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "UmBrella", "Umbrella", "UMBRELLA"],
+                "queries": [
+                    "UMBRELLA",
+                    "umbrELLA",
+                    "umbrelLA",
+                    "umbrella",
+                    "UmBrelLA",
+                    "UMBRELLAA",
+                    "umbrellaa"
+                ]
+            },
+            "expected": ["UMBRELLA", "umbrella", "umbrella", "umbrella", "umbrella", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "Umbrella", "UMBRELLA", "umbralla", "Umbralla"],
+                "queries": [
+                    "umbrella",
+                    "Umbrella",
+                    "UMBRELLA",
+                    "umbralla",
+                    "Umbralla",
+                    "umbrallaS",
+                    "umbrellA",
+                    "UmbrallA",
+                    "UMbralla",
+                    "UmbrAlla"
+                ]
+            },
+            "expected": [
+                "umbrella",
+                "Umbrella",
+                "UMBRELLA",
+                "umbralla",
+                "Umbralla",
+                "",
+                "umbrella",
+                "umbralla",
+                "umbralla",
+                "umbralla"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "beautiful",
+                    "Beautiful",
+                    "BEAUTIFUL",
+                    "beautifull",
+                    "beautifu",
+                    "beautifulll"
+                ],
+                "queries": [
+                    "beautiful",
+                    "Beautiful",
+                    "BEAUTIFUL",
+                    "beautifull",
+                    "beautifu",
+                    "beautifulll",
+                    "beautifulll",
+                    "beautifull",
+                    "beautifuul",
+                    "beautiul"
+                ]
+            },
+            "expected": [
+                "beautiful",
+                "Beautiful",
+                "BEAUTIFUL",
+                "beautifull",
+                "beautifu",
+                "beautifulll",
+                "beautifulll",
+                "beautifull",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["banana", "Banana", "BANANA", "bandana", "BandAna"],
+                "queries": [
+                    "banana",
+                    "Banana",
+                    "BANANA",
+                    "bandana",
+                    "BANDANA",
+                    "bandanna",
+                    "bandanna",
+                    "bndn",
+                    "bandn"
+                ]
+            },
+            "expected": ["banana", "Banana", "BANANA", "bandana", "bandana", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["beautiful", "BeAuTiFuL", "BEautiful", "bEAUtIfUl", "bEAUtIFuL"],
+                "queries": [
+                    "beautiful",
+                    "BeAuTiFuL",
+                    "BEautiful",
+                    "bEAUtIfUl",
+                    "bEAUtIFuL",
+                    "beautifuls",
+                    "BeAuTiFuLs",
+                    "BEautifuls",
+                    "bEAUtIfUls"
+                ]
+            },
+            "expected": [
+                "beautiful",
+                "BeAuTiFuL",
+                "BEautiful",
+                "bEAUtIfUl",
+                "bEAUtIFuL",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "environment",
+                    "ENVIRONMENT",
+                    "EnViRonMeNt",
+                    "ENvIrOnMeNt",
+                    "ENvIrOnMeNT"
+                ],
+                "queries": [
+                    "environment",
+                    "ENVIRONMENT",
+                    "EnViRonMeNt",
+                    "ENvIrOnMeNt",
+                    "ENvIrOnMeNT",
+                    "environments",
+                    "ENVIRONMENTs",
+                    "EnViRonMeNts",
+                    "ENvIrOnMeNts"
+                ]
+            },
+            "expected": [
+                "environment",
+                "ENVIRONMENT",
+                "EnViRonMeNt",
+                "ENvIrOnMeNt",
+                "ENvIrOnMeNT",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "algorithm",
+                    "Algorithm",
+                    "ALGORITHM",
+                    "algorithem",
+                    "algoritum",
+                    "algorith",
+                    "algorithmmm"
+                ],
+                "queries": [
+                    "algorithm",
+                    "Algorithm",
+                    "ALGORITHM",
+                    "algorithem",
+                    "algoritum",
+                    "algorith",
+                    "algorithmmm",
+                    "algorithmmm",
+                    "algorithmm",
+                    "algorithmm"
+                ]
+            },
+            "expected": [
+                "algorithm",
+                "Algorithm",
+                "ALGORITHM",
+                "algorithem",
+                "algoritum",
+                "algorith",
+                "algorithmmm",
+                "algorithmmm",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["education", "environment", "elevation", "excavation", "explanation"],
+                "queries": [
+                    "Education",
+                    "Environment",
+                    "Elevation",
+                    "Excavation",
+                    "Explanation",
+                    "edication",
+                    "enviroment",
+                    "elevatoin",
+                    "exacation",
+                    "explanatoin",
+                    "educatio",
+                    "environmnt",
+                    "elevatn",
+                    "excavtn",
+                    "explntion",
+                    "educatoin",
+                    "enivornment",
+                    "elevtn",
+                    "excavatn",
+                    "explanatn",
+                    "educati",
+                    "environmt",
+                    "elevtn",
+                    "excavtn",
+                    "explntn"
+                ]
+            },
+            "expected": [
+                "education",
+                "environment",
+                "elevation",
+                "excavation",
+                "explanation",
+                "education",
+                "",
+                "elevation",
+                "",
+                "explanation",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "education",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["education", "EDUCATION", "Education", "edUcation"],
+                "queries": [
+                    "EDUCATION",
+                    "education",
+                    "Education",
+                    "edUcation",
+                    "educatiion",
+                    "eduCation"
+                ]
+            },
+            "expected": ["EDUCATION", "education", "Education", "edUcation", "", "education"]
+        },
+        {
+            "args": {
+                "wordlist": ["elephant", "ElEphant", "ELEPHANT", "elePHANT", "eLePHANT"],
+                "queries": [
+                    "elephant",
+                    "elePHANT",
+                    "eLePHANT",
+                    "elePHAN",
+                    "ElePHAN",
+                    "eLEPHAN",
+                    "ELephAN",
+                    "elePHANt"
+                ]
+            },
+            "expected": ["elephant", "elePHANT", "eLePHANT", "", "", "", "", "elephant"]
+        },
+        {
+            "args": {
+                "wordlist": ["education", "EDUCATION", "EduCation", "educate", "educating"],
+                "queries": [
+                    "education",
+                    "EDUCATION",
+                    "EduCation",
+                    "educate",
+                    "educatin",
+                    "Educating"
+                ]
+            },
+            "expected": ["education", "EDUCATION", "EduCation", "educate", "", "educating"]
+        },
+        {
+            "args": {
+                "wordlist": ["elephant", "giraffe", "hippo", "rhino", "zebra", "lemur"],
+                "queries": [
+                    "Elephant",
+                    "Giraffe",
+                    "Hippo",
+                    "Rhino",
+                    "Zebra",
+                    "Lemur",
+                    "elphant",
+                    "giraff",
+                    "hippo",
+                    "rhin",
+                    "zebr",
+                    "lemr",
+                    "elphantt",
+                    "giraffe",
+                    "hippp",
+                    "rhinno",
+                    "zebraa",
+                    "lemur",
+                    "elephant",
+                    "giraffe",
+                    "hippo",
+                    "rhino",
+                    "zebra",
+                    "lemur",
+                    "elephants",
+                    "giraffes",
+                    "hippos",
+                    "rhinos",
+                    "zebras",
+                    "lemurs"
+                ]
+            },
+            "expected": [
+                "elephant",
+                "giraffe",
+                "hippo",
+                "rhino",
+                "zebra",
+                "lemur",
+                "",
+                "",
+                "hippo",
+                "",
+                "",
+                "",
+                "",
+                "giraffe",
+                "",
+                "",
+                "",
+                "lemur",
+                "elephant",
+                "giraffe",
+                "hippo",
+                "rhino",
+                "zebra",
+                "lemur",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["algorithm", "AlgoritHM", "aLgoRitHm", "alGoRiThM"],
+                "queries": [
+                    "algorithm",
+                    "AlgoritHM",
+                    "aLgoRitHm",
+                    "alGoRiThM",
+                    "algoriTHM",
+                    "AlgoRiThM",
+                    "aLGorIthM",
+                    "AlGorIthM",
+                    "algOrIthM"
+                ]
+            },
+            "expected": [
+                "algorithm",
+                "AlgoritHM",
+                "aLgoRitHm",
+                "alGoRiThM",
+                "algorithm",
+                "algorithm",
+                "algorithm",
+                "algorithm",
+                "algorithm"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["education", "EDUCATION", "EducAtion", "eDUCAtion"],
+                "queries": [
+                    "EDUCATION",
+                    "educAtion",
+                    "eDUCAtion",
+                    "EDucAtion",
+                    "educAtioN",
+                    "EDucAtioN",
+                    "educatiOn",
+                    "EDucatiOn"
+                ]
+            },
+            "expected": [
+                "EDUCATION",
+                "education",
+                "eDUCAtion",
+                "education",
+                "education",
+                "education",
+                "education",
+                "education"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["education", "EDUCATION", "EduCatiOn", "eDUCaTIOn", "EDuCAtIoN"],
+                "queries": [
+                    "education",
+                    "EDUCATION",
+                    "EduCatiOn",
+                    "eDUCaTIOn",
+                    "EDuCAtIoN",
+                    "educations",
+                    "EDUCATIONS",
+                    "EduCatiOns",
+                    "eDUCaTIOns"
+                ]
+            },
+            "expected": [
+                "education",
+                "EDUCATION",
+                "EduCatiOn",
+                "eDUCaTIOn",
+                "EDuCAtIoN",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "uMBrElLa", "UMBRELLA", "umbrellA", "umbralla"],
+                "queries": [
+                    "umbrella",
+                    "uMBrElLa",
+                    "UMBRELLA",
+                    "umbrellA",
+                    "umbralla",
+                    "UMBRELLAA",
+                    "uMBrElLAA",
+                    "UMBRELLAAA",
+                    "umbrallaA"
+                ]
+            },
+            "expected": ["umbrella", "uMBrElLa", "UMBRELLA", "umbrellA", "umbralla", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "elephant",
+                    "Elephant",
+                    "ELEPHANT",
+                    "elevnt",
+                    "elphant",
+                    "elefant",
+                    "elephantt"
+                ],
+                "queries": [
+                    "elephant",
+                    "Elephant",
+                    "ELEPHANT",
+                    "elevnt",
+                    "elphant",
+                    "elefant",
+                    "elephantt",
+                    "elphnt",
+                    "elphntt",
+                    "elphnta"
+                ]
+            },
+            "expected": [
+                "elephant",
+                "Elephant",
+                "ELEPHANT",
+                "elevnt",
+                "elphant",
+                "elefant",
+                "elephantt",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "environment",
+                    "Environment",
+                    "ENVIRONMENT",
+                    "environmnt",
+                    "Environmnt",
+                    "environMent"
+                ],
+                "queries": [
+                    "environment",
+                    "Environment",
+                    "ENVIRONMENT",
+                    "environmnt",
+                    "Environmnt",
+                    "environMent",
+                    "environMnt",
+                    "environmEnt",
+                    "environmEnts",
+                    "environmEnt"
+                ]
+            },
+            "expected": [
+                "environment",
+                "Environment",
+                "ENVIRONMENT",
+                "environmnt",
+                "Environmnt",
+                "environMent",
+                "environmnt",
+                "environment",
+                "",
+                "environment"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["beautiful", "Beautiful", "BEAUTIFUL", "beautifull", "beautifu"],
+                "queries": [
+                    "beautiful",
+                    "Beautiful",
+                    "BEAUTIFUL",
+                    "beautifull",
+                    "beautifu",
+                    "beautifull"
+                ]
+            },
+            "expected": [
+                "beautiful",
+                "Beautiful",
+                "BEAUTIFUL",
+                "beautifull",
+                "beautifu",
+                "beautifull"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["baNana", "Banana", "BANANA", "baNANa"],
+                "queries": ["banana", "BANANA", "BaNaNa", "bananA", "baNANaa", "bAnanaa"]
+            },
+            "expected": ["baNana", "BANANA", "baNana", "baNana", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["dictionary", "Dictionary", "DICTIONARY", "dictionry", "Dictionry"],
+                "queries": [
+                    "dictionary",
+                    "Dictionary",
+                    "DICTIONARY",
+                    "dictionry",
+                    "Dictionry",
+                    "dictionryS",
+                    "dictionryY",
+                    "dictiOnary",
+                    "dictioNary",
+                    "dictionry"
+                ]
+            },
+            "expected": [
+                "dictionary",
+                "Dictionary",
+                "DICTIONARY",
+                "dictionry",
+                "Dictionry",
+                "",
+                "",
+                "dictionary",
+                "dictionary",
+                "dictionry"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["programming", "Programming", "PROGRAMMING", "proGramMinG"],
+                "queries": [
+                    "programming",
+                    "Programming",
+                    "PROGRAMMING",
+                    "proGramMinG",
+                    "prograMMing",
+                    "ProgramMiNG",
+                    "PROgRaMMiNG",
+                    "pRoGrAmMiNg",
+                    "programmingg",
+                    "proGramming"
+                ]
+            },
+            "expected": [
+                "programming",
+                "Programming",
+                "PROGRAMMING",
+                "proGramMinG",
+                "programming",
+                "programming",
+                "programming",
+                "programming",
+                "",
+                "programming"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["keyboard", "KeyboArD", "KEYBOARD", "keyboARd"],
+                "queries": [
+                    "keyboard",
+                    "keyboarD",
+                    "KEYBOArd",
+                    "KEYboArd",
+                    "keyboARd",
+                    "KEYboARd",
+                    "keyboArD",
+                    "KEYBOArD"
+                ]
+            },
+            "expected": [
+                "keyboard",
+                "keyboard",
+                "keyboard",
+                "keyboard",
+                "keyboARd",
+                "keyboard",
+                "keyboard",
+                "keyboard"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "sequence",
+                    "Sequence",
+                    "SEQUENCE",
+                    "sequense",
+                    "sequnce",
+                    "sequenec",
+                    "sequencee"
+                ],
+                "queries": [
+                    "sequence",
+                    "Sequence",
+                    "SEQUENCE",
+                    "sequense",
+                    "sequnce",
+                    "sequenec",
+                    "sequencee",
+                    "seqeunce",
+                    "sequnce",
+                    "sequnc"
+                ]
+            },
+            "expected": [
+                "sequence",
+                "Sequence",
+                "SEQUENCE",
+                "sequense",
+                "sequnce",
+                "sequenec",
+                "sequencee",
+                "sequence",
+                "sequnce",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "Umbrella", "UMBRELLA", "UmBReLlA"],
+                "queries": [
+                    "umbrella",
+                    "UMBRELLA",
+                    "Umbrella",
+                    "umBReLlA",
+                    "Umbr3lla",
+                    "umbrellaa",
+                    "UMBRELLAA"
+                ]
+            },
+            "expected": ["umbrella", "UMBRELLA", "Umbrella", "umbrella", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "programming",
+                    "ProgramMING",
+                    "proGRaMMiNG",
+                    "prograMMiNG",
+                    "proGRammING"
+                ],
+                "queries": [
+                    "programming",
+                    "ProgramMING",
+                    "proGRaMMiNG",
+                    "prograMMiNG",
+                    "proGRammING",
+                    "progrAMMING",
+                    "prograMmING",
+                    "progrAmmiNG"
+                ]
+            },
+            "expected": [
+                "programming",
+                "ProgramMING",
+                "proGRaMMiNG",
+                "prograMMiNG",
+                "proGRammING",
+                "programming",
+                "programming",
+                "programming"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["cAt", "cAts", "bAt", "bat", "bats", "cAtBat"],
+                "queries": [
+                    "cats",
+                    "CATS",
+                    "cat",
+                    "bat",
+                    "bAts",
+                    "CATBAT",
+                    "caTbAt",
+                    "batS",
+                    "CAT",
+                    "bAt"
+                ]
+            },
+            "expected": [
+                "cAts",
+                "cAts",
+                "cAt",
+                "bat",
+                "bats",
+                "cAtBat",
+                "cAtBat",
+                "bats",
+                "cAt",
+                "bAt"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["queue", "Queue", "QUEUE", "qUeUe"],
+                "queries": [
+                    "queue",
+                    "Queue",
+                    "QUEUE",
+                    "qUeUe",
+                    "queuE",
+                    "QUeUe",
+                    "qUEUe",
+                    "QUEue",
+                    "quEUe",
+                    "qUeue"
+                ]
+            },
+            "expected": [
+                "queue",
+                "Queue",
+                "QUEUE",
+                "qUeUe",
+                "queue",
+                "queue",
+                "queue",
+                "queue",
+                "queue",
+                "queue"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["kiwi", "Kiwi", "KIWI", "kIWi", "KiwI"],
+                "queries": ["kiwi", "Kiwi", "KIWI", "kIWi", "KiwI", "kiw", "KIW", "kiwiwi", "kiwii"]
+            },
+            "expected": ["kiwi", "Kiwi", "KIWI", "kIWi", "KiwI", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "strawberry",
+                    "Strawberry",
+                    "STRAWBERRY",
+                    "stRawberry",
+                    "strAWberry",
+                    "strawbERRY"
+                ],
+                "queries": [
+                    "strawberry",
+                    "Strawberry",
+                    "STRAWBERRY",
+                    "stRawberry",
+                    "strAWberry",
+                    "strawbERRY",
+                    "straw",
+                    "strawberryy",
+                    "strawberrrry"
+                ]
+            },
+            "expected": [
+                "strawberry",
+                "Strawberry",
+                "STRAWBERRY",
+                "stRawberry",
+                "strAWberry",
+                "strawbERRY",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "programming",
+                    "PROGRAMMING",
+                    "ProgRaMmInG",
+                    "PROgRaMMiNg",
+                    "pROgRaMMiNG"
+                ],
+                "queries": [
+                    "programming",
+                    "PROGRAMMING",
+                    "ProgRaMmInG",
+                    "PROgRaMMiNg",
+                    "pROgRaMMiNG",
+                    "programmings",
+                    "PROGRAMMINGs",
+                    "ProgRaMmInGs",
+                    "PROgRaMMiNgs"
+                ]
+            },
+            "expected": [
+                "programming",
+                "PROGRAMMING",
+                "ProgRaMmInG",
+                "PROgRaMMiNg",
+                "pROgRaMMiNG",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["orange", "Orange", "ORANGE", "oRANGE", "orANGE"],
+                "queries": [
+                    "orange",
+                    "Orange",
+                    "ORANGE",
+                    "oRANGE",
+                    "orANGE",
+                    "orang",
+                    "ORANG",
+                    "oranje",
+                    "orng"
+                ]
+            },
+            "expected": ["orange", "Orange", "ORANGE", "oRANGE", "orANGE", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["success", "SUCCESS", "Success", "succes", "succesful"],
+                "queries": ["success", "SUCCESS", "Success", "succes", "succesful", "succesful"]
+            },
+            "expected": ["success", "SUCCESS", "Success", "succes", "succesful", "succesful"]
+        },
+        {
+            "args": {
+                "wordlist": ["apple", "orange", "banana", "grape", "kiwi"],
+                "queries": [
+                    "Apple",
+                    "ORANGE",
+                    "BANANA",
+                    "Grape",
+                    "KIWI",
+                    "aple",
+                    "oranje",
+                    "bananna",
+                    "grapee",
+                    "kiwii",
+                    "appl",
+                    "orang",
+                    "banan",
+                    "grap",
+                    "kiw"
+                ]
+            },
+            "expected": [
+                "apple",
+                "orange",
+                "banana",
+                "grape",
+                "kiwi",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["algorithm", "ALGORITHM", "AlGORITHM", "alGORITHM"],
+                "queries": [
+                    "algorithm",
+                    "ALGORITHM",
+                    "AlGORITHM",
+                    "alGORITHM",
+                    "algorithM",
+                    "algorithmm"
+                ]
+            },
+            "expected": ["algorithm", "ALGORITHM", "AlGORITHM", "alGORITHM", "algorithm", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["necessary", "NECESSARY", "Necessary", "nessecary", "nessecery"],
+                "queries": [
+                    "necessary",
+                    "NECESSARY",
+                    "Necessary",
+                    "nessecary",
+                    "nessecery",
+                    "nessecery"
+                ]
+            },
+            "expected": [
+                "necessary",
+                "NECESSARY",
+                "Necessary",
+                "nessecary",
+                "nessecery",
+                "nessecery"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "pneumonoultramicroscopicsilicovolcanoconiosis",
+                    "pneumOnoultramicroscopicsilicovolcanoconiosis",
+                    "Pneumonoultramicroscopicsilicovolcanoconiosis"
+                ],
+                "queries": [
+                    "pneumonoultramicroscopicsilicovolcanoconiosis",
+                    "PNEUMONoultramicroscopicsilicovolcanoconiosis",
+                    "pneumOnoultramicroscopicsilicovolcanoconiosis",
+                    "PNEUMOnoultramicroscopicsilicovolcanoconiosis",
+                    "pneumOnoultramicroscopicsilicovolcanoconiosa"
+                ]
+            },
+            "expected": [
+                "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "pneumOnoultramicroscopicsilicovolcanoconiosis",
+                "pneumonoultramicroscopicsilicovolcanoconiosis",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "CompUter",
+                    "compuTer",
+                    "COMPUTer",
+                    "compuTER",
+                    "comPUTER",
+                    "computER",
+                    "COMputer",
+                    "computeR"
+                ],
+                "queries": ["COMPUTER", "computor", "COMpuTer", "compuTER", "compUter", "computerr"]
+            },
+            "expected": ["CompUter", "CompUter", "CompUter", "compuTER", "CompUter", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "Umbrella", "UMBRELLA", "umberella", "UmbereLLa"],
+                "queries": [
+                    "umbrella",
+                    "Umbrella",
+                    "UMBRELLA",
+                    "umberella",
+                    "UmbereLLa",
+                    "umbrrella",
+                    "umbralla",
+                    "umrellla",
+                    "umbrela",
+                    "umbrelal"
+                ]
+            },
+            "expected": [
+                "umbrella",
+                "Umbrella",
+                "UMBRELLA",
+                "umberella",
+                "UmbereLLa",
+                "",
+                "umbrella",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["grape", "Grape", "GRape", "gRAPE", "grAPE"],
+                "queries": ["grape", "Grape", "GRape", "gRAPE", "grAPE", "grapE", "GrapeS"]
+            },
+            "expected": ["grape", "Grape", "GRape", "gRAPE", "grAPE", "grape", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["watermelon", "Watermelon", "WATERMELON", "watERmelon", "waterMELON"],
+                "queries": [
+                    "watermelon",
+                    "Watermelon",
+                    "WATERMELON",
+                    "watERmelon",
+                    "waterMELON",
+                    "wtermelon",
+                    "WATERMELLO",
+                    "watermelonn",
+                    "watermelont"
+                ]
+            },
+            "expected": [
+                "watermelon",
+                "Watermelon",
+                "WATERMELON",
+                "watERmelon",
+                "waterMELON",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "intelligence",
+                    "Intelligence",
+                    "INTELLIGENCE",
+                    "intelligENce",
+                    "intelligenCE",
+                    "INTElligenCE"
+                ],
+                "queries": [
+                    "intelligence",
+                    "Intelligence",
+                    "INTELLIGENCE",
+                    "intelligENce",
+                    "intelligenCE",
+                    "INTElligenCE",
+                    "intelligenCe",
+                    "INTElligenCe",
+                    "INTElligence"
+                ]
+            },
+            "expected": [
+                "intelligence",
+                "Intelligence",
+                "INTELLIGENCE",
+                "intelligENce",
+                "intelligenCE",
+                "INTElligenCE",
+                "intelligence",
+                "intelligence",
+                "intelligence"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "relationship",
+                    "Relationship",
+                    "RELATIONSHIP",
+                    "relashionship",
+                    "Relashionship"
+                ],
+                "queries": [
+                    "relationship",
+                    "Relationship",
+                    "RELATIONSHIP",
+                    "relashionship",
+                    "Relashionship",
+                    "relaship",
+                    "relashionships",
+                    "Relashionships",
+                    "RELashionship",
+                    "relashionship"
+                ]
+            },
+            "expected": [
+                "relationship",
+                "Relationship",
+                "RELATIONSHIP",
+                "relashionship",
+                "Relashionship",
+                "",
+                "",
+                "",
+                "relashionship",
+                "relashionship"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "education",
+                    "EDUCATION",
+                    "eDucAtIoN",
+                    "educatiOn",
+                    "edUcatioN",
+                    "edUcatioN",
+                    "educAtiOn",
+                    "edUcaTion",
+                    "eDUCatiOn"
+                ],
+                "queries": [
+                    "education",
+                    "EDUCATION",
+                    "eDucAtIoN",
+                    "educatiOn",
+                    "edUcatioN",
+                    "edUcatioN",
+                    "educAtiOn",
+                    "edUcaTion",
+                    "eDUCatiOn",
+                    "educatioN"
+                ]
+            },
+            "expected": [
+                "education",
+                "EDUCATION",
+                "eDucAtIoN",
+                "educatiOn",
+                "edUcatioN",
+                "edUcatioN",
+                "educAtiOn",
+                "edUcaTion",
+                "eDUCatiOn",
+                "education"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["elephant", "Elephant", "elePHant", "ELEPHANT"],
+                "queries": [
+                    "elephant",
+                    "Elephant",
+                    "elePHant",
+                    "ELEPHANT",
+                    "elphant",
+                    "ELPHNT",
+                    "elefant",
+                    "elphantt"
+                ]
+            },
+            "expected": ["elephant", "Elephant", "elePHant", "ELEPHANT", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "developer",
+                    "DEVELOPER",
+                    "DevEloPer",
+                    "develoPER",
+                    "develoPer",
+                    "DEveloPer"
+                ],
+                "queries": [
+                    "developer",
+                    "DEVELOPER",
+                    "DevEloPer",
+                    "develoPER",
+                    "develoPer",
+                    "DEveloPer",
+                    "devEloPer",
+                    "DEvelOpEr"
+                ]
+            },
+            "expected": [
+                "developer",
+                "DEVELOPER",
+                "DevEloPer",
+                "develoPER",
+                "develoPer",
+                "DEveloPer",
+                "developer",
+                "developer"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["flying", "FLYING", "FlyIng", "FLyInG", "fLyInG", "FLYing"],
+                "queries": [
+                    "flying",
+                    "FLYING",
+                    "flyIng",
+                    "FLyInG",
+                    "fLyInG",
+                    "FLYing",
+                    "FLyInG",
+                    "FLYINGg",
+                    "FLYINGgg"
+                ]
+            },
+            "expected": [
+                "flying",
+                "FLYING",
+                "flying",
+                "FLyInG",
+                "fLyInG",
+                "FLYing",
+                "FLyInG",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "algorithm",
+                    "algoritm",
+                    "algorithmic",
+                    "algorithem",
+                    "algoritm",
+                    "algorit",
+                    "algorithmically"
+                ],
+                "queries": [
+                    "Algorithm",
+                    "Algoritm",
+                    "Algorithmic",
+                    "Algorithem",
+                    "Algoritm",
+                    "Algorit",
+                    "Algorithmically",
+                    "alorithm",
+                    "algrthm",
+                    "algorithmc",
+                    "algrthm",
+                    "algrthm",
+                    "algorithmiclly",
+                    "alorithm",
+                    "algrthm",
+                    "algorithmc",
+                    "algrthm",
+                    "algrthm",
+                    "algorithmc",
+                    "alorithm",
+                    "algrthm",
+                    "algorithmc",
+                    "algrthm",
+                    "algrthm",
+                    "algorithmc"
+                ]
+            },
+            "expected": [
+                "algorithm",
+                "algoritm",
+                "algorithmic",
+                "algorithem",
+                "algoritm",
+                "algorit",
+                "algorithmically",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["fantastic", "Fantastic", "FANTASTIC", "fantastiv", "Fantastiv"],
+                "queries": [
+                    "fantastic",
+                    "Fantastic",
+                    "FANTASTIC",
+                    "fantastiv",
+                    "Fantastiv",
+                    "fantasticv",
+                    "fantastivv",
+                    "Fantastiv",
+                    "fantasticIv",
+                    "FANTASTIc"
+                ]
+            },
+            "expected": [
+                "fantastic",
+                "Fantastic",
+                "FANTASTIC",
+                "fantastiv",
+                "Fantastiv",
+                "",
+                "",
+                "Fantastiv",
+                "",
+                "fantastic"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["important", "IMPORTANT", "Important", "imporant", "impotant"],
+                "queries": [
+                    "important",
+                    "IMPORTANT",
+                    "Important",
+                    "imporant",
+                    "impotant",
+                    "imporant"
+                ]
+            },
+            "expected": ["important", "IMPORTANT", "Important", "imporant", "impotant", "imporant"]
+        },
+        {
+            "args": {
+                "wordlist": ["machine", "MACHINE", "MachInE", "MACHiNe"],
+                "queries": [
+                    "machine",
+                    "MACHINE",
+                    "MachInE",
+                    "MACHiNe",
+                    "machines",
+                    "MACHINES",
+                    "MachInES",
+                    "MACHiNES",
+                    "machinne"
+                ]
+            },
+            "expected": ["machine", "MACHINE", "MachInE", "MACHiNe", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["community", "COMMUNITY", "Community", "commuinty", "communiti"],
+                "queries": [
+                    "community",
+                    "COMMUNITY",
+                    "Community",
+                    "commuinty",
+                    "communiti",
+                    "commuinty"
+                ]
+            },
+            "expected": [
+                "community",
+                "COMMUNITY",
+                "Community",
+                "commuinty",
+                "communiti",
+                "commuinty"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["orchid", "Orchid", "ORCHID", "orchd", "orhid", "orckid", "orchidd"],
+                "queries": [
+                    "orchid",
+                    "Orchid",
+                    "ORCHID",
+                    "orchd",
+                    "orhid",
+                    "orckid",
+                    "orchidd",
+                    "orchiddd",
+                    "orchidd",
+                    "orchidds"
+                ]
+            },
+            "expected": [
+                "orchid",
+                "Orchid",
+                "ORCHID",
+                "orchd",
+                "orhid",
+                "orckid",
+                "orchidd",
+                "",
+                "orchidd",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["grape", "Grape", "GRAPE", "grapefruit", "GrapeFruit"],
+                "queries": [
+                    "grape",
+                    "Grape",
+                    "GRAPE",
+                    "grapefruit",
+                    "GrapeFruit",
+                    "grApE",
+                    "Grapefruit",
+                    "grapeFruit",
+                    "GRape",
+                    "grapeFruitS"
+                ]
+            },
+            "expected": [
+                "grape",
+                "Grape",
+                "GRAPE",
+                "grapefruit",
+                "GrapeFruit",
+                "grape",
+                "grapefruit",
+                "grapefruit",
+                "grape",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "intelligent",
+                    "Intelligent",
+                    "INTELLIGENT",
+                    "inteligent",
+                    "inteligents"
+                ],
+                "queries": [
+                    "intelligent",
+                    "Intelligent",
+                    "INTELLIGENT",
+                    "inteligent",
+                    "inteligents",
+                    "intilignt"
+                ]
+            },
+            "expected": [
+                "intelligent",
+                "Intelligent",
+                "INTELLIGENT",
+                "inteligent",
+                "inteligents",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["aabbcc", "abc", "aebec", "accbba", "aabbccaa"],
+                "queries": [
+                    "aabbcc",
+                    "abc",
+                    "aebec",
+                    "accbba",
+                    "aabbccaa",
+                    "AABBCC",
+                    "ABC",
+                    "AEBEC",
+                    "ACCBBA",
+                    "AABBCCAA",
+                    "aabbc",
+                    "abcc",
+                    "aebc",
+                    "accbb",
+                    "aabbc",
+                    "abcc",
+                    "aebc",
+                    "accbb",
+                    "aabbc",
+                    "abcc",
+                    "aebc",
+                    "accbb",
+                    "aabbc",
+                    "abcc",
+                    "aebc",
+                    "accbb",
+                    "aabbc",
+                    "abcc",
+                    "aebc",
+                    "accbb"
+                ]
+            },
+            "expected": [
+                "aabbcc",
+                "abc",
+                "aebec",
+                "accbba",
+                "aabbccaa",
+                "aabbcc",
+                "abc",
+                "aebec",
+                "accbba",
+                "aabbccaa",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "water",
+                    "Water",
+                    "WATER",
+                    "waTer",
+                    "wateR",
+                    "watER",
+                    "wAtEr",
+                    "waTEr"
+                ],
+                "queries": [
+                    "water",
+                    "Water",
+                    "WATER",
+                    "waTer",
+                    "wateR",
+                    "watER",
+                    "wAtEr",
+                    "waTEr",
+                    "wateR",
+                    "waTer",
+                    "watER",
+                    "wAtEr",
+                    "waTEr",
+                    "wAter"
+                ]
+            },
+            "expected": [
+                "water",
+                "Water",
+                "WATER",
+                "waTer",
+                "wateR",
+                "watER",
+                "wAtEr",
+                "waTEr",
+                "wateR",
+                "waTer",
+                "watER",
+                "wAtEr",
+                "waTEr",
+                "water"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["banana", "Banana", "BANANA", "banAna"],
+                "queries": [
+                    "banana",
+                    "Banana",
+                    "BANANA",
+                    "banAna",
+                    "BaNANA",
+                    "bAnAnA",
+                    "bananA",
+                    "BaNANa"
+                ]
+            },
+            "expected": [
+                "banana",
+                "Banana",
+                "BANANA",
+                "banAna",
+                "banana",
+                "banana",
+                "banana",
+                "banana"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "Umbrella", "uMbReLlA", "UMbrella"],
+                "queries": [
+                    "umbrella",
+                    "Umbrella",
+                    "uMbReLlA",
+                    "UMbrella",
+                    "umbrellA",
+                    "UmBrella",
+                    "UMBRELLA",
+                    "umBRELLa",
+                    "umbrela"
+                ]
+            },
+            "expected": [
+                "umbrella",
+                "Umbrella",
+                "uMbReLlA",
+                "UMbrella",
+                "umbrella",
+                "umbrella",
+                "umbrella",
+                "umbrella",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "environment",
+                    "ENVIRONMENT",
+                    "Environment",
+                    "enviroment",
+                    "evniroment"
+                ],
+                "queries": [
+                    "environment",
+                    "ENVIRONMENT",
+                    "Environment",
+                    "enviroment",
+                    "evniroment",
+                    "envirnoment"
+                ]
+            },
+            "expected": [
+                "environment",
+                "ENVIRONMENT",
+                "Environment",
+                "enviroment",
+                "evniroment",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "uMBrElLa", "UMBRELLA", "umbrellA"],
+                "queries": [
+                    "umbrella",
+                    "uMBrElLa",
+                    "UMBRELLA",
+                    "umbrellA",
+                    "umbrellaA",
+                    "UMBRELLAa",
+                    "uMBrElLaa",
+                    "umbrellaa",
+                    "umbrellaAA"
+                ]
+            },
+            "expected": ["umbrella", "uMBrElLa", "UMBRELLA", "umbrellA", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["umbrella", "UMBRELLA", "Umbrella", "umBrella"],
+                "queries": ["Umbrella", "umbrella", "UMBRELLA", "uMBRELLA", "umbralla", "umbrellaa"]
+            },
+            "expected": ["Umbrella", "umbrella", "UMBRELLA", "umbrella", "umbrella", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "education",
+                    "Education",
+                    "EDUCATION",
+                    "educatin",
+                    "Educatin",
+                    "educatiOn"
+                ],
+                "queries": [
+                    "education",
+                    "Education",
+                    "EDUCATION",
+                    "educatin",
+                    "Educatin",
+                    "educatiOn",
+                    "edUcation",
+                    "educAtion",
+                    "educatiOns",
+                    "educatiOn"
+                ]
+            },
+            "expected": [
+                "education",
+                "Education",
+                "EDUCATION",
+                "educatin",
+                "Educatin",
+                "educatiOn",
+                "education",
+                "education",
+                "",
+                "educatiOn"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["rhythm", "Rhythm", "RYTHM", "rhythem", "rythum"],
+                "queries": [
+                    "rhythm",
+                    "Rhythm",
+                    "RYTHM",
+                    "rhythem",
+                    "rythum",
+                    "rhythmm",
+                    "rhyth",
+                    "rythmm",
+                    "rhythmz",
+                    "rhythmzz"
+                ]
+            },
+            "expected": ["rhythm", "Rhythm", "RYTHM", "rhythem", "rythum", "", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": ["sequence", "Sequence", "SEQUENCE", "sequnce", "Sequnce", "sequeNce"],
+                "queries": [
+                    "sequence",
+                    "Sequence",
+                    "SEQUENCE",
+                    "sequnce",
+                    "Sequnce",
+                    "sequeNce",
+                    "sequnce",
+                    "Sequense",
+                    "SEQUENSe",
+                    "sequenze"
+                ]
+            },
+            "expected": [
+                "sequence",
+                "Sequence",
+                "SEQUENCE",
+                "sequnce",
+                "Sequnce",
+                "sequeNce",
+                "sequnce",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "communication",
+                    "Communication",
+                    "COMMUNICATION",
+                    "commnication",
+                    "Commnication"
+                ],
+                "queries": [
+                    "communication",
+                    "Communication",
+                    "COMMUNICATION",
+                    "commnication",
+                    "Commnication",
+                    "communiCation",
+                    "commNicAtion",
+                    "ComMunication",
+                    "COMMunIcAtion",
+                    "communIcAtion"
+                ]
+            },
+            "expected": [
+                "communication",
+                "Communication",
+                "COMMUNICATION",
+                "commnication",
+                "Commnication",
+                "communication",
+                "commnication",
+                "communication",
+                "communication",
+                "communication"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "quIckBrOwnFox",
+                    "QUICKBROWNFOX",
+                    "QuickBrownFox",
+                    "quiCKBrOwnFoX",
+                    "QUICKbrownfox"
+                ],
+                "queries": [
+                    "quickbrownfox",
+                    "QUICKBROWNFOX",
+                    "QuiCKBrOwnFoX",
+                    "QUICKbrownfox",
+                    "quickBRownfox",
+                    "quickbrownfoX",
+                    "quickbrOwnfox",
+                    "QUICKBROWNfOX"
+                ]
+            },
+            "expected": [
+                "quIckBrOwnFox",
+                "QUICKBROWNFOX",
+                "quIckBrOwnFox",
+                "QUICKbrownfox",
+                "quIckBrOwnFox",
+                "quIckBrOwnFox",
+                "quIckBrOwnFox",
+                "quIckBrOwnFox"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["elephant", "Elephant", "ELEPHANT", "eLEPHANT", "eLEpHANT"],
+                "queries": [
+                    "elephant",
+                    "Elephant",
+                    "ELEPHANT",
+                    "eLEPHANT",
+                    "eLEpHANT",
+                    "elephants",
+                    "Elephants",
+                    "ELEPHANTs",
+                    "eLEPHANTs"
+                ]
+            },
+            "expected": ["elephant", "Elephant", "ELEPHANT", "eLEPHANT", "eLEpHANT", "", "", "", ""]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "Supercalifragilisticexpialidocious",
+                    "supercalifragilisticexpialidocious",
+                    "SuPeRcAlIfRaGiLiStIcExPiAlIdOcIoUs",
+                    "SUPErcALifRAGilistiCexpiALIdOcIOUs"
+                ],
+                "queries": [
+                    "supercalifragilisticexpialidocious",
+                    "SUPErcALifRAGilistiCexpiALIdOcIOUs",
+                    "SuPeRcAlIfRaGiLiStIcExPiAlIdOcIoUs",
+                    "supercalifragilisticexpialidociosa"
+                ]
+            },
+            "expected": [
+                "supercalifragilisticexpialidocious",
+                "SUPErcALifRAGilistiCexpiALIdOcIOUs",
+                "SuPeRcAlIfRaGiLiStIcExPiAlIdOcIoUs",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "ambiguity",
+                    "ambiguos",
+                    "Ambiguity",
+                    "AMBIGUITY",
+                    "ambiguous",
+                    "amgibuity"
+                ],
+                "queries": [
+                    "ambiguity",
+                    "AMBIGUITY",
+                    "Ambiguity",
+                    "ambiguous",
+                    "AmbiguiTy",
+                    "amgibuity"
+                ]
+            },
+            "expected": [
+                "ambiguity",
+                "AMBIGUITY",
+                "Ambiguity",
+                "ambiguous",
+                "ambiguity",
+                "amgibuity"
+            ]
+        },
+        {
+            "args": {
+                "wordlist": [
+                    "supercalifragilisticexpialidocious",
+                    "SUPERCALIFRAGILISTICEXPIALIDOCIOUS",
+                    "Supercalifragilisticexpialidocious",
+                    "suPercalifragilisticexpialidocious"
+                ],
+                "queries": [
+                    "supercalifragilisticexpialidocious",
+                    "SUPERCALIFRAGILISTICEXPIALIDOCIOUS",
+                    "Supercalifragilisticexpialidocious",
+                    "suPercalifragilisticexpialidocious",
+                    "supercalifragilisticexpialido",
+                    "supercalifragilisticexpialidocius"
+                ]
+            },
+            "expected": [
+                "supercalifragilisticexpialidocious",
+                "SUPERCALIFRAGILISTICEXPIALIDOCIOUS",
+                "Supercalifragilisticexpialidocious",
+                "suPercalifragilisticexpialidocious",
+                "",
+                ""
+            ]
+        },
+        {
+            "args": {
+                "wordlist": ["algorithm", "AlgorithM", "ALGORITHM", "algoritm", "Algoritm"],
+                "queries": [
+                    "algorithm",
+                    "AlgorithM",
+                    "ALGORITHM",
+                    "algoritm",
+                    "Algoritm",
+                    "algorithM",
+                    "algoritm",
+                    "AlgorIthm",
+                    "algoRitm",
+                    "AlgoRithm"
+                ]
+            },
+            "expected": [
+                "algorithm",
+                "AlgorithM",
+                "ALGORITHM",
+                "algoritm",
+                "Algoritm",
+                "algorithm",
+                "algoritm",
+                "algorithm",
+                "algoritm",
+                "algorithm"
+            ]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().spellchecker",
+        "typescript": "Solution().spellchecker"
+    }
+}

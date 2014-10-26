@@ -1,0 +1,845 @@
+{
+    "id": "add-bold-tag-in-string",
+    "questionId": 616,
+    "difficulty": "Medium",
+    "tags": ["Trie", "Array", "Hash Table", "String", "String Matching"],
+    "tests": [
+        {
+            "args": {
+                "s": "hello",
+                "words": ["world"]
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "words": ["issi", "issip", "is", "i"]
+            },
+            "expected": "m<b>ississip</b>p<b>i</b>"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["e", "f", "g"]
+            },
+            "expected": "abcd"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "words": ["ll", "o"]
+            },
+            "expected": "he<b>llo</b>"
+        },
+        {
+            "args": {
+                "s": "",
+                "words": ["a"]
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "zzzz",
+                "words": ["zz"]
+            },
+            "expected": "<b>zzzz</b>"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "words": ["a", "b", "c", "d"]
+            },
+            "expected": "<b>abcd</b>"
+        },
+        {
+            "args": {
+                "s": "abcabcabc",
+                "words": ["abc", "cab"]
+            },
+            "expected": "<b>abcabcabc</b>"
+        },
+        {
+            "args": {
+                "s": "hellothere",
+                "words": ["he", "lo"]
+            },
+            "expected": "<b>he</b>l<b>lo</b>t<b>he</b>re"
+        },
+        {
+            "args": {
+                "s": "abcxyz123",
+                "words": ["abc", "123"]
+            },
+            "expected": "<b>abc</b>xyz<b>123</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaa",
+                "words": ["a", "aa"]
+            },
+            "expected": "<b>aaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "aaabbb",
+                "words": ["aa", "b"]
+            },
+            "expected": "<b>aaabbb</b>"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "words": ["issi", "issipp"]
+            },
+            "expected": "m<b>ississipp</b>i"
+        },
+        {
+            "args": {
+                "s": "complexity",
+                "words": ["com", "plex", "ity", "ityt", "ex"]
+            },
+            "expected": "<b>complexity</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbaaaaa",
+                "words": ["aaa", "bbbb", "aaabbbbbaaa"]
+            },
+            "expected": "<b>aaaaabbbbbaaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "mississippiissippi",
+                "words": ["issi", "issipp", "ippi", "miss", "ippii", "ssippi"]
+            },
+            "expected": "<b>mississippiissippi</b>"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "words": ["this", "test", "string", "is"]
+            },
+            "expected": "<b>thisis</b>a<b>teststring</b>"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "words": ["aa", "bbcc", "ccdd", "ddeeff", "efff", "ff"]
+            },
+            "expected": "<b>aabbccddeeff</b>"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "words": ["xy", "yz", "zxy"]
+            },
+            "expected": "<b>xyzxyzxyz</b>"
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefg",
+                "words": ["abc", "cde", "efg", "abcd"]
+            },
+            "expected": "<b>abcdefgabcdefg</b>"
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcde",
+                "words": ["abc", "deabc", "cde"]
+            },
+            "expected": "<b>abcdeabcdeabcde</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbbaaaaa",
+                "words": ["aaa", "bbb"]
+            },
+            "expected": "<b>aaaaaabbbbbaaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "words": ["this", "is", "test", "string", "a"]
+            },
+            "expected": "<b>thisisateststring</b>"
+        },
+        {
+            "args": {
+                "s": "nestedboldboldnested",
+                "words": ["nestedbold", "boldbold", "bold"]
+            },
+            "expected": "<b>nestedboldbold</b>nested"
+        },
+        {
+            "args": {
+                "s": "overlapexample",
+                "words": ["over", "lap", "example", "exam"]
+            },
+            "expected": "<b>overlapexample</b>"
+        },
+        {
+            "args": {
+                "s": "nestedboldtags",
+                "words": ["nest", "sted", "bold", "tags", "edta"]
+            },
+            "expected": "<b>nestedboldtags</b>"
+        },
+        {
+            "args": {
+                "s": "overlappingboldtags",
+                "words": ["overlap", "ping", "bold", "tags", "pinging"]
+            },
+            "expected": "<b>overlappingboldtags</b>"
+        },
+        {
+            "args": {
+                "s": "xyzabcxyzabcxyz",
+                "words": ["xyz", "abc", "ab", "bc", "yz", "xy"]
+            },
+            "expected": "<b>xyzabcxyzabcxyz</b>"
+        },
+        {
+            "args": {
+                "s": "abababababab",
+                "words": ["aba", "bab", "ab", "ba"]
+            },
+            "expected": "<b>abababababab</b>"
+        },
+        {
+            "args": {
+                "s": "oneonetwoonetwoonetwoonetwoonetwoone",
+                "words": ["one", "onetwo", "two", "onetwone", "oneto"]
+            },
+            "expected": "<b>oneonetwoonetwoonetwoonetwoonetwoone</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaaaa",
+                "words": ["aa", "aaa"]
+            },
+            "expected": "<b>aaaaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "abababababa",
+                "words": ["aba", "bab"]
+            },
+            "expected": "<b>abababababa</b>"
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefg",
+                "words": ["abc", "defg", "bcde", "fgh"]
+            },
+            "expected": "<b>abcdefgabcdefg</b>"
+        },
+        {
+            "args": {
+                "s": "abababababa",
+                "words": ["aba", "bab", "aba", "abb"]
+            },
+            "expected": "<b>abababababa</b>"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd",
+                "words": [
+                    "abcd",
+                    "bcd",
+                    "cd",
+                    "d",
+                    "a",
+                    "ab",
+                    "bc",
+                    "cd",
+                    "abc",
+                    "bca",
+                    "cab",
+                    "dabcd",
+                    "abcdabc",
+                    "bcdbca"
+                ]
+            },
+            "expected": "<b>abcdabcdabcdabcd</b>"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyzxyz",
+                "words": ["xy", "yz", "zxy", "xyz"]
+            },
+            "expected": "<b>xyzxyzxyzxyz</b>"
+        },
+        {
+            "args": {
+                "s": "overlappingboldtags",
+                "words": ["lap", "bold", "tag", "pingb", "lapin"]
+            },
+            "expected": "over<b>lappingboldtag</b>s"
+        },
+        {
+            "args": {
+                "s": "ababaabababa",
+                "words": ["aba", "bab", "abaabababa"]
+            },
+            "expected": "<b>ababaabababa</b>"
+        },
+        {
+            "args": {
+                "s": "xyzzxyzzxyzz",
+                "words": ["xyz", "zzx", "xy", "yz"]
+            },
+            "expected": "<b>xyzzxyzzxyz</b>z"
+        },
+        {
+            "args": {
+                "s": "mixednumbersandletters123",
+                "words": ["123", "and", "num", "bers", "mixed"]
+            },
+            "expected": "<b>mixednumbersand</b>letters<b>123</b>"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "words": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "aabbcc",
+                    "ddeeff",
+                    "gghhii"
+                ]
+            },
+            "expected": "<b>aabbccddeeffgghhii</b>jjkkllmmnnooppqqrrssttuuvvwwxxy<b>yz</b>z"
+        },
+        {
+            "args": {
+                "s": "consecutiveboldboldbold",
+                "words": ["consecutive", "boldbold", "bold"]
+            },
+            "expected": "<b>consecutiveboldboldbold</b>"
+        },
+        {
+            "args": {
+                "s": "xyzabcxyzabc",
+                "words": ["abc", "xyz", "xy"]
+            },
+            "expected": "<b>xyzabcxyzabc</b>"
+        },
+        {
+            "args": {
+                "s": "overlaplap",
+                "words": ["lap", "laplap", "over"]
+            },
+            "expected": "<b>overlaplap</b>"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "words": ["test", "this", "string", "est", "ing"]
+            },
+            "expected": "<b>this</b>isa<b>teststring</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaabaaaabaaaa",
+                "words": ["aa", "aaa", "aaaa"]
+            },
+            "expected": "<b>aaaaa</b>b<b>aaaa</b>b<b>aaaa</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaaaabbbbbbcccccc",
+                "words": ["aaa", "bbb", "ccc", "aabb", "bbcc", "aabbcc"]
+            },
+            "expected": "<b>aaaaaaabbbbbbcccccc</b>"
+        },
+        {
+            "args": {
+                "s": "1234567890",
+                "words": ["12", "23", "34", "45", "56", "67", "78", "89", "90"]
+            },
+            "expected": "<b>1234567890</b>"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzz",
+                "words": ["zzzz", "zzz", "zz", "z"]
+            },
+            "expected": "<b>zzzzzzzzzzzzzzz</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaaa",
+                "words": ["a", "aa", "aaa", "aaaa"]
+            },
+            "expected": "<b>aaaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "words": ["bra", "cad", "ra"]
+            },
+            "expected": "a<b>bracad</b>a<b>bra</b>"
+        },
+        {
+            "args": {
+                "s": "nestedboldtags",
+                "words": ["nest", "sted", "bold", "tags", "boldt", "tagsn"]
+            },
+            "expected": "<b>nestedboldtags</b>"
+        },
+        {
+            "args": {
+                "s": "repeatedpatterns",
+                "words": ["re", "pe", "at", "te", "ed", "pattern", "terns"]
+            },
+            "expected": "<b>repeatedpatterns</b>"
+        },
+        {
+            "args": {
+                "s": "1234567890",
+                "words": ["12", "234", "456", "678", "890"]
+            },
+            "expected": "<b>1234567890</b>"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "words": ["test", "is", "this", "string"]
+            },
+            "expected": "<b>thisis</b>a<b>teststring</b>"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "words": ["xyz", "xy", "yz", "zxy"]
+            },
+            "expected": "<b>xyzxyzxyz</b>"
+        },
+        {
+            "args": {
+                "s": "abcdabcdeabcd",
+                "words": ["abc", "de", "bcd"]
+            },
+            "expected": "<b>abcdabcdeabcd</b>"
+        },
+        {
+            "args": {
+                "s": "1234567890",
+                "words": ["123", "456", "789", "0"]
+            },
+            "expected": "<b>1234567890</b>"
+        },
+        {
+            "args": {
+                "s": "longstringwithmanywords",
+                "words": [
+                    "long",
+                    "string",
+                    "with",
+                    "many",
+                    "words",
+                    "longstring",
+                    "stringwith",
+                    "withman"
+                ]
+            },
+            "expected": "<b>longstringwithmanywords</b>"
+        },
+        {
+            "args": {
+                "s": "12345678901234567890",
+                "words": ["123", "234", "4567", "890"]
+            },
+            "expected": "<b>12345678901234567890</b>"
+        },
+        {
+            "args": {
+                "s": "a1b2c3d4e5f6g7h8i9j0",
+                "words": ["a1b2", "b2c3", "c3d4", "d4e5", "e5f6", "f6g7", "g7h8", "h8i9", "i9j0"]
+            },
+            "expected": "<b>a1b2c3d4e5f6g7h8i9j0</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbcccc",
+                "words": ["aa", "bbb", "cccc", "aabbb", "bbccc"]
+            },
+            "expected": "<b>aaaaaabbbbcccc</b>"
+        },
+        {
+            "args": {
+                "s": "multiplewordsinsequence",
+                "words": ["mul", "ple", "word", "in", "seq", "uence"]
+            },
+            "expected": "<b>mul</b>ti<b>pleword</b>s<b>insequence</b>"
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcdeabcde",
+                "words": ["abc", "de", "cde", "abcde", "bcde", "cdea"]
+            },
+            "expected": "<b>abcdeabcdeabcdeabcde</b>"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "words": ["xyz", "zyx", "xy", "yx"]
+            },
+            "expected": "<b>xyzxyzxyz</b>"
+        },
+        {
+            "args": {
+                "s": "consecutiveconsecutiveconsecutive",
+                "words": ["con", "consec", "consecutive", "sec"]
+            },
+            "expected": "<b>consecutiveconsecutiveconsecutive</b>"
+        },
+        {
+            "args": {
+                "s": "consecutivesubstrings",
+                "words": ["con", "sec", "cut", "utive", "sub", "strings"]
+            },
+            "expected": "<b>consecutivesubstrings</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaaabbbbbaaaa",
+                "words": ["aaa", "bbb"]
+            },
+            "expected": "<b>aaaaaabbbbbaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "thisisateststringfortestingboldtags",
+                "words": ["test", "this", "that", "for", "bold", "tags", "string"]
+            },
+            "expected": "<b>this</b>isa<b>teststringfortest</b>ing<b>boldtags</b>"
+        },
+        {
+            "args": {
+                "s": "12345678901234567890",
+                "words": ["123", "456", "789", "012", "345", "678", "901"]
+            },
+            "expected": "<b>1234567890123456789</b>0"
+        },
+        {
+            "args": {
+                "s": "abcdefgabcdefg",
+                "words": ["abc", "def", "gab", "efg"]
+            },
+            "expected": "<b>abcdefgabcdefg</b>"
+        },
+        {
+            "args": {
+                "s": "aaaaa",
+                "words": ["a", "aa", "aaa", "aaaa", "aaaaa"]
+            },
+            "expected": "<b>aaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzz",
+                "words": ["zzz", "zzzz", "zzzzz", "zzzzzz"]
+            },
+            "expected": "<b>zzzzzzzzzzzzzzzzz</b>"
+        },
+        {
+            "args": {
+                "s": "ababaababa",
+                "words": ["aba", "baa"]
+            },
+            "expected": "<b>ababaababa</b>"
+        },
+        {
+            "args": {
+                "s": "1234567890",
+                "words": ["123", "456", "789", "012", "34567890"]
+            },
+            "expected": "<b>1234567890</b>"
+        },
+        {
+            "args": {
+                "s": "repeatedrepeatedrepeated",
+                "words": ["re", "rep", "peat", "repeated"]
+            },
+            "expected": "<b>repeatedrepeatedrepeated</b>"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijj",
+                "words": ["abc", "def", "gh", "ij", "bb", "cc"]
+            },
+            "expected": "aa<b>bbcc</b>ddeeffg<b>gh</b>hi<b>ij</b>j"
+        },
+        {
+            "args": {
+                "s": "uniquestringsareunique",
+                "words": ["unique", "strings", "are"]
+            },
+            "expected": "<b>uniquestringsareunique</b>"
+        },
+        {
+            "args": {
+                "s": "hello123world456",
+                "words": ["123", "world", "456", "hello"]
+            },
+            "expected": "<b>hello123world456</b>"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "words": ["test", "string", "is", "a", "this", "ing", "est"]
+            },
+            "expected": "<b>thisisateststring</b>"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "words": [
+                    "ab",
+                    "bc",
+                    "cd",
+                    "de",
+                    "ef",
+                    "fg",
+                    "gh",
+                    "hi",
+                    "ij",
+                    "jk",
+                    "kl",
+                    "lm",
+                    "mn",
+                    "no",
+                    "op",
+                    "pq",
+                    "qr",
+                    "rs",
+                    "st",
+                    "tu",
+                    "uv",
+                    "vw",
+                    "wx",
+                    "xy",
+                    "yz"
+                ]
+            },
+            "expected": "a<b>abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyz</b>z"
+        },
+        {
+            "args": {
+                "s": "ababaababa",
+                "words": ["aba", "abaab"]
+            },
+            "expected": "<b>ababaababa</b>"
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "words": ["aba", "bab", "ab", "baba", "abab"]
+            },
+            "expected": "<b>ababababab</b>"
+        },
+        {
+            "args": {
+                "s": "xyzxyzxyz",
+                "words": ["xy", "yz", "zxy", "zyx"]
+            },
+            "expected": "<b>xyzxyzxyz</b>"
+        },
+        {
+            "args": {
+                "s": "consecutivetags",
+                "words": ["con", "sec", "secu", "utive", "tags", "ag"]
+            },
+            "expected": "<b>consecutivetags</b>"
+        },
+        {
+            "args": {
+                "s": "12345678901234567890",
+                "words": ["123", "456", "789", "012", "345", "678", "901"]
+            },
+            "expected": "<b>1234567890123456789</b>0"
+        },
+        {
+            "args": {
+                "s": "overlaplaplaplaplaplaplaplaplaplaplaplaplaplaplaplap",
+                "words": ["lap", "overlap", "laplap", "laplaplaplap"]
+            },
+            "expected": "<b>overlaplaplaplaplaplaplaplaplaplaplaplaplaplaplaplap</b>"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabc",
+                "words": ["abcabc", "bcabcabc", "cabcab", "abc", "ab", "bc", "ca"]
+            },
+            "expected": "<b>abcabcabcabcabc</b>"
+        },
+        {
+            "args": {
+                "s": "overlapoverlap",
+                "words": ["over", "lap", "lapo", "olap"]
+            },
+            "expected": "<b>overlapoverlap</b>"
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "words": ["aba", "bab", "abab"]
+            },
+            "expected": "<b>ababababab</b>"
+        },
+        {
+            "args": {
+                "s": "uniquecharacters",
+                "words": ["unique", "char", "acter", "ers", "s"]
+            },
+            "expected": "<b>uniquecharacters</b>"
+        },
+        {
+            "args": {
+                "s": "hellohellohello",
+                "words": ["hello", "hell", "lohe", "ellhe"]
+            },
+            "expected": "<b>hellohellohello</b>"
+        },
+        {
+            "args": {
+                "s": "ababababab",
+                "words": ["aba", "bab", "aab", "abb"]
+            },
+            "expected": "<b>ababababab</b>"
+        },
+        {
+            "args": {
+                "s": "consecutivewordwordword",
+                "words": ["word", "consecutive", "consecutiveword"]
+            },
+            "expected": "<b>consecutivewordwordword</b>"
+        },
+        {
+            "args": {
+                "s": "mississippissippi",
+                "words": ["miss", "issi", "issipp"]
+            },
+            "expected": "<b>mississippissipp</b>i"
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbbaaaaa",
+                "words": ["aaa", "bbb", "aaaaabbbbbaaaaa"]
+            },
+            "expected": "<b>aaaaabbbbbaaaaa</b>"
+        },
+        {
+            "args": {
+                "s": "abacabadabacaba",
+                "words": ["aba", "bac", "dab"]
+            },
+            "expected": "<b>abacabadabacaba</b>"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "words": ["ab", "bc", "cd", "de"]
+            },
+            "expected": "a<b>abbccdde</b>eff"
+        },
+        {
+            "args": {
+                "s": "consecutiveconsecutive",
+                "words": ["consec", "sec", "secutive", "con", "consecutiveconsecutive"]
+            },
+            "expected": "<b>consecutiveconsecutive</b>"
+        },
+        {
+            "args": {
+                "s": "overlapoverlap",
+                "words": ["lap", "over", "lapover", "overlaplap"]
+            },
+            "expected": "<b>overlapoverlap</b>"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabcabcabc",
+                "words": ["abcabc", "bcabcabc", "cabcab"]
+            },
+            "expected": "<b>abcabcabcabcabcabc</b>"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzz",
+                "words": ["zz", "zzz"]
+            },
+            "expected": "<b>zzzzzzzzz</b>"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringwithmultiplesubstrings",
+                "words": ["this", "is", "averylong", "substring", "stringwithmultiplesubstrings"]
+            },
+            "expected": "<b>thisisaverylongstringwithmultiplesubstrings</b>"
+        },
+        {
+            "args": {
+                "s": "overlappingboldtags",
+                "words": ["overlapping", "lappingb", "boldtags", "olap", "tags"]
+            },
+            "expected": "<b>overlappingboldtags</b>"
+        },
+        {
+            "args": {
+                "s": "overlapoverlapping",
+                "words": ["over", "lap", "lapping"]
+            },
+            "expected": "<b>overlapoverlapping</b>"
+        },
+        {
+            "args": {
+                "s": "multiplewordswithmultipleoccurrences",
+                "words": ["word", "with", "multiple", "occurrences", "mu", "ple", "pleo"]
+            },
+            "expected": "<b>multipleword</b>s<b>withmultipleoccurrences</b>"
+        },
+        {
+            "args": {
+                "s": "nestedboldnested",
+                "words": ["bold", "nest", "nested"]
+            },
+            "expected": "<b>nestedboldnested</b>"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcd",
+                "words": ["a", "b", "c", "d", "ab", "bc", "cd", "abcd", "bcda", "cdab", "dabc"]
+            },
+            "expected": "<b>abcdabcdabcdabcd</b>"
+        },
+        {
+            "args": {
+                "s": "multipleoccurrences",
+                "words": ["mul", "ple", "occ", "cur", "rences", "en"]
+            },
+            "expected": "<b>mul</b>ti<b>pleoccurrences</b>"
+        },
+        {
+            "args": {
+                "s": "abcabcabcabc",
+                "words": ["abcabc", "bcab", "cabc"]
+            },
+            "expected": "<b>abcabcabcabc</b>"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().addBoldTag",
+        "typescript": "Solution().addBoldTag"
+    }
+}

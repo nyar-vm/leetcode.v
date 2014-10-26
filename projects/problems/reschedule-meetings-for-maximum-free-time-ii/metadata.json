@@ -1,0 +1,924 @@
+{
+    "id": "reschedule-meetings-for-maximum-free-time-ii",
+    "questionId": 3440,
+    "difficulty": "Medium",
+    "tags": ["Greedy", "Array", "Enumeration"],
+    "tests": [
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [0, 5, 10, 15, 20],
+                "endTime": [3, 8, 13, 18, 23]
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [5, 15, 25, 35],
+                "endTime": [10, 20, 30, 40]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 5, 10, 15],
+                "endTime": [3, 8, 13, 18]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [10, 30, 50],
+                "endTime": [20, 40, 60]
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 5, 10, 15],
+                "endTime": [3, 8, 13, 18]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "eventTime": 1000,
+                "startTime": [500, 600, 700, 800],
+                "endTime": [550, 650, 750, 850]
+            },
+            "expected": 600
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [5, 25, 45, 65, 85],
+                "endTime": [15, 35, 55, 75, 95]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 5, 10],
+                "endTime": [3, 8, 15]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 1000,
+                "startTime": [100, 300, 500, 700],
+                "endTime": [200, 400, 600, 800]
+            },
+            "expected": 400
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [10, 30, 50, 70, 90],
+                "endTime": [20, 40, 60, 80, 100]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [1, 4, 8, 12],
+                "endTime": [3, 7, 11, 15]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 5, 10, 15],
+                "endTime": [2, 7, 12, 17]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [2, 5, 10],
+                "endTime": [4, 8, 15]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 12,
+                "startTime": [1, 4, 7],
+                "endTime": [3, 6, 9]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 1000,
+                "startTime": [100, 300, 500, 700, 900],
+                "endTime": [200, 400, 600, 800, 1000]
+            },
+            "expected": 300
+        },
+        {
+            "args": {
+                "eventTime": 30,
+                "startTime": [0, 10, 20],
+                "endTime": [5, 15, 25]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [2, 5, 11, 15],
+                "endTime": [3, 7, 14, 20]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [5, 15, 25, 35, 45],
+                "endTime": [10, 20, 30, 40, 50]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [3, 9, 15, 21],
+                "endTime": [6, 12, 18, 24]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 6, 12, 15],
+                "endTime": [4, 8, 14, 20]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [1, 6, 11],
+                "endTime": [4, 9, 14]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 3, 7, 9],
+                "endTime": [1, 4, 8, 10]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [0, 15, 30],
+                "endTime": [10, 25, 40]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 5, 10, 15],
+                "endTime": [2, 8, 13, 20]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [10, 20, 30, 40, 50],
+                "endTime": [20, 30, 40, 50, 60]
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 20, 40, 60, 80],
+                "endTime": [10, 30, 50, 70, 90]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 3, 6, 9],
+                "endTime": [2, 5, 8, 10]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [10, 20, 30, 40],
+                "endTime": [15, 25, 35, 45]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "eventTime": 30,
+                "startTime": [5, 15, 25],
+                "endTime": [10, 20, 27]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 8,
+                "startTime": [0, 2, 5],
+                "endTime": [1, 4, 7]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 30,
+                "startTime": [0, 10, 20],
+                "endTime": [5, 15, 30]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "eventTime": 5,
+                "startTime": [0, 1, 2, 3, 4],
+                "endTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "eventTime": 12,
+                "startTime": [0, 3, 6, 9],
+                "endTime": [2, 5, 8, 12]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [10, 20, 30, 40, 50],
+                "endTime": [15, 25, 35, 45, 55]
+            },
+            "expected": 55
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 20, 40, 60, 80],
+                "endTime": [10, 30, 50, 70, 90]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 1000000,
+                "startTime": [0, 100000, 200000, 300000, 400000],
+                "endTime": [50000, 150000, 250000, 350000, 450000]
+            },
+            "expected": 650000
+        },
+        {
+            "args": {
+                "eventTime": 8,
+                "startTime": [1, 3, 5],
+                "endTime": [2, 4, 6]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [0, 2, 5, 9, 12],
+                "endTime": [1, 4, 6, 10, 15]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 2, 4, 6],
+                "endTime": [1, 3, 5, 7]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 5, 10, 15],
+                "endTime": [3, 7, 12, 18]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 2, 4, 6, 8],
+                "endTime": [1, 3, 5, 7, 10]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [0, 5, 15, 20],
+                "endTime": [3, 10, 20, 25]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [1, 6, 11, 16, 21],
+                "endTime": [3, 8, 13, 18, 23]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [0, 15, 20],
+                "endTime": [5, 20, 25]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [1, 6, 11, 16],
+                "endTime": [4, 9, 14, 19]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 5, 10, 15],
+                "endTime": [4, 9, 14, 19]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [2, 6, 10],
+                "endTime": [4, 8, 12]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 7, 9],
+                "endTime": [1, 8, 10]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 1000000000,
+                "startTime": [0, 100000000],
+                "endTime": [100000000, 200000000]
+            },
+            "expected": 800000000
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [0, 4, 8, 12],
+                "endTime": [2, 6, 10, 14]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [2, 6, 10, 14, 18],
+                "endTime": [4, 8, 12, 16, 20]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [3, 8, 11],
+                "endTime": [5, 10, 13]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [3, 15, 30, 45],
+                "endTime": [10, 25, 40, 50]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 5, 10, 15],
+                "endTime": [3, 7, 13, 19]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 10, 20, 30, 40],
+                "endTime": [5, 25, 35, 50, 60]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [2, 5, 9, 15],
+                "endTime": [3, 6, 10, 20]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [1, 6, 9, 12],
+                "endTime": [2, 8, 11, 15]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 20, 40, 60, 80],
+                "endTime": [10, 30, 50, 70, 100]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 8,
+                "startTime": [0, 1, 2, 3],
+                "endTime": [2, 3, 4, 5]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 6, 11, 16],
+                "endTime": [5, 10, 15, 20]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [5, 15, 30, 45, 60],
+                "endTime": [10, 20, 40, 55, 70]
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+                "endTime": [5, 15, 25, 35, 45, 55, 65, 75, 85, 95]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [2, 6, 9, 11],
+                "endTime": [4, 7, 10, 13]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 7,
+                "startTime": [0, 2, 4],
+                "endTime": [1, 3, 5]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 7,
+                "startTime": [0, 2, 4],
+                "endTime": [1, 3, 5]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 9,
+                "startTime": [1, 4, 7],
+                "endTime": [2, 5, 8]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "eventTime": 18,
+                "startTime": [0, 3, 6, 9, 12],
+                "endTime": [2, 5, 8, 11, 15]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 6, 11, 16],
+                "endTime": [3, 8, 13, 18]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [0, 10, 20],
+                "endTime": [5, 15, 25]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [0, 5, 10],
+                "endTime": [2, 8, 12]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 12,
+                "startTime": [0, 3, 6, 9],
+                "endTime": [2, 5, 8, 11]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 7,
+                "startTime": [1, 2],
+                "endTime": [3, 4]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [2, 5, 8, 11],
+                "endTime": [4, 7, 10, 13]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 5, 10, 15],
+                "endTime": [2, 6, 11, 20]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [10, 30, 50, 70],
+                "endTime": [20, 40, 60, 80]
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 6, 10, 15],
+                "endTime": [3, 9, 14, 17]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 7, 9],
+                "endTime": [1, 8, 10]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 30,
+                "startTime": [3, 9, 15, 21, 27],
+                "endTime": [6, 12, 18, 24, 30]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [2, 5, 9, 12],
+                "endTime": [4, 7, 11, 14]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 10, 15],
+                "endTime": [5, 15, 20]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "eventTime": 1000000,
+                "startTime": [100000, 300000, 500000, 700000],
+                "endTime": [200000, 400000, 600000, 800000]
+            },
+            "expected": 400000
+        },
+        {
+            "args": {
+                "eventTime": 8,
+                "startTime": [1, 4, 6],
+                "endTime": [2, 5, 8]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 20, 50, 80],
+                "endTime": [10, 30, 60, 90]
+            },
+            "expected": 50
+        },
+        {
+            "args": {
+                "eventTime": 10000,
+                "startTime": [0, 1000, 2000, 3000, 4000, 5000],
+                "endTime": [500, 1500, 2500, 3500, 4500, 5500]
+            },
+            "expected": 5500
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [3, 8, 13, 18],
+                "endTime": [5, 10, 15, 20]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [5, 15, 25, 35, 45, 55, 65, 75, 85, 95],
+                "endTime": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 12,
+                "startTime": [0, 3, 8, 10],
+                "endTime": [2, 6, 10, 12]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "eventTime": 5,
+                "startTime": [1, 3],
+                "endTime": [2, 5]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 1000,
+                "startTime": [0, 100, 200, 300, 400, 500, 600, 700, 800, 900],
+                "endTime": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 5, 10, 15],
+                "endTime": [2, 6, 12, 16]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [0, 25, 30],
+                "endTime": [10, 35, 40]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [5, 15, 25, 35],
+                "endTime": [10, 20, 30, 45]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [0, 3, 7, 9],
+                "endTime": [1, 4, 8, 10]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 50, 75],
+                "endTime": [25, 75, 100]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [1, 6, 11],
+                "endTime": [3, 8, 13]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 10, 20, 30, 40],
+                "endTime": [5, 15, 25, 35, 45]
+            },
+            "expected": 65
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [2, 6, 10],
+                "endTime": [5, 9, 13]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [0, 6, 10],
+                "endTime": [3, 9, 12]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 1000,
+                "startTime": [100, 300, 500, 700],
+                "endTime": [200, 400, 600, 800]
+            },
+            "expected": 400
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [1, 6, 11, 16],
+                "endTime": [3, 8, 13, 18]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "eventTime": 1000000,
+                "startTime": [100000, 200000, 300000, 400000],
+                "endTime": [150000, 250000, 350000, 450000]
+            },
+            "expected": 650000
+        },
+        {
+            "args": {
+                "eventTime": 15,
+                "startTime": [0, 5, 10],
+                "endTime": [3, 9, 13]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "eventTime": 5,
+                "startTime": [1, 3],
+                "endTime": [2, 5]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [2, 7, 13],
+                "endTime": [5, 11, 18]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "eventTime": 50,
+                "startTime": [0, 10, 20, 30, 40],
+                "endTime": [5, 15, 25, 35, 45]
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [5, 20, 40, 60, 80],
+                "endTime": [10, 30, 50, 70, 90]
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "eventTime": 30,
+                "startTime": [0, 6, 12, 18, 24],
+                "endTime": [4, 10, 16, 22, 30]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [1, 5, 9, 13, 17],
+                "endTime": [3, 7, 11, 15, 19]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [2, 5, 10, 15],
+                "endTime": [4, 8, 12, 18]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "eventTime": 100,
+                "startTime": [0, 25, 50, 75],
+                "endTime": [20, 45, 70, 95]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "eventTime": 20,
+                "startTime": [0, 10, 15, 18],
+                "endTime": [5, 12, 17, 20]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "eventTime": 25,
+                "startTime": [0, 5, 10, 15, 20],
+                "endTime": [3, 8, 13, 18, 23]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "eventTime": 5,
+                "startTime": [0, 1, 2, 3, 4],
+                "endTime": [1, 2, 3, 4, 5]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "eventTime": 10,
+                "startTime": [1, 2, 3, 4],
+                "endTime": [2, 3, 4, 5]
+            },
+            "expected": 6
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maxFreeTime",
+        "typescript": "Solution().maxFreeTime"
+    }
+}

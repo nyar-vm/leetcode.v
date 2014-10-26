@@ -1,0 +1,1723 @@
+{
+    "id": "maximum-length-of-a-concatenated-string-with-unique-characters",
+    "questionId": 1239,
+    "difficulty": "Medium",
+    "tags": ["Bit Manipulation", "Array", "String", "Backtracking"],
+    "tests": [
+        {
+            "args": {
+                "arr": ["abcd", "abef", "cdgh", "cdef"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "arr": ["un", "iq", "ue"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "arr": ["abcdefghijklmnopqrstuvwxyz"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["unique", "strings", "with", "no", "common", "characters"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "arr": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p"
+                ]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "arr": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yz"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["zzzz", "zzyy", "xxzz", "xxyy", "abcd"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "arr": [
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj"
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["xyy", "zmk"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "arr": ["a", "ab", "abc", "abcd", "abcde"]
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "arr": ["abc", "de", "fgh", "ij", "klm", "nop", "qrs", "tuv", "wxy", "z"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["a", "b", "c"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "arr": ["abcd", "aabbccdd", "abcde", "mnopqr", "stuvwx", "yz"]
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "arr": ["aabbcc", "ddeeff", "gghhiijj"]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": ["cha", "r", "act", "ers"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "arr": ["aabbcc", "ddeeff", "gghhii", "jklmno", "pqqrst", "uvwxyz"]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "arr": ["aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "cdef",
+                    "ghij",
+                    "klmn",
+                    "opqr",
+                    "stuv",
+                    "wxyz",
+                    "abcd",
+                    "efgh"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghijk",
+                    "lmnopqrst",
+                    "uvwxyzabc",
+                    "defghijkl",
+                    "mnopqrstu",
+                    "vwxyzabcd",
+                    "efghijklm",
+                    "nopqrstuv",
+                    "wxyzabcde",
+                    "fghijklmn",
+                    "opqrstuvw",
+                    "xyzabcdefg",
+                    "ghijklmno",
+                    "pqrstuvwx",
+                    "yzabcdefgh",
+                    "hijklmnop",
+                    "qrstuvwxy",
+                    "zabcdefghij"
+                ]
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "arr": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "xyzz",
+                    "abxy",
+                    "mnop",
+                    "qrst",
+                    "uvwz",
+                    "mnop",
+                    "qrst",
+                    "uvwz",
+                    "mnop",
+                    "qrst",
+                    "uvwz",
+                    "mnop",
+                    "qrst",
+                    "uvwz",
+                    "mnop",
+                    "qrst"
+                ]
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "arr": [
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "ddd",
+                    "eee",
+                    "fff",
+                    "ggg",
+                    "hhh",
+                    "iii",
+                    "jjj",
+                    "kkk",
+                    "lll",
+                    "mmm",
+                    "nnn",
+                    "ooo",
+                    "ppp"
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "ab",
+                    "bc",
+                    "cd",
+                    "de",
+                    "ef",
+                    "fg",
+                    "gh",
+                    "hi",
+                    "ij",
+                    "jk",
+                    "kl",
+                    "lm",
+                    "mn",
+                    "no",
+                    "op",
+                    "pq",
+                    "qr",
+                    "rs",
+                    "st",
+                    "tu",
+                    "uv",
+                    "vw",
+                    "wx",
+                    "xy",
+                    "yz",
+                    "za",
+                    "bz",
+                    "cy",
+                    "dx",
+                    "ew",
+                    "fv",
+                    "gu",
+                    "ht",
+                    "is",
+                    "jr",
+                    "kq",
+                    "lp",
+                    "mo",
+                    "np",
+                    "oq",
+                    "pr",
+                    "qs",
+                    "rt",
+                    "su",
+                    "tv",
+                    "uw",
+                    "vx",
+                    "wy",
+                    "xz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "unique",
+                    "strings",
+                    "with",
+                    "distinct",
+                    "chars",
+                    "in",
+                    "each",
+                    "subsequence"
+                ]
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "cdef",
+                    "ghij",
+                    "klmn",
+                    "opqr",
+                    "stuv",
+                    "wxyz",
+                    "mnop",
+                    "qrst",
+                    "uvwxy"
+                ]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "arr": [
+                    "xyz",
+                    "uvw",
+                    "tuv",
+                    "stu",
+                    "rst",
+                    "qrs",
+                    "pqr",
+                    "opq",
+                    "nop",
+                    "mno",
+                    "lmn",
+                    "klm",
+                    "jkl",
+                    "ikl",
+                    "ihg",
+                    "fgh"
+                ]
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "arr": [
+                    "xyz",
+                    "uvw",
+                    "tuv",
+                    "stu",
+                    "rst",
+                    "qrs",
+                    "pqr",
+                    "opq",
+                    "nop",
+                    "mno",
+                    "lmo",
+                    "kln",
+                    "jkl",
+                    "ihg",
+                    "fgh",
+                    "efg",
+                    "def",
+                    "cde",
+                    "bcd",
+                    "abc"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabb",
+                    "ccdd",
+                    "eeff",
+                    "gghh",
+                    "iijj",
+                    "kklm",
+                    "nopq",
+                    "rstu",
+                    "vwxy",
+                    "zz"
+                ]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyza",
+                    "bcdefg",
+                    "hijklm",
+                    "nopqrs",
+                    "tuvwxy",
+                    "zabcde"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdexyz",
+                    "mnop",
+                    "qrstuvw",
+                    "zabcd",
+                    "ef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuv",
+                    "wxyz",
+                    "abcdefghij",
+                    "klmnopqr",
+                    "stuvwxyz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["abcdefgh", "ijklmnop", "qrstuvwxyz", "abcdefgh", "ijklmnop", "qrstuvwxyz"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["abcd", "defg", "hijk", "lmno", "pqrs", "tuvw", "xyza"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "xyz",
+                    "xy",
+                    "xz",
+                    "yz",
+                    "x",
+                    "y",
+                    "z",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "ab",
+                    "ac",
+                    "ad",
+                    "ae",
+                    "af",
+                    "ag",
+                    "ah",
+                    "ai",
+                    "aj",
+                    "ak",
+                    "al",
+                    "am",
+                    "an",
+                    "ao",
+                    "ap",
+                    "aq",
+                    "ar",
+                    "as",
+                    "at",
+                    "au",
+                    "av",
+                    "aw",
+                    "ax",
+                    "ay",
+                    "az"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "cded",
+                    "efgi",
+                    "hjkl",
+                    "mnop",
+                    "qrst",
+                    "uvwz",
+                    "abcd"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yz",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["abc", "abcd", "abcde", "abcdef", "abcdefg", "abcdefgh", "abcdefghi"]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcde",
+                    "fghij",
+                    "klmno",
+                    "pqrst",
+                    "uvwxy",
+                    "zabcd",
+                    "efghi",
+                    "jklmn",
+                    "opqrs",
+                    "tuvwx",
+                    "yzabc",
+                    "defgh"
+                ]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "arr": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yzab"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghij",
+                    "klmnopqr",
+                    "stuvwxyz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvw",
+                    "xyz",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "arr": ["aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee", "fffff"]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "xyz",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "zyxwvutsrqpomnlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "mnopqrstuvwxyza",
+                    "bcdefghijklmnopqr",
+                    "stuvwxyzabcde"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee", "ffffff", "ggggg"]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": ["abcd", "def", "ghij", "klmno", "pqrst", "uvwxy", "z"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "qrst",
+                    "uvwx",
+                    "yz",
+                    "yz",
+                    "abcd"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["aaaa", "bbbb", "cccc", "dddd", "eeee", "ffff", "gggg", "hhhh"]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "abef",
+                    "acgh",
+                    "adei",
+                    "afjk",
+                    "aglm",
+                    "ahno",
+                    "aipq",
+                    "arst",
+                    "auvw",
+                    "axyz"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwxyz",
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwxyz",
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwxyz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yz",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abc",
+                    "defgh",
+                    "ijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yz",
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwx",
+                    "yzab",
+                    "cdefghij",
+                    "klmnopqr",
+                    "stuvwx",
+                    "yz",
+                    "abcdef",
+                    "ghijklmnop",
+                    "qrstuvwx",
+                    "yzab"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["abcdefgh", "yzabcd", "efghij", "mnopqr", "stuvwx", "qrstuv", "wxyzab"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "long",
+                    "strings",
+                    "with",
+                    "repeated",
+                    "characters",
+                    "are",
+                    "not",
+                    "allowed",
+                    "in",
+                    "this",
+                    "problem"
+                ]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcde",
+                    "fghij",
+                    "klmno",
+                    "pqrst",
+                    "uvwxy",
+                    "z",
+                    "yz",
+                    "wxy",
+                    "vwx",
+                    "uwv",
+                    "tuv",
+                    "stu",
+                    "rst",
+                    "qrs",
+                    "pqr",
+                    "opq",
+                    "nop",
+                    "mno",
+                    "lmn",
+                    "kln",
+                    "jkl",
+                    "ihg",
+                    "fgh",
+                    "efg",
+                    "def",
+                    "cde",
+                    "bcd",
+                    "abc"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxy",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxy",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "mnop",
+                    "qrst"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": ["abcdefgh", "ijklmnop", "qrstuvwxyz", "abcdefgh", "ijklmnop", "qrstuvwxyz"]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yz",
+                    "abcdefghijklmnop",
+                    "qrstuvwxyz",
+                    "abcdefghij",
+                    "klmnopqr",
+                    "stuvwxyz",
+                    "abcdefg",
+                    "hijklmnop",
+                    "qrstuvwxy",
+                    "zabcdefghijk",
+                    "lmnopqrstuvw",
+                    "xyzabcdefghi",
+                    "jklmnopqrstu",
+                    "vwxyzabcdef",
+                    "ghijklmnopqrstu",
+                    "vwxyzabcdefghij",
+                    "klmnopqrstuvwxyzabc"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "unique",
+                    "letters",
+                    "only",
+                    "here",
+                    "now",
+                    "this",
+                    "that",
+                    "these",
+                    "those",
+                    "other",
+                    "another",
+                    "either",
+                    "neither",
+                    "both",
+                    "few",
+                    "more",
+                    "most",
+                    "other",
+                    "some",
+                    "any",
+                    "all",
+                    "several",
+                    "both"
+                ]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcde",
+                    "fghij",
+                    "klmno",
+                    "pqrst",
+                    "uvwxy",
+                    "zabcd",
+                    "efghi",
+                    "jklmn",
+                    "opqrs",
+                    "tuvwx",
+                    "yzabc"
+                ]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyzab",
+                    "cdefgh",
+                    "ijklmn",
+                    "opqrst"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "abcde",
+                    "fghij",
+                    "klmno",
+                    "pqrst",
+                    "uvwxy",
+                    "zabcd"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "xyz",
+                    "abcdef",
+                    "ghijklm",
+                    "nopqr",
+                    "stuv",
+                    "wxyz",
+                    "mnop",
+                    "qrstuv",
+                    "xyzuvw",
+                    "abcdefg"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "aaaa",
+                    "bbbb",
+                    "cccc",
+                    "dddd",
+                    "eeee",
+                    "ffff",
+                    "gggg",
+                    "hhhh",
+                    "iiii",
+                    "jjjj",
+                    "kkkk",
+                    "llll",
+                    "mmmm",
+                    "nnnn",
+                    "oooo",
+                    "pppp"
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbcc",
+                    "ddeeff",
+                    "gghhii",
+                    "jkkllm",
+                    "nnoopq",
+                    "rrsstt",
+                    "uuvvww",
+                    "xxyyzz"
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghijklmnop",
+                    "qrstuvwxyz",
+                    "abcdefghijkl",
+                    "mnopqrstuv",
+                    "wxyzabcdef",
+                    "ghijklmnop",
+                    "qrstuvwxy",
+                    "zabcdefghij"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnopqr",
+                    "stuvwxyz",
+                    "abcdefg",
+                    "hijklmnop",
+                    "qrstuvwxy",
+                    "zabcdef",
+                    "ghijklmnopqr",
+                    "vwxyzabcd",
+                    "efghijklmno",
+                    "pqrs",
+                    "tuvwx",
+                    "yz",
+                    "abcd",
+                    "ef",
+                    "ghij",
+                    "klm",
+                    "nop",
+                    "qrs",
+                    "tuv",
+                    "wxy",
+                    "z"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": ["aaaa", "bbbb", "cccc", "dddd", "eeee", "ffff", "gggg", "hhhh"]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv",
+                    "wxyz",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwxy",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "arr": ["abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yzab"]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yz",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdexyz",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmno",
+                    "pqrst",
+                    "uvwxy",
+                    "zabcde",
+                    "fghijk",
+                    "lmnopq",
+                    "rstuvw",
+                    "xyzabc",
+                    "defghi",
+                    "jklmno",
+                    "pqrstu",
+                    "vwxyz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "arr": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "unique",
+                    "chars",
+                    "only",
+                    "here",
+                    "subseq",
+                    "concat",
+                    "maximum",
+                    "length",
+                    "string",
+                    "concatenation"
+                ]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "arr": [
+                    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                    "zzyyxxwwvvuuttssrrqqppoonnmmllkkjjiihhggffeeddccbbaa",
+                    "mnopqrstuvwxyzmnopqrstuvwxyzmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd"
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmno",
+                    "pqrstu",
+                    "vwxyz"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcde",
+                    "fghij",
+                    "klmno",
+                    "pqrst",
+                    "uvwxy",
+                    "zabcd",
+                    "efghi",
+                    "jklmn",
+                    "opqrs",
+                    "tuvwx",
+                    "yzabc",
+                    "defgh",
+                    "ijklm",
+                    "nopqr",
+                    "stuvw",
+                    "xyzab",
+                    "cdefg",
+                    "hijkl",
+                    "mnopq",
+                    "rstuv",
+                    "wxyza",
+                    "bcdef",
+                    "ghijk",
+                    "lmnop",
+                    "qrstu",
+                    "vwxyz"
+                ]
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefgh",
+                    "ijklmnop",
+                    "qrstuvwx",
+                    "yzabcdef",
+                    "ghijklmn",
+                    "opqrstuv",
+                    "wxyzab",
+                    "cdefghij",
+                    "klmnopqr",
+                    "stuvwxy"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdef",
+                    "ghijkl",
+                    "mnopqr",
+                    "stuvwx",
+                    "yzabcd",
+                    "efghij",
+                    "klmnop",
+                    "qrstuv"
+                ]
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "arr": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "qazwsxedcrfvtgbyhnujmiklop",
+                    "plmoknijbuhvgtfrdyecwsxzqa",
+                    "onmlkjihgfedcbazyxwvutsrqpxz"
+                ]
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "arr": [
+                    "unique",
+                    "chars",
+                    "only",
+                    "here",
+                    "are",
+                    "some",
+                    "strings",
+                    "with",
+                    "various",
+                    "lengths"
+                ]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "arr": [
+                    "abcdefghij",
+                    "klmnopqr",
+                    "stuvwxyz",
+                    "abc",
+                    "def",
+                    "ghi",
+                    "jkl",
+                    "mno",
+                    "pqr",
+                    "stu",
+                    "vwxyz",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ]
+            },
+            "expected": "Execution timed out"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().maxLength",
+        "typescript": "Solution().maxLength"
+    }
+}

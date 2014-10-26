@@ -1,0 +1,642 @@
+{
+    "id": "shortest-path-to-get-all-keys",
+    "questionId": 864,
+    "difficulty": "Hard",
+    "tags": ["Bit Manipulation", "Breadth-First Search", "Array", "Matrix"],
+    "tests": [
+        {
+            "args": {
+                "grid": ["@.b..", "###.#", "A.B.c"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.b", "#.A", "aBc"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "grid": ["@Aa"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.b..", "#.A#.", "a.c.C"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "grid": ["@...a", "#.#B.", ".....", "b.cC.", "....."]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "grid": ["@...a", ".#.b.", "....A", "#..B.", "....b"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@...a", "#.###", "b.BA."]
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "grid": [
+                    "@........a",
+                    "........B",
+                    ".........",
+                    ".......C.",
+                    ".........",
+                    ".....D..."
+                ]
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "grid": ["aA.b", "@.B#", "...."]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "grid": ["@.a..", "###.#", "b.A.B"]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "grid": ["@.aA", "b.Bb", "...."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@..aA", "..B#.", "....b"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "grid": ["@abc", "###.", "A#B.", "C..."]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": ["@abc", "###.", "A.BC"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.....",
+                    ".....a",
+                    "#.....",
+                    ".....b",
+                    "#.....",
+                    ".....A",
+                    "#.....",
+                    ".....B"
+                ]
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "grid": ["@abcdef", "###GHI.", "JKLMNO.", "PQRST.", "UVWXY.", "Z....."]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.....",
+                    ".....a",
+                    "#.....",
+                    ".....b",
+                    "#.....",
+                    ".....A",
+                    "#.....",
+                    ".....B",
+                    "......c",
+                    "......C"
+                ]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.abc",
+                    "###.#",
+                    "A#B#C",
+                    "D.E.F",
+                    "G.H.I",
+                    "J.K.L",
+                    "M.N.O",
+                    "P.Q.R",
+                    "S.T.U",
+                    "V.W.X",
+                    "Y.Z."
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "grid": [
+                    "@abcdef",
+                    "ghijklm",
+                    "nopqrst",
+                    "uvwxyz.",
+                    "A.....B",
+                    "C.....D",
+                    "E.....F",
+                    "G.....H",
+                    "I.....J",
+                    "K.....L",
+                    "M.....N",
+                    "O.....P",
+                    "Q.....R",
+                    "S.....T",
+                    "U.....V",
+                    "W.....X",
+                    "Y.....Z"
+                ]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "grid": [
+                    "@..a..",
+                    "###.B.",
+                    "....C.",
+                    "#.D.E.",
+                    "....F.",
+                    "#.G.H.",
+                    "....I.",
+                    "#.J.K.",
+                    "....L.",
+                    "#.M.N.",
+                    "....O.",
+                    "#.P.Q.",
+                    "....R.",
+                    "#.S.T.",
+                    "....U.",
+                    "#.V.W.",
+                    "....X.",
+                    "#.Y.Z.",
+                    "....."
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": ["@.a...", "#.bC..", "D#E.F", "G...H", "...IJ", "....K"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": ["@..a..", "###.#B", "...c.C", "#####.", "..b..A"]
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "grid": ["@...a", ".#.b.", "....A", "#..B.", "....b", "c...#", "...C."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.....", ".#...B", "A...#.", ".c..#.", ".....d"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a..", "###.#", "b.A.B", "C#dE.", "f...G", "#H..i", "j...K", "L...."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@abc", "###.", "A.BC", "D#..", "...E", "f...", "#G..", "hI.."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@...a", "###.#", "b.A.B", "###.#", "....b", "C...c", "d.D.e"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@...a", "###b.", "A#B..", "C...d", "###D.", "...eE", "f..#.", "..F.."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a###", ".....#", "b...A#", "....#B", ".....c", ".....C"]
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "grid": ["@......a", "###.###", "#.......", "b......A", ".....B..", "........"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@.......", "......#.", "b.....A.", "....#B..", ".......c", "......C."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": [
+                    "@abcdef",
+                    "###GHIJ",
+                    "KLMNO.",
+                    "PQRST.",
+                    "UVWXY.",
+                    "Z.....",
+                    "....AB",
+                    "CDEFGH"
+                ]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.......",
+                    "......#.",
+                    ".....bA",
+                    "....#B.",
+                    ".......c",
+                    "......C.",
+                    "........"
+                ]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@.a...", "#.bC..", "D#E.F", "G...H", "...IJ", "....K", "....L", "....M"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": ["@...a", "###b.", "A....", "#B..."]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.......",
+                    "..a.....",
+                    "......b.",
+                    "......B.",
+                    "......A.",
+                    "......c.",
+                    "......C.",
+                    ".......@"
+                ]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.a.....",
+                    ".#####",
+                    "#.B.C.D",
+                    "#.E.F.G",
+                    "#.H.I.J",
+                    "#.K.L.M",
+                    "#.N.O.P",
+                    "#.Q.R.S",
+                    "#.T.U.V",
+                    "#.W.X.Y",
+                    "#.Z....",
+                    "........"
+                ]
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "grid": ["@..aB", "###.#", "..c.C", "#####", "..bA."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a.b", "##..#", ".C...", "A###.", "....B"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "grid": ["@abcABC", "......", "......", "......", "......", "......"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": ["@abcdef", "###..gh", "ijkl..m", "nopqr..", "stuvwxyz"]
+            },
+            "expected": "Execution timed out"
+        },
+        {
+            "args": {
+                "grid": ["@.....", ".#...B", "A...#.", ".c..#.", ".....d", "###.#", "..e.E"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.a..",
+                    "###.#",
+                    "b.A.B",
+                    "C#dE.",
+                    "f...G",
+                    "#H..i",
+                    "j...K",
+                    "L....",
+                    "M...",
+                    "#N.."
+                ]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@.aBc", "###D.", "E...F", "G#b.H", "....I"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@aA....", "......#", "bB.....", "......#", ".....c", ".....C"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@.a.B", "###.#", "cA.BC", "###d.", "....D"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@abcde", "###f.", "AB.CD", "E....", "FGHIJ", "KLMNO", "PQRST", "UVWXY"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@.a.B", "###.#", "cA.BC", "###d.", "....D", ".efE.", "#F...", "g...."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a..", "###B.", "....A", "b...."]
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "grid": ["@.abc", "###.#", "A#B#C", "d.e.f", "D.E.F", "...gH", "...ih"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a.b", "#.C.D", "....E", "F.G.H", "I.J.K", "L.M.N", "O.P.@"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "grid": ["@.aB", ".###", "C#b.", "c...", "...."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@...a", "###.#", "b.A.B", "###.#", "....b", "C...c"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a...", "#.....", "b.....", "#.....", ".....A", ".....B"]
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "grid": ["@abcABC", "###...", "...###", "D...d.", ".E...e"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@.aB", "###C", "D#bE", "F...", ".G.H"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@......", ".....a", ".....#", "b.....", ".....A", "#.....", ".....B"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": ["@...a", "###b.", "#B...", "....A", "....b"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@....", "#.aB.", "C#b.D", ".FEG.", "....H"]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "grid": [
+                    "@...a",
+                    "###.#",
+                    "b.A.B",
+                    "###.#",
+                    "....b",
+                    "C...c",
+                    "D...d",
+                    "E...e",
+                    "F...f"
+                ]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@abc", "###.", "A.BC", "D...", "..EF", "G...", ".H..", "IJKL"]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": ["@.aBc", "##D..", "E...C", "F#bA.", "....G"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.a..", "#.B..", "...cA", "d.B.c", "A.#.."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.....a", "#.....#", ".....b", "#.....#", ".....A", ".....B"]
+            },
+            "expected": "Error: string index out of range"
+        },
+        {
+            "args": {
+                "grid": [
+                    "@......",
+                    "###...#",
+                    ".....B.",
+                    "#####.",
+                    ".....A",
+                    "#####.",
+                    ".....c",
+                    ".....C",
+                    ".....d",
+                    ".....D"
+                ]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@...a", "#.b.B", "#.#.#", "A.B.a", ".B...", "c...."]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": ["@.#.a", "#..b.", "...A.", "#..B.", "....b", "c....", "C...d"]
+            },
+            "expected": -1
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.....",
+                    ".A.B.C",
+                    "######",
+                    ".D.E.F",
+                    "######",
+                    ".G.H.I",
+                    "######",
+                    ".J.K.L",
+                    "######",
+                    ".M.N.O",
+                    "######",
+                    ".P.Q.R",
+                    ".....@",
+                    ".....S",
+                    ".....T",
+                    ".....U",
+                    ".....V",
+                    ".....W",
+                    ".....X",
+                    ".....Y",
+                    ".....Z"
+                ]
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "grid": [
+                    "@abc",
+                    "###.",
+                    "A.BC",
+                    "D...",
+                    "..EF",
+                    "G...",
+                    ".H..",
+                    "IJKL",
+                    "#...",
+                    "M..."
+                ]
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.a.b",
+                    "##C..",
+                    "D#E.F",
+                    "G...H",
+                    "...IJ",
+                    "....K",
+                    "....L",
+                    "....M",
+                    "....N"
+                ]
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "grid": [
+                    "@.....",
+                    ".A.B..",
+                    "#####.",
+                    "..C.D.",
+                    "E.F.G.",
+                    "H.I.J.",
+                    "K.L.M.",
+                    "N.O.P.",
+                    "Q.R.S.",
+                    "T.U.V.",
+                    "W.X.Y.",
+                    "Z......"
+                ]
+            },
+            "expected": 0
+        }
+    ],
+    "invoke": {
+        "python": "Solution().shortestPathAllKeys",
+        "typescript": "Solution().shortestPathAllKeys"
+    }
+}

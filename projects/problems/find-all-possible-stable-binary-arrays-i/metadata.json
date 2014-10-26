@@ -1,0 +1,1036 @@
+{
+    "id": "find-all-possible-stable-binary-arrays-i",
+    "questionId": 3129,
+    "difficulty": "Medium",
+    "tags": ["Dynamic Programming", "Prefix Sum"],
+    "tests": [
+        {
+            "args": {
+                "zero": 3,
+                "one": 5,
+                "limit": 3
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 5,
+                "limit": 4
+            },
+            "expected": 242
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 5,
+                "limit": 2
+            },
+            "expected": 84
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 1,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 2,
+                "limit": 3
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 5,
+                "limit": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 200,
+                "limit": 200
+            },
+            "expected": 587893473
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 4,
+                "limit": 2
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 4,
+                "limit": 2
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 4,
+                "limit": 2
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 3,
+                "limit": 3
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 10,
+                "limit": 5
+            },
+            "expected": 165114
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 4,
+                "limit": 4
+            },
+            "expected": 70
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 2,
+                "limit": 2
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "zero": 6,
+                "one": 3,
+                "limit": 2
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 1,
+                "limit": 2
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 5,
+                "limit": 2
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 5,
+                "limit": 3
+            },
+            "expected": 99
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 3,
+                "limit": 2
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 5,
+                "limit": 3
+            },
+            "expected": 194
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 7,
+                "limit": 6
+            },
+            "expected": 3418
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 3,
+                "limit": 2
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 20,
+                "limit": 10
+            },
+            "expected": 431683431
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 3,
+                "limit": 2
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 2,
+                "limit": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 4,
+                "limit": 3
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "zero": 6,
+                "one": 6,
+                "limit": 5
+            },
+            "expected": 912
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 2,
+                "limit": 2
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 50
+            },
+            "expected": 375840050
+        },
+        {
+            "args": {
+                "zero": 190,
+                "one": 10,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 180,
+                "one": 120,
+                "limit": 15
+            },
+            "expected": 662485902
+        },
+        {
+            "args": {
+                "zero": 190,
+                "one": 10,
+                "limit": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 15,
+                "limit": 5
+            },
+            "expected": 2249276
+        },
+        {
+            "args": {
+                "zero": 120,
+                "one": 180,
+                "limit": 15
+            },
+            "expected": 662485902
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 150,
+                "limit": 5
+            },
+            "expected": 357829666
+        },
+        {
+            "args": {
+                "zero": 175,
+                "one": 125,
+                "limit": 30
+            },
+            "expected": 482940468
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 20,
+                "limit": 2
+            },
+            "expected": 66
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 200,
+                "limit": 10
+            },
+            "expected": 796458380
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 50,
+                "limit": 15
+            },
+            "expected": 814679806
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 50,
+                "limit": 2
+            },
+            "expected": 1326
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 1,
+                "limit": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 150,
+                "limit": 30
+            },
+            "expected": 462327057
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 1,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 100,
+                "limit": 25
+            },
+            "expected": 672942188
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 15,
+                "limit": 2
+            },
+            "expected": 860142
+        },
+        {
+            "args": {
+                "zero": 190,
+                "one": 10,
+                "limit": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 3,
+                "one": 7,
+                "limit": 4
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 200,
+                "limit": 2
+            },
+            "expected": 609176335
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 50,
+                "limit": 10
+            },
+            "expected": 701105470
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 1,
+                "limit": 200
+            },
+            "expected": 201
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 4,
+                "limit": 4
+            },
+            "expected": 121
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 180,
+                "limit": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 199,
+                "one": 199,
+                "limit": 199
+            },
+            "expected": 387943228
+        },
+        {
+            "args": {
+                "zero": 7,
+                "one": 3,
+                "limit": 4
+            },
+            "expected": 80
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 2
+            },
+            "expected": 642129773
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 2
+            },
+            "expected": 572804009
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 10
+            },
+            "expected": 430250984
+        },
+        {
+            "args": {
+                "zero": 2,
+                "one": 100,
+                "limit": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 50,
+                "limit": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 10,
+                "limit": 4
+            },
+            "expected": 3741210
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 100,
+                "limit": 50
+            },
+            "expected": 746397052
+        },
+        {
+            "args": {
+                "zero": 101,
+                "one": 100,
+                "limit": 3
+            },
+            "expected": 922524303
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 190,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 150,
+                "limit": 5
+            },
+            "expected": 670611061
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 200,
+                "limit": 200
+            },
+            "expected": 201
+        },
+        {
+            "args": {
+                "zero": 199,
+                "one": 200,
+                "limit": 100
+            },
+            "expected": 287809711
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 200,
+                "limit": 75
+            },
+            "expected": 592136303
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 200,
+                "limit": 10
+            },
+            "expected": 346661055
+        },
+        {
+            "args": {
+                "zero": 4,
+                "one": 4,
+                "limit": 3
+            },
+            "expected": 62
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 199,
+                "limit": 100
+            },
+            "expected": 287809711
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 120,
+                "limit": 10
+            },
+            "expected": 860251283
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 150,
+                "limit": 10
+            },
+            "expected": 966001232
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 15,
+                "limit": 4
+            },
+            "expected": 77607590
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 200
+            },
+            "expected": 407336795
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 200,
+                "limit": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 150,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 10,
+                "limit": 5
+            },
+            "expected": 2249276
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 5,
+                "limit": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 190,
+                "one": 10,
+                "limit": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 20,
+                "limit": 3
+            },
+            "expected": 702925689
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 20,
+                "limit": 1
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 1,
+                "limit": 200
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 100,
+                "limit": 10
+            },
+            "expected": 796458380
+        },
+        {
+            "args": {
+                "zero": 80,
+                "one": 20,
+                "limit": 5
+            },
+            "expected": 666262799
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 101,
+                "limit": 3
+            },
+            "expected": 922524303
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 50,
+                "limit": 8
+            },
+            "expected": 139177940
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 20,
+                "limit": 6
+            },
+            "expected": 140887996
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 200
+            },
+            "expected": 538992043
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 10
+            },
+            "expected": 474184186
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 10,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 20,
+                "one": 20,
+                "limit": 5
+            },
+            "expected": 89895606
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 50,
+                "limit": 20
+            },
+            "expected": 644307023
+        },
+        {
+            "args": {
+                "zero": 180,
+                "one": 20,
+                "limit": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 199,
+                "one": 199,
+                "limit": 198
+            },
+            "expected": 387942830
+        },
+        {
+            "args": {
+                "zero": 199,
+                "one": 199,
+                "limit": 100
+            },
+            "expected": 541514263
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 150,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 10,
+                "limit": 3
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 50,
+                "limit": 150
+            },
+            "expected": 713790273
+        },
+        {
+            "args": {
+                "zero": 180,
+                "one": 150,
+                "limit": 60
+            },
+            "expected": 850799592
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "zero": 120,
+                "one": 80,
+                "limit": 6
+            },
+            "expected": 885202743
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 150,
+                "limit": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 200,
+                "one": 200,
+                "limit": 3
+            },
+            "expected": 894330409
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 15,
+                "limit": 3
+            },
+            "expected": 24857864
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 190,
+                "limit": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 1,
+                "one": 100,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 5
+            },
+            "expected": 20078082
+        },
+        {
+            "args": {
+                "zero": 180,
+                "one": 20,
+                "limit": 200
+            },
+            "expected": 680498188
+        },
+        {
+            "args": {
+                "zero": 180,
+                "one": 20,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 15,
+                "limit": 4
+            },
+            "expected": 1360424
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 150,
+                "limit": 5
+            },
+            "expected": 245337662
+        },
+        {
+            "args": {
+                "zero": 125,
+                "one": 175,
+                "limit": 80
+            },
+            "expected": 30909440
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 1,
+                "limit": 50
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "zero": 10,
+                "one": 190,
+                "limit": 5
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 50,
+                "limit": 5
+            },
+            "expected": 245337662
+        },
+        {
+            "args": {
+                "zero": 80,
+                "one": 120,
+                "limit": 9
+            },
+            "expected": 674949759
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 150,
+                "limit": 10
+            },
+            "expected": 701105470
+        },
+        {
+            "args": {
+                "zero": 15,
+                "one": 10,
+                "limit": 4
+            },
+            "expected": 1360424
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 100,
+                "limit": 5
+            },
+            "expected": 357829666
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 50,
+                "limit": 2
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 100,
+                "one": 100,
+                "limit": 20
+            },
+            "expected": 294133308
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 100,
+                "limit": 10
+            },
+            "expected": 10967566
+        },
+        {
+            "args": {
+                "zero": 150,
+                "one": 200,
+                "limit": 199
+            },
+            "expected": 777184933
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 150,
+                "limit": 7
+            },
+            "expected": 536640420
+        },
+        {
+            "args": {
+                "zero": 5,
+                "one": 200,
+                "limit": 4
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "zero": 50,
+                "one": 200,
+                "limit": 20
+            },
+            "expected": 192149064
+        },
+        {
+            "args": {
+                "zero": 180,
+                "one": 180,
+                "limit": 50
+            },
+            "expected": 911610311
+        }
+    ],
+    "invoke": {
+        "python": "Solution().numberOfStableArrays",
+        "typescript": "Solution().numberOfStableArrays"
+    }
+}

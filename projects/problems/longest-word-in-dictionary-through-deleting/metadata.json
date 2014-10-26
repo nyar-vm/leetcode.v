@@ -1,0 +1,1253 @@
+{
+    "id": "longest-word-in-dictionary-through-deleting",
+    "questionId": 524,
+    "difficulty": "Medium",
+    "tags": ["Array", "Two Pointers", "String", "Sorting"],
+    "tests": [
+        {
+            "args": {
+                "s": "",
+                "dictionary": ["a", "b", "c"]
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "a",
+                "dictionary": ["b", "c", "d"]
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "zcfzdb",
+                "dictionary": ["a", "b", "c"]
+            },
+            "expected": "b"
+        },
+        {
+            "args": {
+                "s": "aaaaaaa",
+                "dictionary": ["aaa", "aaaa"]
+            },
+            "expected": "aaaa"
+        },
+        {
+            "args": {
+                "s": "aaaaaaa",
+                "dictionary": ["aaaaaaa", "aa", "a", ""]
+            },
+            "expected": "aaaaaaa"
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "dictionary": ["x", "y", "z", "xy", "xyz"]
+            },
+            "expected": "xyz"
+        },
+        {
+            "args": {
+                "s": "apple",
+                "dictionary": ["app", "appl", "applep"]
+            },
+            "expected": "appl"
+        },
+        {
+            "args": {
+                "s": "aaaa",
+                "dictionary": ["aa", "aaa", "aaaa"]
+            },
+            "expected": "aaaa"
+        },
+        {
+            "args": {
+                "s": "abpcplea",
+                "dictionary": ["a", "b", "c"]
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "dictionary": ["db", "abc", "ab", "b"]
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "s": "",
+                "dictionary": ["a", "b", "c"]
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "aaa",
+                "dictionary": ["a", "aa", "aaa"]
+            },
+            "expected": "aaa"
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "dictionary": ["x", "y", "z", "xy", "yz", "xyz"]
+            },
+            "expected": "xyz"
+        },
+        {
+            "args": {
+                "s": "aewfafwafjlwajflwajflwafj",
+                "dictionary": ["apple", "ewaf", "awefawfwaf", "awef", "awefe", "ewafeffewafewf"]
+            },
+            "expected": "ewaf"
+        },
+        {
+            "args": {
+                "s": "abpcplea",
+                "dictionary": ["ale", "apple", "monkey", "plea"]
+            },
+            "expected": "apple"
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "dictionary": []
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "abcd",
+                "dictionary": ["db", "dc", "bd", "ac", "cad"]
+            },
+            "expected": "ac"
+        },
+        {
+            "args": {
+                "s": "aewfafwafjlwajflwajflwafjlwafjl",
+                "dictionary": ["apple", "ewaf", "awefawfwaf", "awef", "awefe", "ewafeffewafewf"]
+            },
+            "expected": "ewaf"
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "dictionary": ["xyzz", "zxy", "zyx"]
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "dictionary": [
+                    "abcd",
+                    "abc",
+                    "ab",
+                    "a",
+                    "bc",
+                    "bcd",
+                    "abcdabcd",
+                    "abcdabcdabcd",
+                    "abcdabcda",
+                    "bcdabcdabcd",
+                    "abcabcabc"
+                ]
+            },
+            "expected": "abcdabcdabcd"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "dictionary": ["ab", "abc", "abrac", "abraca", "abracadabra", "cadabra", "rac"]
+            },
+            "expected": "abracadabra"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "mnopqrstuv"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "dictionary": ["an", "banana", "anana", "nana", "ba", "ana", "aaa", "aa", "a", "b"]
+            },
+            "expected": "banana"
+        },
+        {
+            "args": {
+                "s": "thequickbrownfoxjumpsoverthelazydog",
+                "dictionary": [
+                    "the",
+                    "quick",
+                    "brown",
+                    "fox",
+                    "jumps",
+                    "over",
+                    "lazy",
+                    "dog",
+                    "hello",
+                    "world",
+                    "python"
+                ]
+            },
+            "expected": "brown"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": [
+                    "issi",
+                    "ppis",
+                    "miss",
+                    "ssip",
+                    "isip",
+                    "mississippi",
+                    "mis",
+                    "sip",
+                    "iss",
+                    "piss"
+                ]
+            },
+            "expected": "mississippi"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "ab",
+                    "cd"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "vvvvvvvvvv",
+                "dictionary": [
+                    "v",
+                    "vv",
+                    "vvv",
+                    "vvvv",
+                    "vvvvv",
+                    "vvvvvv",
+                    "vvvvvvv",
+                    "vvvvvvvv",
+                    "vvvvvvvvv",
+                    "vvvvvvvvvv"
+                ]
+            },
+            "expected": "vvvvvvvvvv"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": [
+                    "issi",
+                    "miss",
+                    "pissi",
+                    "ppi",
+                    "issipi",
+                    "ississi",
+                    "mississi",
+                    "issippi"
+                ]
+            },
+            "expected": "mississi"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "dictionary": ["abc", "abcd", "abrac", "cadabra", "abra"]
+            },
+            "expected": "cadabra"
+        },
+        {
+            "args": {
+                "s": "abcabcabc",
+                "dictionary": [
+                    "abc",
+                    "abca",
+                    "abcb",
+                    "abcc",
+                    "aabbcc",
+                    "abcabc",
+                    "abcabca",
+                    "abcaabc"
+                ]
+            },
+            "expected": "abcaabc"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": ["issi", "miss", "mississ", "issippi", "issippis"]
+            },
+            "expected": "issippi"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "dictionary": [
+                    "abc",
+                    "abcd",
+                    "abracadabra",
+                    "racad",
+                    "abraca",
+                    "cadabra",
+                    "dabra",
+                    "bra"
+                ]
+            },
+            "expected": "abracadabra"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "dictionary": [
+                    "zyx",
+                    "wvu",
+                    "tsr",
+                    "pon",
+                    "mlk",
+                    "jih",
+                    "gfed",
+                    "cba",
+                    "zyxwvut",
+                    "srqponmlkjihgfedcba"
+                ]
+            },
+            "expected": "srqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "babgbagagbagagbagagbag",
+                "dictionary": [
+                    "bag",
+                    "bags",
+                    "bagga",
+                    "baggage",
+                    "bagag",
+                    "bagagag",
+                    "bagagaga",
+                    "bagagagag",
+                    "bagagagaga"
+                ]
+            },
+            "expected": "bagagagaga"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": ["abc", "def", "ghijk", "lmnop", "qrstuv", "wxyz"]
+            },
+            "expected": "qrstuv"
+        },
+        {
+            "args": {
+                "s": "abcdeffedcba",
+                "dictionary": [
+                    "abcd",
+                    "abce",
+                    "abcf",
+                    "abde",
+                    "abdf",
+                    "acde",
+                    "acdf",
+                    "adef",
+                    "bcde",
+                    "bcdf",
+                    "bcef",
+                    "bdef",
+                    "cdef"
+                ]
+            },
+            "expected": "abcd"
+        },
+        {
+            "args": {
+                "s": "aabbbccddeeff",
+                "dictionary": ["abc", "abcd", "abde", "acde", "aabbccddeeff", "abcde"]
+            },
+            "expected": "aabbccddeeff"
+        },
+        {
+            "args": {
+                "s": "bananaanananannanana",
+                "dictionary": [
+                    "ana",
+                    "anan",
+                    "anana",
+                    "ananas",
+                    "banana",
+                    "bananana",
+                    "ananan",
+                    "nananan"
+                ]
+            },
+            "expected": "bananana"
+        },
+        {
+            "args": {
+                "s": "aaaabaaaabaaaaabaaaabaaaab",
+                "dictionary": ["ab", "aba", "abab", "ababa", "ababab", "abababa", "abababab"]
+            },
+            "expected": "abababab"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": ["is", "ppi", "missi", "missis", "mississi", "mississipp"]
+            },
+            "expected": "mississipp"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "dictionary": [
+                    "abcdefghij",
+                    "klmnopqrstu",
+                    "vwxyz",
+                    "mnop",
+                    "abcd",
+                    "mnopqr",
+                    "ghijkl",
+                    "efgh",
+                    "mnopqrstuv",
+                    "vwxyzabc"
+                ]
+            },
+            "expected": "klmnopqrstu"
+        },
+        {
+            "args": {
+                "s": "abcdeabcdeabcde",
+                "dictionary": ["abcde", "abcdee", "abcd", "abcdeeabcde", "abcdeabcdeabcde"]
+            },
+            "expected": "abcdeabcdeabcde"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmno",
+                "dictionary": [
+                    "abc",
+                    "abcd",
+                    "abcde",
+                    "abcdef",
+                    "abcdefg",
+                    "abcdefgh",
+                    "abcdefghi",
+                    "abcdefghij",
+                    "abcdefghijk",
+                    "abcdefghijkl",
+                    "abcdefghijklm",
+                    "abcdefghijklmn",
+                    "abcdefghijklmno"
+                ]
+            },
+            "expected": "abcdefghijklmno"
+        },
+        {
+            "args": {
+                "s": "longwordwithmanycharacters",
+                "dictionary": [
+                    "long",
+                    "word",
+                    "with",
+                    "many",
+                    "characters",
+                    "longword",
+                    "longwordwith",
+                    "withmany",
+                    "manycharacters",
+                    "longwordwithmany",
+                    "wordwithmany",
+                    "wordwithmanycharacters"
+                ]
+            },
+            "expected": "wordwithmanycharacters"
+        },
+        {
+            "args": {
+                "s": "leetcode",
+                "dictionary": [
+                    "leet",
+                    "leetc",
+                    "lee",
+                    "code",
+                    "leetcod",
+                    "cod",
+                    "ode",
+                    "leetode",
+                    "leetcoded",
+                    "teecode"
+                ]
+            },
+            "expected": "leetcod"
+        },
+        {
+            "args": {
+                "s": "abcxyz",
+                "dictionary": ["abc", "bca", "cab", "xyz", "zyx"]
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatwilltestourfunction",
+                "dictionary": [
+                    "this",
+                    "is",
+                    "a",
+                    "very",
+                    "long",
+                    "string",
+                    "that",
+                    "will",
+                    "test",
+                    "our",
+                    "function",
+                    "thisisaverylongstringthatwilltestourfunction"
+                ]
+            },
+            "expected": "thisisaverylongstringthatwilltestourfunction"
+        },
+        {
+            "args": {
+                "s": "abacaxbabax",
+                "dictionary": ["aba", "abacax", "bacab", "cab", "bacabc", "abcabc"]
+            },
+            "expected": "abacax"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": ["mis", "issi", "issip", "ippi", "ppi", "pip", "pis", "is", "i"]
+            },
+            "expected": "issip"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": ["issi", "miss", "pippi", "mippi", "mississippi"]
+            },
+            "expected": "mississippi"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "dictionary": [
+                    "zyx",
+                    "zyxwv",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "zyxwvutsrqponmlkjihgfedcb",
+                    "zyxwvutsrqponmlkjihgfedc",
+                    "zyxwvutsrqponmlkjihgfed",
+                    "zyxwvutsrqponmlkjihgfe",
+                    "zyxwvutsrqponmlkjihgf",
+                    "zyxwvutsrqponmlkjihg",
+                    "zyxwvutsrqponmlkjih",
+                    "zyxwvutsrqponmlkji",
+                    "zyxwvutsrqponmlkj",
+                    "zyxwvutsrqponmlk",
+                    "zyxwvutsrqponml",
+                    "zyxwvutsrqponm",
+                    "zyxwvutsrqpon",
+                    "zyxwvutsrqpo",
+                    "zyxwvutsrqp",
+                    "zyxwvutsrq",
+                    "zyxwvutsr",
+                    "zyxwvuts",
+                    "zyxwvut",
+                    "zyxwvu",
+                    "zyxwv",
+                    "zyxw",
+                    "zyx",
+                    "zy",
+                    "z"
+                ]
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "aaaaabbbbcccc",
+                "dictionary": [
+                    "abc",
+                    "acb",
+                    "bac",
+                    "bca",
+                    "cab",
+                    "cba",
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "aabb",
+                    "abcc",
+                    "bbcc",
+                    "aabbcc",
+                    "ab",
+                    "bc",
+                    "ca",
+                    "bb",
+                    "cc",
+                    "aa"
+                ]
+            },
+            "expected": "aabbcc"
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "dictionary": [
+                    "pro",
+                    "gram",
+                    "ming",
+                    "is",
+                    "fun",
+                    "program",
+                    "programming",
+                    "programmin",
+                    "programmingi",
+                    "programmingis",
+                    "programmingisf",
+                    "programmingisfu",
+                    "programmingisfun",
+                    "programmingisfunn",
+                    "programmingisfuns"
+                ]
+            },
+            "expected": "programmingisfun"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": ["miss", "piss", "misp", "issi", "issipp"]
+            },
+            "expected": "issipp"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "dictionary": [
+                    "zzzzzzzzzz",
+                    "zzzzzzzz",
+                    "zzzzzzz",
+                    "zzzzzz",
+                    "zzzzz",
+                    "zzzz",
+                    "zzz",
+                    "zz",
+                    "z"
+                ]
+            },
+            "expected": "zzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "babgbag",
+                "dictionary": ["bag", "bgb", "ggb", "bbag", "baggb"]
+            },
+            "expected": "bbag"
+        },
+        {
+            "args": {
+                "s": "bananaaa",
+                "dictionary": [
+                    "baaa",
+                    "ban",
+                    "anana",
+                    "nana",
+                    "banan",
+                    "anan",
+                    "na",
+                    "n",
+                    "a",
+                    "b",
+                    "ba",
+                    "ban",
+                    "bana",
+                    "banan",
+                    "banana",
+                    "bananaa"
+                ]
+            },
+            "expected": "bananaa"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": ["issi", "missi", "issipi", "mississippi", "mis", "pi"]
+            },
+            "expected": "mississippi"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "abcdefghijklmnopqrstuvwxy"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": [
+                    "zyx",
+                    "yxz",
+                    "xyz",
+                    "abcdefghijklmnopqrstuvwxyzz",
+                    "abcdefghijklmnopqrstuvwxyz"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "dictionary": ["bra", "abr", "cad", "acad", "a", "abracadabra"]
+            },
+            "expected": "abracadabra"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "dictionary": ["abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz", "zzyx"]
+            },
+            "expected": "abc"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "dictionary": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "abcdefghij",
+                    "abcdefghijk",
+                    "abcdefghi",
+                    "abcdefgh",
+                    "abcdefg",
+                    "abcdef",
+                    "abcde",
+                    "abcd",
+                    "abc",
+                    "ab",
+                    "a"
+                ]
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "s": "xxyyzz",
+                "dictionary": ["xyz", "xyzz", "xzyz", "xzy", "yzx", "zyx", "zx", "yx", "xz", "zy"]
+            },
+            "expected": "xyzz"
+        },
+        {
+            "args": {
+                "s": "babbbbaabbaaaaabbaabbbabbbaaabbbbbabababbbababbbbbbbbbaabbaaaabbabbbaababbaabbbaaaabbbbbbaaaabbabbbaaaabbaaabbaabba",
+                "dictionary": [
+                    "babbbbaabbaaaaaaba",
+                    "babbbaaabbbaabbbba",
+                    "bbbaabbbaaaaaababb",
+                    "bbbabbbbaabbaaaaaabb",
+                    "abababbaabbbaababa",
+                    "bbbbbabbaabbaaaaaa",
+                    "babbbbaaaabbaaaaaa",
+                    "abbbbabbaaaabbaabaa",
+                    "baabaaaabaaabaaaab"
+                ]
+            },
+            "expected": "bbbabbbbaabbaaaaaabb"
+        },
+        {
+            "args": {
+                "s": "kfkfkfkfkfkfkfkfkfkfkfkfkfkfkfkf",
+                "dictionary": ["kfk", "fkf", "kfkf", "fkfk", "kfkfkf", "fkfkfk"]
+            },
+            "expected": "fkfkfk"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "dictionary": [
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "abcdefghijklmnopqrstuvwxy",
+                    "qrstuvwxy",
+                    "wxyz",
+                    "uvw",
+                    "vw",
+                    "w"
+                ]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "dictionary": [
+                    "aabbcc",
+                    "ddeeff",
+                    "gghhiijj",
+                    "kkllmm",
+                    "nnoopp",
+                    "qqrrst",
+                    "tuuvvw",
+                    "xxyyzz",
+                    "zzzyyx"
+                ]
+            },
+            "expected": "gghhiijj"
+        },
+        {
+            "args": {
+                "s": "a",
+                "dictionary": ["b", "c", "d", "e", "f", "g"]
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "leetcodeisgreat",
+                "dictionary": [
+                    "leet",
+                    "code",
+                    "is",
+                    "great",
+                    "leetcode",
+                    "leetcodes",
+                    "leetcodeis",
+                    "leetcodeisgreat",
+                    "etcodeisgreat"
+                ]
+            },
+            "expected": "leetcodeisgreat"
+        },
+        {
+            "args": {
+                "s": "aabbaabbaabbaabbaabbaabbaabbaabbaabbaabb",
+                "dictionary": [
+                    "aabba",
+                    "aabbaabb",
+                    "aabbaabbaabb",
+                    "aabbaabbaabbaabb",
+                    "aabbaabbaabbaabbaabb",
+                    "aabbaabbaabbaabbaabbaabb"
+                ]
+            },
+            "expected": "aabbaabbaabbaabbaabbaabb"
+        },
+        {
+            "args": {
+                "s": "longestwordinadictionary",
+                "dictionary": ["longestword", "word", "dictionary", "in", "a", "longest", "long"]
+            },
+            "expected": "longestword"
+        },
+        {
+            "args": {
+                "s": "llllllllllllllllllllllllllllllllllllllllll",
+                "dictionary": [
+                    "l",
+                    "ll",
+                    "lll",
+                    "llll",
+                    "lllll",
+                    "llllll",
+                    "lllllll",
+                    "llllllll",
+                    "lllllllll",
+                    "llllllllll",
+                    "lllllllllll",
+                    "llllllllllll",
+                    "lllllllllllll",
+                    "llllllllllllll",
+                    "lllllllllllllll",
+                    "llllllllllllllll",
+                    "lllllllllllllllll",
+                    "llllllllllllllllll"
+                ]
+            },
+            "expected": "llllllllllllllllll"
+        },
+        {
+            "args": {
+                "s": "aaabbcccddd",
+                "dictionary": ["aabbbcccddd", "aabbbccc", "aabbcc", "aabc", "abc", "a", "b", "c"]
+            },
+            "expected": "aabbcc"
+        },
+        {
+            "args": {
+                "s": "ababcababc",
+                "dictionary": [
+                    "ab",
+                    "abc",
+                    "ababc",
+                    "aabbcc",
+                    "aabbc",
+                    "abab",
+                    "abba",
+                    "ababab",
+                    "babab",
+                    "abcabcabc"
+                ]
+            },
+            "expected": "ababab"
+        },
+        {
+            "args": {
+                "s": "ababcabcabc",
+                "dictionary": ["abc", "abca", "abcab", "abcabc", "abcabcd"]
+            },
+            "expected": "abcabc"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": [
+                    "zyxwvutsrqponmlkjihgfedcba",
+                    "nopqrstuvwxy",
+                    "mnopqrstuvwx",
+                    "lmnopqrstu",
+                    "klmnopqr",
+                    "jklmnop",
+                    "ijklmno",
+                    "ijklm",
+                    "ijkl",
+                    "ijk",
+                    "ij",
+                    "i"
+                ]
+            },
+            "expected": "mnopqrstuvwx"
+        },
+        {
+            "args": {
+                "s": "aaaaaaa",
+                "dictionary": ["aaaa", "aa", "a", "aaa", "aaaaa", "aaaaaa"]
+            },
+            "expected": "aaaaaa"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "dictionary": [
+                    "zyx",
+                    "wvut",
+                    "srqpo",
+                    "nmlkj",
+                    "ihgfedcba",
+                    "mnopqrstu",
+                    "zyxwvutsrqponmlkjihgfedcba"
+                ]
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "longestword",
+                "dictionary": [
+                    "long",
+                    "longer",
+                    "longest",
+                    "longestw",
+                    "longestwo",
+                    "longestwor",
+                    "longestword",
+                    "longestworde"
+                ]
+            },
+            "expected": "longestword"
+        },
+        {
+            "args": {
+                "s": "qwertyuiopasdfghjklzxcvbnm",
+                "dictionary": [
+                    "qwerty",
+                    "asdfgh",
+                    "zxcvbn",
+                    "mnbvcxz",
+                    "lkjhgfdsa",
+                    "poiuytrewq",
+                    "uytrewqpo",
+                    "uytres",
+                    "yuiop",
+                    "poiuyt",
+                    "poiuy",
+                    "poiu",
+                    "po",
+                    "p",
+                    "zxcvbn",
+                    "qwerty",
+                    "asdfghjklzxcvbnm",
+                    "qwertyuiopasdfghjklzxcvbnm",
+                    "qwertyuiopasdfghjklzzzzzzzz",
+                    "zxcvbnmlkjhgfdsapoiuytrewq"
+                ]
+            },
+            "expected": "qwertyuiopasdfghjklzxcvbnm"
+        },
+        {
+            "args": {
+                "s": "aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd",
+                "dictionary": [
+                    "aaaabbbbccccddd",
+                    "bbbccccddd",
+                    "ccccddd",
+                    "ddd",
+                    "ccc",
+                    "bbb",
+                    "aaa",
+                    "aaabbb",
+                    "bbcccc",
+                    "ccccdd",
+                    "ddd"
+                ]
+            },
+            "expected": "aaaabbbbccccddd"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                "dictionary": [
+                    "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                    "abcdabcdabcdabcdabcdabcdabcdabcdabcdabc",
+                    "abcdabcdabcdabcdabcdabcdabcdabcdabcdab",
+                    "abcdabcdabcdabcdabcdabcdabcdabcdabcd",
+                    "abcdabcdabcdabcdabcdabcdabcdabcdabc",
+                    "abcdabcdabcdabcdabcdabcdabcdabcdab",
+                    "abcdabcdabcdabcdabcdabcdabcdabcd"
+                ]
+            },
+            "expected": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"
+        },
+        {
+            "args": {
+                "s": "lletscodeleet",
+                "dictionary": ["code", "let", "lets", "leetc", "leet", "leetcode", "ccode", "lcode"]
+            },
+            "expected": "lcode"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "dictionary": [
+                    "zz",
+                    "yy",
+                    "xx",
+                    "ww",
+                    "vv",
+                    "uu",
+                    "tt",
+                    "ss",
+                    "rr",
+                    "qq",
+                    "pp",
+                    "oo",
+                    "nn",
+                    "mm",
+                    "ll",
+                    "kk",
+                    "jj",
+                    "ii",
+                    "hh",
+                    "gg",
+                    "ff",
+                    "ee",
+                    "dd",
+                    "cc",
+                    "bb",
+                    "aa"
+                ]
+            },
+            "expected": "aa"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "dictionary": [
+                    "miss",
+                    "missi",
+                    "missis",
+                    "mississ",
+                    "mississi",
+                    "mississip",
+                    "mississipp",
+                    "mississippi"
+                ]
+            },
+            "expected": "mississippi"
+        },
+        {
+            "args": {
+                "s": "aaaabbbbcccc",
+                "dictionary": [
+                    "abc",
+                    "aab",
+                    "bbcc",
+                    "aabbcc",
+                    "aaabbbccc",
+                    "ccccbbbbaaa",
+                    "aaaabbbbcccc"
+                ]
+            },
+            "expected": "aaaabbbbcccc"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "dictionary": [
+                    "abc",
+                    "def",
+                    "ghi",
+                    "j",
+                    "abcdefghij",
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "ghij"
+                ]
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "dictionary": [
+                    "super",
+                    "cali",
+                    "fragilistic",
+                    "expialidocious",
+                    "docious",
+                    "ocious",
+                    "cious",
+                    "ious",
+                    "ous",
+                    "us",
+                    "s",
+                    "ex",
+                    "pi",
+                    "li",
+                    "tic",
+                    "exp",
+                    "cal",
+                    "sup",
+                    "era",
+                    "istic"
+                ]
+            },
+            "expected": "expialidocious"
+        },
+        {
+            "args": {
+                "s": "pppqqqrrrsssttt",
+                "dictionary": [
+                    "ppqrs",
+                    "pqr",
+                    "pppp",
+                    "qqqq",
+                    "rrrr",
+                    "ssss",
+                    "tttt",
+                    "pqqqrrrsttt",
+                    "pppqqqrrrssttt"
+                ]
+            },
+            "expected": "pppqqqrrrssttt"
+        },
+        {
+            "args": {
+                "s": "abcdabcdabcd",
+                "dictionary": [
+                    "abcd",
+                    "abc",
+                    "ab",
+                    "a",
+                    "abcdabcdabcd",
+                    "abcdabcd",
+                    "bcd",
+                    "cd",
+                    "d",
+                    "abcdabcda",
+                    "bcdabcd",
+                    "cdabcd",
+                    "dabcd"
+                ]
+            },
+            "expected": "abcdabcdabcd"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "dictionary": ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"]
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "dictionary": [
+                    "ban",
+                    "banana",
+                    "banan",
+                    "bananas",
+                    "anana",
+                    "ana",
+                    "nana",
+                    "na",
+                    "a"
+                ]
+            },
+            "expected": "banana"
+        },
+        {
+            "args": {
+                "s": "banana",
+                "dictionary": [
+                    "ban",
+                    "anana",
+                    "nana",
+                    "banan",
+                    "anan",
+                    "na",
+                    "n",
+                    "a",
+                    "b",
+                    "ba",
+                    "ban",
+                    "bana",
+                    "banan",
+                    "banana"
+                ]
+            },
+            "expected": "banana"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().findLongestWord",
+        "typescript": "Solution().findLongestWord"
+    }
+}

@@ -1,0 +1,960 @@
+{
+    "id": "replace-the-substring-for-balanced-string",
+    "questionId": 1234,
+    "difficulty": "Medium",
+    "tags": ["String", "Sliding Window"],
+    "tests": [
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWEEEEEEEERRRRRRRR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQWWER"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "WQQQQQERQQ"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "WWEERRQQQWEEERRQQQWEEERRQQQWEEERR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQWQWQQWEEWEEWRRWRRWRRW"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QQQQWWWWEEEERRRR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "WQWRQQQWQWQQQQRRWEWRRWQQQWQRWEQWQWRRRRWQQQWRRQWEQWQQWRWRRWQQWEWRRQWQWQWQWQW"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "QQWWRRER"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QQQQWWWEERRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEERRRRRRRR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRRQQQWEEERRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QWERQWERQWERQWER"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQWEEEERRRQ"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "QQWE"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QQQW"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQWEQRQQQQEEEEWWRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QWER"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQQEEEERRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "WQEEWRQQQWEEEERRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "WQWRQQQW"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEWWRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QWQWQWQW"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQEEEEWWWWRRRR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQQWWEERR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEERRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "QQQQWWRRRRWWRRRQQQ"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQQWWEERRRRQQQQ"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQWEEEERRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQWWWWWWWWQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRRQQWWEERRRRQQWWEERRRR"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "QQQQWWWEEERRRR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEEQQQQRRRRWWWWEEEEQQQQ"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 42
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "s": "QQQQWWEERRQQWWEERRQQWWEERRQQWWEERR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQ"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQWEEEEERRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "QQQWEEEERRRRQQ"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QQQQQWWEERRRQQ"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 87
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQ"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QWEQRWEQRWEQRWEQWEQRWEQRWEQRWE"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "QQWWEERRQQWWEERRQQWWEERR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQWWWWWWWWWWEEEEEEEEEEERRRRRRRRRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QQQQQWEEEEERRRRR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEERRRR"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "WWWWWWWWQQQQEEEERRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQWWWWWWWWWWWEEEEEEEEEEEERRRRRRRRRRRRRRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQW"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "EEEEWWRRQQQQEEEEWWRRQQQQ"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWW"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQQWWWWEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRWWW"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "EEEEEEEEWWWWWWWWRRRRRRRRQQQQQQQQ"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEE"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWW"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "WWWWWWWWWWEEEEEEEEQQQQQQQQQQRRRRRRRRRR"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEEQQQQ"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEEERRRRRRRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QWQWQWQWQWQWQWQW"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEERRRRRRRRRRRR"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QQQQQQWWEERRRRWWWWRRRRQQQQQQWWEERRRRWWWWRRRRQQQQQQWWEERRRRWWWWRRRR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQEEEEWWRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWWEEEEEEEEEEEEEEEEERRRRRRRRRRRRRR"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQ"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "s": "QWEQQWEQQWEQQWEQQWEQQWEQQWEQQWE"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQWWWWWWWWWWEEEEEEEEERRRRRRRRRR"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEERRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQWEEEEEEERRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWQQQQQQQQWWWWWWWWQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRRWWWWRRRRWWWWRRRRWWWWRRRR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "WWWWQQQEEEERRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQWWWWWWWWWWWWWWWWEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQQQWEEEEERRRRRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQQWWEERRRRQQQWWEERRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQQQQWWWEEEEEEEEEERRRRRRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "WWWWWQQQQQQQQQQQQQQQQQQEEEERRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWW"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQWWWWWWWWEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRR"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRRWWWWRRRRWWWWRRRRWWWWRRRRQQQWEEERRRRWWWWRRRR"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "WQQQWEWQERWREWER"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QWQWQWQWQQQQQQQQEEEEWWRRQQQQ"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQWWEERRRRRRRRRRRRRR"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWEEEEEEEEEERRRRRRRRR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQQQWWEEEERRRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEERRRRRR"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 102
+        },
+        {
+            "args": {
+                "s": "QQQQWWEEREEE"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQWWEERRQQWWEERR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQWWWWWEEEEERRRRRQQQWWWWWEEEEERRRRRQQQWWWWWEEEEERRRRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQQWWWWEEEERRRRQQQQWWWWEEEE"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQWWEERRRRQQQQWWEERRRRQQQQWWEERRRR"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQW"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "QQQWEEEERRRRQQQWEEEERRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQEEEEWWRRQQQQQQQQQQQQ"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEERRRRWWWWQQQQWEEEERRRRWWWW"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQWQQQQQQQQQQEEEEWWRRQQQQ"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "QQQQWWWWWWWWEEEEERRRRRRRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQWEEERQQQWEEERRQQQWEEERRQQQWEEERR"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWEEEEEEEEEEEEEERRRRRRRRRRRR"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERR"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRQQQWEEERRQQQWEEERRQQQWEEEERR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRR"
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQWWWWWWWWWWWWEEEEEEEEEEEEERRRRRRRRRRRR"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRRQQQWEEERRRR"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRR"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEEQQQQRRRR"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEERRRRRRRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWEERRRRRR"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "s": "QQQWQWQWQWQWQWQWQWQWQWQWQWQWQW"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "QQQWWEERRRRQQQQWWEERRRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "WQQQWQQQWQQQWQQQEEEEWWRRQQQQ"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "QQQWEEEERRRRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 31
+        },
+        {
+            "args": {
+                "s": "QQQWEEEEEERRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQQQWEEEEEEEEEEEEERRRRRRRRRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEEQQQQRRRRWWWWEEEE"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QQQWEEEEWWRRQQQQEEEEWWRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "QWQWQWQWQWQWQQQQWWRRQQQQ"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "s": "QQQQQQWWWWWWEEEEEEEEEERRRRRRRRRRRRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQQWQQQQWQQQQEEEEWWRRQQQQEEEEWWRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQQQQQWEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "s": "WWWWQQQEEERRRR"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEEQQQQRRRRWWWWEEEEQQQQRRRR"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "s": "QWQQQQQQQQQWEWEWEWRR"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQWEEEERRR"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 68
+        },
+        {
+            "args": {
+                "s": "QQQWWEERQQRRQWRE"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQQEEEEWWRR"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERR"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQQQQQQQQQEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "s": "QQQQWWEERRRRQQQQWWEERRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQQQQWWWEEEEERRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQQWWEERRRRQQQQWWEERRRRQQQQWWEERRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRR"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "s": "WQWRQQQQEERRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWWWWWWWWWWWWWEEEEEERRRR"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "s": "QQQQWEEEEEERRRRQQQWEEEERRRRWWWWQQQQQQQQWWWWEEEEQQQQRRRRWWWW"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "s": "QQQWEEEEEERRRRQQ"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRRRRRRRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "RRRRRRRRQQQQQQQQWWWWWWWWEEEEEEEE"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWQQQQWWWWEEEEEEEEEEEEEEEERRRRRRRRRRRRRR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRRWWWWRRRRQQQWEEERRRRWWWWRRRRQQQWEEERRRRWWWWRRRR"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWWWWWEEEERRRRRRRRRRRR"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRRWWWWRRRRWWWWRRRRWWWWRRRRQQWWEERRRRWWWWRRRR"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "s": "WWWWQQQQEEEERRRRWWWWQQQQEEEERRRR"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "s": "QQQQQQQQWWEERRRR"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "s": "QQWWEERRWWEERRWWEERRWWEERR"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "s": "QQWWEERRRRWWWWRRRRQQQWEEERRRRWWWWRRRRQQQWEEERRRRWWWWRRRRQQQWEEERRRRWWWWRRRR"
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "s": "QQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERRQQQWEEERR"
+            },
+            "expected": 12
+        }
+    ],
+    "invoke": {
+        "python": "Solution().balancedString",
+        "typescript": "Solution().balancedString"
+    }
+}

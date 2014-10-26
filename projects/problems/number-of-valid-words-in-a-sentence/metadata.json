@@ -1,0 +1,2274 @@
+{
+    "id": "number-of-valid-words-in-a-sentence",
+    "questionId": 2047,
+    "difficulty": "Easy",
+    "tags": ["String"],
+    "tests": [
+        {
+            "args": {
+                "sentence": "no-digits123 or symbols#allowed"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "a.b.c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "hello-world, this-is-a-test"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "hello-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "singleletter a b c d e f g"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "sentence": "valid-words only"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "hello world! this is a test."
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "sentence": "hello-world, my.name-is Qwen"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "ending-with-punctuation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "invalid--double-dash"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple   spaces   between   words"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple--hyphens"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-hyphenated-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-invalid invalid- invalid-!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "well-well, well!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "singleletter"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a! b. c?"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "hello-world"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a-b-c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-world"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a-b-c d-e f-g"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "-b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "no-digits-allowed 123 456-789"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "alice and  bob are playing stone-game10"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "sentence": "no-dash-here"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a-b!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word here!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "a-b- c d"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "valid-word here and another-valid one!"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "sentence": "a-b-c-d.e.f!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "singleletter a b c"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "a-b. afad ba-c a! ."
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "sentence": "a.b-c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "hello!world"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": ","
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a!b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-ab cd- ef-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "hello-world, my name is john-doe."
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "sentence": "!this  1-s b8d!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "trailingpunctuation. comma, exclamation!"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "punctuation,in,middle,a-b.c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "invalid-end-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-invalid start"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word here! and here."
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word-here!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation,at,end."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a-b.c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "cat and  dog"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "."
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "-invalid-start"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a.b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "hello-world!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "punctuation! marks, are: allowed?"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "punctuation.only,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word- valid-word-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation-after-hyphen-! invalid"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation-1,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word, valid-word!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word?"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word@123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-hyphen-and-punctuation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word, invalid-word2"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation-after-hyphen-,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-1b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-1b-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation,at,end."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple---hyphens-in-a-row"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-in-middle-1word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation-inside-word!word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a-b-c d-e-f g-h"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation-and-digit1!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation-after-hyphen-!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-word-with-leading-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-b--1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation! word-without"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word. word- word!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "hyphenated-word- is valid"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "no-spaces"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-1-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word! word- word. word?"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "hyphen-at-end-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "multiple---hyphens"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-exclamation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word- valid-word!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word word, word! word."
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-b--"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word- word-with-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit1-and-punctuation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation-in-middle-of-word!word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word!word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "singleletter singleletter! singleletter."
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-at-end1!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-1--b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation-and-hyphen-word-123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple--dashes are invalid"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation.at.end,invalid"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit1-and-punctuation."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-punctuation-at-end,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "single-hyphenated-word a-b"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "123 word- word! word?"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "a.b!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation, word-with-hyphen-and-punctuation."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word- valid-word- valid-word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "punctuation-only! and !only-punctuation"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "hello-world- is not valid"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-with-valid-hyphen word-with--invalid-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word valid-word- valid-word"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-and-punctuation-1-word!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "invalid-1word and valid-word"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation,at,end!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word- word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations!word-with-punctuations!word-with-punctuations."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-ending-punctuation."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation,word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word.."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-multiple-hyphens-and-punctuation-,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple-spaces   between   words"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word-"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations!word-with-punctuations!word-with-punctuations!word-with-punctuations!word-with-punctuations."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid!word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word- word- valid"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a--b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word word- word. word?"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-b1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word- word! word@"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#abc-def,word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen- valid-word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation1-,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "validwordwithmultiplepunctuations,,,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-hyphen-and-comma, valid."
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word,word,word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-punctuation-at-end!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word,with,commas and.punctuations"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word@!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123?"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word, valid-word. valid-word! valid-word"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-space-in-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation word-with-hyphen-and-punctuation-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple---hyphens-in-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word,word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word?"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "123 456 789"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation!in!the!middle"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple-punctuation,,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-digit-1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit123 and another-word!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "a!b.c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple-punctuation!!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with123-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "only!only only.only only-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word1 word2- word3- word4"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen- word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-1digit"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations,word-with-punctuations,word-with-punctuations,word-with-punctuations,word-with-punctuations!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word, and invalid-word1"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation-in-middle.a"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word@?"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-period."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-multiple-hyphens-and-punctuation-,and valid-word!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations,word-with-punctuations."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word followed-by-number123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "single-punctuation!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word word- word! word-"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-! word- word-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-and-punctuation-word-1."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen word-with-hyphen- word-with-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word! another-valid-word?"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation1,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation.at-end"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word, invalid-word123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "!valid valid. valid-"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word."
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation1-."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a a-b a-b-c a-b-c-d"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-trailing-punctuation,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation-after-hyphen-."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "multiple   spaces"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word?"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "multiple-punctuation.."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#abc-123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word! word- word. word-"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "valid-word followed-by-digits123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen--b-1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "hello-world- is-not-valid"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations!word-with-punctuations!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-a"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "nohyphens here!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation-at-start!word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "leading!and-trailing!punctuation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "no-dashes-here but-here-are-too-many-dashes"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphen- word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-hyphen-and-punctuation."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word, valid-word. valid-word!"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation.at.end."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word-"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a!b!c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-number1234 and valid-word"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word,word!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word@"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word1 word2 word3 word4"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation,at,end!invalid"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "complex-word-with-punctuation,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#abc-def!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations!word-with-punctuations!word-with-punctuations!word-with-punctuations."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "single-letter-word a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-trailing-hyphen-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation.multiple"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multi-hyphen-word-123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen word-with-hyphen-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word a valid-word- valid-word"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation-1."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-b-1--"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word!word!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "!word .word ,word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation- word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "invalid-punctuation, invalid-punctuation! invalid-punctuation?"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "a.b.c.d"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multi-hyphenated-word-should-fail"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "punctuation!in!middle"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "trailing-hyphen- invalid-hyphen-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "single-letter a"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen--b1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-period-and-comma,./"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations! word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-2-hyphens-a-b-c"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with--double-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a.b-c!d.e"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "this-is-valid-1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word! valid-word!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-digit1-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a!b-c.d.e"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a.b-c.d.e"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation1-!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "1word 12word word3"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation,word-with-punctuation, word-with-punctuation!word-with-punctuation."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a!b.c-d.e"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-1 valid-word-2"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word!word another-word,"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a.b-c.d!e"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a-b.c.d"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "mid,dash"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid.word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word valid-word-"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations,word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation1."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-word-1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-comma,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "-hyphen-at-start"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "single-punctuation-mark."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "!invalid-start-word invalid-end-word!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "a-b-c-d"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations,word-with-punctuations,word-with-punctuations!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-at-end1."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#abc-def"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "multiple-hyphens-in--one-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "a valid-word- valid-word valid-word-"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "double--hyphen invalid"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "validwordwithmultiplepunctuations..."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "!a-b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word! word- word. word@"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "valid-word- valid-word valid-word"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "leading-hyphen invalid-hyphen"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "a.b.c!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "invalid-word- punctuation-here."
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word-here, and-this.is!ok"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word, valid-word."
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "valid-word valid-word valid-word-"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-h word-hyphenated word-!"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "another!valid!word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with.punctuation"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word- valid-hyphenated-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word word-with-hyphen-"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation! word-with-hyphen-and-punctuation!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "single-letter a valid-word"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-hyphen-and-punctuation,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen-and-punctuation."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word!"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "end! punctuation"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-at-end1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "hyphenated-word-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word,"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "-word-with-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "only-allowed-here"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-in-hyphen-1-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "mixed-case Words Are Invalid"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "-leading-hyphen"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation!at!the!end"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "validwordwithmultiplepunctuations!!!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word word-with-hyphen"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit1-and-punctuation,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-hyphen123"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation!at!end"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated word- word. word?"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-at-end1,"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word word- word! word?"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "valid-word,another-valid-word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "trailing-punctuations,, are! invalid"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuation!and-more"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "123abc and abc123 are invalid"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen--b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-b-1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word! valid-word, valid-word."
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "no-hyphens allowed"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation-1!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple    spaces    between words"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "sentence": "triple-hyphen---word"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "punctuation,,comma and space"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "valid-word-2!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit1-and-hyphen-b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-hyphen-word word- word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word- word- word- word."
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word!!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "trailing-hyphen-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word- word- word- word"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-!!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-punctuation1!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "word-with-multiple-punctuations!!!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations!."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word1- word2- word3- word4-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multiple--hyphens-are!invalid"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-hyphenated-word- word- word. word-123@?!#abc-def,word@?!#abc-def,word@?!#abc123"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "sentence": "valid-word- valid-word- valid-word-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid-word-with-punctuation-at-end."
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen1-b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "multi-hyphen-usage-is-not-allowed"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with! punctuation"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "sentence": "valid-word valid-word valid-word"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "sentence": "valid-word-1 valid-word-2 valid-word-3"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-punctuations,word-with-punctuations,word-with-punctuations,word-with-punctuations!"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-in-hyphen-word-1"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "word-with-digit-and-hyphen-1-b"
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "sentence": "valid,word valid.word valid-word!"
+            },
+            "expected": 1
+        }
+    ],
+    "invoke": {
+        "python": "Solution().countValidWords",
+        "typescript": "Solution().countValidWords"
+    }
+}

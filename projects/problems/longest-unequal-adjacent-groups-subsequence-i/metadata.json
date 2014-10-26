@@ -1,0 +1,2658 @@
+{
+    "id": "longest-unequal-adjacent-groups-subsequence-i",
+    "questionId": 2900,
+    "difficulty": "Easy",
+    "tags": ["Greedy", "Array", "String", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "words": ["dog", "cat", "bird", "fish"],
+                "groups": [0, 1, 1, 0]
+            },
+            "expected": ["dog", "cat", "fish"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["x", "y", "z"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d"],
+                "groups": [1, 0, 1, 1]
+            },
+            "expected": ["a", "b", "c"]
+        },
+        {
+            "args": {
+                "words": ["e", "a", "b"],
+                "groups": [0, 0, 1]
+            },
+            "expected": ["e", "b"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "groups": [1, 1, 0]
+            },
+            "expected": ["one", "three"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry"],
+                "groups": [1, 1, 0]
+            },
+            "expected": ["apple", "cherry"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["one", "two", "three", "four", "five"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "fish", "bird"],
+                "groups": [1, 1, 0, 0]
+            },
+            "expected": ["cat", "fish"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "code"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["hello", "world", "python", "code"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "bat", "rat"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["dog", "cat", "bat", "rat"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "code"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["hello", "world", "python", "code"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "abc", "def"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["hello", "world", "abc", "def"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["red", "blue", "green", "yellow"]
+        },
+        {
+            "args": {
+                "words": [
+                    "umbrella",
+                    "tornado",
+                    "rainbow",
+                    "ocean",
+                    "mountain",
+                    "lake",
+                    "island",
+                    "forest",
+                    "desert",
+                    "canyon",
+                    "volcano",
+                    "glacier",
+                    "river"
+                ],
+                "groups": [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+            },
+            "expected": ["umbrella", "tornado", "ocean", "lake", "forest", "canyon", "glacier"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet", "galaxy"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["sun", "moon", "star", "planet", "galaxy"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "p", "q", "r", "s", "t", "u", "v", "w"],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["x", "y", "z", "p", "q", "r", "s", "t", "u", "v", "w"]
+        },
+        {
+            "args": {
+                "words": ["ocean", "sea", "lake", "river", "stream", "creek", "pond"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["ocean", "sea", "lake", "river", "stream", "creek", "pond"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "galaxy",
+                    "universe",
+                    "constellation",
+                    "comet",
+                    "asteroid",
+                    "supernova"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "sun",
+                "moon",
+                "star",
+                "planet",
+                "galaxy",
+                "universe",
+                "constellation",
+                "comet",
+                "asteroid",
+                "supernova"
+            ]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "comet", "planet", "galaxy", "universe"],
+                "groups": [0, 1, 1, 0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "comet", "planet", "galaxy", "universe"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"],
+                "groups": [0, 1, 1, 0, 0, 1]
+            },
+            "expected": ["alpha", "beta", "delta", "zeta"]
+        },
+        {
+            "args": {
+                "words": ["quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t"
+            ]
+        },
+        {
+            "args": {
+                "words": ["flower", "tree", "bush", "shrub", "vine", "grass", "moss"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["flower", "tree", "bush", "shrub", "vine", "grass", "moss"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "comet",
+                    "asteroid",
+                    "galaxy",
+                    "universe"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "star", "planet", "comet", "asteroid", "galaxy", "universe"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta"],
+                "groups": [1, 1, 0, 0, 1, 1, 0, 0]
+            },
+            "expected": ["alpha", "gamma", "epsilon", "eta"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "galaxy",
+                    "universe",
+                    "constellation",
+                    "asteroid"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "sun",
+                "moon",
+                "star",
+                "planet",
+                "galaxy",
+                "universe",
+                "constellation",
+                "asteroid"
+            ]
+        },
+        {
+            "args": {
+                "words": ["orange", "lemon", "lime", "mango", "papaya", "guava", "kiwi"],
+                "groups": [1, 0, 0, 1, 1, 0, 1]
+            },
+            "expected": ["orange", "lemon", "mango", "guava", "kiwi"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine",
+                "ten",
+                "eleven",
+                "twelve"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "car",
+                    "truck",
+                    "bike",
+                    "motorcycle",
+                    "bicycle",
+                    "scooter",
+                    "skateboard",
+                    "longboard",
+                    "tricycle"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "car",
+                "truck",
+                "bike",
+                "motorcycle",
+                "bicycle",
+                "scooter",
+                "skateboard",
+                "longboard",
+                "tricycle"
+            ]
+        },
+        {
+            "args": {
+                "words": ["ocean", "sea", "lake", "river", "creek", "stream", "pond"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["ocean", "sea", "lake", "river", "creek", "stream", "pond"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "yak",
+                    "xylophone",
+                    "wolf",
+                    "vulture",
+                    "toucan",
+                    "snake",
+                    "raven",
+                    "quetzal",
+                    "parrot"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "zebra",
+                "yak",
+                "xylophone",
+                "wolf",
+                "vulture",
+                "toucan",
+                "snake",
+                "raven",
+                "quetzal",
+                "parrot"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "elephant",
+                    "giraffe",
+                    "hippo",
+                    "rhino",
+                    "lion",
+                    "tiger",
+                    "bear"
+                ],
+                "groups": [0, 0, 1, 1, 0, 0, 1, 1]
+            },
+            "expected": ["zebra", "giraffe", "rhino", "tiger"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"]
+        },
+        {
+            "args": {
+                "words": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"],
+                "groups": [0, 1, 1, 0, 0, 1, 1]
+            },
+            "expected": ["red", "orange", "green", "indigo"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
+        },
+        {
+            "args": {
+                "words": [
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday",
+                    "sunday"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "x",
+                    "y",
+                    "z",
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w"
+                ],
+                "groups": [
+                    1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
+                ]
+            },
+            "expected": [
+                "x",
+                "y",
+                "z",
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "puppy",
+                    "kitten",
+                    "fish",
+                    "bird",
+                    "dog",
+                    "cat",
+                    "hamster",
+                    "gerbil",
+                    "rabbit"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "puppy",
+                "kitten",
+                "fish",
+                "bird",
+                "dog",
+                "cat",
+                "hamster",
+                "gerbil",
+                "rabbit"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "aardvark",
+                    "alpaca",
+                    "antelope",
+                    "armadillo",
+                    "badger",
+                    "bear",
+                    "beaver",
+                    "camel",
+                    "capybara",
+                    "chinchilla",
+                    "chipmunk",
+                    "coati",
+                    "collared",
+                    "coyote",
+                    "deer",
+                    "dhole",
+                    "dhole",
+                    "dingo",
+                    "dolphin",
+                    "eland",
+                    "elk",
+                    "elope",
+                    "erlang",
+                    "ferret",
+                    "fisher",
+                    "fossa",
+                    "fox",
+                    "frog",
+                    "gazelle",
+                    "genet",
+                    "geoduck",
+                    "giant",
+                    "giraffe",
+                    "glenys Lynne",
+                    "gnu",
+                    "goat",
+                    "goose",
+                    "gopher",
+                    "gorilla",
+                    "grivet",
+                    "ground",
+                    "guanaco",
+                    "guinea",
+                    "guineafowl",
+                    "gurgle",
+                    "guy",
+                    "jackal",
+                    "jacana",
+                    "jaguar",
+                    "jay",
+                    "jerboa",
+                    "javelina",
+                    "jellyfish",
+                    "kangaroo",
+                    "kangaroo",
+                    "kapok",
+                    "kangaroo",
+                    "kangaroo",
+                    "koala",
+                    "komodo",
+                    "kookaburra",
+                    "kouprey",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu",
+                    "kudu"
+                ],
+                "groups": [
+                    0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
+                    1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+                    0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
+                    1, 0, 1, 0, 1, 0, 1, 0, 1, 0
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "eta",
+                    "theta",
+                    "iota",
+                    "kappa",
+                    "lambda"
+                ],
+                "groups": [1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "alpha",
+                "beta",
+                "delta",
+                "zeta",
+                "eta",
+                "theta",
+                "iota",
+                "kappa",
+                "lambda"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "groups": [
+                    1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0
+                ]
+            },
+            "expected": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z"
+            ]
+        },
+        {
+            "args": {
+                "words": ["ocean", "sea", "lake", "river", "pond", "brook", "creek", "stream"],
+                "groups": [0, 1, 1, 0, 0, 1, 0, 0]
+            },
+            "expected": ["ocean", "sea", "river", "brook", "creek"]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "eta",
+                    "theta",
+                    "iota",
+                    "kappa"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "alpha",
+                "beta",
+                "gamma",
+                "delta",
+                "epsilon",
+                "zeta",
+                "eta",
+                "theta",
+                "iota",
+                "kappa"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "dog",
+                    "bird",
+                    "fish",
+                    "ant",
+                    "bee",
+                    "moth",
+                    "fly",
+                    "antelope",
+                    "giraffe"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "cat",
+                "dog",
+                "bird",
+                "fish",
+                "ant",
+                "bee",
+                "moth",
+                "fly",
+                "antelope",
+                "giraffe"
+            ]
+        },
+        {
+            "args": {
+                "words": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
+        },
+        {
+            "args": {
+                "words": ["car", "bike", "truck", "bus", "motorcycle", "scooter", "bicycle"],
+                "groups": [1, 0, 0, 1, 1, 0, 0]
+            },
+            "expected": ["car", "bike", "bus", "scooter"]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine",
+                "ten",
+                "eleven",
+                "twelve"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "orange",
+                    "lemon",
+                    "lime",
+                    "grapefruit",
+                    "kiwi",
+                    "mango",
+                    "papaya",
+                    "guava",
+                    "dragonfruit"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "orange",
+                "lemon",
+                "lime",
+                "grapefruit",
+                "kiwi",
+                "mango",
+                "papaya",
+                "guava",
+                "dragonfruit"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "purple",
+                    "cyan",
+                    "magenta",
+                    "black",
+                    "white"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "red",
+                "green",
+                "blue",
+                "yellow",
+                "purple",
+                "cyan",
+                "magenta",
+                "black",
+                "white"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve",
+                    "thirteen"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine",
+                "ten",
+                "eleven",
+                "twelve",
+                "thirteen"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten"
+                ],
+                "groups": [0, 0, 1, 1, 0, 0, 1, 1, 0, 0]
+            },
+            "expected": ["one", "three", "five", "seven", "nine"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "rat", "bat", "owl", "fox", "wolf", "bear"],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["cat", "dog", "rat", "bat", "owl", "fox", "wolf", "bear"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sun",
+                    "moon",
+                    "star",
+                    "planet",
+                    "comet",
+                    "asteroid",
+                    "galaxy",
+                    "universe",
+                    "nebula",
+                    "blackhole"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "sun",
+                "moon",
+                "star",
+                "planet",
+                "comet",
+                "asteroid",
+                "galaxy",
+                "universe",
+                "nebula",
+                "blackhole"
+            ]
+        },
+        {
+            "args": {
+                "words": ["zebra", "giraffe", "elephant", "lion", "tiger", "bear", "wolf", "hippo"],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["zebra", "giraffe", "elephant", "lion", "tiger", "bear", "wolf", "hippo"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "w", "v", "u", "t", "s", "r", "q"],
+                "groups": [1, 1, 0, 1, 0, 0, 1, 0, 1, 1]
+            },
+            "expected": ["x", "z", "w", "v", "t", "s", "r"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "bb",
+                    "ccc",
+                    "dddd",
+                    "eeeee",
+                    "ffffff",
+                    "ggggggg",
+                    "hhhhhhhh",
+                    "iiiiiiiii",
+                    "jjjjjjjjjj"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "a",
+                "bb",
+                "ccc",
+                "dddd",
+                "eeeee",
+                "ffffff",
+                "ggggggg",
+                "hhhhhhhh",
+                "iiiiiiiii",
+                "jjjjjjjjjj"
+            ]
+        },
+        {
+            "args": {
+                "words": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"],
+                "groups": [1, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["red", "yellow", "green", "blue", "indigo", "violet"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta"],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta"]
+        },
+        {
+            "args": {
+                "words": [
+                    "abcd",
+                    "efgh",
+                    "ijkl",
+                    "mnop",
+                    "qrst",
+                    "uvwx",
+                    "yzab",
+                    "cded",
+                    "fghi",
+                    "jklm",
+                    "nopq",
+                    "rstu",
+                    "vwxy",
+                    "zabc",
+                    "defg",
+                    "hijk",
+                    "lmno",
+                    "pqr",
+                    "stu",
+                    "vwx",
+                    "yz",
+                    "ab",
+                    "cd",
+                    "ef",
+                    "gh",
+                    "ij",
+                    "kl",
+                    "mn",
+                    "op",
+                    "qr",
+                    "st",
+                    "uv",
+                    "wx",
+                    "yz",
+                    "ab"
+                ],
+                "groups": [
+                    0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
+                    1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0
+                ]
+            },
+            "expected": "Error: list index out of range"
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet", "comet", "asteroid", "galaxy"],
+                "groups": [0, 1, 1, 0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "planet", "comet", "asteroid", "galaxy"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "purple",
+                    "pink",
+                    "orange",
+                    "black",
+                    "white",
+                    "gray",
+                    "brown"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "pink",
+                "orange",
+                "black",
+                "white",
+                "gray",
+                "brown"
+            ]
+        },
+        {
+            "args": {
+                "words": ["zebra", "giraffe", "elephant", "lion", "tiger", "bear", "wolf", "fox"],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["zebra", "giraffe", "elephant", "lion", "tiger", "bear", "wolf", "fox"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"]
+        },
+        {
+            "args": {
+                "words": [
+                    "sunrise",
+                    "sunset",
+                    "dawn",
+                    "dusk",
+                    "midnight",
+                    "noon",
+                    "evening",
+                    "morning"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "sunrise",
+                "sunset",
+                "dawn",
+                "dusk",
+                "midnight",
+                "noon",
+                "evening",
+                "morning"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                    "ten",
+                    "eleven",
+                    "twelve",
+                    "thirteen",
+                    "fourteen",
+                    "fifteen"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine",
+                "ten",
+                "eleven",
+                "twelve",
+                "thirteen",
+                "fourteen",
+                "fifteen"
+            ]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet", "comet", "asteroid", "nebula"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "star", "planet", "comet", "asteroid", "nebula"]
+        },
+        {
+            "args": {
+                "words": [
+                    "piano",
+                    "guitar",
+                    "violin",
+                    "drums",
+                    "flute",
+                    "trumpet",
+                    "saxophone",
+                    "balalaika"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "piano",
+                "guitar",
+                "violin",
+                "drums",
+                "flute",
+                "trumpet",
+                "saxophone",
+                "balalaika"
+            ]
+        },
+        {
+            "args": {
+                "words": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"],
+                "groups": [1, 1, 0, 0, 1, 1, 0]
+            },
+            "expected": ["red", "yellow", "blue", "violet"]
+        },
+        {
+            "args": {
+                "words": ["ocean", "river", "lake", "stream", "pond", "fountain", "basin"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["ocean", "river", "lake", "stream", "pond", "fountain", "basin"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "giraffe",
+                    "elephant",
+                    "tiger",
+                    "lion",
+                    "bear",
+                    "wolf",
+                    "fox",
+                    "coyote",
+                    "lynx"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "zebra",
+                "giraffe",
+                "elephant",
+                "tiger",
+                "lion",
+                "bear",
+                "wolf",
+                "fox",
+                "coyote",
+                "lynx"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "lion",
+                    "tiger",
+                    "giraffe",
+                    "elephant",
+                    "rhino",
+                    "hippo",
+                    "monkey"
+                ],
+                "groups": [0, 1, 1, 0, 0, 1, 1, 0]
+            },
+            "expected": ["zebra", "lion", "giraffe", "rhino", "monkey"]
+        },
+        {
+            "args": {
+                "words": ["mountain", "hill", "peak", "valley", "canyon", "cliff", "ridge"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["mountain", "hill", "peak", "valley", "canyon", "cliff", "ridge"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+                "groups": [1, 0, 0, 1, 1, 0, 0, 1, 1, 0]
+            },
+            "expected": ["a", "b", "d", "f", "h", "j"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "indigo",
+                    "violet",
+                    "ultraviolet"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "blue",
+                "indigo",
+                "violet",
+                "ultraviolet"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "eta",
+                    "theta",
+                    "iota",
+                    "kappa"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "alpha",
+                "beta",
+                "gamma",
+                "delta",
+                "epsilon",
+                "zeta",
+                "eta",
+                "theta",
+                "iota",
+                "kappa"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "eta",
+                    "theta",
+                    "iota",
+                    "kappa",
+                    "lambda"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "alpha",
+                "beta",
+                "gamma",
+                "delta",
+                "epsilon",
+                "zeta",
+                "eta",
+                "theta",
+                "iota",
+                "kappa",
+                "lambda"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "cat",
+                    "dog",
+                    "fish",
+                    "bird",
+                    "cat",
+                    "dog",
+                    "fish",
+                    "bird",
+                    "cat",
+                    "dog",
+                    "fish",
+                    "bird",
+                    "cat",
+                    "dog",
+                    "fish",
+                    "bird",
+                    "cat",
+                    "dog",
+                    "fish",
+                    "bird"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "cat",
+                "dog",
+                "fish",
+                "bird",
+                "cat",
+                "dog",
+                "fish",
+                "bird",
+                "cat",
+                "dog",
+                "fish",
+                "bird",
+                "cat",
+                "dog",
+                "fish",
+                "bird",
+                "cat",
+                "dog",
+                "fish",
+                "bird"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "sushi",
+                    "pizza",
+                    "burger",
+                    "steak",
+                    "salad",
+                    "pasta",
+                    "taco",
+                    "burrito",
+                    "sandwich",
+                    "omelette"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "sushi",
+                "pizza",
+                "burger",
+                "steak",
+                "salad",
+                "pasta",
+                "taco",
+                "burrito",
+                "sandwich",
+                "omelette"
+            ]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming", "is", "fun"],
+                "groups": [0, 1, 1, 0, 0, 1]
+            },
+            "expected": ["hello", "world", "programming", "fun"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "giraffe", "elephant", "lion", "tiger", "bear", "monkey"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["zebra", "giraffe", "elephant", "lion", "tiger", "bear", "monkey"]
+        },
+        {
+            "args": {
+                "words": [
+                    "zebra",
+                    "giraffe",
+                    "elephant",
+                    "tiger",
+                    "lion",
+                    "bear",
+                    "panda",
+                    "rhino",
+                    "hippo",
+                    "flamingo"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "zebra",
+                "giraffe",
+                "elephant",
+                "tiger",
+                "lion",
+                "bear",
+                "panda",
+                "rhino",
+                "hippo",
+                "flamingo"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "hello",
+                    "world",
+                    "python",
+                    "programming",
+                    "is",
+                    "fun",
+                    "and",
+                    "challenging"
+                ],
+                "groups": [0, 1, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["hello", "world", "programming", "is", "fun", "and", "challenging"]
+        },
+        {
+            "args": {
+                "words": [
+                    "ant",
+                    "bee",
+                    "cow",
+                    "dog",
+                    "elephant",
+                    "frog",
+                    "goat",
+                    "horse",
+                    "iguana",
+                    "jaguar"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "ant",
+                "bee",
+                "cow",
+                "dog",
+                "elephant",
+                "frog",
+                "goat",
+                "horse",
+                "iguana",
+                "jaguar"
+            ]
+        },
+        {
+            "args": {
+                "words": ["zebra", "elephant", "tiger", "lion", "giraffe", "rhino"],
+                "groups": [1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["zebra", "elephant", "tiger", "lion", "giraffe", "rhino"]
+        },
+        {
+            "args": {
+                "words": [
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow",
+                    "red",
+                    "blue",
+                    "green"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "red",
+                "blue",
+                "green"
+            ]
+        },
+        {
+            "args": {
+                "words": ["orange", "lemon", "lime", "mango", "kiwi", "papaya", "guava", "melon"],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["orange", "lemon", "lime", "mango", "kiwi", "papaya", "guava", "melon"]
+        },
+        {
+            "args": {
+                "words": ["ocean", "river", "lake", "pond", "stream", "creek", "bay", "gulf"],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["ocean", "river", "lake", "pond", "stream", "creek", "bay", "gulf"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i"]
+        },
+        {
+            "args": {
+                "words": ["panda", "koala", "kangaroo", "polarbear", "dolphin", "seal", "walrus"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["panda", "koala", "kangaroo", "polarbear", "dolphin", "seal", "walrus"]
+        },
+        {
+            "args": {
+                "words": [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t",
+                    "u",
+                    "v",
+                    "w",
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "groups": [
+                    0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
+                ]
+            },
+            "expected": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z"
+            ]
+        },
+        {
+            "args": {
+                "words": [
+                    "ant",
+                    "bee",
+                    "ant",
+                    "bee",
+                    "ant",
+                    "bee",
+                    "ant",
+                    "bee",
+                    "ant",
+                    "bee",
+                    "ant",
+                    "bee"
+                ],
+                "groups": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "ant",
+                "bee",
+                "ant",
+                "bee",
+                "ant",
+                "bee",
+                "ant",
+                "bee",
+                "ant",
+                "bee",
+                "ant",
+                "bee"
+            ]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet", "comet", "asteroid", "galaxy"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "star", "planet", "comet", "asteroid", "galaxy"]
+        },
+        {
+            "args": {
+                "words": [
+                    "aardvark",
+                    "beaver",
+                    "capybara",
+                    "dugong",
+                    "elephant",
+                    "flamingo",
+                    "giraffe",
+                    "hippopotamus",
+                    "iguana"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": [
+                "aardvark",
+                "beaver",
+                "capybara",
+                "dugong",
+                "elephant",
+                "flamingo",
+                "giraffe",
+                "hippopotamus",
+                "iguana"
+            ]
+        },
+        {
+            "args": {
+                "words": ["car", "bike", "plane", "train", "boat", "ship", "bus"],
+                "groups": [1, 0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["car", "bike", "plane", "train", "boat", "ship", "bus"]
+        },
+        {
+            "args": {
+                "words": ["ocean", "river", "lake", "pond", "waterfall", "creek", "stream"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["ocean", "river", "lake", "pond", "waterfall", "creek", "stream"]
+        },
+        {
+            "args": {
+                "words": [
+                    "north",
+                    "south",
+                    "east",
+                    "west",
+                    "northeast",
+                    "northwest",
+                    "southeast",
+                    "southwest"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "north",
+                "south",
+                "east",
+                "west",
+                "northeast",
+                "northwest",
+                "southeast",
+                "southwest"
+            ]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"],
+                "groups": [0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
+        },
+        {
+            "args": {
+                "words": [
+                    "alpha",
+                    "beta",
+                    "gamma",
+                    "delta",
+                    "epsilon",
+                    "zeta",
+                    "eta",
+                    "theta",
+                    "iota",
+                    "kappa",
+                    "lambda",
+                    "mu",
+                    "nu",
+                    "xi",
+                    "omicron",
+                    "pi",
+                    "rho",
+                    "sigma",
+                    "tau",
+                    "upsilon",
+                    "phi",
+                    "chi",
+                    "psi",
+                    "omega"
+                ],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": [
+                "alpha",
+                "beta",
+                "gamma",
+                "delta",
+                "epsilon",
+                "zeta",
+                "eta",
+                "theta",
+                "iota",
+                "kappa",
+                "lambda",
+                "mu",
+                "nu",
+                "xi",
+                "omicron",
+                "pi",
+                "rho",
+                "sigma",
+                "tau",
+                "upsilon",
+                "phi",
+                "chi",
+                "psi",
+                "omega"
+            ]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "w", "v", "u", "t", "s", "r", "q"],
+                "groups": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["x", "y", "z", "w", "v", "u", "t", "s", "r", "q"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [0, 1, 1, 0]
+            },
+            "expected": ["one", "two", "four"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow"],
+                "groups": [0, 0, 1, 1]
+            },
+            "expected": ["red", "green"]
+        },
+        {
+            "args": {
+                "words": ["red", "green", "blue"],
+                "groups": [1, 1, 0]
+            },
+            "expected": ["red", "blue"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z"],
+                "groups": [0, 0, 0]
+            },
+            "expected": ["x"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "bird", "fish"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["dog", "cat", "bird", "fish"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["hello", "world", "python"]
+        },
+        {
+            "args": {
+                "words": ["zebra", "lion", "tiger", "bear"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["zebra", "lion", "tiger", "bear"]
+        },
+        {
+            "args": {
+                "words": ["a", "b"],
+                "groups": [0, 1]
+            },
+            "expected": ["a", "b"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["apple", "banana", "cherry"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "mouse", "elephant"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["dog", "cat", "mouse", "elephant"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "w", "v"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["x", "y", "z", "w", "v"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "groups": [0, 0]
+            },
+            "expected": ["hello"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry", "date"],
+                "groups": [1, 1, 0, 0]
+            },
+            "expected": ["apple", "cherry"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "a", "b", "a", "b"],
+                "groups": [0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["a", "b", "a", "b", "a", "b"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [1, 1, 1, 0]
+            },
+            "expected": ["one", "four"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "bird", "fish"],
+                "groups": [1, 1, 0, 0]
+            },
+            "expected": ["dog", "bird"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "star", "planet"]
+        },
+        {
+            "args": {
+                "words": ["up", "down", "left", "right"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["up", "down", "left", "right"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["apple", "banana", "cherry"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow", "black"],
+                "groups": [0, 0, 1, 1, 0]
+            },
+            "expected": ["red", "green", "black"]
+        },
+        {
+            "args": {
+                "words": ["up", "down", "left", "right"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["up", "down", "left", "right"]
+        },
+        {
+            "args": {
+                "words": ["light", "dark"],
+                "groups": [0, 1]
+            },
+            "expected": ["light", "dark"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e"],
+                "groups": [1, 1, 1, 1, 1]
+            },
+            "expected": ["a"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five", "six"],
+                "groups": [1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["one", "two", "three", "four", "five", "six"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "mouse"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["dog", "cat", "mouse"]
+        },
+        {
+            "args": {
+                "words": ["fast", "slow", "big", "small"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["fast", "slow", "big", "small"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["red", "blue", "green", "yellow"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["alpha", "beta", "gamma", "delta"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["red", "blue", "green"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [1, 1, 0, 0, 1]
+            },
+            "expected": ["one", "three", "five"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three"],
+                "groups": [1, 1, 1]
+            },
+            "expected": ["one"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "mouse"],
+                "groups": [0, 0, 1]
+            },
+            "expected": ["cat", "mouse"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry", "date", "elderberry"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["apple", "banana", "cherry", "date", "elderberry"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow", "purple", "orange"],
+                "groups": [1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["red", "blue", "green", "yellow", "purple", "orange"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z"],
+                "groups": [0, 0, 0]
+            },
+            "expected": ["x"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [0, 1, 1, 0]
+            },
+            "expected": ["sun", "moon", "planet"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["one", "two", "three", "four", "five"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "foo", "bar"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["hello", "world", "foo", "bar"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow"],
+                "groups": [1, 1, 1, 0]
+            },
+            "expected": ["red", "yellow"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["sun", "moon", "star"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["alpha", "beta", "gamma", "delta"]
+        },
+        {
+            "args": {
+                "words": ["fast", "slow", "high", "low"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["fast", "slow", "high", "low"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [1, 1, 1, 1]
+            },
+            "expected": ["sun"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "elephant"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["cat", "dog", "elephant"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry", "date"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["apple", "banana", "cherry", "date"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow", "purple"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["red", "blue", "green", "yellow", "purple"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["a", "b", "c", "d", "e"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "fish", "bird"],
+                "groups": [1, 0, 1, 1]
+            },
+            "expected": ["dog", "cat", "fish"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "bird"],
+                "groups": [0, 0, 1]
+            },
+            "expected": ["dog", "bird"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "fish", "bird"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["dog", "cat", "fish", "bird"]
+        },
+        {
+            "args": {
+                "words": ["up", "down", "left", "right"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["up", "down", "left", "right"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "bird", "fish"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["cat", "dog", "bird", "fish"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "bird", "fish"],
+                "groups": [1, 0, 1, 1]
+            },
+            "expected": ["dog", "cat", "bird"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow"],
+                "groups": [1, 1, 0, 0]
+            },
+            "expected": ["red", "green"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "groups": [0, 1]
+            },
+            "expected": ["hello", "world"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "elephant", "fox"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["cat", "dog", "elephant", "fox"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green"],
+                "groups": [0, 0, 0]
+            },
+            "expected": ["red"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "bird"],
+                "groups": [0, 1, 0]
+            },
+            "expected": ["cat", "dog", "bird"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "w"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["x", "y", "z", "w"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "bird", "fish"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["cat", "dog", "bird", "fish"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star"],
+                "groups": [0, 1, 1]
+            },
+            "expected": ["sun", "moon"]
+        },
+        {
+            "args": {
+                "words": ["red", "green", "blue", "yellow"],
+                "groups": [1, 1, 0, 0]
+            },
+            "expected": ["red", "blue"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [1, 0, 1, 1]
+            },
+            "expected": ["sun", "moon", "star"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["hello", "world", "python", "programming"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["one", "two", "three", "four", "five"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["one", "two", "three", "four"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green"],
+                "groups": [0, 1, 1]
+            },
+            "expected": ["red", "blue"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow", "black"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["red", "blue", "green", "yellow", "black"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f"],
+                "groups": [1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "fish", "bird", "lizard"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["cat", "dog", "fish", "bird", "lizard"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "w"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["x", "y", "z", "w"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["x", "y", "z"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "code"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["hello", "world", "python", "code"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f"],
+                "groups": [1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "words": ["apple", "banana", "cherry", "date"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["apple", "banana", "cherry", "date"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "code"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["hello", "world", "python", "code"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green"],
+                "groups": [1, 1, 1]
+            },
+            "expected": ["red"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f"],
+                "groups": [0, 1, 0, 1, 0, 1]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [0, 0, 1, 1]
+            },
+            "expected": ["sun", "star"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["sun", "moon", "star", "planet"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "fish", "bird"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["dog", "cat", "fish", "bird"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green", "yellow"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["red", "blue", "green", "yellow"]
+        },
+        {
+            "args": {
+                "words": ["fast", "slow", "quick", "lazy"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["fast", "slow", "quick", "lazy"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green"],
+                "groups": [0, 0, 1]
+            },
+            "expected": ["red", "green"]
+        },
+        {
+            "args": {
+                "words": ["fast", "slow", "big", "small"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["fast", "slow", "big", "small"]
+        },
+        {
+            "args": {
+                "words": ["red", "blue", "green"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["red", "blue", "green"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "groups": [1, 0]
+            },
+            "expected": ["hello", "world"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "code"],
+                "groups": [1, 1, 0, 0]
+            },
+            "expected": ["hello", "python"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta", "epsilon"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["alpha", "beta", "gamma", "delta", "epsilon"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["sun", "moon", "star", "planet"]
+        },
+        {
+            "args": {
+                "words": ["dog", "cat", "fish"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["dog", "cat", "fish"]
+        },
+        {
+            "args": {
+                "words": ["cat", "dog", "fish", "bird", "elephant"],
+                "groups": [1, 0, 1, 0, 1]
+            },
+            "expected": ["cat", "dog", "fish", "bird", "elephant"]
+        },
+        {
+            "args": {
+                "words": ["left", "right", "up", "down"],
+                "groups": [0, 1, 0, 1]
+            },
+            "expected": ["left", "right", "up", "down"]
+        },
+        {
+            "args": {
+                "words": ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"],
+                "groups": [0, 0, 1, 1, 0, 1]
+            },
+            "expected": ["alpha", "gamma", "epsilon", "zeta"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["sun", "moon", "star"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five", "six"],
+                "groups": [0, 0, 1, 1, 0, 0]
+            },
+            "expected": ["one", "three", "five"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world"],
+                "groups": [0, 1]
+            },
+            "expected": ["hello", "world"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [0, 0, 1, 1, 0]
+            },
+            "expected": ["one", "three", "five"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming"],
+                "groups": [1, 0, 1, 0]
+            },
+            "expected": ["hello", "world", "python", "programming"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "code"],
+                "groups": [0, 0, 1, 1]
+            },
+            "expected": ["hello", "python"]
+        },
+        {
+            "args": {
+                "words": ["a", "b", "c", "d", "e", "f", "g"],
+                "groups": [0, 1, 0, 1, 0, 1, 0]
+            },
+            "expected": ["a", "b", "c", "d", "e", "f", "g"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [0, 1, 0, 1, 0]
+            },
+            "expected": ["one", "two", "three", "four", "five"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [1, 1, 0, 0, 1]
+            },
+            "expected": ["one", "three", "five"]
+        },
+        {
+            "args": {
+                "words": ["quick", "brown", "fox"],
+                "groups": [1, 0, 1]
+            },
+            "expected": ["quick", "brown", "fox"]
+        },
+        {
+            "args": {
+                "words": ["one", "two", "three", "four", "five"],
+                "groups": [0, 0, 1, 1, 0]
+            },
+            "expected": ["one", "three", "five"]
+        },
+        {
+            "args": {
+                "words": ["sun", "moon", "star", "planet"],
+                "groups": [1, 0, 1, 1]
+            },
+            "expected": ["sun", "moon", "star"]
+        },
+        {
+            "args": {
+                "words": ["hello", "world", "python", "programming"],
+                "groups": [0, 0, 1, 1]
+            },
+            "expected": ["hello", "python"]
+        },
+        {
+            "args": {
+                "words": ["x", "y", "z", "w", "v"],
+                "groups": [0, 0, 0, 1, 1]
+            },
+            "expected": ["x", "w"]
+        }
+    ],
+    "invoke": {
+        "python": "Solution().getLongestSubsequence",
+        "typescript": "Solution().getLongestSubsequence"
+    }
+}

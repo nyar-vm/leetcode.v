@@ -1,0 +1,480 @@
+{
+    "id": "removing-stars-from-a-string",
+    "questionId": 2390,
+    "difficulty": "Medium",
+    "tags": ["Stack", "String", "Simulation"],
+    "tests": [
+        {
+            "args": {
+                "s": "abc*def*ghi*jkl*mno*pqr*stu*vwx*y*z"
+            },
+            "expected": "abdeghjkmnpqstvwz"
+        },
+        {
+            "args": {
+                "s": "leet**cod*e"
+            },
+            "expected": "lecoe"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "***************************"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "ab*cd*ef*gh*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*"
+            },
+            "expected": "aceg"
+        },
+        {
+            "args": {
+                "s": "a*ab*abc*abcd*abcde*abcdef*abcdefg*abcdefgh*abcdefghi*abcdefghij*abcdefghijk*abcdefghijkl*abcdefghijklm*abcdefghijklmn*abcdefghijklmno*abcdefghijklmnop*abcdefghijklmnopq*abcdefghijklmnopqr*abcdefghijklmnopqrs*abcdefghijklmnopqrst*abcdefghijklmnopqrstu*abcdefghijklmnopqrstuv*abcdefghijklmnopqrstuvw*abcdefghijklmnopqrstuvwx*abcdefghijklmnopqrstuvwxy*abcdefghijklmnopqrstuvwxyza"
+            },
+            "expected": "aababcabcdabcdeabcdefabcdefgabcdefghabcdefghiabcdefghijabcdefghijkabcdefghijklabcdefghijklmabcdefghijklmnabcdefghijklmnoabcdefghijklmnopabcdefghijklmnopqabcdefghijklmnopqrabcdefghijklmnopqrsabcdefghijklmnopqrstabcdefghijklmnopqrstuabcdefghijklmnopqrstuvabcdefghijklmnopqrstuvwabcdefghijklmnopqrstuvwxabcdefghijklmnopqrstuvwxyza"
+        },
+        {
+            "args": {
+                "s": "*********"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcdef"
+            },
+            "expected": "abcdef"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "*a*b*c*"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a"
+            },
+            "expected": "a"
+        },
+        {
+            "args": {
+                "s": "ab*cd*ef*gh*ij*kl*mn*op*qr*st*uv*wx*yz"
+            },
+            "expected": "acegikmoqsuwyz"
+        },
+        {
+            "args": {
+                "s": "abcde"
+            },
+            "expected": "abcde"
+        },
+        {
+            "args": {
+                "s": "abc***"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "ab*cd*ef*g*hi*j*"
+            },
+            "expected": "aceh"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "erase*****"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "abcd**efgh**ijkl**mnop**qrst**uvw**x**y**z"
+            },
+            "expected": "abefijmnqz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz************************************"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "aaabbbcccddd***eee***fffgggggghhhhiiiiijkkkkkllllmmmmnnnnoooo***pppppqqqqrrrrsssss"
+            },
+            "expected": "aaabbbcccfffgggggghhhhiiiiijkkkkkllllmmmmnnnnopppppqqqqrrrrsssss"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z**a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z**a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcde**fghij**klmno**pqrst**uvwxy**z"
+            },
+            "expected": "abcfghklmpqruvwz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuv*xyzwvutsrponmlkjihgfedcba*"
+            },
+            "expected": "abcdefghijklmnopqrstuxyzwvutsrponmlkjihgfedcb"
+        },
+        {
+            "args": {
+                "s": "******************"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz*zyxwvutsrqponmlkjihgfedcba*"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcb"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "aaaaaa*bbbbbb*cccccc*dddddd*eeeeee*ffffff*gggggg*hhhhhh*iiiiii*jjjjjj*kkkkkk*llllll*mmmmmm*nnnnnn*oooooo*pppppp*qqqqqq*rrrrrr*ssssss*tttttt*uuuuuu*vvvvvv*wwwwww*xxxxxx*yyyyyy*zzzzzz*"
+            },
+            "expected": "aaaaabbbbbcccccdddddeeeeefffffggggghhhhhiiiiijjjjjkkkkklllllmmmmmnnnnnooooopppppqqqqqrrrrrssssstttttuuuuuvvvvvwwwwwxxxxxyyyyyzzzzz"
+        },
+        {
+            "args": {
+                "s": "abcdefghij************************"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcde*fghij*klmno*pqrst*uvwxy*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "abcdfghiklmnpqrsuvwxz"
+        },
+        {
+            "args": {
+                "s": "abc*def*ghi*jkl*mno*pqr*stu*vwx*yz*"
+            },
+            "expected": "abdeghjkmnpqstvwy"
+        },
+        {
+            "args": {
+                "s": "aaa*bbb*ccc*ddd*eee*fff*ggg*hhh*iii*jjj*kkk*lll*mmm*nnn*ooo*ppp*qqq*rrr*sss*ttt*uuu*vvv*www*xxx*yyy*zzz*"
+            },
+            "expected": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz"
+        },
+        {
+            "args": {
+                "s": "*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "abcde*fg*hi*jkl*mno*pqr*stu*vwx*y*z*"
+            },
+            "expected": "abcdfhjkmnpqstvw"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeefffggg***hhiijjkkllmmnn***oo***ppqqrrssttttuuuuuuuuuuvvvvvvvvwxyz"
+            },
+            "expected": "aabbccddeeefffhhiijjkkllppqqrrssttttuuuuuuuuuuvvvvvvvvwxyz"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*zyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": "zyxwvutsrqponmlkjihgfedcba"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz*****"
+            },
+            "expected": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwx"
+        },
+        {
+            "args": {
+                "s": "z*yz*zyxw*vyxwv*u*vwxy*ts*rq*ponm*ln*kj*i*hg*fed*cb*a*"
+            },
+            "expected": "yzyxvyxwvwxtrponlkhfec"
+        },
+        {
+            "args": {
+                "s": "abc***def**ghij***klmno**pqrstuv***wxyz"
+            },
+            "expected": "dgklmpqrswxyz"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z**"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcdefghij*klmnopqrst*uvwxyz*zyxwvutsr*qp*on*m*l*k*j*i*h*g*f*e*d*c*b*a"
+            },
+            "expected": "abcdefghiklmnopqrsuvwxyzyxwvutsqoa"
+        },
+        {
+            "args": {
+                "s": "**a**b**c**d**e**f**g**h**i**j**k**l**m**n**o**p**q**r**s**t**u**v**w**x**y**z"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "a*ab*abc*abcd*abcde*abcdef*abcdefg*abcdefgh*abcdefghi*abcdefghij*abcdefghijk*abcdefghijkl*abcdefghijklm*abcdefghijklmn*abcdefghijklmno*abcdefghijklmnop*abcdefghijklmnopq*abcdefghijklmnopqr*abcdefghijklmnopqrs*abcdefghijklmnopqrst*abcdefghijklmnopqrstu*abcdefghijklmnopqrstuv*abcdefghijklmnopqrstuvw*abcdefghijklmnopqrstuvwx*abcdefghijklmnopqrstuvwxy*abcdefghijklmnopqrstuvwxyz*"
+            },
+            "expected": "aababcabcdabcdeabcdefabcdefgabcdefghabcdefghiabcdefghijabcdefghijkabcdefghijklabcdefghijklmabcdefghijklmnabcdefghijklmnoabcdefghijklmnopabcdefghijklmnopqabcdefghijklmnopqrabcdefghijklmnopqrsabcdefghijklmnopqrstabcdefghijklmnopqrstuabcdefghijklmnopqrstuvabcdefghijklmnopqrstuvwabcdefghijklmnopqrstuvwxabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz****"
+            },
+            "expected": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxx"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxy**z"
+            },
+            "expected": "abcdefghijklmnopqrstuvwz"
+        },
+        {
+            "args": {
+                "s": "xyz***xyz***xyz***xyz***xyz***xyz***xyz***xyz***xyz***xyz***xyz***xyz***xyz"
+            },
+            "expected": "xyz"
+        },
+        {
+            "args": {
+                "s": "abcde*****fghij*****klmno*****pqrst*****uvwxy*****z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "abcdefghij***klmnopqrst***uvwxyz***abcd***efghij***klmno***pqrst***uvwxy***z"
+            },
+            "expected": "abcdefgklmnopquvwaefgklpquvz"
+        },
+        {
+            "args": {
+                "s": "abcdefghijk***lmnopqrstuvwxyz**aaaaaaaaaabbbbbbbbbbccccccccccddddeeeeee****"
+            },
+            "expected": "abcdefghlmnopqrstuvwxaaaaaaaaaabbbbbbbbbbccccccccccddddee"
+        },
+        {
+            "args": {
+                "s": "abcd*efgh*ijkl*mnop*qrst*uvw*x*y*z*"
+            },
+            "expected": "abcefgijkmnoqrsuv"
+        },
+        {
+            "args": {
+                "s": "nested*stars*****in*string*example***"
+            },
+            "expected": "nesteistrinexam"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "a*bb*ccc*dddd*eeeee*ffffff*gggggg*hhhhhhh*iiiiiiii*jjjjjjjjj*kkkkkkkkk*llllllllll*mmmmmmmmmm*nnnnnnnnnnn*ooooooooooo*pppppppppppp*qqqqqqqqqqqqq*rrrrrrrrrrrrrr*sssssssssssssss*ttttttttttttttttt*uuuuuuuuuuuuuuuuuu*vvvvvvvvvvvvvvvvvvv*wwwwwwwwwwwwwwwwwwww*xxyyz**"
+            },
+            "expected": "bccdddeeeefffffggggghhhhhhiiiiiiijjjjjjjjkkkkkkkklllllllllmmmmmmmmmnnnnnnnnnnoooooooooopppppppppppqqqqqqqqqqqqrrrrrrrrrrrrrssssssssssssssttttttttttttttttuuuuuuuuuuuuuuuuuvvvvvvvvvvvvvvvvvvwwwwwwwwwwwwwwwwwwwxxy"
+        },
+        {
+            "args": {
+                "s": "a**bc**def**ghij**klmno**pqrst**uvwxy**z"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz*abcdefghijklmnopqrstuvwxyz*"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "s": "*a**b*c**d*e*f**g*h**i*j**k*l**m*n**o**p*q**r**s**t**u**v**w**x**y**z"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcde*fg*hij*k*lmnop*qrs*tuvw*x*y*z*"
+            },
+            "expected": "abcdfhilmnoqrtuv"
+        },
+        {
+            "args": {
+                "s": "abcdefghi*jk*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z**"
+            },
+            "expected": "abcdefgh"
+        },
+        {
+            "args": {
+                "s": "x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x*x"
+            },
+            "expected": "x"
+        },
+        {
+            "args": {
+                "s": "aabbaa*bbcc*ddcc*eeff*ffgg*hhiijj*kkll*mmnn*oopp*qqrr*sttuu*vwwxxyyzz*****"
+            },
+            "expected": "aabbabbcddceefffghhiijkklmmnoopqqrsttuvwwx"
+        },
+        {
+            "args": {
+                "s": "abc**def**ghi**jkl**mno**pqr**stu**vwx**yz**"
+            },
+            "expected": "adgjmpsv"
+        },
+        {
+            "args": {
+                "s": "mississippi***ipp*ss*m*i**"
+            },
+            "expected": "mississiip"
+        },
+        {
+            "args": {
+                "s": "a*bc*def*ghij*klmno*pqrst*uvwxy*z"
+            },
+            "expected": "bdeghiklmnpqrsuvwxz"
+        },
+        {
+            "args": {
+                "s": "mnopqrstu*****vwxyz*****abcdefghi*****jklmno*****pqrst*****uvw*****xy*****z"
+            },
+            "expected": "mnopz"
+        },
+        {
+            "args": {
+                "s": "a**b**c**d**e**f**g**h**i**j**k**l**m**n**o**p**q**r**s**t**u**v**w**x**y**z"
+            },
+            "expected": "Error: pop from empty list"
+        },
+        {
+            "args": {
+                "s": "abcde*fgh*i*jklmno*pqrstu*v*wxyz*"
+            },
+            "expected": "abcdfgjklmnpqrstwxy"
+        },
+        {
+            "args": {
+                "s": "abc*def*ghi*jkl*mno*pqr*stu*vwx*y*z**"
+            },
+            "expected": "abdeghjkmnpqstv"
+        },
+        {
+            "args": {
+                "s": "a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*"
+            },
+            "expected": ""
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxy**z*"
+            },
+            "expected": "abcdefghijklmnopqrstuvw"
+        },
+        {
+            "args": {
+                "s": "xy*z*ab*cd*ef*gh*ij*kl*mn*op*qr*st*uv*wx*yz*"
+            },
+            "expected": "xacegikmoqsuwy"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz*"
+            },
+            "expected": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyz"
+        },
+        {
+            "args": {
+                "s": "python*is*awesome***so**is**java**"
+            },
+            "expected": "pythoiawesja"
+        },
+        {
+            "args": {
+                "s": "longstringwith*various*characters*and*stars*through*out***"
+            },
+            "expected": "longstringwitvarioucharacteranstarthroug"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz*a**b**c**d**e**f**g**h**i**j**k**l**m**n**o**p**q**r**s**t**u**v**w**x**y**z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z"
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "a*ab*abc*abcd*abcde*abcdef*abcdefg*abcdefgh*abcdefghi*abcdefghij*abcdefghijk"
+            },
+            "expected": "aababcabcdabcdeabcdefabcdefgabcdefghabcdefghiabcdefghijk"
+        },
+        {
+            "args": {
+                "s": "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*abcdefghijklmnopqrstuvwxyz*zyxwvutsrqponmlkjihgfedcba*"
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcb"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().removeStars",
+        "typescript": "Solution().removeStars"
+    }
+}

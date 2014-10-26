@@ -1,0 +1,1105 @@
+{
+    "id": "longest-chunked-palindrome-decomposition",
+    "questionId": 1147,
+    "difficulty": "Hard",
+    "tags": [
+        "Greedy",
+        "Two Pointers",
+        "String",
+        "Dynamic Programming",
+        "Hash Function",
+        "Rolling Hash"
+    ],
+    "tests": [
+        {
+            "args": {
+                "text": "abcabc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "abcabcabc"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "level"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "zyxzyxzyx"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "madam"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "aaaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "merchant"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "aabbccddeedccbbaa"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "repaper"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "ghiabcdefhelloadamhelloabcdefghi"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "aaa"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "antaprezatepzapreanta"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "abcdabcdabcdabcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "abacaba"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "abcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "text": "xyzzyx"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "text": "abcddcba"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "text": "rotor"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abcdedcba"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "text": "refer"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "redder"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "text": "peep"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "abba"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "racecar"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "civic"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abcdabcd"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "a"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "abcabcabcabcabcabc"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "text": "xyzzyxxyzzyx"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "noon"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "deified"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "racecarlevelracecar"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "text": "deed"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "abccba"
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "text": "abab"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "aabbccddeeddccbbaa"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "text": "abcba"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abcdeedcba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "levellevel"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "ababababab"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "bananaananabayananabanana"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "text": "abcdabcabcabcabcd"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "racecarannakayakracecar"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "abcabcabcabcabcabcabc"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "xxyyxxyyxyyxxyyxxyy"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "xylophonephoneyloxyxylophonephoneyloxy"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "leveloneleveltwolevelonelevel"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "text": "aaaaabaaaabaaaa"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "text": "abacababacaba"
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "text": "rotorcarrot"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "leveloneonetwothreefourthreefourtwoonelevel"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "aaaaabaaaabaaaaaaaabaaaaabaaaabaaaa"
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "text": "noonnoonnoonnoonnoonnoon"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "text": "annakayakannakayakannakayakannakayakannakayak"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abcdefghihgfedcbaabcdefghihgfedcba"
+            },
+            "expected": 34
+        },
+        {
+            "args": {
+                "text": "abcdefgfedcbaabcdefgfedcbaabcdefgfedcba"
+            },
+            "expected": 39
+        },
+        {
+            "args": {
+                "text": "abacabaabacaba"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "text": "qwertyuiopasdfghjklzxcvbnmmnbvcxzlkjhgfdsapoiuytrewq"
+            },
+            "expected": 52
+        },
+        {
+            "args": {
+                "text": "madamimadamimadam"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "text": "kayak"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "thisisaverylongstringwhichdoesnotrepeatthisisaverylongstring"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "deifiedrotorcarcaretordeified"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "text": "madamimadamimadamimadamimadam"
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "text": "noonnoonnoonnoonnoonnoonnoonnoon"
+            },
+            "expected": 32
+        },
+        {
+            "args": {
+                "text": "deifiedrotordeified"
+            },
+            "expected": 19
+        },
+        {
+            "args": {
+                "text": "noonracecarnoon"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "madamimadam"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "repaperdeified"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "deededeed"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "text": "ananaananaananananananananananana"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "racecarlevelracecarlevelracecarlevel"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "text": "racecarlevelmadamracecar"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "leveloneonelevel"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "xyzyxzyzyxzyzyxzyx"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "abcdefghihgfedcba"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "text": "abbaabbaabbaabbaabba"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "text": "abacabaabacabaabacaba"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "text": "abcdabcdeedcbadcbabcd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "abccbaabccba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "abracadabra"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "madammadam"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "aaaaaaaaabbbbbbbbbbbbbbbccccccccccccccccccccdd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "deifiedrotorleveldeified"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "racecarlevelracecarlevelracecarlevelracecarlevel"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "madaminnadammadam"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "leveldeifiedmadamdeifiedlevel"
+            },
+            "expected": 29
+        },
+        {
+            "args": {
+                "text": "abacabacabacabac"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "aaaabbbbccccaaaabbbbcccc"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "noonnoonnoon"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "xyzyxzyzyxzyxzyzyxzyzyxzyzyxzyzyxzyzyxzyzyxzyzyxzyzyxzyzyx"
+            },
+            "expected": 33
+        },
+        {
+            "args": {
+                "text": "abcdefgabcdefgabcdefg"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "abracadabraabracadabra"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "text": "civiccivic"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "annakayakannakayakannakayakannakayakannakayakannakayakannakayak"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "rotorcarrots"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "abracadabraacarab"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "kayakkayakkayak"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "nun"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "annakayakannakayakannakayak"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "rotorlevelrotor"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "aabbccddeeddccbaa"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "abbaabbaabba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "xyzxyzxyzxyzxyzxyzxyzxyz"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "text": "levellevellevellevel"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "text": "abccbaabccbaabccba"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "text": "abcdeedcbaabcdeedcbaabcdeedcba"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "text": "abcdefgfedcbaabcdefg"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "levelmadamlevel"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "abcabcabcabc"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "abacabadabacabaabacabadabacaba"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "text": "rotorcarcaretor"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "annakayakannakayakannakayakannakayak"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "levellevellevellevellevellevellevellevellevellevellevellevel"
+            },
+            "expected": 60
+        },
+        {
+            "args": {
+                "text": "levellevellevellevellevellevel"
+            },
+            "expected": 30
+        },
+        {
+            "args": {
+                "text": "aaaaabbbbbaaaabbbbbaaaaa"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "text": "abcdabcabcabcd"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "aaaabbbbccccbbbbaaaa"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "text": "madamimadamimadamimadamimadamimadamimadamimadam"
+            },
+            "expected": 47
+        },
+        {
+            "args": {
+                "text": "abcdxyzyxzyxcddcbaabcdxyzyxzyxcddcba"
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "text": "abacabadabacabadabacaba"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "text": "deifieddeified"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "text": "deifiedracecardeified"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "text": "noonnoonnoonnoon"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "text": "radar"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abacabadabacaba"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "annakayakannakayak"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "abcdabcdefgabcdefgdcba"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "racecarannakayak"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "abbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabba"
+            },
+            "expected": 44
+        },
+        {
+            "args": {
+                "text": "abacabadabacabad"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "rotorrotor"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "abcabcabcabcabc"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abracadabracadabra"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "levellevellevellevellevel"
+            },
+            "expected": 25
+        },
+        {
+            "args": {
+                "text": "aaaaaabaaaaa"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "aabbccddeedcbaabbccdd"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "hellohellobellohellobellohello"
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "text": "xyzzxyzzxyzz"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "xxyyzzzyyxxyyyzzzzyyxx"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "aabbccddeeeedddccbbaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "deifiedrotor"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "abcdeedcbaabcdeedcba"
+            },
+            "expected": 20
+        },
+        {
+            "args": {
+                "text": "abababababababab"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "text": "abacabaabacabaabacabaabacaba"
+            },
+            "expected": 28
+        },
+        {
+            "args": {
+                "text": "aaaabbbbccccddddeeeeffffeeeeggggccccbbbbaaaaffff"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "wow"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "abcdabccbaabcd"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "text": "abcabcabcabcabcabcabcd"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "abcxyzzyxcba"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "racecarlevelracecarlevelracecarlevelracecarlevelracecarlevel"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "madamimadamimadamimadamimadamimadam"
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "text": "noonabbadacabbaaddaabbnoon"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "xyzzyxzyxzyxzyxzyxzyxzyxyz"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "levellevellevellevellevellevellevellevel"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "text": "abababababababababababab"
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "text": "mississippiississimississimississippi"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "text": "aabbccddeedcba"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "xyzyxzyzyxzyx"
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "text": "aaaaabaaa"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "abcdcdeabcdcdeabcdcdeabcd"
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "text": "racecarracecar"
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "text": "rotorrotorrotor"
+            },
+            "expected": 15
+        },
+        {
+            "args": {
+                "text": "racecarlevelracecarlevel"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "kayakkayak"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "noonnoon"
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "text": "racecarlevelmadamracecarlevelmadam"
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "text": "abcxyzzyxcbaabcxyzzyxcba"
+            },
+            "expected": 24
+        },
+        {
+            "args": {
+                "text": "redividerrotorredivider"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "text": "ababababababababababababababababab"
+            },
+            "expected": 17
+        },
+        {
+            "args": {
+                "text": "referrefer"
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "text": "noonnoonnoonnoonnoonnoonnoonnoonnoonnoon"
+            },
+            "expected": 40
+        },
+        {
+            "args": {
+                "text": "madamimadamimadamimadam"
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "text": "abbaabbaabbaabba"
+            },
+            "expected": 16
+        },
+        {
+            "args": {
+                "text": "mississippi"
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "text": "aabbccddeedccbbaaa"
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "text": "abcdeabcdeabcde"
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "text": "racecarracecarracecar"
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "text": "redivider"
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "text": "thisisaverylongstringwithnorepeatedpattern"
+            },
+            "expected": 1
+        }
+    ],
+    "invoke": {
+        "python": "Solution().longestDecomposition",
+        "typescript": "Solution().longestDecomposition"
+    }
+}

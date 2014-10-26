@@ -1,0 +1,943 @@
+{
+    "id": "minimum-number-of-operations-to-make-x-and-y-equal",
+    "questionId": 2998,
+    "difficulty": "Medium",
+    "tags": ["Breadth-First Search", "Memoization", "Dynamic Programming"],
+    "tests": [
+        {
+            "args": {
+                "x": 1,
+                "y": 10000
+            },
+            "expected": 9999
+        },
+        {
+            "args": {
+                "x": 11,
+                "y": 5
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 10000,
+                "y": 1
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "x": 111,
+                "y": 11
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "x": 77,
+                "y": 7
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 500,
+                "y": 20
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 25,
+                "y": 30
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 11,
+                "y": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 55,
+                "y": 11
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 2,
+                "y": 20
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 4321
+            },
+            "expected": 3087
+        },
+        {
+            "args": {
+                "x": 100,
+                "y": 1
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "x": 26,
+                "y": 1
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "x": 54,
+                "y": 2
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "x": 99,
+                "y": 9
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 9999,
+                "y": 9999
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "x": 55,
+                "y": 10
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 10,
+                "y": 10
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "x": 55,
+                "y": 5
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 100,
+                "y": 10
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "x": 5,
+                "y": 1
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 15,
+                "y": 6
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "x": 1,
+                "y": 100
+            },
+            "expected": 99
+        },
+        {
+            "args": {
+                "x": 1111,
+                "y": 5555
+            },
+            "expected": 4444
+        },
+        {
+            "args": {
+                "x": 6666,
+                "y": 3333
+            },
+            "expected": 2002
+        },
+        {
+            "args": {
+                "x": 9876,
+                "y": 5432
+            },
+            "expected": 3459
+        },
+        {
+            "args": {
+                "x": 8888,
+                "y": 111
+            },
+            "expected": 45
+        },
+        {
+            "args": {
+                "x": 3000,
+                "y": 2500
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "x": 1111,
+                "y": 100
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 7777,
+                "y": 6666
+            },
+            "expected": 1111
+        },
+        {
+            "args": {
+                "x": 100,
+                "y": 2500
+            },
+            "expected": 2400
+        },
+        {
+            "args": {
+                "x": 5555,
+                "y": 22
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 8765
+            },
+            "expected": 7531
+        },
+        {
+            "args": {
+                "x": 7000,
+                "y": 3500
+            },
+            "expected": 2101
+        },
+        {
+            "args": {
+                "x": 9876,
+                "y": 1234
+            },
+            "expected": 339
+        },
+        {
+            "args": {
+                "x": 55,
+                "y": 15
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 3333,
+                "y": 6666
+            },
+            "expected": 3333
+        },
+        {
+            "args": {
+                "x": 3333,
+                "y": 33
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "x": 1010,
+                "y": 10
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "x": 550,
+                "y": 10
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 100,
+                "y": 10000
+            },
+            "expected": 9900
+        },
+        {
+            "args": {
+                "x": 6666,
+                "y": 66
+            },
+            "expected": 14
+        },
+        {
+            "args": {
+                "x": 5000,
+                "y": 5005
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 5000,
+                "y": 50
+            },
+            "expected": 13
+        },
+        {
+            "args": {
+                "x": 441,
+                "y": 121
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "x": 5000,
+                "y": 2500
+            },
+            "expected": 1501
+        },
+        {
+            "args": {
+                "x": 330,
+                "y": 3
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 9999,
+                "y": 10000
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 5000,
+                "y": 6000
+            },
+            "expected": 1000
+        },
+        {
+            "args": {
+                "x": 9999,
+                "y": 1000
+            },
+            "expected": 92
+        },
+        {
+            "args": {
+                "x": 500,
+                "y": 1000
+            },
+            "expected": 500
+        },
+        {
+            "args": {
+                "x": 2222,
+                "y": 2222
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "x": 9000,
+                "y": 9009
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "x": 1000,
+                "y": 345
+            },
+            "expected": 146
+        },
+        {
+            "args": {
+                "x": 4444,
+                "y": 4445
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 220,
+                "y": 385
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "x": 300,
+                "y": 105
+            },
+            "expected": 46
+        },
+        {
+            "args": {
+                "x": 9999,
+                "y": 1
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 654
+            },
+            "expected": 409
+        },
+        {
+            "args": {
+                "x": 5000,
+                "y": 5
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "x": 55,
+                "y": 77
+            },
+            "expected": 22
+        },
+        {
+            "args": {
+                "x": 4999,
+                "y": 5001
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 1000,
+                "y": 10000
+            },
+            "expected": 9000
+        },
+        {
+            "args": {
+                "x": 3000,
+                "y": 2990
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "x": 300,
+                "y": 150
+            },
+            "expected": 91
+        },
+        {
+            "args": {
+                "x": 220,
+                "y": 20
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 4567,
+                "y": 890
+            },
+            "expected": 26
+        },
+        {
+            "args": {
+                "x": 1111,
+                "y": 1000
+            },
+            "expected": 111
+        },
+        {
+            "args": {
+                "x": 1000,
+                "y": 995
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 4444,
+                "y": 44
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "x": 123,
+                "y": 321
+            },
+            "expected": 198
+        },
+        {
+            "args": {
+                "x": 1000,
+                "y": 999
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 6000,
+                "y": 1000
+            },
+            "expected": 201
+        },
+        {
+            "args": {
+                "x": 880,
+                "y": 15
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "x": 880,
+                "y": 55
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "x": 1100,
+                "y": 50
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "x": 1331,
+                "y": 110
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "x": 1000,
+                "y": 990
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "x": 7777,
+                "y": 2222
+            },
+            "expected": 670
+        },
+        {
+            "args": {
+                "x": 1100,
+                "y": 10
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "x": 4000,
+                "y": 2000
+            },
+            "expected": 1201
+        },
+        {
+            "args": {
+                "x": 9876,
+                "y": 4321
+            },
+            "expected": 2348
+        },
+        {
+            "args": {
+                "x": 9876,
+                "y": 4567
+            },
+            "expected": 2594
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 5678
+            },
+            "expected": 4444
+        },
+        {
+            "args": {
+                "x": 495,
+                "y": 660
+            },
+            "expected": 165
+        },
+        {
+            "args": {
+                "x": 6110,
+                "y": 55
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "x": 1111,
+                "y": 222
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 45,
+                "y": 33
+            },
+            "expected": 12
+        },
+        {
+            "args": {
+                "x": 9876,
+                "y": 11
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "x": 5500,
+                "y": 220
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 1024,
+                "y": 128
+            },
+            "expected": 37
+        },
+        {
+            "args": {
+                "x": 24,
+                "y": 29
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 8000,
+                "y": 8008
+            },
+            "expected": 8
+        },
+        {
+            "args": {
+                "x": 88,
+                "y": 22
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "x": 495,
+                "y": 4
+            },
+            "expected": 3
+        },
+        {
+            "args": {
+                "x": 7000,
+                "y": 7000
+            },
+            "expected": 0
+        },
+        {
+            "args": {
+                "x": 825,
+                "y": 17
+            },
+            "expected": 4
+        },
+        {
+            "args": {
+                "x": 5555,
+                "y": 5
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 88
+            },
+            "expected": 27
+        },
+        {
+            "args": {
+                "x": 1024,
+                "y": 512
+            },
+            "expected": 309
+        },
+        {
+            "args": {
+                "x": 9999,
+                "y": 8888
+            },
+            "expected": 1111
+        },
+        {
+            "args": {
+                "x": 8000,
+                "y": 2000
+            },
+            "expected": 401
+        },
+        {
+            "args": {
+                "x": 5432,
+                "y": 6789
+            },
+            "expected": 1357
+        },
+        {
+            "args": {
+                "x": 111,
+                "y": 55
+            },
+            "expected": 35
+        },
+        {
+            "args": {
+                "x": 7500,
+                "y": 7400
+            },
+            "expected": 100
+        },
+        {
+            "args": {
+                "x": 242,
+                "y": 11
+            },
+            "expected": 7
+        },
+        {
+            "args": {
+                "x": 121,
+                "y": 1
+            },
+            "expected": 2
+        },
+        {
+            "args": {
+                "x": 6105,
+                "y": 1221
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 3333,
+                "y": 999
+            },
+            "expected": 335
+        },
+        {
+            "args": {
+                "x": 2020,
+                "y": 202
+            },
+            "expected": 23
+        },
+        {
+            "args": {
+                "x": 121,
+                "y": 110
+            },
+            "expected": 11
+        },
+        {
+            "args": {
+                "x": 4321,
+                "y": 9876
+            },
+            "expected": 5555
+        },
+        {
+            "args": {
+                "x": 4444,
+                "y": 8888
+            },
+            "expected": 4444
+        },
+        {
+            "args": {
+                "x": 2222,
+                "y": 222
+            },
+            "expected": 21
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 890
+            },
+            "expected": 344
+        },
+        {
+            "args": {
+                "x": 7,
+                "y": 143
+            },
+            "expected": 136
+        },
+        {
+            "args": {
+                "x": 7777,
+                "y": 77
+            },
+            "expected": 18
+        },
+        {
+            "args": {
+                "x": 5555,
+                "y": 1111
+            },
+            "expected": 1
+        },
+        {
+            "args": {
+                "x": 8888,
+                "y": 7777
+            },
+            "expected": 1111
+        },
+        {
+            "args": {
+                "x": 9876,
+                "y": 123
+            },
+            "expected": 48
+        },
+        {
+            "args": {
+                "x": 2000,
+                "y": 10000
+            },
+            "expected": 8000
+        },
+        {
+            "args": {
+                "x": 8000,
+                "y": 8010
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "x": 88,
+                "y": 13
+            },
+            "expected": 6
+        },
+        {
+            "args": {
+                "x": 7777,
+                "y": 1111
+            },
+            "expected": 405
+        },
+        {
+            "args": {
+                "x": 3333,
+                "y": 4444
+            },
+            "expected": 1111
+        },
+        {
+            "args": {
+                "x": 6000,
+                "y": 6005
+            },
+            "expected": 5
+        },
+        {
+            "args": {
+                "x": 9999,
+                "y": 9990
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "x": 2222,
+                "y": 7777
+            },
+            "expected": 5555
+        },
+        {
+            "args": {
+                "x": 77,
+                "y": 22
+            },
+            "expected": 10
+        },
+        {
+            "args": {
+                "x": 2000,
+                "y": 10
+            },
+            "expected": 9
+        },
+        {
+            "args": {
+                "x": 1111,
+                "y": 9999
+            },
+            "expected": 8888
+        },
+        {
+            "args": {
+                "x": 1234,
+                "y": 987
+            },
+            "expected": 247
+        },
+        {
+            "args": {
+                "x": 8888,
+                "y": 1111
+            },
+            "expected": 304
+        }
+    ],
+    "invoke": {
+        "python": "Solution().minimumOperationsToMakeEqual",
+        "typescript": "Solution().minimumOperationsToMakeEqual"
+    }
+}

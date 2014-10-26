@@ -1,0 +1,628 @@
+{
+    "id": "find-the-encrypted-string",
+    "questionId": 3210,
+    "difficulty": "Easy",
+    "tags": ["String"],
+    "tests": [
+        {
+            "args": {
+                "s": "hello",
+                "k": 10
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "abc",
+                "k": 2
+            },
+            "expected": "cab"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 7
+            },
+            "expected": "llohe"
+        },
+        {
+            "args": {
+                "s": "abcdef",
+                "k": 2
+            },
+            "expected": "cdefab"
+        },
+        {
+            "args": {
+                "s": "world",
+                "k": 5
+            },
+            "expected": "world"
+        },
+        {
+            "args": {
+                "s": "dart",
+                "k": 3
+            },
+            "expected": "tdar"
+        },
+        {
+            "args": {
+                "s": "aaa",
+                "k": 1
+            },
+            "expected": "aaa"
+        },
+        {
+            "args": {
+                "s": "abcxyz",
+                "k": 10
+            },
+            "expected": "yzabcx"
+        },
+        {
+            "args": {
+                "s": "xyz",
+                "k": 5
+            },
+            "expected": "zxy"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 2
+            },
+            "expected": "llohe"
+        },
+        {
+            "args": {
+                "s": "z",
+                "k": 10000
+            },
+            "expected": "z"
+        },
+        {
+            "args": {
+                "s": "wraparound",
+                "k": 15
+            },
+            "expected": "roundwrapa"
+        },
+        {
+            "args": {
+                "s": "jumps",
+                "k": 30
+            },
+            "expected": "jumps"
+        },
+        {
+            "args": {
+                "s": "cryptography",
+                "k": 20
+            },
+            "expected": "aphycryptogr"
+        },
+        {
+            "args": {
+                "s": "securedata",
+                "k": 1234
+            },
+            "expected": "redatasecu"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 1
+            },
+            "expected": "abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzza"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 1000
+            },
+            "expected": "gabcdef"
+        },
+        {
+            "args": {
+                "s": "cryptography",
+                "k": 11
+            },
+            "expected": "ycryptograph"
+        },
+        {
+            "args": {
+                "s": "mfvnhg",
+                "k": 9999
+            },
+            "expected": "nhgmfv"
+        },
+        {
+            "args": {
+                "s": "alibabacloud",
+                "k": 15
+            },
+            "expected": "babacloudali"
+        },
+        {
+            "args": {
+                "s": "abacaxi",
+                "k": 1
+            },
+            "expected": "bacaxia"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "k": 13
+            },
+            "expected": "mlkjihgfedcbazyxwvutsrqpon"
+        },
+        {
+            "args": {
+                "s": "cryptography",
+                "k": 7
+            },
+            "expected": "raphycryptog"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 15
+            },
+            "expected": "rammingprog"
+        },
+        {
+            "args": {
+                "s": "zebra",
+                "k": 3
+            },
+            "expected": "razeb"
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "k": 12
+            },
+            "expected": "xquickbrownfo"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 10
+            },
+            "expected": "gprogrammin"
+        },
+        {
+            "args": {
+                "s": "cryptography",
+                "k": 8
+            },
+            "expected": "aphycryptogr"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 20
+            },
+            "expected": "kkllmmnnooppqqrrssttuuvvwwxxyyzzaabbccddeeffgghhiijj"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 25
+            },
+            "expected": "zabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "k": 8
+            },
+            "expected": "wnfoxquickbro"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 50
+            },
+            "expected": "zzaabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy"
+        },
+        {
+            "args": {
+                "s": "abcdabcd",
+                "k": 4
+            },
+            "expected": "abcdabcd"
+        },
+        {
+            "args": {
+                "s": "overthelazydog",
+                "k": 28
+            },
+            "expected": "overthelazydog"
+        },
+        {
+            "args": {
+                "s": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+                "k": 1000
+            },
+            "expected": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+        },
+        {
+            "args": {
+                "s": "thequickbrownfoxjumpsoverthelazydog",
+                "k": 13
+            },
+            "expected": "foxjumpsoverthelazydogthequickbrown"
+        },
+        {
+            "args": {
+                "s": "python",
+                "k": 1
+            },
+            "expected": "ythonp"
+        },
+        {
+            "args": {
+                "s": "cryptography",
+                "k": 15
+            },
+            "expected": "ptographycry"
+        },
+        {
+            "args": {
+                "s": "pythonprogramming",
+                "k": 25
+            },
+            "expected": "ogrammingpythonpr"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 27
+            },
+            "expected": "bcdefghijklmnopqrstuvwxyza"
+        },
+        {
+            "args": {
+                "s": "thesecretcode",
+                "k": 20
+            },
+            "expected": "etcodethesecr"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 9
+            },
+            "expected": "pimississip"
+        },
+        {
+            "args": {
+                "s": "abcabcabc",
+                "k": 9
+            },
+            "expected": "abcabcabc"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 97
+            },
+            "expected": "ngprogrammi"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 7
+            },
+            "expected": "mingprogram"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "k": 27
+            },
+            "expected": "yxwvutsrqponmlkjihgfedcbaz"
+        },
+        {
+            "args": {
+                "s": "thisisatest",
+                "k": 13
+            },
+            "expected": "isisatestth"
+        },
+        {
+            "args": {
+                "s": "hello world",
+                "k": 10
+            },
+            "expected": "dhello worl"
+        },
+        {
+            "args": {
+                "s": "alibabacloud",
+                "k": 100
+            },
+            "expected": "abacloudalib"
+        },
+        {
+            "args": {
+                "s": "zebra",
+                "k": 10
+            },
+            "expected": "zebra"
+        },
+        {
+            "args": {
+                "s": "thequickbrownfoxjumpsoverthelazydog",
+                "k": 10
+            },
+            "expected": "ownfoxjumpsoverthelazydogthequickbr"
+        },
+        {
+            "args": {
+                "s": "repeatedcharactersssssss",
+                "k": 7
+            },
+            "expected": "dcharactersssssssrepeate"
+        },
+        {
+            "args": {
+                "s": "zabcdefghijklmnopqrstuvwxyz",
+                "k": 26
+            },
+            "expected": "zzabcdefghijklmnopqrstuvwxy"
+        },
+        {
+            "args": {
+                "s": "abracadabra",
+                "k": 7
+            },
+            "expected": "abraabracad"
+        },
+        {
+            "args": {
+                "s": "quickbrownfox",
+                "k": 50
+            },
+            "expected": "oxquickbrownf"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 26
+            },
+            "expected": "issippimiss"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 5
+            },
+            "expected": "cddeeffaabbc"
+        },
+        {
+            "args": {
+                "s": "world",
+                "k": 500
+            },
+            "expected": "world"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 100
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "hello_world",
+                "k": 4
+            },
+            "expected": "o_worldhell"
+        },
+        {
+            "args": {
+                "s": "pneumonoultramicroscopicsilicovolcanoconiosis",
+                "k": 26
+            },
+            "expected": "licovolcanoconiosispneumonoultramicroscopicsi"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 10000
+            },
+            "expected": "efgabcd"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 1000
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "programmingisfun",
+                "k": 10
+            },
+            "expected": "gisfunprogrammin"
+        },
+        {
+            "args": {
+                "s": "algorithms",
+                "k": 50
+            },
+            "expected": "algorithms"
+        },
+        {
+            "args": {
+                "s": "mississippi",
+                "k": 3
+            },
+            "expected": "sissippimis"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 1
+            },
+            "expected": "bcdefghijklmnopqrstuvwxyza"
+        },
+        {
+            "args": {
+                "s": "programming",
+                "k": 5
+            },
+            "expected": "ammingprogr"
+        },
+        {
+            "args": {
+                "s": "qwen",
+                "k": 50
+            },
+            "expected": "enqw"
+        },
+        {
+            "args": {
+                "s": "thisisateststring",
+                "k": 50
+            },
+            "expected": "gthisisateststrin"
+        },
+        {
+            "args": {
+                "s": "cryptography",
+                "k": 4
+            },
+            "expected": "tographycryp"
+        },
+        {
+            "args": {
+                "s": "cycliccycliccycliccyclic",
+                "k": 50
+            },
+            "expected": "cliccycliccycliccycliccy"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+                "k": 3
+            },
+            "expected": "bccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzzaab"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 105
+            },
+            "expected": "abcdefg"
+        },
+        {
+            "args": {
+                "s": "abacaxi",
+                "k": 7
+            },
+            "expected": "abacaxi"
+        },
+        {
+            "args": {
+                "s": "aabbccddeeff",
+                "k": 123
+            },
+            "expected": "bccddeeffaab"
+        },
+        {
+            "args": {
+                "s": "supercalifragilisticexpialidocious",
+                "k": 9
+            },
+            "expected": "fragilisticexpialidocioussupercali"
+        },
+        {
+            "args": {
+                "s": "quickbrownfoxjumpsoverthelazydog",
+                "k": 13
+            },
+            "expected": "jumpsoverthelazydogquickbrownfox"
+        },
+        {
+            "args": {
+                "s": "hello world",
+                "k": 15
+            },
+            "expected": "o worldhell"
+        },
+        {
+            "args": {
+                "s": "thisisaverylongstringthatweneedtocrypt",
+                "k": 15
+            },
+            "expected": "stringthatweneedtocryptthisisaverylong"
+        },
+        {
+            "args": {
+                "s": "repeatedcharacters",
+                "k": 50
+            },
+            "expected": "tersrepeatedcharac"
+        },
+        {
+            "args": {
+                "s": "hello",
+                "k": 10000
+            },
+            "expected": "hello"
+        },
+        {
+            "args": {
+                "s": "abcdefghij",
+                "k": 30
+            },
+            "expected": "abcdefghij"
+        },
+        {
+            "args": {
+                "s": "zyxwvutsrqponmlkjihgfedcba",
+                "k": 3
+            },
+            "expected": "wvutsrqponmlkjihgfedcbazyx"
+        },
+        {
+            "args": {
+                "s": "abcdefg",
+                "k": 10
+            },
+            "expected": "defgabc"
+        },
+        {
+            "args": {
+                "s": "abcdefghijklmnopqrstuvwxyz",
+                "k": 26
+            },
+            "expected": "abcdefghijklmnopqrstuvwxyz"
+        },
+        {
+            "args": {
+                "s": "qwen",
+                "k": 12
+            },
+            "expected": "qwen"
+        },
+        {
+            "args": {
+                "s": "ab",
+                "k": 9999
+            },
+            "expected": "ba"
+        }
+    ],
+    "invoke": {
+        "python": "Solution().getEncryptedString",
+        "typescript": "Solution().getEncryptedString"
+    }
+}
