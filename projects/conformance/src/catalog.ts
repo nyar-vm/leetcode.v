@@ -3,7 +3,7 @@ export { PROBLEMS, type ProblemDefinition } from "./catalog.generated.ts";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 
-/** 题目根目录（metadata.json、solvers/）。 */
+/** 题目根目录 `projects/problems/<slug>/`（slug 与 catalog `id` 现同字符串）。 */
 export function problemDir(root: string, problem: { id: string }): string {
     return join(root, "projects", "problems", problem.id);
 }

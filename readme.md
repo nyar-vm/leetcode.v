@@ -1,144 +1,93 @@
-# Gaia Multi-Platform Assembler
+# leetcode.v
 
-Gaia is a modern multi-platform assembler project designed to provide a unified, ergonomic assembly language frontend for different target platforms.
+LeetCode 题目在 **Valkyrie（V）** 与 **TypeScript** 上的完备性测试、外部产物基准与对比看板。
 
-## 🎯 Project Overview
+本仓收录大量 LeetCode 题目（`metadata.json` + 多语言求解器），用同一套测试用例验证 Python 参考解、手写 TS 解与
+`legion build` 产出的 V/Wasm 解，并在看板中对比运行耗时。
 
-The Gaia project contains the following core components:
+## 依赖兄弟仓
 
-- **gaia-frontend**: Rust core library, providing the main functionality of the assembler.
-- **gaia-frontend-wasm32**: WebAssembly frontend, supporting execution in browser and Node.js environments.
-- **Example Projects**: Includes example implementations such as mini-go and mini-ts.
+与本仓并列放置（路径可用环境变量覆盖，勿写死盘符进题目内容）：
 
-## 🏗️ Project Structure
+| 仓                              | 作用                                                    |
+|---------------------------------|---------------------------------------------------------|
+| [`valkyrie.rs`](../valkyrie.rs) | `legion` CLI、`@valkyrie-language/vcc`、Wasm 编译与基准 |
+| [`valkyrie.v`](../valkyrie.v)   | V 语言 `core` / `std`（根目录 `legions.von` 注册）      |
 
+首次克隆后建议：
+
+```bash
+pnpm install
+pnpm link:valkyrie   # 将 vcc 链到本地 valkyrie.rs（按需）
 ```
-gaia.ts/
+
+## 标识符
+
+| 术语           | 含义                                                                    |
+|----------------|-------------------------------------------------------------------------|
+| **slug**       | LeetCode URL 路径段；目录 `projects/problems/<slug>/`                   |
+| **id**         | `metadata.json` / catalog 键、`LEETCODE_BENCH_ID`（现与 slug 同字符串） |
+| **questionId** | LeetCode 数字题号（如 `#1`）                                            |
+
+## 目录结构
+
+```text
+leetcode.v/
+├── AGENTS.md                   # 工具无关代理入口
+├── .agents/skills/             # Agent Skills 开放标准（如 leetcode-coach）
+├── legions.von                 # V workspace：core + std
 ├── projects/
-│   ├── gaia-frontend/          # Rust core library
-│   └── gaia-frontend-wasm32/   # WASM32 frontend package
-├── examples/
-│   ├── mini-go/               # Go language example
-│   └── mini-ts/               # TypeScript example
-├── Cargo.toml                 # Rust workspace configuration
-└── License.md                 # Project license
+│   ├── problems/<slug>/        # 单题（slug = 目录名 = LeetCode URL 段）
+│   │   ├── metadata.json       # id、questionId、难度、标签、tests、invoke
+│   │   ├── readme.md           # 教练稿（见 .agents/skills/leetcode-coach）
+│   │   └── solvers/
+│   │       ├── python/         # LCD 参考解
+│   │       ├── typescript/     # 手写 TS 解
+│   │       └── valkyrie/       # solution.v + legion.von
+│   ├── conformance/            # @leetcode/conformance — 跑测与基准
+│   └── dashboard/              # @leetcode/bench-dashboard — Vue 看板
+└── scripts/                    # 格式化、批量限额、valkyrie 路径
 ```
 
-## 🚀 Quick Start
+## 快速开始
 
-### Prerequisites
-
-- **Rust**: Latest stable version
-- **Node.js**: 18.0 or higher
-- **wasm32-wasip2 target**: For WASM builds
-
-### Installation Steps
-
-1. **Clone the project**
-   ```bash
-   git clone https://github.com/nyar-vm/project-gaia
-   cd gaia.ts
-   ```
-
-2. **Add WASM target**
-   ```bash
-   rustup target add wasm32-wasip2
-   ```
-
-3. **Build the project**
-   ```bash
-   # Build Rust core library
-   cargo build --release
-   
-   # Build WASM32 frontend (optional)
-   cd projects/gaia-frontend-wasm32
-   npm install
-   npm run build
-   ```
-
-## 📦 Core Components
-
-### gaia-frontend
-
-Rust core library, providing the following features:
-
-- **Assembler**: Converts assembly code into target platform code.
-- **Metadata**: Handles assembly metadata and debugging information.
-- **Utilities**: Provides various practical utility functions.
-- **Easy Test**: Tools to simplify the testing process.
-
-### gaia-frontend-wasm32
-
-WebAssembly frontend package features:
-
-- Based on WebAssembly technology, supporting cross-platform execution.
-- Provides JavaScript/TypeScript API.
-- Supports usage in browser and Node.js environments.
-- Includes complete type definition files.
-
-## 🧪 Example Projects
-
-### mini-go
-
-Demonstrates how to use the Gaia assembler to handle Go-style syntax:
-
-- Lexer
-- Parser
-- AST (Abstract Syntax Tree)
-- Code Generator
-
-### mini-ts
-
-A similar implementation in TypeScript, showing how different language frontends can be integrated.
-
-## 🔧 Development Guide
-
-### Running Tests
+**环境**：Node.js ≥ 20，pnpm ≥ 10。
 
 ```bash
-# Rust tests
-cargo test
-
-# WASM32 frontend tests
-cd projects/gaia-frontend-wasm32
-npm test
-
-# Example project tests
-cd examples/mini-go
-npm test
+pnpm install
+pnpm fmt:check        # Biome 格式检查
+pnpm test:problems    # 完备性矩阵（默认批量限额 50 题）
+pnpm bench            # TS 参考解 vs V 外部产物基准
+pnpm dashboard        # 启动看板 dev server
 ```
 
-### Building Release Version
+常用环境变量：
 
-```bash
-# Rust release build
-cargo build --release
+| 变量                        | 说明                                 |
+|-----------------------------|--------------------------------------|
+| `LEETCODE_BATCH_ALL=1`      | 跑全量题目（默认仅 50 题）           |
+| `LEETCODE_BENCH_ID=two-sum` | 按 **id** 仅跑单题（现与 slug 同值） |
+| `LEETCODE_BENCH_IDS=a,b,c`  | 逗号分隔多个 **id**                  |
+| `VALKYRIE_RS_ROOT`          | 覆盖 `valkyrie.rs` 根路径            |
 
-# WASM32 release package
-cd projects/gaia-frontend-wasm32
-npm run build
-```
+## 单题约定
 
-## 📄 License
+- **Python**：`solvers/python/solution.py`，与 `metadata.json` 中 `tests` 对齐。
+- **TypeScript**：`export class Solution`，方法名与 `invoke.typescript` 一致（如 `Solution().twoSum`）。
+- **Valkyrie**：`solvers/valkyrie/solution.v` + `legion.von`（`entry: "solution.v"`，`core` / `std` 为 workspace 依赖，
+  `target: node`）。
 
-This project is licensed under the MPL-2.0 License, see the [License.md](License.md) file for details.
+基准采用 **外部 harness**：对编译产物跑 `metadata.tests` 计时，不在 `.v` 源码里写 `[benchmark]` 烟雾块。
 
-## 🤝 Contribution Guide
+## 看板
 
-Contributions are welcome! Please follow these steps:
+`pnpm dashboard` 启动后读取 `projects/dashboard/public/benchmark-results.json`（可由 `pnpm bench` 更新）。展示 TS 参考解与
+V 编译/运行耗时对比。
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Create a Pull Request
+## 代理与题解规范
 
-## 📞 Contact
+- 代理约定见 [`AGENTS.md`](AGENTS.md)；题解 coach 见 [Agent Skills](https://agentskills.io/specification) 目录 [`.agents/skills/leetcode-coach/`](.agents/skills/leetcode-coach/SKILL.md)。
 
-- **Project Team**: Gaia Team <team↯gaia-project.org>
-- **Repository**: https://github.com/nyar-vm/project-gaia
-- **Documentation**: https://docs.rs/gaia-frontend
+## 许可证
 
----
-
-**Gaia** - Making assembly language development more human and modern!
+[MPL-2.0](License.md)
