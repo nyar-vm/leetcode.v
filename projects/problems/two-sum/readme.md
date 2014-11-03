@@ -1,38 +1,62 @@
-# Two Sum
+# [Two Sum](https://leetcode.com/problems/two-sum/)
 
-- **LeetCode**：[#1 Two Sum](https://leetcode.com/problems/two-sum/)
-- **难度**：Easy
-- **标签**：Array · Hash Table
+## 问题
 
-## 题目
+给定一个整数数组 `nums` 和一个整数目标值 `target`，请在数组中找出**和为目标值**的那**两个**整数，并返回它们的数组下标。
 
-Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-You can return the answer in any order.
+你可以假设每种输入只会对应一个答案，且**同一个元素不能使用两次**。你可以按任意顺序返回答案。
 
-**Example 1**：
+**示例 1**
 
-**Input**：nums = [2,7,11,15], target = 9
-**Output**：[0,1]
-**Explanation**：Because nums[0] + nums[1] == 9, we return [0, 1].
+- **输入**：`nums = [2, 7, 11, 15]`，`target = 9`
+- **输出**：`[0, 1]`
+- **解释**：因为 `nums[0] + nums[1] == 9`，返回 `[0, 1]`。
 
-**Example 2**：
+**示例 2**
 
-**Input**：nums = [3,2,4], target = 6
-**Output**：[1,2]
+- **输入**：`nums = [3, 2, 4]`，`target = 6`
+- **输出**：`[1, 2]`
 
-**Example 3**：
+**示例 3**
 
-**Input**：nums = [3,3], target = 6
-**Output**：[0,1]
+- **输入**：`nums = [3, 3]`，`target = 6`
+- **输出**：`[0, 1]`
 
+**约束**
 
-**Constraints**：
+- $2 \le \mathrm{len}(\texttt{nums}) \le 10^4$
+- $-10^9 \le \texttt{nums}[i] \le 10^9$
+- $-10^9 \le \texttt{target} \le 10^9$
+- **只会存在一个有效答案**
 
-2 $\le \mathrm{len}(nums)$ $\le 104$
--109 <= nums[i] $\le 109$
--109 <= target $\le 109$
-Only one valid answer exists.
+## 解答
 
+### 朴素想法
 
-**Follow-up**：Can you come up with an algorithm that is less than $O(n^2)$ time complexity?
+枚举所有不同下标对 $(i, j)$，检查是否 $\texttt{nums}[i] + \texttt{nums}[j] = \texttt{target}$。正确，需 $O(n^2)$ 次检查。
+
+### 补数重复扫描瓶颈
+
+对每个位置都在问「之前是否出现过补数 $\texttt{target} - x$」，暴力做法每次都重新扫已访问部分，重复劳动。
+
+### 哈希表一次遍历优化
+
+用哈希表维护「已遍历元素的值 → 下标」。扫到 $x$ 时，若 $\texttt{target} - x$ 已在表中则得答案；否则记入 $(x, \text{下标})$。一轮优化即到 $O(n)$ 时间。
+
+### 最终算法
+
+从左到右扫描。对每个下标 $i$、值 $x = \texttt{nums}[i]$：先查 $\texttt{target} - x$ 是否在表中；有则返回两下标；否则写入 $x \mapsto i$。**先查后写**，避免同一位置被复用。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+数组只扫描一次；哈希表查找与插入均摊 $O(1)$。
+
+### 空间复杂度
+
+$O(n)$
+
+最坏情况下需为每个已见元素记录下标。
