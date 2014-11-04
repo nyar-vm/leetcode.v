@@ -1,34 +1,57 @@
-# Contains Duplicate
+# [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 
-- **LeetCode**：[#217 Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
-- **难度**：Easy
-- **标签**：Array · Hash Table · Sorting
+## 问题
 
-## 题目
+给定整数数组 `nums`，若存在任一值在数组中**至少出现两次**，返回 `true`；若每个元素互不相同，返回 `false`。
 
-Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [1, 2, 3, 1]`
+- **输出**：`true`
 
-**Input**：nums = [1,2,3,1]
-**Output**：true
-**Explanation**：
-The element 1 occurs at the indices 0 and 3.
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [1, 2, 3, 4]`
+- **输出**：`false`
 
-**Input**：nums = [1,2,3,4]
-**Output**：false
-**Explanation**：
-All elements are distinct.
+**示例 3**
 
-**Example 3**：
+- **输入**：`nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]`
+- **输出**：`true`
 
-**Input**：nums = [1,1,1,3,3,4,3,2,4,2]
-**Output**：true
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums}) \le 10^5$
+- $-10^9 \le \texttt{nums}[i] \le 10^9$
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(nums)$ $\le 105$
--109 <= nums[i] $\le 109$
+### 朴素想法
+
+枚举所有不同下标对 $(i, j)$，若 $\texttt{nums}[i] = \texttt{nums}[j]$ 则返回 `true`。最坏 $O(n^2)$。
+
+### 成对比较冗余瓶颈
+
+同一元素是否「已见过」被反复向后面元素求证，大量重复比较。
+
+### 已见集合一次判定优化
+
+维护已遍历元素集合。扫描 $x$ 时，若 $x$ 已在集合中则立即 `true`；否则加入集合。扫完无重复则 `false`。只需一遍，成员查询均摊 $O(1)$。
+
+### 最终算法
+
+从左到右扫描 `nums`，用集合记录已见值；首次发现重复即返回 `true`，否则遍历结束返回 `false`。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个元素至多插入与查询集合各一次。
+
+### 空间复杂度
+
+$O(n)$
+
+最坏情况下集合存下全部互异元素。

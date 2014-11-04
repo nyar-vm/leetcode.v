@@ -1,32 +1,58 @@
-# Single Number
+# [Single Number](https://leetcode.com/problems/single-number/)
 
-- **LeetCode**：[#136 Single Number](https://leetcode.com/problems/single-number/)
-- **难度**：Easy
-- **标签**：Bit Manipulation · Array
+## 问题
 
-## 题目
+给定非空整数数组 `nums`，其中**每个元素出现两次，恰有一个元素只出现一次**。找出并返回这个只出现一次的元素。须在线性时间、常数额外空间内完成。
 
-Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
-You must implement a solution with a linear runtime complexity and use only constant extra space.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [2, 2, 1]`
+- **输出**：`1`
 
-**Input**：nums = [2,2,1]
-**Output**：1
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [4, 1, 2, 1, 2]`
+- **输出**：`4`
 
-**Input**：nums = [4,1,2,1,2]
-**Output**：4
+**示例 3**
 
-**Example 3**：
+- **输入**：`nums = [1]`
+- **输出**：`1`
 
-**Input**：nums = [1]
-**Output**：1
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums}) \le 3 \times 10^4$
+- $-3 \times 10^4 \le \texttt{nums}[i] \le 3 \times 10^4$
+- 除一个元素外，其余均恰出现两次
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(nums)$ $\le 3$ * 104
--3 * 104 <= nums[i] $\le 3$ * 104
-Each element in the array appears twice except for one element which appears only once.
+### 朴素想法
+
+用映射统计每个值出现次数，再找计数为 $1$ 的键。时间 $O(n)$，空间 $O(n)$。
+
+### 频次表空间瓶颈
+
+题意保证成对重复，计数信息可用更紧凑的代数结构消去。
+
+### 异或成对抵消优化
+
+异或满足 $a \oplus a = 0$、$a \oplus 0 = a$、交换结合律。将全部元素异或，成对相同的数抵消为 $0$，结果即为落单元素。
+
+### 最终算法
+
+维护 $ans = 0$，遍历 `nums` 令 $ans \leftarrow ans \oplus x$；结束返回 $ans$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+一次遍历。
+
+### 空间复杂度
+
+$O(1)$
+
+仅一个累加变量。

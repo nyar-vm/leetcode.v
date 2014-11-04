@@ -1,55 +1,60 @@
-# Missing Number
+# [Missing Number](https://leetcode.com/problems/missing-number/)
 
-- **LeetCode**：[#268 Missing Number](https://leetcode.com/problems/missing-number/)
-- **难度**：Easy
-- **标签**：Bit Manipulation · Array · Hash Table · Math · Binary Search · Sorting
+## 问题
 
-## 题目
+给定一个包含 $n$ 个不同整数的数组 `nums`，取值范围为 $[0, n]$，其中**恰好缺一个数**。找出并返回这个缺失的整数。
 
-Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [3, 0, 1]`
+- **输出**：`2`
+- **解释**：$n = 3$，完整集合为 $\{0,1,2,3\}$，缺 $2$。
 
-**Input**：nums = [3,0,1]
-**Output**：2
-**Explanation**：
-n = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 2 is the missing number in the range since it does not appear in nums.
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [0, 1]`
+- **输出**：`2`
 
-**Input**：nums = [0,1]
-**Output**：2
-**Explanation**：
-n = 2 since there are 2 numbers, so all numbers are in the range [0,2]. 2 is the missing number in the range since it does not appear in nums.
+**示例 3**
 
-**Example 3**：
+- **输入**：`nums = [9, 6, 4, 2, 3, 5, 7, 0, 1]`
+- **输出**：`8`
 
-**Input**：nums = [9,6,4,2,3,5,7,0,1]
-**Output**：8
-**Explanation**：
-n = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number in the range since it does not appear in nums.
+**约束**
 
+- $n = \mathrm{len}(\texttt{nums})$
+- $1 \le n \le 10^4$
+- $0 \le \texttt{nums}[i] \le n$
+- `nums` 中元素互异
 
+## 解答
 
+### 朴素想法
 
+用布尔数组或集合标记 $0 \ldots n$ 是否出现，再找未标记者。时间 $O(n)$，额外空间 $O(n)$。
 
+### 辅助标记数组瓶颈
 
+已知值域仅为 $0 \ldots n$，仍要为每个值预留标记位，空间未压缩。
 
+### 异或抵消成对优化
 
+完整集合 $\{0,1,\ldots,n\}$ 与 `nums` 中每个数、以及所有下标 $0 \ldots n$（或等价地再异或一遍 $0 \ldots n$）一起异或：出现两次的相同值异或为 $0$，最终剩余即为缺失数。一遍扫描，$O(1)$ 额外空间。
 
+### 最终算法
 
+令 $missing = n$（或 $0$），对 $i = 0 \ldots n-1$ 执行 $missing \leftarrow missing \oplus i \oplus \texttt{nums}[i]$（等价变体亦可）。结束时 $missing$ 即为答案。
 
+## 复杂度分析
 
+### 时间复杂度
 
+$O(n)$
 
+单次线性扫描。
 
+### 空间复杂度
 
-**Constraints**：
+$O(1)$
 
-n == nums.length
-1 <= n $\le 104$
-0 <= nums[i] <= n
-All the numbers of nums are unique.
-
-
-Follow up: Could you implement a solution using only $O(1)$ extra space complexity and $O(n)$ runtime complexity?
+仅常数个变量。
