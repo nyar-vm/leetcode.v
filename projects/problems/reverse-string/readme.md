@@ -1,23 +1,52 @@
-# Reverse String
+# [Reverse String](https://leetcode.com/problems/reverse-string/)
 
-- **LeetCode**：[#344 Reverse String](https://leetcode.com/problems/reverse-string/)
-- **难度**：Easy
-- **标签**：Two Pointers · String
+## 问题
 
-## 题目
+给定字符数组 `s`，**原地**反转，即第一个字符与最后一个交换，第二个与倒数第二个交换，依此类推。须用 $O(1)$ 额外空间。
 
-Write a function that reverses a string. The input string is given as an array of characters s.
-You must do this by modifying the input array in-place with $O(1)$ extra memory.
+**示例**
 
-**Example 1**：
-**Input**：s = ["h","e","l","l","o"]
-**Output**：["o","l","l","e","h"]
-**Example 2**：
-**Input**：s = ["H","a","n","n","a","h"]
-**Output**：["h","a","n","n","a","H"]
+- **输入**：`s = ["h","e","l","l","o"]`
+- **输出**：`["o","l","l","e","h"]`
 
+**示例 2**
 
-**Constraints**：
+- **输入**：`s = ["H","a","n","n","a","h"]`
+- **输出**：`["h","a","n","n","a","H"]`
 
-1 $\le \mathrm{len}(s)$ $\le 105$
-s[i] is a printable ascii character.
+**约束**
+
+- $1 \le \mathrm{len}(\texttt{s}) \le 10^5$
+- `s[i]` 为 ASCII 可打印字符
+
+## 解答
+
+### 朴素想法
+
+复制到新数组再写回，或整体移位。需要 $O(n)$ 额外空间，不符合原地要求。
+
+### 额外缓冲区瓶颈
+
+题意要求原地，必须只在原数组内交换。
+
+### 双指针相向交换优化
+
+设左指针 $l=0$、右指针 $r=n-1$，当 $l < r$ 时交换 $\texttt{s}[l]$ 与 $\texttt{s}[r]$，然后 $l$ 增、$r$ 减。每个位置至多交换一次。
+
+### 最终算法
+
+双指针从两端向中间移动，成对交换直至相遇。偶数、奇数长度均适用。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+约 $\lfloor n/2 \rfloor$ 次交换。
+
+### 空间复杂度
+
+$O(1)$
+
+仅指针与临时交换槽。

@@ -1,35 +1,58 @@
-# Palindrome Number
+# [Palindrome Number](https://leetcode.com/problems/palindrome-number/)
 
-- **LeetCode**：[#9 Palindrome Number](https://leetcode.com/problems/palindrome-number/)
-- **难度**：Easy
-- **标签**：Math
+## 问题
 
-## 题目
+给定整数 `x`，若 `x` 是回文数（正读反读相同）返回 `true`，否则返回 `false`。
 
-Given an integer x, return true if x is a palindrome, and false otherwise.
+**示例 1**
 
-**Example 1**：
+- **输入**：`x = 121`
+- **输出**：`true`
 
-**Input**：x = 121
-**Output**：true
-**Explanation**：121 reads as 121 from left to right and from right to left.
+**示例 2**
 
-**Example 2**：
+- **输入**：`x = -121`
+- **输出**：`false`
+- **解释**：从左读为 $-121$，从右读为 $121-$，不相同。
 
-**Input**：x = -121
-**Output**：false
-**Explanation**：From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+**示例 3**
 
-**Example 3**：
+- **输入**：`x = 10`
+- **输出**：`false`
+- **解释**：从右读为 $01$，即 $1$。
 
-**Input**：x = 10
-**Output**：false
-**Explanation**：Reads 01 from right to left. Therefore it is not a palindrome.
+**约束**
 
+- $-2^{31} \le x \le 2^{31} - 1$
 
-**Constraints**：
+## 解答
 
--231 <= x $\le 231$ - 1
+### 朴素想法
 
+将 `x` 转为字符串，比较与反转串是否相等。正确但需额外字符串空间。
 
-Follow up: Could you solve it without converting the integer to a string?
+### 字符串化额外空间瓶颈
+
+回文性质只与数字位序有关，可在整数域内处理一半位数。
+
+### 反转后半段数字优化
+
+负数与末尾为 $0$ 且 $x \neq 0$ 直接 `false`。否则不断取 $x$ 末位拼到 `reverted`：当 $x \le \texttt{reverted}$ 时，已处理到中间；比较 $x$ 与 $\texttt{reverted}$（偶数位）或 $x$ 与 $\lfloor \texttt{reverted}/10 \rfloor$（奇数位）。全程 $O(1)$ 空间。
+
+### 最终算法
+
+按上规则循环剥离末位；注意溢出在题给范围内由取模控制。不构造完整反转数即可判定。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(\log_{10} x)$
+
+处理的位数与 $x$ 的十进制位数成正比。
+
+### 空间复杂度
+
+$O(1)$
+
+仅常数个整数变量。

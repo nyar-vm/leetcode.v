@@ -1,36 +1,58 @@
-# Maximum Subarray
+# [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
 
-- **LeetCode**：[#53 Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
-- **难度**：Medium
-- **标签**：Array · Divide and Conquer · Dynamic Programming
+## 问题
 
-## 题目
+给定整数数组 `nums`，找出一个具有最大和的**连续**子数组（至少含一个元素），返回其和。
 
-Given an integer array nums, find the subarray with the largest sum, and return its sum.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]`
+- **输出**：`6`
+- **解释**：子数组 `[4, -1, 2, 1]` 和最大。
 
-**Input**：nums = [-2,1,-3,4,-1,2,1,-5,4]
-**Output**：6
-**Explanation**：The subarray [4,-1,2,1] has the largest sum 6.
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [1]`
+- **输出**：`1`
 
-**Input**：nums = [1]
-**Output**：1
-**Explanation**：The subarray [1] has the largest sum 1.
+**示例 3**
 
-**Example 3**：
+- **输入**：`nums = [5, 4, -1, 7, 8]`
+- **输出**：`23`
 
-**Input**：nums = [5,4,-1,7,8]
-**Output**：23
-**Explanation**：The subarray [5,4,-1,7,8] has the largest sum 23.
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums}) \le 10^5$
+- $-10^4 \le \texttt{nums}[i] \le 10^4$
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(nums)$ $\le 105$
--104 <= nums[i] $\le 104$
+### 朴素想法
 
+枚举所有连续区间 $[l, r]$ 求和取最大。双重循环 $O(n^2)$，或用前缀和仍可能 $O(n^2)$。
 
-Follow up: If you have figured out the $O(n)$ solution, try coding another solution using the divide and conquer approach, which is more subtle.
+### 区间端点穷举瓶颈
+
+以 $r$ 为右端点时，许多 $l$ 对应的和不必单独重算——最优左端点信息可从前一位继承。
+
+### 动态规划「以当前结尾」优化
+
+定义 $cur$：以当前位置结尾的最大子数组和。扫到 $x$ 时：$cur \leftarrow \max(x,\ cur + x)$（要么新开一段，要么接在前一段后）。全局答案为扫描过程中 $cur$ 的最大值。一遍 $O(n)$。
+
+### 最终算法
+
+维护 $cur$ 与 $ans$。对每个 $x$ 更新 $cur$，再 $ans \leftarrow \max(ans, cur)$。返回 $ans$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+单次线性扫描。
+
+### 空间复杂度
+
+$O(1)$
+
+仅两个累加状态。

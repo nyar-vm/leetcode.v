@@ -1,32 +1,53 @@
-# Climbing Stairs
+# [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 
-- **LeetCode**：[#70 Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
-- **难度**：Easy
-- **标签**：Memoization · Math · Dynamic Programming
+## 问题
 
-## 题目
+假设爬楼梯到楼顶需要 $n$ 阶。每次可以爬 $1$ 阶或 $2$ 阶。有多少种不同的方法可以爬到楼顶？
 
-You are climbing a staircase. It takes n steps to reach the top.
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+**示例 1**
 
-**Example 1**：
+- **输入**：`n = 2`
+- **输出**：`2`
+- **解释**：$1+1$ 或 $2$。
 
-**Input**：n = 2
-**Output**：2
-**Explanation**：There are two ways to climb to the top.
-1. 1 step + 1 step
-2. 2 steps
+**示例 2**
 
-**Example 2**：
+- **输入**：`n = 3`
+- **输出**：`3`
+- **解释**：$1+1+1$、$1+2$、$2+1$。
 
-**Input**：n = 3
-**Output**：3
-**Explanation**：There are three ways to climb to the top.
-1. 1 step + 1 step + 1 step
-2. 1 step + 2 steps
-3. 2 steps + 1 step
+**约束**
 
+- $1 \le n \le 45$
 
-**Constraints**：
+## 解答
 
-1 <= n $\le 45$
+### 朴素想法
+
+递归：到第 $k$ 阶的方法数 $f(k) = f(k-1) + f(k-2)$，边界 $f(1)=1$、$f(2)=2$。直接递归重复计算子问题，指数级时间。
+
+### 递归重叠子问题瓶颈
+
+$f(k-2)$、$f(k-1)$ 等被反复求值，同一 $k$ 对应状态被浪费。
+
+### 递推滚动状态优化
+
+按定义 $f(i)$ 只依赖 $f(i-1)$ 与 $f(i-2)$，从 $i=3$ 扫到 $n$ 用两个变量滚动更新即可，无需保存全长数组。时间 $O(n)$，空间 $O(1)$。
+
+### 最终算法
+
+若 $n \le 2$ 直接返回 $n$。否则维护「前两级」方法数，循环 $i=3 \ldots n$ 更新为两者之和；返回第 $n$ 级方法数（即 Fibonacci 型递推）。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+从 $3$ 到 $n$ 线性递推。
+
+### 空间复杂度
+
+$O(1)$
+
+仅保存最近两个状态。
