@@ -77,8 +77,8 @@ def is_same_tree(p, q):
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        ans = f = nums[0]
+        ans = cur = nums[0]
         for x in nums[1:]:
-            f = max(f, 0) + x
-            ans = max(ans, f)
+            cur = max(x, cur + x)
+            ans = max(ans, cur)
         return ans

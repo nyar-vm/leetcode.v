@@ -77,4 +77,9 @@ def is_same_tree(p, q):
 
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        return any(a == b for a, b in pairwise(sorted(nums)))
+        seen = set()
+        for x in nums:
+            if x in seen:
+                return True
+            seen.add(x)
+        return False
