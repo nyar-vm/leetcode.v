@@ -34,7 +34,7 @@ pnpm link:valkyrie   # 将 vcc 链到本地 valkyrie.rs（按需）
 ```text
 leetcode.v/
 ├── AGENTS.md                   # 工具无关代理入口
-├── .agents/skills/             # Agent Skills 开放标准（如 leetcode-coach）
+├── .agents/skills/             # coach / implement / valkyrie-guide
 ├── legions.von                 # V workspace：core + std
 ├── projects/
 │   ├── problems/<slug>/        # 单题（slug = 目录名 = LeetCode URL 段）
@@ -86,7 +86,7 @@ V 编译/运行耗时对比。
 
 ## 代理与题解规范
 
-- 代理约定见 [`AGENTS.md`](AGENTS.md)；题解 coach 见 [Agent Skills](https://agentskills.io/specification) 目录 [`.agents/skills/leetcode-coach/`](.agents/skills/leetcode-coach/SKILL.md)。
+- 代理约定见 [`AGENTS.md`](AGENTS.md)。Skills：[`leetcode-coach`](.agents/skills/leetcode-coach/SKILL.md)、[`leetcode-implement`](.agents/skills/leetcode-implement/SKILL.md)、[`valkyrie-guide`](.agents/skills/valkyrie-guide/SKILL.md)（[Agent Skills](https://agentskills.io/specification) 格式）。
 
 ## 许可证
 

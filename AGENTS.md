@@ -102,8 +102,12 @@ pnpm dashboard        # 看板 dev
 - 搜代码 → 限定目录（如 `projects/conformance/src`）并带 `head_limit`。
 - 列题目 → 读 `catalog.generated.ts` 或 `metadata.json`，不要递归枚举整个 `problems/`。
 
-## Coach Skill
+## Agent Skills（`.agents/skills/`）
 
-撰写或修订 `readme.md` 时加载 `.agents/skills/leetcode-coach/`（`SKILL.md` + `references/coach-template.md`）。
+| Skill | 用途 |
+|-------|------|
+| `leetcode-coach` | 单题 `readme.md` 教练稿（语言无关） |
+| `leetcode-implement` | `solvers/` 三端实现与 `metadata.tests` |
+| `valkyrie-guide` | V 语法、**下标约定**、std、legion 布局 |
 
 **勿**在仓库根自建 `skills/` 或提交 `.cursor/skills/` 副本；`.cursor/` 仅作本机可选映射（已 gitignore）。
