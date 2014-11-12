@@ -1,6 +1,7 @@
 ---
 name: leetcode-implement
 description: >-
+  刷题流程第②步：三端求解器。完整刷题见 leetcode-practice。
   实现 leetcode.v 三端求解器：Python 参考解、TypeScript、Valkyrie solution.v。
   算法须与 coach readme 最优解一致，通过 metadata.tests。用户提及实现、solver、
   TS、V、Python 对齐题解时加载。
@@ -58,17 +59,19 @@ projects/problems/<slug>/solvers/
 - 算法与 coach 一致；phase-1 题型见 `references/v-phase1-capabilities.md`。
 - 与 LeetCode 对齐的逻辑下标用 `ArrayList` 的 **`⁅i⁆`（0-based cardinal）**，勿把 `[i]` 当 0-based。
 - 无 `[benchmark]`；正确性靠外部 harness / `legion test`。
-- 若 std 暂缺能力，在 `solution.v` 顶部用 `#` 一行中文注释标明阻塞点（勿用 `//`）。
+- 若 std 暂缺能力，在 `solution.v` 顶部用 `# 阻塞：<能力摘要>` 注释（勿用 `//`），并加载 **`valkyrie-evolution`** 记入
+  backlog、排上游切片。
 
 ## 检查清单
 
 - [ ] 三端算法与 coach **最终算法** 同阶同语义
 - [ ] Python / TS 对本机 `metadata.tests` 全绿
 - [ ] 未在 readme 写代码或语言名（coach 规则不变）
-- [ ] V 至少 `legion build -t node` 可尝试（环境允许时）
+- [ ] V 至少 `legion build --target node` 可尝试（环境允许时）
 
 ## 参考
 
 - 标杆：`projects/problems/two-sum/solvers/`
 - V 语言：`../valkyrie-guide/SKILL.md`
+- V 上游补缺：`../valkyrie-evolution/SKILL.md`
 - V phase-1 题型：`references/v-phase1-capabilities.md`

@@ -1,6 +1,7 @@
 ---
 name: leetcode-coach
 description: >-
+  刷题流程第①步：单题 readme 教练稿。完整刷题见 leetcode-practice。
   撰写 leetcode.v 单题 readme.md 教练稿：汉化题面，由浅入深推导最优算法，语言无关，
   具名瓶颈/优化小节，复杂度分小标题。用户提及题解、教练、readme、汉化、复杂度时加载。
 ---

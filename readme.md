@@ -12,7 +12,7 @@ LeetCode 题目在 **Valkyrie（V）** 与 **TypeScript** 上的完备性测试�
 | 仓                              | 作用                                                    |
 |---------------------------------|---------------------------------------------------------|
 | [`valkyrie.rs`](../valkyrie.rs) | `legion` CLI、`@valkyrie-language/vcc`、Wasm 编译与基准 |
-| [`valkyrie.v`](../valkyrie.v)   | V 语言 `core` / `std`（根目录 `legions.von` 注册）      |
+| [`valkyrie.v`](../valkyrie.v)   | V 语言 `core` / `std` / adaptors（`legions.von` 注册；**非** legion CLI 来源） |
 
 首次克隆后建议：
 
@@ -34,8 +34,8 @@ pnpm link:valkyrie   # 将 vcc 链到本地 valkyrie.rs（按需）
 ```text
 leetcode.v/
 ├── AGENTS.md                   # 工具无关代理入口
-├── .agents/skills/             # coach / implement / valkyrie-guide
-├── legions.von                 # V workspace：core + std
+├── .agents/skills/             # practice（刷题全流程）+ coach / implement / guide / evolution
+├── legions.von                 # V workspace：core + std + std.adaptors._（见 AGENTS.md）
 ├── projects/
 │   ├── problems/<slug>/        # 单题（slug = 目录名 = LeetCode URL 段）
 │   │   ├── metadata.json       # id、questionId、难度、标签、tests、invoke
@@ -86,7 +86,12 @@ V 编译/运行耗时对比。
 
 ## 代理与题解规范
 
-- 代理约定见 [`AGENTS.md`](AGENTS.md)。Skills：[`leetcode-coach`](.agents/skills/leetcode-coach/SKILL.md)、[`leetcode-implement`](.agents/skills/leetcode-implement/SKILL.md)、[`valkyrie-guide`](.agents/skills/valkyrie-guide/SKILL.md)（[Agent Skills](https://agentskills.io/specification) 格式）。
+- 代理约定见 [`AGENTS.md`](AGENTS.md)。 **刷题** = [`leetcode-practice`](.agents/skills/leetcode-practice/SKILL.md)
+  （题解 → 实现 → 测 V → 演进）。子 Skill：[`leetcode-coach`](.agents/skills/leetcode-coach/SKILL.md)、[
+  `leetcode-implement`](.agents/skills/leetcode-implement/SKILL.md)、[
+  `valkyrie-guide`](.agents/skills/valkyrie-guide/SKILL.md)、[
+  `valkyrie-evolution`](.agents/skills/valkyrie-evolution/SKILL.md)（[Agent Skills](https://agentskills.io/specification)
+  格式）。
 
 ## 许可证
 

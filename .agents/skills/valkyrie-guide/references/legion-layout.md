@@ -10,18 +10,20 @@ projects/problems/<slug>/solvers/valkyrie/
 
 ## `legion.von` 最小字段
 
-```json
+```von
 {
-    name: "leetcode-<slug>",
-    version: "0.1.0",
-    entry: "solution.v",
-    dependencies: {
-        core: true,
-        std: true
-    },
-    build: [
-        { target: "node" }
-    ]
+  name: "leetcode-<slug>",
+  version: "0.1.0",
+  entry: "solution.v",
+  dependencies: {
+    core: true,
+    std: true
+  },
+  build: [
+    {
+      target: "node"
+    }
+  ]
 }
 ```
 
@@ -31,9 +33,11 @@ projects/problems/<slug>/solvers/valkyrie/
 
 ## 命令（本机）
 
+使用 **`valkyrie.rs` Rust seed** `legion`（非 `valkyrie.v` 自举 `legion.tools`）。见 `AGENTS.md` §维护者陷阱。
+
 ```text
-legion build solvers/valkyrie -t node -o .cache/out
-legion test solvers/valkyrie -t node
+legion build solvers/valkyrie --target node -o .cache/out
+legion test solvers/valkyrie --target node
 ```
 
 路径相对于题目目录或传入绝对路径。leetcode 基准以外部 harness 跑 `metadata.tests` 为准，不依赖源码内 `[benchmark]`。

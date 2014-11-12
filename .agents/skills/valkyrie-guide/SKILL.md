@@ -1,6 +1,7 @@
 ---
 name: valkyrie-guide
 description: >-
+  刷题流程第②步（V 子流程）。完整刷题见 leetcode-practice。
   Valkyrie（V）语言与 std 约定：1-based ordinal 与 0-based cardinal 下标、
   namespace、Option、legion 工程布局。写 solution.v 或读 valkyrie.v 时加载。
   用户提及 V、valkyrie、下标、ArrayList、HashMap、legion 时加载。
@@ -40,15 +41,17 @@ description: >-
 
 ## std 命名空间
 
-| 路径 | 典型类型 |
-|------|----------|
+| 路径             | 典型类型                                         |
+|------------------|--------------------------------------------------|
 | `std.collection` | `ArrayList`、`HashMap`、`Deque`、`OrderedMap`、… |
-| `std.text` | `Utf8Text`、`AsciiText` |
-| `core` | `i32`、`i64`、`bool` |
+| `std.text`       | `Utf8Text`、`AsciiText`                          |
+| `core`           | `i32`、`i64`、`bool`                             |
 
-集合 **只用单数** `std.collection`，勿写已废止的 `std.collections`。详表见 [references/std-namespaces.md](references/std-namespaces.md)。
+集合 **只用单数** `std.collection`，勿写已废止的 `std.collections`
+。详表见 [references/std-namespaces.md](references/std-namespaces.md)。
 
-`leetcode.v` 根 `legions.von` 注册 `../valkyrie.v/projects/core` 与 `std`；单题 `legion.von` 写 `dependencies: { core: true, std: true }`。
+`leetcode.v` 根 `legions.von` 注册 `../valkyrie.v/projects/core` 与 `std`；单题 `legion.von` 写
+`dependencies: { core: true, std: true }`。
 
 ## 语言片段
 
@@ -69,7 +72,7 @@ imply Solution {
 - 可选值：`Option<T>`、`Some(v)`、`None` / `option_none::<T>()`。
 - 循环：`while cond { ... }`、`loop item in collection { ... }`。
 - 整数异或：`i64` 上可用 `^`（见 `core` `i64`）。
-- 注释：**`#` 行注释**、**`<#` … `#>` 块注释**（可嵌套）。**不支持** `//` 或 `/* */`。std 里偶见的 `⍝` 为遗留，新代码勿用。
+- 注释： **`#` 行注释**、 **`<#` … `#>` 块注释**（可嵌套）。 **不支持** `//` 或 `/* */`。std 里偶见的 `⍝` 为遗留，新代码勿用。
 
 ## legion 工程（leetcode 单题）
 
@@ -80,7 +83,7 @@ solvers/valkyrie/
 ```
 
 - **不要**在 `solution.v` 里写 `[benchmark]`；leetcode 用外部 harness 跑 `metadata.tests`。
-- 编译：`legion build <dir> -t node -o ...`（需本机 `legion` / vcc）。
+- 编译：`legion build <dir> --target node -o ...`（Rust seed，见 `AGENTS.md` §维护者陷阱；非 `valkyrie.v` 自举 legion）。
 
 ## 与 LeetCode 测试数据的边界
 
@@ -91,7 +94,8 @@ solvers/valkyrie/
 
 当前 std 适合：线性扫、哈希表、固定小表计数、异或、滚动变量、双指针交换、摩尔投票、数字反转。暂缓：树、图、堆、大二维 DP。
 
-题型清单见 `leetcode-implement/references/v-phase1-capabilities.md`。
+题型清单见 `leetcode-implement/references/v-phase1-capabilities.md`。 **缺能力时**加载 `../valkyrie-evolution/SKILL.md`
+，在兄弟仓补 std / 工具链，勿在题解里绕过。
 
 ## 检查清单（写 solution.v 时）
 
