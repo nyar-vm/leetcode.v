@@ -41,18 +41,22 @@ export function coreStdDependenciesVon() {
         std: true`;
 }
 
-/** 写入 `leetcode.v/legions.von`，注册 `core` / `std` workspace 成员。 */
+/** 写入 `leetcode.v/legions.von`，注册 `core` / `std` / `std.adaptors._` workspace 成员。 */
 export function leetcodeLegionsVon({
     leetcodeRoot = LEETCODE_ROOT,
     valkyrieRoot = VALKYRIE_V_ROOT,
 } = {}) {
     const coreMember = toPosixPath(relative(leetcodeRoot, join(valkyrieRoot, "projects", "core")));
     const stdMember = toPosixPath(relative(leetcodeRoot, join(valkyrieRoot, "projects", "std")));
+    const adaptorsMember = toPosixPath(
+        relative(leetcodeRoot, join(valkyrieRoot, "projects", "std.adaptors._")),
+    );
     return `{
     name: "leetcode",
     members: [
         "${coreMember}",
-        "${stdMember}"
+        "${stdMember}",
+        "${adaptorsMember}"
     ],
     workspace: {
         version: "0.1.0",
