@@ -1,5 +1,5 @@
 export class Solution {
-    twoSum(nums: number[], target: number): number[] {
+    twoSum(nums: number[], target: number): number[] | null {
         const index = new Map<number, number>();
         for (let i = 0; i < nums.length; i++) {
             const x = nums[i];
@@ -9,6 +9,6 @@ export class Solution {
             }
             index.set(x, i);
         }
-        return [];
+        return null;
     }
 }
