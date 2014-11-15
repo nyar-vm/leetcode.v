@@ -10,6 +10,6 @@
 | 滚动变量                         | —                      | climbing-stairs、maxProfit、Kadane  |
 | 双指针交换                       | `ArrayList`            | reverse-string                      |
 | 摩尔投票 / 数字反转              | 标量                   | majority-element、palindrome-number |
-| 长度 26 计数表                   | `[i64]` + `loop ch in utf8` / `char.lowercase_ascii_index` | valid-anagram |
+| 长度 26 计数表                   | `[i64]` + `utf8.char_at` / `char.lowercase_ascii_index` | valid-anagram |
 
 暂缓：链表、树、优先队列、并查集、多维 DP 表。
