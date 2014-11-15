@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { makeTsCandidate } from "../src/runner/ts-ref.ts";
+import { makeTsCandidate, normalizeTsTestResult } from "../src/runner/ts-ref.ts";
 
 async function main(): Promise<number> {
     const problemDir = process.argv[2];
@@ -38,10 +38,11 @@ async function main(): Promise<number> {
     const candidate = makeTsCandidate(entry, mod);
 
     for (const [index, case_] of tests.entries()) {
-        const actual = candidate(case_.args);
-        if (JSON.stringify(actual) !== JSON.stringify(case_.expected)) {
+        const actual = normalizeTsTestResult(candidate(case_.args));
+        const expected = normalizeTsTestResult(case_.expected);
+        if (JSON.stringify(actual) !== JSON.stringify(expected)) {
             throw new Error(
-                `tests[${index}]: expected ${JSON.stringify(case_.expected)}, got ${JSON.stringify(actual)}`,
+                `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
             );
         }
     }

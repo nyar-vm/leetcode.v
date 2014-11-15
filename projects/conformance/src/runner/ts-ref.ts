@@ -29,6 +29,11 @@ export function hasTsSolver(problemRoot: string, _problemId?: string): boolean {
 
 type TestCase = { args: Record<string, unknown>; expected: unknown };
 
+/** `void` 解返回 `undefined`；metadata 用 `null` 表示无返回值断言。 */
+export function normalizeTsTestResult(value: unknown): unknown {
+    return value === undefined ? null : value;
+}
+
 function loadMetadata(problemRoot: string): { tests: TestCase[]; invoke: { typescript: string } } {
     const meta = JSON.parse(readFileSync(join(problemRoot, "metadata.json"), "utf8")) as {
         tests?: TestCase[];
@@ -86,10 +91,11 @@ export async function runTsSolverOnce(problemRoot: string, problemId: string): P
     const candidate = makeTsCandidate(invoke.typescript, mod);
 
     for (const [index, case_] of tests.entries()) {
-        const actual = candidate(case_.args);
-        if (JSON.stringify(actual) !== JSON.stringify(case_.expected)) {
+        const actual = normalizeTsTestResult(candidate(case_.args));
+        const expected = normalizeTsTestResult(case_.expected);
+        if (JSON.stringify(actual) !== JSON.stringify(expected)) {
             throw new Error(
-                `tests[${index}]: expected ${JSON.stringify(case_.expected)}, got ${JSON.stringify(actual)}`,
+                `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
             );
         }
     }
