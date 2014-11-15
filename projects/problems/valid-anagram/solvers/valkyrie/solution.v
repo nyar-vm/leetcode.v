@@ -8,13 +8,13 @@ class Solution {
         let mut counts: [i64] = [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         ]
-        loop ch in s {
-            let idx: usize = ch.lowercase_ascii_index().unwrap() as usize
-            counts⁅idx⁆ = counts⁅idx⁆ + 1
-        }
-        loop ch in t {
-            let idx: usize = ch.lowercase_ascii_index().unwrap() as usize
-            counts⁅idx⁆ = counts⁅idx⁆ - 1
+        let mut i: i32 = 0
+        while i < s.length() {
+            let si: usize = s.char_at(i).unwrap().lowercase_ascii_index().unwrap() as usize
+            let ti: usize = t.char_at(i).unwrap().lowercase_ascii_index().unwrap() as usize
+            counts⁅si⁆ = counts⁅si⁆ + 1
+            counts⁅ti⁆ = counts⁅ti⁆ - 1
+            i = i + 1
         }
         let mut k: usize = 0
         while k < 26 {

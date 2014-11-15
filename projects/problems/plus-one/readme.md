@@ -1,41 +1,59 @@
-# Plus One
+# [Plus One](https://leetcode.com/problems/plus-one/)
 
-- **LeetCode**：[#66 Plus One](https://leetcode.com/problems/plus-one/)
-- **难度**：Easy
-- **标签**：Array · Math
+## 问题
 
-## 题目
+给定一个由整数数组 `digits` 表示的大整数，其中 `digits[i]` 为从高位到低位排列的十进制数字，且**不含前导零**。将这个大整数加 $1$，返回结果的数字数组。
 
-You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
-Increment the large integer by one and return the resulting array of digits.
+**示例 1**
 
-**Example 1**：
+- **输入**：`digits = [1, 2, 3]`
+- **输出**：`[1, 2, 4]`
+- **解释**：表示 $123 + 1 = 124$。
 
-**Input**：digits = [1,2,3]
-**Output**：[1,2,4]
-**Explanation**：The array represents the integer 123.
-Incrementing by one gives 123 + 1 = 124.
-Thus, the result should be [1,2,4].
+**示例 2**
 
-**Example 2**：
+- **输入**：`digits = [4, 3, 2, 1]`
+- **输出**：`[4, 3, 2, 2]`
 
-**Input**：digits = [4,3,2,1]
-**Output**：[4,3,2,2]
-**Explanation**：The array represents the integer 4321.
-Incrementing by one gives 4321 + 1 = 4322.
-Thus, the result should be [4,3,2,2].
+**示例 3**
 
-**Example 3**：
+- **输入**：`digits = [9]`
+- **输出**：`[1, 0]`
 
-**Input**：digits = [9]
-**Output**：[1,0]
-**Explanation**：The array represents the integer 9.
-Incrementing by one gives 9 + 1 = 10.
-Thus, the result should be [1,0].
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{digits}) \le 100$
+- $0 \le \texttt{digits}[i] \le 9$
+- `digits` 不含前导零
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(digits)$ $\le 100$
-0 <= digits[i] $\le 9$
-digits does not contain any leading 0's.
+### 朴素想法
+
+把数组转成数值再加 $1$ 再拆回数组。在位数较多或语言整数有上限时不可靠，且多余地绕开了「按位进位」结构。
+
+### 大整数转换瓶颈
+
+题面已用数组表示数位，应直接在数位上模拟加法，避免溢出与多余转换。
+
+### 自低位进位优化
+
+从末位 $i = n-1$ 向高位扫描：若 $\texttt{digits}[i] < 9$，则加 $1$ 并结束；若为 $9$ 则置 $0$ 并继续进位。若最高位仍进位（全为 $9$），在结果前补 $1$（或等价地构造长度 $n+1$ 的数组）。
+
+### 最终算法
+
+复制或原地修改 `digits`。从末尾向前：非 $9$ 则 $+1$ 并返回；$9$ 则变 $0$ 继续。循环结束后说明全为 $9$，返回 `[1]` 与 $n$ 个 $0$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+$n = \mathrm{len}(\texttt{digits})$，至多扫描一遍；全 $9$ 时仍线性。
+
+### 空间复杂度
+
+$O(1)$ 或 $O(n)$
+
+原地修改为 $O(1)$ 额外空间；若需新数组存全 $9$ 进位结果则为 $O(n)$ 输出空间（题面通常计输出不计入额外空间）。

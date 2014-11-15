@@ -11,7 +11,7 @@
 | V-005 | 二维 DP 表 / 矩阵                   | open | 路径、编辑距离    | `Array` 嵌套或 `ArrayList`            | 语法 + std 边界          |
 | V-006 | `legion build --target node` 题解 harness | upstream | coach 批次 11 题 | `valkyrie.rs` legion + `legions.von` 含 `std.adaptors._` | 2026-09：workspace 缺 adaptor 已修 |
 | V-009 | `char.lowercase_ascii_index` | done | `valid-anagram` | `core::text::char` | 题解用 `loop ch in utf8`；`Utf8Text.char_at` 待补 |
-| V-010 | `Utf8Text.char_at`（0-based 逻辑下标） | open | 下标访问字符串题 | `std.text.Utf8Text` | std test bundle 现与 char_at 同编时有 parser 风险 |
+| V-010 | `Utf8Text.char_at`（0-based 逻辑下标） | done | `valid-anagram`、下标字符串题 | `std.text.Utf8Text` | 与 `count_char` / `byte_offset` 一致 |
 | V-007 | 字符串切片与 `Utf8Text` 互操作      | open | 字符串题          | `std.text`                            | 对照 TS `string` 语义    |
 | V-008 | 递归深度 / 栈溢出策略               | open | DFS 题            | nyar / core                           | 文档化限制或尾调用       |
 
