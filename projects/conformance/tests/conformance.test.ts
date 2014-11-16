@@ -22,7 +22,7 @@ const LEETCODE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", 
 const V_STRICT = process.env.LEETCODE_V_STRICT === "1";
 const BATCH_PROBLEMS = problemsForBatch(PROBLEMS, { fallbackKeys: ["LEETCODE_TEST_LIMIT"] });
 
-describe("Python 参考解完备性（LeetCodeDataset）", () => {
+describe("Python 实现完备性（LeetCodeDataset）", () => {
     const ready = pythonRefReady();
 
     for (const problem of BATCH_PROBLEMS) {

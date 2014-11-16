@@ -97,7 +97,7 @@ legion build projects/problems/<slug>/solvers/valkyrie --target node -o .cache/<
 - [ ] ② Python + TS `metadata.tests` 全绿
 - [ ] ② V 源码与 `legion.von` 就绪
 - [ ] ③ `legion build --target node` 通过
-- [ ] ③ V 测例与参考解一致
+- [ ] ③ V 测例与题解一致（与其它实现对齐）
 - [ ] ④（若曾阻塞）backlog 项已 `done` 或 `wont`
 
 ## 子 Skill 索引

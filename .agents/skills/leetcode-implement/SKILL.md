@@ -2,8 +2,8 @@
 name: leetcode-implement
 description: >-
   刷题流程第②步：三端求解器。完整刷题见 leetcode-practice。
-  实现 leetcode.v 三端求解器：Python 参考解、TypeScript、Valkyrie solution.v。
-  算法须与 coach readme 最优解一致，通过 metadata.tests。用户提及实现、solver、
+  实现 leetcode.v 三端求解器：Python、TypeScript、Valkyrie solution.v。
+  算法须与题解（readme 参考实现）一致，通过 metadata.tests。用户提及实现、solver、
   TS、V、Python 对齐题解时加载。
 ---
 
@@ -31,8 +31,8 @@ projects/problems/<slug>/solvers/
 
 ## 权威校验
 
-1. `metadata.json` — `invoke.python` / `invoke.typescript`、`tests`
-2. 同目录 `readme.md` — 最优算法（实现不得回退到 readme 已否定的次优解）
+1. 同目录 `readme.md` — **参考实现**（最优算法；实现不得回退到题解已否定的次优解）
+2. `metadata.json` — `invoke.python` / `invoke.typescript`、`tests`
 3. 跑测：
     - Python：`python projects/conformance/scripts/run_python_solver.py <problem-dir>`
     - TS：`node --import tsx projects/conformance/scripts/run_ts_solver.ts <problem-dir>`

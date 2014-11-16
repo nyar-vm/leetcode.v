@@ -2,16 +2,16 @@
 
 LeetCode 题目在 **Valkyrie（V）** 与 **TypeScript** 上的完备性测试、外部产物基准与对比看板。
 
-本仓收录大量 LeetCode 题目（`metadata.json` + 多语言求解器），用同一套测试用例验证 Python 参考解、手写 TS 解与
-`legion build` 产出的 V/Wasm 解，并在看板中对比运行耗时。
+本仓收录大量 LeetCode 题目（`metadata.json` + 多语言求解器）。 **题解**（`readme.md`）为语言无关的 **参考实现**；Python、TS、V
+三端实现须与题解一致，并用同一套 `metadata.tests` 校验，在看板中对比 TS 与 V 运行耗时。
 
 ## 依赖兄弟仓
 
 与本仓并列放置（路径可用环境变量覆盖，勿写死盘符进题目内容）：
 
-| 仓                              | 作用                                                    |
-|---------------------------------|---------------------------------------------------------|
-| [`valkyrie.rs`](../valkyrie.rs) | `legion` CLI、`@valkyrie-language/vcc`、Wasm 编译与基准 |
+| 仓                              | 作用                                                                           |
+|---------------------------------|--------------------------------------------------------------------------------|
+| [`valkyrie.rs`](../valkyrie.rs) | `legion` CLI、`@valkyrie-language/vcc`、Wasm 编译与基准                        |
 | [`valkyrie.v`](../valkyrie.v)   | V 语言 `core` / `std` / adaptors（`legions.von` 注册；**非** legion CLI 来源） |
 
 首次克隆后建议：
@@ -41,7 +41,7 @@ leetcode.v/
 │   │   ├── metadata.json       # id、questionId、难度、标签、tests、invoke
 │   │   ├── readme.md           # 教练稿（见 .agents/skills/leetcode-coach）
 │   │   └── solvers/
-│   │       ├── python/         # LCD 参考解
+│   │       ├── python/         # LCD 脚手架解（完备性跑测）
 │   │       ├── typescript/     # 手写 TS 解
 │   │       └── valkyrie/       # solution.v + legion.von
 │   ├── conformance/            # @leetcode/conformance — 跑测与基准
@@ -57,7 +57,7 @@ leetcode.v/
 pnpm install
 pnpm fmt:check        # Biome 格式检查
 pnpm test:problems    # 完备性矩阵（默认批量限额 50 题）
-pnpm bench            # TS 参考解 vs V 外部产物基准
+pnpm bench            # TS 实现 vs V 外部产物基准
 pnpm dashboard        # 启动看板 dev server
 ```
 
@@ -72,7 +72,8 @@ pnpm dashboard        # 启动看板 dev server
 
 ## 单题约定
 
-- **Python**：`solvers/python/solution.py`，与 `metadata.json` 中 `tests` 对齐。
+- **题解**：`readme.md` 为参考实现（语言无关最优算法）；三端实现须与其一致。
+- **Python**：`solvers/python/solution.py`，LCD 脚手架，完备性跑测用。
 - **TypeScript**：`export class Solution`，方法名与 `invoke.typescript` 一致（如 `Solution().twoSum`）。
 - **Valkyrie**：`solvers/valkyrie/solution.v` + `legion.von`（`entry: "solution.v"`，`core` / `std` 为 workspace 依赖，
   `target: node`）。
@@ -81,7 +82,7 @@ pnpm dashboard        # 启动看板 dev server
 
 ## 看板
 
-`pnpm dashboard` 启动后读取 `projects/dashboard/public/benchmark-results.json`（可由 `pnpm bench` 更新）。展示 TS 参考解与
+`pnpm dashboard` 启动后读取 `projects/dashboard/public/benchmark-results.json`（可由 `pnpm bench` 更新）。展示 TS 实现与
 V 编译/运行耗时对比。
 
 ## 代理与题解规范

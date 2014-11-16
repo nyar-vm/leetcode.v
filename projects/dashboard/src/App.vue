@@ -53,7 +53,7 @@ async function loadCached() {
 
 async function runBench() {
     loading.value = true;
-    statusText.value = "运行中（TS 参考解 + legion bench → Wasm）…";
+    statusText.value = "运行中（TS 实现 + legion bench → Wasm）…";
     try {
         const res = await fetch("/api/bench");
         if (!res.ok) {
@@ -75,7 +75,7 @@ onMounted(loadCached);
     <header>
         <h1>LeetCode 完备性 · TypeScript vs Valkyrie Wasm</h1>
         <p class="subtitle">
-            TS：同算法参考解 median 毫秒（Node）。V：<code>legion bench -t node</code> = 编译为 Wasm + Wasm 运行
+            TS：与题解同算法的实现 median 毫秒（Node）。V：<code>legion bench -t node</code> = 编译为 Wasm + Wasm 运行
             <code>[benchmark]</code> 的 median。
         </p>
     </header>
@@ -89,7 +89,7 @@ onMounted(loadCached);
         <thead>
             <tr>
                 <th>题目</th>
-                <th>TS 参考解 (ms)</th>
+                <th>TS 实现 (ms)</th>
                 <th>V 编译→Wasm (ms)</th>
                 <th>V Wasm 运行 (ms)</th>
                 <th>TS / V</th>
