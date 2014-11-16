@@ -1,26 +1,52 @@
-# Move Zeroes
+# [Move Zeroes](https://leetcode.com/problems/move-zeroes/)
 
-- **LeetCode**：[#283 Move Zeroes](https://leetcode.com/problems/move-zeroes/)
-- **难度**：Easy
-- **标签**：Array · Two Pointers
+## 问题
 
-## 题目
+给定整数数组 `nums`，将所有 $0$ 移动到数组末尾，同时保持非零元素的相对顺序不变。必须在**原地**修改数组，不得额外分配与输入同规模的新数组。
 
-Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-Note that you must do this in-place without making a copy of the array.
+**示例 1**
 
-**Example 1**：
-**Input**：nums = [0,1,0,3,12]
-**Output**：[1,3,12,0,0]
-**Example 2**：
-**Input**：nums = [0]
-**Output**：[0]
+- **输入**：`nums = [0, 1, 0, 3, 12]`
+- **输出**：`[1, 3, 12, 0, 0]`
 
+**示例 2**
 
-**Constraints**：
+- **输入**：`nums = [0]`
+- **输出**：`[0]`
 
-1 $\le \mathrm{len}(nums)$ $\le 104$
--231 <= nums[i] $\le 231$ - 1
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums}) \le 10^4$
+- $-2^{31} \le \texttt{nums}[i] \le 2^{31} - 1$
 
-Follow up: Could you minimize the total number of operations done?
+## 解答
+
+### 朴素想法
+
+另建数组：按原顺序收集所有非零元素，再依次写回并在尾部补零。语义正确，但违反「原地、不复制整表」的要求，额外需要 $O(n)$ 空间。
+
+### 尾部冒泡瓶颈
+
+反复从左到右扫描，遇零则与右侧相邻元素交换，直到该零到达当前后缀。单次把零推到末尾可能触发 $O(n)$ 次交换，最坏总交换次数达 $O(n^2)$，对大数组不可接受。
+
+### 双指针 compaction 优化
+
+维护写指针 $k$，表示「下一个非零元素应落位的下标」。从左到右扫描 $i$：若 $\texttt{nums}[i] \ne 0$，则交换 $\texttt{nums}[k]$ 与 $\texttt{nums}[i]$（当 $k \ne i$ 时等价于把非零填到前面），然后 $k \leftarrow k+1$。扫描结束后，$[0, k)$ 为非零段且相对顺序不变，$[k, n)$ 自然全为 $0$。
+
+### 最终算法
+
+初始化 $k = 0$。对每个 $i \in [0, n)$：若 $\texttt{nums}[i] \ne 0$，交换 $\texttt{nums}[k]$ 与 $\texttt{nums}[i]$，$k$ 加 $1$。无需单独清零后缀——未被写指针覆盖的位置在交换过程中已被零占据或保持为零。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个下标至多被访问、交换常数次，$n = \mathrm{len}(\texttt{nums})$。
+
+### 空间复杂度
+
+$O(1)$
+
+仅使用常数个指针，原地修改 `nums`。
