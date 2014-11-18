@@ -1,36 +1,63 @@
-# Happy Number
+# [Happy Number](https://leetcode.com/problems/happy-number/)
 
-- **LeetCode**：[#202 Happy Number](https://leetcode.com/problems/happy-number/)
-- **难度**：Easy
-- **标签**：Hash Table · Math · Two Pointers
+## 问题
 
-## 题目
+编写算法判断正整数 $n$ 是否为「快乐数」。
 
-Write an algorithm to determine if a number n is happy.
-A happy number is a number defined by the following process:
+对 $n$ 反复执行：将 $n$ 替换为其各位数字的平方和，直到
 
-Starting with any positive integer, replace the number by the sum of the squares of its digits.
-Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
-Those numbers for which this process ends in 1 are happy.
+- 得到 $1$（此后恒为 $1$），或
+- 进入不含 $1$ 的循环。
 
-Return true if n is a happy number, and false if not.
+若过程以 $1$ 结束，则 $n$ 为快乐数；否则不是。返回对应布尔结果。
 
-**Example 1**：
+**示例 1**
 
-**Input**：n = 19
-**Output**：true
-**Explanation**：
-12 + 92 = 82
-82 + 22 = 68
-62 + 82 = 100
-12 + 02 + 02 = 1
+- **输入**：`n = 19`
+- **输出**：`true`
+- **解释**：$1^2+9^2=82 \to 68 \to 100 \to 1$。
 
-**Example 2**：
+**示例 2**
 
-**Input**：n = 2
-**Output**：false
+- **输入**：`n = 2`
+- **输出**：`false`
 
+**约束**
 
-**Constraints**：
+- $1 \le n \le 2^{31} - 1$
 
-1 <= n $\le 231$ - 1
+## 解答
+
+### 朴素想法
+
+模拟变换直到出现 $1$ 或步数超过某常数上界。上界难选：漏判会错杀，过大则浪费。
+
+### 无循环检测瓶颈
+
+若进入非 $1$ 环，过程不终止；仅靠步数截断不可靠。
+
+### 访问集合优化
+
+用集合记录已出现过的值；每次变换后若已在集合中则判定为环（非快乐）；若到达 $1$ 则为快乐。环长有限，最多 $O(\log n)$ 量级不同状态（数位平方和上界约三位数）。
+
+### 快慢指针环检测（可选）
+
+用两个指针以不同步长沿同一变换前进，相遇且当前值 $\ne 1$ 则在环内；相遇于 $1$ 则为快乐。额外空间 $O(1)$，与哈希集合等价正确性。
+
+### 最终算法
+
+维护已访问集合。当 $n \ne 1$：若 $n$ 已访问则返回 false；否则记入 $n$ 并令 $n \leftarrow$ 各位平方和。退出循环后 $n=1$，返回 true。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(\log n)$
+
+每次变换将 $n$ 压到有限范围；环检测保证每值至多处理一次。
+
+### 空间复杂度
+
+$O(\log n)$
+
+哈希集合规模受环/链长度限制；快慢指针版为 $O(1)$ 额外空间。
