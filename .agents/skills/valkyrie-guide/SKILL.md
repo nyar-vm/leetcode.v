@@ -69,7 +69,8 @@ imply Solution {
 
 - 方法用 **`micro`**；会修改接收者时 **`mut self`**。
 - 扩展方法写在 **`imply Type { ... }`**。
-- 可选值：`Option<T>`、`Some(v)`、`None` / `option_none::<T>()`。
+- 可选值：`Option<T>`、`Some(v)`、`None` / `option_none::<T>()`（ **`unite` = tagged sum**；缺省 tag 由编译器派生，见 `valkyrie-evolution/.../type-taxonomy.md`）。
+- **勿混淆**：named **`union Foo { ... }`**（untagged，大整数等）与类型表达式 **`A | B`**（匿名 untagged）— 二者均 **不是** `unite`。
 - 循环：`while cond { ... }`、`loop item in collection { ... }`。
 - 整数异或：`i64` 上可用 `^`（见 `core` `i64`）。
 - 注释： **`#` 行注释**、 **`<#` … `#>` 块注释**（可嵌套）。 **不支持** `//` 或 `/* */`。std 里偶见的 `⍝` 为遗留，新代码勿用。

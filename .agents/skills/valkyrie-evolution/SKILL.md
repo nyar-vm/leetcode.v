@@ -101,6 +101,7 @@ node --import tsx projects/conformance/scripts/run_ts_solver.ts projects/problem
 
 ## 参考
 
+- [references/type-taxonomy.md](references/type-taxonomy.md) — `unite` / `union` / `A|B` 三分法
 - [references/capability-backlog.md](references/capability-backlog.md) — 活 backlog
 - [references/plan-template.md](references/plan-template.md)
 - [references/triage.md](references/triage.md)

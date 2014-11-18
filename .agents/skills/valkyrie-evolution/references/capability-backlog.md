@@ -14,8 +14,14 @@
 | V-010 | `Utf8Text.char_at`（0-based 逻辑下标） | done | `valid-anagram`、下标字符串题 | `std.text.Utf8Text` | 与 `count_char` / `byte_offset` 一致 |
 | V-007 | 字符串切片与 `Utf8Text` 互操作      | open | 字符串题          | `std.text`                            | 对照 TS `string` 语义    |
 | V-008 | 递归深度 / 栈溢出策略               | open | DFS 题            | nyar / core                           | 文档化限制或尾调用       |
+| V-011 | `unite` 强制 tagged + 缺省 tag 自动派生 | planned | `Option`/`Result`、全部 ADT | `valkyrie.rs` nyar/HIR/backend；`core::types` | 见 `type-taxonomy.md` §unite |
+| V-012 | named `union Name { ... }`（untagged） | open | 大整数（参考 `athena.rs`）、C 互操作 payload | `valkyrie.rs` + `std`（待定） | parser 有 `SumTypeKind::Union`；语义/布局未完备 |
+| V-013 | 匿名 `A \| B \| C` 类型联合           | open | 泛型约束、测例多形参数 | `valkyrie.rs` typechecker | `TypeExpression::Union` 已解析 |
 
-## 新增条目模板
+## 和类型 taxonomy
+
+`unite`（始终 tagged，可自动派生 tag） vs named `union`（untagged） vs 匿名 `A|B|C`（untagged）见 [type-taxonomy.md](type-taxonomy.md)。
+
 
 ```markdown
 | V-0xx | 简短名 | open | <slug> 或测试命令 | valkyrie.v 路径 | 阻塞原文或 coach 算法需求 |
