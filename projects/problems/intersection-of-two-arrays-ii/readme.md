@@ -1,33 +1,56 @@
-# Intersection Of Two Arrays Ii
+# [Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/)
 
-- **LeetCode**：[#350 Intersection Of Two Arrays Ii](https://leetcode.com/problems/intersection-of-two-arrays-ii/)
-- **难度**：Easy
-- **标签**：Array · Hash Table · Two Pointers · Binary Search · Sorting
+## 问题
 
-## 题目
+给定两个整数数组 `nums1` 和 `nums2`，返回它们的交集。结果中每个元素的出现次数，应等于该元素在两个数组中出现次数的**较小值**；输出顺序任意。
 
-Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums1 = [1, 2, 2, 1]`，`nums2 = [2, 2]`
+- **输出**：`[2, 2]`
 
-**Input**：nums1 = [1,2,2,1], nums2 = [2,2]
-**Output**：[2,2]
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums1 = [4, 9, 5]`，`nums2 = [9, 4, 9, 8, 4]`
+- **输出**：`[4, 9]`（`[9, 4]` 亦可）
 
-**Input**：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-**Output**：[4,9]
-**Explanation**：[9,4] is also accepted.
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums1}), \mathrm{len}(\texttt{nums2}) \le 1000$
+- $0 \le \texttt{nums1}[i], \texttt{nums2}[i] \le 1000$
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(nums1)$, nums2.length $\le 1000$
-0 <= nums1[i], nums2[i] $\le 1000$
+### 朴素想法
 
+枚举 `nums1` 中每个元素，在 `nums2` 中找匹配并标记已用。正确但最坏需 $O(n \times m)$ 次比较。
 
-Follow up:
+### 无序双数组扫描瓶颈
 
-What if the given array is already sorted? How would you optimize your algorithm?
-What if nums1's size is small compared to nums2's size? Which algorithm is better?
-What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+不记录频次时，同一数值会被重复匹配或漏计「可配对次数」，难以同时满足「多重交集」与「次数取 min」。
+
+### 频次哈希表优化
+
+先统计 `nums1` 中每个值的出现次数。再扫描 `nums2`：若某值在表中计数 $> 0$，则加入结果并将计数减 $1$。每个值最多贡献 $\min(\mathrm{count}_1, \mathrm{count}_2)$ 次，一趟构建结果。
+
+### 已排序数组双指针（可选）
+
+若两数组均已排序，可用双指针同步推进：相等则收集并双指针前进；不等则移动较小值一侧指针。时间仍为线性，空间 $O(1)$ 额外（不含输出）。本题通用解法以哈希表为准；排序版适合作为已有序或愿先排序的场景。
+
+### 最终算法
+
+建表统计 `nums1` 频次。遍历 `nums2`，计数 $> 0$ 则 push 到答案并递减。返回结果数组。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n + m)$
+
+$n = \mathrm{len}(\texttt{nums1})$，$m = \mathrm{len}(\texttt{nums2})$，各扫描一遍。
+
+### 空间复杂度
+
+$O(n)$
+
+哈希表最多存 `nums1` 中不同键及其计数；输出不计入额外空间时仍视为 $O(1)$ 额外，但表本身为 $O(n)$。
