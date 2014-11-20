@@ -1,49 +1,55 @@
-# Remove Duplicates From Sorted Array
+# [Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 
-- **LeetCode**：[#26 Remove Duplicates From Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
-- **难度**：Easy
-- **标签**：Array · Two Pointers
+## 问题
 
-## 题目
+给定按非递减顺序排序的整数数组 `nums`，**原地**删除重复元素，使每个唯一元素只出现一次，并保持相对顺序不变。返回唯一元素的个数 $k$。
 
-Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
-Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+要求：`nums` 的前 $k$ 个位置存放去重后的结果（顺序与原数组中首次出现顺序一致）；$k$ 之后的元素内容不作要求。
 
-Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
-Return k.
+**示例 1**
 
-Custom Judge:
-The judge will test your solution with the following code:
+- **输入**：`nums = [1, 1, 2]`
+- **输出**：`2`，`nums` 前两位为 `[1, 2, _]`
 
-int[] nums = [...]; // Input array
-int[] expectedNums = [...]; // The expected answer with correct length
+**示例 2**
 
-int k = removeDuplicates(nums); // Calls your implementation
+- **输入**：`nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]`
+- **输出**：`5`，前五位为 `[0, 1, 2, 3, 4, _, _, _, _, _]`
 
-assert k == expectedNums.length;
-for (int i = 0; i < k; i++) {
-assert nums[i] == expectedNums[i];
-}
+**约束**
 
-If all assertions pass, then your solution will be accepted.
+- $1 \le \mathrm{len}(\texttt{nums}) \le 3 \times 10^4$
+- $-100 \le \texttt{nums}[i] \le 100$
+- `nums` 已按非递减顺序排序
 
-**Example 1**：
+## 解答
 
-**Input**：nums = [1,1,2]
-**Output**：2, nums = [1,2,_]
-**Explanation**：Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
-It does not matter what you leave beyond the returned k (hence they are underscores).
+### 朴素想法
 
-**Example 2**：
+用辅助集合记录已见过的值，再扫一遍把首次出现的元素按序写入新数组。正确但需 $O(n)$ 额外空间，且通常需复制整表，不符合原地要求。
 
-**Input**：nums = [0,0,1,1,1,2,2,3,3,4]
-**Output**：5, nums = [0,1,2,3,4,_,_,_,_,_]
-**Explanation**：Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
-It does not matter what you leave beyond the returned k (hence they are underscores).
+### 全表重建瓶颈
 
+每次发现新唯一值就整体左移或拼接，单次删除可能 $O(n)$，总代价可达 $O(n^2)$。
 
-**Constraints**：
+### 有序双指针优化
 
-1 $\le \mathrm{len}(nums)$ $\le 3$ * 104
--100 <= nums[i] $\le 100$
-nums is sorted in non-decreasing order.
+数组已有序，**相同值必相邻**。维护写指针 $k$（已写入的唯一段长度）。从左到右读 $x$：若 $k=0$ 或 $x \ne \texttt{nums}[k-1]$，则 $\texttt{nums}[k] \leftarrow x$，$k \leftarrow k+1$；否则 $x$ 为重复，跳过。一趟扫描即可。
+
+### 最终算法
+
+$k \leftarrow 0$。对每个元素 $x$：若 $k=0$ 或 $x$ 与 $\texttt{nums}[k-1]$ 不同，写入 $\texttt{nums}[k]$ 并 $k++$。返回 $k$。边界：单元素时 $k$ 终为 $1$；全相同则 $k=1$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个元素读写常数次，$n = \mathrm{len}(\texttt{nums})$。
+
+### 空间复杂度
+
+$O(1)$
+
+仅使用常数个指针，原地修改 `nums` 前缀。
