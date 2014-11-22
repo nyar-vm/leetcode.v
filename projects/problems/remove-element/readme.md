@@ -1,53 +1,54 @@
-# Remove Element
+# [Remove Element](https://leetcode.com/problems/remove-element/)
 
-- **LeetCode**：[#27 Remove Element](https://leetcode.com/problems/remove-element/)
-- **难度**：Easy
-- **标签**：Array · Two Pointers
+## 问题
 
-## 题目
+给定整数数组 `nums` 与整数 `val`，**原地**移除所有等于 `val` 的元素，并返回剩余元素个数 $k$。
 
-Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
-Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+要求：`nums` 的前 $k$ 个位置存放所有不等于 `val` 的元素（**顺序可以任意改变**）；$k$ 之后的内容不作要求。
 
-Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
-Return k.
+**示例 1**
 
-Custom Judge:
-The judge will test your solution with the following code:
+- **输入**：`nums = [3, 2, 2, 3]`，`val = 3`
+- **输出**：`2`，前两位为 `[2, 2, _, _]`
 
-int[] nums = [...]; // Input array
-int val = ...; // Value to remove
-int[] expectedNums = [...]; // The expected answer with correct length.
-// It is sorted with no values equaling val.
+**示例 2**
 
-int k = removeElement(nums, val); // Calls your implementation
+- **输入**：`nums = [0, 1, 2, 2, 3, 0, 4, 2]`，`val = 2`
+- **输出**：`5`，前五位的五个非 $2$ 元素任意排列均可（如 `[0, 1, 4, 0, 3, _, _, _]`）
 
-assert k == expectedNums.length;
-sort(nums, 0, k); // Sort the first k elements of nums
-for (int i = 0; i < actualLength; i++) {
-assert nums[i] == expectedNums[i];
-}
+**约束**
 
-If all assertions pass, then your solution will be accepted.
+- $0 \le \mathrm{len}(\texttt{nums}) \le 100$
+- $0 \le \texttt{nums}[i], \texttt{val} \le 50$
 
-**Example 1**：
+## 解答
 
-**Input**：nums = [3,2,2,3], val = 3
-**Output**：2, nums = [2,2,_,_]
-**Explanation**：Your function should return k = 2, with the first two elements of nums being 2.
-It does not matter what you leave beyond the returned k (hence they are underscores).
+### 朴素想法
 
-**Example 2**：
+新建数组，收集所有不等于 `val` 的元素再写回。正确但需 $O(n)$ 额外空间，不符合原地要求。
 
-**Input**：nums = [0,1,2,2,3,0,4,2], val = 2
-**Output**：5, nums = [0,1,4,0,3,_,_,_]
-**Explanation**：Your function should return k = 5, with the first five elements of nums containing 0, 0, 1, 3, and 4.
-Note that the five elements can be returned in any order.
-It does not matter what you leave beyond the returned k (hence they are underscores).
+### 逐段删除瓶颈
 
+每发现一处 `val` 就整体左移后续元素，单次删除 $O(n)$，最坏 $O(n^2)$。
 
-**Constraints**：
+### 写指针 compaction 优化
 
-0 $\le \mathrm{len}(nums)$ $\le 100$
-0 <= nums[i] $\le 50$
-0 <= val $\le 100$
+维护写指针 $k$。从左到右扫描 $x$：若 $x \ne \texttt{val}$，则 $\texttt{nums}[k] \leftarrow x$，$k \leftarrow k+1$；等于 `val` 则跳过。一趟线性完成，且自然保留所有保留元素（顺序为扫描顺序，满足「可任意重排」）。
+
+### 最终算法
+
+$k \leftarrow 0$。对每个 $x \in \texttt{nums}$：若 $x \ne \texttt{val}$，写入 $\texttt{nums}[k]$ 并 $k++$。返回 $k$。空数组时 $k=0$；全为 `val` 时同样返回 $0$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+$n = \mathrm{len}(\texttt{nums})$，每个元素处理常数次。
+
+### 空间复杂度
+
+$O(1)$
+
+仅使用常数个指针，原地修改前缀。
