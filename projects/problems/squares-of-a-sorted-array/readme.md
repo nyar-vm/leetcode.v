@@ -1,31 +1,53 @@
-# Squares Of A Sorted Array
+# [Squares of a Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
 
-- **LeetCode**：[#977 Squares Of A Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
-- **难度**：Easy
-- **标签**：Array · Two Pointers · Sorting
+## 问题
 
-## 题目
+给定按非递减顺序排序的整数数组 `nums`，返回一个新数组，其中每个元素是 `nums` 中对应元素的平方，且结果数组同样按非递减顺序排序。
 
-Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [-4, -1, 0, 3, 10]`
+- **输出**：`[0, 1, 9, 16, 100]`
 
-**Input**：nums = [-4,-1,0,3,10]
-**Output**：[0,1,9,16,100]
-**Explanation**：After squaring, the array becomes [16,1,0,9,100].
-After sorting, it becomes [0,1,9,16,100].
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [-7, -3, 2, 3, 11]`
+- **输出**：`[4, 9, 9, 49, 121]`
 
-**Input**：nums = [-7,-3,2,3,11]
-**Output**：[4,9,9,49,121]
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums}) \le 10^4$
+- $-10^4 \le \texttt{nums}[i] \le 10^4$
+- `nums` 已按非递减顺序排序
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(nums)$ $\le 104$
--104 <= nums[i] $\le 104$
-nums is sorted in non-decreasing order.
+### 朴素想法
 
+对每个元素平方，再对结果排序。正确，时间 $O(n \log n)$，未利用原数组已有序这一结构。
 
-Follow up: Squaring each element and sorting the new array is very trivial, could you find an $O(n)$ solution using a different approach?
+### 全表排序瓶颈
+
+平方后最大值可能出现在数组两端（负数的绝对值大），中间较小；整体排序做了多余比较。
+
+### 双指针从两端合并优化
+
+有序数组平方后，**最大平方值只可能来自当前左端或右端**（绝对值最大者）。设左右指针 $i,j$：比较 $\texttt{nums}[i]^2$ 与 $\texttt{nums}[j]^2$，将较大者写入结果尾部并移动对应指针，直到 $i>j$。自后向前填表，得到非递减序列。
+
+### 最终算法
+
+初始化 $i=0$，$j=n-1$，结果长度 $n$。当 $i \le j$：若 $\texttt{nums}[i]^2 > \texttt{nums}[j]^2$，取左端平方并 $i++$；否则取右端平方并 $j--$。将选取的平方按从大到小顺序收集后反转，或直接从结果数组末尾向前写入。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个指针至多移动 $n$ 次。
+
+### 空间复杂度
+
+$O(n)$
+
+输出数组占 $O(n)$；除输出外额外指针为 $O(1)$。
