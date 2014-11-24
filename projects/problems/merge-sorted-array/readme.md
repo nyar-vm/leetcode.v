@@ -1,45 +1,62 @@
-# Merge Sorted Array
+# [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
 
-- **LeetCode**：[#88 Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
-- **难度**：Easy
-- **标签**：Array · Two Pointers · Sorting
+## 问题
 
-## 题目
+给定两个按非递减顺序排序的整数数组 `nums1`、`nums2`，以及整数 `m`、`n`，分别表示 `nums1` 与 `nums2` 中**有效元素**的个数。
 
-You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
-Merge nums1 and nums2 into a single array sorted in non-decreasing order.
-The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+将 `nums2` 合并进 `nums1`，使 `nums1` 成为一个按非递减顺序排序的数组。**原地**完成，结果存放在 `nums1` 中。
 
-**Example 1**：
+`nums1` 长度为 $m+n$，前 $m$ 个为待合并元素，后 $n$ 个为占位（可忽略）；`nums2` 长度为 $n$。
 
-**Input**：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-**Output**：[1,2,2,3,5,6]
-**Explanation**：The arrays we are merging are [1,2,3] and [2,5,6].
-The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+**示例 1**
 
-**Example 2**：
+- **输入**：`nums1 = [1, 2, 3, 0, 0, 0]`，`m = 3`，`nums2 = [2, 5, 6]`，`n = 3`
+- **输出**：`nums1 = [1, 2, 2, 3, 5, 6]`
 
-**Input**：nums1 = [1], m = 1, nums2 = [], n = 0
-**Output**：[1]
-**Explanation**：The arrays we are merging are [1] and [].
-The result of the merge is [1].
+**示例 2**
 
-**Example 3**：
+- **输入**：`nums1 = [1]`，`m = 1`，`nums2 = []`，`n = 0`
+- **输出**：`[1]`
 
-**Input**：nums1 = [0], m = 0, nums2 = [1], n = 1
-**Output**：[1]
-**Explanation**：The arrays we are merging are [] and [1].
-The result of the merge is [1].
-Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
+**示例 3**
 
+- **输入**：`nums1 = [0]`，`m = 0`，`nums2 = [1]`，`n = 1`
+- **输出**：`[1]`（`m = 0` 时 `nums1` 无有效元素，仅占位）
 
-**Constraints**：
+**约束**
 
-nums1.length == m + n
-nums2.length == n
-0 <= m, n $\le 200$
-1 <= m + n $\le 200$
--109 <= nums1[i], nums2[j] $\le 109$
+- $\mathrm{len}(\texttt{nums1}) = m + n$，$\mathrm{len}(\texttt{nums2}) = n$
+- $0 \le m, n \le 200$，$1 \le m+n \le 200$
+- $-10^9 \le \texttt{nums1}[i], \texttt{nums2}[j] \le 10^9$
 
+## 解答
 
-Follow up: Can you come up with an algorithm that runs in O(m + n) time?
+### 朴素想法
+
+复制 `nums1` 前 $m$ 个与整个 `nums2`，排序后写回。需额外 $O(m+n)$ 空间，且排序 $O((m+n)\log(m+n))$，未利用已有序性质。
+
+### 自前向后合并瓶颈
+
+从 `nums1` 头部开始比较写入，较大者后移会覆盖尚未处理的 `nums1` 元素，需要额外缓冲区或整体后移，代价高。
+
+### 自后向前双指针优化
+
+`nums1` 尾部 $n$ 个位置空闲。设写指针 $k = m+n-1$，`nums1` 有效尾 $i = m-1$，`nums2` 尾 $j = n-1$。当 $j \ge 0$：若 $i \ge 0$ 且 $\texttt{nums1}[i] > \texttt{nums2}[j]$，则 $\texttt{nums1}[k] \leftarrow \texttt{nums1}[i]$，$i--$；否则 $\texttt{nums1}[k] \leftarrow \texttt{nums2}[j]$，$j--$；然后 $k--$。从最大元素填起，永不覆盖未合并的 `nums1` 前缀。
+
+### 最终算法
+
+初始化 $k,i,j$ 如上。`while j >= 0` 执行比较写入并移动指针。当 $n=0$ 时循环不进入；$m=0$ 时仅剩将 `nums2` 写入 `nums1`。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(m + n)$
+
+每个元素至多被写入一次。
+
+### 空间复杂度
+
+$O(1)$
+
+仅使用常数个指针，原地修改 `nums1`。
