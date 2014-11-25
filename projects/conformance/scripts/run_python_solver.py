@@ -72,7 +72,21 @@ def run_check(candidate: Callable[..., Any], tests: list[dict[str, Any]]) -> Non
         if not isinstance(args, dict):
             raise ValueError(f"tests[{index}].args 必须是 object")
         expected = case["expected"]
-        actual = candidate(**args)
+        try:
+            actual = candidate(**args)
+        except Exception as exc:  # noqa: BLE001
+            if isinstance(expected, str) and expected.startswith("Error:"):
+                actual_err = f"Error: {exc}"
+                if actual_err == expected:
+                    continue
+                raise AssertionError(
+                    f"tests[{index}]: expected {expected!r}, got {actual_err!r}, args={args!r}",
+                ) from exc
+            raise
+        if isinstance(expected, str) and expected.startswith("Error:"):
+            raise AssertionError(
+                f"tests[{index}]: expected {expected!r}, no exception raised, args={args!r}",
+            )
         if actual != expected:
             raise AssertionError(f"tests[{index}]: expected {expected!r}, got {actual!r}, args={args!r}")
 

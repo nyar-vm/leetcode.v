@@ -34,6 +34,38 @@ export function normalizeTsTestResult(value: unknown): unknown {
     return value === undefined ? null : value;
 }
 
+/** metadata 中 `expected: "Error: ..."` 表示应抛出异常且消息匹配。 */
+export function assertTestCase(
+    index: number,
+    expected: unknown,
+    run: () => unknown,
+): void {
+    if (typeof expected === "string" && expected.startsWith("Error:")) {
+        try {
+            run();
+        } catch (err) {
+            const actual =
+                err instanceof Error ? `Error: ${err.message}` : `Error: ${String(err)}`;
+            if (actual !== expected) {
+                throw new Error(
+                    `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
+                );
+            }
+            return;
+        }
+        throw new Error(
+            `tests[${index}]: expected ${JSON.stringify(expected)}, no exception raised`,
+        );
+    }
+    const actual = normalizeTsTestResult(run());
+    const normalized = normalizeTsTestResult(expected);
+    if (JSON.stringify(actual) !== JSON.stringify(normalized)) {
+        throw new Error(
+            `tests[${index}]: expected ${JSON.stringify(normalized)}, got ${JSON.stringify(actual)}`,
+        );
+    }
+}
+
 function loadMetadata(problemRoot: string): { tests: TestCase[]; invoke: { typescript: string } } {
     const meta = JSON.parse(readFileSync(join(problemRoot, "metadata.json"), "utf8")) as {
         tests?: TestCase[];
@@ -71,7 +103,7 @@ export function makeTsCandidate(
             if (typeof fn !== "function") {
                 throw new Error(`Solution 缺少方法 ${method}`);
             }
-            return fn(...Object.values(args));
+            return fn.call(instance, ...Object.values(args));
         };
     }
     const exported = mod[expr];
@@ -91,13 +123,7 @@ export async function runTsSolverOnce(problemRoot: string, problemId: string): P
     const candidate = makeTsCandidate(invoke.typescript, mod);
 
     for (const [index, case_] of tests.entries()) {
-        const actual = normalizeTsTestResult(candidate(case_.args));
-        const expected = normalizeTsTestResult(case_.expected);
-        if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-            throw new Error(
-                `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
-            );
-        }
+        assertTestCase(index, case_.expected, () => candidate(case_.args));
     }
 }
 

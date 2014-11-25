@@ -205,6 +205,7 @@ slug 写进 `legions.von`。
 - `expected: null` 表示 **无返回值断言**（原地修改、无解等）。TS `void` 解得到 `undefined`，harness 在 `ts-ref.ts` 中归一为
   `null` 再比较。
 - 无解数组题（如 `two-sum`）实现应返回 `null`，勿返回 `[]`，与 metadata 一致。
+- `expected: "Error: …"` 表示 **应抛出异常**（如 `merge-sorted-array` 缓冲区不足）。Python harness 将 `Error: {message}` 与异常消息比对；TS 用 `ts-ref.assertTestCase` 同理。实现应在越界写入时抛错，勿在入口仅比较 `len(nums1) === m+n`（metadata 中常有 `len > m+n` 的有效用例）。
 
 ## Agent Skills（`.agents/skills/`）
 

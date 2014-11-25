@@ -50,6 +50,7 @@ projects/problems/<slug>/solvers/
 
 - 单文件 `solution.ts`：`export class Solution { ... }`
 - 方法名与 `invoke.typescript` 一致；参数顺序与 `metadata.tests[].args` 键序一致（`Object.values(args)`）。
+- harness 经 `fn.call(instance, …)` 调用，`this` 指向 `Solution` 实例；可用 `private` 辅助方法。
 - 不写测试 harness、不引 conformance 包。
 
 ## Valkyrie
