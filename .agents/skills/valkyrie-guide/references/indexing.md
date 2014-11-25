@@ -33,3 +33,9 @@ let x = nums⁅i⁆.unwrap()
 ## 与题解 readme 的关系
 
 `readme.md`（coach）里的下标叙述遵循 **LeetCode 题面（0-based）**。仅 `solution.v` 实现需注意 V 的双轨下标。
+
+## 双指针与 `usize` 右端
+
+右端指针 `j: usize` 从 `length - 1` 向 $0$ 移动时，**勿在 `j == 0` 时无条件 `j = j - 1`**（无符号下溢）。合并/平方类题在取右端元素后，若 `i == j` 则令 `i = i + 1` 结束循环，否则再 `j = j - 1`（见 `squares-of-a-sorted-array`）。
+
+自后向前写指针（如 `merge-sorted-array`）建议 **`k, i, j` 用 `i64`**，避免 `usize` 在 $0$ 处 `k - 1` 下溢；仅在下标访问时 `as usize` 转 cardinal。
