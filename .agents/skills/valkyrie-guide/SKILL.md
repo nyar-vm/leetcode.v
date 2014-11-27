@@ -73,6 +73,7 @@ imply Solution {
 - **勿混淆**：named **`union Foo { ... }`**（untagged，大整数等）与类型表达式 **`A | B`**（匿名 untagged）— 二者均 **不是** `unite`。
 - 循环：`while cond { ... }`、`loop item in collection { ... }`。
 - 整数异或：`i64` 上可用 `^`（见 `core` `i64`）。
+- **`char` 码位**：使用 **`ch as u32`**（原始 `as`；`to_u32()` 已移除，见 backlog **V-015**）。
 - 注释： **`#` 行注释**、 **`<#` … `#>` 块注释**（可嵌套）。 **不支持** `//` 或 `/* */`。std 里偶见的 `⍝` 为遗留，新代码勿用。
 
 ## legion 工程（leetcode 单题）

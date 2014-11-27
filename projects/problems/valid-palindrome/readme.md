@@ -1,35 +1,61 @@
-# Valid Palindrome
+# [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 
-- **LeetCode**：[#125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
-- **难度**：Easy
-- **标签**：Two Pointers · String
+## 问题
 
-## 题目
+若一个短语在**将所有大写字母转为小写，并移除所有非字母数字字符**之后，正读与反读相同，则称其为回文串。字母数字字符包括字母与数字。
 
-A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
-Given a string s, return true if it is a palindrome, or false otherwise.
+给定字符串 `s`，判断它是否为回文串。
 
-**Example 1**：
+**示例 1**
 
-**Input**：s = "A man, a plan, a canal: Panama"
-**Output**：true
-**Explanation**："amanaplanacanalpanama" is a palindrome.
+- **输入**：`s = "A man, a plan, a canal: Panama"`
+- **输出**：`true`
+- **解释**：规范化后为 `amanaplanacanalpanama`。
 
-**Example 2**：
+**示例 2**
 
-**Input**：s = "race a car"
-**Output**：false
-**Explanation**："raceacar" is not a palindrome.
+- **输入**：`s = "race a car"`
+- **输出**：`false`
 
-**Example 3**：
+**示例 3**
 
-**Input**：s = " "
-**Output**：true
-**Explanation**：s is an empty string "" after removing non-alphanumeric characters.
-Since an empty string reads the same forward and backward, it is a palindrome.
+- **输入**：`s = " "`
+- **输出**：`true`
+- **解释**：移除非字母数字后为空串，视为回文。
 
+**约束**
 
-**Constraints**：
+- $1 \le \mathrm{len}(s) \le 2 \times 10^5$
+- `s` 仅由可打印 ASCII 字符组成
 
-1 $\le \mathrm{len}(s)$ $\le 2$ * 105
-s consists only of printable ASCII characters.
+## 解答
+
+### 朴素想法
+
+先过滤出字母数字并转小写得到新串，再判断是否回文。需 $O(n)$ 额外空间存规范化结果。
+
+### 规范化复制瓶颈
+
+两遍扫描（过滤 + 比较）且分配辅助串，在长度上界较大时浪费内存。
+
+### 双指针跳过非字母数字优化
+
+在原串上设左右指针 $i,j$。同步向中间移动：若当前字符非字母数字则跳过；若两侧均为字母数字且小写后不等则返回 false；否则双指针内收。仅比较必要字符，无需辅助串。
+
+### 最终算法
+
+初始化 $i=0$，$j=\mathrm{len}(s)-1$。当 $i<j$：左/右非字母数字则 $i++$ 或 $j--$；否则比较小写（或等价键）后不等则 false，相等则 $i++, j--$。循环结束返回 true（含空规范化串）。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个下标至多被左右指针各访问一次，$n = \mathrm{len}(s)$。
+
+### 空间复杂度
+
+$O(1)$
+
+仅使用常数个指针与临时字符比较。
