@@ -1,36 +1,55 @@
-# Assign Cookies
+# [Assign Cookies](https://leetcode.com/problems/assign-cookies/)
 
-- **LeetCode**：[#455 Assign Cookies](https://leetcode.com/problems/assign-cookies/)
-- **难度**：Easy
-- **标签**：Greedy · Array · Two Pointers · Sorting
+## 问题
 
-## 题目
+有 $m$ 个孩子与 $n$ 块饼干。孩子 $i$ 的「贪心因子」为 `g[i]`，表示能令其满足的最小饼干尺寸；饼干 $j$ 的尺寸为 `s[j]`。若 `s[j] >= g[i]`，可将饼干 $j$ 分给孩子 $i$ 并使其满足。每个孩子最多一块饼干。
 
-Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
-Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.
+求最多能让多少孩子满足，返回该人数。
 
-**Example 1**：
+**示例 1**
 
-**Input**：g = [1,2,3], s = [1,1]
-**Output**：1
-**Explanation**：You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.
-And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.
-You need to output 1.
+- **输入**：`g = [1, 2, 3]`，`s = [1, 1]`
+- **输出**：`1`
 
-**Example 2**：
+**示例 2**
 
-**Input**：g = [1,2], s = [1,2,3]
-**Output**：2
-**Explanation**：You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2.
-You have 3 cookies and their sizes are big enough to gratify all of the children,
-You need to output 2.
+- **输入**：`g = [1, 2]`，`s = [1, 2, 3]`
+- **输出**：`2`
 
+**约束**
 
-**Constraints**：
+- $1 \le \mathrm{len}(g) \le 3 \times 10^4$
+- $0 \le \mathrm{len}(s) \le 3 \times 10^4$
+- $1 \le g[i], s[j] \le 2^{31} - 1$
 
-1 $\le \mathrm{len}(g)$ $\le 3$ * 104
-0 $\le \mathrm{len}(s)$ $\le 3$ * 104
-1 <= g[i], s[j] $\le 231$ - 1
+## 解答
 
+### 朴素想法
 
-Note: This question is the same as  2410: Maximum Matching of Players With Trainers.
+枚举饼干子集或孩子匹配方案，检验是否满足。指数级，不可行。
+
+### 无序贪心瓶颈
+
+对每个孩子随意挑一块够大的饼干，可能用大饼干满足小需求，导致后续大需求无法满足。
+
+### 排序 + 双指针优化
+
+将孩子需求 `g` 与饼干 `s` **升序排序**。用指针 $j$ 扫描饼干：对当前最小未满足孩子 `g[i]`，跳过所有 `s[j] < g[i]` 的饼干；若还有饼干则分配并 $j++$，满足数加一。小饼干优先满足小需求，最大化人数。
+
+### 最终算法
+
+排序 `g`、`s`。初始化 $j=0$，计数 $ans=0$。对每个 `g[i]`：while $j < \mathrm{len}(s)$ 且 `s[j] < g[i]`，$j++$；若 $j \ge \mathrm{len}(s)$ 结束；否则 $j++$，$ans++$。返回 $ans$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(m \log m + n \log n)$
+
+排序主导；双指针扫描线性。
+
+### 空间复杂度
+
+$O(\log m + \log n)$ 或 $O(1)$
+
+取决于排序实现是否原地；双指针仅常数额外空间。
