@@ -38,7 +38,7 @@
 | `projects/problems/<slug>/solvers/valkyrie/`   | 手写 V 解：`solution.v` + `legion.von`（`entry: "solution.v"`）             |
 | `projects/conformance/`                        | 完备性矩阵、TS/Python/V 跑测、**外部产物基准**                              |
 | `projects/dashboard/`                          | Vue 看板（缓存 `benchmark-results.json`，Vega-Lite 可视化）                 |
-| `scripts/`                                     | `format.mjs`、`batch-limit.mjs`、`link-valkyrie.mjs`、`valkyrie-v-deps.mjs` |
+| `scripts/`                                     | `format.mjs`、`reword.mjs`、`batch-limit.mjs`、`link-valkyrie.mjs`、`valkyrie-v-deps.mjs` |
 | `legions.von`                                  | workspace 成员：`core`、`std`、`std.adaptors._`（见下文「维护者陷阱」）     |
 
 **禁止**：程序化批量生成 V 解、在 `.v` 里嵌 `# ```legion` cargo-script、把 solver 再套一层 `source/` 目录（除非 `legion`
@@ -101,7 +101,52 @@ pnpm dashboard        # 看板 dev
 
 - Biome 扫描：`scripts/`、`conformance/`、`dashboard/`、根 manifest、 **仅** `projects/problems/**/metadata.json`（不扫海量
   solver `package.json`）。
-- **中文**写注释与 `readme.md`； **commit message** 用 gitmoji + 英文 subject/body（与花火引擎工作区一致）。
+- **中文**写注释与 `readme.md`（commit message 例外，见下节）。
+
+## Git 提交（gitmoji）
+
+本仓所有 commit **强制** 遵守下列约定。
+
+### 格式
+
+- subject **必须以一个真实 gitmoji 字符开头**（如 ✨ 🐛 📝 ♻️ ⬆️ 🔧 🧪）。禁止 `?` / Conventional Commit 前缀 / 描述词冒充 emoji / 多个 emoji。
+- **subject 与 body 用英文**。注释、readme、skill 正文仍用中文。
+- **subject 末尾禁止句号 `.`**。body 句子正常用句号。
+- **全文禁止 `;` 与 `；`**（subject 与 body，改用句号或分行）。
+- **禁止内部计划/里程碑代号**：`Phase 1`、`phase-1`、`M0`/`Gate-N`、roadmap 切片名等 **一律不进** commit message。
+- **标识符必须反引号**：slug / 类型 / 函数 / 字段 / 路径 / 模块名，如 `` `two-sum` ``、`` `solution.v` ``、`` `legions.von` ``、`` `assertTestCase` ``、`` `metadata.tests` ``。
+- **禁止含糊缩写**：写全称（约定俗成的 `BFS`/`DFS` 可保留；指 TypeScript 时写 `TypeScript`，勿写 bare `TS`）。
+- **版本号不进 commit message**（如 `4.1.11`），改用「patched releases」等表述。
+
+### UTF-8 落盘（Windows）
+
+- **禁止**用 PowerShell here-string / 控制台默认编码写带 emoji 的 `git commit -m`（易变成 `?`）。
+- **推荐**：`node scripts/reword.mjs`、Node/Python 写 UTF-8 临时文件 + `git commit -F`，或 `git commit -F` 指向 UTF-8 消息文件。
+- PowerShell 会把 `` ` `` 当转义；在脚本里写 commit message 的反引号时用 `chr(96)` 拼接，勿手写 `` ` ``。
+
+### 批量 reword（`scripts/reword.mjs`）
+
+修正已提交但 message 不合规的 commit（如缺反引号、subject 带句号、误用 `TS`）：
+
+```text
+# 1. 查看待改范围
+git log --oneline origin/dev..HEAD
+
+# 2. 按从旧到新顺序写消息块（块间单独一行 ---），保存为 reword.pending.txt（勿提交，已 gitignore）
+#    格式见 scripts/reword.example.txt
+
+# 3. 校验
+node scripts/reword.mjs --lint --file reword.pending.txt
+node scripts/reword.mjs --lint-log --base origin/dev
+
+# 4. 预览
+node scripts/reword.mjs --dry-run --file reword.pending.txt --base origin/dev
+
+# 5. 执行（工作区须干净）
+node scripts/reword.mjs --file reword.pending.txt --base origin/dev
+```
+
+`--base` 默认为 `origin/dev`。reword 会改写历史，仅对 **未推送** 或已协商的 `dev` 分支使用，禁止对 `master` force-push。
 
 ## 代理检索纪律
 
