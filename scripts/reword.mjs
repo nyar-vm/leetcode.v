@@ -225,12 +225,15 @@ function runReword(base, messages) {
 
     writeFileSync(statePath, JSON.stringify({ index: 0, messages }, null, 2), "utf8");
 
+    // Copy editor into .git so rebase steps before this script exists can still invoke it.
+    const editorCopy = join(root, ".git", "reword-editor.mjs");
+    writeFileSync(editorCopy, readFileSync(join(root, "scripts", "reword.mjs"), "utf8"), "utf8");
+
     const node = process.execPath;
-    const script = join(root, "scripts", "reword.mjs");
     const env = {
         ...process.env,
-        GIT_SEQUENCE_EDITOR: `"${node}" "${script}" --sequence-editor`,
-        GIT_EDITOR: `"${node}" "${script}" --commit-editor`,
+        GIT_SEQUENCE_EDITOR: `"${node}" "${editorCopy}" --sequence-editor`,
+        GIT_EDITOR: `"${node}" "${editorCopy}" --commit-editor`,
     };
 
     const result = spawnSync("git", ["rebase", "-i", base], {
@@ -242,6 +245,9 @@ function runReword(base, messages) {
 
     if (existsSync(statePath)) {
         unlinkSync(statePath);
+    }
+    if (existsSync(editorCopy)) {
+        unlinkSync(editorCopy);
     }
 
     if (result.status !== 0) {
