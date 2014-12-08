@@ -1,0 +1,91 @@
+<script setup lang="ts">
+import DifficultyBadge from "./DifficultyBadge.vue";
+import type { EnrichedBenchRow, SortKey } from "../types/bench";
+import { formatMs, ratioLabel, runtimeRatio } from "../utils/format";
+
+const props = defineProps<{
+    rows: EnrichedBenchRow[];
+    sort: SortKey;
+    sortDesc: boolean;
+}>();
+
+const emit = defineEmits<{
+    sort: [key: SortKey];
+}>();
+
+const columns: { key: SortKey; label: string; align?: "right" }[] = [
+    { key: "title", label: "题目" },
+    { key: "difficulty", label: "难度" },
+    { key: "tsRuntimeMs", label: "TS (ms)", align: "right" },
+    { key: "vRuntimeMs", label: "V Wasm (ms)", align: "right" },
+    { key: "ratio", label: "TS / V", align: "right" },
+];
+
+function sortIcon(key: SortKey): string {
+    if (props.sort !== key) {
+        return "↕";
+    }
+    return props.sortDesc ? "↓" : "↑";
+}
+
+function ratioClass(row: EnrichedBenchRow): string {
+    const ratio = runtimeRatio(row);
+    if (ratio === null) return "";
+    if (ratio < 1) return "v-win";
+    if (ratio > 1) return "ts-win";
+    return "";
+}
+</script>
+
+<template>
+    <div class="table-shell">
+        <table>
+            <thead>
+                <tr>
+                    <th
+                        v-for="column in columns"
+                        :key="column.key"
+                        :class="{ num: column.align === 'right', sortable: true, active: sort === column.key }"
+                        @click="emit('sort', column.key)"
+                    >
+                        {{ column.label }}
+                        <span class="sort-icon">{{ sortIcon(column.key) }}</span>
+                    </th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-if="rows.length === 0">
+                    <td colspan="6" class="empty-cell">没有匹配的题目，试试放宽筛选条件。</td>
+                </tr>
+                <tr v-for="row in rows" :key="row.id">
+                    <td>
+                        <RouterLink class="row-link" :to="`/problems/${row.id}`">
+                            <strong>{{ row.title }}</strong>
+                        </RouterLink>
+                        <div class="row-meta">
+                            <span>#{{ row.questionId || "—" }}</span>
+                            <span>{{ row.id }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <DifficultyBadge :difficulty="row.difficulty" />
+                    </td>
+                    <td class="num">{{ formatMs(row.tsRuntimeMs) }}</td>
+                    <td class="num">
+                        <div>{{ formatMs(row.vRuntimeMs) }}</div>
+                        <div class="row-meta">编译 {{ formatMs(row.vCompileMs) }}</div>
+                    </td>
+                    <td class="num ratio" :class="ratioClass(row)">{{ ratioLabel(row) }}</td>
+                    <td>
+                        <div v-if="row.legionRoute || row.benchTarget" class="row-meta">
+                            <span v-if="row.legionRoute">route {{ row.legionRoute }}</span>
+                            <span v-if="row.benchTarget">target {{ row.benchTarget }}</span>
+                        </div>
+                        <div v-if="row.error" class="error">{{ row.error }}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
