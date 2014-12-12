@@ -1,39 +1,58 @@
-# Find The Duplicate Number
+# [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
 
-- **LeetCode**：[#287 Find The Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
-- **难度**：Medium
-- **标签**：Bit Manipulation · Array · Two Pointers · Binary Search
+## 问题
 
-## 题目
+给定长度为 $n+1$ 的整数数组 `nums`，元素均在 $[1, n]$ 内，且**恰有一个**整数重复出现（可出现两次以上）。在不修改数组、仅 $O(1)$ 额外空间的前提下，找出该重复数。
 
-Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
-There is only one repeated number in nums, return this repeated number.
-You must solve the problem without modifying the array nums and using only constant extra space.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [1, 3, 4, 2, 2]`
+- **输出**：`2`
 
-**Input**：nums = [1,3,4,2,2]
-**Output**：2
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [3, 1, 3, 4, 2]`
+- **输出**：`3`
 
-**Input**：nums = [3,1,3,4,2]
-**Output**：3
+**约束**
 
-**Example 3**：
+- $1 \le n \le 10^5$
+- $\mathrm{len}(\texttt{nums}) = n + 1$
+- $1 \le \texttt{nums}[i] \le n$
+- 除一个重复值外，其余值各出现一次（重复值至少两次）
 
-**Input**：nums = [3,3,3,3,3]
-**Output**：3
+## 解答
 
-**Constraints**：
+### 朴素想法
 
-1 <= n $\le 105$
-nums.length == n + 1
-1 <= nums[i] <= n
-All the integers in nums appear only once except for precisely one integer which appears two or more times.
+排序或哈希集合找重复。违反「不修改数组 / $O(1)$ 空间」约束。
 
+### 排序 / 集合瓶颈
 
-Follow up:
+需要 $O(n \log n)$ 或 $O(n)$ 额外空间，不符合 follow-up。
 
-How can we prove that at least one duplicate number must exist in nums?
-Can you solve the problem in linear runtime complexity?
+### 抽屉原理与值域二分
+
+因 $n+1$ 个数落在 $[1,n]$，必存在重复。对值 $mid$ 统计 `nums` 中 $\le mid$ 的个数；若大于 $mid$，则重复数在 $[1,mid]$。二分 $O(n \log n)$，不改数组。
+
+### 快慢指针（Floyd）优化
+
+将下标 $i$ 视为指向 `nums[i]` 的链表节点（值域在 $[1,n]$ 且可作下标）。重复导致入环点即为重复值。第一阶段快慢指针相遇；第二阶段从 `nums[0]` 与相遇点同步走，相遇处为答案。$O(n)$ 时间、$O(1)$ 空间、不修改数组。
+
+### 最终算法
+
+采用 Floyd：初始化 `slow = fast = nums[0]`，循环 `slow = nums[slow]`、`fast = nums[nums[fast]]` 至相等；再令 `slow = nums[0]`，同步前进至再次相遇，返回该值。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+Floyd 线性；值域二分为 $O(n \log n)$ 亦可。
+
+### 空间复杂度
+
+$O(1)$
+
+仅常数指针，不修改 `nums`。

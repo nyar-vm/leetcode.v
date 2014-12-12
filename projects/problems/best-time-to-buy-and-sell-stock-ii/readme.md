@@ -1,38 +1,60 @@
-# Best Time To Buy And Sell Stock Ii
+# [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
-- **LeetCode**：[#122 Best Time To Buy And Sell Stock Ii](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
-- **难度**：Medium
-- **标签**：Greedy · Array · Dynamic Programming
+## 问题
 
-## 题目
+给定整数数组 `prices`，`prices[i]` 为第 $i$ 天股价。每天可买卖股票，但任意时刻最多持有 **一股**；可在同一天先买后卖。
 
-You are given an integer array prices where prices[i] is the price of a given stock on the ith day.
-On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. However, you can buy it then immediately sell it on the same day.
-Find and return the maximum profit you can achieve.
+求可获得的最大总利润。
 
-**Example 1**：
+**示例 1**
 
-**Input**：prices = [7,1,5,3,6,4]
-**Output**：7
-**Explanation**：Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
-Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
-Total profit is 4 + 3 = 7.
+- **输入**：`prices = [7, 1, 5, 3, 6, 4]`
+- **输出**：`7`
+- **解释**：例如第 2 天买、第 3 天卖得 $4$，第 4 天买、第 5 天卖得 $3$，合计 $7$。
 
-**Example 2**：
+**示例 2**
 
-**Input**：prices = [1,2,3,4,5]
-**Output**：4
-**Explanation**：Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
-Total profit is 4.
+- **输入**：`prices = [1, 2, 3, 4, 5]`
+- **输出**：`4`
 
-**Example 3**：
+**示例 3**
 
-**Input**：prices = [7,6,4,3,1]
-**Output**：0
-**Explanation**：There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.
+- **输入**：`prices = [7, 6, 4, 3, 1]`
+- **输出**：`0`
 
+**约束**
 
-**Constraints**：
+- $1 \le \mathrm{len}(\texttt{prices}) \le 3 \times 10^4$
+- $0 \le \texttt{prices}[i] \le 10^4$
 
-1 $\le \mathrm{len}(prices)$ $\le 3$ * 104
-0 <= prices[i] $\le 104$
+## 解答
+
+### 朴素想法
+
+枚举所有买卖日组合或状态机 DP（持有/不持有）。可行但 $O(n)$ 贪心更直接。
+
+### 全局最优交易瓶颈
+
+试图一次找最低买、最高卖，无法覆盖「多段上涨」：中间回落后再次上涨应分开吃尽。
+
+### 上涨段累加优化
+
+若 $\texttt{prices}[i] > \texttt{prices}[i-1]$，则可在 $i-1$ 买、$i$ 卖，贡献 $\texttt{prices}[i] - \texttt{prices}[i-1]$。任意完整交易可拆成若干相邻日正差价之和；只累加正差价即最大利润。
+
+### 最终算法
+
+`ans = 0`。对 $i = 1 \ldots n-1$：若 `prices[i] > prices[i-1]`，则 `ans += prices[i] - prices[i-1]`。返回 `ans`。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+单遍扫描，$n = \mathrm{len}(\texttt{prices})$。
+
+### 空间复杂度
+
+$O(1)$
+
+仅常数累加变量。

@@ -1,43 +1,58 @@
-# Summary Ranges
+# [Summary Ranges](https://leetcode.com/problems/summary-ranges/)
 
-- **LeetCode**：[#228 Summary Ranges](https://leetcode.com/problems/summary-ranges/)
-- **难度**：Easy
-- **标签**：Array
+## 问题
 
-## 题目
+给定一个按升序排列、元素互异的整数数组 `nums`，请返回能**恰好覆盖**数组中每个数的最小有序区间列表。
 
-You are given a sorted unique integer array nums.
-A range [a,b] is the set of all integers from a to b (inclusive).
-Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.
-Each range [a,b] in the list should be output as:
+区间 $[a,b]$ 表示从 $a$ 到 $b$（含端点）的所有整数。输出时：
 
-"a->b" if a != b
-"a" if a == b
+- 若 $a = b$，输出 `"a"`；
+- 若 $a \ne b$，输出 `"a->b"`。
 
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [0, 1, 2, 4, 5, 7]`
+- **输出**：`["0->2", "4->5", "7"]`
 
-**Input**：nums = [0,1,2,4,5,7]
-**Output**：["0->2","4->5","7"]
-**Explanation**：The ranges are:
-[0,2] --> "0->2"
-[4,5] --> "4->5"
-[7,7] --> "7"
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [0, 2, 3, 4, 6, 8, 9]`
+- **输出**：`["0", "2->4", "6", "8->9"]`
 
-**Input**：nums = [0,2,3,4,6,8,9]
-**Output**：["0","2->4","6","8->9"]
-**Explanation**：The ranges are:
-[0,0] --> "0"
-[2,4] --> "2->4"
-[6,6] --> "6"
-[8,9] --> "8->9"
+**约束**
 
+- $0 \le \mathrm{len}(\texttt{nums}) \le 20$
+- $-2^{31} \le \texttt{nums}[i] \le 2^{31} - 1$
+- `nums` 升序且互异
 
-**Constraints**：
+## 解答
 
-0 $\le \mathrm{len}(nums)$ $\le 20$
--231 <= nums[i] $\le 231$ - 1
-All the values of nums are unique.
-nums is sorted in ascending order.
+### 朴素想法
+
+对每个元素单独输出 `"x"`，共 $\mathrm{len}(\texttt{nums})$ 段。正确但冗余，未利用排序与连续性的信息。
+
+### 逐元素格式化瓶颈
+
+若仍按元素逐个拼接字符串，区间边界要靠事后合并相邻段，逻辑分散且多扫一遍。
+
+### 双指针一次扫描优化
+
+利用数组已排序且互异：用左指针 $i$ 标记区间起点，右指针 $j$ 向右延伸，只要 $\texttt{nums}[j+1] = \texttt{nums}[j] + 1$ 就仍属同一段；否则在 $[i,j]$ 上格式化一条输出，令 $i \leftarrow j+1$。每元素至多被 $j$ 访问一次。
+
+### 最终算法
+
+若 `nums` 为空，返回空列表。否则初始化 $i=0$；当 $i < \mathrm{len}$ 时，令 $j=i$，内层 while 扩展连续段，再按 $i=j$ 与否输出单点或 `"a->b"`，最后 $i \leftarrow j+1$。空数组、单元素、全连续与含大整数边界均按同一规则处理。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个下标最多被右指针经过一次，格式化单段为区间长度无关的常数工作。
+
+### 空间复杂度
+
+$O(1)$
+
+除输出列表外仅使用若干下标变量；输出本身不计入额外空间。

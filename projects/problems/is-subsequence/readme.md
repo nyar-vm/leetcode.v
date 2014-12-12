@@ -1,27 +1,55 @@
-# Is Subsequence
+# [Is Subsequence](https://leetcode.com/problems/is-subsequence/)
 
-- **LeetCode**：[#392 Is Subsequence](https://leetcode.com/problems/is-subsequence/)
-- **难度**：Easy
-- **标签**：Two Pointers · String · Dynamic Programming
+## 问题
 
-## 题目
+给定字符串 `s` 和 `t`，判断 `s` 是否为 `t` 的子序列。
 
-Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
-A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+子序列指从原串中删除任意个字符（可不删）后，剩余字符保持相对顺序得到的新串。例如 `"ace"` 是 `"abcde"` 的子序列，而 `"aec"` 不是。
 
-**Example 1**：
-**Input**：s = "abc", t = "ahbgdc"
-**Output**：true
-**Example 2**：
-**Input**：s = "axc", t = "ahbgdc"
-**Output**：false
+**示例 1**
 
+- **输入**：`s = "abc"`，`t = "ahbgdc"`
+- **输出**：`true`
 
-**Constraints**：
+**示例 2**
 
-0 $\le \mathrm{len}(s)$ $\le 100$
-0 $\le \mathrm{len}(t)$ $\le 104$
-s and t consist only of lowercase English letters.
+- **输入**：`s = "axc"`，`t = "ahbgdc"`
+- **输出**：`false`
 
+**约束**
 
-Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k $\ge 109$, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?
+- $0 \le \mathrm{len}(s) \le 100$
+- $0 \le \mathrm{len}(t) \le 10^4$
+- `s` 与 `t` 仅由小写英文字母组成
+
+## 解答
+
+### 朴素想法
+
+枚举 `t` 中所有子序列并与 `s` 比较，规模指数级，不可行。
+
+### 动态规划表冗余瓶颈
+
+经典 $O(mn)$ DP 能判定，但本题只需知道 `s` 能否按序嵌入 `t`，全表状态多数用不到。
+
+### 双指针贪心优化
+
+用指针 $i$ 跟踪 `s` 已匹配前缀，指针 $j$ 扫描 `t`。若 $\texttt{s}[i]=\texttt{t}[j]$ 则 $i$ 前进；无论是否匹配 $j$ 都前进。扫描结束当且仅当 $i=\mathrm{len}(s)$ 时成功。空 `s` 恒为真。
+
+### 最终算法
+
+初始化 $i=j=0$。当 $i<\mathrm{len}(s)$ 且 $j<\mathrm{len}(t)$ 时，字符相等则 $i++$，然后 $j++$。返回 $i==\mathrm{len}(s)$。$O(m+n)$ 时间、$O(1)$ 额外空间。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(m + n)$
+
+其中 $m=\mathrm{len}(s)$、$n=\mathrm{len}(t)$；每个指针至多走完各自字符串一次。
+
+### 空间复杂度
+
+$O(1)$
+
+仅使用常数个指针与临时字符，不依赖额外结构。

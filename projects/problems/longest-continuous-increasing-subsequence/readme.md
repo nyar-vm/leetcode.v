@@ -1,31 +1,55 @@
-# Longest Continuous Increasing Subsequence
+# [Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/)
 
-- **LeetCode**：[#674 Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/)
-- **难度**：Easy
-- **标签**：Array
+## 问题
 
-## 题目
+给定整数数组 `nums`，求**最长连续严格递增子数组**的长度。
 
-Given an unsorted array of integers nums, return the length of the longest continuous increasing subsequence (i.e. subarray). The subsequence must be strictly increasing.
-A continuous increasing subsequence is defined by two indices l and r (l < r) such that it is [nums[l], nums[l + 1], ..., nums[r - 1], nums[r]] and for each l <= i < r, nums[i] < nums[i + 1].
+连续递增子数组指下标 $l \le r$，且对每个 $l \le i < r$ 都有 $\texttt{nums}[i] < \texttt{nums}[i+1]$ 的片段 $\texttt{nums}[l..r]$。注意必须是**连续**下标，且递增**严格**（相等会打断）。
 
-**Example 1**：
+**示例 1**
 
-**Input**：nums = [1,3,5,4,7]
-**Output**：3
-**Explanation**：The longest continuous increasing subsequence is [1,3,5] with length 3.
-Even though [1,3,5,7] is an increasing subsequence, it is not continuous as elements 5 and 7 are separated by element
-4.
+- **输入**：`nums = [1, 3, 5, 4, 7]`
+- **输出**：`3`
+- **解释**：最长连续严格递增子数组为 `[1, 3, 5]`。虽存在子序列 `[1, 3, 5, 7]`，但中间被 `4` 隔开，不算连续子数组。
 
-**Example 2**：
+**示例 2**
 
-**Input**：nums = [2,2,2,2,2]
-**Output**：1
-**Explanation**：The longest continuous increasing subsequence is [2] with length 1. Note that it must be strictly
-increasing.
+- **输入**：`nums = [2, 2, 2, 2, 2]`
+- **输出**：`1`
 
+**约束**
 
-**Constraints**：
+- $1 \le \mathrm{len}(\texttt{nums}) \le 10^4$
+- $-10^9 \le \texttt{nums}[i] \le 10^9$
 
-1 $\le \mathrm{len}(nums)$ $\le 104$
--109 <= nums[i] $\le 109$
+## 解答
+
+### 朴素想法
+
+枚举所有子数组 $[l,r]$，检查是否严格递增并取最大长度。正确但需 $O(n^2)$ 次检查。
+
+### 全局 LIS 混淆瓶颈
+
+最长递增**子序列**（允许跳元素）是另一道题；本题要求**连续**下标，DP 或 patience sorting 会把 `[1,3,5,4,7]` 误算成 4。
+
+### 单趟滚动计数优化
+
+从左到右扫描，维护当前连续段长度 `cnt`：若 $\texttt{nums}[i] < \texttt{nums}[i+1]$ 则 `cnt++`，否则 `cnt=1`（新段从当前元素重新开始）。用 `ans` 记录历史最大 `cnt`。每个位置 $O(1)$ 更新。
+
+### 最终算法
+
+若 `nums` 非空，初始化 `ans=cnt=1`。对 $i=1..n-1$，比较相邻元素决定扩展或重置 `cnt`，同步更新 `ans`。单元素数组答案为 1；全相等数组答案亦为 1。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+数组只扫描一次，每次仅常数比较与赋值。
+
+### 空间复杂度
+
+$O(1)$
+
+除输入外仅保留 `ans`、`cnt` 与循环下标。

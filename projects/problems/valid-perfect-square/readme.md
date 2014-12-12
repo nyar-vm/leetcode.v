@@ -1,28 +1,53 @@
-# Valid Perfect Square
+# [Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)
 
-- **LeetCode**：[#367 Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)
-- **难度**：Easy
-- **标签**：Math · Binary Search
+## 问题
 
-## 题目
+给定正整数 `num`，判断它是否为完全平方数（即存在整数 $k$ 使 $k^2 = \texttt{num}$）。
 
-Given a positive integer num, return true if num is a perfect square or false otherwise.
-A perfect square is an integer that is the square of an integer. In other words, it is the product of some integer with itself.
-You must not use any built-in library function, such as sqrt.
+不得使用内置开方函数（如 `sqrt`）。
 
-**Example 1**：
+**示例 1**
 
-**Input**：num = 16
-**Output**：true
-**Explanation**：We return true because 4 * 4 = 16 and 4 is an integer.
+- **输入**：`num = 16`
+- **输出**：`true`
 
-**Example 2**：
+**示例 2**
 
-**Input**：num = 14
-**Output**：false
-**Explanation**：We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.
+- **输入**：`num = 14`
+- **输出**：`false`
 
+**约束**
 
-**Constraints**：
+- $1 \le \texttt{num} \le 2^{31} - 1$
 
-1 <= num $\le 231$ - 1
+## 解答
+
+### 朴素想法
+
+从 $k=1$ 起逐个尝试 $k^2$ 直至超过 `num`，最坏 $O(\sqrt n)$ 次乘法，上界约 $10^5$ 步，可接受但仍有更稳的对数做法。
+
+### 线性试除瓶颈
+
+逐一递增 $k$ 在 `num` 很大时步数随 $\sqrt{\texttt{num}}$ 增长；若多次查询同一量级，重复劳动明显。
+
+### 二分搜索平方根优化
+
+在 $[1, \texttt{num}]$ 上二分整数 $k$，比较 $k^2$ 与 `num`：相等则成功；偏小则抬高左界；偏大则压低右界。每步 $O(1)$ 乘法，共 $O(\log n)$ 轮。`num=1` 直接为真。
+
+### 最终算法
+
+若 `num < 2` 返回真。否则维护 `lo=2`、`hi=num`，标准二分求是否有 $k$ 使 $k^2=\texttt{num}$；循环结束返回假。乘法用 64 位整数避免中间积溢出 32 位。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(\log n)$
+
+搜索空间每次减半，$n=\texttt{num}$。
+
+### 空间复杂度
+
+$O(1)$
+
+仅若干整型边界与中间值。

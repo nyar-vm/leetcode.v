@@ -1,45 +1,57 @@
-# Third Maximum Number
+# [Third Maximum Number](https://leetcode.com/problems/third-maximum-number/)
 
-- **LeetCode**：[#414 Third Maximum Number](https://leetcode.com/problems/third-maximum-number/)
-- **难度**：Easy
-- **标签**：Array · Sorting
+## 问题
 
-## 题目
+给定整数数组 `nums`，返回其中**第三大的不同元素**；若不存在第三大，则返回**最大值**。
 
-Given an integer array nums, return the third distinct maximum number in this array. If the third maximum does not exist, return the maximum number.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [3, 2, 1]`
+- **输出**：`1`
 
-**Input**：nums = [3,2,1]
-**Output**：1
-**Explanation**：
-The first distinct maximum is 3.
-The second distinct maximum is 2.
-The third distinct maximum is 1.
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [1, 2]`
+- **输出**：`2`（仅两个不同数，无第三大，返回最大）
 
-**Input**：nums = [1,2]
-**Output**：2
-**Explanation**：
-The first distinct maximum is 2.
-The second distinct maximum is 1.
-The third distinct maximum does not exist, so the maximum (2) is returned instead.
+**示例 3**
 
-**Example 3**：
+- **输入**：`nums = [2, 2, 3, 1]`
+- **输出**：`1`
 
-**Input**：nums = [2,2,3,1]
-**Output**：1
-**Explanation**：
-The first distinct maximum is 3.
-The second distinct maximum is 2 (both 2's are counted together since they have the same value).
-The third distinct maximum is 1.
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{nums}) \le 10^4$
+- $-2^{31} \le \texttt{nums}[i] \le 2^{31} - 1$
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(nums)$ $\le 104$
--231 <= nums[i] $\le 231$ - 1
+### 朴素想法
 
+排序去重后取第三项，或转集合再排序。需 $O(n \log n)$ 或额外结构。
 
-Follow up: Can you find an $O(n)$ solution?
+### 全排序瓶颈
+
+为找三个不同最大值而对整表排序，代价高于必要。
+
+### 三变量滚动优化
+
+维护三个「当前见过的不同最大值」`first`、`second`、`third`（按从大到小）。扫描 $x$：若 $x$ 已等于三者之一则跳过；否则按 $x$ 与 `first`、`second`、`third` 的大小关系级联更新。遍历后若 `third` 仍未被赋值，说明不同数不足三个，返回 `first`；否则返回 `third`。
+
+### 最终算法
+
+初始化 `first`、`second`、`third` 为「未设置」哨兵（实现可用 `Option` 或负无穷，注意 $-2^{31}$ 边界）。对每个 $x$ 更新三元组；结束时无第三大则输出 `first`，否则输出 `third`。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+单遍扫描，$n = \mathrm{len}(\texttt{nums})$。
+
+### 空间复杂度
+
+$O(1)$
+
+仅常数个变量。

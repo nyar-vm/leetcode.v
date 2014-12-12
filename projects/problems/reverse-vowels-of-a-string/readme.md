@@ -1,28 +1,54 @@
-# Reverse Vowels Of A String
+# [Reverse Vowels of a String](https://leetcode.com/problems/reverse-vowels-of-a-string/)
 
-- **LeetCode**：[#345 Reverse Vowels Of A String](https://leetcode.com/problems/reverse-vowels-of-a-string/)
-- **难度**：Easy
-- **标签**：Two Pointers · String
+## 问题
 
-## 题目
+给定字符串 `s`，仅将其中的**元音字母**反序，其余字符位置不变，返回结果串。
 
-Given a string s, reverse only all the vowels in the string and return it.
-The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+元音为 `a`、`e`、`i`、`o`、`u` 及其大写形式，可出现多次。
 
-**Example 1**：
+**示例 1**
 
-**Input**：s = "IceCreAm"
-**Output**："AceCreIm"
-**Explanation**：
-The vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes "AceCreIm".
+- **输入**：`s = "IceCreAm"`
+- **输出**：`"AceCreIm"`
 
-**Example 2**：
+**示例 2**
 
-**Input**：s = "leetcode"
-**Output**："leotcede"
+- **输入**：`s = "leetcode"`
+- **输出**：`"leotcede"`
 
+**约束**
 
-**Constraints**：
+- $1 \le \mathrm{len}(s) \le 3 \times 10^5$
+- `s` 由可打印 ASCII 字符组成
 
-1 $\le \mathrm{len}(s)$ $\le 3$ * 105
-s consist of printable ASCII characters.
+## 解答
+
+### 朴素想法
+
+提取所有元音到新数组，反转后再插回原位置。需 $O(n)$ 额外空间与多遍扫描。
+
+### 全串反转瓶颈
+
+反转整个字符串会破坏非元音字符的相对位置，不符合题意。
+
+### 双指针交换元音优化
+
+在原串（或可变副本）上设左右指针 $i,j$：分别向右/向左跳过非元音；当 $i<j$ 且两侧均为元音时交换，然后内收指针。仅元音参与交换，顺序等价于元音子序列反转。
+
+### 最终算法
+
+复制为可变缓冲（题面 ASCII，逻辑下标与字节一一对应）。`while i < j`：跳过非元音；若 $i<j$ 交换 `s[i]` 与 `s[j]`，$i++, j--$。返回结果串。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个下标至多被访问常数次。
+
+### 空间复杂度
+
+$O(n)$
+
+需可变副本存放结果（或 $O(1)$ 额外若宿主允许原地修改不可变串语义）。
