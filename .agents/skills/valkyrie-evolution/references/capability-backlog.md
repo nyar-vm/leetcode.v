@@ -17,8 +17,9 @@
 | V-011 | `unite` 强制 tagged + 缺省 tag 自动派生 | planned | `Option`/`Result`、全部 ADT | `valkyrie.rs` nyar/HIR/backend；`core::types` | 见 `type-taxonomy.md` §unite |
 | V-012 | named `union Name { ... }`（untagged） | open | 大整数（参考 `athena.rs`）、C 互操作 payload | `valkyrie.rs` + `std`（待定） | parser 有 `SumTypeKind::Union`；语义/布局未完备 |
 | V-013 | 匿名 `A \| B \| C` 类型联合           | open | 泛型约束、测例多形参数 | `valkyrie.rs` typechecker | `TypeExpression::Union` 已解析 |
-| V-014 | `char` ASCII 字母数字判定 / 小写键   | planned | `valid-palindrome` | `core::text::char` | 题解用 `ch as u32` 范围判断；可收敛为 `is_ascii_alphanumeric` |
+| V-014 | `char` ASCII 字母数字 / 元音判定   | done | `valid-palindrome`、`reverse-vowels-of-a-string` | `core::text::char` | `is_ascii_alphanumeric`、`ascii_alnum_key`、`is_ascii_vowel` |
 | V-015 | `char as u32` / `As<u32>` 原语转换   | done | `valid-palindrome`、`lowercase_ascii_index` | `core::text::char` + `core::types::conversion` | `char as u32` 已可用；已移除 `to_u32()` shim |
+| V-016 | `Utf8Builder.append_i64` 十进制格式化 | done | `summary-ranges` 等需输出数字字符串的题 | `std.text.Utf8Builder` + `test_utf8_builder.v` | 含 `0` 与 `-2147483648` 边界 |
 
 ## 和类型 taxonomy
 

@@ -83,8 +83,10 @@
 
 ## 基准测试
 
-- **外部基准**：先 `legion build` 得到产物，再用 harness 对 **metadata.tests** 计时不依赖源码内 `[benchmark]`。
-- TS：经 `run_ts_solver.ts` 对 `solution.ts` 跑全量测试并计时。
+- **外部基准**：先 `legion build` 得到 wasm + js glue，再在 harness 里对 **metadata.tests** 计时；leetcode **不在** `solution.v` 写 `[benchmark]`。
+- **TS 参考**：`run_ts_solver.ts` 对 `solution.ts` 跑全量 `metadata.tests` 并计时 → `tsRuntimeMs`。
+- **V 编译**：`pnpm bench` 对 `legion build --target node` 计时 → `vCompileMs`（**不**调用 `legion bench`）。
+- **V 运行**：`vRuntimeMs` 待 wasm 导出 invoke + `run_v_solver` 接线后补全；缺运行时分 **不算 error**（看板标为 missing）。
 - 编排：`pnpm bench` → `@leetcode/conformance` `bench-all.ts`。
 - 看板：`pnpm dashboard`；结果写入 `projects/dashboard/public/benchmark-results.json`。
 

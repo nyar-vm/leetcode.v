@@ -78,7 +78,7 @@ pnpm dashboard        # 启动看板 dev server
 - **Valkyrie**：`solvers/valkyrie/solution.v` + `legion.von`（`entry: "solution.v"`，`core` / `std` 为 workspace 依赖，
   `target: node`）。
 
-基准采用 **外部 harness**：对编译产物跑 `metadata.tests` 计时，不在 `.v` 源码里写 `[benchmark]` 烟雾块。
+基准采用 **外部 harness**：`legion build` 产出 wasm + js glue；TS 对 `metadata.tests` 计时（`tsRuntimeMs`）。`pnpm bench` 对 V 侧只计 **编译**（`vCompileMs`），**不**调用 `legion bench` / `[benchmark]`；`vRuntimeMs` 待 wasm invoke harness 接线。
 
 ## 看板
 
