@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -27,6 +28,20 @@ const runner = createBenchmarkRunner({
 });
 
 export type LegionOutcome = VccCliSpawnResult;
+
+export function valkyrieSolverPath(problemRoot: string): string {
+    return join(problemRoot, "solvers", "valkyrie", "solution.v");
+}
+
+/** 基准只跑非空且未标 `# 阻塞` 的 `solution.v`。 */
+export function hasValkyrieSolver(problemRoot: string): boolean {
+    try {
+        const text = readFileSync(valkyrieSolverPath(problemRoot), "utf8").trim();
+        return text.length > 0 && !text.startsWith("# 阻塞");
+    } catch {
+        return false;
+    }
+}
 
 export function valkyrieRunnerReady(): boolean {
     return runner.ready();

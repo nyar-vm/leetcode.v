@@ -8,7 +8,11 @@ import { problemDir } from "../catalog.ts";
 
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
 
-import { hasPythonSolver } from "./python-ref.ts";
+import { PYTHON_BENCH_PARAMS } from "./bench-params.ts";
+import { PYTHON_BENCH_PARAMS } from "./bench-params.ts";
+import { hasPythonSolver, PYTHON_BENCH_CHECKER } from "./python-ref.ts";
+
+const CHECKER = PYTHON_BENCH_CHECKER;
 
 function median(values: number[]): number {
     if (values.length === 0) {
@@ -26,7 +30,11 @@ function median(values: number[]): number {
     return sorted[mid];
 }
 
-export function benchPythonProblem(problem: ProblemDefinition, iterations = 5, warmup = 1): number {
+export function benchPythonProblem(
+    problem: ProblemDefinition,
+    iterations = PYTHON_BENCH_PARAMS.iterations,
+    warmup = PYTHON_BENCH_PARAMS.warmup,
+): number {
     const root = problemDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
 
     if (!hasPythonSolver(root)) {

@@ -6,6 +6,7 @@ import { median } from "@valkyrie-language/vcc/benchmark";
 import type { ProblemDefinition } from "../catalog.ts";
 import { problemDir } from "../catalog.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
+import { TYPESCRIPT_BENCH_PARAMS } from "./bench-params.ts";
 import { hasTsSolver } from "./ts-ref.ts";
 
 const RUNNER = join(
@@ -25,7 +26,11 @@ function spawnTsSolver(problemRoot: string): { status: number | null; stderr: st
     return { status: result.status, stderr };
 }
 
-export function benchTsProblem(problem: ProblemDefinition, iterations = 50, warmup = 5): number {
+export function benchTsProblem(
+    problem: ProblemDefinition,
+    iterations = TYPESCRIPT_BENCH_PARAMS.iterations,
+    warmup = TYPESCRIPT_BENCH_PARAMS.warmup,
+): number {
     const root = problemDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
     if (!hasTsSolver(root)) {
         throw new Error(`missing solvers/typescript/solution.ts for ${problem.id}`);

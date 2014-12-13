@@ -6,6 +6,7 @@ import { median } from "@valkyrie-language/vcc/benchmark";
 import type { ProblemDefinition } from "../catalog.ts";
 import { valkyrieProjectDir } from "../catalog.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
+import { VALKYRIE_BENCH_PARAMS } from "./bench-params.ts";
 import { formatLegionError, legionBuild, valkyrieRunnerReady, valkyrieSkipReason } from "./valkyrie.ts";
 
 export type ValkyrieBenchResult = {
@@ -22,8 +23,8 @@ export type ValkyrieBenchResult = {
  */
 export function benchValkyrieProblem(
     problem: ProblemDefinition,
-    compileRuns = 3,
-    warmup = 1,
+    compileRuns = VALKYRIE_BENCH_PARAMS.compileRuns,
+    warmup = VALKYRIE_BENCH_PARAMS.warmup,
 ): ValkyrieBenchResult {
     if (!valkyrieRunnerReady()) {
         return {

@@ -27,6 +27,16 @@ export function hasTsSolver(problemRoot: string, _problemId?: string): boolean {
     }
 }
 
+/** 基准只跑含 `export class Solution` 的题解，跳过 LCD 空脚手架。 */
+export function hasReadyTsSolver(problemRoot: string): boolean {
+    try {
+        const text = readFileSync(tsSolverPath(problemRoot), "utf8");
+        return text.includes("export class Solution");
+    } catch {
+        return false;
+    }
+}
+
 type TestCase = { args: Record<string, unknown>; expected: unknown };
 
 /** `void` 解返回 `undefined`；metadata 用 `null` 表示无返回值断言。 */

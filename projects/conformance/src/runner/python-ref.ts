@@ -8,7 +8,8 @@ import { problemDir } from "../catalog.ts";
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const LEETCODE_ROOT = join(PACKAGE_ROOT, "..", "..");
-const CHECKER = join(PACKAGE_ROOT, "scripts", "run_python_solver.py");
+export const PYTHON_BENCH_CHECKER = join(PACKAGE_ROOT, "scripts", "run_python_solver.py");
+const CHECKER = PYTHON_BENCH_CHECKER;
 
 export function pythonSolverDir(problemRoot: string): string {
     return join(problemRoot, "solvers", "python");
