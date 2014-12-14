@@ -1,18 +1,14 @@
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
 
-export default defineConfig(async ({ command }) => {
-    const plugins = [vue()];
+import { problemReadmeRenderPlugin } from "./src/plugins/problemReadmeRender";
 
-    if (command === "serve") {
-        const { benchApiPlugin } = await import("./vite.bench-api");
-        plugins.push(benchApiPlugin());
-    }
-
-    return {
-        plugins,
-        server: {
-            port: 5175,
+export default defineConfig({
+    plugins: [problemReadmeRenderPlugin(), vue()],
+    server: {
+        port: 5175,
+        fs: {
+            allow: [".."],
         },
-    };
+    },
 });

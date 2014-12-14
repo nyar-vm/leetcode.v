@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { ChevronLeft, ChevronRight, Rows3 } from "@lucide/vue";
 import { computed } from "vue";
 
 import { PAGE_SIZE_OPTIONS } from "../types/bench";
+import AppIcon from "./AppIcon.vue";
 
 const props = defineProps<{
     page: number;
@@ -46,7 +48,8 @@ const pageItems = computed(() => {
 <template>
     <nav v-if="total > 0" class="table-pagination" aria-label="表格分页">
         <p class="pagination-summary muted">
-            显示 {{ start }}–{{ end }} / {{ total }}
+            <AppIcon :icon="Rows3" :size="15" />
+            <span>显示 {{ start }}–{{ end }} / {{ total }}</span>
         </p>
 
         <div class="pagination-controls">
@@ -62,8 +65,9 @@ const pageItems = computed(() => {
                 </select>
             </label>
 
-            <button class="btn ghost" :disabled="page <= 1" @click="emit('update:page', page - 1)">
-                上一页
+            <button class="btn ghost icon-btn" :disabled="page <= 1" @click="emit('update:page', page - 1)">
+                <AppIcon :icon="ChevronLeft" :size="16" />
+                <span>上一页</span>
             </button>
 
             <div class="page-list">
@@ -81,11 +85,12 @@ const pageItems = computed(() => {
             </div>
 
             <button
-                class="btn ghost"
+                class="btn ghost icon-btn"
                 :disabled="page >= totalPages"
                 @click="emit('update:page', page + 1)"
             >
-                下一页
+                <span>下一页</span>
+                <AppIcon :icon="ChevronRight" :size="16" />
             </button>
         </div>
     </nav>

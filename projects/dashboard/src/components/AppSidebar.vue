@@ -1,24 +1,39 @@
 <script setup lang="ts">
+import { ArrowLeftRight, Gauge, LayoutDashboard, Server, Table2 } from "@lucide/vue";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+
+import AppIcon from "./AppIcon.vue";
+import ThemeToggle from "./ThemeToggle.vue";
 
 const route = useRoute();
 
 const navItems = [
-    { to: "/", label: "概览", icon: "◈" },
-    { to: "/benchmarks", label: "基准对比", icon: "▤" },
+    { to: "/", label: "概览", icon: LayoutDashboard, exact: true },
+    { to: "/benchmarks", label: "全量对比", icon: Table2, exact: true },
+    { to: "/benchmarks/ts-v", label: "V / TS 对比", icon: ArrowLeftRight, exact: true },
+    { to: "/environment", label: "语言环境", icon: Server, exact: true },
 ];
 
 const activePath = computed(() => route.path);
+
+function isActive(item: { to: string; exact?: boolean }) {
+    if (item.exact) {
+        return activePath.value === item.to;
+    }
+    return activePath.value === item.to || activePath.value.startsWith(`${item.to}/`);
+}
 </script>
 
 <template>
     <aside class="sidebar">
         <div class="brand">
-            <div class="brand-mark">V</div>
+            <div class="brand-mark">
+                <AppIcon :icon="Gauge" :size="22" :stroke-width="2.25" />
+            </div>
             <div>
                 <p class="brand-title">LeetCode Bench</p>
-                <p class="brand-sub">TypeScript vs Valkyrie</p>
+                <p class="brand-sub">Python · TS · Valkyrie</p>
             </div>
         </div>
 
@@ -28,16 +43,20 @@ const activePath = computed(() => route.path);
                 :key="item.to"
                 :to="item.to"
                 class="nav-link"
-                :class="{ active: activePath === item.to || activePath.startsWith(`${item.to}/`) }"
+                :class="{ active: isActive(item) }"
             >
-                <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+                <AppIcon class="nav-icon" :icon="item.icon" :size="18" />
                 <span>{{ item.label }}</span>
             </RouterLink>
         </nav>
 
         <div class="sidebar-foot">
-            <p>完备性矩阵外部基准</p>
-            <p class="muted">静态快照 · TypeScript vs Wasm</p>
+            <ThemeToggle />
+            <p class="foot-line">
+                <AppIcon :icon="Gauge" :size="14" />
+                <span>完备性矩阵外部基准</span>
+            </p>
+            <p class="muted">静态快照 · 多语言跑测</p>
         </div>
     </aside>
 </template>

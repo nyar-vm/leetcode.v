@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { AlertTriangle, BookOpen, ChevronLeft, ExternalLink, FileCode2, Filter, Search, Timer } from "@lucide/vue";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import AppTopBar from "../components/AppTopBar.vue";
+import AppIcon from "../components/AppIcon.vue";
 import DifficultyBadge from "../components/DifficultyBadge.vue";
 import EmptyState from "../components/EmptyState.vue";
+import MarkdownContent from "../components/MarkdownContent.vue";
 import { useBenchReport } from "../composables/useBenchReport";
+import { useProblemReadme } from "../composables/useProblemReadme";
 import { enrichBenchRow, leetcodeUrl } from "../composables/useProblemCatalog";
 import { formatMs, ratioLabel, runtimeRatio } from "../utils/format";
 
@@ -21,15 +24,15 @@ const row = computed(() => {
 });
 
 const ratio = computed(() => (row.value ? runtimeRatio(row.value) : null));
+
+const { content: readme, loading: readmeLoading, error: readmeError } = useProblemReadme(problemId);
 </script>
 
 <template>
-    <AppTopBar>
-        <template #title>{{ row?.title ?? problemId }}</template>
-        <template #subtitle>单题基准详情与 LeetCode 外链</template>
-    </AppTopBar>
-
-    <button class="btn ghost back-btn" @click="router.back()">← 返回</button>
+    <button class="btn ghost back-btn icon-btn" @click="router.back()">
+        <AppIcon :icon="ChevronLeft" :size="16" />
+        <span>返回</span>
+    </button>
 
     <EmptyState
         v-if="!report"
@@ -46,7 +49,10 @@ const ratio = computed(() => (row.value ? runtimeRatio(row.value) : null));
     <section v-else class="detail-grid">
         <article class="panel">
             <div class="panel-head">
-                <h2>元数据</h2>
+                <h2 class="panel-title">
+                    <AppIcon :icon="FileCode2" :size="18" />
+                    <span>元数据</span>
+                </h2>
                 <DifficultyBadge :difficulty="row.difficulty" />
             </div>
             <dl class="detail-list">
@@ -68,8 +74,9 @@ const ratio = computed(() => (row.value ? runtimeRatio(row.value) : null));
                 <div>
                     <dt>LeetCode</dt>
                     <dd>
-                        <a class="text-link" :href="leetcodeUrl(row.id)" target="_blank" rel="noreferrer">
-                            打开题面
+                        <a class="text-link icon-link" :href="leetcodeUrl(row.id)" target="_blank" rel="noreferrer">
+                            <span>打开题面</span>
+                            <AppIcon :icon="ExternalLink" :size="14" />
                         </a>
                     </dd>
                 </div>
@@ -78,12 +85,19 @@ const ratio = computed(() => (row.value ? runtimeRatio(row.value) : null));
 
         <article class="panel">
             <div class="panel-head">
-                <h2>计时</h2>
+                <h2 class="panel-title">
+                    <AppIcon :icon="Timer" :size="18" />
+                    <span>计时</span>
+                </h2>
                 <span class="ratio" :class="ratio !== null && ratio < 1 ? 'v-win' : ratio !== null && ratio > 1 ? 'ts-win' : ''">
                     {{ ratioLabel(row) }}
                 </span>
             </div>
             <dl class="detail-list">
+                <div>
+                    <dt>Python 运行</dt>
+                    <dd class="num">{{ formatMs(row.pyRuntimeMs) }} ms</dd>
+                </div>
                 <div>
                     <dt>TypeScript 运行</dt>
                     <dd class="num">{{ formatMs(row.tsRuntimeMs) }} ms</dd>
@@ -107,27 +121,52 @@ const ratio = computed(() => (row.value ? runtimeRatio(row.value) : null));
             </dl>
         </article>
 
-        <article v-if="row.error" class="panel error-panel">
+        <article v-if="row.pyError || row.tsError || row.vError || row.error" class="panel error-panel">
             <div class="panel-head">
-                <h2>错误</h2>
+                <h2 class="panel-title">
+                    <AppIcon :icon="AlertTriangle" :size="18" class="tone-danger" />
+                    <span>错误</span>
+                </h2>
             </div>
-            <pre class="error-block">{{ row.error }}</pre>
+            <pre v-if="row.pyError" class="error-block">Python: {{ row.pyError }}</pre>
+            <pre v-if="row.tsError" class="error-block">TypeScript: {{ row.tsError }}</pre>
+            <pre v-if="row.vError" class="error-block">Valkyrie: {{ row.vError }}</pre>
+            <pre v-if="!row.pyError && !row.tsError && !row.vError && row.error" class="error-block">{{ row.error }}</pre>
         </article>
 
         <article class="panel">
             <div class="panel-head">
-                <h2>相关操作</h2>
+                <h2 class="panel-title">
+                    <AppIcon :icon="Search" :size="18" />
+                    <span>相关操作</span>
+                </h2>
             </div>
             <div class="action-row">
-                <RouterLink class="btn ghost" :to="`/benchmarks?q=${row.id}`">在表格中定位</RouterLink>
+                <RouterLink class="btn ghost icon-btn" :to="`/benchmarks?q=${row.id}`">
+                    <AppIcon :icon="Search" :size="15" />
+                    <span>在表格中定位</span>
+                </RouterLink>
                 <RouterLink
                     v-if="row.difficulty"
-                    class="btn ghost"
+                    class="btn ghost icon-btn"
                     :to="`/benchmarks?difficulty=${row.difficulty}`"
                 >
-                    同难度题目
+                    <AppIcon :icon="Filter" :size="15" />
+                    <span>同难度题目</span>
                 </RouterLink>
             </div>
+        </article>
+
+        <article class="panel readme-panel">
+            <div class="panel-head">
+                <h2 class="panel-title">
+                    <AppIcon :icon="BookOpen" :size="18" />
+                    <span>题解</span>
+                </h2>
+            </div>
+            <p v-if="readmeLoading" class="muted readme-status">加载题解…</p>
+            <p v-else-if="readmeError" class="muted readme-status">{{ readmeError }}</p>
+            <MarkdownContent v-else-if="readme" :html="readme" />
         </article>
     </section>
 </template>
