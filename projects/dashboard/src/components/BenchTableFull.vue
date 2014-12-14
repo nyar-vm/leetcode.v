@@ -2,7 +2,7 @@
 import { ArrowDown, ArrowUp, ArrowUpDown } from "@lucide/vue";
 
 import type { EnrichedBenchRow, SortKey } from "../types/bench";
-import { formatMs, ratioLabel, runtimeRatio } from "../utils/format";
+import { fastestLabel, formatMs } from "../utils/format";
 import AppIcon from "./AppIcon.vue";
 import DifficultyBadge from "./DifficultyBadge.vue";
 
@@ -20,9 +20,10 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
     { key: "title", label: "题目" },
     { key: "difficulty", label: "难度" },
     { key: "pyRuntimeMs", label: "Python (ms)", align: "right" },
-    { key: "tsRuntimeMs", label: "TS (ms)", align: "right" },
+    { key: "tsRuntimeMs", label: "TypeScript (ms)", align: "right" },
+    { key: "vCompileMs", label: "V 编译 (ms)", align: "right" },
     { key: "vRuntimeMs", label: "V Wasm (ms)", align: "right" },
-    { key: "ratio", label: "TS / V", align: "right" },
+    { key: "fastest", label: "最快", align: "right" },
 ];
 
 function sortIcon(key: SortKey) {
@@ -30,14 +31,6 @@ function sortIcon(key: SortKey) {
         return ArrowUpDown;
     }
     return props.sortDesc ? ArrowDown : ArrowUp;
-}
-
-function ratioClass(row: EnrichedBenchRow): string {
-    const ratio = runtimeRatio(row);
-    if (ratio === null) return "";
-    if (ratio < 1) return "v-win";
-    if (ratio > 1) return "ts-win";
-    return "";
 }
 </script>
 
@@ -60,7 +53,7 @@ function ratioClass(row: EnrichedBenchRow): string {
             </thead>
             <tbody>
                 <tr v-if="rows.length === 0">
-                    <td colspan="7" class="empty-cell">没有匹配的题目，试试放宽筛选条件。</td>
+                    <td colspan="8" class="empty-cell">没有匹配的题目，试试放宽筛选条件。</td>
                 </tr>
                 <tr v-for="row in rows" :key="row.id">
                     <td>
@@ -77,11 +70,9 @@ function ratioClass(row: EnrichedBenchRow): string {
                     </td>
                     <td class="num">{{ formatMs(row.pyRuntimeMs) }}</td>
                     <td class="num">{{ formatMs(row.tsRuntimeMs) }}</td>
-                    <td class="num">
-                        <div>{{ formatMs(row.vRuntimeMs) }}</div>
-                        <div class="row-meta">编译 {{ formatMs(row.vCompileMs) }}</div>
-                    </td>
-                    <td class="num ratio" :class="ratioClass(row)">{{ ratioLabel(row) }}</td>
+                    <td class="num">{{ formatMs(row.vCompileMs) }}</td>
+                    <td class="num">{{ formatMs(row.vRuntimeMs) }}</td>
+                    <td class="num fastest-cell">{{ fastestLabel(row) }}</td>
                     <td>
                         <div v-if="row.legionRoute || row.benchTarget" class="row-meta">
                             <span v-if="row.legionRoute">route {{ row.legionRoute }}</span>

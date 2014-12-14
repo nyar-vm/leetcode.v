@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import type { BenchStatus, Difficulty } from "../types/bench";
+import { Filter, Search, SlidersHorizontal, Tag, X } from "@lucide/vue";
 
-defineProps<{
+import { computed } from "vue";
+
+import type { BenchFilterMode, BenchStatus, Difficulty } from "../types/bench";
+import AppIcon from "./AppIcon.vue";
+
+const props = withDefaults(
+    defineProps<{
+    variant?: BenchFilterMode;
     query: string;
     difficulties: Difficulty[];
     selectedDifficulties: Difficulty[];
@@ -11,7 +18,11 @@ defineProps<{
     resultCount: number;
     totalCount: number;
     activeFilterCount: number;
-}>();
+    }>(),
+    {
+        variant: "ts-v",
+    },
+);
 
 const emit = defineEmits<{
     "update:query": [value: string];
@@ -23,30 +34,47 @@ const emit = defineEmits<{
 
 const difficultyOptions: Difficulty[] = ["Easy", "Medium", "Hard"];
 
-const statusOptions: { value: BenchStatus; label: string }[] = [
-    { value: "all", label: "全部" },
-    { value: "ok", label: "无错误" },
-    { value: "error", label: "有错误" },
-    { value: "v-faster", label: "V 更快" },
-    { value: "ts-faster", label: "TS 更快" },
-    { value: "missing", label: "缺数据" },
-];
+const statusOptions = computed(() => {
+    if (props.variant === "full") {
+        return [
+            { value: "all" as BenchStatus, label: "全部" },
+            { value: "ok" as BenchStatus, label: "无错误" },
+            { value: "error" as BenchStatus, label: "有错误" },
+            { value: "missing" as BenchStatus, label: "缺计时" },
+        ];
+    }
+    return [
+        { value: "all" as BenchStatus, label: "全部" },
+        { value: "ok" as BenchStatus, label: "无错误" },
+        { value: "error" as BenchStatus, label: "有错误" },
+        { value: "v-faster" as BenchStatus, label: "V 更快" },
+        { value: "ts-faster" as BenchStatus, label: "TS 更快" },
+        { value: "missing" as BenchStatus, label: "缺数据" },
+    ];
+});
 </script>
 
 <template>
     <section class="filter-panel">
         <div class="filter-head">
             <div>
-                <h2>筛选</h2>
+                <h2 class="panel-title">
+                    <AppIcon :icon="SlidersHorizontal" :size="17" />
+                    <span>筛选</span>
+                </h2>
                 <p class="muted">结果 {{ resultCount }} / {{ totalCount }}</p>
             </div>
-            <button v-if="activeFilterCount > 0" class="btn ghost" @click="emit('clear')">
-                清除 {{ activeFilterCount }} 项
+            <button v-if="activeFilterCount > 0" class="btn ghost icon-btn" @click="emit('clear')">
+                <AppIcon :icon="X" :size="15" />
+                <span>清除 {{ activeFilterCount }} 项</span>
             </button>
         </div>
 
         <label class="field">
-            <span class="field-label">搜索题目</span>
+            <span class="field-label">
+                <AppIcon :icon="Search" :size="14" />
+                <span>搜索题目</span>
+            </span>
             <input
                 :value="query"
                 type="search"
@@ -56,7 +84,10 @@ const statusOptions: { value: BenchStatus; label: string }[] = [
         </label>
 
         <div class="field">
-            <span class="field-label">难度</span>
+            <span class="field-label">
+                <AppIcon :icon="Filter" :size="14" />
+                <span>难度</span>
+            </span>
             <div class="chip-row">
                 <button
                     v-for="difficulty in difficultyOptions"
@@ -71,7 +102,10 @@ const statusOptions: { value: BenchStatus; label: string }[] = [
         </div>
 
         <div v-if="tags.length" class="field">
-            <span class="field-label">标签</span>
+            <span class="field-label">
+                <AppIcon :icon="Tag" :size="14" />
+                <span>标签</span>
+            </span>
             <div class="chip-row wrap">
                 <button
                     v-for="tag in tags"
@@ -86,7 +120,10 @@ const statusOptions: { value: BenchStatus; label: string }[] = [
         </div>
 
         <label class="field">
-            <span class="field-label">状态</span>
+            <span class="field-label">
+                <AppIcon :icon="Filter" :size="14" />
+                <span>状态</span>
+            </span>
             <select :value="status" @change="emit('setStatus', ($event.target as HTMLSelectElement).value as BenchStatus)">
                 <option v-for="option in statusOptions" :key="option.value" :value="option.value">
                     {{ option.label }}

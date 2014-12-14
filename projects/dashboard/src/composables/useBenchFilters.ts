@@ -4,15 +4,34 @@ import { useRoute, useRouter } from "vue-router";
 import {
     DEFAULT_PAGE_SIZE,
     PAGE_SIZE_OPTIONS,
+    type BenchFilterMode,
     type BenchFilters,
     type BenchStatus,
     type Difficulty,
     type EnrichedBenchRow,
     type SortKey,
 } from "../types/bench";
+import { fastestRuntimeMs, runtimeRatio } from "../utils/format";
 
 const DIFFICULTIES: Difficulty[] = ["Easy", "Medium", "Hard"];
-const SORT_KEYS: SortKey[] = ["title", "tsRuntimeMs", "vRuntimeMs", "ratio", "difficulty"];
+const TS_V_SORT_KEYS: SortKey[] = ["title", "difficulty", "tsRuntimeMs", "vRuntimeMs", "ratio"];
+const FULL_SORT_KEYS: SortKey[] = [
+    "title",
+    "difficulty",
+    "pyRuntimeMs",
+    "tsRuntimeMs",
+    "vCompileMs",
+    "vRuntimeMs",
+    "fastest",
+];
+
+function sortKeysForMode(mode: BenchFilterMode): SortKey[] {
+    return mode === "full" ? FULL_SORT_KEYS : TS_V_SORT_KEYS;
+}
+
+function defaultSortForMode(mode: BenchFilterMode): SortKey {
+    return mode === "full" ? "fastest" : "title";
+}
 
 function parseList(value: unknown): string[] {
     if (typeof value !== "string" || !value.trim()) {
@@ -27,19 +46,23 @@ function parseDifficulty(value: unknown): Difficulty[] {
     );
 }
 
-function parseStatus(value: unknown): BenchStatus {
+function parseStatus(value: unknown, mode: BenchFilterMode): BenchStatus {
     const allowed: BenchStatus[] = ["all", "ok", "error", "v-faster", "ts-faster", "missing"];
     if (typeof value === "string" && allowed.includes(value as BenchStatus)) {
+        if (mode === "full" && (value === "v-faster" || value === "ts-faster")) {
+            return "all";
+        }
         return value as BenchStatus;
     }
     return "all";
 }
 
-function parseSort(value: unknown): SortKey {
-    if (typeof value === "string" && SORT_KEYS.includes(value as SortKey)) {
+function parseSort(value: unknown, mode: BenchFilterMode): SortKey {
+    const allowed = sortKeysForMode(mode);
+    if (typeof value === "string" && allowed.includes(value as SortKey)) {
         return value as SortKey;
     }
-    return "title";
+    return defaultSortForMode(mode);
 }
 
 function parsePage(value: unknown): number {
@@ -58,14 +81,7 @@ function parsePageSize(value: unknown): number {
     return DEFAULT_PAGE_SIZE;
 }
 
-function runtimeRatio(row: EnrichedBenchRow): number | null {
-    if (row.tsRuntimeMs === null || row.vRuntimeMs === null || row.vRuntimeMs === 0) {
-        return null;
-    }
-    return row.tsRuntimeMs / row.vRuntimeMs;
-}
-
-function matchesStatus(row: EnrichedBenchRow, status: BenchStatus): boolean {
+function matchesStatus(row: EnrichedBenchRow, status: BenchStatus, mode: BenchFilterMode): boolean {
     switch (status) {
         case "all":
             return true;
@@ -74,6 +90,9 @@ function matchesStatus(row: EnrichedBenchRow, status: BenchStatus): boolean {
         case "error":
             return row.error !== null;
         case "missing":
+            if (mode === "full") {
+                return row.pyRuntimeMs === null || row.tsRuntimeMs === null || row.vRuntimeMs === null;
+            }
             return row.tsRuntimeMs === null || row.vRuntimeMs === null;
         case "v-faster": {
             const ratio = runtimeRatio(row);
@@ -111,8 +130,14 @@ function sortRows(rows: EnrichedBenchRow[], sort: SortKey, sortDesc: boolean): E
             case "difficulty":
                 cmp = difficultyRank(left.difficulty) - difficultyRank(right.difficulty);
                 break;
+            case "pyRuntimeMs":
+                cmp = (left.pyRuntimeMs ?? -1) - (right.pyRuntimeMs ?? -1);
+                break;
             case "tsRuntimeMs":
                 cmp = (left.tsRuntimeMs ?? -1) - (right.tsRuntimeMs ?? -1);
+                break;
+            case "vCompileMs":
+                cmp = (left.vCompileMs ?? -1) - (right.vCompileMs ?? -1);
                 break;
             case "vRuntimeMs":
                 cmp = (left.vRuntimeMs ?? -1) - (right.vRuntimeMs ?? -1);
@@ -123,30 +148,39 @@ function sortRows(rows: EnrichedBenchRow[], sort: SortKey, sortDesc: boolean): E
                 cmp = leftRatio - rightRatio;
                 break;
             }
+            case "fastest": {
+                const leftFastest = fastestRuntimeMs(left) ?? -1;
+                const rightFastest = fastestRuntimeMs(right) ?? -1;
+                cmp = leftFastest - rightFastest;
+                break;
+            }
         }
         return sortDesc ? -cmp : cmp;
     });
     return sorted;
 }
 
-export function filtersFromRoute(route: ReturnType<typeof useRoute>): BenchFilters {
+export function filtersFromRoute(
+    route: ReturnType<typeof useRoute>,
+    mode: BenchFilterMode,
+): BenchFilters {
     return {
         query: typeof route.query.q === "string" ? route.query.q : "",
         difficulties: parseDifficulty(route.query.difficulty),
         tags: parseList(route.query.tag),
-        status: parseStatus(route.query.status),
-        sort: parseSort(route.query.sort),
+        status: parseStatus(route.query.status, mode),
+        sort: parseSort(route.query.sort, mode),
         sortDesc: route.query.desc === "1",
         page: parsePage(route.query.page),
         pageSize: parsePageSize(route.query.size),
     };
 }
 
-export function useBenchFilters(rows: () => EnrichedBenchRow[]) {
+export function useBenchFilters(rows: () => EnrichedBenchRow[], mode: BenchFilterMode = "ts-v") {
     const route = useRoute();
     const router = useRouter();
 
-    const filters = computed(() => filtersFromRoute(route));
+    const filters = computed(() => filtersFromRoute(route, mode));
 
     function updateQuery(patch: Partial<Record<string, string | undefined>>) {
         router.replace({
@@ -233,7 +267,7 @@ export function useBenchFilters(rows: () => EnrichedBenchRow[]) {
             if (filters.value.tags.length > 0 && !filters.value.tags.some((tag) => row.tags.includes(tag))) {
                 return false;
             }
-            return matchesStatus(row, filters.value.status);
+            return matchesStatus(row, filters.value.status, mode);
         });
         return sortRows(result, filters.value.sort, filters.value.sortDesc);
     });
