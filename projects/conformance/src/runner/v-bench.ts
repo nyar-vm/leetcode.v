@@ -7,6 +7,8 @@ import type { ProblemDefinition } from "../catalog.ts";
 import { valkyrieProjectDir } from "../catalog.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
 import { VALKYRIE_BENCH_PARAMS } from "./bench-params.ts";
+import { benchVRuntimeProblem } from "./v-runtime-bench.ts";
+import { resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./v-ref.ts";
 import { formatLegionError, legionBuild, valkyrieRunnerReady, valkyrieSkipReason } from "./valkyrie.ts";
 
 export type ValkyrieBenchResult = {
@@ -18,8 +20,8 @@ export type ValkyrieBenchResult = {
 
 /**
  * leetcode 外部基准的 V 侧：对 `legion build --target node` 计时。
- * 运行时分（对 wasm 产物跑 `metadata.tests`）待 wasm 导出 invoke 接线后补全；
- * 成功编译时 **不** 因缺少 `[benchmark]` 报错。
+ * 运行时分：对 wasm 产物跑 `run_v_solver.ts`（`metadata.tests`）。
+ * wasm 空壳或 glue 未接线时 `vRuntimeMs` 为 null 且 `error` 说明原因。
  */
 export function benchValkyrieProblem(
     problem: ProblemDefinition,
@@ -70,10 +72,29 @@ export function benchValkyrieProblem(
         compileSamples.push(performance.now() - start);
     }
 
+    let vRuntimeMs: number | null = null;
+    let runtimeError: string | null = null;
+
+    const artifacts = resolveVBuildArtifacts(problem);
+    if (artifacts) {
+        const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm);
+        if (blocked) {
+            runtimeError = blocked;
+        } else {
+            try {
+                vRuntimeMs = benchVRuntimeProblem(problem);
+            } catch (err) {
+                runtimeError = String(err);
+            }
+        }
+    } else {
+        runtimeError = "legion build 产物缺失";
+    }
+
     return {
         vCompileMs: median(compileSamples),
-        vRuntimeMs: null,
+        vRuntimeMs,
         legionRoute,
-        error: null,
+        error: runtimeError,
     };
 }

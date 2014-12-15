@@ -38,7 +38,7 @@ export type ValkyrieBenchEnvironment = {
     skipReason: string | null;
     compileMetric: "compile";
     runtimeMetric: "runtime";
-    runtimeStatus: "pending-invoke-harness";
+    runtimeStatus: "blocked-stub-wasm" | "ready";
     aggregation: "median";
     compileRuns: number;
     warmup: number;

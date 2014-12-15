@@ -21,5 +21,5 @@ export const VALKYRIE_BENCH_PARAMS = {
     aggregation: "median" as const,
     compileMetric: "compile" as const,
     runtimeMetric: "runtime" as const,
-    runtimeStatus: "pending-invoke-harness" as const,
+    runtimeStatus: "blocked-stub-wasm" as const,
 };
