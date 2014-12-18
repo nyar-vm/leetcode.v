@@ -37,7 +37,7 @@
 | `projects/problems/<slug>/solvers/typescript/` | 手写 TS 解：`solution.ts` + `package.json`                                  |
 | `projects/problems/<slug>/solvers/valkyrie/`   | 手写 V 解：`solution.v` + `legion.von`（`entry: "solution.v"`）             |
 | `projects/conformance/`                        | 完备性矩阵、TS/Python/V 跑测、**外部产物基准**                              |
-| `projects/dashboard/`                          | Vue 看板（缓存 `benchmark-results.json`，Vega-Lite 可视化）                 |
+| `projects/dashboard/`                          | Vue 看板（合并 `benchmark-typescript.json` / `benchmark-valkyrie.json`，Vega-Lite 可视化） |
 | `scripts/`                                     | `format.mjs`、`reword.mjs`、`batch-limit.mjs`、`link-valkyrie.mjs`、`valkyrie-v-deps.mjs` |
 | `legions.von`                                  | workspace 成员：`core`、`std`、`std.adaptors._`（见下文「维护者陷阱」）     |
 
@@ -88,7 +88,7 @@
 - **V 编译**：`pnpm bench` 对 `legion build --target node` 计时 → `vCompileMs`（**不**调用 `legion bench`）。
 - **V 运行**：`vRuntimeMs` 待 wasm 导出 invoke + `run_v_solver` 接线后补全；缺运行时分 **不算 error**（看板标为 missing）。
 - 编排：`pnpm bench` → `@leetcode/conformance` `bench-all.ts`。
-- 看板：`pnpm dashboard`；结果写入 `projects/dashboard/public/benchmark-results.json`。
+- 看板：`pnpm dashboard`；基准按语言写入 `projects/dashboard/public/benchmark-typescript.json` 与 `benchmark-valkyrie.json`（`pnpm bench:typescript` / `pnpm bench:valkyrie`，或 `LEETCODE_BENCH_LANG` 过滤的 `pnpm bench`）。
 
 ## 格式化与链接
 

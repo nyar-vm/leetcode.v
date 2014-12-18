@@ -20,6 +20,7 @@
 | V-014 | `char` ASCII 字母数字 / 元音判定   | done | `valid-palindrome`、`reverse-vowels-of-a-string` | `core::text::char` | `is_ascii_alphanumeric`、`ascii_alnum_key`、`is_ascii_vowel` |
 | V-015 | `char as u32` / `As<u32>` 原语转换   | done | `valid-palindrome`、`lowercase_ascii_index` | `core::text::char` + `core::types::conversion` | `char as u32` 已可用；已移除 `to_u32()` shim |
 | V-016 | `Utf8Builder.append_i64` 十进制格式化 | done | `summary-ranges` 等需输出数字字符串的题 | `std.text.Utf8Builder` + `test_utf8_builder.v` | 含 `0` 与 `-2147483648` 边界 |
+| V-017 | **leetcode wasm invoke harness（P0）** | upstream | `vRuntimeMs`、跑飞检测、三语言对比 | `valkyrie.rs` legion/nyar-emitter：① package 构建将 `entry solution.v` 编入 Executable MIR（非 126B 空壳 `main`）② 导出顶层 `[export] micro`（库入口，非 `[main]`）③ node `.mjs` glue 提供 `invokeLeetCode`/`callExport` + JSON 编解码 | leetcode 侧 `run_v_solver.ts` 已就绪，阻塞时空壳 wasm 会 **显式报错** |
 
 ## 和类型 taxonomy
 

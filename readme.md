@@ -57,7 +57,9 @@ leetcode.v/
 pnpm install
 pnpm fmt:check        # Biome 格式检查
 pnpm test:problems    # 完备性矩阵（默认批量限额 50 题）
-pnpm bench            # TS 实现 vs V 外部产物基准
+pnpm bench            # 跑全部已配置语言（默认 TS + V）
+pnpm bench:typescript # 仅 TypeScript 基准 → benchmark-typescript.json
+pnpm bench:valkyrie   # 仅 Valkyrie 基准 → benchmark-valkyrie.json
 pnpm dashboard        # 启动看板 dev server
 ```
 
@@ -68,6 +70,7 @@ pnpm dashboard        # 启动看板 dev server
 | `LEETCODE_BATCH_ALL=1`      | 跑全量题目（默认仅 50 题）           |
 | `LEETCODE_BENCH_ID=two-sum` | 按 **id** 仅跑单题（现与 slug 同值） |
 | `LEETCODE_BENCH_IDS=a,b,c`  | 逗号分隔多个 **id**                  |
+| `LEETCODE_BENCH_LANG=typescript` | 只跑指定语言（`valkyrie`、`all`、逗号组合） |
 | `VALKYRIE_RS_ROOT`          | 覆盖 `valkyrie.rs` 根路径            |
 
 ## 单题约定
@@ -82,8 +85,7 @@ pnpm dashboard        # 启动看板 dev server
 
 ## 看板
 
-`pnpm dashboard` 启动后读取 `projects/dashboard/public/benchmark-results.json`（可由 `pnpm bench` 更新）。展示 TS 实现与
-V 编译/运行耗时对比。
+`pnpm dashboard` 启动后合并读取 `benchmark-typescript.json` 与 `benchmark-valkyrie.json`（各语言可独立生成，缺一则只展示已有侧）。展示 TS 实现与 V 编译/运行耗时对比。
 
 ## 代理与题解规范
 

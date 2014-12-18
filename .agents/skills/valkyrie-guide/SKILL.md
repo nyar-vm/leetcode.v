@@ -72,6 +72,7 @@ imply Solution {
 - 可选值：`Option<T>`、`Some(v)`、`None` / `option_none::<T>()`（ **`unite` = tagged sum**；缺省 tag 由编译器派生，见 `valkyrie-evolution/.../type-taxonomy.md`）。
 - **勿混淆**：named **`union Foo { ... }`**（untagged，大整数等）与类型表达式 **`A | B`**（匿名 untagged）— 二者均 **不是** `unite`。
 - 循环：`while cond { ... }`、`loop item in collection { ... }`。
+- **定长数组填充**：编译期长度用 **`[value; count]`**（如 `let counts: [i64] = [0; 26]`），勿手写多遍字面量。运行期长度用 `ArrayList::new(capacity)` + `push`，或 `let mut a: [T] = []` 配合 `push(a, item)` 逐元素构建。
 - 整数异或：`i64` 上可用 `^`（见 `core` `i64`）。
 - **`char` 码位**：使用 **`ch as u32`**（原始 `as`；`to_u32()` 已移除，见 backlog **V-015**）。
 - 注释： **`#` 行注释**、 **`<#` … `#>` 块注释**（可嵌套）。 **不支持** `//` 或 `/* */`。std 里偶见的 `⍝` 为遗留，新代码勿用。
