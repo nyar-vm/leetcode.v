@@ -57,21 +57,22 @@ leetcode.v/
 pnpm install
 pnpm fmt:check        # Biome 格式检查
 pnpm test:problems    # 完备性矩阵（默认批量限额 50 题）
-pnpm bench            # 跑全部已配置语言（默认 TS + V）
-pnpm bench:typescript # 仅 TypeScript 基准 → benchmark-typescript.json
-pnpm bench:valkyrie   # 仅 Valkyrie 基准 → benchmark-valkyrie.json
-pnpm dashboard        # 启动看板 dev server
+pnpm bench                  # 跑全部已配置语言（默认 python + TS + V）
+pnpm bench --count 10       # 最多 10 题
+pnpm bench --id two-sum     # 单题
+pnpm bench --lang ts,v      # 指定语言组合
+pnpm bench:typescript       # 仅 TypeScript → benchmark-typescript.json
+pnpm bench:valkyrie       # 仅 Valkyrie → benchmark-valkyrie.json
+pnpm dashboard            # 启动看板 dev server
 ```
 
-常用环境变量：
+`pnpm bench --help` 查看完整 CLI。未在命令行指定的项仍可读环境变量（CI 兼容）。
 
-| 变量                        | 说明                                 |
-|-----------------------------|--------------------------------------|
-| `LEETCODE_BATCH_ALL=1`      | 跑全量题目（默认仅 50 题）           |
-| `LEETCODE_BENCH_ID=two-sum` | 按 **id** 仅跑单题（现与 slug 同值） |
-| `LEETCODE_BENCH_IDS=a,b,c`  | 逗号分隔多个 **id**                  |
-| `LEETCODE_BENCH_LANG=typescript` | 只跑指定语言（`valkyrie`、`all`、逗号组合） |
-| `VALKYRIE_RS_ROOT`          | 覆盖 `valkyrie.rs` 根路径            |
+| 变量                   | 说明                                 |
+|------------------------|--------------------------------------|
+| `VALKYRIE_RS_ROOT`     | 覆盖 `valkyrie.rs` 根路径            |
+| `LEETCODE_BATCH_ALL=1` | 全量题目（等同 `--all`）             |
+| `LEETCODE_BENCH_ID`    | 单题 id（等同 `--id`）               |
 
 ## 单题约定
 

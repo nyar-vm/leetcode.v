@@ -50,7 +50,7 @@
   ）。目录名 = **slug**（与 `id` 同值）。
 - `projects/conformance/src/catalog.generated.ts` 为目录索引， **勿手改**。
 - 大批量跑测默认限 **50** 题（`scripts/batch-limit.mjs`）；全量需 `LEETCODE_BATCH_ALL=1`。
-- 单题基准：`LEETCODE_BENCH_ID=two-sum pnpm bench`。
+- 单题基准：`pnpm bench --id two-sum`（或 `LEETCODE_BENCH_ID=two-sum pnpm bench`）。
 
 ## 题解文档（`readme.md`）
 
@@ -87,8 +87,8 @@
 - **TS 参考**：`run_ts_solver.ts` 对 `solution.ts` 跑全量 `metadata.tests` 并计时 → `tsRuntimeMs`。
 - **V 编译**：`pnpm bench` 对 `legion build --target node` 计时 → `vCompileMs`（**不**调用 `legion bench`）。
 - **V 运行**：`vRuntimeMs` 待 wasm 导出 invoke + `run_v_solver` 接线后补全；缺运行时分 **不算 error**（看板标为 missing）。
-- 编排：`pnpm bench` → `@leetcode/conformance` `bench-all.ts`。
-- 看板：`pnpm dashboard`；基准按语言写入 `projects/dashboard/public/benchmark-typescript.json` 与 `benchmark-valkyrie.json`（`pnpm bench:typescript` / `pnpm bench:valkyrie`，或 `LEETCODE_BENCH_LANG` 过滤的 `pnpm bench`）。
+- 编排：`pnpm bench` → `scripts/benchmark.mjs` → `@leetcode/conformance` `bench-all.ts`（支持 `--count`、`--id`、`--lang` 等 CLI）。
+- 看板：`pnpm dashboard`；基准按语言写入 `projects/dashboard/public/benchmark-typescript.json` 与 `benchmark-valkyrie.json`（`pnpm bench:typescript` / `pnpm bench:valkyrie`，或 `pnpm bench --lang typescript,valkyrie`）。
 
 ## 格式化与链接
 
