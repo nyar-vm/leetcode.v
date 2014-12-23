@@ -34,8 +34,8 @@ const {
 <template>
     <EmptyState
         v-if="!report"
-        title="暂无基准快照"
-        description="快照就绪后，可在此聚焦 TypeScript 与 Valkyrie Wasm 运行时间对比。"
+        title="暂无数据"
+        description="请先运行 pnpm bench 生成基准结果。"
     />
 
     <div v-else class="benchmark-layout">

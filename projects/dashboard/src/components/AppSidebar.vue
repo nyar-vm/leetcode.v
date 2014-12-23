@@ -33,7 +33,7 @@ function isActive(item: { to: string; exact?: boolean }) {
             </div>
             <div>
                 <p class="brand-title">LeetCode Bench</p>
-                <p class="brand-sub">Python · TS · Valkyrie</p>
+                <p class="brand-sub">Python · TS · V (wasm)</p>
             </div>
         </div>
 
@@ -52,11 +52,6 @@ function isActive(item: { to: string; exact?: boolean }) {
 
         <div class="sidebar-foot">
             <ThemeToggle />
-            <p class="foot-line">
-                <AppIcon :icon="Gauge" :size="14" />
-                <span>完备性矩阵外部基准</span>
-            </p>
-            <p class="muted">静态快照 · 多语言跑测</p>
         </div>
     </aside>
 </template>

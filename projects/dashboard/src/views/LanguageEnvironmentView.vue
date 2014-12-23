@@ -5,7 +5,6 @@ import { computed } from "vue";
 import AppIcon from "../components/AppIcon.vue";
 import EmptyState from "../components/EmptyState.vue";
 import { useBenchReport } from "../composables/useBenchReport";
-import { formatDate } from "../utils/format";
 import type {
     BenchEnvironments,
     HostEnvironment,
@@ -24,8 +23,6 @@ type EnvCard = {
     title: string;
     subtitle: string;
     ready: boolean;
-    snapshotAt: string | null;
-    rowCount: number | null;
     versionRows: { label: string; value: string }[];
     paramRows: { label: string; value: string }[];
     host: HostEnvironment | null;
@@ -43,7 +40,7 @@ function hostRows(host: HostEnvironment | null) {
     ];
 }
 
-function pythonCard(env: PythonBenchEnvironment | null, ready: boolean, snapshotAt: string | null, rowCount: number | null): EnvCard | null {
+function pythonCard(env: PythonBenchEnvironment | null, ready: boolean): EnvCard | null {
     if (!env) {
         return null;
     }
@@ -52,8 +49,6 @@ function pythonCard(env: PythonBenchEnvironment | null, ready: boolean, snapshot
         title: "Python",
         subtitle: "LCD 脚手架 · metadata.tests 外部 harness",
         ready,
-        snapshotAt,
-        rowCount,
         versionRows: [{ label: "Python", value: env.runtimeVersion }],
         paramRows: [
             { label: "指标", value: `${env.metric}（${env.aggregation}）` },
@@ -64,12 +59,7 @@ function pythonCard(env: PythonBenchEnvironment | null, ready: boolean, snapshot
     };
 }
 
-function typescriptCard(
-    env: TypeScriptBenchEnvironment | null,
-    ready: boolean,
-    snapshotAt: string | null,
-    rowCount: number | null,
-): EnvCard | null {
+function typescriptCard(env: TypeScriptBenchEnvironment | null, ready: boolean): EnvCard | null {
     if (!env) {
         return null;
     }
@@ -78,8 +68,6 @@ function typescriptCard(
         title: "TypeScript",
         subtitle: "tsx 加载 solution.ts · metadata.tests",
         ready,
-        snapshotAt,
-        rowCount,
         versionRows: [
             { label: "Node", value: env.nodeVersion },
             { label: "tsx", value: env.tsxVersion ?? "—" },
@@ -94,22 +82,15 @@ function typescriptCard(
     };
 }
 
-function valkyrieCard(
-    env: ValkyrieBenchEnvironment | null,
-    ready: boolean,
-    snapshotAt: string | null,
-    rowCount: number | null,
-): EnvCard | null {
+function valkyrieCard(env: ValkyrieBenchEnvironment | null, ready: boolean): EnvCard | null {
     if (!env) {
         return null;
     }
     return {
         key: "valkyrie",
-        title: "Valkyrie / Wasm",
+        title: "V (wasm)",
         subtitle: "legion build --target node 外部 harness",
         ready,
-        snapshotAt,
-        rowCount,
         versionRows: [
             { label: "legion", value: env.legionVersion ?? "—" },
             { label: "route", value: env.legionRoute ?? "—" },
@@ -133,19 +114,9 @@ const cards = computed(() => {
         return [];
     }
     return [
-        pythonCard(env.python, src?.python?.ready ?? false, src?.python?.generatedAt ?? null, src?.python?.rowCount ?? null),
-        typescriptCard(
-            env.typescript,
-            src?.typescript?.ready ?? false,
-            src?.typescript?.generatedAt ?? null,
-            src?.typescript?.rowCount ?? null,
-        ),
-        valkyrieCard(
-            env.valkyrie,
-            src?.valkyrie?.ready ?? false,
-            src?.valkyrie?.generatedAt ?? null,
-            src?.valkyrie?.rowCount ?? null,
-        ),
+        pythonCard(env.python, src?.python?.ready ?? false),
+        typescriptCard(env.typescript, src?.typescript?.ready ?? false),
+        valkyrieCard(env.valkyrie, src?.valkyrie?.ready ?? false),
     ].filter((card): card is EnvCard => card !== null);
 });
 
@@ -162,7 +133,7 @@ const missingLanguages = computed(() => {
         missing.push("TypeScript");
     }
     if (!env.valkyrie) {
-        missing.push("Valkyrie");
+        missing.push("V (wasm)");
     }
     return missing;
 });
@@ -171,14 +142,14 @@ const missingLanguages = computed(() => {
 <template>
     <EmptyState
         v-if="!report"
-        title="暂无基准快照"
-        description="语言环境信息随各语言 benchmark-*.json 写入。请先跑 pnpm bench:python / bench:typescript / bench:valkyrie。"
+        title="暂无数据"
+        description="请先运行 pnpm bench 生成各语言基准结果。"
     />
 
     <EmptyState
         v-else-if="cards.length === 0"
         title="暂无语言环境元数据"
-        description="当前快照缺少 environment 字段。请重新执行基准以生成版本与计时参数。"
+        description="缺少 environment 字段。请重新执行基准以生成版本与计时参数。"
     />
 
     <section v-else class="env-layout">
@@ -237,11 +208,6 @@ const missingLanguages = computed(() => {
                 </dl>
 
                 <p v-if="card.note" class="env-note">{{ card.note }}</p>
-
-                <p v-if="card.snapshotAt" class="env-foot muted">
-                    快照 {{ formatDate(card.snapshotAt) }}
-                    <template v-if="card.rowCount !== null"> · {{ card.rowCount }} 题</template>
-                </p>
             </article>
         </div>
     </section>
