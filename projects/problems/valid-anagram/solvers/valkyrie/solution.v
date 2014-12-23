@@ -1,13 +1,11 @@
-namespace leetcode.valid_anagram;
+﻿namespace leetcode.valid_anagram;
 
 class Solution {
     micro isAnagram(self, s: utf8, t: utf8): bool {
         if s.length() != t.length() {
             return false
         }
-        let mut counts: [i64] = [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        ]
+        let mut counts: [i64] = [0; 26]
         let mut i: i32 = 0
         while i < s.length() {
             let si: usize = s.char_at(i).unwrap().lowercase_ascii_index().unwrap() as usize

@@ -2,9 +2,7 @@ namespace leetcode.ransom_note;
 
 class Solution {
     micro canConstruct(self, ransomNote: utf8, magazine: utf8): bool {
-        let mut counts: [i64] = [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        ]
+        let mut counts: [i64] = [0; 26]
         let mut j: i32 = 0
         while j < magazine.length() {
             let idx: usize = magazine.char_at(j).unwrap().lowercase_ascii_index().unwrap() as usize
