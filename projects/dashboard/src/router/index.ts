@@ -15,7 +15,7 @@ export const router = createRouter({
             component: OverviewView,
             meta: {
                 title: "概览",
-                subtitle: "Python、TypeScript、V Wasm 多语言综合成绩与 log 耗时分布",
+                subtitle: "Python、TypeScript、V (wasm) 多语言综合成绩与 log 耗时分布",
             },
         },
         {
@@ -24,7 +24,7 @@ export const router = createRouter({
             component: BenchmarksFullView,
             meta: {
                 title: "全量对比",
-                subtitle: "Python、TypeScript、V 编译与 Wasm 运行时间同表竞技，支持筛选与下钻。",
+                subtitle: "Python、TypeScript、V 编译与 V (wasm) 运行时间同表竞技，支持筛选与下钻。",
             },
         },
         {
@@ -33,7 +33,7 @@ export const router = createRouter({
             component: BenchmarksTsVView,
             meta: {
                 title: "V / TypeScript 对比",
-                subtitle: "聚焦 TS 与 V Wasm 运行时间、比值与编译耗时。",
+                subtitle: "聚焦 TS 与 V (wasm) 运行时间、比值与编译耗时。",
             },
         },
         {

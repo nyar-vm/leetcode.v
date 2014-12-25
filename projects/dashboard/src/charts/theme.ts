@@ -83,7 +83,7 @@ export const statusColor: Record<string, [string, string]> = {
 export const languageColor: Record<string, string> = {
     Python: "#fbbf24",
     TypeScript: "#5b8cff",
-    "V Wasm": "#34d399",
+    "V (wasm)": "#34d399",
 };
 
 export const winnerColor: Record<string, [string, string]> = {

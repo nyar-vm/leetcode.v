@@ -22,7 +22,7 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
     { key: "pyRuntimeMs", label: "Python (ms)", align: "right" },
     { key: "tsRuntimeMs", label: "TypeScript (ms)", align: "right" },
     { key: "vCompileMs", label: "V 编译 (ms)", align: "right" },
-    { key: "vRuntimeMs", label: "V Wasm (ms)", align: "right" },
+    { key: "vRuntimeMs", label: "V (wasm) (ms)", align: "right" },
     { key: "fastest", label: "最快", align: "right" },
 ];
 

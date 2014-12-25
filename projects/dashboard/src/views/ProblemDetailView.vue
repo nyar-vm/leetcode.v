@@ -36,8 +36,8 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
 
     <EmptyState
         v-if="!report"
-        title="暂无基准快照"
-        description="快照就绪后可查看题目详情。"
+        title="暂无数据"
+        description="请先运行 pnpm bench 生成基准结果。"
     />
 
     <EmptyState
@@ -103,11 +103,11 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
                     <dd class="num">{{ formatMs(row.tsRuntimeMs) }} ms</dd>
                 </div>
                 <div>
-                    <dt>V 编译 → Wasm</dt>
+                    <dt>V 编译</dt>
                     <dd class="num">{{ formatMs(row.vCompileMs) }} ms</dd>
                 </div>
                 <div>
-                    <dt>V Wasm 运行</dt>
+                    <dt>V (wasm) 运行</dt>
                     <dd class="num">{{ formatMs(row.vRuntimeMs) }} ms</dd>
                 </div>
                 <div>
@@ -130,7 +130,7 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
             </div>
             <pre v-if="row.pyError" class="error-block">Python: {{ row.pyError }}</pre>
             <pre v-if="row.tsError" class="error-block">TypeScript: {{ row.tsError }}</pre>
-            <pre v-if="row.vError" class="error-block">Valkyrie: {{ row.vError }}</pre>
+            <pre v-if="row.vError" class="error-block">V: {{ row.vError }}</pre>
             <pre v-if="!row.pyError && !row.tsError && !row.vError && row.error" class="error-block">{{ row.error }}</pre>
         </article>
 

@@ -307,7 +307,7 @@ export function scatterSpec(
     return baseSpec(
         {
             $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "TS vs V Wasm 运行时间",
+            title: "TS vs V (wasm) 运行时间",
             width: "container",
             height: 280,
             data: { values: data },
@@ -322,7 +322,7 @@ export function scatterSpec(
                 y: {
                     field: "vRuntimeMs",
                     type: "quantitative",
-                    title: "V Wasm (ms)",
+                    title: "V (wasm) (ms)",
                     scale: { type: "symlog" },
                 },
                 color: {

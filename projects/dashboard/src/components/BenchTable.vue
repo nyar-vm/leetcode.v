@@ -21,7 +21,7 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
     { key: "difficulty", label: "难度" },
     { key: "pyRuntimeMs", label: "Python (ms)", align: "right" },
     { key: "tsRuntimeMs", label: "TS (ms)", align: "right" },
-    { key: "vRuntimeMs", label: "V Wasm (ms)", align: "right" },
+    { key: "vRuntimeMs", label: "V (wasm) (ms)", align: "right" },
     { key: "ratio", label: "TS / V", align: "right" },
 ];
 
