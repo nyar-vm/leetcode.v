@@ -25,7 +25,7 @@ export const RUNTIME_LANGUAGES: RuntimeLanguage[] = [
     },
     {
         id: "valkyrie",
-        label: "V Wasm",
+        label: "V (wasm)",
         color: "#34d399",
         readRuntime: (row) => row.vRuntimeMs,
     },
@@ -86,6 +86,34 @@ export function winnersForRow(row: EnrichedBenchRow): RuntimeLanguageId[] {
 
 export function comparableRowCount(rows: EnrichedBenchRow[]): number {
     return rows.filter((row) => winnersForRow(row).length > 0 && countTimedLanguages(row) >= 2).length;
+}
+
+export function sumCompileMs(rows: EnrichedBenchRow[]): number | null {
+    let total = 0;
+    let count = 0;
+    for (const row of rows) {
+        const ms = row.vCompileMs;
+        if (ms !== null && ms > 0 && Number.isFinite(ms)) {
+            total += ms;
+            count += 1;
+        }
+    }
+    return count > 0 ? total : null;
+}
+
+export function sumRuntimeMs(rows: EnrichedBenchRow[]): number | null {
+    let total = 0;
+    let count = 0;
+    for (const row of rows) {
+        for (const language of RUNTIME_LANGUAGES) {
+            const runtime = validRuntime(language.readRuntime(row));
+            if (runtime !== null) {
+                total += runtime;
+                count += 1;
+            }
+        }
+    }
+    return count > 0 ? total : null;
 }
 
 export function countTimedLanguages(row: EnrichedBenchRow): number {

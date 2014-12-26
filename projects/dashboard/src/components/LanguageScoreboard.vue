@@ -29,7 +29,7 @@ const leader = computed(() => leadingLanguage(stats.value));
             <p v-if="leader" class="muted leader-hint">
                 第一名最多：<strong>{{ leader.label }}</strong>（{{ leader.winCount }} 题）
             </p>
-            <p v-else class="muted leader-hint">暂无足够多语言样本决出领跑语言</p>
+            <p v-else class="muted leader-hint">暂无足够多语言样本决出最佳语言</p>
         </div>
 
         <div class="table-shell scoreboard-table">

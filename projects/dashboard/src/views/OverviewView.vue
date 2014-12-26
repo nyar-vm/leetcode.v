@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {
     ArrowRight,
-    CheckCircle2,
+    Cog,
     LayoutList,
     Sparkles,
-    Target,
+    Timer,
     Trophy,
     Users,
     XCircle,
@@ -23,16 +23,26 @@ import {
     computeLanguageStats,
     leadingLanguage,
     RUNTIME_LANGUAGES,
+    sumCompileMs,
+    sumRuntimeMs,
 } from "../utils/languageStats";
 
 const OverviewCharts = defineAsyncComponent(() => import("../components/OverviewCharts.vue"));
 
-const { report, rowCount, errorCount, okCount } = useBenchReport();
+const { report, rowCount, errorCount } = useBenchReport();
 
 const rows = computed(() => enrichBenchRows(report.value?.rows ?? []));
 const languageStats = computed(() => computeLanguageStats(rows.value));
 const comparableCount = computed(() => comparableRowCount(rows.value));
 const leader = computed(() => leadingLanguage(languageStats.value));
+const compileDuration = computed(() => {
+    const ms = sumCompileMs(rows.value);
+    return ms === null ? "—" : `${formatMs(ms)} ms`;
+});
+const runtimeDuration = computed(() => {
+    const ms = sumRuntimeMs(rows.value);
+    return ms === null ? "—" : `${formatMs(ms)} ms`;
+});
 
 const leaderLabel = computed(() => {
     if (!leader.value) {
@@ -45,29 +55,35 @@ const leaderLabel = computed(() => {
 <template>
     <EmptyState
         v-if="!report"
-        title="暂无基准快照"
-        description="看板合并 benchmark-python.json、benchmark-typescript.json 与 benchmark-valkyrie.json。本地可先跑 pnpm bench，再刷新页面。"
+        title="暂无数据"
+        description="请先运行 pnpm bench 生成基准结果，然后刷新页面。"
     />
 
     <template v-else>
         <section class="stat-grid">
-            <StatCard label="题目数" :value="rowCount" hint="当前批次" :icon="LayoutList" />
-            <StatCard label="通过" :value="okCount" tone="success" hint="无 error 字段" :icon="CheckCircle2" />
-            <StatCard label="失败" :value="errorCount" tone="danger" hint="含编译或运行错误" :icon="XCircle" />
+            <StatCard label="题目数量" :value="rowCount" hint="当前批次" :icon="LayoutList" />
             <StatCard
-                label="可竞技样本"
+                label="错误数量"
+                :value="errorCount"
+                tone="danger"
+                hint="含编译或运行错误"
+                :icon="XCircle"
+            />
+            <StatCard
+                label="有效对比"
                 :value="comparableCount"
                 hint="至少两种语言有有效计时"
                 :icon="Users"
             />
+            <StatCard label="编译时长" :value="compileDuration" hint="V 编译总和" :icon="Cog" />
+            <StatCard label="运行时长" :value="runtimeDuration" hint="全语言运行总和" :icon="Timer" />
             <StatCard
-                label="领跑语言"
+                label="最佳语言"
                 :value="leaderLabel"
                 tone="success"
-                hint="第一名次数最多"
+                hint="胜场最多"
                 :icon="Trophy"
             />
-            <StatCard label="Target" :value="report.benchTarget" hint="Valkyrie bench 目标" :icon="Target" />
         </section>
 
         <LanguageScoreboard :rows="rows" />
