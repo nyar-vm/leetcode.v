@@ -1,5 +1,10 @@
 namespace leetcode.two_sum;
 
+[export]
+micro twoSum(nums: ArrayList<i64>, target: i64): ArrayList<i64> {
+    return Solution().twoSum(nums, target)
+}
+
 class Solution {
     micro twoSum(self, nums: ArrayList<i64>, target: i64): ArrayList<i64> {
         let mut index: HashMap<i64, i64> = HashMap::new(0)
