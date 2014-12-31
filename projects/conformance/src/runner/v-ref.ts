@@ -3,7 +3,11 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { NODE_WASM_TARGET, resolveArtifactDir, resolveNodeEntry } from "@valkyrie-language/vcc/testing";
+import {
+    NODE_WASM_TARGET,
+    resolveArtifactDir,
+    resolveNodeEntry,
+} from "@valkyrie-language/vcc/testing";
 
 import type { ProblemDefinition } from "../catalog.ts";
 import { problemDir, valkyrieProjectDir } from "../catalog.ts";
@@ -78,6 +82,20 @@ export function isStubWasmArtifact(wasmPath: string): boolean {
     } catch {
         return true;
     }
+}
+
+/** 从 `metadata.invoke`（如 `Solution().twoSum`）解析 wasm 导出名（camelCase）。 */
+export function resolveWasmExportSymbol(invokeEntry: string): string {
+    const trimmed = invokeEntry.trim();
+    const methodMatch = trimmed.match(/\.([A-Za-z_][A-Za-z0-9_]*)$/);
+    if (methodMatch) {
+        return methodMatch[1];
+    }
+    const callMatch = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*\(/);
+    if (callMatch) {
+        return callMatch[1];
+    }
+    return trimmed;
 }
 
 export function wasmInvokeBlockedReason(wasmPath: string): string | null {

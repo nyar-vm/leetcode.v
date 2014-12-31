@@ -1,4 +1,8 @@
-import type { PythonBenchReport, TypeScriptBenchReport, ValkyrieBenchReport } from "./bench-types.ts";
+import type {
+    PythonBenchReport,
+    TypeScriptBenchReport,
+    ValkyrieBenchReport,
+} from "./bench-types.ts";
 import { mergeErrors } from "./bench-shared.ts";
 
 export type BenchRow = {

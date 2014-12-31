@@ -11,6 +11,7 @@ export type PythonBenchEnvironment = {
     language: "python";
     runtimeVersion: string;
     metric: "runtime";
+    timingScope: "in-process-metadata-tests";
     aggregation: "median";
     iterations: number;
     warmup: number;
@@ -23,6 +24,7 @@ export type TypeScriptBenchEnvironment = {
     tsxVersion: string | null;
     runner: "tsx";
     metric: "runtime";
+    timingScope: "in-process-metadata-tests";
     aggregation: "median";
     iterations: number;
     warmup: number;

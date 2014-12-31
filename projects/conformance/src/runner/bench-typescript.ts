@@ -1,29 +1,34 @@
 import { PROBLEMS } from "../catalog.ts";
 import type { TypeScriptBenchReport } from "./bench-types.ts";
-import { benchProblemsForLanguage, metaForProblem, writeLanguageBenchReport } from "./bench-shared.ts";
+import {
+    benchProblemsForLanguage,
+    metaForProblem,
+    writeLanguageBenchReport,
+} from "./bench-shared.ts";
 import { collectTypeScriptBenchEnvironment } from "./bench-env.ts";
 import { benchTsProblem } from "./ts-bench.ts";
 
 export async function runTypeScriptBenchmarks(): Promise<TypeScriptBenchReport> {
     const problems = benchProblemsForLanguage("typescript");
-    const rows = problems.map((problem) => {
+    const rows = [];
+    for (const problem of problems) {
         const meta = metaForProblem(problem);
         let runtimeMs: number | null = null;
         let error: string | null = null;
 
         try {
-            runtimeMs = benchTsProblem(problem);
+            runtimeMs = await benchTsProblem(problem);
         } catch (err) {
             error = String(err);
         }
 
-        return {
+        rows.push({
             id: problem.id,
             ...meta,
             runtimeMs,
             error,
-        };
-    });
+        });
+    }
 
     return {
         language: "typescript",

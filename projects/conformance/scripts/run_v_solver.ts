@@ -7,6 +7,7 @@ import { assertTestCase, normalizeTsTestResult } from "../src/runner/ts-ref.ts";
 import {
     loadMetadata,
     resolveVBuildArtifacts,
+    resolveWasmExportSymbol,
     wasmInvokeBlockedReason,
 } from "../src/runner/v-ref.ts";
 
@@ -29,7 +30,8 @@ async function runCandidate(
         return host.invokeLeetCode(entry, args);
     }
     if (typeof host.callExport === "function") {
-        return host.callExport(entry, args);
+        const exportSymbol = resolveWasmExportSymbol(entry);
+        return host.callExport(exportSymbol, args);
     }
     throw new Error(
         "node glue 缺少 invokeLeetCode / callExport（需 valkyrie.rs 为 leetcode 库模式接线 wasm invoke）",
@@ -43,7 +45,9 @@ async function main(): Promise<number> {
         return 2;
     }
 
-    const meta = JSON.parse(readFileSync(join(problemDir, "metadata.json"), "utf8")) as { id?: string };
+    const meta = JSON.parse(readFileSync(join(problemDir, "metadata.json"), "utf8")) as {
+        id?: string;
+    };
     const slug = meta.id;
     if (!slug) {
         throw new Error("metadata.id 缺失");

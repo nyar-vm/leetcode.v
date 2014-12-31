@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { median } from "@valkyrie-language/vcc/benchmark";
+
 import type { ProblemDefinition } from "../catalog.ts";
 import { problemDir } from "../catalog.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
@@ -118,18 +120,52 @@ export function makeTsCandidate(
     throw new Error(`无法解析 typescript entry: ${expr}`);
 }
 
-/** 跑一遍 metadata.tests。 */
-export async function runTsSolverOnce(problemRoot: string, problemId: string): Promise<void> {
+async function loadTsCandidate(problemRoot: string) {
     const { tests, invoke } = loadMetadata(problemRoot);
     const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<
         string,
         unknown
     >;
     const candidate = makeTsCandidate(invoke.typescript, mod);
+    return { tests, candidate };
+}
 
+/** 跑一遍 metadata.tests。 */
+export async function runTsSolverOnce(problemRoot: string, _problemId?: string): Promise<void> {
+    const { tests, candidate } = await loadTsCandidate(problemRoot);
     for (const [index, case_] of tests.entries()) {
         assertTestCase(index, case_.expected, () => candidate(case_.args));
     }
+}
+
+/**
+ * 单进程内预热后只对 metadata.tests 全量循环计时（不含每次冷启动 Node/tsx）。
+ */
+export async function benchTsSolverInProcess(
+    problemRoot: string,
+    iterations: number,
+    warmup: number,
+): Promise<number> {
+    const { tests, candidate } = await loadTsCandidate(problemRoot);
+
+    const runAll = () => {
+        for (const [index, case_] of tests.entries()) {
+            assertTestCase(index, case_.expected, () => candidate(case_.args));
+        }
+    };
+
+    for (let i = 0; i < warmup; i++) {
+        runAll();
+    }
+
+    const samples: number[] = [];
+    for (let i = 0; i < iterations; i++) {
+        const start = performance.now();
+        runAll();
+        samples.push(performance.now() - start);
+    }
+
+    return median(samples);
 }
 
 export async function runTsReference(

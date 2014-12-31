@@ -46,7 +46,9 @@ export function parseBenchLanguages(): BenchLanguage[] | "all" {
         } else if (part === "valkyrie" || part === "v") {
             langs.push("valkyrie");
         } else {
-            throw new Error(`无效的 LEETCODE_BENCH_LANG=${part}（可用 python、typescript、valkyrie、all）`);
+            throw new Error(
+                `无效的 LEETCODE_BENCH_LANG=${part}（可用 python、typescript、valkyrie、all）`,
+            );
         }
     }
     return langs.length > 0 ? langs : "all";
@@ -89,7 +91,10 @@ export function benchProblemsForLanguage(language: BenchLanguage): ProblemDefini
     });
 }
 
-export function writeLanguageBenchReport(language: BenchLanguage, report: LanguageBenchReport): string {
+export function writeLanguageBenchReport(
+    language: BenchLanguage,
+    report: LanguageBenchReport,
+): string {
     const outPath = join(BENCH_PUBLIC_DIR, BENCH_JSON_FILES[language]);
     mkdirSync(dirname(outPath), { recursive: true });
     writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");

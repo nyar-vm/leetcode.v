@@ -1,6 +1,10 @@
 import { PROBLEMS } from "../catalog.ts";
 import type { PythonBenchReport } from "./bench-types.ts";
-import { benchProblemsForLanguage, metaForProblem, writeLanguageBenchReport } from "./bench-shared.ts";
+import {
+    benchProblemsForLanguage,
+    metaForProblem,
+    writeLanguageBenchReport,
+} from "./bench-shared.ts";
 import { collectPythonBenchEnvironment } from "./bench-env.ts";
 import { benchPythonProblem } from "./python-bench.ts";
 import { pythonRefReady } from "./python-ref.ts";

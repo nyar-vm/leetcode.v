@@ -2,7 +2,11 @@ import { WASM_NODE_BENCH_TARGET } from "@valkyrie-language/vcc/benchmark";
 
 import { PROBLEMS } from "../catalog.ts";
 import type { ValkyrieBenchReport } from "./bench-types.ts";
-import { benchProblemsForLanguage, metaForProblem, writeLanguageBenchReport } from "./bench-shared.ts";
+import {
+    benchProblemsForLanguage,
+    metaForProblem,
+    writeLanguageBenchReport,
+} from "./bench-shared.ts";
 import { collectValkyrieBenchEnvironment } from "./bench-env.ts";
 import { benchValkyrieProblem } from "./v-bench.ts";
 import { valkyrieRunnerReady } from "./valkyrie.ts";
