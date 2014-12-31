@@ -1,435 +1,250 @@
-import type { TopLevelSpec } from "vega-lite";
+import type { EChartsOption } from "echarts";
 
 import type { ThemeMode } from "../composables/useTheme";
-import { getChartConfig, languageColor, statusColor } from "./theme";
+import {
+    chartGrid,
+    chartLegend,
+    chartTitle,
+    chartTooltip,
+    categoryAxis,
+    getChartUi,
+    languageColor,
+    linearGradient,
+    statusColor,
+    valueAxis,
+} from "./theme";
 
-const statusScale = {
-    domain: Object.keys(statusColor),
-    range: Object.values(statusColor).map(([color]) => color),
-};
+const LANGUAGE_ORDER = Object.keys(languageColor);
 
-function baseSpec(spec: TopLevelSpec, theme: ThemeMode): TopLevelSpec {
+export function statusDonutOption(
+    data: { label: string; count: number }[],
+    theme: ThemeMode,
+): EChartsOption | null {
+    if (!data.length) {
+        return null;
+    }
+    const ui = getChartUi(theme);
     return {
-        ...spec,
-        config: getChartConfig(theme),
+        title: chartTitle("跑测状态", theme),
+        tooltip: chartTooltip(theme),
+        legend: { ...chartLegend(theme), orient: "horizontal" },
+        series: [
+            {
+                type: "pie",
+                radius: ["42%", "68%"],
+                center: ["50%", "52%"],
+                avoidLabelOverlap: true,
+                itemStyle: {
+                    borderRadius: 4,
+                    borderColor: theme === "dark" ? "#151d2a" : "#ffffff",
+                    borderWidth: 2,
+                },
+                label: { color: ui.muted, fontSize: 11 },
+                data: data.map((item) => {
+                    const [from, to] = statusColor[item.label] ?? [ui.muted, ui.muted];
+                    return {
+                        name: item.label,
+                        value: item.count,
+                        itemStyle: { color: linearGradient(from, to) },
+                    };
+                }),
+            },
+        ],
     };
 }
 
-export function statusDonutSpec(
-    data: { label: string; count: number }[],
-    theme: ThemeMode,
-): TopLevelSpec | null {
-    if (!data.length) {
-        return null;
-    }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "跑测状态",
-            width: DONUT_SIZE,
-            height: DONUT_SIZE,
-            data: { values: data },
-            mark: { type: "arc", innerRadius: 56, tooltip: true },
-            encoding: {
-                theta: { field: "count", type: "quantitative" },
-                color: {
-                    field: "label",
-                    type: "nominal",
-                    legend: { orient: "bottom" },
-                    scale: statusScale,
-                },
-            },
-        },
-        theme,
-    );
-}
-
-const languageScale = {
-    domain: Object.keys(languageColor),
-    range: Object.values(languageColor),
-};
-
-const DONUT_SIZE = 260;
-const BAR_BAND = { paddingInner: 0.18, paddingOuter: 0.06 };
-
-function compactBarWidth(categoryCount: number): number {
-    return Math.min(400, Math.max(280, categoryCount * 68 + 88));
-}
-
-export function languageWinBarSpec(
+export function languageWinBarOption(
     data: { language: string; winCount: number }[],
     theme: ThemeMode,
-): TopLevelSpec | null {
+): EChartsOption | null {
     if (!data.length || data.every((item) => item.winCount === 0)) {
         return null;
     }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "第一名数量",
-            width: compactBarWidth(data.length),
-            height: 240,
-            data: { values: data },
-            mark: { type: "bar", cornerRadiusEnd: 2, tooltip: true, size: 52 },
-            encoding: {
-                x: {
-                    field: "language",
-                    type: "nominal",
-                    title: null,
-                    sort: { field: "winCount", order: "descending" },
-                    scale: BAR_BAND,
-                },
-                y: {
-                    field: "winCount",
-                    type: "quantitative",
-                    title: "题目数",
-                },
-                color: {
-                    field: "language",
-                    type: "nominal",
-                    legend: null,
-                    scale: languageScale,
-                },
-                tooltip: [
-                    { field: "language", title: "语言" },
-                    { field: "winCount", title: "第一名" },
-                ],
+    const sorted = [...data].sort((left, right) => right.winCount - left.winCount);
+    return {
+        title: {
+            ...chartTitle("第一名数量", theme),
+            padding: [0, 0, 10, 0],
+        },
+        tooltip: {
+            ...chartTooltip(theme),
+            formatter: (params) => {
+                const item = Array.isArray(params) ? params[0] : params;
+                if (!item || typeof item !== "object" || !("name" in item)) {
+                    return "";
+                }
+                return `${String(item.name)}<br/>胜场 ${String(item.value ?? "")}`;
             },
         },
-        theme,
-    );
+        grid: {
+            left: 56,
+            right: 16,
+            top: 52,
+            bottom: 36,
+            containLabel: true,
+        },
+        xAxis: {
+            ...categoryAxis(theme),
+            data: sorted.map((item) => item.language),
+        },
+        yAxis: {
+            ...valueAxis(theme, "胜场"),
+            nameLocation: "middle",
+            nameGap: 48,
+            nameRotate: 90,
+        },
+        series: [
+            {
+                type: "bar",
+                barMaxWidth: 52,
+                data: sorted.map((item) => ({
+                    value: item.winCount,
+                    itemStyle: {
+                        color: languageColor[item.language] ?? getChartUi(theme).muted,
+                        borderRadius: [4, 4, 0, 0],
+                    },
+                })),
+            },
+        ],
+    };
 }
 
-export function languageLogBarSpec(
-    data: { language: string; value: number }[],
-    title: string,
+export function languageViolinOption(
+    data: { language: string; logMs: number; runtimeMs: number; title: string; jitter: number }[],
     theme: ThemeMode,
-): TopLevelSpec | null {
+): EChartsOption | null {
     if (!data.length) {
         return null;
     }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title,
-            width: compactBarWidth(data.length),
-            height: 240,
-            data: { values: data },
-            mark: { type: "bar", cornerRadiusEnd: 2, tooltip: true, size: 52 },
-            encoding: {
-                x: {
-                    field: "language",
-                    type: "nominal",
-                    title: null,
-                    sort: { field: "value", order: "ascending" },
-                    scale: BAR_BAND,
-                },
-                y: {
-                    field: "value",
-                    type: "quantitative",
-                    title: "ln(ms)",
-                },
-                color: {
-                    field: "language",
-                    type: "nominal",
-                    legend: null,
-                    scale: languageScale,
-                },
-                tooltip: [
-                    { field: "language", title: "语言" },
-                    { field: "value", title: "ln(ms)", format: ".3f" },
-                ],
+
+    const ui = getChartUi(theme);
+    const languages = LANGUAGE_ORDER.filter((label) =>
+        data.some((item) => item.language === label),
+    );
+
+    return {
+        title: chartTitle("分布 · ln(ms)", theme),
+        tooltip: {
+            ...chartTooltip(theme),
+            formatter: (params) => {
+                const item = Array.isArray(params) ? params[0] : params;
+                if (!item || typeof item !== "object" || !("data" in item)) {
+                    return "";
+                }
+                const point = item.data as { title: string; runtimeMs: number; logMs: number };
+                return `${point.title}<br/>${String(item.seriesName)}<br/>${point.runtimeMs.toFixed(2)} ms · ln ${point.logMs.toFixed(3)}`;
             },
         },
-        theme,
-    );
+        legend: {
+            ...chartLegend(theme),
+            data: languages,
+        },
+        grid: chartGrid(44, 48),
+        xAxis: {
+            ...valueAxis(theme, "ln(ms)"),
+            scale: true,
+        },
+        yAxis: {
+            ...categoryAxis(theme),
+            data: languages,
+        },
+        series: languages.map((language) => ({
+            name: language,
+            type: "scatter",
+            symbolSize: data.filter((item) => item.language === language).length >= 2 ? 9 : 12,
+            itemStyle: {
+                color: languageColor[language] ?? ui.muted,
+                opacity: 0.9,
+            },
+            data: data
+                .filter((item) => item.language === language)
+                .map((item) => ({
+                    value: [item.logMs, language],
+                    title: item.title,
+                    runtimeMs: item.runtimeMs,
+                    logMs: item.logMs,
+                })),
+        })),
+    };
 }
 
-export function languageViolinSpec(
+function buildEcdfSeries(
+    data: { language: string; logMs: number; runtimeMs: number; title: string }[],
+) {
+    const grouped = new Map<string, typeof data>();
+    for (const item of data) {
+        const list = grouped.get(item.language) ?? [];
+        list.push(item);
+        grouped.set(item.language, list);
+    }
+
+    const series: EChartsOption["series"] = [];
+    for (const language of LANGUAGE_ORDER) {
+        const items = grouped.get(language);
+        if (!items?.length) {
+            continue;
+        }
+        const sorted = [...items].sort((left, right) => left.logMs - right.logMs);
+        const points = sorted.map((item, index) => ({
+            value: [item.logMs, (index + 1) / sorted.length] as [number, number],
+            title: item.title,
+            runtimeMs: item.runtimeMs,
+        }));
+        series.push({
+            name: language,
+            type: "line",
+            step: "end",
+            showSymbol: true,
+            symbolSize: 6,
+            lineStyle: { width: 2 },
+            itemStyle: { color: languageColor[language] },
+            data: points,
+        });
+    }
+    return series;
+}
+
+export function languageEcdfOption(
     data: { language: string; logMs: number; runtimeMs: number; title: string }[],
     theme: ThemeMode,
-): TopLevelSpec | null {
+): EChartsOption | null {
     if (!data.length) {
         return null;
     }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "Violin · ln(ms)",
-            data: { values: data },
-            facet: {
-                column: {
-                    field: "language",
-                    type: "nominal",
-                    title: null,
-                    sort: languageScale.domain,
-                    header: { labelAlign: "left", labelAngle: 0, labelPadding: 6 },
-                },
-            },
-            spec: {
-                width: 88,
-                height: 260,
-                layer: [
-                    {
-                        transform: [{ density: "logMs", extent: "extent", as: ["logMs", "density"] }],
-                        mark: { type: "area", orient: "horizontal", opacity: 0.75 },
-                        encoding: {
-                            y: { field: "logMs", type: "quantitative", title: "ln(ms)" },
-                            x: { field: "density", type: "quantitative", axis: null, title: null },
-                            color: {
-                                field: "language",
-                                type: "nominal",
-                                legend: null,
-                                scale: languageScale,
-                            },
-                        },
-                    },
-                    {
-                        mark: {
-                            type: "circle",
-                            size: 70,
-                            opacity: 0.95,
-                            stroke: "white",
-                            strokeWidth: 1,
-                        },
-                        encoding: {
-                            y: { field: "logMs", type: "quantitative" },
-                            color: {
-                                field: "language",
-                                type: "nominal",
-                                legend: null,
-                                scale: languageScale,
-                            },
-                            tooltip: [
-                                { field: "title", title: "题目" },
-                                { field: "runtimeMs", title: "ms", format: ".2f" },
-                                { field: "logMs", title: "ln(ms)", format: ".3f" },
-                            ],
-                        },
-                    },
-                ],
-            },
-            resolve: { scale: { y: "shared" } },
-        },
-        theme,
-    );
-}
+    const series = buildEcdfSeries(data);
+    if (!series?.length) {
+        return null;
+    }
 
-export function languageEcdfSpec(
-    data: { language: string; logMs: number; runtimeMs: number; title: string }[],
-    theme: ThemeMode,
-): TopLevelSpec | null {
-    if (!data.length) {
-        return null;
-    }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "ECDF · ln(ms)",
-            width: 440,
-            height: 280,
-            data: { values: data },
-            transform: [
-                {
-                    window: [{ op: "row_number", as: "rank" }],
-                    sort: [{ field: "logMs", order: "ascending" }],
-                    groupby: ["language"],
-                },
-                {
-                    joinaggregate: [{ op: "count", as: "n" }],
-                    groupby: ["language"],
-                },
-                { calculate: "datum.rank / datum.n", as: "ecdf" },
-            ],
-            layer: [
-                {
-                    mark: { type: "line", interpolate: "step-after", strokeWidth: 2 },
-                    encoding: {
-                        x: { field: "logMs", type: "quantitative", title: "ln(ms)" },
-                        y: {
-                            field: "ecdf",
-                            type: "quantitative",
-                            title: "累计比例",
-                            scale: { domain: [0, 1] },
-                            axis: { format: "%" },
-                        },
-                        color: {
-                            field: "language",
-                            type: "nominal",
-                            scale: languageScale,
-                            legend: { orient: "bottom" },
-                        },
-                        tooltip: [
-                            { field: "language", title: "语言" },
-                            { field: "title", title: "题目" },
-                            { field: "runtimeMs", title: "ms", format: ".2f" },
-                            { field: "ecdf", title: "累计比例", format: ".0%" },
-                        ],
-                    },
-                },
-                {
-                    mark: { type: "point", filled: true, size: 55, opacity: 0.85 },
-                    encoding: {
-                        x: { field: "logMs", type: "quantitative" },
-                        y: { field: "ecdf", type: "quantitative" },
-                        color: {
-                            field: "language",
-                            type: "nominal",
-                            scale: languageScale,
-                            legend: null,
-                        },
-                        tooltip: [
-                            { field: "language", title: "语言" },
-                            { field: "title", title: "题目" },
-                            { field: "runtimeMs", title: "ms", format: ".2f" },
-                            { field: "ecdf", title: "累计比例", format: ".0%" },
-                        ],
-                    },
-                },
-            ],
-        },
-        theme,
-    );
-}
-
-export function scatterSpec(
-    data: {
-        title: string;
-        tsRuntimeMs: number;
-        vRuntimeMs: number;
-        difficulty: string;
-    }[],
-    theme: ThemeMode,
-): TopLevelSpec | null {
-    if (!data.length) {
-        return null;
-    }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "TS vs V (wasm) 运行时间",
-            width: "container",
-            height: 280,
-            data: { values: data },
-            mark: { type: "point", filled: true, size: 90, tooltip: true },
-            encoding: {
-                x: {
-                    field: "tsRuntimeMs",
-                    type: "quantitative",
-                    title: "TypeScript (ms)",
-                    scale: { type: "symlog" },
-                },
-                y: {
-                    field: "vRuntimeMs",
-                    type: "quantitative",
-                    title: "V (wasm) (ms)",
-                    scale: { type: "symlog" },
-                },
-                color: {
-                    field: "difficulty",
-                    type: "nominal",
-                    scale: {
-                        domain: ["Easy", "Medium", "Hard", "Unknown"],
-                        range: ["#34d399", "#fbbf24", "#fb7185", "#64748b"],
-                    },
-                },
-                tooltip: [
-                    { field: "title", title: "题目" },
-                    { field: "tsRuntimeMs", title: "TS (ms)", format: ".2f" },
-                    { field: "vRuntimeMs", title: "V (ms)", format: ".2f" },
-                    { field: "difficulty", title: "难度" },
-                ],
+    return {
+        title: chartTitle("ECDF · ln(ms)", theme),
+        tooltip: {
+            ...chartTooltip(theme),
+            formatter: (params) => {
+                const item = Array.isArray(params) ? params[0] : params;
+                if (!item || typeof item !== "object" || !("data" in item)) {
+                    return "";
+                }
+                const point = item.data as {
+                    title: string;
+                    runtimeMs: number;
+                    value: [number, number];
+                };
+                const ratio = point.value[1];
+                return `${point.title}<br/>${String(item.seriesName)}<br/>${point.runtimeMs.toFixed(2)} ms · 累计 ${(ratio * 100).toFixed(0)}%`;
             },
         },
-        theme,
-    );
-}
-
-export function tsRuntimeBarSpec(
-    data: { title: string; tsRuntimeMs: number; difficulty: string }[],
-    theme: ThemeMode,
-): TopLevelSpec | null {
-    if (!data.length) {
-        return null;
-    }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "TypeScript 运行时间 Top",
-            width: "container",
-            height: Math.max(220, data.length * 22),
-            data: { values: data },
-            mark: { type: "bar", cornerRadiusEnd: 1, tooltip: true },
-            encoding: {
-                y: {
-                    field: "title",
-                    type: "nominal",
-                    sort: "-x",
-                    title: null,
-                },
-                x: {
-                    field: "tsRuntimeMs",
-                    type: "quantitative",
-                    title: "ms",
-                },
-                color: {
-                    field: "difficulty",
-                    type: "nominal",
-                    legend: { orient: "top" },
-                    scale: {
-                        domain: ["Easy", "Medium", "Hard", "Unknown"],
-                        range: ["#34d399", "#fbbf24", "#fb7185", "#64748b"],
-                    },
-                },
-            },
+        legend: chartLegend(theme),
+        grid: chartGrid(44, 48),
+        xAxis: {
+            ...valueAxis(theme, "ln(ms)"),
+            scale: true,
         },
-        theme,
-    );
-}
-
-export function ratioBarSpec(
-    data: { title: string; ratio: number; winner: string }[],
-    theme: ThemeMode,
-): TopLevelSpec | null {
-    if (!data.length) {
-        return null;
-    }
-    return baseSpec(
-        {
-            $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-            title: "TS / V 比值（越小 V 越快）",
-            width: "container",
-            height: Math.max(220, data.length * 22),
-            data: { values: data },
-            mark: { type: "bar", cornerRadiusEnd: 1, tooltip: true },
-            encoding: {
-                y: {
-                    field: "title",
-                    type: "nominal",
-                    sort: { field: "ratio", order: "ascending" },
-                    title: null,
-                },
-                x: {
-                    field: "ratio",
-                    type: "quantitative",
-                    title: "倍率",
-                },
-                color: {
-                    field: "winner",
-                    type: "nominal",
-                    legend: { orient: "top" },
-                    scale: {
-                        domain: ["V 更快", "TS 更快", "持平"],
-                        range: ["#34d399", "#fbbf24", "#94a3b8"],
-                    },
-                },
-                tooltip: [
-                    { field: "title", title: "题目" },
-                    { field: "ratio", title: "TS/V", format: ".2f" },
-                    { field: "winner", title: "领先" },
-                ],
-            },
+        yAxis: {
+            ...valueAxis(theme, "累计比例", (value) => `${Math.round(Number(value) * 100)}%`),
+            min: 0,
+            max: 1,
         },
-        theme,
-    );
+        series,
+    };
 }

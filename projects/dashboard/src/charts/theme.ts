@@ -1,59 +1,37 @@
-import type { Config } from "vega-lite";
+import type { EChartsOption } from "echarts";
 
 import type { ThemeMode } from "../composables/useTheme";
 
-const chartPalettes: Record<ThemeMode, { label: string; title: string; grid: string; axis: string; text: string }> =
+const chartUi: Record<
+    ThemeMode,
     {
-        dark: {
-            label: "#94a3b8",
-            title: "#b8c4d6",
-            grid: "#243041",
-            axis: "#334155",
-            text: "#edf2f7",
-        },
-        light: {
-            label: "#64748b",
-            title: "#475569",
-            grid: "#e2e8f0",
-            axis: "#cbd5e1",
-            text: "#0f172a",
-        },
-    };
+        text: string;
+        muted: string;
+        grid: string;
+        axis: string;
+        tooltipBg: string;
+        tooltipBorder: string;
+    }
+> = {
+    dark: {
+        text: "#edf2f7",
+        muted: "#94a3b8",
+        grid: "#243041",
+        axis: "#334155",
+        tooltipBg: "rgba(15, 20, 28, 0.94)",
+        tooltipBorder: "rgba(148, 163, 184, 0.22)",
+    },
+    light: {
+        text: "#0f172a",
+        muted: "#64748b",
+        grid: "#e2e8f0",
+        axis: "#cbd5e1",
+        tooltipBg: "rgba(255, 255, 255, 0.96)",
+        tooltipBorder: "rgba(15, 23, 42, 0.1)",
+    },
+};
 
-export function getChartConfig(theme: ThemeMode): Config {
-    const colors = chartPalettes[theme];
-    return {
-        background: "transparent",
-        font: "Segoe UI, PingFang SC, Microsoft YaHei, system-ui, sans-serif",
-        axis: {
-            labelColor: colors.label,
-            titleColor: colors.title,
-            gridColor: colors.grid,
-            domainColor: colors.axis,
-        },
-        legend: {
-            labelColor: colors.label,
-            titleColor: colors.title,
-        },
-        title: {
-            color: colors.text,
-            fontSize: 14,
-            fontWeight: 600,
-        },
-        view: {
-            stroke: "transparent",
-        },
-        range: {
-            category: ["#5b8cff", "#34d399", "#fbbf24", "#fb7185", "#a78bfa", "#38bdf8"],
-        },
-    };
-}
 export const palette = {
-    text: "#edf2f7",
-    muted: "#94a3b8",
-    grid: "#243041",
-    axis: "#334155",
-    panel: "#151d2a",
     accent: "#5b8cff",
     accentDeep: "#3d6ef5",
     success: "#34d399",
@@ -63,7 +41,6 @@ export const palette = {
     danger: "#fb7185",
     dangerDeep: "#f43f5e",
     neutral: "#64748b",
-    purple: "#a78bfa",
 };
 
 export const difficultyColor: Record<string, string> = {
@@ -106,28 +83,89 @@ export function linearGradient(from: string, to: string) {
     };
 }
 
-export const titleStyle = {
-    textStyle: {
-        color: palette.text,
-        fontSize: 14,
-        fontWeight: 600,
-    },
-    left: 0,
-    top: 0,
-};
+export function getChartUi(theme: ThemeMode) {
+    return chartUi[theme];
+}
 
-export const axisStyle = {
-    axisLine: { lineStyle: { color: palette.axis } },
-    axisTick: { lineStyle: { color: palette.axis } },
-    axisLabel: { color: palette.muted, fontSize: 11 },
-    splitLine: { lineStyle: { color: palette.grid, type: "dashed" as const } },
-};
+export function chartTitle(text: string, theme: ThemeMode): EChartsOption["title"] {
+    const ui = getChartUi(theme);
+    return {
+        text,
+        left: 0,
+        top: 0,
+        textStyle: {
+            color: ui.text,
+            fontSize: 14,
+            fontWeight: 600,
+        },
+    };
+}
 
-export const tooltipStyle = {
-    backgroundColor: "rgba(15, 20, 28, 0.94)",
-    borderColor: "rgba(148, 163, 184, 0.22)",
-    borderWidth: 1,
-    padding: [10, 14],
-    textStyle: { color: palette.text, fontSize: 12 },
-    extraCssText: "box-shadow: 0 12px 32px rgba(0,0,0,0.35); border-radius: 10px;",
-};
+export function chartLegend(theme: ThemeMode): EChartsOption["legend"] {
+    const ui = getChartUi(theme);
+    return {
+        bottom: 0,
+        textStyle: { color: ui.muted, fontSize: 11 },
+        itemWidth: 10,
+        itemHeight: 10,
+    };
+}
+
+export function chartTooltip(
+    theme: ThemeMode,
+    trigger: "item" | "axis" = "item",
+): EChartsOption["tooltip"] {
+    const ui = getChartUi(theme);
+    return {
+        trigger,
+        backgroundColor: ui.tooltipBg,
+        borderColor: ui.tooltipBorder,
+        borderWidth: 1,
+        padding: [10, 14],
+        textStyle: { color: ui.text, fontSize: 12 },
+        extraCssText: "box-shadow: 0 12px 32px rgba(0,0,0,0.12); border-radius: 10px;",
+    };
+}
+
+export function categoryAxis(theme: ThemeMode, name?: string): EChartsOption["xAxis"] {
+    const ui = getChartUi(theme);
+    return {
+        type: "category",
+        name,
+        nameTextStyle: { color: ui.muted, fontSize: 11 },
+        axisLine: { lineStyle: { color: ui.axis } },
+        axisTick: { lineStyle: { color: ui.axis } },
+        axisLabel: { color: ui.muted, fontSize: 11 },
+    };
+}
+
+export function valueAxis(
+    theme: ThemeMode,
+    name?: string,
+    formatter?: string,
+): EChartsOption["yAxis"] {
+    const ui = getChartUi(theme);
+    return {
+        type: "value",
+        name,
+        nameTextStyle: { color: ui.muted, fontSize: 11 },
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: {
+            color: ui.muted,
+            fontSize: 11,
+            formatter,
+        },
+        splitLine: { lineStyle: { color: ui.grid, type: "dashed" } },
+    };
+}
+
+export function chartGrid(top = 44, bottom = 36): EChartsOption["grid"] {
+    return {
+        left: 48,
+        right: 16,
+        top,
+        bottom,
+        containLabel: true,
+    };
+}

@@ -1,5 +1,9 @@
 import type { EnrichedBenchRow } from "../types/bench";
-import { computeLanguageStats, countTimedLanguages, RUNTIME_LANGUAGES } from "../utils/languageStats";
+import {
+    computeLanguageStats,
+    countTimedLanguages,
+    RUNTIME_LANGUAGES,
+} from "../utils/languageStats";
 
 function jitterForKey(key: string): number {
     let hash = 0;
@@ -81,20 +85,57 @@ export function languageWinCounts(rows: EnrichedBenchRow[]) {
     }));
 }
 
+function average(values: number[]): number | null {
+    if (!values.length) {
+        return null;
+    }
+    return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function median(values: number[]): number | null {
+    if (!values.length) {
+        return null;
+    }
+    const sorted = [...values].sort((left, right) => left - right);
+    const mid = Math.floor(sorted.length / 2);
+    if (sorted.length % 2 === 0) {
+        return (sorted[mid - 1] + sorted[mid]) / 2;
+    }
+    return sorted[mid];
+}
+
 export function languageAvgLog(rows: EnrichedBenchRow[]) {
-    return computeLanguageStats(rows)
-        .filter((item) => item.avgLogMs !== null)
-        .map((item) => ({
-            language: item.label,
-            value: item.avgLogMs as number,
-        }));
+    return RUNTIME_LANGUAGES.map((language) => {
+        const logs: number[] = [];
+        for (const row of rows) {
+            const runtimeMs = language.readRuntime(row);
+            if (runtimeMs === null || runtimeMs <= 0 || !Number.isFinite(runtimeMs)) {
+                continue;
+            }
+            logs.push(Math.log(runtimeMs));
+        }
+        const value = average(logs);
+        if (value === null) {
+            return null;
+        }
+        return { language: language.label, value };
+    }).filter((item): item is { language: string; value: number } => item !== null);
 }
 
 export function languageMedianLog(rows: EnrichedBenchRow[]) {
-    return computeLanguageStats(rows)
-        .filter((item) => item.medianLogMs !== null)
-        .map((item) => ({
-            language: item.label,
-            value: item.medianLogMs as number,
-        }));
+    return RUNTIME_LANGUAGES.map((language) => {
+        const logs: number[] = [];
+        for (const row of rows) {
+            const runtimeMs = language.readRuntime(row);
+            if (runtimeMs === null || runtimeMs <= 0 || !Number.isFinite(runtimeMs)) {
+                continue;
+            }
+            logs.push(Math.log(runtimeMs));
+        }
+        const value = median(logs);
+        if (value === null) {
+            return null;
+        }
+        return { language: language.label, value };
+    }).filter((item): item is { language: string; value: number } => item !== null);
 }
