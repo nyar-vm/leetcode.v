@@ -37,9 +37,9 @@ export type LanguageStat = {
     color: string;
     sampleCount: number;
     winCount: number;
-    avgLogMs: number | null;
-    medianLogMs: number | null;
-    geoMeanMs: number | null;
+    avgMs: number | null;
+    medianMs: number | null;
+    totalMs: number | null;
 };
 
 function validRuntime(ms: number | null): number | null {
@@ -69,12 +69,10 @@ function average(values: number[]): number | null {
 }
 
 export function winnersForRow(row: EnrichedBenchRow): RuntimeLanguageId[] {
-    const candidates = RUNTIME_LANGUAGES
-        .map((language) => ({
-            id: language.id,
-            ms: validRuntime(language.readRuntime(row)),
-        }))
-        .filter((item): item is { id: RuntimeLanguageId; ms: number } => item.ms !== null);
+    const candidates = RUNTIME_LANGUAGES.map((language) => ({
+        id: language.id,
+        ms: validRuntime(language.readRuntime(row)),
+    })).filter((item): item is { id: RuntimeLanguageId; ms: number } => item.ms !== null);
 
     if (!candidates.length) {
         return [];
@@ -85,7 +83,8 @@ export function winnersForRow(row: EnrichedBenchRow): RuntimeLanguageId[] {
 }
 
 export function comparableRowCount(rows: EnrichedBenchRow[]): number {
-    return rows.filter((row) => winnersForRow(row).length > 0 && countTimedLanguages(row) >= 2).length;
+    return rows.filter((row) => winnersForRow(row).length > 0 && countTimedLanguages(row) >= 2)
+        .length;
 }
 
 export function sumCompileMs(rows: EnrichedBenchRow[]): number | null {
@@ -117,14 +116,15 @@ export function sumRuntimeMs(rows: EnrichedBenchRow[]): number | null {
 }
 
 export function countTimedLanguages(row: EnrichedBenchRow): number {
-    return RUNTIME_LANGUAGES.filter((language) => validRuntime(language.readRuntime(row)) !== null).length;
+    return RUNTIME_LANGUAGES.filter((language) => validRuntime(language.readRuntime(row)) !== null)
+        .length;
 }
 
 export function computeLanguageStats(rows: EnrichedBenchRow[]): LanguageStat[] {
     const winCounts = new Map<RuntimeLanguageId, number>(
         RUNTIME_LANGUAGES.map((language) => [language.id, 0]),
     );
-    const logSamples = new Map<RuntimeLanguageId, number[]>(
+    const samples = new Map<RuntimeLanguageId, number[]>(
         RUNTIME_LANGUAGES.map((language) => [language.id, []]),
     );
 
@@ -138,28 +138,30 @@ export function computeLanguageStats(rows: EnrichedBenchRow[]): LanguageStat[] {
             if (runtime === null) {
                 continue;
             }
-            logSamples.get(language.id)?.push(Math.log(runtime));
+            samples.get(language.id)?.push(runtime);
         }
     }
 
     return RUNTIME_LANGUAGES.map((language) => {
-        const logs = logSamples.get(language.id) ?? [];
-        const avgLogMs = average(logs);
+        const values = samples.get(language.id) ?? [];
+        const avgMs = average(values);
         return {
             id: language.id,
             label: language.label,
             color: language.color,
-            sampleCount: logs.length,
+            sampleCount: values.length,
             winCount: winCounts.get(language.id) ?? 0,
-            avgLogMs,
-            medianLogMs: median(logs),
-            geoMeanMs: avgLogMs === null ? null : Math.exp(avgLogMs),
+            avgMs,
+            medianMs: median(values),
+            totalMs: values.length > 0 ? values.reduce((sum, value) => sum + value, 0) : null,
         };
     });
 }
 
 export function leadingLanguage(stats: LanguageStat[]): LanguageStat | null {
-    const ranked = [...stats].filter((item) => item.winCount > 0).sort((left, right) => right.winCount - left.winCount);
+    const ranked = [...stats]
+        .filter((item) => item.winCount > 0)
+        .sort((left, right) => right.winCount - left.winCount);
     if (!ranked.length) {
         return null;
     }
@@ -169,16 +171,9 @@ export function leadingLanguage(stats: LanguageStat[]): LanguageStat | null {
     return ranked[0];
 }
 
-export function formatLogMs(value: number | null): string {
+export function formatStatMs(value: number | null): string {
     if (value === null || !Number.isFinite(value)) {
         return "—";
     }
-    return value.toFixed(3);
-}
-
-export function formatGeoMeanHint(stat: LanguageStat): string {
-    if (stat.geoMeanMs === null) {
-        return "无有效样本";
-    }
-    return `几何均值 ${formatMs(stat.geoMeanMs)} ms`;
+    return `${formatMs(value)} ms`;
 }

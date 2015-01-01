@@ -3,12 +3,7 @@ import { Trophy } from "@lucide/vue";
 import { computed } from "vue";
 
 import type { EnrichedBenchRow } from "../types/bench";
-import { formatMs } from "../utils/format";
-import {
-    computeLanguageStats,
-    formatLogMs,
-    leadingLanguage,
-} from "../utils/languageStats";
+import { computeLanguageStats, formatStatMs, leadingLanguage } from "../utils/languageStats";
 import AppIcon from "./AppIcon.vue";
 
 const props = defineProps<{
@@ -39,9 +34,9 @@ const leader = computed(() => leadingLanguage(stats.value));
                         <th>语言</th>
                         <th class="num">有效样本</th>
                         <th class="num">第一名</th>
-                        <th class="num">平均 log(ms)</th>
-                        <th class="num">中位 log(ms)</th>
-                        <th class="num">几何均值 (ms)</th>
+                        <th class="num">平均 (ms)</th>
+                        <th class="num">中位 (ms)</th>
+                        <th class="num">总和 (ms)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,9 +46,9 @@ const leader = computed(() => leadingLanguage(stats.value));
                         </td>
                         <td class="num">{{ item.sampleCount }}</td>
                         <td class="num" :class="{ 'tone-success': leader?.id === item.id }">{{ item.winCount }}</td>
-                        <td class="num">{{ formatLogMs(item.avgLogMs) }}</td>
-                        <td class="num">{{ formatLogMs(item.medianLogMs) }}</td>
-                        <td class="num">{{ item.geoMeanMs === null ? "—" : formatMs(item.geoMeanMs) }}</td>
+                        <td class="num">{{ formatStatMs(item.avgMs) }}</td>
+                        <td class="num">{{ formatStatMs(item.medianMs) }}</td>
+                        <td class="num">{{ formatStatMs(item.totalMs) }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -32,12 +32,13 @@ function isActive(item: { to: string; exact?: boolean }) {
                 <AppIcon :icon="Gauge" :size="22" :stroke-width="2.25" />
             </div>
             <div>
-                <p class="brand-title">LeetCode Bench</p>
+                <p class="brand-title">LeetCode Benchmark</p>
                 <p class="brand-sub">Python · TS · V (wasm)</p>
             </div>
         </div>
 
         <nav class="nav">
+            <p class="nav-caption">工作台</p>
             <RouterLink
                 v-for="item in navItems"
                 :key="item.to"

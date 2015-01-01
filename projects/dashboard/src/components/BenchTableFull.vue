@@ -17,7 +17,7 @@ const emit = defineEmits<{
 }>();
 
 const columns: { key: SortKey; label: string; align?: "right" }[] = [
-    { key: "title", label: "题目" },
+    { key: "id", label: "题目" },
     { key: "difficulty", label: "难度" },
     { key: "pyRuntimeMs", label: "Python (ms)", align: "right" },
     { key: "tsRuntimeMs", label: "TypeScript (ms)", align: "right" },
@@ -78,7 +78,10 @@ function sortIcon(key: SortKey) {
                             <span v-if="row.legionRoute">route {{ row.legionRoute }}</span>
                             <span v-if="row.benchTarget">target {{ row.benchTarget }}</span>
                         </div>
-                        <div v-if="row.error" class="error">{{ row.error }}</div>
+                        <details v-if="row.error" class="error-details">
+                            <summary>查看错误详情</summary>
+                            <div class="error">{{ row.error }}</div>
+                        </details>
                     </td>
                 </tr>
             </tbody>

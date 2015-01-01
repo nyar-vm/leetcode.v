@@ -24,7 +24,8 @@ export const router = createRouter({
             component: BenchmarksFullView,
             meta: {
                 title: "全量对比",
-                subtitle: "Python、TypeScript、V 编译与 V (wasm) 运行时间同表竞技，支持筛选与下钻。",
+                subtitle:
+                    "Python、TypeScript、V 编译与 V (wasm) 运行时间同表竞技，支持筛选与下钻。",
             },
         },
         {
@@ -66,5 +67,5 @@ export const router = createRouter({
 
 router.afterEach((to) => {
     const label = typeof to.meta.title === "string" ? to.meta.title : "看板";
-    document.title = `${label} · LeetCode Bench`;
+    document.title = `${label} · LeetCode Benchmark`;
 });

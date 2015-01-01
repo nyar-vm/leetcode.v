@@ -14,8 +14,9 @@ import {
 import { fastestRuntimeMs, runtimeRatio } from "../utils/format";
 
 const DIFFICULTIES: Difficulty[] = ["Easy", "Medium", "Hard"];
-const TS_V_SORT_KEYS: SortKey[] = ["title", "difficulty", "tsRuntimeMs", "vRuntimeMs", "ratio"];
+const TS_V_SORT_KEYS: SortKey[] = ["id", "title", "difficulty", "tsRuntimeMs", "vRuntimeMs", "ratio"];
 const FULL_SORT_KEYS: SortKey[] = [
+    "id",
     "title",
     "difficulty",
     "pyRuntimeMs",
@@ -37,7 +38,10 @@ function parseList(value: unknown): string[] {
     if (typeof value !== "string" || !value.trim()) {
         return [];
     }
-    return value.split(",").map((item) => item.trim()).filter(Boolean);
+    return value
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
 }
 
 function parseDifficulty(value: unknown): Difficulty[] {
@@ -91,7 +95,9 @@ function matchesStatus(row: EnrichedBenchRow, status: BenchStatus, mode: BenchFi
             return row.error !== null;
         case "missing":
             if (mode === "full") {
-                return row.pyRuntimeMs === null || row.tsRuntimeMs === null || row.vRuntimeMs === null;
+                return (
+                    row.pyRuntimeMs === null || row.tsRuntimeMs === null || row.vRuntimeMs === null
+                );
             }
             return row.tsRuntimeMs === null || row.vRuntimeMs === null;
         case "v-faster": {
@@ -124,6 +130,12 @@ function sortRows(rows: EnrichedBenchRow[], sort: SortKey, sortDesc: boolean): E
     const sorted = [...rows].sort((left, right) => {
         let cmp = 0;
         switch (sort) {
+            case "id": {
+                const leftQ = left.questionId ?? 0;
+                const rightQ = right.questionId ?? 0;
+                cmp = leftQ !== rightQ ? leftQ - rightQ : left.id.localeCompare(right.id);
+                break;
+            }
             case "title":
                 cmp = left.title.localeCompare(right.title);
                 break;
@@ -264,7 +276,10 @@ export function useBenchFilters(rows: () => EnrichedBenchRow[], mode: BenchFilte
             ) {
                 return false;
             }
-            if (filters.value.tags.length > 0 && !filters.value.tags.some((tag) => row.tags.includes(tag))) {
+            if (
+                filters.value.tags.length > 0 &&
+                !filters.value.tags.some((tag) => row.tags.includes(tag))
+            ) {
                 return false;
             }
             return matchesStatus(row, filters.value.status, mode);

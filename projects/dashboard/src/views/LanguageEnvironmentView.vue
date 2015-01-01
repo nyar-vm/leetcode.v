@@ -47,10 +47,11 @@ function pythonCard(env: PythonBenchEnvironment | null, ready: boolean): EnvCard
     return {
         key: "python",
         title: "Python",
-        subtitle: "LCD 脚手架 · metadata.tests 外部 harness",
+        subtitle: "单进程加载后只计 metadata.tests 循环",
         ready,
         versionRows: [{ label: "Python", value: env.runtimeVersion }],
         paramRows: [
+            { label: "计时范围", value: env.timingScope ?? "in-process-metadata-tests" },
             { label: "指标", value: `${env.metric}（${env.aggregation}）` },
             { label: "采样", value: `${env.iterations} 次` },
             { label: "预热", value: `${env.warmup} 次` },
@@ -66,7 +67,7 @@ function typescriptCard(env: TypeScriptBenchEnvironment | null, ready: boolean):
     return {
         key: "typescript",
         title: "TypeScript",
-        subtitle: "tsx 加载 solution.ts · metadata.tests",
+        subtitle: "单进程加载后只计 metadata.tests 循环",
         ready,
         versionRows: [
             { label: "Node", value: env.nodeVersion },
@@ -74,6 +75,7 @@ function typescriptCard(env: TypeScriptBenchEnvironment | null, ready: boolean):
         ],
         paramRows: [
             { label: "Runner", value: env.runner },
+            { label: "计时范围", value: env.timingScope ?? "in-process-metadata-tests" },
             { label: "指标", value: `${env.metric}（${env.aggregation}）` },
             { label: "采样", value: `${env.iterations} 次` },
             { label: "预热", value: `${env.warmup} 次` },

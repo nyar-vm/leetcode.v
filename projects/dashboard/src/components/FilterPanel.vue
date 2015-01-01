@@ -8,16 +8,16 @@ import AppIcon from "./AppIcon.vue";
 
 const props = withDefaults(
     defineProps<{
-    variant?: BenchFilterMode;
-    query: string;
-    difficulties: Difficulty[];
-    selectedDifficulties: Difficulty[];
-    tags: string[];
-    selectedTags: string[];
-    status: BenchStatus;
-    resultCount: number;
-    totalCount: number;
-    activeFilterCount: number;
+        variant?: BenchFilterMode;
+        query: string;
+        difficulties: Difficulty[];
+        selectedDifficulties: Difficulty[];
+        tags: string[];
+        selectedTags: string[];
+        status: BenchStatus;
+        resultCount: number;
+        totalCount: number;
+        activeFilterCount: number;
     }>(),
     {
         variant: "ts-v",

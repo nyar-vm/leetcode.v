@@ -2,7 +2,9 @@ import type { EnrichedBenchRow } from "../types/bench";
 
 export type RuntimeLanguage = "Python" | "TypeScript" | "V (wasm)";
 
-export function fastestRuntime(row: EnrichedBenchRow): { label: RuntimeLanguage; ms: number } | null {
+export function fastestRuntime(
+    row: EnrichedBenchRow,
+): { label: RuntimeLanguage; ms: number } | null {
     const candidates: { label: RuntimeLanguage; ms: number }[] = [];
     if (row.pyRuntimeMs !== null) {
         candidates.push({ label: "Python", ms: row.pyRuntimeMs });

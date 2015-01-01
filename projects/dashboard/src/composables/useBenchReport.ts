@@ -7,10 +7,7 @@ import {
     benchmarkValkyrieUrl,
 } from "../config";
 import type { BenchReport } from "../types/bench";
-import {
-    mergeLanguageBenchReports,
-    normalizeLegacyBenchReport,
-} from "./mergeBenchReports";
+import { mergeLanguageBenchReports, normalizeLegacyBenchReport } from "./mergeBenchReports";
 
 const benchReportKey: InjectionKey<ReturnType<typeof createBenchReport>> = Symbol("benchReport");
 

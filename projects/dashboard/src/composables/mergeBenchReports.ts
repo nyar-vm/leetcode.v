@@ -67,7 +67,10 @@ type ValkyrieBenchReport = {
     rows: ValkyrieBenchRow[];
 };
 
-function mergeErrors(left: string | null | undefined, right: string | null | undefined): string | null {
+function mergeErrors(
+    left: string | null | undefined,
+    right: string | null | undefined,
+): string | null {
     const a = left ?? null;
     const b = right ?? null;
     if (a && b) {
@@ -226,7 +229,9 @@ export function mergeLanguageBenchReports(
 }
 
 /** 旧版合并快照缺 Python 字段时补齐。 */
-export function normalizeLegacyBenchRow(row: Partial<BenchRow> & Pick<BenchRow, "id" | "title">): BenchRow {
+export function normalizeLegacyBenchRow(
+    row: Partial<BenchRow> & Pick<BenchRow, "id" | "title">,
+): BenchRow {
     return {
         id: row.id,
         title: row.title,

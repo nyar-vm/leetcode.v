@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-    ArrowRight,
-    Cog,
-    LayoutList,
-    Sparkles,
-    Timer,
-    Trophy,
-    Users,
-    XCircle,
-} from "@lucide/vue";
+import { ArrowRight, Cog, LayoutList, Sparkles, Timer, Trophy, Users, XCircle } from "@lucide/vue";
 import { computed, defineAsyncComponent } from "vue";
 
 import AppIcon from "../components/AppIcon.vue";
@@ -104,7 +95,7 @@ const leaderLabel = computed(() => {
             <div class="sample-grid">
                 <article v-for="row in rows.slice(0, 6)" :key="row.id" class="sample-card">
                     <RouterLink :to="`/problems/${row.id}`" class="sample-title">{{ row.title }}</RouterLink>
-                    <p class="row-meta">{{ row.id }}</p>
+                    <p class="row-meta sample-slug">{{ row.id }}</p>
                     <div class="sample-metrics">
                         <span
                             v-for="language in RUNTIME_LANGUAGES"
@@ -112,7 +103,8 @@ const leaderLabel = computed(() => {
                             class="sample-metric"
                             :style="{ '--lang-color': language.color }"
                         >
-                            {{ language.label }} {{ formatMs(language.readRuntime(row)) }}
+                            <span class="sample-metric-label">{{ language.label }}</span>
+                            <strong>{{ formatMs(language.readRuntime(row)) }}</strong>
                         </span>
                     </div>
                 </article>

@@ -27,6 +27,7 @@ export type PythonBenchEnvironment = {
     language: "python";
     runtimeVersion: string;
     metric: "runtime";
+    timingScope: "in-process-metadata-tests";
     aggregation: "median";
     iterations: number;
     warmup: number;
@@ -39,6 +40,7 @@ export type TypeScriptBenchEnvironment = {
     tsxVersion: string | null;
     runner: "tsx";
     metric: "runtime";
+    timingScope: "in-process-metadata-tests";
     aggregation: "median";
     iterations: number;
     warmup: number;
@@ -99,6 +101,7 @@ export type Difficulty = "Easy" | "Medium" | "Hard";
 export type BenchStatus = "all" | "ok" | "error" | "v-faster" | "ts-faster" | "missing";
 
 export type SortKey =
+    | "id"
     | "title"
     | "difficulty"
     | "pyRuntimeMs"
