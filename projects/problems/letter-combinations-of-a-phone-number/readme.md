@@ -1,32 +1,60 @@
-# Letter Combinations Of A Phone Number
+# [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 
-- **LeetCode**：[#17 Letter Combinations Of A Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
-- **难度**：Medium
-- **标签**：Hash Table · String · Backtracking
+## 问题
 
-## 题目
+给定一个只包含数字 `2`–`9` 的字符串 `digits`，返回它能表示的所有字母组合。答案可以按任意顺序返回。
 
-Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
-A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+数字与字母的对应关系与老式电话键盘相同（`1` 不对应任何字母）。映射如下：`2→abc`，`3→def`，`4→ghi`，`5→jkl`，`6→mno`，`7→pqrs`，`8→tuv`，`9→wxyz`。
 
+**示例 1**
 
-**Example 1**：
+- **输入**：`digits = "23"`
+- **输出**：`["ad","ae","af","bd","be","bf","cd","ce","cf"]`
 
-**Input**：digits = "23"
-**Output**：["ad","ae","af","bd","be","bf","cd","ce","cf"]
+**示例 2**
 
-**Example 2**：
+- **输入**：`digits = ""`
+- **输出**：`[]`
 
-**Input**：digits = ""
-**Output**：[]
+**示例 3**
 
-**Example 3**：
+- **输入**：`digits = "2"`
+- **输出**：`["a","b","c"]`
 
-**Input**：digits = "2"
-**Output**：["a","b","c"]
+**约束**
 
+- $1 \le \mathrm{len}(\texttt{digits}) \le 4$
+- $\texttt{digits}[i]$ 为 `2`–`9` 之间的数字
+- 空字符串 `""` 按题面示例返回空列表（实现中需单独处理）
 
-**Constraints**：
+## 解答
 
-0 $\le \mathrm{len}(digits)$ $\le 4$
-digits[i] is a digit in the range ['2', '9'].
+### 朴素想法
+
+从左到右依次确定每一位数字对应的字母。对长度为 $n$ 的输入，每位最多 $4$ 种选择，组合总数不超过 $4^n$，直接枚举全部字符串并检查是否由映射合法拼接而成。正确但冗余。
+
+### 逐位笛卡尔积瓶颈
+
+用「当前已形成的字符串列表」与下一位字母做笛卡尔积，每轮都复制整表。在 $n=4$ 的官方约束下虽能跑通，但中间列表反复扩容，空间峰值约为最终输出的数倍。
+
+### 回溯一次生成优化
+
+用一条路径缓冲区 `path` 记录已选字母，递归到下一位时尝试该位映射中的每个字母，到底时把 `path` 加入答案并回溯撤销。只维护一条深度为 $n$ 的路径，避免中间临时列表。
+
+### 最终算法
+
+若 `digits` 为空，直接返回 `[]`。否则从下标 $0$ 开始 DFS：未到末尾则枚举 `digits[index]` 对应字母并递归 `index+1`；到达末尾则将 `path` 拷贝进答案。`7` 与 `9` 对应 $4$ 个字母，其余数字对应 $3$ 个。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(4^n \cdot n)$
+
+$n = \mathrm{len}(\texttt{digits}) \le 4$。最多生成 $4^n$ 条长度为 $n$ 的字符串，每条构造需 $O(n)$。在官方约束下 $4^4 = 256$，为常数级上界。
+
+### 空间复杂度
+
+$O(n)$
+
+递归深度与路径缓冲区均为 $O(n)$；不计输出数组本身占用的 $O(4^n \cdot n)$ 空间。
