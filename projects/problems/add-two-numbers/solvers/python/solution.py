@@ -1,6 +1,5 @@
 import heapq
 import itertools
-from sortedcontainers import SortedList
 import random
 import functools
 import collections
