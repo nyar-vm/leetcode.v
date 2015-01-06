@@ -1,12 +1,13 @@
 namespace leetcode.two_sum;
 
-[export]
-micro twoSum(nums: ArrayList<i64>, target: i64): ArrayList<i64> {
-    return Solution().twoSum(nums, target)
+# wasm invoke 入口：V 侧 snake_case，导出符号 camelCase 对齐 metadata.invoke
+[export(case: "camelCase")]
+micro two_sum(nums: ArrayList<i64>, target: i64): ArrayList<i64> {
+    return Solution().two_sum(nums, target)
 }
 
 class Solution {
-    micro twoSum(self, nums: ArrayList<i64>, target: i64): ArrayList<i64> {
+    micro two_sum(self, nums: ArrayList<i64>, target: i64): ArrayList<i64> {
         let mut index: HashMap<i64, i64> = HashMap::new(0)
         let mut i: usize = 0
         while i < nums.length() {
