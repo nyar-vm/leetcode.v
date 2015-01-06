@@ -109,7 +109,10 @@ export function wasmInvokeBlockedReason(wasmPath: string): string | null {
         );
     }
     const exports = listWasmExports(wasmPath);
-    if (exports.length <= 1) {
+    const callable = exports.filter(
+        (name) => name !== "main" && name !== "_start" && name !== "memory" && !name.startsWith("cabi_"),
+    );
+    if (callable.length === 0) {
         return `wasm 缺少可 invoke 的导出符号（现有：${exports.join(", ") || "无"})`;
     }
     return null;

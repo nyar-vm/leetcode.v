@@ -31,7 +31,7 @@ async function runCandidate(
     }
     if (typeof host.callExport === "function") {
         const exportSymbol = resolveWasmExportSymbol(entry);
-        return host.callExport(exportSymbol, args);
+        return host.callExport(exportSymbol, ...Object.values(args));
     }
     throw new Error(
         "node glue 缺少 invokeLeetCode / callExport（需 valkyrie.rs 为 leetcode 库模式接线 wasm invoke）",
