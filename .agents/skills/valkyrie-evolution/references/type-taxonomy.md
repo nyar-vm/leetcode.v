@@ -30,6 +30,7 @@ leetcode 侧记录的 **语言设定**，权威规范仍以 `valkyrie-2020` / �
 
 - **设定**：类型位置的 **匿名** 联合；无独立类型名，用于签名与约束（如「接受 `ArrayList<i64>` 或 digit 数组」的过渡 API）。
 - **实现状态**：`vcc-data` 已解析 `TypeExpression::Union`；完整子typing / 收窄 **未完备** — backlog **V-013**。
+- **phase-1 使用边界**：题解禁止用匿名 `|` 规避多形参数的类型检查；先用显式 overload 或题面专用类型。`T | null` 与 `Option<T>` 的关系尚待独立 nullable 合同，不按二者等价处理。
 - **与 `unite` 区别**：`A|B` 不引入新 nominal type，也不自动生成 tag；不能替代 `Option`/`Result`。
 
 ## 与 leetcode 刷题的关系

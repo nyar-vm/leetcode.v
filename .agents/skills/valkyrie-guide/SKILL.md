@@ -88,6 +88,29 @@ solvers/valkyrie/
 - **不要**在 `solution.v` 里写 `[benchmark]`；leetcode 用外部 harness 跑 `metadata.tests`。
 - 编译：`legion build <dir> --target node -o ...`（Rust seed，见 `AGENTS.md` §维护者陷阱；非 `valkyrie.v` 自举 legion）。
 
+### wasm invoke（库模式，无 `[main]`）
+
+leetcode 外部 harness 通过 node glue 的 `callExport` / `invokeLeetCode` 调用 wasm，**不会**自动跑 `[main]`。
+
+| 约定 | 说明 |
+|------|------|
+| 显式 `[export]` | 仅带 `[export]` 的顶层 `micro` 进入 wasm 导出表；类方法 **不会**自动导出 |
+| V 命名 `snake_case` | 题内 `micro` / 类方法用 `two_sum`，与 V 习惯一致 |
+| LeetCode 对齐 | `[export(case: "camelCase")]` 将导出符号变为 `twoSum`，对齐 `metadata.invoke.typescript` |
+| 精确覆盖 | `[export(name: "twoSum")]` 或 `[export(name: "invokeTwoSum")]` 优先于 `case` |
+| 入口包装 | 顶层 `[export]` `micro` 调用 `Solution().two_sum(...)`，类内保留算法 |
+
+示例（`two-sum`）：
+
+```text
+[export(case: "camelCase")]
+micro two_sum(nums: ArrayList<i64>, target: i64): ArrayList<i64> {
+    return Solution().two_sum(nums, target)
+}
+```
+
+harness 从 `metadata.invoke`（如 `Solution().twoSum`）解析 wasm 导出名 `twoSum`。
+
 ## 与 LeetCode 测试数据的边界
 
 - `metadata.json` 的 `tests` / 返回值约定来自 **LeetCode（0-based 下标、JSON 类型）**。
@@ -106,6 +129,7 @@ solvers/valkyrie/
 - [ ] `HashMap` / `ArrayList` 在 `std.collection` 下
 - [ ] 返回下标与 `metadata.tests` 一致（0-based）
 - [ ] 已对照同题 coach readme 的最优算法
+- [ ] wasm invoke：顶层 `[export]` 包装 + `snake_case`；需对齐 invoke 时加 `case: "camelCase"`
 
 ## 参考
 

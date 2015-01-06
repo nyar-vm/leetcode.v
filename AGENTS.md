@@ -15,7 +15,8 @@
 
 | 仓               | 用途                                                                                                              |
 |------------------|-------------------------------------------------------------------------------------------------------------------|
-| `../valkyrie.rs` | **Rust seed** `legion` CLI、`@valkyrie-language/vcc`、Wasm 编译与基准（leetcode 默认工具链）                      |
+| `../valkyrie.rs` | **装配层**：Rust seed `legion` CLI、`@valkyrie-language/vcc`、manifest/收集/构建编排与 wasm 产物装配（leetcode 默认工具链） |
+| `../nyar-vm.rs`  | **解析与优化层**：`nyar-language` / `nyar-optimizer` / `nyar-emitter`（HIR、`[export]`、wasm 降低、Node `callExport` glue）；经 `valkyrie.rs` `[patch]` 链接 |
 | `../valkyrie.v`  | V 语言 `core` / `std` / `std.adaptors._`（经根 `legions.von` 注册）；**不是** leetcode 用的 legion 可执行文件来源 |
 
 ## 标识符（slug / id / questionId）
@@ -37,7 +38,7 @@
 | `projects/problems/<slug>/solvers/typescript/` | 手写 TS 解：`solution.ts` + `package.json`                                  |
 | `projects/problems/<slug>/solvers/valkyrie/`   | 手写 V 解：`solution.v` + `legion.von`（`entry: "solution.v"`）             |
 | `projects/conformance/`                        | 完备性矩阵、TS/Python/V 跑测、**外部产物基准**                              |
-| `projects/dashboard/`                          | Vue 看板（合并 `benchmark-typescript.json` / `benchmark-valkyrie.json`，Vega-Lite 可视化） |
+| `projects/dashboard/`                          | Vue 看板（合并 `benchmark-typescript.json` / `benchmark-valkyrie.json`，ECharts 可视化） |
 | `scripts/`                                     | `format.mjs`、`reword.mjs`、`batch-limit.mjs`、`link-valkyrie.mjs`、`valkyrie-v-deps.mjs` |
 | `legions.von`                                  | workspace 成员：`core`、`std`、`std.adaptors._`（见下文「维护者陷阱」）     |
 
@@ -84,7 +85,7 @@
 ## 基准测试
 
 - **外部基准**：先 `legion build` 得到 wasm + js glue，再在 harness 里对 **metadata.tests** 计时；leetcode **不在** `solution.v` 写 `[benchmark]`。
-- **TS 参考**：`run_ts_solver.ts` 对 `solution.ts` 跑全量 `metadata.tests` 并计时 → `tsRuntimeMs`。
+- **TS 运行**：harness 单进程加载题解（`tsx` 转译发生在计时外），预热后只对全量 `metadata.tests` 循环取中位数 → `runtimeMs`（不含每次冷启动 Node）。
 - **V 编译**：`pnpm bench` 对 `legion build --target node` 计时 → `vCompileMs`（**不**调用 `legion bench`）。
 - **V 运行**：`vRuntimeMs` 待 wasm 导出 invoke + `run_v_solver` 接线后补全；缺运行时分 **不算 error**（看板标为 missing）。
 - 编排：`pnpm bench` → `scripts/benchmark.mjs` → `@leetcode/conformance` `bench-all.ts`（支持 `--count`、`--id`、`--lang` 等 CLI）。
@@ -173,7 +174,18 @@ node scripts/reword.mjs --file reword.pending.txt --base origin/dev
 - 本机 `legion` 常不在 `PATH`；harness 默认解析 `VALKYRIE_RS_ROOT/target/release/legion.exe`（或 debug / wasm
   collect）。可设环境变量 `VALKYRIE_RS_ROOT`。
 
-### 2. `legions.von` 不能只注册 `core` + `std`
+### 2. `valkyrie.rs` 是装配层，解析/优化在 `nyar-vm.rs`
+
+| 层 | 仓 | 典型改动 |
+| --- | --- | --- |
+| 装配 | `../valkyrie.rs` | `legion` manifest、`planner` source closure、CLI、`legion build` 缓存与产物路径 |
+| 解析/优化/降低 | `../nyar-vm.rs` | HIR、`[export]` → wasm 导出表、MIR、`wasm_js_glue`（`callExport`）、`nyar-optimizer` |
+
+- **勿**在 `valkyrie.rs` 的 `asgard` 或 `legion` 里找 LeetCode wasm invoke / 多 export 的 emitter 实现（见 backlog **V-017**）。
+- **勿**在 `nyar-vm.rs` 重复实现 `legion.von` 的 `entry` 收集合同；manifest 校验属装配层。
+- 本机开发时 `valkyrie.rs` 根 `Cargo.toml` `[patch]` 应指向 `../nyar-vm.rs`；改 emitter 后需在 `nyar-vm.rs` 验证再 `cargo build -p legion`。
+
+### 3. `legions.von` 不能只注册 `core` + `std`
 
 `projects/std/legion.von` 声明 `std.adaptor.clr`、`std.adaptor.wasm` 等为 **workspace 依赖**。leetcode 根 `legions.von`
 若缺少 adaptor 超工作空间，会出现：
@@ -193,7 +205,7 @@ project 'std' requires workspace dependency 'std.adaptor.clr', but no workspace 
 
 `pnpm link:valkyrie` 会重写 `legions.von`；脚本 `scripts/valkyrie-v-deps.mjs` 须与上表一致，避免 link 后再次踩坑。
 
-### 3. legion CLI 标志：用 `--target`，不是 `-t`
+### 4. legion CLI 标志：用 `--target`，不是 `-t`
 
 当前 Rust seed legion 的 build/test 使用长选项：
 
@@ -206,7 +218,7 @@ legion test <project-dir> --target node
 
 `node` 在规划器里映射为 `wasm32-node-unknown-wasm`（见 `valkyrie.rs` planner 测试）。
 
-### 4. `legion test` ≠ 对 `metadata.tests` 验题意
+### 5. `legion test` ≠ 对 `metadata.tests` 验题意
 
 | 机制                                        | 验什么                                                                               |
 |---------------------------------------------|--------------------------------------------------------------------------------------|
@@ -218,34 +230,34 @@ leetcode **不**在 `solution.v` 里写 `[benchmark]`；也 **不必**为每题�
 侧单测。完备性矩阵默认探测 build + test 退出码（非 strict 下 test 为空可接受）；算法对错以 **题解**为准，三端实现须与题解一致并通过
 `metadata.tests` / bench harness 校验。
 
-### 5. 单题 `solvers/valkyrie/` 不在 workspace `members` 内是正常的
+### 6. 单题 `solvers/valkyrie/` 不在 workspace `members` 内是正常的
 
 对题目目录执行 `legion build` 时，日志可能出现 `mode: package`、`未注册到 workspace members，已回退到 package 模式`
 。只要祖先链上能发现 leetcode 根 `legions.von` 且 std 依赖可解析，通常 **仍可成功构建**。不要把「未注册为 member」误判为必须把每题
 slug 写进 `legions.von`。
 
-### 6. 刷题闭环各步的「完成」标准
+### 7. 刷题闭环各步的「完成」标准
 
 | 步骤                | 常见误判                                                                                                                         |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | ① coach `readme.md` | 把 LCD 旧稿（英文题面 + 难度标签行）当成已完成；须符合 `leetcode-coach`（中文、`## 问题` / `## 解答` / `## 复杂度分析`、无代码） |
 | ② `solution.v`      | 文件存在但 **空文件** 或仅 `# 阻塞：` 即宣称「已实现」                                                                           |
 | ③ 测 V              | 只跑 `legion build` 未对照题解或其它实现；或把 seed legion 与自举 legion 混用导致环境不一致                                      |
-| ④ 演进              | 在 leetcode.v 内嵌 std 副本；应在 `valkyrie.v` / `valkyrie.rs` 补能力后回到 ②③                                                   |
+| ④ 演进              | 在 leetcode.v 内嵌 std 副本；应在 `valkyrie.v` / `valkyrie.rs` / `nyar-vm.rs`（按层）补能力后回到 ②③                                 |
 
-### 7. 写 `solution.v` 时易错点（详见 `valkyrie-guide`）
+### 8. 写 `solution.v` 时易错点（详见 `valkyrie-guide`）
 
 - `ArrayList`： **逻辑 0-based** 用 `⁅i⁆`，勿把 LeetCode 下标直接套到 **`[i]`**（ordinal 1-based）。
 - `i64` 异或：用 **`bit_xor`**；`^` 运算符主要在 `i32` 等类型上，勿照搬 TS 的 `^=`。
 - `HashMap`：当前 std 提供 `HashMap::new(capacity)`、`insert` / `get`；勿假定存在 `from(iterator)` 等未实现构造器——缺 API 走
   `valkyrie-evolution` backlog，勿在题解里 hack。
 
-### 8. 跑测前环境
+### 9. 跑测前环境
 
 - `projects/conformance` 需 `pnpm install` 后才有 `tsx` 等依赖；根目录 `pnpm test:problems` 会拉起 filter 包。
 - Python 完备性跑测依赖本机 `python` 与题内 `pyproject.toml` 环境。
 
-### 9. `metadata.tests` 大整数与 `null` 语义
+### 10. `metadata.tests` 大整数与 `null` 语义
 
 - JSON 数字超过 $2^{53}-1$ 时， **生成/编辑 metadata 可能静默损坏**（如回文题 `1000000000000000000` 末位被抹平）；题解与实现算法正确仍会对不上
   `expected`。修复时以算法重算 `expected`，或改用字符串键存大整数（需 harness 同步）。
