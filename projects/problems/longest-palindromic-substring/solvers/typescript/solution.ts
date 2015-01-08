@@ -1,12 +1,5 @@
-function asMetadataValue(value: string): string | number {
-    if (/^\d+$/.test(value) && !value.startsWith("0")) {
-        return Number(value);
-    }
-    return value;
-}
-
 export class Solution {
-    longestPalindrome(s: string): string | number {
+    longestPalindrome(s: string): string {
         const n = s.length;
         const f: boolean[][] = Array.from({ length: n }, () => Array(n).fill(true));
         let k = 0;
@@ -23,6 +16,6 @@ export class Solution {
                 }
             }
         }
-        return asMetadataValue(s.slice(k, k + mx));
+        return s.slice(k, k + mx);
     }
 }

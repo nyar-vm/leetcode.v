@@ -1,12 +1,5 @@
-function asMetadataValue(value: string): string | number {
-    if (/^\d+$/.test(value) && !value.startsWith("0")) {
-        return Number(value);
-    }
-    return value;
-}
-
 export class Solution {
-    convert(s: string, numRows: number): string | number {
+    convert(s: string, numRows: number): string {
         if (numRows === 1) {
             return s;
         }
@@ -20,6 +13,6 @@ export class Solution {
             }
             i += k;
         }
-        return asMetadataValue(g.map((row) => row.join("")).join(""));
+        return g.map((row) => row.join("")).join("");
     }
 }
