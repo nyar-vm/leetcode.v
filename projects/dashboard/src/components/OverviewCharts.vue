@@ -45,13 +45,19 @@ function median(values: number[]): number {
     return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
+function mean(values: number[]): number {
+    return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
 const lanes = computed(() =>
     RUNTIME_LANGUAGES.map((language) => {
         const points = samples.value.filter((sample) => sample.language === language.label);
+        const runtimes = points.map((point) => point.runtimeMs);
         return {
             ...language,
             points,
-            medianMs: points.length ? median(points.map((point) => point.runtimeMs)) : null,
+            medianMs: runtimes.length ? median(runtimes) : null,
+            meanMs: runtimes.length ? mean(runtimes) : null,
         };
     }),
 );
@@ -86,7 +92,10 @@ const lanes = computed(() =>
                         <h3 class="chart-block-title">运行耗时分布</h3>
                         <p class="muted chart-note">横轴为对数刻度，等间距表示耗时相差 10 倍。</p>
                     </div>
-                    <span class="muted distribution-key"><i></i> 中位数</span>
+                    <div class="distribution-keys">
+                        <span class="muted distribution-key"><i class="key-median"></i> 中位数</span>
+                        <span class="muted distribution-key"><i class="key-mean"></i> 平均数</span>
+                    </div>
                 </div>
                 <article class="panel distribution-panel">
                     <div v-if="samples.length" class="log-plot">
@@ -97,6 +106,12 @@ const lanes = computed(() =>
                             </div>
                             <div class="log-track">
                                 <span v-for="tick in ticks" :key="tick.label" class="log-gridline" :style="{ left: tick.left }"></span>
+                                <span
+                                    v-if="lane.meanMs !== null"
+                                    class="log-mean"
+                                    :style="{ left: position(lane.meanMs), '--lang-color': lane.color }"
+                                    :title="`平均数 ${lane.meanMs.toPrecision(3)} ms`"
+                                ></span>
                                 <span
                                     v-if="lane.medianMs !== null"
                                     class="log-median"
@@ -112,7 +127,10 @@ const lanes = computed(() =>
                                 ></span>
                                 <span v-if="!lane.points.length" class="log-no-data">暂无运行计时</span>
                             </div>
-                            <strong class="log-lane-value">{{ lane.medianMs === null ? "—" : `${lane.medianMs.toPrecision(3)} ms` }}</strong>
+                            <div class="log-lane-value">
+                                <span>中位 {{ lane.medianMs === null ? "—" : `${lane.medianMs.toPrecision(3)} ms` }}</span>
+                                <span class="muted">平均 {{ lane.meanMs === null ? "—" : `${lane.meanMs.toPrecision(3)} ms` }}</span>
+                            </div>
                         </div>
                         <div class="log-axis">
                             <span v-for="tick in ticks" :key="tick.label" :style="{ left: tick.left }">{{ tick.label }}</span>
