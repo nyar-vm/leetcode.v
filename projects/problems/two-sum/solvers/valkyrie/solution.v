@@ -1,5 +1,6 @@
 namespace leetcode.two_sum;
 
+[export(case: "camelCase")]
 micro two_sum(nums: ArrayList<i64>, target: i64) -> ArrayList<i64> {
     let mut index: HashMap<i64, i64> = HashMap::new(0)
     let mut i: usize = 0
