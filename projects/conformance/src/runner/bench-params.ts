@@ -27,3 +27,12 @@ export const VALKYRIE_BENCH_PARAMS = {
     runtimeMetric: "runtime" as const,
     runtimeStatus: "blocked-stub-wasm" as const,
 };
+
+export const SXO_BENCH_PARAMS = {
+    iterations: 50,
+    warmup: 5,
+    aggregation: "median" as const,
+    metric: "runtime" as const,
+    /** 单 Node 进程内复用 @sxo/* frontend，只计 metadata.tests 循环。 */
+    timingScope: "in-process-metadata-tests" as const,
+};

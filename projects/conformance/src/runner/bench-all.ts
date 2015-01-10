@@ -1,8 +1,10 @@
 import type { BenchLanguage } from "./bench-types.ts";
 import { parseBenchLanguages } from "./bench-shared.ts";
+import { benchMatlabSxoMain } from "./bench-matlab-sxo.ts";
 import { benchPythonMain } from "./bench-python.ts";
 import { benchTypeScriptMain } from "./bench-typescript.ts";
 import { benchValkyrieMain } from "./bench-valkyrie.ts";
+import { benchWolframSxoMain } from "./bench-wolfram-sxo.ts";
 
 export type { BenchRow } from "./bench-merge.ts";
 export { mergeLanguageBenchReports } from "./bench-merge.ts";
@@ -29,7 +31,15 @@ export async function runSelectedBenchmarks(
             paths.push(await benchTypeScriptMain());
             continue;
         }
-        paths.push(await benchValkyrieMain());
+        if (language === "valkyrie") {
+            paths.push(await benchValkyrieMain());
+            continue;
+        }
+        if (language === "wolfram-sxo") {
+            paths.push(await benchWolframSxoMain());
+            continue;
+        }
+        paths.push(await benchMatlabSxoMain());
     }
 
     return { languages, paths };

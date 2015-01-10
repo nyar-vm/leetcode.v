@@ -7,6 +7,7 @@ import { PROBLEMS, problemDir } from "../catalog.ts";
 import { problemsForBatch } from "../batch-limit.ts";
 import { hasPythonSolver } from "./python-ref.ts";
 import { hasReadyTsSolver } from "./ts-ref.ts";
+import { hasMatlabSxoSolver, hasWolframSxoSolver } from "./sxo-solver-shared.ts";
 import { hasValkyrieSolver } from "./valkyrie.ts";
 import type { BenchLanguage, LanguageBenchReport } from "./bench-types.ts";
 import { BENCH_JSON_FILES } from "./bench-types.ts";
@@ -86,6 +87,12 @@ export function benchProblemsForLanguage(language: BenchLanguage): ProblemDefini
         }
         if (language === "typescript") {
             return hasReadyTsSolver(root);
+        }
+        if (language === "wolfram-sxo") {
+            return hasWolframSxoSolver(root);
+        }
+        if (language === "matlab-sxo") {
+            return hasMatlabSxoSolver(root);
         }
         return hasValkyrieSolver(root);
     });

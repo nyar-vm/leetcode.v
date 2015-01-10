@@ -1,4 +1,9 @@
-export type BenchLanguage = "python" | "typescript" | "valkyrie";
+export type BenchLanguage =
+    | "python"
+    | "typescript"
+    | "valkyrie"
+    | "wolfram-sxo"
+    | "matlab-sxo";
 
 export type HostEnvironment = {
     platform: string;
@@ -104,10 +109,69 @@ export type ValkyrieBenchReport = {
     rows: ValkyrieBenchRow[];
 };
 
-export type LanguageBenchReport = PythonBenchReport | TypeScriptBenchReport | ValkyrieBenchReport;
+export type WolframSxoBenchEnvironment = {
+    language: "wolfram-sxo";
+    sxoMathematicaVersion: string | null;
+    runnerReady: boolean;
+    skipReason: string | null;
+    metric: "runtime";
+    timingScope: "in-process-metadata-tests";
+    aggregation: "median";
+    iterations: number;
+    warmup: number;
+    host: HostEnvironment;
+};
+
+export type MatlabSxoBenchEnvironment = {
+    language: "matlab-sxo";
+    sxoMatlabVersion: string | null;
+    runnerReady: boolean;
+    skipReason: string | null;
+    metric: "runtime";
+    timingScope: "in-process-metadata-tests";
+    aggregation: "median";
+    iterations: number;
+    warmup: number;
+    host: HostEnvironment;
+};
+
+export type WolframSxoBenchRow = LanguageBenchRowBase & {
+    runtimeMs: number | null;
+};
+
+export type MatlabSxoBenchRow = LanguageBenchRowBase & {
+    runtimeMs: number | null;
+};
+
+export type WolframSxoBenchReport = {
+    language: "wolfram-sxo";
+    generatedAt: string;
+    ready: boolean;
+    catalogTotal: number;
+    environment: WolframSxoBenchEnvironment;
+    rows: WolframSxoBenchRow[];
+};
+
+export type MatlabSxoBenchReport = {
+    language: "matlab-sxo";
+    generatedAt: string;
+    ready: boolean;
+    catalogTotal: number;
+    environment: MatlabSxoBenchEnvironment;
+    rows: MatlabSxoBenchRow[];
+};
+
+export type LanguageBenchReport =
+    | PythonBenchReport
+    | TypeScriptBenchReport
+    | ValkyrieBenchReport
+    | WolframSxoBenchReport
+    | MatlabSxoBenchReport;
 
 export const BENCH_JSON_FILES: Record<BenchLanguage, string> = {
     python: "benchmark-python.json",
     typescript: "benchmark-typescript.json",
     valkyrie: "benchmark-valkyrie.json",
+    "wolfram-sxo": "benchmark-wolfram-sxo.json",
+    "matlab-sxo": "benchmark-matlab-sxo.json",
 };

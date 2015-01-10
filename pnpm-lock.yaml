@@ -32,6 +32,13 @@ importers:
       vitest:
         specifier: ^4.1.11
         version: 4.1.11(@types/node@22.20.4)(vite@6.4.3(@types/node@22.20.4)(tsx@4.23.15))
+    optionalDependencies:
+      '@sxo/mathematica':
+        specifier: ^0.0.6
+        version: 0.0.6
+      '@sxo/matlab':
+        specifier: ^0.0.6
+        version: 0.0.6
 
   projects/dashboard:
     dependencies:
@@ -596,6 +603,37 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
+  '@sxo/core@0.0.6':
+    resolution: {integrity: sha512-BdmB97CIOa2tdpYmuRdg7yjRc1rSQ1G3kOdzALOJhjvspzIxOM6DWdkGhiLVYOXVOurnqKKjjm4a0q/uAnGJLg==}
+
+  '@sxo/mathematica@0.0.6':
+    resolution: {integrity: sha512-4PA+GNKP/tR1Cc47viYxgplwsbbKEkKIbs+9l5z89VIBvQtOJl5Nxx3Ortbr1FfnO/ORrU7aIoWyA/pUQIBR4w==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  '@sxo/matlab@0.0.6':
+    resolution: {integrity: sha512-viR0vxLGtA/p8EYme9ixVmm4fhYX0SspWPGyL7YorGPFyJZNbZbRZ/apEoQR9DZoKKuMGu/wX0bQ6tBfYxHPHQ==}
+
+  '@sxo/sxo-darwin-arm64@0.0.6':
+    resolution: {integrity: sha512-OU05y9WF0SCIjbnA3fJ059bAh2JE3UlhIpEs4s5TAA1MeZZS9YVxpiKEnenZyes3X6aj8kqGxx0y6X4fFdzSGg==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@sxo/sxo-darwin-x64@0.0.6':
+    resolution: {integrity: sha512-uxj4mmSc6zxovAEP555l2vnSNyUdeYuaQEDL1Sm4I14xK1yGvHsOJnby0pUxmMZS3PquAKNylSAuX5ECwIEzGQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@sxo/sxo-linux-x64@0.0.6':
+    resolution: {integrity: sha512-S+ityA5Su6VzQey+kyuuomhT3BOpxdCbLCfTIXgd2jiYAIvguniAGVr8vW7/HTi5/6D54g1jDYrIgHlcbYx6ZQ==}
+    cpu: [x64]
+    os: [linux]
+
+  '@sxo/sxo-win32-x64@0.0.6':
+    resolution: {integrity: sha512-l/6GuQlwNxNBESUNatwpWjr+tcOjyKLxuY3mxeL2BXRYh3R9cqX8Q+a8HeWcp29C0dBvs3voCMHsEktsY8Js9w==}
+    cpu: [x64]
+    os: [win32]
+
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
 
@@ -643,6 +681,14 @@ packages:
 
   '@vitest/utils@4.1.11':
     resolution: {integrity: sha512-zTCVGpyFsGWBhllOyKlTw/vnr6D9qxsfSDyfbyZmTyjHw5N/VuvzHpHoQjm2ZJzn4RJgx5w4r7V0er69CmLgPQ==}
+
+  '@vmz/commander@0.1.26':
+    resolution: {integrity: sha512-9qMb8bEJsg60Fr968F4/OKnK8l19bDl+ebDU1KvVAoexj7WmCg1srM4/W7lJhS0i1Rmc3dqMnOB+Dxo13Mu40Q==}
+    engines: {node: '>=20'}
+
+  '@vmz/diagnostic@0.1.26':
+    resolution: {integrity: sha512-hGud+xd0N3YqNbuKtpduuy3TZ4uu94bhZKAybl18Jfjy/qn30C3sDY+AL5b6bH88l2nqd/MatUr4Jvsq2UfWEg==}
+    engines: {node: '>=20'}
 
   '@volar/language-core@2.4.15':
     resolution: {integrity: sha512-3VHw+QZU0ZG9IuQmzT68IyN4hZNd9GchGPhbD9+pa8CVv7rnoOZwo7T8weIbrRmihqy3ATpdfXFnqRrfPVK6CA==}
@@ -1295,6 +1341,48 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
+  '@sxo/core@0.0.6':
+    optionalDependencies:
+      '@sxo/sxo-darwin-arm64': 0.0.6
+      '@sxo/sxo-darwin-x64': 0.0.6
+      '@sxo/sxo-linux-x64': 0.0.6
+      '@sxo/sxo-win32-x64': 0.0.6
+    optional: true
+
+  '@sxo/mathematica@0.0.6':
+    dependencies:
+      '@sxo/core': 0.0.6
+      '@vmz/commander': 0.1.26
+      '@vmz/diagnostic': 0.1.26
+    optionalDependencies:
+      '@sxo/sxo-darwin-arm64': 0.0.6
+      '@sxo/sxo-darwin-x64': 0.0.6
+      '@sxo/sxo-linux-x64': 0.0.6
+      '@sxo/sxo-win32-x64': 0.0.6
+    optional: true
+
+  '@sxo/matlab@0.0.6':
+    dependencies:
+      '@sxo/core': 0.0.6
+    optionalDependencies:
+      '@sxo/sxo-darwin-arm64': 0.0.6
+      '@sxo/sxo-darwin-x64': 0.0.6
+      '@sxo/sxo-linux-x64': 0.0.6
+      '@sxo/sxo-win32-x64': 0.0.6
+    optional: true
+
+  '@sxo/sxo-darwin-arm64@0.0.6':
+    optional: true
+
+  '@sxo/sxo-darwin-x64@0.0.6':
+    optional: true
+
+  '@sxo/sxo-linux-x64@0.0.6':
+    optional: true
+
+  '@sxo/sxo-win32-x64@0.0.6':
+    optional: true
+
   '@types/chai@5.2.3':
     dependencies:
       '@types/deep-eql': 4.0.2
@@ -1353,6 +1441,12 @@ snapshots:
       '@vitest/pretty-format': 4.1.11
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.1
+
+  '@vmz/commander@0.1.26':
+    optional: true
+
+  '@vmz/diagnostic@0.1.26':
+    optional: true
 
   '@volar/language-core@2.4.15':
     dependencies:

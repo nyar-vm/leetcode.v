@@ -25,6 +25,12 @@ const LANGUAGE_ALIASES = {
     ts: "typescript",
     valkyrie: "valkyrie",
     v: "valkyrie",
+    "wolfram-sxo": "wolfram-sxo",
+    wolfram: "wolfram-sxo",
+    wl: "wolfram-sxo",
+    "matlab-sxo": "matlab-sxo",
+    matlab: "matlab-sxo",
+    m: "matlab-sxo",
 };
 
 const RUNNERS = {
@@ -32,6 +38,8 @@ const RUNNERS = {
     python: "src/runner/bench-python.ts",
     typescript: "src/runner/bench-typescript.ts",
     valkyrie: "src/runner/bench-valkyrie.ts",
+    "wolfram-sxo": "src/runner/bench-wolfram-sxo.ts",
+    "matlab-sxo": "src/runner/bench-matlab-sxo.ts",
 };
 
 function usage() {
@@ -41,14 +49,16 @@ function usage() {
   python | py          仅 Python
   typescript | ts      仅 TypeScript
   valkyrie | v           仅 Valkyrie
-  （省略）               多语言（默认 python + typescript + valkyrie，可用 --lang 过滤）
+  wolfram-sxo | wl       仅 Wolfram (sxo)
+  matlab-sxo | m         仅 MATLAB (sxo)
+  （省略）               多语言（默认可用 --lang 过滤）
 
 选项:
   --count, -n <N>       最多跑 N 题（默认 50）
   --all                 跑全量题目
   --id <slug>           仅跑单题 id
   --ids <a,b,c>         逗号分隔多个 id
-  --lang <列表>         多语言模式下指定语言（python,ts,valkyrie,all）
+  --lang <列表>         多语言模式下指定语言（python,ts,valkyrie,wolfram-sxo,matlab-sxo,all）
   --help, -h            显示帮助
 
 示例:
@@ -62,7 +72,9 @@ function normalizeLanguage(token) {
     const key = token.trim().toLowerCase();
     const language = LANGUAGE_ALIASES[key];
     if (!language) {
-        throw new Error(`未知语言 ${token}（可用 python、typescript、valkyrie）`);
+        throw new Error(
+            `未知语言 ${token}（可用 python、typescript、valkyrie、wolfram-sxo、matlab-sxo）`,
+        );
     }
     return language;
 }

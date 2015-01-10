@@ -6,15 +6,19 @@ import { WASM_NODE_BENCH_TARGET } from "@valkyrie-language/vcc/benchmark";
 
 import type {
     HostEnvironment,
+    MatlabSxoBenchEnvironment,
     PythonBenchEnvironment,
     TypeScriptBenchEnvironment,
     ValkyrieBenchEnvironment,
+    WolframSxoBenchEnvironment,
 } from "./bench-types.ts";
 import {
     PYTHON_BENCH_PARAMS,
+    SXO_BENCH_PARAMS,
     TYPESCRIPT_BENCH_PARAMS,
     VALKYRIE_BENCH_PARAMS,
 } from "./bench-params.ts";
+import { sxoPackagesStatus, sxoRunnerReady, sxoSkipReason } from "./sxo-bridge.ts";
 import { spawnLegion, valkyrieRunnerReady, valkyrieSkipReason } from "./valkyrie.ts";
 
 const requireFromHere = createRequire(import.meta.url);
@@ -64,6 +68,30 @@ export function collectTypeScriptBenchEnvironment(): TypeScriptBenchEnvironment 
         tsxVersion: tsxVersion ? `tsx ${tsxVersion}` : null,
         host: collectHostEnvironment(),
         ...TYPESCRIPT_BENCH_PARAMS,
+    };
+}
+
+export function collectWolframSxoBenchEnvironment(): WolframSxoBenchEnvironment {
+    const status = sxoPackagesStatus();
+    return {
+        language: "wolfram-sxo",
+        sxoMathematicaVersion: status.mathematicaVersion,
+        runnerReady: sxoRunnerReady(),
+        skipReason: sxoSkipReason(),
+        host: collectHostEnvironment(),
+        ...SXO_BENCH_PARAMS,
+    };
+}
+
+export function collectMatlabSxoBenchEnvironment(): MatlabSxoBenchEnvironment {
+    const status = sxoPackagesStatus();
+    return {
+        language: "matlab-sxo",
+        sxoMatlabVersion: status.matlabVersion,
+        runnerReady: sxoRunnerReady(),
+        skipReason: sxoSkipReason(),
+        host: collectHostEnvironment(),
+        ...SXO_BENCH_PARAMS,
     };
 }
 
