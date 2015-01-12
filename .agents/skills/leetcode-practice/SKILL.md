@@ -10,9 +10,10 @@ description: >-
 在本仓， **刷题** 指对 `projects/problems/<slug>/` 的 **完整闭环**，不是只写 readme 或只写某一语言。
 
 ```text
-① 写题解（coach）  →  ② 写实现（solvers）  →  ③ 测 Valkyrie  →  ④ 演进（若缺能力）
-      leetcode-coach      leetcode-implement       本节步骤 3          valkyrie-evolution
+① 写题解（coach）  →  ② 写实现（solvers）  →  ③ 测 Valkyrie / SXO  →  ④ 演进（若缺能力）
+      leetcode-coach      leetcode-implement       本节步骤 3          valkyrie-evolution / sxo-evolution
                           + valkyrie-guide（V）
+                          + wolfram-sxo / matlab-sxo 单脚本（无题级 manifest）
 ```
 
 任一步未通过 **不得** 宣称该题「刷完」；③ 失败且因语言/std 缺口时进入 ④，完成后 **回到 ②③** 直至 V 可编译且测例通过（或
@@ -78,13 +79,14 @@ legion build projects/problems/<slug>/solvers/valkyrie --target node -o .cache/<
 |-----------------------|--------------------------|
 | 算法 / 边界错         | 回 ②，不改上游           |
 | 缺类型、语法、std API | ④ `valkyrie-evolution`   |
+| Wolfram / MATLAB (sxo) evaluate 失败 | ④ `sxo-evolution` |
 | legion / vcc 报错     | ④，落点 `../valkyrie.rs` |
 
-## ④ Valkyrie 演进
+## ④ 上游演进
 
-**Skill**：`valkyrie-evolution`
+**Skill**：`valkyrie-evolution`（V / std / legion）或 `sxo-evolution`（**Wolfram (sxo)** / **MATLAB (sxo)**，`@sxo/*` npm）
 
-**产出**：兄弟仓 `../valkyrie.v` / `../valkyrie.rs` 补丁 + 更新 `capability-backlog.md`
+**产出**：兄弟仓补丁 + 更新对应 `capability-backlog.md`
 
 **完成标准**：
 
@@ -107,4 +109,4 @@ legion build projects/problems/<slug>/solvers/valkyrie --target node -o .cache/<
 | ①    | `leetcode-coach`                       |
 | ②    | `leetcode-implement`、`valkyrie-guide` |
 | ③    | 本 skill §③ + `AGENTS.md` 基准节       |
-| ④    | `valkyrie-evolution`                   |
+| ④    | `valkyrie-evolution`、`sxo-evolution` |

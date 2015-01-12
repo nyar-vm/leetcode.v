@@ -22,8 +22,10 @@ description: >-
 
 ```text
 projects/problems/<slug>/solvers/
-├── python/solution.py      # LCD 脚手架 + class Solution
-├── typescript/solution.ts  # export class Solution
+├── python/solution.py         # LCD 脚手架 + class Solution
+├── typescript/solution.ts     # export class Solution
+├── wolfram-sxo/solution.wl    # 单脚本，无 package.json
+├── matlab-sxo/solution.m      # 单脚本，无 package.json
 └── valkyrie/
     ├── legion.von
     └── solution.v
@@ -53,6 +55,13 @@ projects/problems/<slug>/solvers/
 - harness 经 `fn.call(instance, …)` 调用，`this` 指向 `Solution` 实例；可用 `private` 辅助方法。
 - 不写测试 harness、不引 conformance 包。
 
+## Wolfram (sxo) / MATLAB (sxo)
+
+- **仅单文件**：`solution.wl` / `solution.m`；**禁止**题级 `package.json`。`@sxo/*` 由 `projects/conformance` 统一声明。
+- `metadata.invoke.wolframSxo` / `matlabSxo`：函数名（如 `twoSum`），非 `Solution().twoSum`。
+- 参数顺序与 `metadata.tests[].args` 键序一致；无解返回须与 metadata 一致（`null` 而非 `[]`，Wolfram 侧 harness 解析 `Null`）。
+- 缺 `@sxo/*` 能力：首行 `# 阻塞：` / `% 阻塞：` + 加载 **`sxo-evolution`**。
+
 ## Valkyrie
 
 **写 `solution.v` 前加载** `.agents/skills/valkyrie-guide/SKILL.md`（下标 ordinal/cardinal、std 命名空间、legion 布局）。
@@ -75,4 +84,5 @@ projects/problems/<slug>/solvers/
 - 标杆：`projects/problems/two-sum/solvers/`
 - V 语言：`../valkyrie-guide/SKILL.md`
 - V 上游补缺：`../valkyrie-evolution/SKILL.md`
+- SXO 上游补缺：`../sxo-evolution/SKILL.md`
 - V phase-1 题型：`references/v-phase1-capabilities.md`

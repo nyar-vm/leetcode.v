@@ -1,6 +1,6 @@
 # AGENTS
 
-本目录是 **leetcode.v** — LeetCode 题目在 Valkyrie（V）与 TypeScript 上的完备性测试、外部产物基准与对比看板。
+本目录是 **leetcode.v** — LeetCode 题目在 Python、TypeScript、Valkyrie（V）、Wolfram (sxo)、MATLAB (sxo) 上的完备性测试、外部产物基准与对比看板。
 
 **代理入口（工具无关）**：不假定 Cursor、Codex、Claude Code 或其他产品。任何自动化助手先读本文件。
 
@@ -18,6 +18,7 @@
 | `../valkyrie.rs` | **装配层**：Rust seed `legion` CLI、`@valkyrie-language/vcc`、manifest/收集/构建编排与 wasm 产物装配（leetcode 默认工具链） |
 | `../nyar-vm.rs`  | **解析与优化层**：`nyar-language` / `nyar-optimizer` / `nyar-emitter`（HIR、`[export]`、wasm 降低、Node `callExport` glue）；经 `valkyrie.rs` `[patch]` 链接 |
 | `../valkyrie.v`  | V 语言 `core` / `std` / `std.adaptors._`（经根 `legions.von` 注册）；**不是** leetcode 用的 legion 可执行文件来源 |
+| sxo-framework（npm） | **Wolfram (sxo)** / **MATLAB (sxo)**：已发布 `@sxo/mathematica`、`@sxo/matlab`（`conformance` 的 `optionalDependencies`）；上游开发可选 `pnpm link:sxo` |
 
 ## 标识符（slug / id / questionId）
 
@@ -37,9 +38,11 @@
 | `projects/problems/<slug>/solvers/python/`     | LCD 脚手架解：`solution.py` + `pyproject.toml`                              |
 | `projects/problems/<slug>/solvers/typescript/` | 手写 TS 解：`solution.ts` + `package.json`                                  |
 | `projects/problems/<slug>/solvers/valkyrie/`   | 手写 V 解：`solution.v` + `legion.von`（`entry: "solution.v"`）             |
-| `projects/conformance/`                        | 完备性矩阵、TS/Python/V 跑测、**外部产物基准**                              |
-| `projects/dashboard/`                          | Vue 看板（合并 `benchmark-typescript.json` / `benchmark-valkyrie.json`，ECharts 可视化） |
-| `scripts/`                                     | `format.mjs`、`reword.mjs`、`batch-limit.mjs`、`link-valkyrie.mjs`、`valkyrie-v-deps.mjs` |
+| `projects/problems/<slug>/solvers/wolfram-sxo/` | **单文件** `solution.wl`（无题级 manifest）                                |
+| `projects/problems/<slug>/solvers/matlab-sxo/`  | **单文件** `solution.m`（无题级 manifest）                                 |
+| `projects/conformance/`                        | 完备性矩阵、TS/Python/V/SXO 跑测、**外部产物基准**                          |
+| `projects/dashboard/`                          | Vue 看板（合并 `benchmark-*.json`，ECharts 可视化）                         |
+| `scripts/`                                     | `format.mjs`、`reword.mjs`、`batch-limit.mjs`、`link-valkyrie.mjs`、`link-sxo.mjs`、`valkyrie-v-deps.mjs` |
 | `legions.von`                                  | workspace 成员：`core`、`std`、`std.adaptors._`（见下文「维护者陷阱」）     |
 
 **禁止**：程序化批量生成 V 解、在 `.v` 里嵌 `# ```legion` cargo-script、把 solver 再套一层 `source/` 目录（除非 `legion`
@@ -47,8 +50,8 @@
 
 ## 题目元数据
 
-- `metadata.json`：`id`（仓内键）、`questionId`（LeetCode 题号）、`difficulty`、`tags`、`tests[]`、`invoke`（如 `Solution().twoSum`
-  ）。目录名 = **slug**（与 `id` 同值）。
+- `metadata.json`：`id`（仓内键）、`questionId`（LeetCode 题号）、`difficulty`、`tags`、`tests[]`、`invoke`（如 `Solution().twoSum`、
+  `wolframSxo` / `matlabSxo` 函数名）。目录名 = **slug**（与 `id` 同值）。
 - `projects/conformance/src/catalog.generated.ts` 为目录索引， **勿手改**。
 - 大批量跑测默认限 **50** 题（`scripts/batch-limit.mjs`）；全量需 `LEETCODE_BATCH_ALL=1`。
 - 单题基准：`pnpm bench --id two-sum`（或 `LEETCODE_BENCH_ID=two-sum pnpm bench`）。
@@ -69,7 +72,7 @@
 7. **数学用 LaTeX**；题面符号与示例输入输出用反引号。
 8. **不**粘贴完整英文题面；正文中文表述。
 
-**参考实现**：仅指 `readme.md` 题解（语言无关的最优算法权威）。`solvers/` 下 Python、TypeScript、Valkyrie 均为 **实现**
+**参考实现**：仅指 `readme.md` 题解（语言无关的最优算法权威）。`solvers/` 下 Python、TypeScript、Valkyrie、Wolfram (sxo)、MATLAB (sxo) 均为 **实现**
 ，须与题解同阶同语义；不得以某一语言实现充当「参考实现」。
 
 ## 求解器约定
@@ -79,8 +82,20 @@
 | Python     | `invoke.python`                               | LCD 脚手架实现，算法须与题解一致；完备性跑测用                                                     |
 | TypeScript | `export class Solution` + `invoke.typescript` | 手写实现，算法须与题解一致                                                                         |
 | Valkyrie   | `solution.v` + `legion.von`                   | 手写实现，算法须与题解一致；`core: true`、`std: true`、`target: node`；**无** `[benchmark]` 烟雾块 |
+| Wolfram (sxo) | `invoke.wolframSxo` + `solution.wl`        | 单脚本；经 `@sxo/mathematica` evaluate；看板标 **Wolfram (sxo)**，非 Wolfram Engine |
+| MATLAB (sxo)  | `invoke.matlabSxo` + `solution.m`          | 单脚本；经 `@sxo/matlab` evaluate；看板标 **MATLAB (sxo)**，非 MATLAB Runtime |
 
 `legion.von` 示例字段：`entry: "solution.v"`、`dependencies: { core: true, std: true }`。
+
+### SXO 单脚本约定
+
+- **禁止**在 `projects/problems/<slug>/` 下为 SXO 再建 `package.json` / `pyproject.toml`；`@sxo/*` 仅声明在 `projects/conformance/package.json` 的 `optionalDependencies`（`pnpm install` 自动拉取 npm 包）。
+- `metadata.invoke.wolframSxo` / `matlabSxo`：裸函数名（如 `twoSum`），参数顺序与 `metadata.tests[].args` 键序一致（`Object.values(args)`）。
+- harness 拼接：`{solution 全文}\n\n{symbol}[{args}]`（Wolfram）或 `{symbol}({args})`（MATLAB），经 `Mathematica.create({ autoSimplify: false })` / `Matlab.create({ autoSimplify: false })` 求值后与 `expected` 比对。
+- 上游缺能力：脚本首行 `# 阻塞：`（Wolfram）或 `% 阻塞：`（MATLAB），并走 **`sxo-evolution`**。
+- 单题验题：
+  - `node --import tsx projects/conformance/scripts/run_wolfram_sxo_solver.ts projects/problems/<slug>`
+  - `node --import tsx projects/conformance/scripts/run_matlab_sxo_solver.ts projects/problems/<slug>`
 
 ## 基准测试
 
@@ -89,12 +104,14 @@
 - **V 编译**：`pnpm bench` 对 `legion build --target node` 计时 → `vCompileMs`（**不**调用 `legion bench`）。
 - **V 运行**：`vRuntimeMs` 待 wasm 导出 invoke + `run_v_solver` 接线后补全；缺运行时分 **不算 error**（看板标为 missing）。
 - 编排：`pnpm bench` → `scripts/benchmark.mjs` → `@leetcode/conformance` `bench-all.ts`（支持 `--count`、`--id`、`--lang` 等 CLI）。
-- 看板：`pnpm dashboard`；基准按语言写入 `projects/dashboard/public/benchmark-typescript.json` 与 `benchmark-valkyrie.json`（`pnpm bench:typescript` / `pnpm bench:valkyrie`，或 `pnpm bench --lang typescript,valkyrie`）。
+- **Wolfram / MATLAB (sxo)**：单 Node 进程内复用 `@sxo/*` frontend，预热后只对全量 `metadata.tests` 循环取中位数 → `runtimeMs`（对齐 Python / TS 公平性）。
+- 看板：`pnpm dashboard`；基准按语言写入 `projects/dashboard/public/benchmark-*.json`（`pnpm bench:typescript` / `bench:valkyrie` / `bench:wolfram-sxo` / `bench:matlab-sxo`，或 `LEETCODE_BENCH_LANG=wolfram-sxo,matlab-sxo pnpm bench`）。
 
 ## 格式化与链接
 
 ```text
 pnpm link:valkyrie    # 链到兄弟仓 vcc（按需）
+pnpm link:sxo         # 仅 sxo-framework 上游开发：改回本地 link:（默认用 npm）
 pnpm fmt              # Biome，4 空格
 pnpm fmt:check
 pnpm test:problems    # 完备性
@@ -257,7 +274,16 @@ slug 写进 `legions.von`。
 - `projects/conformance` 需 `pnpm install` 后才有 `tsx` 等依赖；根目录 `pnpm test:problems` 会拉起 filter 包。
 - Python 完备性跑测依赖本机 `python` 与题内 `pyproject.toml` 环境。
 
-### 10. `metadata.tests` 大整数与 `null` 语义
+### 10. SXO 不是官方 Wolfram Engine / MATLAB
+
+| 误区 | 正确 |
+|------|------|
+| 安装 Wolfram Engine / MATLAB Runtime 跑题 | leetcode 只消费 **`@sxo/mathematica` / `@sxo/matlab` npm 包** |
+| 在题目录写 `package.json` 引 `@sxo/*` | 依赖集中在 **`projects/conformance`** |
+| 看板写「Mathematica」「MATLAB」 | 一律 **Wolfram (sxo)**、**MATLAB (sxo)** |
+| 去 Rust `sxo-dialect-*` 找 leetcode 默认入口 | 题解跑测走 **npm evaluate API**；dialect 仅在 `sxo-evolution` 补 lowering 时动 |
+
+### 11. `metadata.tests` 大整数与 `null` 语义
 
 - JSON 数字超过 $2^{53}-1$ 时， **生成/编辑 metadata 可能静默损坏**（如回文题 `1000000000000000000` 末位被抹平）；题解与实现算法正确仍会对不上
   `expected`。修复时以算法重算 `expected`，或改用字符串键存大整数（需 harness 同步）。
@@ -275,5 +301,6 @@ slug 写进 `legions.von`。
 | `leetcode-implement`    | ② `solvers/` 三端实现与 `metadata.tests`             |
 | `valkyrie-guide`        | ② 写 V 时：语法、下标、std、legion                   |
 | `valkyrie-evolution`    | ④ 按缺口在 `../valkyrie.v` / `../valkyrie.rs` 补能力 |
+| `sxo-evolution`         | ④ 按缺口在 sxo-framework `@sxo/mathematica` / `@sxo/matlab` 补能力（看板标 **(sxo)**） |
 
 **勿**在仓库根自建 `skills/` 或提交 `.cursor/skills/` 副本；`.cursor/` 仅作本机可选映射（已 gitignore）。
