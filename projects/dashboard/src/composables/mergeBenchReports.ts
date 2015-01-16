@@ -1,22 +1,14 @@
 import type {
     BenchReport,
     BenchRow,
+    MatlabSxoBenchEnvironment,
     PythonBenchEnvironment,
     TypeScriptBenchEnvironment,
     ValkyrieBenchEnvironment,
+    WolframSxoBenchEnvironment,
 } from "../types/bench";
 
-type PythonBenchRow = {
-    id: string;
-    title: string;
-    questionId: number;
-    difficulty: string;
-    tags: string[];
-    runtimeMs: number | null;
-    error: string | null;
-};
-
-type TypeScriptBenchRow = {
+type RuntimeBenchRow = {
     id: string;
     title: string;
     questionId: number;
@@ -45,7 +37,7 @@ type PythonBenchReport = {
     ready: boolean;
     catalogTotal: number;
     environment?: PythonBenchEnvironment;
-    rows: PythonBenchRow[];
+    rows: RuntimeBenchRow[];
 };
 
 type TypeScriptBenchReport = {
@@ -54,7 +46,7 @@ type TypeScriptBenchReport = {
     ready: boolean;
     catalogTotal: number;
     environment?: TypeScriptBenchEnvironment;
-    rows: TypeScriptBenchRow[];
+    rows: RuntimeBenchRow[];
 };
 
 type ValkyrieBenchReport = {
@@ -65,6 +57,24 @@ type ValkyrieBenchReport = {
     catalogTotal: number;
     environment?: ValkyrieBenchEnvironment;
     rows: ValkyrieBenchRow[];
+};
+
+type WolframSxoBenchReport = {
+    language: "wolfram-sxo";
+    generatedAt: string;
+    ready: boolean;
+    catalogTotal: number;
+    environment?: WolframSxoBenchEnvironment;
+    rows: RuntimeBenchRow[];
+};
+
+type MatlabSxoBenchReport = {
+    language: "matlab-sxo";
+    generatedAt: string;
+    ready: boolean;
+    catalogTotal: number;
+    environment?: MatlabSxoBenchEnvironment;
+    rows: RuntimeBenchRow[];
 };
 
 function mergeErrors(
@@ -87,39 +97,67 @@ function latestIso(...dates: (string | undefined)[]): string {
     return valid.sort().at(-1) ?? new Date(0).toISOString();
 }
 
+function baseBenchRow(
+    row: {
+        id: string;
+        title: string;
+        questionId: number;
+        difficulty: string;
+        tags: string[];
+        error: string | null;
+    },
+    benchTarget: string,
+): BenchRow {
+    return {
+        id: row.id,
+        title: row.title,
+        questionId: row.questionId,
+        difficulty: row.difficulty,
+        tags: row.tags,
+        pyRuntimeMs: null,
+        tsRuntimeMs: null,
+        vCompileMs: null,
+        vRuntimeMs: null,
+        wlRuntimeMs: null,
+        mlRuntimeMs: null,
+        legionRoute: null,
+        benchTarget,
+        pyError: null,
+        tsError: null,
+        vError: null,
+        wlError: null,
+        mlError: null,
+        error: row.error,
+    };
+}
+
 function mergeRowErrors(row: BenchRow): void {
-    row.error = mergeErrors(mergeErrors(row.pyError, row.tsError), row.vError);
+    row.error = mergeErrors(
+        mergeErrors(mergeErrors(row.pyError, row.tsError), row.vError),
+        mergeErrors(row.wlError, row.mlError),
+    );
 }
 
 export function mergeLanguageBenchReports(
     python: PythonBenchReport | null,
     typescript: TypeScriptBenchReport | null,
     valkyrie: ValkyrieBenchReport | null,
+    wolframSxo: WolframSxoBenchReport | null = null,
+    matlabSxo: MatlabSxoBenchReport | null = null,
 ): BenchReport | null {
-    if (!python && !typescript && !valkyrie) {
+    if (!python && !typescript && !valkyrie && !wolframSxo && !matlabSxo) {
         return null;
     }
 
+    const benchTarget = valkyrie?.benchTarget ?? "node";
     const byId = new Map<string, BenchRow>();
 
     for (const row of python?.rows ?? []) {
-        byId.set(row.id, {
-            id: row.id,
-            title: row.title,
-            questionId: row.questionId,
-            difficulty: row.difficulty,
-            tags: row.tags,
-            pyRuntimeMs: row.runtimeMs,
-            tsRuntimeMs: null,
-            vCompileMs: null,
-            vRuntimeMs: null,
-            legionRoute: null,
-            benchTarget: valkyrie?.benchTarget ?? "node",
-            pyError: row.error,
-            tsError: null,
-            vError: null,
-            error: row.error,
-        });
+        const base = baseBenchRow(row, benchTarget);
+        base.pyRuntimeMs = row.runtimeMs;
+        base.pyError = row.error;
+        base.error = row.error;
+        byId.set(row.id, base);
     }
 
     for (const row of typescript?.rows ?? []) {
@@ -130,24 +168,11 @@ export function mergeLanguageBenchReports(
             mergeRowErrors(existing);
             continue;
         }
-
-        byId.set(row.id, {
-            id: row.id,
-            title: row.title,
-            questionId: row.questionId,
-            difficulty: row.difficulty,
-            tags: row.tags,
-            pyRuntimeMs: null,
-            tsRuntimeMs: row.runtimeMs,
-            vCompileMs: null,
-            vRuntimeMs: null,
-            legionRoute: null,
-            benchTarget: valkyrie?.benchTarget ?? "node",
-            pyError: null,
-            tsError: row.error,
-            vError: null,
-            error: row.error,
-        });
+        const base = baseBenchRow(row, benchTarget);
+        base.tsRuntimeMs = row.runtimeMs;
+        base.tsError = row.error;
+        base.error = row.error;
+        byId.set(row.id, base);
     }
 
     for (const row of valkyrie?.rows ?? []) {
@@ -161,24 +186,43 @@ export function mergeLanguageBenchReports(
             mergeRowErrors(existing);
             continue;
         }
+        const base = baseBenchRow(row, row.benchTarget);
+        base.vCompileMs = row.compileMs;
+        base.vRuntimeMs = row.runtimeMs;
+        base.legionRoute = row.legionRoute;
+        base.vError = row.error;
+        base.error = row.error;
+        byId.set(row.id, base);
+    }
 
-        byId.set(row.id, {
-            id: row.id,
-            title: row.title,
-            questionId: row.questionId,
-            difficulty: row.difficulty,
-            tags: row.tags,
-            pyRuntimeMs: null,
-            tsRuntimeMs: null,
-            vCompileMs: row.compileMs,
-            vRuntimeMs: row.runtimeMs,
-            legionRoute: row.legionRoute,
-            benchTarget: row.benchTarget,
-            pyError: null,
-            tsError: null,
-            vError: row.error,
-            error: row.error,
-        });
+    for (const row of wolframSxo?.rows ?? []) {
+        const existing = byId.get(row.id);
+        if (existing) {
+            existing.wlRuntimeMs = row.runtimeMs;
+            existing.wlError = row.error;
+            mergeRowErrors(existing);
+            continue;
+        }
+        const base = baseBenchRow(row, benchTarget);
+        base.wlRuntimeMs = row.runtimeMs;
+        base.wlError = row.error;
+        base.error = row.error;
+        byId.set(row.id, base);
+    }
+
+    for (const row of matlabSxo?.rows ?? []) {
+        const existing = byId.get(row.id);
+        if (existing) {
+            existing.mlRuntimeMs = row.runtimeMs;
+            existing.mlError = row.error;
+            mergeRowErrors(existing);
+            continue;
+        }
+        const base = baseBenchRow(row, benchTarget);
+        base.mlRuntimeMs = row.runtimeMs;
+        base.mlError = row.error;
+        base.error = row.error;
+        byId.set(row.id, base);
     }
 
     const rows = [...byId.values()].sort((left, right) => {
@@ -191,10 +235,27 @@ export function mergeLanguageBenchReports(
     });
 
     return {
-        generatedAt: latestIso(python?.generatedAt, typescript?.generatedAt, valkyrie?.generatedAt),
-        ready: Boolean(python?.ready || typescript?.ready || valkyrie?.ready),
-        benchTarget: valkyrie?.benchTarget ?? "node",
-        catalogTotal: python?.catalogTotal ?? typescript?.catalogTotal ?? valkyrie?.catalogTotal,
+        generatedAt: latestIso(
+            python?.generatedAt,
+            typescript?.generatedAt,
+            valkyrie?.generatedAt,
+            wolframSxo?.generatedAt,
+            matlabSxo?.generatedAt,
+        ),
+        ready: Boolean(
+            python?.ready ||
+                typescript?.ready ||
+                valkyrie?.ready ||
+                wolframSxo?.ready ||
+                matlabSxo?.ready,
+        ),
+        benchTarget,
+        catalogTotal:
+            python?.catalogTotal ??
+            typescript?.catalogTotal ??
+            valkyrie?.catalogTotal ??
+            wolframSxo?.catalogTotal ??
+            matlabSxo?.catalogTotal,
         rows,
         sources: {
             python: python
@@ -219,16 +280,32 @@ export function mergeLanguageBenchReports(
                       benchTarget: valkyrie.benchTarget,
                   }
                 : null,
+            wolframSxo: wolframSxo
+                ? {
+                      generatedAt: wolframSxo.generatedAt,
+                      ready: wolframSxo.ready,
+                      rowCount: wolframSxo.rows.length,
+                  }
+                : null,
+            matlabSxo: matlabSxo
+                ? {
+                      generatedAt: matlabSxo.generatedAt,
+                      ready: matlabSxo.ready,
+                      rowCount: matlabSxo.rows.length,
+                  }
+                : null,
         },
         environments: {
             python: python?.environment ?? null,
             typescript: typescript?.environment ?? null,
             valkyrie: valkyrie?.environment ?? null,
+            wolframSxo: wolframSxo?.environment ?? null,
+            matlabSxo: matlabSxo?.environment ?? null,
         },
     };
 }
 
-/** 旧版合并快照缺 Python 字段时补齐。 */
+/** 旧版合并快照缺字段时补齐。 */
 export function normalizeLegacyBenchRow(
     row: Partial<BenchRow> & Pick<BenchRow, "id" | "title">,
 ): BenchRow {
@@ -242,11 +319,15 @@ export function normalizeLegacyBenchRow(
         tsRuntimeMs: row.tsRuntimeMs ?? null,
         vCompileMs: row.vCompileMs ?? null,
         vRuntimeMs: row.vRuntimeMs ?? null,
+        wlRuntimeMs: row.wlRuntimeMs ?? null,
+        mlRuntimeMs: row.mlRuntimeMs ?? null,
         legionRoute: row.legionRoute ?? null,
         benchTarget: row.benchTarget ?? "node",
         pyError: row.pyError ?? null,
         tsError: row.tsError ?? null,
         vError: row.vError ?? null,
+        wlError: row.wlError ?? null,
+        mlError: row.mlError ?? null,
         error: row.error ?? null,
     };
 }
@@ -259,11 +340,15 @@ export function normalizeLegacyBenchReport(report: BenchReport): BenchReport {
             python: report.sources?.python ?? null,
             typescript: report.sources?.typescript ?? null,
             valkyrie: report.sources?.valkyrie ?? null,
+            wolframSxo: report.sources?.wolframSxo ?? null,
+            matlabSxo: report.sources?.matlabSxo ?? null,
         },
         environments: {
             python: report.environments?.python ?? null,
             typescript: report.environments?.typescript ?? null,
             valkyrie: report.environments?.valkyrie ?? null,
+            wolframSxo: report.environments?.wolframSxo ?? null,
+            matlabSxo: report.environments?.matlabSxo ?? null,
         },
     };
 }

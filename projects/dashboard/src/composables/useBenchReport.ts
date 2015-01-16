@@ -2,9 +2,11 @@ import { computed, inject, provide, ref, type InjectionKey } from "vue";
 
 import {
     benchmarkLegacyUrl,
+    benchmarkMatlabSxoUrl,
     benchmarkPythonUrl,
     benchmarkTypeScriptUrl,
     benchmarkValkyrieUrl,
+    benchmarkWolframSxoUrl,
 } from "../config";
 import type { BenchReport } from "../types/bench";
 import { mergeLanguageBenchReports, normalizeLegacyBenchReport } from "./mergeBenchReports";
@@ -33,13 +35,15 @@ function createBenchReport() {
     const okCount = computed(() => rowCount.value - errorCount.value);
 
     async function loadCached() {
-        const [python, typescript, valkyrie] = await Promise.all([
+        const [python, typescript, valkyrie, wolframSxo, matlabSxo] = await Promise.all([
             fetchJson(benchmarkPythonUrl),
             fetchJson(benchmarkTypeScriptUrl),
             fetchJson(benchmarkValkyrieUrl),
+            fetchJson(benchmarkWolframSxoUrl),
+            fetchJson(benchmarkMatlabSxoUrl),
         ]);
 
-        const merged = mergeLanguageBenchReports(python, typescript, valkyrie);
+        const merged = mergeLanguageBenchReports(python, typescript, valkyrie, wolframSxo, matlabSxo);
         if (merged) {
             report.value = merged;
             return;

@@ -1,7 +1,7 @@
 import type { EnrichedBenchRow } from "../types/bench";
 import { formatMs } from "./format";
 
-export type RuntimeLanguageId = "python" | "typescript" | "valkyrie";
+export type RuntimeLanguageId = "python" | "typescript" | "valkyrie" | "wolfram-sxo" | "matlab-sxo";
 
 export type RuntimeLanguage = {
     id: RuntimeLanguageId;
@@ -29,6 +29,18 @@ export const RUNTIME_LANGUAGES: RuntimeLanguage[] = [
         color: "#34d399",
         readRuntime: (row) => row.vRuntimeMs,
     },
+    {
+        id: "wolfram-sxo",
+        label: "Wolfram (sxo)",
+        color: "#f472b6",
+        readRuntime: (row) => row.wlRuntimeMs,
+    },
+    {
+        id: "matlab-sxo",
+        label: "MATLAB (sxo)",
+        color: "#fb923c",
+        readRuntime: (row) => row.mlRuntimeMs,
+    },
 ];
 
 export type LanguageStat = {
@@ -47,6 +59,42 @@ function validRuntime(ms: number | null): number | null {
         return null;
     }
     return ms;
+}
+
+export const RUNTIME_RANK_LABELS: Record<1 | 2 | 3, string> = {
+    1: "金",
+    2: "银",
+    3: "铜",
+};
+
+export type RankedRuntime = {
+    rank: 1 | 2 | 3;
+    id: RuntimeLanguageId;
+    label: string;
+    color: string;
+    ms: number;
+};
+
+/** 单题有效运行时间升序前三（样本预览用）。 */
+export function topRuntimesForRow(row: EnrichedBenchRow, limit = 3): RankedRuntime[] {
+    const ranked = RUNTIME_LANGUAGES
+        .map((language) => ({
+            id: language.id,
+            label: language.label,
+            color: language.color,
+            ms: validRuntime(language.readRuntime(row)),
+        }))
+        .filter((item): item is Omit<RankedRuntime, "rank"> & { ms: number } => item.ms !== null)
+        .sort((left, right) => left.ms - right.ms)
+        .slice(0, limit);
+
+    return ranked.map((item, index) => ({
+        rank: (index + 1) as 1 | 2 | 3,
+        id: item.id,
+        label: item.label,
+        color: item.color,
+        ms: item.ms,
+    }));
 }
 
 function median(values: number[]): number | null {

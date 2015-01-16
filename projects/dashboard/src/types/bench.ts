@@ -8,11 +8,15 @@ export type BenchRow = {
     tsRuntimeMs: number | null;
     vCompileMs: number | null;
     vRuntimeMs: number | null;
+    wlRuntimeMs: number | null;
+    mlRuntimeMs: number | null;
     legionRoute: string | null;
     benchTarget: string;
     pyError?: string | null;
     tsError?: string | null;
     vError?: string | null;
+    wlError?: string | null;
+    mlError?: string | null;
     error: string | null;
 };
 
@@ -63,10 +67,38 @@ export type ValkyrieBenchEnvironment = {
     host: HostEnvironment;
 };
 
+export type WolframSxoBenchEnvironment = {
+    language: "wolfram-sxo";
+    sxoMathematicaVersion: string | null;
+    runnerReady: boolean;
+    skipReason: string | null;
+    metric: "runtime";
+    timingScope: "in-process-metadata-tests";
+    aggregation: "median";
+    iterations: number;
+    warmup: number;
+    host: HostEnvironment;
+};
+
+export type MatlabSxoBenchEnvironment = {
+    language: "matlab-sxo";
+    sxoMatlabVersion: string | null;
+    runnerReady: boolean;
+    skipReason: string | null;
+    metric: "runtime";
+    timingScope: "in-process-metadata-tests";
+    aggregation: "median";
+    iterations: number;
+    warmup: number;
+    host: HostEnvironment;
+};
+
 export type BenchEnvironments = {
     python: PythonBenchEnvironment | null;
     typescript: TypeScriptBenchEnvironment | null;
     valkyrie: ValkyrieBenchEnvironment | null;
+    wolframSxo: WolframSxoBenchEnvironment | null;
+    matlabSxo: MatlabSxoBenchEnvironment | null;
 };
 
 export type BenchReportSource = {
@@ -86,6 +118,8 @@ export type BenchReport = {
         python: BenchReportSource | null;
         typescript: BenchReportSource | null;
         valkyrie: BenchReportSource | null;
+        wolframSxo: BenchReportSource | null;
+        matlabSxo: BenchReportSource | null;
     };
     environments?: BenchEnvironments;
 };
@@ -108,6 +142,8 @@ export type SortKey =
     | "tsRuntimeMs"
     | "vCompileMs"
     | "vRuntimeMs"
+    | "wlRuntimeMs"
+    | "mlRuntimeMs"
     | "ratio"
     | "fastest";
 

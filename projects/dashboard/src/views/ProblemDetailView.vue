@@ -120,6 +120,14 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
                     <dd class="num">{{ formatMs(row.vRuntimeMs) }} ms</dd>
                 </div>
                 <div>
+                    <dt>Wolfram (sxo) 运行</dt>
+                    <dd class="num">{{ formatMs(row.wlRuntimeMs) }} ms</dd>
+                </div>
+                <div>
+                    <dt>MATLAB (sxo) 运行</dt>
+                    <dd class="num">{{ formatMs(row.mlRuntimeMs) }} ms</dd>
+                </div>
+                <div>
                     <dt>Legion route</dt>
                     <dd>{{ row.legionRoute ?? "—" }}</dd>
                 </div>
@@ -130,7 +138,10 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
             </dl>
         </article>
 
-        <article v-if="row.pyError || row.tsError || row.vError || row.error" class="panel error-panel">
+        <article
+            v-if="row.pyError || row.tsError || row.vError || row.wlError || row.mlError || row.error"
+            class="panel error-panel"
+        >
             <div class="panel-head">
                 <h2 class="panel-title">
                     <AppIcon :icon="AlertTriangle" :size="18" class="tone-danger" />
@@ -140,7 +151,12 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
             <pre v-if="row.pyError" class="error-block">Python: {{ row.pyError }}</pre>
             <pre v-if="row.tsError" class="error-block">TypeScript: {{ row.tsError }}</pre>
             <pre v-if="row.vError" class="error-block">V: {{ row.vError }}</pre>
-            <pre v-if="!row.pyError && !row.tsError && !row.vError && row.error" class="error-block">{{ row.error }}</pre>
+            <pre v-if="row.wlError" class="error-block">Wolfram (sxo): {{ row.wlError }}</pre>
+            <pre v-if="row.mlError" class="error-block">MATLAB (sxo): {{ row.mlError }}</pre>
+            <pre
+                v-if="!row.pyError && !row.tsError && !row.vError && !row.wlError && !row.mlError && row.error"
+                class="error-block"
+            >{{ row.error }}</pre>
         </article>
 
         <article class="panel">

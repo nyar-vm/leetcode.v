@@ -23,6 +23,8 @@ const FULL_SORT_KEYS: SortKey[] = [
     "tsRuntimeMs",
     "vCompileMs",
     "vRuntimeMs",
+    "wlRuntimeMs",
+    "mlRuntimeMs",
     "fastest",
 ];
 
@@ -96,7 +98,11 @@ function matchesStatus(row: EnrichedBenchRow, status: BenchStatus, mode: BenchFi
         case "missing":
             if (mode === "full") {
                 return (
-                    row.pyRuntimeMs === null || row.tsRuntimeMs === null || row.vRuntimeMs === null
+                    row.pyRuntimeMs === null ||
+                    row.tsRuntimeMs === null ||
+                    row.vRuntimeMs === null ||
+                    row.wlRuntimeMs === null ||
+                    row.mlRuntimeMs === null
                 );
             }
             return row.tsRuntimeMs === null || row.vRuntimeMs === null;
@@ -153,6 +159,12 @@ function sortRows(rows: EnrichedBenchRow[], sort: SortKey, sortDesc: boolean): E
                 break;
             case "vRuntimeMs":
                 cmp = (left.vRuntimeMs ?? -1) - (right.vRuntimeMs ?? -1);
+                break;
+            case "wlRuntimeMs":
+                cmp = (left.wlRuntimeMs ?? -1) - (right.wlRuntimeMs ?? -1);
+                break;
+            case "mlRuntimeMs":
+                cmp = (left.mlRuntimeMs ?? -1) - (right.mlRuntimeMs ?? -1);
                 break;
             case "ratio": {
                 const leftRatio = runtimeRatio(left) ?? -1;

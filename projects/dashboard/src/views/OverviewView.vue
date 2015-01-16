@@ -13,9 +13,10 @@ import {
     comparableRowCount,
     computeLanguageStats,
     leadingLanguage,
-    RUNTIME_LANGUAGES,
+    RUNTIME_RANK_LABELS,
     sumCompileMs,
     sumRuntimeMs,
+    topRuntimesForRow,
 } from "../utils/languageStats";
 
 const OverviewCharts = defineAsyncComponent(() => import("../components/OverviewCharts.vue"));
@@ -96,17 +97,20 @@ const leaderLabel = computed(() => {
                 <article v-for="row in rows.slice(0, 6)" :key="row.id" class="sample-card">
                     <RouterLink :to="`/problems/${row.id}`" class="sample-title">{{ row.title }}</RouterLink>
                     <p class="row-meta sample-slug">{{ row.id }}</p>
-                    <div class="sample-metrics">
+                    <div v-if="topRuntimesForRow(row).length" class="sample-metrics">
                         <span
-                            v-for="language in RUNTIME_LANGUAGES"
-                            :key="language.id"
+                            v-for="item in topRuntimesForRow(row)"
+                            :key="item.id"
                             class="sample-metric"
-                            :style="{ '--lang-color': language.color }"
+                            :class="`sample-metric--rank-${item.rank}`"
+                            :style="{ '--lang-color': item.color }"
                         >
-                            <span class="sample-metric-label">{{ language.label }}</span>
-                            <strong>{{ formatMs(language.readRuntime(row)) }}</strong>
+                            <span class="sample-metric-rank">{{ RUNTIME_RANK_LABELS[item.rank] }}</span>
+                            <span class="sample-metric-label">{{ item.label }}</span>
+                            <strong>{{ formatMs(item.ms) }}</strong>
                         </span>
                     </div>
+                    <p v-else class="muted sample-empty">暂无有效运行数据</p>
                 </article>
             </div>
         </section>

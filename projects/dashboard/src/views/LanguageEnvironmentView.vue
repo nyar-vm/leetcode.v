@@ -8,9 +8,11 @@ import { useBenchReport } from "../composables/useBenchReport";
 import type {
     BenchEnvironments,
     HostEnvironment,
+    MatlabSxoBenchEnvironment,
     PythonBenchEnvironment,
     TypeScriptBenchEnvironment,
     ValkyrieBenchEnvironment,
+    WolframSxoBenchEnvironment,
 } from "../types/bench";
 
 const { report } = useBenchReport();
@@ -84,6 +86,48 @@ function typescriptCard(env: TypeScriptBenchEnvironment | null, ready: boolean):
     };
 }
 
+function wolframSxoCard(env: WolframSxoBenchEnvironment | null, ready: boolean): EnvCard | null {
+    if (!env) {
+        return null;
+    }
+    return {
+        key: "wolframSxo",
+        title: "Wolfram (sxo)",
+        subtitle: "单进程 @sxo/mathematica，只计 metadata.tests 循环",
+        ready,
+        versionRows: [{ label: "@sxo/mathematica", value: env.sxoMathematicaVersion ?? "—" }],
+        paramRows: [
+            { label: "计时范围", value: env.timingScope ?? "in-process-metadata-tests" },
+            { label: "指标", value: `${env.metric}（${env.aggregation}）` },
+            { label: "采样", value: `${env.iterations} 次` },
+            { label: "预热", value: `${env.warmup} 次` },
+        ],
+        host: env.host,
+        note: env.skipReason && !env.runnerReady ? env.skipReason : undefined,
+    };
+}
+
+function matlabSxoCard(env: MatlabSxoBenchEnvironment | null, ready: boolean): EnvCard | null {
+    if (!env) {
+        return null;
+    }
+    return {
+        key: "matlabSxo",
+        title: "MATLAB (sxo)",
+        subtitle: "单进程 @sxo/matlab，只计 metadata.tests 循环",
+        ready,
+        versionRows: [{ label: "@sxo/matlab", value: env.sxoMatlabVersion ?? "—" }],
+        paramRows: [
+            { label: "计时范围", value: env.timingScope ?? "in-process-metadata-tests" },
+            { label: "指标", value: `${env.metric}（${env.aggregation}）` },
+            { label: "采样", value: `${env.iterations} 次` },
+            { label: "预热", value: `${env.warmup} 次` },
+        ],
+        host: env.host,
+        note: env.skipReason && !env.runnerReady ? env.skipReason : undefined,
+    };
+}
+
 function valkyrieCard(env: ValkyrieBenchEnvironment | null, ready: boolean): EnvCard | null {
     if (!env) {
         return null;
@@ -119,13 +163,15 @@ const cards = computed(() => {
         pythonCard(env.python, src?.python?.ready ?? false),
         typescriptCard(env.typescript, src?.typescript?.ready ?? false),
         valkyrieCard(env.valkyrie, src?.valkyrie?.ready ?? false),
+        wolframSxoCard(env.wolframSxo, src?.wolframSxo?.ready ?? false),
+        matlabSxoCard(env.matlabSxo, src?.matlabSxo?.ready ?? false),
     ].filter((card): card is EnvCard => card !== null);
 });
 
 const missingLanguages = computed(() => {
     const env = environments.value;
     if (!env) {
-        return ["Python", "TypeScript", "Valkyrie"];
+        return ["Python", "TypeScript", "Valkyrie", "Wolfram (sxo)", "MATLAB (sxo)"];
     }
     const missing: string[] = [];
     if (!env.python) {
@@ -136,6 +182,12 @@ const missingLanguages = computed(() => {
     }
     if (!env.valkyrie) {
         missing.push("V (wasm)");
+    }
+    if (!env.wolframSxo) {
+        missing.push("Wolfram (sxo)");
+    }
+    if (!env.matlabSxo) {
+        missing.push("MATLAB (sxo)");
     }
     return missing;
 });

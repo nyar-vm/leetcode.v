@@ -23,6 +23,8 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
     { key: "tsRuntimeMs", label: "TypeScript (ms)", align: "right" },
     { key: "vCompileMs", label: "V 编译 (ms)", align: "right" },
     { key: "vRuntimeMs", label: "V (wasm) (ms)", align: "right" },
+    { key: "wlRuntimeMs", label: "Wolfram (sxo) (ms)", align: "right" },
+    { key: "mlRuntimeMs", label: "MATLAB (sxo) (ms)", align: "right" },
     { key: "fastest", label: "最快", align: "right" },
 ];
 
@@ -53,7 +55,7 @@ function sortIcon(key: SortKey) {
             </thead>
             <tbody>
                 <tr v-if="rows.length === 0">
-                    <td colspan="8" class="empty-cell">没有匹配的题目，试试放宽筛选条件。</td>
+                    <td colspan="10" class="empty-cell">没有匹配的题目，试试放宽筛选条件。</td>
                 </tr>
                 <tr v-for="row in rows" :key="row.id">
                     <td>
@@ -72,6 +74,8 @@ function sortIcon(key: SortKey) {
                     <td class="num">{{ formatMs(row.tsRuntimeMs) }}</td>
                     <td class="num">{{ formatMs(row.vCompileMs) }}</td>
                     <td class="num">{{ formatMs(row.vRuntimeMs) }}</td>
+                    <td class="num">{{ formatMs(row.wlRuntimeMs) }}</td>
+                    <td class="num">{{ formatMs(row.mlRuntimeMs) }}</td>
                     <td class="num fastest-cell">{{ fastestLabel(row) }}</td>
                     <td>
                         <div v-if="row.legionRoute || row.benchTarget" class="row-meta">
