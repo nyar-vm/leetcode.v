@@ -14,13 +14,21 @@ import {
 import { fastestRuntimeMs, runtimeRatio } from "../utils/format";
 
 const DIFFICULTIES: Difficulty[] = ["Easy", "Medium", "Hard"];
-const TS_V_SORT_KEYS: SortKey[] = ["id", "title", "difficulty", "tsRuntimeMs", "vRuntimeMs", "ratio"];
+const TS_V_SORT_KEYS: SortKey[] = [
+    "id",
+    "title",
+    "difficulty",
+    "tsRuntimeMs",
+    "vRuntimeMs",
+    "ratio",
+];
 const FULL_SORT_KEYS: SortKey[] = [
     "id",
     "title",
     "difficulty",
     "pyRuntimeMs",
     "tsRuntimeMs",
+    "tbRuntimeMs",
     "vCompileMs",
     "vRuntimeMs",
     "wlRuntimeMs",
@@ -100,6 +108,7 @@ function matchesStatus(row: EnrichedBenchRow, status: BenchStatus, mode: BenchFi
                 return (
                     row.pyRuntimeMs === null ||
                     row.tsRuntimeMs === null ||
+                    row.tbRuntimeMs === null ||
                     row.vRuntimeMs === null ||
                     row.wlRuntimeMs === null ||
                     row.mlRuntimeMs === null
@@ -153,6 +162,9 @@ function sortRows(rows: EnrichedBenchRow[], sort: SortKey, sortDesc: boolean): E
                 break;
             case "tsRuntimeMs":
                 cmp = (left.tsRuntimeMs ?? -1) - (right.tsRuntimeMs ?? -1);
+                break;
+            case "tbRuntimeMs":
+                cmp = (left.tbRuntimeMs ?? -1) - (right.tbRuntimeMs ?? -1);
                 break;
             case "vCompileMs":
                 cmp = (left.vCompileMs ?? -1) - (right.vCompileMs ?? -1);

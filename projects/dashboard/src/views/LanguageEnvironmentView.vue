@@ -11,6 +11,7 @@ import type {
     MatlabSxoBenchEnvironment,
     PythonBenchEnvironment,
     TypeScriptBenchEnvironment,
+    TypeScriptBunBenchEnvironment,
     ValkyrieBenchEnvironment,
     WolframSxoBenchEnvironment,
 } from "../types/bench";
@@ -86,13 +87,38 @@ function typescriptCard(env: TypeScriptBenchEnvironment | null, ready: boolean):
     };
 }
 
+function typescriptBunCard(
+    env: TypeScriptBunBenchEnvironment | null,
+    ready: boolean,
+): EnvCard | null {
+    if (!env) {
+        return null;
+    }
+    return {
+        key: "typescriptBun",
+        title: "TypeScript (Bun)",
+        subtitle: "Bun 子进程内加载题解，只计 metadata.tests 循环",
+        ready,
+        versionRows: [{ label: "Bun", value: env.bunVersion ?? "—" }],
+        paramRows: [
+            { label: "Runner", value: env.runner },
+            { label: "计时范围", value: env.timingScope ?? "in-process-metadata-tests" },
+            { label: "指标", value: `${env.metric}（${env.aggregation}）` },
+            { label: "采样", value: `${env.iterations} 次` },
+            { label: "预热", value: `${env.warmup} 次` },
+        ],
+        host: env.host,
+        note: env.skipReason && !env.runnerReady ? env.skipReason : undefined,
+    };
+}
+
 function wolframSxoCard(env: WolframSxoBenchEnvironment | null, ready: boolean): EnvCard | null {
     if (!env) {
         return null;
     }
     return {
         key: "wolframSxo",
-        title: "Wolfram (sxo)",
+        title: "Wolfram (Sxo)",
         subtitle: "单进程 @sxo/mathematica，只计 metadata.tests 循环",
         ready,
         versionRows: [{ label: "@sxo/mathematica", value: env.sxoMathematicaVersion ?? "—" }],
@@ -113,7 +139,7 @@ function matlabSxoCard(env: MatlabSxoBenchEnvironment | null, ready: boolean): E
     }
     return {
         key: "matlabSxo",
-        title: "MATLAB (sxo)",
+        title: "MATLAB (Sxo)",
         subtitle: "单进程 @sxo/matlab，只计 metadata.tests 循环",
         ready,
         versionRows: [{ label: "@sxo/matlab", value: env.sxoMatlabVersion ?? "—" }],
@@ -171,7 +197,14 @@ const cards = computed(() => {
 const missingLanguages = computed(() => {
     const env = environments.value;
     if (!env) {
-        return ["Python", "TypeScript", "Valkyrie", "Wolfram (sxo)", "MATLAB (sxo)"];
+        return [
+            "Python",
+            "TypeScript",
+            "TypeScript (Bun)",
+            "Valkyrie",
+            "Wolfram (Sxo)",
+            "MATLAB (Sxo)",
+        ];
     }
     const missing: string[] = [];
     if (!env.python) {
@@ -180,14 +213,17 @@ const missingLanguages = computed(() => {
     if (!env.typescript) {
         missing.push("TypeScript");
     }
+    if (!env.typescriptBun) {
+        missing.push("TypeScript (Bun)");
+    }
     if (!env.valkyrie) {
         missing.push("V (wasm)");
     }
     if (!env.wolframSxo) {
-        missing.push("Wolfram (sxo)");
+        missing.push("Wolfram (Sxo)");
     }
     if (!env.matlabSxo) {
-        missing.push("MATLAB (sxo)");
+        missing.push("MATLAB (Sxo)");
     }
     return missing;
 });

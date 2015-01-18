@@ -3,9 +3,10 @@ import type { EnrichedBenchRow } from "../types/bench";
 export type RuntimeLanguage =
     | "Python"
     | "TypeScript"
+    | "TypeScript (Bun)"
     | "V (wasm)"
-    | "Wolfram (sxo)"
-    | "MATLAB (sxo)";
+    | "Wolfram (Sxo)"
+    | "MATLAB (Sxo)";
 
 export function fastestRuntime(
     row: EnrichedBenchRow,
@@ -17,14 +18,17 @@ export function fastestRuntime(
     if (row.tsRuntimeMs !== null) {
         candidates.push({ label: "TypeScript", ms: row.tsRuntimeMs });
     }
+    if (row.tbRuntimeMs !== null) {
+        candidates.push({ label: "TypeScript (Bun)", ms: row.tbRuntimeMs });
+    }
     if (row.vRuntimeMs !== null) {
         candidates.push({ label: "V (wasm)", ms: row.vRuntimeMs });
     }
     if (row.wlRuntimeMs !== null) {
-        candidates.push({ label: "Wolfram (sxo)", ms: row.wlRuntimeMs });
+        candidates.push({ label: "Wolfram (Sxo)", ms: row.wlRuntimeMs });
     }
     if (row.mlRuntimeMs !== null) {
-        candidates.push({ label: "MATLAB (sxo)", ms: row.mlRuntimeMs });
+        candidates.push({ label: "MATLAB (Sxo)", ms: row.mlRuntimeMs });
     }
     if (!candidates.length) {
         return null;

@@ -112,6 +112,10 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
                     <dd class="num">{{ formatMs(row.tsRuntimeMs) }} ms</dd>
                 </div>
                 <div>
+                    <dt>TypeScript (Bun) 运行</dt>
+                    <dd class="num">{{ formatMs(row.tbRuntimeMs) }} ms</dd>
+                </div>
+                <div>
                     <dt>V 编译</dt>
                     <dd class="num">{{ formatMs(row.vCompileMs) }} ms</dd>
                 </div>
@@ -120,11 +124,11 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
                     <dd class="num">{{ formatMs(row.vRuntimeMs) }} ms</dd>
                 </div>
                 <div>
-                    <dt>Wolfram (sxo) 运行</dt>
+                    <dt>Wolfram (Sxo) 运行</dt>
                     <dd class="num">{{ formatMs(row.wlRuntimeMs) }} ms</dd>
                 </div>
                 <div>
-                    <dt>MATLAB (sxo) 运行</dt>
+                    <dt>MATLAB (Sxo) 运行</dt>
                     <dd class="num">{{ formatMs(row.mlRuntimeMs) }} ms</dd>
                 </div>
                 <div>
@@ -139,7 +143,7 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
         </article>
 
         <article
-            v-if="row.pyError || row.tsError || row.vError || row.wlError || row.mlError || row.error"
+            v-if="row.pyError || row.tsError || row.tbError || row.vError || row.wlError || row.mlError || row.error"
             class="panel error-panel"
         >
             <div class="panel-head">
@@ -150,11 +154,12 @@ const { content: readme, loading: readmeLoading, error: readmeError } = useProbl
             </div>
             <pre v-if="row.pyError" class="error-block">Python: {{ row.pyError }}</pre>
             <pre v-if="row.tsError" class="error-block">TypeScript: {{ row.tsError }}</pre>
+            <pre v-if="row.tbError" class="error-block">TypeScript (Bun): {{ row.tbError }}</pre>
             <pre v-if="row.vError" class="error-block">V: {{ row.vError }}</pre>
-            <pre v-if="row.wlError" class="error-block">Wolfram (sxo): {{ row.wlError }}</pre>
-            <pre v-if="row.mlError" class="error-block">MATLAB (sxo): {{ row.mlError }}</pre>
+            <pre v-if="row.wlError" class="error-block">Wolfram (Sxo): {{ row.wlError }}</pre>
+            <pre v-if="row.mlError" class="error-block">MATLAB (Sxo): {{ row.mlError }}</pre>
             <pre
-                v-if="!row.pyError && !row.tsError && !row.vError && !row.wlError && !row.mlError && row.error"
+                v-if="!row.pyError && !row.tsError && !row.tbError && !row.vError && !row.wlError && !row.mlError && row.error"
                 class="error-block"
             >{{ row.error }}</pre>
         </article>

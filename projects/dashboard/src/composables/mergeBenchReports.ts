@@ -4,6 +4,7 @@ import type {
     MatlabSxoBenchEnvironment,
     PythonBenchEnvironment,
     TypeScriptBenchEnvironment,
+    TypeScriptBunBenchEnvironment,
     ValkyrieBenchEnvironment,
     WolframSxoBenchEnvironment,
 } from "../types/bench";
@@ -46,6 +47,15 @@ type TypeScriptBenchReport = {
     ready: boolean;
     catalogTotal: number;
     environment?: TypeScriptBenchEnvironment;
+    rows: RuntimeBenchRow[];
+};
+
+type TypeScriptBunBenchReport = {
+    language: "typescript-bun";
+    generatedAt: string;
+    ready: boolean;
+    catalogTotal: number;
+    environment?: TypeScriptBunBenchEnvironment;
     rows: RuntimeBenchRow[];
 };
 
@@ -116,6 +126,7 @@ function baseBenchRow(
         tags: row.tags,
         pyRuntimeMs: null,
         tsRuntimeMs: null,
+        tbRuntimeMs: null,
         vCompileMs: null,
         vRuntimeMs: null,
         wlRuntimeMs: null,
@@ -124,6 +135,7 @@ function baseBenchRow(
         benchTarget,
         pyError: null,
         tsError: null,
+        tbError: null,
         vError: null,
         wlError: null,
         mlError: null,
@@ -133,7 +145,7 @@ function baseBenchRow(
 
 function mergeRowErrors(row: BenchRow): void {
     row.error = mergeErrors(
-        mergeErrors(mergeErrors(row.pyError, row.tsError), row.vError),
+        mergeErrors(mergeErrors(mergeErrors(row.pyError, row.tsError), row.tbError), row.vError),
         mergeErrors(row.wlError, row.mlError),
     );
 }
@@ -144,8 +156,9 @@ export function mergeLanguageBenchReports(
     valkyrie: ValkyrieBenchReport | null,
     wolframSxo: WolframSxoBenchReport | null = null,
     matlabSxo: MatlabSxoBenchReport | null = null,
+    typescriptBun: TypeScriptBunBenchReport | null = null,
 ): BenchReport | null {
-    if (!python && !typescript && !valkyrie && !wolframSxo && !matlabSxo) {
+    if (!python && !typescript && !valkyrie && !wolframSxo && !matlabSxo && !typescriptBun) {
         return null;
     }
 
@@ -171,6 +184,21 @@ export function mergeLanguageBenchReports(
         const base = baseBenchRow(row, benchTarget);
         base.tsRuntimeMs = row.runtimeMs;
         base.tsError = row.error;
+        base.error = row.error;
+        byId.set(row.id, base);
+    }
+
+    for (const row of typescriptBun?.rows ?? []) {
+        const existing = byId.get(row.id);
+        if (existing) {
+            existing.tbRuntimeMs = row.runtimeMs;
+            existing.tbError = row.error;
+            mergeRowErrors(existing);
+            continue;
+        }
+        const base = baseBenchRow(row, benchTarget);
+        base.tbRuntimeMs = row.runtimeMs;
+        base.tbError = row.error;
         base.error = row.error;
         byId.set(row.id, base);
     }
@@ -241,13 +269,15 @@ export function mergeLanguageBenchReports(
             valkyrie?.generatedAt,
             wolframSxo?.generatedAt,
             matlabSxo?.generatedAt,
+            typescriptBun?.generatedAt,
         ),
         ready: Boolean(
             python?.ready ||
                 typescript?.ready ||
                 valkyrie?.ready ||
                 wolframSxo?.ready ||
-                matlabSxo?.ready,
+                matlabSxo?.ready ||
+                typescriptBun?.ready,
         ),
         benchTarget,
         catalogTotal:
@@ -255,7 +285,8 @@ export function mergeLanguageBenchReports(
             typescript?.catalogTotal ??
             valkyrie?.catalogTotal ??
             wolframSxo?.catalogTotal ??
-            matlabSxo?.catalogTotal,
+            matlabSxo?.catalogTotal ??
+            typescriptBun?.catalogTotal,
         rows,
         sources: {
             python: python
@@ -270,6 +301,13 @@ export function mergeLanguageBenchReports(
                       generatedAt: typescript.generatedAt,
                       ready: typescript.ready,
                       rowCount: typescript.rows.length,
+                  }
+                : null,
+            typescriptBun: typescriptBun
+                ? {
+                      generatedAt: typescriptBun.generatedAt,
+                      ready: typescriptBun.ready,
+                      rowCount: typescriptBun.rows.length,
                   }
                 : null,
             valkyrie: valkyrie
@@ -298,6 +336,7 @@ export function mergeLanguageBenchReports(
         environments: {
             python: python?.environment ?? null,
             typescript: typescript?.environment ?? null,
+            typescriptBun: typescriptBun?.environment ?? null,
             valkyrie: valkyrie?.environment ?? null,
             wolframSxo: wolframSxo?.environment ?? null,
             matlabSxo: matlabSxo?.environment ?? null,
@@ -317,6 +356,7 @@ export function normalizeLegacyBenchRow(
         tags: row.tags,
         pyRuntimeMs: row.pyRuntimeMs ?? null,
         tsRuntimeMs: row.tsRuntimeMs ?? null,
+        tbRuntimeMs: row.tbRuntimeMs ?? null,
         vCompileMs: row.vCompileMs ?? null,
         vRuntimeMs: row.vRuntimeMs ?? null,
         wlRuntimeMs: row.wlRuntimeMs ?? null,
@@ -325,6 +365,7 @@ export function normalizeLegacyBenchRow(
         benchTarget: row.benchTarget ?? "node",
         pyError: row.pyError ?? null,
         tsError: row.tsError ?? null,
+        tbError: row.tbError ?? null,
         vError: row.vError ?? null,
         wlError: row.wlError ?? null,
         mlError: row.mlError ?? null,
@@ -339,6 +380,7 @@ export function normalizeLegacyBenchReport(report: BenchReport): BenchReport {
         sources: {
             python: report.sources?.python ?? null,
             typescript: report.sources?.typescript ?? null,
+            typescriptBun: report.sources?.typescriptBun ?? null,
             valkyrie: report.sources?.valkyrie ?? null,
             wolframSxo: report.sources?.wolframSxo ?? null,
             matlabSxo: report.sources?.matlabSxo ?? null,
@@ -346,6 +388,7 @@ export function normalizeLegacyBenchReport(report: BenchReport): BenchReport {
         environments: {
             python: report.environments?.python ?? null,
             typescript: report.environments?.typescript ?? null,
+            typescriptBun: report.environments?.typescriptBun ?? null,
             valkyrie: report.environments?.valkyrie ?? null,
             wolframSxo: report.environments?.wolframSxo ?? null,
             matlabSxo: report.environments?.matlabSxo ?? null,

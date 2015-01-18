@@ -6,6 +6,7 @@ export type BenchRow = {
     tags?: string[];
     pyRuntimeMs: number | null;
     tsRuntimeMs: number | null;
+    tbRuntimeMs: number | null;
     vCompileMs: number | null;
     vRuntimeMs: number | null;
     wlRuntimeMs: number | null;
@@ -14,6 +15,7 @@ export type BenchRow = {
     benchTarget: string;
     pyError?: string | null;
     tsError?: string | null;
+    tbError?: string | null;
     vError?: string | null;
     wlError?: string | null;
     mlError?: string | null;
@@ -43,6 +45,20 @@ export type TypeScriptBenchEnvironment = {
     nodeVersion: string;
     tsxVersion: string | null;
     runner: "tsx";
+    metric: "runtime";
+    timingScope: "in-process-metadata-tests";
+    aggregation: "median";
+    iterations: number;
+    warmup: number;
+    host: HostEnvironment;
+};
+
+export type TypeScriptBunBenchEnvironment = {
+    language: "typescript-bun";
+    bunVersion: string | null;
+    runnerReady: boolean;
+    skipReason: string | null;
+    runner: "bun";
     metric: "runtime";
     timingScope: "in-process-metadata-tests";
     aggregation: "median";
@@ -96,6 +112,7 @@ export type MatlabSxoBenchEnvironment = {
 export type BenchEnvironments = {
     python: PythonBenchEnvironment | null;
     typescript: TypeScriptBenchEnvironment | null;
+    typescriptBun: TypeScriptBunBenchEnvironment | null;
     valkyrie: ValkyrieBenchEnvironment | null;
     wolframSxo: WolframSxoBenchEnvironment | null;
     matlabSxo: MatlabSxoBenchEnvironment | null;
@@ -117,6 +134,7 @@ export type BenchReport = {
     sources?: {
         python: BenchReportSource | null;
         typescript: BenchReportSource | null;
+        typescriptBun: BenchReportSource | null;
         valkyrie: BenchReportSource | null;
         wolframSxo: BenchReportSource | null;
         matlabSxo: BenchReportSource | null;
@@ -140,6 +158,7 @@ export type SortKey =
     | "difficulty"
     | "pyRuntimeMs"
     | "tsRuntimeMs"
+    | "tbRuntimeMs"
     | "vCompileMs"
     | "vRuntimeMs"
     | "wlRuntimeMs"

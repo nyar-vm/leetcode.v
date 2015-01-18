@@ -4,6 +4,7 @@ import {
     benchmarkLegacyUrl,
     benchmarkMatlabSxoUrl,
     benchmarkPythonUrl,
+    benchmarkTypeScriptBunUrl,
     benchmarkTypeScriptUrl,
     benchmarkValkyrieUrl,
     benchmarkWolframSxoUrl,
@@ -35,15 +36,24 @@ function createBenchReport() {
     const okCount = computed(() => rowCount.value - errorCount.value);
 
     async function loadCached() {
-        const [python, typescript, valkyrie, wolframSxo, matlabSxo] = await Promise.all([
-            fetchJson(benchmarkPythonUrl),
-            fetchJson(benchmarkTypeScriptUrl),
-            fetchJson(benchmarkValkyrieUrl),
-            fetchJson(benchmarkWolframSxoUrl),
-            fetchJson(benchmarkMatlabSxoUrl),
-        ]);
+        const [python, typescript, typescriptBun, valkyrie, wolframSxo, matlabSxo] =
+            await Promise.all([
+                fetchJson(benchmarkPythonUrl),
+                fetchJson(benchmarkTypeScriptUrl),
+                fetchJson(benchmarkTypeScriptBunUrl),
+                fetchJson(benchmarkValkyrieUrl),
+                fetchJson(benchmarkWolframSxoUrl),
+                fetchJson(benchmarkMatlabSxoUrl),
+            ]);
 
-        const merged = mergeLanguageBenchReports(python, typescript, valkyrie, wolframSxo, matlabSxo);
+        const merged = mergeLanguageBenchReports(
+            python,
+            typescript,
+            valkyrie,
+            wolframSxo,
+            matlabSxo,
+            typescriptBun,
+        );
         if (merged) {
             report.value = merged;
             return;
