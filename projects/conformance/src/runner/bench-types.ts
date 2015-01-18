@@ -1,6 +1,7 @@
 export type BenchLanguage =
     | "python"
     | "typescript"
+    | "typescript-bun"
     | "valkyrie"
     | "wolfram-sxo"
     | "matlab-sxo";
@@ -36,6 +37,20 @@ export type TypeScriptBenchEnvironment = {
     host: HostEnvironment;
 };
 
+export type TypeScriptBunBenchEnvironment = {
+    language: "typescript-bun";
+    bunVersion: string | null;
+    runnerReady: boolean;
+    skipReason: string | null;
+    runner: "bun";
+    metric: "runtime";
+    timingScope: "in-process-metadata-tests";
+    aggregation: "median";
+    iterations: number;
+    warmup: number;
+    host: HostEnvironment;
+};
+
 export type ValkyrieBenchEnvironment = {
     language: "valkyrie";
     legionVersion: string | null;
@@ -55,7 +70,10 @@ export type ValkyrieBenchEnvironment = {
 export type LanguageBenchEnvironment =
     | PythonBenchEnvironment
     | TypeScriptBenchEnvironment
-    | ValkyrieBenchEnvironment;
+    | TypeScriptBunBenchEnvironment
+    | ValkyrieBenchEnvironment
+    | WolframSxoBenchEnvironment
+    | MatlabSxoBenchEnvironment;
 
 export type LanguageBenchRowBase = {
     id: string;
@@ -71,6 +89,10 @@ export type PythonBenchRow = LanguageBenchRowBase & {
 };
 
 export type TypeScriptBenchRow = LanguageBenchRowBase & {
+    runtimeMs: number | null;
+};
+
+export type TypeScriptBunBenchRow = LanguageBenchRowBase & {
     runtimeMs: number | null;
 };
 
@@ -97,6 +119,15 @@ export type TypeScriptBenchReport = {
     catalogTotal: number;
     environment: TypeScriptBenchEnvironment;
     rows: TypeScriptBenchRow[];
+};
+
+export type TypeScriptBunBenchReport = {
+    language: "typescript-bun";
+    generatedAt: string;
+    ready: boolean;
+    catalogTotal: number;
+    environment: TypeScriptBunBenchEnvironment;
+    rows: TypeScriptBunBenchRow[];
 };
 
 export type ValkyrieBenchReport = {
@@ -164,6 +195,7 @@ export type MatlabSxoBenchReport = {
 export type LanguageBenchReport =
     | PythonBenchReport
     | TypeScriptBenchReport
+    | TypeScriptBunBenchReport
     | ValkyrieBenchReport
     | WolframSxoBenchReport
     | MatlabSxoBenchReport;
@@ -171,6 +203,7 @@ export type LanguageBenchReport =
 export const BENCH_JSON_FILES: Record<BenchLanguage, string> = {
     python: "benchmark-python.json",
     typescript: "benchmark-typescript.json",
+    "typescript-bun": "benchmark-typescript-bun.json",
     valkyrie: "benchmark-valkyrie.json",
     "wolfram-sxo": "benchmark-wolfram-sxo.json",
     "matlab-sxo": "benchmark-matlab-sxo.json",

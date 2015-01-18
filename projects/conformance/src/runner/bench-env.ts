@@ -9,15 +9,18 @@ import type {
     MatlabSxoBenchEnvironment,
     PythonBenchEnvironment,
     TypeScriptBenchEnvironment,
+    TypeScriptBunBenchEnvironment,
     ValkyrieBenchEnvironment,
     WolframSxoBenchEnvironment,
 } from "./bench-types.ts";
 import {
+    BUN_BENCH_PARAMS,
     PYTHON_BENCH_PARAMS,
     SXO_BENCH_PARAMS,
     TYPESCRIPT_BENCH_PARAMS,
     VALKYRIE_BENCH_PARAMS,
 } from "./bench-params.ts";
+import { bunRunnerReady, bunSkipReason, bunVersion } from "./bun-bridge.ts";
 import { sxoPackagesStatus, sxoRunnerReady, sxoSkipReason } from "./sxo-bridge.ts";
 import { spawnLegion, valkyrieRunnerReady, valkyrieSkipReason } from "./valkyrie.ts";
 
@@ -68,6 +71,17 @@ export function collectTypeScriptBenchEnvironment(): TypeScriptBenchEnvironment 
         tsxVersion: tsxVersion ? `tsx ${tsxVersion}` : null,
         host: collectHostEnvironment(),
         ...TYPESCRIPT_BENCH_PARAMS,
+    };
+}
+
+export function collectTypeScriptBunBenchEnvironment(): TypeScriptBunBenchEnvironment {
+    return {
+        language: "typescript-bun",
+        bunVersion: bunVersion(),
+        runnerReady: bunRunnerReady(),
+        skipReason: bunSkipReason(),
+        host: collectHostEnvironment(),
+        ...BUN_BENCH_PARAMS,
     };
 }
 

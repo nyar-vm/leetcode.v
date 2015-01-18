@@ -44,11 +44,17 @@ export function parseBenchLanguages(): BenchLanguage[] | "all" {
             langs.push("python");
         } else if (part === "typescript" || part === "ts") {
             langs.push("typescript");
+        } else if (part === "typescript-bun" || part === "ts-bun" || part === "bun") {
+            langs.push("typescript-bun");
         } else if (part === "valkyrie" || part === "v") {
             langs.push("valkyrie");
+        } else if (part === "wolfram-sxo" || part === "wolfram" || part === "wl") {
+            langs.push("wolfram-sxo");
+        } else if (part === "matlab-sxo" || part === "matlab" || part === "m") {
+            langs.push("matlab-sxo");
         } else {
             throw new Error(
-                `无效的 LEETCODE_BENCH_LANG=${part}（可用 python、typescript、valkyrie、all）`,
+                `无效的 LEETCODE_BENCH_LANG=${part}（可用 python、typescript、typescript-bun、valkyrie、wolfram-sxo、matlab-sxo、all）`,
             );
         }
     }
@@ -85,7 +91,7 @@ export function benchProblemsForLanguage(language: BenchLanguage): ProblemDefini
         if (language === "python") {
             return hasPythonSolver(root);
         }
-        if (language === "typescript") {
+        if (language === "typescript" || language === "typescript-bun") {
             return hasReadyTsSolver(root);
         }
         if (language === "wolfram-sxo") {

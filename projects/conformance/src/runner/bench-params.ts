@@ -19,6 +19,16 @@ export const TYPESCRIPT_BENCH_PARAMS = {
     timingScope: "in-process-metadata-tests" as const,
 };
 
+export const BUN_BENCH_PARAMS = {
+    iterations: 50,
+    warmup: 5,
+    aggregation: "median" as const,
+    metric: "runtime" as const,
+    runner: "bun" as const,
+    /** Bun 子进程内加载题解后只计 metadata.tests 循环，不含每次冷启动 Bun。 */
+    timingScope: "in-process-metadata-tests" as const,
+};
+
 export const VALKYRIE_BENCH_PARAMS = {
     compileRuns: 3,
     warmup: 1,

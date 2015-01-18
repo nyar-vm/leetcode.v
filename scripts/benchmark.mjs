@@ -23,6 +23,9 @@ const LANGUAGE_ALIASES = {
     py: "python",
     typescript: "typescript",
     ts: "typescript",
+    "typescript-bun": "typescript-bun",
+    "ts-bun": "typescript-bun",
+    bun: "typescript-bun",
     valkyrie: "valkyrie",
     v: "valkyrie",
     "wolfram-sxo": "wolfram-sxo",
@@ -37,6 +40,7 @@ const RUNNERS = {
     all: "src/runner/bench-all.ts",
     python: "src/runner/bench-python.ts",
     typescript: "src/runner/bench-typescript.ts",
+    "typescript-bun": "src/runner/bench-typescript-bun.ts",
     valkyrie: "src/runner/bench-valkyrie.ts",
     "wolfram-sxo": "src/runner/bench-wolfram-sxo.ts",
     "matlab-sxo": "src/runner/bench-matlab-sxo.ts",
@@ -47,10 +51,11 @@ function usage() {
 
 语言（可选，等同 bench:语言 脚本）:
   python | py          仅 Python
-  typescript | ts      仅 TypeScript
+  typescript | ts      仅 TypeScript (Node)
+  typescript-bun | bun  仅 TypeScript (Bun)
   valkyrie | v           仅 Valkyrie
-  wolfram-sxo | wl       仅 Wolfram (sxo)
-  matlab-sxo | m         仅 MATLAB (sxo)
+  wolfram-sxo | wl       仅 Wolfram (Sxo)
+  matlab-sxo | m         仅 MATLAB (Sxo)
   （省略）               多语言（默认可用 --lang 过滤）
 
 选项:
@@ -73,7 +78,7 @@ function normalizeLanguage(token) {
     const language = LANGUAGE_ALIASES[key];
     if (!language) {
         throw new Error(
-            `未知语言 ${token}（可用 python、typescript、valkyrie、wolfram-sxo、matlab-sxo）`,
+            `未知语言 ${token}（可用 python、typescript、typescript-bun、valkyrie、wolfram-sxo、matlab-sxo）`,
         );
     }
     return language;
