@@ -10,7 +10,7 @@
 
 - **Backlog ID**：S-0xx
 - **leetcode**：`projects/problems/<slug>/`（coach 算法一句话）
-- **方言**：Wolfram (sxo) / MATLAB (sxo)
+- **方言**：Wolfram (Sxo) / MATLAB (Sxo)
 - **现状**：阻塞注释 / `Expression.diagnostics` / matrix status
 
 ### 目标能力
@@ -31,7 +31,7 @@
 
 1. 上游：`pnpm --filter @sxo/<pkg> test` 或指定 matrix case
 2. leetcode：单题 `metadata.tests` 全绿（对应 sxo 脚本）
-3. （可选）bench 行 `runtimeMs` 非 null，看板标签含 **(sxo)**
+3. （可选）bench 行 `runtimeMs` 非 null，看板标签含 **(Sxo)**
 
 ### 风险与回滚
 

@@ -6,8 +6,8 @@
 
 | 包 | 用途 | 看板显示名 |
 |----|------|------------|
-| `@sxo/mathematica` | Wolfram 语法 frontend + evaluate | **Wolfram (sxo)** |
-| `@sxo/matlab` | MATLAB 语法 frontend + evaluate | **MATLAB (sxo)** |
+| `@sxo/mathematica` | Wolfram 语法 frontend + evaluate | **Wolfram (Sxo)** |
+| `@sxo/matlab` | MATLAB 语法 frontend + evaluate | **MATLAB (Sxo)** |
 | `@sxo/core` | 共享 native 加载（经上面包 re-export） | （不单独上榜） |
 | `@sxo/sxo-<platform>` | optional native addon | 宿主诊断用 |
 

@@ -37,7 +37,8 @@ projects/problems/<slug>/solvers/
 2. `metadata.json` — `invoke.python` / `invoke.typescript`、`tests`
 3. 跑测：
     - Python：`python projects/conformance/scripts/run_python_solver.py <problem-dir>`
-    - TS：`node --import tsx projects/conformance/scripts/run_ts_solver.ts <problem-dir>`
+    - TS (Node)：`node --import tsx projects/conformance/scripts/run_ts_solver.ts <problem-dir>`
+    - TS (Bun)：`projects/conformance` 下 `bun scripts/run_bun_solver.ts <problem-dir>`（复用同一 `solution.ts`）
     - V：`legion build` / `legion test` on `solvers/valkyrie/`（本地 legion 就绪时）
 
 只读当前 `<slug>` 目录，禁止 `**/*` glob。
@@ -52,10 +53,11 @@ projects/problems/<slug>/solvers/
 
 - 单文件 `solution.ts`：`export class Solution { ... }`
 - 方法名与 `invoke.typescript` 一致；参数顺序与 `metadata.tests[].args` 键序一致（`Object.values(args)`）。
+- **Node**：`run_ts_solver.ts`（`tsx`）。**Bun**：`run_bun_solver.ts` 复用同一文件与 `invoke.typescript`，看板列 **TypeScript (Bun)**。
 - harness 经 `fn.call(instance, …)` 调用，`this` 指向 `Solution` 实例；可用 `private` 辅助方法。
 - 不写测试 harness、不引 conformance 包。
 
-## Wolfram (sxo) / MATLAB (sxo)
+## Wolfram (Sxo) / MATLAB (Sxo)
 
 - **仅单文件**：`solution.wl` / `solution.m`；**禁止**题级 `package.json`。`@sxo/*` 由 `projects/conformance` 统一声明。
 - `metadata.invoke.wolframSxo` / `matlabSxo`：函数名（如 `twoSum`），非 `Solution().twoSum`。

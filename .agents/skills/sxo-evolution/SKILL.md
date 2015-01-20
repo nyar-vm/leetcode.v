@@ -2,9 +2,9 @@
 name: sxo-evolution
 description: >-
   刷题流程第④步（SXO 方言）：上游补缺。完整刷题见 leetcode-practice。
-  根据 leetcode.v 与 Wolfram (sxo) / MATLAB (sxo) 实现暴露的缺口，在兄弟仓 sxo-framework
+  根据 leetcode.v 与 Wolfram (Sxo) / MATLAB (Sxo) 实现暴露的缺口，在兄弟仓 sxo-framework
   （@sxo/mathematica、@sxo/matlab 等 npm 包）制定演进计划并落地。
-  用户提及 Wolfram (sxo)、MATLAB (sxo)、@sxo 缺能力、方言 frontend、feature matrix 时加载。
+  用户提及 Wolfram (Sxo)、MATLAB (Sxo)、@sxo 缺能力、方言 frontend、feature matrix 时加载。
 ---
 
 # SXO Evolution
@@ -15,7 +15,7 @@ Athena 能力 → 回到 leetcode.v 验证。
 与 `leetcode-practice` 四步中，本 skill 负责 **④ 演进（SXO 分支）**。不改 coach readme；② 中
 `solution.wl` / `solution.m` 因 **@sxo/* 能力不足** 无法通过 `metadata.tests` 时转入此处。
 
-**不是** Wolfram Engine / MATLAB 运行时演进；看板与文档一律标 **Wolfram (sxo)**、**MATLAB (sxo)**。
+**不是** Wolfram Engine / MATLAB 运行时演进；看板与文档一律标 **Wolfram (Sxo)**、**MATLAB (Sxo)**。
 
 ## 何时使用
 
@@ -76,7 +76,7 @@ leetcode **消费** npm 包；优先改 **已发布面包**（`@sxo/mathematica`
 1. **权威在 sxo-framework**：编辑兄弟仓 npm 包与测试；不在 leetcode.v 复制 `@sxo/*` 源码。
 2. **测试跟能力走**：改 frontend 须补 `tests/` 或 feature-matrix case；禁止只改实现不补测。
 3. **最小公开面**：先满足 leetcode 单题 `metadata.tests`；泛化放后续切片。
-4. **标签诚实**：文档与看板写 **Wolfram (sxo)** / **MATLAB (sxo)**，不写「Mathematica 兼容」「MATLAB 替代」。
+4. **标签诚实**：文档与看板写 **Wolfram (Sxo)** / **MATLAB (Sxo)**（括号内 **Sxo** 大写 S），不写「Mathematica 兼容」「MATLAB 替代」。
 5. commit 在 **sxo-framework** 仓，gitmoji + 英文 subject；leetcode 侧只解除阻塞与 harness 接线。
 
 ## 与 leetcode.v 的闭环
@@ -100,7 +100,7 @@ node --import tsx projects/conformance/scripts/run_matlab_sxo_solver.ts projects
 
 - [ ] backlog 项有 **slug 或 matrix case** 可追溯
 - [ ] 计划含验收：上游 vitest + leetcode 单题
-- [ ] 看板语言名含 **(sxo)** 后缀
+- [ ] 看板语言名含 **(Sxo)** 后缀
 - [ ] 未把官方 Wolfram Engine / MATLAB Runtime 误当作依赖
 
 ## 参考

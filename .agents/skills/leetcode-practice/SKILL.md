@@ -79,12 +79,12 @@ legion build projects/problems/<slug>/solvers/valkyrie --target node -o .cache/<
 |-----------------------|--------------------------|
 | 算法 / 边界错         | 回 ②，不改上游           |
 | 缺类型、语法、std API | ④ `valkyrie-evolution`   |
-| Wolfram / MATLAB (sxo) evaluate 失败 | ④ `sxo-evolution` |
+| Wolfram / MATLAB (Sxo) evaluate 失败 | ④ `sxo-evolution` |
 | legion / vcc 报错     | ④，落点 `../valkyrie.rs` |
 
 ## ④ 上游演进
 
-**Skill**：`valkyrie-evolution`（V / std / legion）或 `sxo-evolution`（**Wolfram (sxo)** / **MATLAB (sxo)**，`@sxo/*` npm）
+**Skill**：`valkyrie-evolution`（V / std / legion）或 `sxo-evolution`（**Wolfram (Sxo)** / **MATLAB (Sxo)**，`@sxo/*` npm）
 
 **产出**：兄弟仓补丁 + 更新对应 `capability-backlog.md`
 
