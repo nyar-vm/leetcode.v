@@ -4,11 +4,114 @@
 
 | ID | 能力簇 | 状态 | 动机（题 / 场景） | 上游落点 | 备注 |
 |----|--------|------|-------------------|----------|------|
-| S-001 | leetcode conformance harness（Wolfram / MATLAB sxo） | done | batch 公平对比、看板 **(sxo)** 列 | `leetcode.v` `conformance` + `@sxo/*` | `run_*_sxo_solver.ts`、`bench:wolfram-sxo` / `bench:matlab-sxo` |
-| S-002 | `metadata.invoke` 与 JSON expected 互操作 | open | 数组、字符串、null、大整数 | leetcode harness 编解码 | 禁止 JS number 静默损坏 |
-| S-003 | 数组 / 列表构造（LeetCode 批量题） | open | 两数之和类、多返回值 | matrix + `@sxo/matlab` / `@sxo/mathematica` | 对照 TS `number[]` |
-| S-004 | 循环与分支（Medium 题） | open | 双指针、扫描类 | dialect lowering | 先 matrix 再 leetcode |
+| S-001 | leetcode conformance harness（Wolfram / MATLAB sxo） | done | batch 公平对比、看板 **(Sxo)** 列 | `leetcode.v` `conformance` + `@sxo/*` | `run_*_sxo_solver.ts`、`bench:wolfram-sxo` / `bench:matlab-sxo` |
+| S-002 | harness JSON ↔ 表面语法编解码 | open | `metadata.tests` 数组、null、字符串 | `leetcode.v` `sxo-json.ts` | 已覆盖标量与一维 `number[]`；大整数仍受 JS 限制 |
+| S-003 | 数组 Part / 下标读取 | partial | `two-sum` | `@sxo/mathematica` | `{3,3}[[1]]` → `3`、`Length[{3,3}]` → `2` 可用 |
+| S-004 | 循环与早退（Medium 题骨架） | open | 双指针、嵌套扫描 | dialect lowering + matrix | 见 S-006–S-008 |
 | S-005 | Windows native optional dep 一键可装 | open | 本机 bench CI | `@sxo/sxo-win32-x64` | 与 `loadNative()` 诊断对齐 |
+| S-006 | Wolfram `Module` + 嵌套 `Do` + `Return` 早退 | open | `two-sum` | `@sxo/mathematica` / `sxo-dialect-mathematica` | 见下方复现；算法不改，题解保留 coach 双层循环 |
+| S-007 | Wolfram 嵌套 `Table` / `Flatten` 配对枚举 | open | `two-sum` 备选扫描 | Athena VM | `ATHENA_UNSUPPORTED_OPERATION` op=234 |
+| S-008 | MATLAB `function` 内嵌套 `for` + `return` | open | `two-sum` | `@sxo/matlab` / `sxo-dialect-matlab` | `matlab(oak): error node`；算法不改 |
+
+## 看板为 0 的原因（非 harness 缺陷）
+
+1. **快照过期**：`benchmark-wolfram-sxo.json` / `benchmark-matlab-sxo.json` 在 `@sxo/*` 尚未 `pnpm install` 时生成，`rows: []`、`ready: false`。npm 就绪后须重跑 `LEETCODE_BENCH_LANG=wolfram-sxo,matlab-sxo pnpm bench`。
+2. **题解被能力阻塞**：目前仅 `two-sum` 有 sxo 脚本；在 S-006–S-008 未解决前 conformance 失败，bench 无有效 `runtimeMs`。
+3. **与 Python/TS 批次无关**：batch-20 只保证三端 LCD/TS 解；sxo 需逐题补 `solution.wl` / `solution.m` 且上游能力绿。
+
+## 复现锚点：`two-sum`（`@sxo/mathematica` 0.0.6 / `@sxo/matlab` 0.0.6）
+
+环境：`leetcode.v` 根 `pnpm install` 后，在 `projects/conformance` 执行。
+
+### S-006 — Wolfram `Do` / `Return`
+
+题解（`projects/problems/two-sum/solvers/wolfram-sxo/solution.wl`，**勿改算法**）：
+
+```wolfram
+twoSum[nums_, target_] := Module[{n = Length[nums]},
+  Do[
+    Do[
+      If[nums[[i]] + nums[[j]] == target, Return[{i - 1, j - 1}]],
+      {j, i + 1, n}
+    ],
+    {i, 1, n - 1}
+  ];
+  Null
+]
+```
+
+```text
+node --import tsx projects/conformance/scripts/run_wolfram_sxo_solver.ts projects/problems/two-sum
+# tests[0]: expected [0,1], got null
+```
+
+最小 evaluate（`Mathematica.create({ autoSimplify: false })`）：
+
+```text
+输入：{solution 全文}
+
+twoSum[{3, 3}, 6]
+实际：Null
+期望：{0, 1}
+```
+
+已确认**可用**的邻近构造（同包、同 `autoSimplify: false`）：
+
+| 输入 | 输出 |
+|------|------|
+| `Length[{3,3}]` | `2` |
+| `{3,3}[[1]]` | `3` |
+| `Module[{n=2}, n]` | `2` |
+| `Table[i,{i,1,3}]` | `{1, 2, 3}` |
+
+### S-007 — Wolfram `Table` / `Flatten`
+
+```text
+Flatten[Table[{i-1,j-1},{i,1,2},{j,2,2}],1]
+→ ATHENA_UNSUPPORTED_OPERATION details={backend=athena-vm, component=execute_ir_request, op=234, reason=vm_backend_failed_no_fallback}
+
+Cases[{{1,2},{2,2}}, {i_,j_}/; {3,3}[[i]]+{3,3}[[j]]==6]
+→ mathematica(ast): error node
+```
+
+### S-008 — MATLAB 嵌套 `for` + `return`
+
+题解（`projects/problems/two-sum/solvers/matlab-sxo/solution.m`，**勿改算法**）：
+
+```matlab
+function out = twoSum(nums, target)
+    n = length(nums);
+    for i = 1:(n - 1)
+        for j = (i + 1):n
+            if nums(i) + nums(j) == target
+                out = [i - 1, j - 1];
+                return;
+            end
+        end
+    end
+    out = [];
+end
+```
+
+```text
+node --import tsx projects/conformance/scripts/run_matlab_sxo_solver.ts projects/problems/two-sum
+# matlab(oak): error node（evaluate 阶段，非 parse-only）
+```
+
+最小 evaluate（`Matlab.create({ autoSimplify: false })`）：
+
+```text
+输入：{solution 全文}
+
+twoSum([3, 3], 6)
+→ Error: matlab(oak): error node
+```
+
+## 上游验收标准（切片完成后）
+
+1. 上表最小 evaluate 与 `metadata.tests` 全绿（`two-sum`）。
+2. `pnpm bench:wolfram-sxo --id two-sum` / `pnpm bench:matlab-sxo --id two-sum` 写出非空 `runtimeMs`。
+3. 看板 **语言综合成绩** 中 Wolfram (Sxo) / MATLAB (Sxo) **有效样本 ≥ 1**（随题解扩面再涨）。
 
 ## 新增条目模板
 
@@ -18,5 +121,5 @@
 
 ## 标签约定
 
-- 看板、bench JSON、`RUNTIME_LANGUAGES`：**Wolfram (sxo)**、**MATLAB (sxo)**
+- 看板、bench JSON、`RUNTIME_LANGUAGES`：**Wolfram (Sxo)**、**MATLAB (Sxo)**（`@sxo/*` npm 包名仍小写）
 - 文档说明：SXO frontend，**不是** Wolfram Engine / MATLAB Runtime
