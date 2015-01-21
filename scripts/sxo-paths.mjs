@@ -15,7 +15,8 @@ export const SXO_PACKAGES_DIR = join(SXO_FRAMEWORK_ROOT, "projects", "packages")
 
 /** 供 `projects/conformance/package.json` 使用的 `link:` 相对路径（从 conformance 出发）。 */
 export const SXO_LINK_FROM_CONFORMANCE = {
-    "@sxo/mathematica": "link:../../../../dxo 深度学习/sxo-framework/projects/packages/sxo-mathematica",
+    "@sxo/mathematica":
+        "link:../../../../dxo 深度学习/sxo-framework/projects/packages/sxo-mathematica",
     "@sxo/matlab": "link:../../../../dxo 深度学习/sxo-framework/projects/packages/sxo-matlab",
     "@sxo/core": "link:../../../../dxo 深度学习/sxo-framework/projects/packages/sxo-core",
 };

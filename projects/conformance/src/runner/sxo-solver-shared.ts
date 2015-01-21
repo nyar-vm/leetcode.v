@@ -49,11 +49,15 @@ export function hasMatlabSxoSolver(problemRoot: string): boolean {
 }
 
 export function hasSxoSolver(problemRoot: string, dialect: SxoDialect): boolean {
-    return dialect === "wolfram-sxo" ? hasWolframSxoSolver(problemRoot) : hasMatlabSxoSolver(problemRoot);
+    return dialect === "wolfram-sxo"
+        ? hasWolframSxoSolver(problemRoot)
+        : hasMatlabSxoSolver(problemRoot);
 }
 
 function solverPath(problemRoot: string, dialect: SxoDialect): string {
-    return dialect === "wolfram-sxo" ? wolframSxoSolverPath(problemRoot) : matlabSxoSolverPath(problemRoot);
+    return dialect === "wolfram-sxo"
+        ? wolframSxoSolverPath(problemRoot)
+        : matlabSxoSolverPath(problemRoot);
 }
 
 function invokeKey(dialect: SxoDialect): "wolframSxo" | "matlabSxo" {
@@ -81,13 +85,25 @@ export function loadSxoSolverBundle(problemRoot: string, dialect: SxoDialect) {
     return { tests, symbol, source };
 }
 
-export function buildWolframProgram(source: string, symbol: string, args: Record<string, unknown>): string {
-    const argList = Object.values(args).map((value) => jsonToWolfram(value)).join(", ");
+export function buildWolframProgram(
+    source: string,
+    symbol: string,
+    args: Record<string, unknown>,
+): string {
+    const argList = Object.values(args)
+        .map((value) => jsonToWolfram(value))
+        .join(", ");
     return `${source.trim()}\n\n${symbol}[${argList}]`;
 }
 
-export function buildMatlabProgram(source: string, symbol: string, args: Record<string, unknown>): string {
-    const argList = Object.values(args).map((value) => jsonToMatlab(value)).join(", ");
+export function buildMatlabProgram(
+    source: string,
+    symbol: string,
+    args: Record<string, unknown>,
+): string {
+    const argList = Object.values(args)
+        .map((value) => jsonToMatlab(value))
+        .join(", ");
     return `${source.trim()}\n\n${symbol}(${argList})`;
 }
 
