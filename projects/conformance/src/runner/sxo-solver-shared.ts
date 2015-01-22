@@ -3,13 +3,14 @@ import { join } from "node:path";
 
 import type { ProblemDefinition } from "../catalog.ts";
 import { problemDir } from "../catalog.ts";
+import { assertTestCase } from "../core/assert.ts";
+import { loadProblemMetadata, requireInvoke, type TestCase } from "../core/metadata.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
-import { assertTestCase } from "./ts-ref.ts";
 import { jsonToMatlab, jsonToWolfram } from "./sxo-json.ts";
 
 export type SxoDialect = "wolfram-sxo" | "matlab-sxo";
 
-export type TestCase = { args: Record<string, unknown>; expected: unknown };
+export type { TestCase };
 
 const BLOCKED_MARKERS = ["# 阻塞：", "% 阻塞："];
 
@@ -65,24 +66,14 @@ function invokeKey(dialect: SxoDialect): "wolframSxo" | "matlabSxo" {
 }
 
 export function loadSxoSolverBundle(problemRoot: string, dialect: SxoDialect) {
-    const meta = JSON.parse(readFileSync(join(problemRoot, "metadata.json"), "utf8")) as {
-        tests?: TestCase[];
-        invoke?: { wolframSxo?: string; matlabSxo?: string };
-    };
-    const tests = meta.tests;
-    if (!tests?.length) {
-        throw new Error("metadata.tests 为空");
-    }
+    const metadata = loadProblemMetadata(problemRoot);
     const key = invokeKey(dialect);
-    const symbol = meta.invoke?.[key]?.trim();
-    if (!symbol) {
-        throw new Error(`metadata.invoke.${key} 缺失`);
-    }
+    const symbol = requireInvoke(metadata, key);
     const source = readFileSync(solverPath(problemRoot, dialect), "utf8");
     if (isBlockedSource(source)) {
         throw new Error(`${dialect} 解处于阻塞状态`);
     }
-    return { tests, symbol, source };
+    return { tests: metadata.tests, symbol, source };
 }
 
 export function buildWolframProgram(

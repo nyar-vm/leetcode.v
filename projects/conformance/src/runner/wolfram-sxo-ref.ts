@@ -1,26 +1,16 @@
-import { median } from "@valkyrie-language/vcc/benchmark";
-
 import type { ProblemDefinition } from "../catalog.ts";
 import {
-    buildWolframProgram,
-    hasWolframSxoSolver,
-    loadSxoSolverBundle,
-    problemRootFor,
-    runSxoTests,
-} from "./sxo-solver-shared.ts";
-import { createWolframEvaluator, sxoRunnerReady, sxoSkipReason } from "./sxo-bridge.ts";
-import { parseWolframSurface } from "./sxo-json.ts";
+    benchSxoSolverInProcess,
+    runSxoSolverOnce,
+    WOLFRAM_SXO_RUNNER,
+} from "../solvers/sxo-runner.ts";
+import { hasWolframSxoSolver, problemRootFor } from "./sxo-solver-shared.ts";
+import { sxoRunnerReady, sxoSkipReason } from "./sxo-bridge.ts";
 
 export { hasWolframSxoSolver };
 
 export async function runWolframSxoSolverOnce(problemRoot: string): Promise<void> {
-    const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, "wolfram-sxo");
-    const evaluator = await createWolframEvaluator();
-    runSxoTests(tests, (args) => {
-        const program = buildWolframProgram(source, symbol, args);
-        const rendered = evaluator.evaluate(program);
-        return parseWolframSurface(rendered);
-    });
+    return runSxoSolverOnce(problemRoot, WOLFRAM_SXO_RUNNER);
 }
 
 export async function benchWolframSxoSolverInProcess(
@@ -28,29 +18,7 @@ export async function benchWolframSxoSolverInProcess(
     iterations: number,
     warmup: number,
 ): Promise<number> {
-    const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, "wolfram-sxo");
-    const evaluator = await createWolframEvaluator();
-
-    const runAll = () => {
-        runSxoTests(tests, (args) => {
-            const program = buildWolframProgram(source, symbol, args);
-            const rendered = evaluator.evaluate(program);
-            return parseWolframSurface(rendered);
-        });
-    };
-
-    for (let i = 0; i < warmup; i++) {
-        runAll();
-    }
-
-    const samples: number[] = [];
-    for (let i = 0; i < iterations; i++) {
-        const start = performance.now();
-        runAll();
-        samples.push(performance.now() - start);
-    }
-
-    return median(samples);
+    return benchSxoSolverInProcess(problemRoot, iterations, warmup, WOLFRAM_SXO_RUNNER);
 }
 
 export async function runWolframSxoReference(

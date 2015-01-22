@@ -1,26 +1,19 @@
-import { median } from "@valkyrie-language/vcc/benchmark";
-
 import type { ProblemDefinition } from "../catalog.ts";
 import {
-    buildMatlabProgram,
+    benchSxoSolverInProcess,
+    runSxoSolverOnce,
+    MATLAB_SXO_RUNNER,
+} from "../solvers/sxo-runner.ts";
+import {
     hasMatlabSxoSolver,
-    loadSxoSolverBundle,
     problemRootFor,
-    runSxoTests,
 } from "./sxo-solver-shared.ts";
-import { createMatlabEvaluator, sxoRunnerReady, sxoSkipReason } from "./sxo-bridge.ts";
-import { parseMatlabSurface } from "./sxo-json.ts";
+import { sxoRunnerReady, sxoSkipReason } from "./sxo-bridge.ts";
 
 export { hasMatlabSxoSolver };
 
 export async function runMatlabSxoSolverOnce(problemRoot: string): Promise<void> {
-    const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, "matlab-sxo");
-    const evaluator = await createMatlabEvaluator();
-    runSxoTests(tests, (args) => {
-        const program = buildMatlabProgram(source, symbol, args);
-        const rendered = evaluator.evaluate(program);
-        return parseMatlabSurface(rendered);
-    });
+    return runSxoSolverOnce(problemRoot, MATLAB_SXO_RUNNER);
 }
 
 export async function benchMatlabSxoSolverInProcess(
@@ -28,29 +21,7 @@ export async function benchMatlabSxoSolverInProcess(
     iterations: number,
     warmup: number,
 ): Promise<number> {
-    const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, "matlab-sxo");
-    const evaluator = await createMatlabEvaluator();
-
-    const runAll = () => {
-        runSxoTests(tests, (args) => {
-            const program = buildMatlabProgram(source, symbol, args);
-            const rendered = evaluator.evaluate(program);
-            return parseMatlabSurface(rendered);
-        });
-    };
-
-    for (let i = 0; i < warmup; i++) {
-        runAll();
-    }
-
-    const samples: number[] = [];
-    for (let i = 0; i < iterations; i++) {
-        const start = performance.now();
-        runAll();
-        samples.push(performance.now() - start);
-    }
-
-    return median(samples);
+    return benchSxoSolverInProcess(problemRoot, iterations, warmup, MATLAB_SXO_RUNNER);
 }
 
 export async function runMatlabSxoReference(

@@ -6,7 +6,11 @@ import { median } from "@valkyrie-language/vcc/benchmark";
 
 import type { ProblemDefinition } from "../catalog.ts";
 import { problemDir } from "../catalog.ts";
+import { assertTestCase, normalizeTsTestResult } from "../core/assert.ts";
+import { loadProblemMetadata, requireInvoke } from "../core/metadata.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "./paths.ts";
+
+export { assertTestCase, normalizeTsTestResult };
 
 export function slugToTsProject(slug: string): string {
     let name = slug.replace(/-/g, "_");
@@ -37,56 +41,6 @@ export function hasReadyTsSolver(problemRoot: string): boolean {
     } catch {
         return false;
     }
-}
-
-type TestCase = { args: Record<string, unknown>; expected: unknown };
-
-/** `void` 解返回 `undefined`；metadata 用 `null` 表示无返回值断言。 */
-export function normalizeTsTestResult(value: unknown): unknown {
-    return value === undefined ? null : value;
-}
-
-/** metadata 中 `expected: "Error: ..."` 表示应抛出异常且消息匹配。 */
-export function assertTestCase(index: number, expected: unknown, run: () => unknown): void {
-    if (typeof expected === "string" && expected.startsWith("Error:")) {
-        try {
-            run();
-        } catch (err) {
-            const actual = err instanceof Error ? `Error: ${err.message}` : `Error: ${String(err)}`;
-            if (actual !== expected) {
-                throw new Error(
-                    `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
-                );
-            }
-            return;
-        }
-        throw new Error(
-            `tests[${index}]: expected ${JSON.stringify(expected)}, no exception raised`,
-        );
-    }
-    const actual = normalizeTsTestResult(run());
-    const normalized = normalizeTsTestResult(expected);
-    if (JSON.stringify(actual) !== JSON.stringify(normalized)) {
-        throw new Error(
-            `tests[${index}]: expected ${JSON.stringify(normalized)}, got ${JSON.stringify(actual)}`,
-        );
-    }
-}
-
-function loadMetadata(problemRoot: string): { tests: TestCase[]; invoke: { typescript: string } } {
-    const meta = JSON.parse(readFileSync(join(problemRoot, "metadata.json"), "utf8")) as {
-        tests?: TestCase[];
-        invoke?: { typescript?: string };
-    };
-    const tests = meta.tests;
-    if (!tests?.length) {
-        throw new Error("metadata.tests 为空");
-    }
-    const entry = meta.invoke?.typescript;
-    if (!entry) {
-        throw new Error("metadata.invoke.typescript 缺失");
-    }
-    return { tests, invoke: { typescript: entry } };
 }
 
 /** 解析 `Solution().twoSum` 等 LeetCode 风格入口。 */
@@ -121,13 +75,14 @@ export function makeTsCandidate(
 }
 
 async function loadTsCandidate(problemRoot: string) {
-    const { tests, invoke } = loadMetadata(problemRoot);
+    const metadata = loadProblemMetadata(problemRoot);
+    const entry = requireInvoke(metadata, "typescript");
     const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<
         string,
         unknown
     >;
-    const candidate = makeTsCandidate(invoke.typescript, mod);
-    return { tests, candidate };
+    const candidate = makeTsCandidate(entry, mod);
+    return { tests: metadata.tests, candidate };
 }
 
 /** 跑一遍 metadata.tests。 */

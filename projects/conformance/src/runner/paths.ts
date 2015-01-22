@@ -1,7 +1,5 @@
-import { dirname, join } from "node:path";
+export { CONFORMANCE_ROOT, LEETCODE_ROOT, BENCH_PUBLIC_DIR } from "../core/paths.ts";
+import { LEETCODE_ROOT } from "../core/paths.ts";
 
-import { fileURLToPath } from "node:url";
-
-const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-
-export const LEETCODE_ROOT_FROM_PACKAGE = join(PACKAGE_ROOT, "..", "..");
+/** @deprecated 使用 `LEETCODE_ROOT`。 */
+export const LEETCODE_ROOT_FROM_PACKAGE = LEETCODE_ROOT;

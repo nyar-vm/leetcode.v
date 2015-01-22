@@ -2,13 +2,11 @@
  * 在 Bun 进程内执行（由 `run_bun_solver.ts` 调用）。
  * 复用 `solvers/typescript/solution.ts` 与 `metadata.invoke.typescript`。
  */
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { assertTestCase, makeTsCandidate, tsSolverPath } from "./ts-ref.ts";
-
-type TestCase = { args: Record<string, unknown>; expected: unknown };
+import { assertTestCase } from "../core/assert.ts";
+import { loadProblemMetadata, requireInvoke } from "../core/metadata.ts";
+import { makeTsCandidate, tsSolverPath } from "./ts-ref.ts";
 
 function median(values: number[]): number {
     if (!values.length) {
@@ -22,30 +20,15 @@ function median(values: number[]): number {
     return sorted[mid];
 }
 
-function loadMetadata(problemRoot: string): { tests: TestCase[]; invoke: { typescript: string } } {
-    const meta = JSON.parse(readFileSync(join(problemRoot, "metadata.json"), "utf8")) as {
-        tests?: TestCase[];
-        invoke?: { typescript?: string };
-    };
-    const tests = meta.tests;
-    if (!tests?.length) {
-        throw new Error("metadata.tests 为空");
-    }
-    const entry = meta.invoke?.typescript;
-    if (!entry) {
-        throw new Error("metadata.invoke.typescript 缺失");
-    }
-    return { tests, invoke: { typescript: entry } };
-}
-
 async function loadTsCandidate(problemRoot: string) {
-    const { tests, invoke } = loadMetadata(problemRoot);
+    const metadata = loadProblemMetadata(problemRoot);
+    const entry = requireInvoke(metadata, "typescript");
     const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<
         string,
         unknown
     >;
-    const candidate = makeTsCandidate(invoke.typescript, mod);
-    return { tests, candidate };
+    const candidate = makeTsCandidate(entry, mod);
+    return { tests: metadata.tests, candidate };
 }
 
 export async function runBunSolverOnce(problemRoot: string): Promise<void> {
