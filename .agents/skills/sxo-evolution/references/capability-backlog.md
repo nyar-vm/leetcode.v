@@ -12,6 +12,23 @@
 | S-006 | Wolfram `Module` + 嵌套 `Do` + `Return` 早退 | open | `two-sum` | `@sxo/mathematica` / `sxo-dialect-mathematica` | 见下方复现；算法不改，题解保留 coach 双层循环 |
 | S-007 | Wolfram 嵌套 `Table` / `Flatten` 配对枚举 | open | `two-sum` 备选扫描 | Athena VM | `ATHENA_UNSUPPORTED_OPERATION` op=234 |
 | S-008 | MATLAB `function` 内嵌套 `for` + `return` | open | `two-sum` | `@sxo/matlab` / `sxo-dialect-matlab` | `matlab(oak): error node`；算法不改 |
+| S-009 | Wolfram `:=` 用户函数在 harness 单次 evaluate 中求值为 `Null` | open | `palindrome-number`、`reverse-integer` 等标量题 | `@sxo/mathematica` | `IntegerDigits`/`While` 定义后调用仍 `Null` |
+| S-010 | 字符串 `Characters` / `StringTake` / `strlength` | open | `longest-common-prefix`、`valid-parentheses` | `@sxo/mathematica` / `@sxo/matlab` | 字符级 Part 与拼接 |
+| S-011 | MATLAB 用户 `function` 体（含 `while`） | open | 标量 / 数组题 | `@sxo/matlab` | 脚本级 `while` 可用，函数体内 `error node` |
+| S-012 | 链表（数组模拟下标） | open | `add-two-numbers` 等 | dialect | 与 S-006/S-008 叠加 |
+| S-013 | 排序 + 多指针 | open | `3sum`、`container-with-most-water` | `@sxo/*` | `Sort` / `sort` + 双指针 |
+| S-014 | 二维矩阵 | open | `rotate-image`、`valid-sudoku` | dialect | 矩阵下标与变异 |
+| S-015 | 回溯 / 递归 DFS | open | `generate-parentheses` 等 | Athena VM | 深度与组合枚举 |
+| S-016 | 哈希 / `Association` / `containers.Map` | open | `roman-to-integer`、`group-anagrams` | frontend | 映射构造与查表 |
+| S-017 | 正则 / 通配 / DP 表 | open | `regular-expression-matching` 等 | dialect | Hard 题簇 |
+
+## 批量补题 Gap 报告
+
+catalog 前 N 题批量写入 `solvers/wolfram-sxo` / `matlab-sxo` 后，逐题 conformance 结果见：
+
+**`projects/conformance/reports/sxo-batch-gap.md`**
+
+生成：`node scripts/sxo-batch-rollout.mjs`（默认 N=50，可用 `LEETCODE_BATCH_LIMIT` 覆盖）。
 
 ## 看板为 0 的原因（非 harness 缺陷）
 

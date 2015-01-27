@@ -1,4 +1,3 @@
-# 阻塞：S-006、S-007 — 见 sxo-evolution references/capability-backlog.md
 twoSum[nums_, target_] := Module[{n = Length[nums]},
   Do[
     Do[
