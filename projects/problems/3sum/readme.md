@@ -1,39 +1,57 @@
-# 3sum
+# [3Sum](https://leetcode.com/problems/3sum/)
 
-- **LeetCode**：[#15 3sum](https://leetcode.com/problems/3sum/)
-- **难度**：Medium
-- **标签**：Array · Two Pointers · Sorting
+## 问题
 
-## 题目
+给定整数数组 `nums`，找出所有和为 $0$ 的三元组 $[\texttt{nums}[i], \texttt{nums}[j], \texttt{nums}[k]]$，满足 $i \ne j \ne k$。结果中**不得含重复三元组**（元素值相同视为同一组）。
 
-Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
-Notice that the solution set must not contain duplicate triplets.
+**示例 1**
 
-**Example 1**：
+- **输入**：`nums = [-1,0,1,2,-1,-4]`
+- **输出**：`[[-1,-1,2],[-1,0,1]]`
 
-**Input**：nums = [-1,0,1,2,-1,-4]
-**Output**：[[-1,-1,2],[-1,0,1]]
-**Explanation**：
-nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
-nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
-nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
-The distinct triplets are [-1,0,1] and [-1,-1,2].
-Notice that the order of the output and the order of the triplets does not matter.
+**示例 2**
 
-**Example 2**：
+- **输入**：`nums = [0,1,1]`
+- **输出**：`[]`
 
-**Input**：nums = [0,1,1]
-**Output**：[]
-**Explanation**：The only possible triplet does not sum up to 0.
+**示例 3**
 
-**Example 3**：
+- **输入**：`nums = [0,0,0]`
+- **输出**：`[[0,0,0]]`
 
-**Input**：nums = [0,0,0]
-**Output**：[[0,0,0]]
-**Explanation**：The only possible triplet sums up to 0.
+**约束**
 
+- $3 \le \mathrm{len}(\texttt{nums}) \le 3000$
+- $-10^5 \le \texttt{nums}[i] \le 10^5$
 
-**Constraints**：
+## 解答
 
-3 $\le \mathrm{len}(nums)$ $\le 3000$
--105 <= nums[i] $\le 105$
+### 朴素想法
+
+三重枚举下标 $(i,j,k)$，$i<j<k$，和为 $0$ 则记入答案，最后用集合去重。$O(n^3)$ 时间，去重额外开销。
+
+### 三重循环的去重负担
+
+大量重复值会产生相同三元组，事后哈希去重既慢又易漏边界。
+
+### 排序后固定一端双指针
+
+先升序排序。固定最小元下标 $i$：若 $\texttt{nums}[i] > 0$ 可提前结束；若 $i>0$ 且 $\texttt{nums}[i]=\texttt{nums}[i-1]$ 跳过重复。在区间 $(i+1, n-1)$ 上设 $j=i+1$、$k=n-1$：和 $<0$ 则 $j\leftarrow j+1$，和 $>0$ 则 $k\leftarrow k-1$，和 $=0$ 则记录三元组并同时移动 $j,k$，再跳过两端重复值。
+
+### 最终算法
+
+排序 `nums`。对 $i=0,\ldots,n-3$ 执行上述剪枝与双指针；命中时追加 $[\texttt{nums}[i],\texttt{nums}[j],\texttt{nums}[k]]$ 并收缩指针至下一不等值。正确性：排序后固定 $\texttt{nums}[i]$ 时，双指针在有序区间上穷尽所有和为 $-\texttt{nums}[i]$ 的数对；跳过重复保证三元组唯一。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n^2)$
+
+排序 $O(n \log n)$，外层 $i$ 与内层双指针合计 $O(n^2)$，主导项为 $O(n^2)$。
+
+### 空间复杂度
+
+$O(\log n)$ 至 $O(n)$
+
+排序栈深或辅助空间依实现而定；不计输出数组时无额外与 $n$ 同阶的结构（输出规模最坏 $O(n^2)$ 不计入辅助空间惯例）。

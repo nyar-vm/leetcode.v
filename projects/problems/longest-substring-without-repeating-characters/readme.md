@@ -1,34 +1,64 @@
-# Longest Substring Without Repeating Characters
+# [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 
-- **LeetCode**：[#3 Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-- **难度**：Medium
-- **标签**：Hash Table · String · Sliding Window
+## 问题
 
-## 题目
+给定一个字符串 `s`，找出其中**不含有重复字符**的最长子串的长度。
 
-Given a string s, find the length of the longest substring without repeating characters.
+**示例 1**
 
-**Example 1**：
+- **输入**：`s = "abcabcbb"`
+- **输出**：`3`
+- **解释**：最长无重复子串是 `"abc"`，长度为 $3$。
 
-**Input**：s = "abcabcbb"
-**Output**：3
-**Explanation**：The answer is "abc", with the length of 3.
+**示例 2**
 
-**Example 2**：
+- **输入**：`s = "bbbbb"`
+- **输出**：`1`
+- **解释**：最长无重复子串是 `"b"`，长度为 $1$。
 
-**Input**：s = "bbbbb"
-**Output**：1
-**Explanation**：The answer is "b", with the length of 1.
+**示例 3**
 
-**Example 3**：
+- **输入**：`s = "pwwkew"`
+- **输出**：`3`
+- **解释**：最长无重复子串是 `"wke"`，长度为 $3$。注意 `"pwke"` 是子序列而非子串。
 
-**Input**：s = "pwwkew"
-**Output**：3
-**Explanation**：The answer is "wke", with the length of 3.
-Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+**约束**
 
+- $0 \le \mathrm{len}(s) \le 5 \times 10^4$
+- `s` 由英文字母、数字、符号与空格组成
 
-**Constraints**：
+## 解答
 
-0 $\le \mathrm{len}(s)$ $\le 5$ * 104
-s consists of English letters, digits, symbols and spaces.
+### 朴素想法
+
+枚举所有子串 $[l, r]$，检查是否含重复字符。正确但需 $O(n^3)$ 或优化检查后仍约 $O(n^2)$，对 $n \approx 5\times 10^4$ 过慢。
+
+### 暴力枚举的重复扫描瓶颈
+
+固定右端点时，左端点从 $0$ 扫到右端点会反复验证同一段前缀是否合法，字符进出窗口的状态没有被复用。
+
+### 滑动窗口维护合法区间
+
+用双指针 $[l, r]$ 表示当前**无重复**子串。右指针每次右扩一位；若新字符已在窗口内出现，则左指针连续右移直到重复被移出。窗口长度 $r-l+1$ 即为以 $r$ 结尾的最长合法子串，全程取最大值。
+
+### 字符出现次数辅助
+
+窗口内每种字符至多出现一次，可用长度为字符集大小的计数表（或集合）记录窗口内各字符出现次数：扩右时加一，缩左时减一，减到零即表示该字符已离开窗口。
+
+### 最终算法
+
+初始化 $l=0$、答案 $0$、空计数表。$r$ 从 $0$ 到 $n-1$：若 $s[r]$ 已在窗口内则不断 $l$ 右移并更新计数直至 $s[r]$ 可加入；加入 $s[r]$，更新答案为 $\max(\text{ans}, r-l+1)$。空串时答案为 $0$。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+每个字符最多被左、右指针各访问一次。
+
+### 空间复杂度
+
+$O(|\Sigma|)$
+
+计数表规模取决于字符集大小；题面字符为有限 ASCII 类符号，可视为常数级额外空间。

@@ -1,26 +1,57 @@
-# Longest Palindromic Substring
+# [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
 
-- **LeetCode**：[#5 Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
-- **难度**：Medium
-- **标签**：Two Pointers · String · Dynamic Programming
+## 问题
 
-## 题目
+给定一个字符串 `s`，找到 `s` 中最长的回文子串并返回。
 
-Given a string s, return the longest palindromic substring in s.
+**示例 1**
 
-**Example 1**：
+- **输入**：`s = "babad"`
+- **输出**：`"bab"`
+- **解释**：`"aba"` 同样是符合题意的答案。
 
-**Input**：s = "babad"
-**Output**："bab"
-**Explanation**："aba" is also a valid answer.
+**示例 2**
 
-**Example 2**：
+- **输入**：`s = "cbbd"`
+- **输出**：`"bb"`
 
-**Input**：s = "cbbd"
-**Output**："bb"
+**约束**
 
+- $1 \le \mathrm{len}(s) \le 1000$
+- `s` 仅由数字和英文字母组成
 
-**Constraints**：
+## 解答
 
-1 $\le \mathrm{len}(s)$ $\le 1000$
-s consist of only digits and English letters.
+### 朴素想法
+
+枚举所有子串 $[l,r]$，判断是否为回文并取最长。需 $O(n^3)$ 字符比较，$n=1000$ 时偏紧。
+
+### 暴力枚举的重复比较
+
+以每个子串独立扫描判断回文，中心重叠的子串会重复比较同一对对称字符，没有利用「更短回文已知则更长可递推」的结构。
+
+### 区间动态规划
+
+设 $f[l,r]$ 表示 $s[l..r]$ 是否为回文。单字符与相邻双字符为基；若 $s[l]=s[r]$ 且 $f[l+1,r-1]$ 为真则 $f[l,r]$ 为真。自短区间向长区间填表，$O(n^2)$ 时间、$O(n^2)$ 空间。
+
+### 中心扩展的常数空间优化
+
+任意回文都有「中心」（奇长为一个字符，偶长为两字符之间）。对每个中心向两侧同步扩展，直到字符不等为止，记录最长段。共 $2n-1$ 个中心，每次扩展均摊 $O(1)$，总计 $O(n^2)$ 时间、$O(1)$ 额外空间。
+
+### 最终算法
+
+维护当前最长回文的起始下标与长度。遍历每个中心，双指针向外扩展并更新最优；最后截取对应子串返回。与 DP 同阶但空间更优，实现更直接。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n^2)$
+
+至多 $2n-1$ 个中心，每个中心扩展不超过 $n$ 步。
+
+### 空间复杂度
+
+$O(1)$
+
+中心扩展仅保留最优起点、长度与若干下标；输出子串本身不计入额外渐近空间。

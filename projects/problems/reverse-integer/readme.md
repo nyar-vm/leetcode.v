@@ -1,30 +1,60 @@
-# Reverse Integer
+# [Reverse Integer](https://leetcode.com/problems/reverse-integer/)
 
-- **LeetCode**：[#7 Reverse Integer](https://leetcode.com/problems/reverse-integer/)
-- **难度**：Medium
-- **标签**：Math
+## 问题
 
-## 题目
+给你一个 32 位有符号整数 `x`，返回将 `x` 的数字部分反转后的结果；若反转后超出 32 位有符号整数范围 $[-2^{31},\,2^{31}-1]$，则返回 $0$。
 
-Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
-Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+**示例 1**
 
-**Example 1**：
+- **输入**：`x = 123`
+- **输出**：`321`
 
-**Input**：x = 123
-**Output**：321
+**示例 2**
 
-**Example 2**：
+- **输入**：`x = -123`
+- **输出**：`-321`
 
-**Input**：x = -123
-**Output**：-321
+**示例 3**
 
-**Example 3**：
+- **输入**：`x = 120`
+- **输出**：`21`
 
-**Input**：x = 120
-**Output**：21
+**约束**
 
+- $-2^{31} \le x \le 2^{31}-1$
 
-**Constraints**：
+## 解答
 
--231 <= x $\le 231$ - 1
+### 朴素想法
+
+把 `x` 转成字符串，反转后再解析为整数并检查范围。正确但依赖字符串与额外分配，且边界溢出检查容易写漏。
+
+### 字符串转换的额外开销
+
+数值反转本质是逐位抽取十进制数字，经字符串中间表示会多一次编解码，与题意所需的算术过程不对齐。
+
+### 逐位构造反转数
+
+反复取 `x` 的末位 `pop = x \bmod 10`，更新 `rev = rev \times 10 + pop`，再令 `x = \lfloor x / 10 \rfloor$（负数的取模语义需与语言一致）。当 $x=0$ 时结束。
+
+### 溢出先验检查
+
+在乘 $10$ 加下一位之前，判断 `rev` 是否已接近上下界：若 `rev > \lfloor MAX/10 \rfloor`，或 `rev == \lfloor MAX/10 \rfloor` 且下一位超过 $7$（正数）/ 小于 $-8$（负数），则反转必溢出，直接返回 $0$。这样无需 64 位中间类型也能安全判定。
+
+### 最终算法
+
+维护 `rev`，循环直到 $x=0$：每轮先做溢出检查，再取末位更新 `rev` 与 $x$。负号由末位取模与除法自然保留。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(\log_{10}|x|)$
+
+位数与十进制长度成正比。
+
+### 空间复杂度
+
+$O(1)$
+
+仅常数个标量变量。

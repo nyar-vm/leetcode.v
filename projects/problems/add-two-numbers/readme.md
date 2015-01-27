@@ -1,34 +1,61 @@
-# Add Two Numbers
+# [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
 
-- **LeetCode**：[#2 Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
-- **难度**：Medium
-- **标签**：Recursion · Linked List · Math
+## 问题
 
-## 题目
+给你两个**非空**链表，表示两个非负整数。数字按**逆序**存储，每个节点只存一位十进制数字。将两数相加并以相同逆序链表形式返回和。
 
-You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
-You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+除数字 `0` 本身外，可以认为链表**不含前导零**。
 
-**Example 1**：
+**示例 1**
 
+- **输入**：`l1 = [2,4,3]`，`l2 = [5,6,4]`
+- **输出**：`[7,0,8]`
+- **解释**：$342 + 465 = 807$，逆序存储为 `[7,0,8]`。
 
-**Input**：l1 = [2,4,3], l2 = [5,6,4]
-**Output**：[7,0,8]
-**Explanation**：342 + 465 = 807.
+**示例 2**
 
-**Example 2**：
+- **输入**：`l1 = [0]`，`l2 = [0]`
+- **输出**：`[0]`
 
-**Input**：l1 = [0], l2 = [0]
-**Output**：[0]
+**示例 3**
 
-**Example 3**：
+- **输入**：`l1 = [9,9,9,9,9,9,9]`，`l2 = [9,9,9,9]`
+- **输出**：`[8,9,9,9,0,0,0,1]`
 
-**Input**：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
-**Output**：[8,9,9,9,0,0,0,1]
+**约束**
 
+- 每条链表长度 $\in [1, 100]$
+- 每个节点值 $\in [0, 9]$
+- 链表表示的整数不含前导零（`0` 本身除外）
 
-**Constraints**：
+## 解答
 
-The number of nodes in each linked list is in the range [1, 100].
-0 <= Node.val $\le 9$
-It is guaranteed that the list represents a number that does not have leading zeros.
+### 朴素想法
+
+把两条链表还原成普通整数，相加后再拆成逆序数字链表。思路直观，但节点可达百级，对应整数远超一般标量宽度，还原与拆分都不可靠。
+
+### 逐位相加与进位传播
+
+两数逆序存储时，链表头就是**个位**。从两端同时向后走，对当前位求和 $s = d_1 + d_2 + \text{carry}$，本位写入 $s \bmod 10$，新进位 $\lfloor s / 10 \rfloor$。只要还有未处理节点或进位非零，就继续。
+
+### 长度不齐的处理
+
+较短链表走完后，缺失位按 $0$ 参与加法；较长链表剩余位照常与进位相加。最后若仍有进位，需再追加一位（如 $99 + 1 \rightarrow [0,1]$）。
+
+### 最终算法
+
+维护进位变量，双指针从链表头同步推进。每步计算 $s$ 并更新进位，把 $s \bmod 10$ 接到结果尾部。两指针都到头且进位为 $0$ 时结束。若用哨兵节点挂接新链表，可统一「头插/尾接」逻辑而无需特判首节点。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(\max(m, n))$
+
+$m$、$n$ 为两链表长度；每位至多访问一次，末尾进位至多增加常数一步。
+
+### 空间复杂度
+
+$O(\max(m, n))$
+
+结果链表最长比较长输入多一位进位；除输出外只需 $O(1)$ 额外变量（进位与指针）。

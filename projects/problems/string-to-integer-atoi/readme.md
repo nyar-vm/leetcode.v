@@ -1,87 +1,67 @@
-# String To Integer Atoi
+# [String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
 
-- **LeetCode**：[#8 String To Integer Atoi](https://leetcode.com/problems/string-to-integer-atoi/)
-- **难度**：Medium
-- **标签**：String
+## 问题
 
-## 题目
+实现 `myAtoi(string s)`，将字符串转换为 32 位有符号整数。算法如下：
 
-Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer.
-The algorithm for myAtoi(string s) is as follows:
+1. **去前导空白**：忽略开头的空格 `' '`。
+2. **符号**：若下一个字符为 `'-'` 或 `'+'`，确定正负；否则视为正。
+3. **转换**：读取连续数字（跳过数字前导零的语义由「读到非数字即停」自然体现）；若无任何数字则结果为 $0$。
+4. **截断**：结果若超出 $[-2^{31},\,2^{31}-1]$，截断到边界（过小取 $-2^{31}$，过大取 $2^{31}-1$）。
 
-Whitespace: Ignore any leading whitespace (" ").
-Signedness: Determine the sign by checking if the next character is '-' or '+', assuming positivity if neither present.
-Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.
-Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range. Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
+**示例 1**
 
-Return the integer as the final result.
+- **输入**：`s = "42"`
+- **输出**：`42`
 
-**Example 1**：
+**示例 2**
 
-**Input**：s = "42"
-**Output**：42
-**Explanation**：
+- **输入**：`s = "   -42"`
+- **输出**：`-42`
 
-The underlined characters are what is read in and the caret is the current reader position.
-Step 1: "42" (no characters read because there is no leading whitespace)
-^
-Step 2: "42" (no characters read because there is neither a '-' nor '+')
-^
-Step 3: "42" ("42" is read in)
-^
+**示例 3**
 
+- **输入**：`s = "4193 with words"`
+- **输出**：`4193`
+- **解释**：读到空格后停止，得到 $4193$。
 
-**Example 2**：
+**约束**
 
-**Input**：s = " -042"
-**Output**：-42
-**Explanation**：
+- $0 \le \mathrm{len}(s) \le 200$
+- `s` 由英文字母、数字、`'+'`、`'-'` 和空格组成
 
-Step 1: "   -042" (leading whitespace is read and ignored)
-^
-Step 2: "   -042" ('-' is read, so the result should be negative)
-^
-Step 3: "   -042" ("042" is read in, leading zeros ignored in the result)
-^
+## 解答
 
+### 朴素想法
 
-**Example 3**：
+正则或状态机手写一遍规则。正确，但状态转移若散乱则易漏边界（仅符号、仅空白、溢出）。
 
-**Input**：s = "1337c0d3"
-**Output**：1337
-**Explanation**：
+### 一次性解析的溢出风险
 
-Step 1: "1337c0d3" (no characters read because there is no leading whitespace)
-^
-Step 2: "1337c0d3" (no characters read because there is neither a '-' nor '+')
-^
-Step 3: "1337c0d3" ("1337" is read in; reading stops because the next character is a non-digit)
-^
+边读边乘 $10$ 累加，可能在已超过 32 位范围后仍继续运算，导致中间值语义依赖语言宽度。
 
+### 有限状态扫描
 
-**Example 4**：
+用下标线性扫描：先跳过空白 → 读可选符号 → 在数字段内逐字符转数位并累加，遇非数字结束。无数字段则返回 $0$。
 
-**Input**：s = "0-1"
-**Output**：0
-**Explanation**：
+### 溢出先验截断
 
-Step 1: "0-1" (no characters read because there is no leading whitespace)
-^
-Step 2: "0-1" (no characters read because there is neither a '-' nor '+')
-^
-Step 3: "0-1" ("0" is read in; reading stops because the next character is a non-digit)
-^
+设 $\texttt{MAX}=2^{31}-1$，在加入下一位 $d$ 之前判断：若 $\texttt{res} > \lfloor \texttt{MAX}/10 \rfloor$，或 $\texttt{res} = \lfloor \texttt{MAX}/10 \rfloor$ 且 $d>7$（正数）/ 对称处理负数边界，则直接返回 $\texttt{MAX}$ 或 $-2^{31}$，不再继续累加。
 
+### 最终算法
 
-**Example 5**：
+维护下标、符号、累加值 `res`。按上述三阶段扫描；数字阶段每步先溢出检查再 `res = 10*res + d`。返回 `sign * res`（符号已并入检查逻辑时可先按正数累加再乘符号）。
 
-**Input**：s = "words and 987"
-**Output**：0
-**Explanation**：
-Reading stops at the first non-digit character 'w'.
+## 复杂度分析
 
+### 时间复杂度
 
-**Constraints**：
+$O(n)$
 
-0 $\le \mathrm{len}(s)$ $\le 200$
-s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
+每个字符至多访问常数次。
+
+### 空间复杂度
+
+$O(1)$
+
+仅若干标量与下标。

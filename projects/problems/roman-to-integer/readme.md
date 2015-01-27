@@ -1,51 +1,59 @@
-# Roman To Integer
+# [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
 
-- **LeetCode**：[#13 Roman To Integer](https://leetcode.com/problems/roman-to-integer/)
-- **难度**：Easy
-- **标签**：Hash Table · Math · String
+## 问题
 
-## 题目
+罗马数字由 `I`、`V`、`X`、`L`、`C`、`D`、`M` 表示 1、5、10、50、100、500、1000。通常从左到右按值从大到小书写；若较小符号在较大符号左侧，则从前者减去后者（如 `IV`=4、`IX`=9、`XL`=40 等）。
 
-Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+给定合法罗马数字串 `s`，求其整数值。
 
-Symbol       Value
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
-For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
-Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+**示例 1**
 
-I can be placed before V (5) and X (10) to make 4 and 9.
-X can be placed before L (50) and C (100) to make 40 and 90.
-C can be placed before D (500) and M (1000) to make 400 and 900.
+- **输入**：`s = "III"`
+- **输出**：`3`
 
-Given a roman numeral, convert it to an integer.
+**示例 2**
 
-**Example 1**：
+- **输入**：`s = "LVIII"`
+- **输出**：`58`
 
-**Input**：s = "III"
-**Output**：3
-**Explanation**：III = 3.
+**示例 3**
 
-**Example 2**：
+- **输入**：`s = "MCMXCIV"`
+- **输出**：`1994`
 
-**Input**：s = "LVIII"
-**Output**：58
-**Explanation**：L = 50, V= 5, III = 3.
+**约束**
 
-**Example 3**：
+- $1 \le \mathrm{len}(s) \le 15$
+- `s` 仅含 `I`、`V`、`X`、`L`、`C`、`D`、`M`，且为 $[1,3999]$ 内的合法表示
 
-**Input**：s = "MCMXCIV"
-**Output**：1994
-**Explanation**：M = 1000, CM = 900, XC = 90 and IV = 4.
+## 解答
 
+### 朴素想法
 
-**Constraints**：
+从左到右扫描，尝试匹配最长的合法符号（含 `CM`、`IV` 等双字符），累加值。需维护符号表与最长匹配，实现繁琐。
 
-1 $\le \mathrm{len}(s)$ $\le 15$
-s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
-It is guaranteed that s is a valid roman numeral in the range [1, 3999].
+### 双字符匹配的表驱动开销
+
+为每个位置查最长前缀，最坏需多次比较；合法输入下双字符减法仅出现在「左小右大」的相邻对，不必显式枚举所有双字符 token。
+
+### 相邻比较累加
+
+自左向右处理相邻字符对 $(a,b)$：若 $\mathrm{val}(a) < \mathrm{val}(b)$，则 $a$ 为减法位，贡献 $-\mathrm{val}(a)$；否则贡献 $+\mathrm{val}(a)$。最后一字符从未作为「左邻」参与比较，单独加上 $\mathrm{val}(s_{n-1})$。等价于从左到右累加，遇小在前则回退。
+
+### 最终算法
+
+令 $\mathrm{val}(\cdot)$ 为七种单字符映射。`sum` 初始为末字符值。对 $i=0,\ldots,n-2$，令 $a=s[i]$、$b=s[i+1]$，若 $\mathrm{val}(a)<\mathrm{val}(b)$ 则 `sum -= val(a)`，否则 `sum += val(a)`。返回 `sum`。
+
+## 复杂度分析
+
+### 时间复杂度
+
+$O(n)$
+
+$n = \mathrm{len}(s)$，单次线性扫描。
+
+### 空间复杂度
+
+$O(1)$
+
+仅符号值查表与累加变量，不依赖输入规模额外结构。

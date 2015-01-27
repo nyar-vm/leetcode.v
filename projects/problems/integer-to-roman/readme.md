@@ -1,94 +1,58 @@
-# Integer To Roman
+# [Integer to Roman](https://leetcode.com/problems/integer-to-roman/)
 
-- **LeetCode**：[#12 Integer To Roman](https://leetcode.com/problems/integer-to-roman/)
-- **难度**：Medium
-- **标签**：Hash Table · Math · String
+## 问题
 
-## 题目
+罗马数字由符号 `I`(1)、`V`(5)、`X`(10)、`L`(50)、`C`(100)、`D`(500)、`M`(1000) 组成。按十进制位从高到低拼接：一般取不超过当前值的最大符号；遇 4 或 9 用减法形式（`IV`、`IX`、`XL`、`XC`、`CD`、`CM`）；`I`/`X`/`C`/`M` 同一符号最多连续三次。
 
-Seven different symbols represent Roman numerals with the following values:
+给定整数 `num`，输出对应的罗马数字字符串。
 
+**示例 1**
 
+- **输入**：`num = 3749`
+- **输出**：`"MMMDCCXLIX"`
 
-Symbol
-Value
+**示例 2**
 
+- **输入**：`num = 58`
+- **输出**：`"LVIII"`
 
+**示例 3**
 
+- **输入**：`num = 1994`
+- **输出**：`"MCMXCIV"`
 
-I
-1
+**约束**
 
+- $1 \le \texttt{num} \le 3999$
 
-V
-5
+## 解答
 
+### 朴素想法
 
-X
-10
+把 `num` 反复拆成「当前能表示的最大罗马片段」并拼接。若每次只查七种基本符号，遇到 4、9、40、90 等需额外分支处理减法形式，逻辑分散。
 
+### 逐位拆分的分支膨胀
 
-L
-50
+按个、十、百、千位分别映射会重复处理 4/9 特例，且与「一次取最大可减片段」的贪心视角不一致，代码冗长。
 
+### 值—符号贪心表
 
-C
-100
+预置 13 组 $(\text{值}, \text{串})$，按值从大到小排列：$(1000,\texttt{M})$、$(900,\texttt{CM})$、$(500,\texttt{D})$、$(400,\texttt{CD})$、…、$(1,\texttt{I})$。对每组，当 $\texttt{num} \ge \text{值}$ 时反复减去该值并追加对应串，直至 $\texttt{num}=0$。减法形式已编码进表中，无需单独分支。
 
+### 最终算法
 
-D
-500
+初始化答案为空。按表顺序扫描每一对 $(v,s)$：$\texttt{while }\texttt{num} \ge v$ 时执行 $\texttt{num} \leftarrow \texttt{num}-v$ 并追加 $s$。表覆盖 $[1,3999]$ 内所有合法组合，贪心正确性由罗马数字的规范表示唯一性保证。
 
+## 复杂度分析
 
-M
-1000
+### 时间复杂度
 
+$O(1)$
 
+符号种类与每位重复次数均有常数上界（$\texttt{num} \le 3999$）。
 
-Roman numerals are formed by appending the conversions of decimal place values from highest to lowest. Converting a decimal place value into a Roman numeral has the following rules:
+### 空间复杂度
 
-If the value does not start with 4 or 9, select the symbol of the maximal value that can be subtracted from the input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.
-If the value starts with 4 or 9 use the subtractive form representing one symbol subtracted from the following symbol, for example, 4 is 1 (I) less than 5 (V): IV and 9 is 1 (I) less than 10 (X): IX. Only the following subtractive forms are used: 4 (IV), 9 (IX), 40 (XL), 90 (XC), 400 (CD) and 900 (CM).
-Only powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to represent multiples of 10. You cannot append 5 (V), 50 (L), or 500 (D) multiple times. If you need to append a symbol 4 times use the subtractive form.
+$O(1)$
 
-Given an integer, convert it to a Roman numeral.
-
-**Example 1**：
-
-**Input**：num = 3749
-**Output**："MMMDCCXLIX"
-**Explanation**：
-
-3000 = MMM as 1000 (M) + 1000 (M) + 1000 (M)
-700 = DCC as 500 (D) + 100 (C) + 100 (C)
-40 = XL as 10 (X) less of 50 (L)
-9 = IX as 1 (I) less of 10 (X)
-Note: 49 is not 1 (I) less of 50 (L) because the conversion is based on decimal places
-
-
-**Example 2**：
-
-**Input**：num = 58
-**Output**："LVIII"
-**Explanation**：
-
-50 = L
-8 = VIII
-
-
-**Example 3**：
-
-**Input**：num = 1994
-**Output**："MCMXCIV"
-**Explanation**：
-
-1000 = M
-900 = CM
-90 = XC
-4 = IV
-
-
-
-**Constraints**：
-
-1 <= num $\le 3999$
+除输出串外仅常数变量；输出长度亦为常数级。
