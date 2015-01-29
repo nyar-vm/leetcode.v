@@ -3,13 +3,13 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { assertTestCase, normalizeTsTestResult } from "../src/runner/ts-ref.ts";
+import { assertTestCase, normalizeTsTestResult } from "../src/domain/assert.ts";
 import {
     loadMetadata,
     resolveVBuildArtifacts,
     resolveWasmExportSymbol,
     wasmInvokeBlockedReason,
-} from "../src/runner/v-ref.ts";
+} from "../src/adapters/valkyrie-node/ref.ts";
 
 type InvokeHost = {
     invokeLeetCode?: (entry: string, args: Record<string, unknown>) => unknown;

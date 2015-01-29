@@ -57,9 +57,15 @@ const wlPrograms = [
 
 const wlSyntax = [
     ["inline", "Module[{x=121}, x>=0 && IntegerString[x]==StringReverse[IntegerString[x]]]"],
-    ["set block", "(isPalindrome[x_] := (x>=0 && IntegerString[x]==StringReverse[IntegerString[x]]); isPalindrome[121])"],
+    [
+        "set block",
+        "(isPalindrome[x_] := (x>=0 && IntegerString[x]==StringReverse[IntegerString[x]]); isPalindrome[121])",
+    ],
     ["set delayed block", "Block[{isPalindrome}, isPalindrome[x_] := x>=0; isPalindrome[121]]"],
-    ["pure expr", "Sign[123]*Module[{n=123,rev=0}, While[n>0,rev=rev*10+Mod[n,10];n=Quotient[n,10]];rev]"],
+    [
+        "pure expr",
+        "Sign[123]*Module[{n=123,rev=0}, While[n>0,rev=rev*10+Mod[n,10];n=Quotient[n,10]];rev]",
+    ],
 ];
 
 for (const [label, program] of wlSyntax) {

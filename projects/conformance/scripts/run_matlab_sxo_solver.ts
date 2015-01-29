@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /** 加载 solvers/matlab-sxo/solution.m 并经 @sxo/matlab 执行 metadata.tests。 */
-import { SXO_BENCH_PARAMS } from "../src/runner/bench-params.ts";
+import { SXO_BENCH_PARAMS } from "../src/planning/bench-params.ts";
 import {
     benchMatlabSxoSolverInProcess,
     runMatlabSxoSolverOnce,
-} from "../src/runner/matlab-sxo-ref.ts";
-import { sxoRunnerReady, sxoSkipReason } from "../src/runner/sxo-bridge.ts";
+} from "../src/adapters/matlab-sxo/ref.ts";
+import { sxoRunnerReady, sxoSkipReason } from "../src/adapters/shared/sxo-bridge.ts";
 
 async function main(): Promise<number> {
     const args = process.argv.slice(2);

@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { normalizeBenchLanguage } from "../src/bench/language-selection.ts";
-import { metaForProblem } from "../src/bench/orchestrator.ts";
-import { PROBLEMS } from "../src/catalog.ts";
+import { normalizeBenchLanguage } from "../src/planning/language-selection.ts";
+import { metaForProblem } from "../src/planning/problem-selection.ts";
+import { PROBLEMS } from "../src/catalog/index.ts";
 import {
     ALL_BENCH_LANGUAGES,
     DEFAULT_BENCH_LANGUAGES,
     getLanguageBenchPlugin,
-} from "../src/solvers/plugins.ts";
+} from "../src/adapters/plugins.ts";
 
 describe("bench language selection", () => {
     it("normalizes aliases", () => {

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /** 加载 solvers/wolfram-sxo/solution.wl 并经 @sxo/mathematica 执行 metadata.tests。 */
-import { SXO_BENCH_PARAMS } from "../src/runner/bench-params.ts";
+import { SXO_BENCH_PARAMS } from "../src/planning/bench-params.ts";
 import {
     benchWolframSxoSolverInProcess,
     runWolframSxoSolverOnce,
-} from "../src/runner/wolfram-sxo-ref.ts";
-import { sxoRunnerReady, sxoSkipReason } from "../src/runner/sxo-bridge.ts";
+} from "../src/adapters/wolfram-sxo/ref.ts";
+import { sxoRunnerReady, sxoSkipReason } from "../src/adapters/shared/sxo-bridge.ts";
 
 async function main(): Promise<number> {
     const args = process.argv.slice(2);

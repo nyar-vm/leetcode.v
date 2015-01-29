@@ -6,21 +6,20 @@
     "description": "LeetCode 完备性测试与 Valkyrie 对比基准（本地 sibling valkyrie.rs）",
     "exports": {
         ".": "./src/index.ts",
-        "./bench": "./src/runner/bench-all.ts",
-        "./bench/orchestrator": "./src/bench/orchestrator.ts",
-        "./catalog": "./src/catalog.generated.ts",
-        "./registry": "./src/solvers/registry.ts"
+        "./catalog": "./src/catalog/generated.ts",
+        "./registry": "./src/adapters/registry.ts",
+        "./cli": "./src/cli/run.ts"
     },
     "scripts": {
         "test": "vitest run",
         "test:watch": "vitest",
-        "bench": "node --import tsx src/runner/bench-all.ts",
-        "bench:python": "node --import tsx src/runner/bench-python.ts",
-        "bench:typescript": "node --import tsx src/runner/bench-typescript.ts",
-        "bench:typescript-bun": "node --import tsx src/runner/bench-typescript-bun.ts",
-        "bench:valkyrie": "node --import tsx src/runner/bench-valkyrie.ts",
-        "bench:wolfram-sxo": "node --import tsx src/runner/bench-wolfram-sxo.ts",
-        "bench:matlab-sxo": "node --import tsx src/runner/bench-matlab-sxo.ts",
+        "bench": "node --import tsx src/cli/run.ts",
+        "bench:python": "node --import tsx src/cli/run.ts --lang python",
+        "bench:typescript": "node --import tsx src/cli/run.ts --lang typescript",
+        "bench:typescript-bun": "node --import tsx src/cli/run.ts --lang typescript-bun",
+        "bench:valkyrie": "node --import tsx src/cli/run.ts --lang valkyrie",
+        "bench:wolfram-sxo": "node --import tsx src/cli/run.ts --lang wolfram-sxo",
+        "bench:matlab-sxo": "node --import tsx src/cli/run.ts --lang matlab-sxo",
         "rebuild:bun": "pnpm rebuild bun"
     },
     "optionalDependencies": {

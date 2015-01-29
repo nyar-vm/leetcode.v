@@ -8,14 +8,18 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-import { PROBLEMS, legionProjectDir, problemDir } from "../src/catalog.ts";
-import { problemsForBatch } from "../src/batch-limit.ts";
+import { PROBLEMS, legionProjectDir, problemDir } from "../src/catalog/index.ts";
+import { problemsForBatch } from "../src/planning/batch-limit.ts";
 
-import { isValkyrieGreen, probeValkyrieProblem } from "../src/runner/matrix.ts";
+import { isValkyrieGreen, probeValkyrieProblem } from "../src/adapters/valkyrie-node/matrix.ts";
 
-import { pythonRefReady, pythonSkipReason, runPythonReference } from "../src/runner/python-ref.ts";
+import {
+    pythonRefReady,
+    pythonSkipReason,
+    runPythonSolver as runPythonReference,
+} from "../src/adapters/python/ref.ts";
 
-import { valkyrieRunnerReady } from "../src/runner/valkyrie.ts";
+import { valkyrieRunnerReady } from "../src/adapters/valkyrie-node/valkyrie.ts";
 
 const LEETCODE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /** 在 Bun 进程内加载 solvers/typescript/solution.ts 并执行 metadata.tests。 */
-import { BUN_BENCH_PARAMS } from "../src/runner/bench-params.ts";
-import { benchBunSolverInProcess, runBunSolverOnce } from "../src/runner/bun-solver-runtime.ts";
+import { BUN_BENCH_PARAMS } from "../src/planning/bench-params.ts";
+import { benchBunSolverInProcess, runBunSolverOnce } from "../src/adapters/typescript-bun/runtime.ts";
 
 function parseCount(value: string | undefined, flag: string): number {
     const parsed = Number(value);

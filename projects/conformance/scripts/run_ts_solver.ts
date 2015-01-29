@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** 加载 solvers/typescript/<project>/solution.ts 并执行 metadata.tests。 */
-import { benchTsSolverInProcess, runTsSolverOnce } from "../src/runner/ts-ref.ts";
-import { TYPESCRIPT_BENCH_PARAMS } from "../src/runner/bench-params.ts";
+import { benchTsSolverInProcess, runTsSolverOnce } from "../src/adapters/typescript-node/ref.ts";
+import { TYPESCRIPT_BENCH_PARAMS } from "../src/planning/bench-params.ts";
 
 async function main(): Promise<number> {
     const args = process.argv.slice(2);

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { bunRunnerReady, bunVersion } from "../src/runner/bun-bridge.ts";
+import { bunRunnerReady, bunVersion } from "../src/adapters/typescript-bun/bridge.ts";
 
 describe("bun-bridge", () => {
     it("reports bun readiness after pnpm install", () => {

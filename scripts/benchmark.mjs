@@ -37,13 +37,13 @@ const LANGUAGE_ALIASES = {
 };
 
 const RUNNERS = {
-    all: "src/runner/bench-all.ts",
-    python: "src/runner/bench-python.ts",
-    typescript: "src/runner/bench-typescript.ts",
-    "typescript-bun": "src/runner/bench-typescript-bun.ts",
-    valkyrie: "src/runner/bench-valkyrie.ts",
-    "wolfram-sxo": "src/runner/bench-wolfram-sxo.ts",
-    "matlab-sxo": "src/runner/bench-matlab-sxo.ts",
+    all: "src/cli/run.ts",
+    python: "src/cli/run.ts",
+    typescript: "src/cli/run.ts",
+    "typescript-bun": "src/cli/run.ts",
+    valkyrie: "src/cli/run.ts",
+    "wolfram-sxo": "src/cli/run.ts",
+    "matlab-sxo": "src/cli/run.ts",
 };
 
 function usage() {
