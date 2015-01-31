@@ -29,8 +29,7 @@ const writeOnly = process.argv.includes("--write-only");
 function loadCatalogProblems() {
     const text = readFileSync(CATALOG_PATH, "utf8");
     const problems = [];
-    const re =
-        /{\s*id:\s*"([^"]+)",\s*title:\s*"([^"]+)",\s*questionId:\s*(\d+),/g;
+    const re = /{\s*id:\s*"([^"]+)",\s*title:\s*"([^"]+)",\s*questionId:\s*(\d+),/g;
     let m;
     while ((m = re.exec(text)) !== null) {
         problems.push({ id: m[1], title: m[2], questionId: Number(m[3]) });
@@ -87,15 +86,11 @@ function runSolverScript(dialect, problemRoot) {
             ? join(CONFORMANCE_ROOT, "scripts", "run_wolfram_sxo_solver.ts")
             : join(CONFORMANCE_ROOT, "scripts", "run_matlab_sxo_solver.ts");
     const rel = problemRoot.replaceAll("\\", "/");
-    const result = spawnSync(
-        "node",
-        ["--import", "tsx", script, rel],
-        {
-            cwd: CONFORMANCE_ROOT,
-            encoding: "utf8",
-            timeout: 120_000,
-        },
-    );
+    const result = spawnSync("node", ["--import", "tsx", script, rel], {
+        cwd: CONFORMANCE_ROOT,
+        encoding: "utf8",
+        timeout: 120_000,
+    });
     const ok = result.status === 0;
     const err = (result.stderr || result.stdout || "").trim();
     return { ok, err: err.slice(0, 500) };
