@@ -1,5 +1,6 @@
 import type { RunRequest } from "../domain/run.ts";
 import type { ProblemSpec } from "../domain/problem.ts";
+import type { AdapterEnvironment } from "../domain/adapter.ts";
 import { LEETCODE_ROOT } from "../domain/paths.ts";
 import { problemDir } from "../catalog/index.ts";
 import { getAdapter } from "../adapters/registry.ts";
@@ -8,6 +9,7 @@ import { buildRunId, digestSource } from "../reporting/cache/run-id.ts";
 import { writeRunRecord } from "../reporting/cache/store.ts";
 import type { RunRecord } from "../reporting/cache/types.ts";
 import type { RunResult } from "../domain/result.ts";
+import type { MeasurementPlan } from "../domain/measurement.ts";
 
 const ADAPTER_VERSION = "0.2.0";
 
@@ -16,30 +18,39 @@ export async function runBenchmark(
     problem: ProblemSpec,
     executionNonce: string,
 ): Promise<RunRecord> {
-    const adapter = getAdapter(request.implementationId);
+    const adapter = await getAdapter(request.implementationId);
     const problemRoot = problemDir(LEETCODE_ROOT, problem);
     const env = adapter.describeEnvironment();
     const plan = request.measurementPlan ?? defaultMeasurementPlan(problem.difficulty);
 
     if (!env.ready) {
-        return blockedRecord(
-            request,
-            problem,
-            env.blockedReason ?? "adapter not ready",
+        return persistRecord(
+            blockedRecord(
+                request,
+                problem,
+                env.blockedReason ?? "adapter not ready",
+                plan,
+                executionNonce,
+            ),
+            env,
             plan,
             executionNonce,
         );
     }
     if (!adapter.discover(problemRoot)) {
-        return blockedRecord(request, problem, "solver not found", plan, executionNonce);
+        return persistRecord(
+            blockedRecord(request, problem, "solver not found", plan, executionNonce),
+            env,
+            plan,
+            executionNonce,
+        );
     }
 
     const prepare = await adapter.prepare(problem, problemRoot);
     if (!prepare.ok) {
-        return failedRecord(
-            request,
-            problem,
-            prepare.error ?? "prepare failed",
+        return persistRecord(
+            failedRecord(request, problem, prepare.error ?? "prepare failed", plan, executionNonce),
+            env,
             plan,
             executionNonce,
         );
@@ -47,29 +58,47 @@ export async function runBenchmark(
 
     const correctness = await adapter.invokeCorrectness(problem, problemRoot);
     if (correctness.status !== "passed") {
-        return {
-            manifest: buildManifest(request, problem, correctness, plan, executionNonce),
-            result: {
-                ...correctness,
-                mode: "benchmark",
-                status: correctness.status === "blocked" ? "blocked" : "failed",
-                blockedReason:
-                    correctness.status === "blocked"
-                        ? correctness.blockedReason
-                        : "correctness must pass before benchmark",
+        return persistRecord(
+            {
+                manifest: buildManifest(request, problem, correctness, plan, executionNonce),
+                result: {
+                    ...correctness,
+                    mode: "benchmark",
+                    status: correctness.status === "blocked" ? "blocked" : "failed",
+                    blockedReason:
+                        correctness.status === "blocked"
+                            ? correctness.blockedReason
+                            : "correctness must pass before benchmark",
+                },
             },
-        };
+            env,
+            plan,
+            executionNonce,
+        );
     }
 
     const { result, measurement } = await adapter.invokeBenchmark(problem, problemRoot, plan);
-    const record: RunRecord = {
-        manifest: buildManifest(request, problem, result, plan, executionNonce),
-        result,
-        measurement,
-    };
+    return persistRecord(
+        {
+            manifest: buildManifest(request, problem, result, plan, executionNonce),
+            result,
+            measurement,
+        },
+        env,
+        plan,
+        executionNonce,
+    );
+}
+
+function persistRecord(
+    record: RunRecord,
+    env: AdapterEnvironment,
+    plan: MeasurementPlan | undefined,
+    executionNonce: string,
+): RunRecord {
     record.manifest.runId = buildRunId({
-        problemId: problem.id,
-        implementationId: request.implementationId,
+        problemId: record.manifest.problemId,
+        implementationId: record.manifest.implementationId,
         mode: "benchmark",
         sourceDigest: record.manifest.sourceDigest,
         adapterVersion: ADAPTER_VERSION,

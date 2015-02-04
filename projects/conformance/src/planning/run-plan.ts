@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import type { RunRequest } from "../domain/run.ts";
 import type { ImplementationId } from "../adapters/ids.ts";
 import { ALL_IMPLEMENTATION_IDS, BENCH_LANGUAGE_TO_IMPLEMENTATION } from "../adapters/ids.ts";
-import { DEFAULT_BENCH_LANGUAGES } from "../adapters/plugins.ts";
+import { DEFAULT_BENCH_LANGUAGES } from "../adapters/languages.ts";
 import { selectedProblems, toProblemSpec } from "./problem-selection.ts";
 import { hasSolver } from "../adapters/registry.ts";
 import { defaultMeasurementPlan } from "./measurement-plan.ts";

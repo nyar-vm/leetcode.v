@@ -1,5 +1,5 @@
 import type { BenchLanguage } from "../reporting/schema.ts";
-import { ALL_BENCH_LANGUAGES, DEFAULT_BENCH_LANGUAGES } from "../adapters/plugins.ts";
+import { ALL_BENCH_LANGUAGES, DEFAULT_BENCH_LANGUAGES } from "../adapters/languages.ts";
 
 const LANGUAGE_ALIASES: Record<string, BenchLanguage> = {
     python: "python",

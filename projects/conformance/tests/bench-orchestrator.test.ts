@@ -1,13 +1,11 @@
 import { describe, expect, it } from "vitest";
 
+import { ALL_IMPLEMENTATION_IDS, BENCH_LANGUAGE_TO_IMPLEMENTATION } from "../src/adapters/ids.ts";
+import { ALL_BENCH_LANGUAGES, DEFAULT_BENCH_LANGUAGES } from "../src/adapters/languages.ts";
+import { adapterReady, hasSolver } from "../src/adapters/registry.ts";
 import { normalizeBenchLanguage } from "../src/planning/language-selection.ts";
 import { metaForProblem } from "../src/planning/problem-selection.ts";
 import { PROBLEMS } from "../src/catalog/index.ts";
-import {
-    ALL_BENCH_LANGUAGES,
-    DEFAULT_BENCH_LANGUAGES,
-    getLanguageBenchPlugin,
-} from "../src/adapters/plugins.ts";
 
 describe("bench language selection", () => {
     it("normalizes aliases", () => {
@@ -15,14 +13,27 @@ describe("bench language selection", () => {
         expect(normalizeBenchLanguage("wl")).toBe("wolfram-sxo");
     });
 
-    it("registers every bench language", () => {
+    it("maps every bench language to an implementation id", () => {
         for (const language of ALL_BENCH_LANGUAGES) {
-            expect(getLanguageBenchPlugin(language).language).toBe(language);
+            expect(BENCH_LANGUAGE_TO_IMPLEMENTATION[language]).toBeTruthy();
         }
     });
 
     it("keeps default all-languages set stable", () => {
         expect(DEFAULT_BENCH_LANGUAGES).toEqual(["python", "typescript", "valkyrie"]);
+    });
+});
+
+describe("adapter registry", () => {
+    it("registers every implementation id", () => {
+        expect(ALL_IMPLEMENTATION_IDS).toHaveLength(6);
+        for (const implementationId of ALL_IMPLEMENTATION_IDS) {
+            expect(typeof adapterReady(implementationId)).toBe("boolean");
+        }
+    });
+
+    it("discovers two-sum python solver", () => {
+        expect(hasSolver("python", "two-sum")).toBe(true);
     });
 });
 

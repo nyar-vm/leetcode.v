@@ -1,6 +1,7 @@
 import type { RunRequest } from "../domain/run.ts";
 import type { RunResult } from "../domain/result.ts";
 import type { ProblemSpec } from "../domain/problem.ts";
+import type { AdapterEnvironment } from "../domain/adapter.ts";
 import { LEETCODE_ROOT } from "../domain/paths.ts";
 import { problemDir } from "../catalog/index.ts";
 import { getAdapter } from "../adapters/registry.ts";
@@ -15,81 +16,61 @@ export async function runCorrectness(
     problem: ProblemSpec,
     executionNonce: string,
 ): Promise<RunRecord> {
-    const adapter = getAdapter(request.implementationId);
+    const adapter = await getAdapter(request.implementationId);
     const problemRoot = problemDir(LEETCODE_ROOT, problem);
     const env = adapter.describeEnvironment();
 
     if (!env.ready) {
-        const finishedAt = new Date().toISOString();
-        const result: RunResult = {
-            runId: "",
-            problemId: problem.id,
-            implementationId: request.implementationId,
-            mode: "correctness",
-            status: "blocked",
-            blockedReason: env.blockedReason ?? "adapter not ready",
-            cases: [],
-            diagnostics: [],
-            toolchain: {
-                implementationId: request.implementationId,
-                adapterVersion: ADAPTER_VERSION,
-            },
-            startedAt: finishedAt,
-            finishedAt,
-        };
-        return { manifest: buildManifest(request, problem, result, executionNonce), result };
+        return persistRecord(
+            statusRecord(request, problem, "blocked", env.blockedReason ?? "adapter not ready", [], executionNonce),
+            env,
+            executionNonce,
+        );
     }
 
     if (!adapter.discover(problemRoot)) {
-        const finishedAt = new Date().toISOString();
-        const result: RunResult = {
-            runId: "",
-            problemId: problem.id,
-            implementationId: request.implementationId,
-            mode: "correctness",
-            status: "blocked",
-            blockedReason: "solver not found",
-            cases: [],
-            diagnostics: [],
-            toolchain: {
-                implementationId: request.implementationId,
-                adapterVersion: ADAPTER_VERSION,
-            },
-            startedAt: finishedAt,
-            finishedAt,
-        };
-        return { manifest: buildManifest(request, problem, result, executionNonce), result };
+        return persistRecord(
+            statusRecord(request, problem, "blocked", "solver not found", [], executionNonce),
+            env,
+            executionNonce,
+        );
     }
 
     const prepare = await adapter.prepare(problem, problemRoot);
     if (!prepare.ok) {
-        const finishedAt = new Date().toISOString();
-        const result: RunResult = {
-            runId: "",
-            problemId: problem.id,
-            implementationId: request.implementationId,
-            mode: "correctness",
-            status: "failed",
-            cases: [],
-            diagnostics: [prepare.error ?? "prepare failed"],
-            toolchain: {
-                implementationId: request.implementationId,
-                adapterVersion: ADAPTER_VERSION,
-            },
-            startedAt: finishedAt,
-            finishedAt,
-        };
-        return { manifest: buildManifest(request, problem, result, executionNonce), result };
+        return persistRecord(
+            statusRecord(
+                request,
+                problem,
+                "failed",
+                undefined,
+                [prepare.error ?? "prepare failed"],
+                executionNonce,
+            ),
+            env,
+            executionNonce,
+        );
     }
 
     const result = await adapter.invokeCorrectness(problem, problemRoot);
-    const record: RunRecord = {
-        manifest: buildManifest(request, problem, result, executionNonce),
-        result: { ...result, runId: "" },
-    };
+    return persistRecord(
+        {
+            manifest: buildManifest(request, problem, result, executionNonce),
+            result: { ...result, runId: "" },
+        },
+        env,
+        executionNonce,
+    );
+}
+
+function persistRecord(
+    record: RunRecord,
+    env: AdapterEnvironment,
+    executionNonce: string,
+): RunRecord {
     record.manifest.runId = buildRunId({
-        problemId: problem.id,
-        implementationId: request.implementationId,
+        problemId: record.manifest.problemId,
+        implementationId: record.manifest.implementationId,
         mode: "correctness",
         sourceDigest: record.manifest.sourceDigest,
         adapterVersion: ADAPTER_VERSION,
@@ -100,6 +81,34 @@ export async function runCorrectness(
     record.result.runId = record.manifest.runId;
     writeRunRecord(record);
     return record;
+}
+
+function statusRecord(
+    request: RunRequest,
+    problem: ProblemSpec,
+    status: RunResult["status"],
+    blockedReason: string | undefined,
+    diagnostics: string[],
+    executionNonce: string,
+): RunRecord {
+    const finishedAt = new Date().toISOString();
+    const result: RunResult = {
+        runId: "",
+        problemId: problem.id,
+        implementationId: request.implementationId,
+        mode: "correctness",
+        status,
+        blockedReason,
+        cases: [],
+        diagnostics,
+        toolchain: {
+            implementationId: request.implementationId,
+            adapterVersion: ADAPTER_VERSION,
+        },
+        startedAt: finishedAt,
+        finishedAt,
+    };
+    return { manifest: buildManifest(request, problem, result, executionNonce), result };
 }
 
 function buildManifest(

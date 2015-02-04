@@ -1,9 +1,5 @@
 import type { ProblemDefinition } from "../../catalog/index.ts";
-import {
-    benchSxoSolverInProcess,
-    runSxoSolverOnce,
-    WOLFRAM_SXO_RUNNER,
-} from "./sxo-runner.ts";
+import { benchSxoSolverInProcess, runSxoSolverOnce, WOLFRAM_SXO_RUNNER } from "../shared/sxo-runner.ts";
 import { hasWolframSxoSolver, problemRootFor } from "../shared/sxo-solver-shared.ts";
 import { sxoRunnerReady, sxoSkipReason } from "../shared/sxo-bridge.ts";
 
