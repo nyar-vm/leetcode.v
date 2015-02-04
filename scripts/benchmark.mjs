@@ -77,9 +77,7 @@ function normalizeLanguage(token) {
     const key = token.trim().toLowerCase();
     const language = LANGUAGE_ALIASES[key];
     if (!language) {
-        throw new Error(
-            `未知语言 ${token}（可用 python、typescript、typescript-bun、valkyrie、wolfram-sxo、matlab-sxo）`,
-        );
+        throw new Error(`未知语言 ${token}（可用 python、typescript、typescript-bun、valkyrie、wolfram-sxo、matlab-sxo）`);
     }
     return language;
 }

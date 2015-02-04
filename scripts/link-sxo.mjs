@@ -7,12 +7,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 
-import {
-    SXO_FRAMEWORK_ROOT,
-    SXO_LINK_FROM_CONFORMANCE,
-    assertSxoFrameworkPresent,
-    LEETCODE_ROOT,
-} from "./sxo-paths.mjs";
+import { SXO_FRAMEWORK_ROOT, SXO_LINK_FROM_CONFORMANCE, assertSxoFrameworkPresent, LEETCODE_ROOT } from "./sxo-paths.mjs";
 
 assertSxoFrameworkPresent();
 

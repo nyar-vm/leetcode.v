@@ -42,9 +42,7 @@ export function parseBatchLimit(options = {}) {
 
     const parsed = Number(hit.value);
     if (!Number.isFinite(parsed) || parsed < 0) {
-        throw new Error(
-            `无效的批量限制 ${hit.key}=${hit.value}（用正整数、all 或 LEETCODE_BATCH_ALL=1）`,
-        );
+        throw new Error(`无效的批量限制 ${hit.key}=${hit.value}（用正整数、all 或 LEETCODE_BATCH_ALL=1）`);
     }
     if (parsed === 0) {
         return null;

@@ -189,9 +189,7 @@ function planReword(base, messages, dryRun) {
         throw new Error(`no commits in range ${base}..HEAD`);
     }
     if (messages.length !== commits.length) {
-        throw new Error(
-            `message count (${messages.length}) does not match commit count (${commits.length}) in ${base}..HEAD`,
-        );
+        throw new Error(`message count (${messages.length}) does not match commit count (${commits.length}) in ${base}..HEAD`);
     }
 
     console.log(`reword plan: ${commits.length} commit(s) after ${base}\n`);
@@ -258,9 +256,7 @@ function runReword(base, messages) {
 /** @param {string} todoPath */
 function sequenceEditor(todoPath) {
     const lines = readFileSync(todoPath, "utf8").split(/\r?\n/);
-    const next = lines
-        .map((line) => (line.startsWith("pick ") ? `reword ${line.slice(5)}` : line))
-        .join("\n");
+    const next = lines.map((line) => (line.startsWith("pick ") ? `reword ${line.slice(5)}` : line)).join("\n");
     writeFileSync(todoPath, `${next}\n`, "utf8");
 }
 
