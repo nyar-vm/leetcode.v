@@ -84,6 +84,7 @@ function sortIcon(key: SortKey) {
                             <span v-if="row.legionRoute">route {{ row.legionRoute }}</span>
                             <span v-if="row.benchTarget">target {{ row.benchTarget }}</span>
                         </div>
+                        <div v-if="row.benchmarkStale" class="row-meta stale-hint">缓存与当前源码不一致</div>
                         <details v-if="row.error" class="error-details">
                             <summary>查看错误详情</summary>
                             <div class="error">{{ row.error }}</div>

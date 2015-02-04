@@ -20,6 +20,8 @@ export type BenchRow = {
     wlError?: string | null;
     mlError?: string | null;
     error: string | null;
+    /** 任一语言缓存行 sourceCurrent 为 false 时标记为 true。 */
+    benchmarkStale?: boolean;
 };
 
 export type HostEnvironment = {

@@ -17,6 +17,8 @@ type RuntimeBenchRow = {
     tags: string[];
     runtimeMs: number | null;
     error: string | null;
+    runId?: string;
+    sourceCurrent?: boolean;
 };
 
 type ValkyrieBenchRow = {
@@ -30,6 +32,8 @@ type ValkyrieBenchRow = {
     legionRoute: string | null;
     benchTarget: string;
     error: string | null;
+    runId?: string;
+    sourceCurrent?: boolean;
 };
 
 type PythonBenchReport = {
@@ -115,6 +119,7 @@ function baseBenchRow(
         difficulty: string;
         tags: string[];
         error: string | null;
+        sourceCurrent?: boolean;
     },
     benchTarget: string,
 ): BenchRow {
@@ -140,7 +145,14 @@ function baseBenchRow(
         wlError: null,
         mlError: null,
         error: row.error,
+        benchmarkStale: row.sourceCurrent === false,
     };
+}
+
+function markStale(row: BenchRow, sourceCurrent?: boolean): void {
+    if (sourceCurrent === false) {
+        row.benchmarkStale = true;
+    }
 }
 
 function mergeRowErrors(row: BenchRow): void {
@@ -170,6 +182,7 @@ export function mergeLanguageBenchReports(
         base.pyRuntimeMs = row.runtimeMs;
         base.pyError = row.error;
         base.error = row.error;
+        markStale(base, row.sourceCurrent);
         byId.set(row.id, base);
     }
 
@@ -178,6 +191,7 @@ export function mergeLanguageBenchReports(
         if (existing) {
             existing.tsRuntimeMs = row.runtimeMs;
             existing.tsError = row.error;
+            markStale(existing, row.sourceCurrent);
             mergeRowErrors(existing);
             continue;
         }
@@ -185,6 +199,7 @@ export function mergeLanguageBenchReports(
         base.tsRuntimeMs = row.runtimeMs;
         base.tsError = row.error;
         base.error = row.error;
+        markStale(base, row.sourceCurrent);
         byId.set(row.id, base);
     }
 
@@ -193,6 +208,7 @@ export function mergeLanguageBenchReports(
         if (existing) {
             existing.tbRuntimeMs = row.runtimeMs;
             existing.tbError = row.error;
+            markStale(existing, row.sourceCurrent);
             mergeRowErrors(existing);
             continue;
         }
@@ -200,6 +216,7 @@ export function mergeLanguageBenchReports(
         base.tbRuntimeMs = row.runtimeMs;
         base.tbError = row.error;
         base.error = row.error;
+        markStale(base, row.sourceCurrent);
         byId.set(row.id, base);
     }
 
@@ -211,6 +228,7 @@ export function mergeLanguageBenchReports(
             existing.legionRoute = row.legionRoute;
             existing.benchTarget = row.benchTarget;
             existing.vError = row.error;
+            markStale(existing, row.sourceCurrent);
             mergeRowErrors(existing);
             continue;
         }
@@ -220,6 +238,7 @@ export function mergeLanguageBenchReports(
         base.legionRoute = row.legionRoute;
         base.vError = row.error;
         base.error = row.error;
+        markStale(base, row.sourceCurrent);
         byId.set(row.id, base);
     }
 
@@ -228,6 +247,7 @@ export function mergeLanguageBenchReports(
         if (existing) {
             existing.wlRuntimeMs = row.runtimeMs;
             existing.wlError = row.error;
+            markStale(existing, row.sourceCurrent);
             mergeRowErrors(existing);
             continue;
         }
@@ -235,6 +255,7 @@ export function mergeLanguageBenchReports(
         base.wlRuntimeMs = row.runtimeMs;
         base.wlError = row.error;
         base.error = row.error;
+        markStale(base, row.sourceCurrent);
         byId.set(row.id, base);
     }
 
@@ -243,6 +264,7 @@ export function mergeLanguageBenchReports(
         if (existing) {
             existing.mlRuntimeMs = row.runtimeMs;
             existing.mlError = row.error;
+            markStale(existing, row.sourceCurrent);
             mergeRowErrors(existing);
             continue;
         }
@@ -250,6 +272,7 @@ export function mergeLanguageBenchReports(
         base.mlRuntimeMs = row.runtimeMs;
         base.mlError = row.error;
         base.error = row.error;
+        markStale(base, row.sourceCurrent);
         byId.set(row.id, base);
     }
 
@@ -370,6 +393,7 @@ export function normalizeLegacyBenchRow(
         wlError: row.wlError ?? null,
         mlError: row.mlError ?? null,
         error: row.error ?? null,
+        benchmarkStale: row.benchmarkStale ?? false,
     };
 }
 
