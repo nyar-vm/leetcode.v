@@ -58,13 +58,12 @@ async function main(): Promise<number> {
         throw new Error("未找到 legion build 产物");
     }
 
-    const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm);
+    const { tests, invoke } = loadMetadata(problemDir);
+    const entry = invoke.valkyrie ?? invoke.typescript;
+    const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm, entry);
     if (blocked) {
         throw new Error(blocked);
     }
-
-    const { tests, invoke } = loadMetadata(problemDir);
-    const entry = invoke.valkyrie ?? invoke.typescript;
     if (!entry) {
         throw new Error("metadata.invoke 缺失");
     }

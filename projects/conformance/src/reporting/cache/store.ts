@@ -56,6 +56,10 @@ export function writeRunRecord(record: RunRecord, markCurrent = true): void {
             `${JSON.stringify(record.measurement, null, 2)}\n`,
             "utf8",
         );
+        const attemptsPath = join(dir, "attempts.jsonl");
+        for (const attempt of record.measurement.attempts) {
+            appendFileSync(attemptsPath, `${JSON.stringify(attempt)}\n`, "utf8");
+        }
     }
 
     const index = readIndex();

@@ -1,13 +1,15 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import { BENCH_PUBLIC_DIR } from "../domain/paths.ts";
-import { PROBLEMS } from "../catalog/index.ts";
+import { BENCH_PUBLIC_DIR, LEETCODE_ROOT } from "../domain/paths.ts";
+import { loadProblemMetadata } from "../domain/metadata.ts";
+import { PROBLEMS, problemDir } from "../catalog/index.ts";
 import type { ImplementationId } from "../adapters/ids.ts";
 import { DASHBOARD_BENCH_FILES, IMPLEMENTATION_TO_BENCH_LANGUAGE } from "../adapters/ids.ts";
 import { listCurrentRunRecords } from "./cache/store.ts";
 import type { RunRecord } from "./cache/types.ts";
-import { metaForProblem, toProblemSpec } from "../planning/problem-selection.ts";
+import { problemSourceDigest } from "./cache/run-id.ts";
+import { metaForProblem } from "../planning/problem-selection.ts";
 
 export type LanguageBenchReport = {
     language: string;
@@ -17,6 +19,9 @@ export type LanguageBenchReport = {
     environment: Record<string, unknown>;
     rows: Record<string, unknown>[];
 };
+
+const problemById = new Map(PROBLEMS.map((problem) => [problem.id, problem]));
+const catalogOrder = new Map(PROBLEMS.map((problem, index) => [problem.id, index]));
 
 function recordsForImplementation(
     records: RunRecord[],
@@ -29,17 +34,36 @@ function recordsForImplementation(
     );
 }
 
+function resolveSourceCurrent(
+    problemId: string,
+    implementationId: ImplementationId,
+    recordDigest: string,
+): boolean {
+    try {
+        const root = problemDir(LEETCODE_ROOT, { id: problemId });
+        const tests = loadProblemMetadata(root).tests;
+        return recordDigest === problemSourceDigest(problemId, implementationId, tests);
+    } catch {
+        return false;
+    }
+}
+
 function buildRow(
-    problem: ReturnType<typeof toProblemSpec>,
+    problem: (typeof PROBLEMS)[number],
     record: RunRecord,
 ): Record<string, unknown> {
-    const meta = metaForProblem({ id: problem.id, title: problem.title });
+    const meta = metaForProblem(problem);
+    const implementationId = record.manifest.implementationId as ImplementationId;
     const row: Record<string, unknown> = {
         id: problem.id,
         ...meta,
         runId: record.manifest.runId,
         sourceDigest: record.manifest.sourceDigest,
-        sourceCurrent: true,
+        sourceCurrent: resolveSourceCurrent(
+            problem.id,
+            implementationId,
+            record.manifest.sourceDigest,
+        ),
         error: record.result.blockedReason ?? (record.result.diagnostics.join("; ") || null),
     };
     const measurement = record.measurement;
@@ -62,16 +86,21 @@ export function projectLanguageReport(
 ): LanguageBenchReport {
     const language = IMPLEMENTATION_TO_BENCH_LANGUAGE[implementationId];
     const relevant = recordsForImplementation(records, implementationId);
-    const byProblem = new Map(relevant.map((record) => [record.manifest.problemId, record]));
 
-    const rows: Record<string, unknown>[] = [];
-    for (const problem of PROBLEMS) {
-        const spec = toProblemSpec(problem);
-        const record = byProblem.get(problem.id);
-        if (record) {
-            rows.push(buildRow(spec, record));
-        }
-    }
+    const rows = relevant
+        .map((record) => {
+            const problem = problemById.get(record.manifest.problemId);
+            if (!problem) {
+                return null;
+            }
+            return buildRow(problem, record);
+        })
+        .filter((row): row is Record<string, unknown> => row !== null)
+        .sort(
+            (left, right) =>
+                (catalogOrder.get(left.id as string) ?? 0) -
+                (catalogOrder.get(right.id as string) ?? 0),
+        );
 
     const adapterEnv =
         relevant.length > 0 ? (relevant[0].manifest.toolchain as Record<string, unknown>) : {};

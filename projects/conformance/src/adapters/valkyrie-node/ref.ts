@@ -98,7 +98,10 @@ export function resolveWasmExportSymbol(invokeEntry: string): string {
     return trimmed;
 }
 
-export function wasmInvokeBlockedReason(wasmPath: string): string | null {
+export function wasmInvokeBlockedReason(
+    wasmPath: string,
+    invokeEntry?: string,
+): string | null {
     if (!valkyrieRunnerReady()) {
         return "legion 未就绪";
     }
@@ -109,6 +112,13 @@ export function wasmInvokeBlockedReason(wasmPath: string): string | null {
         );
     }
     const exports = listWasmExports(wasmPath);
+    if (invokeEntry) {
+        const expected = resolveWasmExportSymbol(invokeEntry);
+        if (!exports.includes(expected)) {
+            return `wasm 缺少 metadata.invoke 声明的导出 ${expected}（现有：${exports.join(", ") || "无"}）`;
+        }
+        return null;
+    }
     const callable = exports.filter(
         (name) =>
             name !== "main" && name !== "_start" && name !== "memory" && !name.startsWith("cabi_"),
@@ -128,7 +138,15 @@ export async function runVSolverOnce(problemRoot: string): Promise<void> {
             if (!artifacts) {
                 return "未找到 legion build 产物（先跑 legion build --target node）";
             }
-            return wasmInvokeBlockedReason(artifacts.entry.legionWasm);
+            const { tests, invoke } = loadMetadata(problemRoot);
+            const entry = invoke.valkyrie ?? invoke.typescript;
+            if (!entry) {
+                return "metadata.invoke.valkyrie 或 invoke.typescript 缺失";
+            }
+            if (tests.length === 0) {
+                return "metadata.tests 为空";
+            }
+            return wasmInvokeBlockedReason(artifacts.entry.legionWasm, entry);
         } catch (err) {
             return String(err);
         }

@@ -4,11 +4,11 @@ import { join } from "node:path";
 import { median } from "@valkyrie-language/vcc/benchmark";
 
 import type { ProblemDefinition } from "../../catalog/index.ts";
-import { valkyrieProjectDir } from "../../catalog/index.ts";
+import { problemDir, valkyrieProjectDir } from "../../catalog/index.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
 import { VALKYRIE_BENCH_PARAMS } from "../../planning/bench-params.ts";
 import { benchVRuntimeProblem } from "./runtime-bench.ts";
-import { resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
+import { loadMetadata, resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
 import {
     formatLegionError,
     legionBuild,
@@ -82,7 +82,10 @@ export function benchValkyrieProblem(
 
     const artifacts = resolveVBuildArtifacts(problem);
     if (artifacts) {
-        const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm);
+        const problemRoot = problemDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
+        const { invoke } = loadMetadata(problemRoot);
+        const entry = invoke.valkyrie ?? invoke.typescript;
+        const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm, entry);
         if (blocked) {
             runtimeError = blocked;
         } else {

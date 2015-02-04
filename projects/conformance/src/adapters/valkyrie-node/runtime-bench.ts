@@ -7,7 +7,7 @@ import type { ProblemDefinition } from "../../catalog/index.ts";
 import { problemDir } from "../../catalog/index.ts";
 import { PYTHON_BENCH_PARAMS } from "../../planning/bench-params.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
-import { resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
+import { loadMetadata, resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
 
 const RUNNER = join(
     LEETCODE_ROOT_FROM_PACKAGE,
@@ -36,7 +36,9 @@ export function benchVRuntimeProblem(
     if (!artifacts) {
         throw new Error("missing legion build artifacts (run legion build first)");
     }
-    const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm);
+    const { invoke } = loadMetadata(root);
+    const entry = invoke.valkyrie ?? invoke.typescript;
+    const blocked = wasmInvokeBlockedReason(artifacts.entry.legionWasm, entry);
     if (blocked) {
         throw new Error(blocked);
     }

@@ -5,7 +5,7 @@ import type { AdapterEnvironment } from "../domain/adapter.ts";
 import { LEETCODE_ROOT } from "../domain/paths.ts";
 import { problemDir } from "../catalog/index.ts";
 import { getAdapter } from "../adapters/registry.ts";
-import { buildRunId, digestSource } from "../reporting/cache/run-id.ts";
+import { buildRunId, problemSourceDigest } from "../reporting/cache/run-id.ts";
 import { writeRunRecord } from "../reporting/cache/store.ts";
 import type { RunRecord } from "../reporting/cache/types.ts";
 
@@ -117,11 +117,11 @@ function buildManifest(
     result: RunResult,
     executionNonce: string,
 ): RunRecord["manifest"] {
-    const sourceDigest = digestSource([
+    const sourceDigest = problemSourceDigest(
         problem.id,
         request.implementationId,
-        JSON.stringify(problem.tests),
-    ]);
+        problem.tests,
+    );
     return {
         runId: "",
         problemId: problem.id,

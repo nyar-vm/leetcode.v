@@ -11,7 +11,7 @@ import { describe, expect, it } from "vitest";
 import { PROBLEMS, legionProjectDir, problemDir } from "../src/catalog/index.ts";
 import { problemsForBatch } from "../src/planning/batch-limit.ts";
 
-import { isValkyrieGreen, probeValkyrieProblem } from "../src/adapters/valkyrie-node/matrix.ts";
+import { probeValkyrieProblem } from "../src/adapters/valkyrie-node/matrix.ts";
 
 import {
     pythonRefReady,
@@ -53,7 +53,7 @@ describe("Valkyrie 完备性矩阵", () => {
 
     for (const problem of BATCH_PROBLEMS) {
         it.skipIf(!ready)(
-            `${problem.id} legion build + test 探测`,
+            `${problem.id} legion build 必须通过`,
             { timeout: 10 * 60 * 1000 },
             () => {
                 const projectPath = legionProjectDir(LEETCODE_ROOT, problem);
@@ -63,20 +63,10 @@ describe("Valkyrie 完备性矩阵", () => {
                 try {
                     const row = probeValkyrieProblem(problem, projectPath, outDir);
 
+                    expect(row.buildStatus, row.buildError ?? "build failed").toBe(0);
+
                     if (V_STRICT) {
-                        expect(row.buildStatus, row.buildError ?? "build failed").toBe(0);
-
                         expect(row.testStatus, row.testError ?? "test failed").toBe(0);
-                    } else {
-                        expect(row.buildStatus).toBeTypeOf("number");
-
-                        expect(row.testStatus).toBeTypeOf("number");
-
-                        if (!isValkyrieGreen(row)) {
-                            console.warn(
-                                `[matrix] ${problem.id} build=${row.buildStatus} test=${row.testStatus}`,
-                            );
-                        }
                     }
                 } finally {
                     rmSync(outDir, { recursive: true, force: true });
