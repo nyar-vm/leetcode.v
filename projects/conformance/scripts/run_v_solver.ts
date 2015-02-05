@@ -4,12 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { assertTestCase, normalizeTsTestResult } from "../src/domain/assert.ts";
-import {
-    loadMetadata,
-    resolveVBuildArtifacts,
-    resolveWasmExportSymbol,
-    wasmInvokeBlockedReason,
-} from "../src/adapters/valkyrie-node/ref.ts";
+import { loadMetadata, resolveVBuildArtifacts, resolveWasmExportSymbol, wasmInvokeBlockedReason } from "../src/adapters/valkyrie-node/ref.ts";
 
 type InvokeHost = {
     invokeLeetCode?: (entry: string, args: Record<string, unknown>) => unknown;
@@ -21,11 +16,7 @@ async function loadInvokeHost(mjsPath: string): Promise<InvokeHost> {
     return (await import(href)) as InvokeHost;
 }
 
-async function runCandidate(
-    host: InvokeHost,
-    entry: string,
-    args: Record<string, unknown>,
-): Promise<unknown> {
+async function runCandidate(host: InvokeHost, entry: string, args: Record<string, unknown>): Promise<unknown> {
     if (typeof host.invokeLeetCode === "function") {
         return host.invokeLeetCode(entry, args);
     }
@@ -33,9 +24,7 @@ async function runCandidate(
         const exportSymbol = resolveWasmExportSymbol(entry);
         return host.callExport(exportSymbol, ...Object.values(args));
     }
-    throw new Error(
-        "node glue 缺少 invokeLeetCode / callExport（需 valkyrie.rs 为 leetcode 库模式接线 wasm invoke）",
-    );
+    throw new Error("node glue 缺少 invokeLeetCode / callExport（需 valkyrie.rs 为 leetcode 库模式接线 wasm invoke）");
 }
 
 async function main(): Promise<number> {
@@ -79,9 +68,7 @@ async function main(): Promise<number> {
         const actual = normalizeTsTestResult(await runCandidate(host, entry, case_.args));
         const expected = normalizeTsTestResult(case_.expected);
         if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-            throw new Error(
-                `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
-            );
+            throw new Error(`tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`);
         }
     }
     return 0;

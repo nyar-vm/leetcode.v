@@ -20,15 +20,7 @@ export function benchPythonProblem(
 
     const result = spawnSync(
         "python",
-        [
-            PYTHON_BENCH_CHECKER,
-            root,
-            "--bench",
-            "--iterations",
-            String(iterations),
-            "--warmup",
-            String(warmup),
-        ],
+        [PYTHON_BENCH_CHECKER, root, "--bench", "--iterations", String(iterations), "--warmup", String(warmup)],
         {
             encoding: "utf8",
             cwd: pythonSolverDir(root),

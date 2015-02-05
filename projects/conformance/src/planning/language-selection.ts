@@ -23,9 +23,7 @@ export function normalizeBenchLanguage(token: string): BenchLanguage {
     const key = token.trim().toLowerCase();
     const language = LANGUAGE_ALIASES[key];
     if (!language) {
-        throw new Error(
-            `无效的 LEETCODE_BENCH_LANG=${token}（可用 ${ALL_BENCH_LANGUAGES.join("、")}、all）`,
-        );
+        throw new Error(`无效的 LEETCODE_BENCH_LANG=${token}（可用 ${ALL_BENCH_LANGUAGES.join("、")}、all）`);
     }
     return language;
 }

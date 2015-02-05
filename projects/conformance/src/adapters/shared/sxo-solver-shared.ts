@@ -50,15 +50,11 @@ export function hasMatlabSxoSolver(problemRoot: string): boolean {
 }
 
 export function hasSxoSolver(problemRoot: string, dialect: SxoDialect): boolean {
-    return dialect === "wolfram-sxo"
-        ? hasWolframSxoSolver(problemRoot)
-        : hasMatlabSxoSolver(problemRoot);
+    return dialect === "wolfram-sxo" ? hasWolframSxoSolver(problemRoot) : hasMatlabSxoSolver(problemRoot);
 }
 
 function solverPath(problemRoot: string, dialect: SxoDialect): string {
-    return dialect === "wolfram-sxo"
-        ? wolframSxoSolverPath(problemRoot)
-        : matlabSxoSolverPath(problemRoot);
+    return dialect === "wolfram-sxo" ? wolframSxoSolverPath(problemRoot) : matlabSxoSolverPath(problemRoot);
 }
 
 function invokeKey(dialect: SxoDialect): "wolframSxo" | "matlabSxo" {
@@ -76,32 +72,21 @@ export function loadSxoSolverBundle(problemRoot: string, dialect: SxoDialect) {
     return { tests: metadata.tests, symbol, source };
 }
 
-export function buildWolframProgram(
-    source: string,
-    symbol: string,
-    args: Record<string, unknown>,
-): string {
+export function buildWolframProgram(source: string, symbol: string, args: Record<string, unknown>): string {
     const argList = Object.values(args)
         .map((value) => jsonToWolfram(value))
         .join(", ");
     return `${source.trim()}\n\n${symbol}[${argList}]`;
 }
 
-export function buildMatlabProgram(
-    source: string,
-    symbol: string,
-    args: Record<string, unknown>,
-): string {
+export function buildMatlabProgram(source: string, symbol: string, args: Record<string, unknown>): string {
     const argList = Object.values(args)
         .map((value) => jsonToMatlab(value))
         .join(", ");
     return `${source.trim()}\n\n${symbol}(${argList})`;
 }
 
-export function runSxoTests(
-    tests: TestCase[],
-    evaluateCase: (args: Record<string, unknown>) => unknown,
-): void {
+export function runSxoTests(tests: TestCase[], evaluateCase: (args: Record<string, unknown>) => unknown): void {
     for (const [index, case_] of tests.entries()) {
         assertTestCase(index, case_.expected, () => evaluateCase(case_.args));
     }

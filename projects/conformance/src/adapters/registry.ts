@@ -13,14 +13,10 @@ type AdapterLoader = () => Promise<SolverAdapter>;
 
 const ADAPTER_LOADERS: Record<ImplementationId, AdapterLoader> = {
     python: () => import("./python/adapter.ts").then((module) => module.pythonAdapter),
-    "typescript-node": () =>
-        import("./typescript-node/adapter.ts").then((module) => module.typescriptNodeAdapter),
-    "typescript-bun": () =>
-        import("./typescript-bun/adapter.ts").then((module) => module.typescriptBunAdapter),
-    "valkyrie-node": () =>
-        import("./valkyrie-node/adapter.ts").then((module) => module.valkyrieNodeAdapter),
-    "wolfram-sxo": () =>
-        import("./wolfram-sxo/adapter.ts").then((module) => module.wolframSxoAdapter),
+    "typescript-node": () => import("./typescript-node/adapter.ts").then((module) => module.typescriptNodeAdapter),
+    "typescript-bun": () => import("./typescript-bun/adapter.ts").then((module) => module.typescriptBunAdapter),
+    "valkyrie-node": () => import("./valkyrie-node/adapter.ts").then((module) => module.valkyrieNodeAdapter),
+    "wolfram-sxo": () => import("./wolfram-sxo/adapter.ts").then((module) => module.wolframSxoAdapter),
     "matlab-sxo": () => import("./matlab-sxo/adapter.ts").then((module) => module.matlabSxoAdapter),
 };
 

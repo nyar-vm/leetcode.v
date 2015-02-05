@@ -9,12 +9,7 @@ import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
 import { VALKYRIE_BENCH_PARAMS } from "../../planning/bench-params.ts";
 import { benchVRuntimeProblem } from "./runtime-bench.ts";
 import { loadMetadata, resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
-import {
-    formatLegionError,
-    legionBuild,
-    valkyrieRunnerReady,
-    valkyrieSkipReason,
-} from "./valkyrie.ts";
+import { formatLegionError, legionBuild, valkyrieRunnerReady, valkyrieSkipReason } from "./valkyrie.ts";
 
 export type ValkyrieBenchResult = {
     vCompileMs: number | null;

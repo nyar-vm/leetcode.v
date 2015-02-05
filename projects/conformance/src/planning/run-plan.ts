@@ -34,9 +34,7 @@ export function parseImplementationIds(): ImplementationId[] | "all" {
 
 export function implementationsToRun(selection: ImplementationId[] | "all"): ImplementationId[] {
     if (selection === "all") {
-        return DEFAULT_BENCH_LANGUAGES.map(
-            (lang) => BENCH_LANGUAGE_TO_IMPLEMENTATION[lang] as ImplementationId,
-        );
+        return DEFAULT_BENCH_LANGUAGES.map((lang) => BENCH_LANGUAGE_TO_IMPLEMENTATION[lang] as ImplementationId);
     }
     return selection;
 }

@@ -22,11 +22,7 @@ import {
 } from "../planning/bench-params.ts";
 import { bunRunnerReady, bunSkipReason, bunVersion } from "../adapters/typescript-bun/bridge.ts";
 import { sxoPackagesStatus, sxoRunnerReady, sxoSkipReason } from "../adapters/shared/sxo-bridge.ts";
-import {
-    spawnLegion,
-    valkyrieRunnerReady,
-    valkyrieSkipReason,
-} from "../adapters/valkyrie-node/valkyrie.ts";
+import { spawnLegion, valkyrieRunnerReady, valkyrieSkipReason } from "../adapters/valkyrie-node/valkyrie.ts";
 
 const requireFromHere = createRequire(import.meta.url);
 

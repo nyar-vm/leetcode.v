@@ -34,10 +34,6 @@ export type ConformanceIndex = {
 };
 
 /** `problemId:implementationId:mode` */
-export function indexKey(
-    problemId: string,
-    implementationId: string,
-    mode: "correctness" | "benchmark",
-): string {
+export function indexKey(problemId: string, implementationId: string, mode: "correctness" | "benchmark"): string {
     return `${problemId}:${implementationId}:${mode}`;
 }

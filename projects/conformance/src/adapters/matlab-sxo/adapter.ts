@@ -18,13 +18,7 @@ export const matlabSxoAdapter = defineSolverAdapter({
     async runCorrectness(problem, problemRoot) {
         const startedAt = new Date().toISOString();
         if (!hasMatlabSxoSolver(problemRoot)) {
-            return runResultFromReference(
-                problem,
-                "matlab-sxo",
-                { ok: false, stderr: "solver not found" },
-                startedAt,
-                "solver not found",
-            );
+            return runResultFromReference(problem, "matlab-sxo", { ok: false, stderr: "solver not found" }, startedAt, "solver not found");
         }
         const ref = await runMatlabSxoReference({ id: problem.id, title: problem.title });
         return runResultFromReference(problem, "matlab-sxo", ref, startedAt);

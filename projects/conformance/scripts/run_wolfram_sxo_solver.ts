@@ -1,10 +1,7 @@
 #!/usr/bin/env node
 /** 加载 solvers/wolfram-sxo/solution.wl 并经 @sxo/mathematica 执行 metadata.tests。 */
 import { SXO_BENCH_PARAMS } from "../src/planning/bench-params.ts";
-import {
-    benchWolframSxoSolverInProcess,
-    runWolframSxoSolverOnce,
-} from "../src/adapters/wolfram-sxo/ref.ts";
+import { benchWolframSxoSolverInProcess, runWolframSxoSolverOnce } from "../src/adapters/wolfram-sxo/ref.ts";
 import { sxoRunnerReady, sxoSkipReason } from "../src/adapters/shared/sxo-bridge.ts";
 
 async function main(): Promise<number> {
@@ -23,11 +20,7 @@ async function main(): Promise<number> {
     }
 
     if (benchMode) {
-        const runtimeMs = await benchWolframSxoSolverInProcess(
-            problemDir,
-            SXO_BENCH_PARAMS.iterations,
-            SXO_BENCH_PARAMS.warmup,
-        );
+        const runtimeMs = await benchWolframSxoSolverInProcess(problemDir, SXO_BENCH_PARAMS.iterations, SXO_BENCH_PARAMS.warmup);
         console.log(JSON.stringify({ runtimeMs }));
         return 0;
     }

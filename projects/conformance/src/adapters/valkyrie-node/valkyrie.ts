@@ -13,12 +13,7 @@ import {
 
 const VALKYRIE_RS_ROOT = process.env.VALKYRIE_RS_ROOT ?? join(LEETCODE_ROOT, "..", "valkyrie.rs");
 
-export const VALKYRIE_WASM_COLLECT_DIR = join(
-    VALKYRIE_RS_ROOT,
-    "projects",
-    "packages",
-    "vcc-unknown-wasm32",
-);
+export const VALKYRIE_WASM_COLLECT_DIR = join(VALKYRIE_RS_ROOT, "projects", "packages", "vcc-unknown-wasm32");
 
 const runner = createBenchmarkRunner({
     valkyrieRsRoot: VALKYRIE_RS_ROOT,
@@ -65,10 +60,7 @@ export type ParsedBenchRow = LegionBenchRow;
 
 export { parseLegionBenchTable };
 
-export function legionBench(
-    projectDir: string,
-    runs = 3,
-): { outcome: LegionOutcome; rows: ParsedBenchRow[] } {
+export function legionBench(projectDir: string, runs = 3): { outcome: LegionOutcome; rows: ParsedBenchRow[] } {
     const result = runner.benchProject(projectDir, { runs, target: WASM_NODE_BENCH_TARGET });
     return { outcome: result.outcome, rows: result.rows };
 }

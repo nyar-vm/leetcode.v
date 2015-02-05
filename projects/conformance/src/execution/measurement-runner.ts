@@ -1,9 +1,4 @@
-import type {
-    AttemptRecord,
-    BenchmarkSample,
-    MeasurementOutcome,
-    MeasurementPlan,
-} from "../domain/measurement.ts";
+import type { AttemptRecord, BenchmarkSample, MeasurementOutcome, MeasurementPlan } from "../domain/measurement.ts";
 
 function median(values: number[]): number {
     if (values.length === 0) {
@@ -32,10 +27,7 @@ function relativeSpread(values: number[]): number {
 export type SampleFn = (attempt: number, warmup: boolean) => Promise<number>;
 
 /** 按测量计划动态采集样本，保留全部原始尝试。 */
-export async function runAdaptiveMeasurement(
-    plan: MeasurementPlan,
-    sampleFn: SampleFn,
-): Promise<MeasurementOutcome> {
+export async function runAdaptiveMeasurement(plan: MeasurementPlan, sampleFn: SampleFn): Promise<MeasurementOutcome> {
     const attempts: AttemptRecord[] = [];
     const rawSamples: BenchmarkSample[] = [];
     const validDurations: number[] = [];
@@ -77,10 +69,7 @@ export async function runAdaptiveMeasurement(
             validDurations.push(durationMs);
         }
 
-        if (
-            validDurations.length >= plan.minValidSamples &&
-            relativeSpread(validDurations) <= plan.maxRelativeSpread
-        ) {
+        if (validDurations.length >= plan.minValidSamples && relativeSpread(validDurations) <= plan.maxRelativeSpread) {
             break;
         }
     }

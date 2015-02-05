@@ -4,12 +4,7 @@ import { assertTestCase } from "../../domain/assert.ts";
 import type { TestCase } from "../../domain/metadata.ts";
 import { createMatlabEvaluator, createWolframEvaluator } from "./sxo-bridge.ts";
 import { parseMatlabSurface, parseWolframSurface } from "./sxo-json.ts";
-import {
-    buildMatlabProgram,
-    buildWolframProgram,
-    loadSxoSolverBundle,
-    type SxoDialect,
-} from "./sxo-solver-shared.ts";
+import { buildMatlabProgram, buildWolframProgram, loadSxoSolverBundle, type SxoDialect } from "./sxo-solver-shared.ts";
 
 export type SxoEvaluator = {
     evaluate(program: string): string;
@@ -22,19 +17,13 @@ export type SxoDialectRunner = {
     parseSurface: (rendered: string) => unknown;
 };
 
-function runSxoTests(
-    tests: TestCase[],
-    evaluateCase: (args: Record<string, unknown>) => unknown,
-): void {
+function runSxoTests(tests: TestCase[], evaluateCase: (args: Record<string, unknown>) => unknown): void {
     for (const [index, case_] of tests.entries()) {
         assertTestCase(index, case_.expected, () => evaluateCase(case_.args));
     }
 }
 
-export async function runSxoSolverOnce(
-    problemRoot: string,
-    runner: SxoDialectRunner,
-): Promise<void> {
+export async function runSxoSolverOnce(problemRoot: string, runner: SxoDialectRunner): Promise<void> {
     const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, runner.dialect);
     const evaluator = await runner.createEvaluator();
     runSxoTests(tests, (args) => {

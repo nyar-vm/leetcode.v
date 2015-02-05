@@ -1,10 +1,4 @@
-export type BenchLanguage =
-    | "python"
-    | "typescript"
-    | "typescript-bun"
-    | "valkyrie"
-    | "wolfram-sxo"
-    | "matlab-sxo";
+export type BenchLanguage = "python" | "typescript" | "typescript-bun" | "valkyrie" | "wolfram-sxo" | "matlab-sxo";
 
 export type HostEnvironment = {
     platform: string;

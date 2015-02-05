@@ -23,22 +23,11 @@ export type LanguageBenchReport = {
 const problemById = new Map(PROBLEMS.map((problem) => [problem.id, problem]));
 const catalogOrder = new Map(PROBLEMS.map((problem, index) => [problem.id, index]));
 
-function recordsForImplementation(
-    records: RunRecord[],
-    implementationId: ImplementationId,
-): RunRecord[] {
-    return records.filter(
-        (record) =>
-            record.manifest.implementationId === implementationId &&
-            record.manifest.mode === "benchmark",
-    );
+function recordsForImplementation(records: RunRecord[], implementationId: ImplementationId): RunRecord[] {
+    return records.filter((record) => record.manifest.implementationId === implementationId && record.manifest.mode === "benchmark");
 }
 
-function resolveSourceCurrent(
-    problemId: string,
-    implementationId: ImplementationId,
-    recordDigest: string,
-): boolean {
+function resolveSourceCurrent(problemId: string, implementationId: ImplementationId, recordDigest: string): boolean {
     try {
         const root = problemDir(LEETCODE_ROOT, { id: problemId });
         const tests = loadProblemMetadata(root).tests;
@@ -48,10 +37,7 @@ function resolveSourceCurrent(
     }
 }
 
-function buildRow(
-    problem: (typeof PROBLEMS)[number],
-    record: RunRecord,
-): Record<string, unknown> {
+function buildRow(problem: (typeof PROBLEMS)[number], record: RunRecord): Record<string, unknown> {
     const meta = metaForProblem(problem);
     const implementationId = record.manifest.implementationId as ImplementationId;
     const row: Record<string, unknown> = {
@@ -59,11 +45,7 @@ function buildRow(
         ...meta,
         runId: record.manifest.runId,
         sourceDigest: record.manifest.sourceDigest,
-        sourceCurrent: resolveSourceCurrent(
-            problem.id,
-            implementationId,
-            record.manifest.sourceDigest,
-        ),
+        sourceCurrent: resolveSourceCurrent(problem.id, implementationId, record.manifest.sourceDigest),
         error: record.result.blockedReason ?? (record.result.diagnostics.join("; ") || null),
     };
     const measurement = record.measurement;
@@ -80,10 +62,7 @@ function buildRow(
     return row;
 }
 
-export function projectLanguageReport(
-    implementationId: ImplementationId,
-    records: RunRecord[],
-): LanguageBenchReport {
+export function projectLanguageReport(implementationId: ImplementationId, records: RunRecord[]): LanguageBenchReport {
     const language = IMPLEMENTATION_TO_BENCH_LANGUAGE[implementationId];
     const relevant = recordsForImplementation(records, implementationId);
 
@@ -96,14 +75,9 @@ export function projectLanguageReport(
             return buildRow(problem, record);
         })
         .filter((row): row is Record<string, unknown> => row !== null)
-        .sort(
-            (left, right) =>
-                (catalogOrder.get(left.id as string) ?? 0) -
-                (catalogOrder.get(right.id as string) ?? 0),
-        );
+        .sort((left, right) => (catalogOrder.get(left.id as string) ?? 0) - (catalogOrder.get(right.id as string) ?? 0));
 
-    const adapterEnv =
-        relevant.length > 0 ? (relevant[0].manifest.toolchain as Record<string, unknown>) : {};
+    const adapterEnv = relevant.length > 0 ? (relevant[0].manifest.toolchain as Record<string, unknown>) : {};
 
     return {
         language,

@@ -9,17 +9,11 @@ export async function runWolframSxoSolverOnce(problemRoot: string): Promise<void
     return runSxoSolverOnce(problemRoot, WOLFRAM_SXO_RUNNER);
 }
 
-export async function benchWolframSxoSolverInProcess(
-    problemRoot: string,
-    iterations: number,
-    warmup: number,
-): Promise<number> {
+export async function benchWolframSxoSolverInProcess(problemRoot: string, iterations: number, warmup: number): Promise<number> {
     return benchSxoSolverInProcess(problemRoot, iterations, warmup, WOLFRAM_SXO_RUNNER);
 }
 
-export async function runWolframSxoReference(
-    problem: ProblemDefinition,
-): Promise<{ ok: boolean; stderr: string }> {
+export async function runWolframSxoReference(problem: ProblemDefinition): Promise<{ ok: boolean; stderr: string }> {
     if (!sxoRunnerReady()) {
         return { ok: false, stderr: sxoSkipReason() ?? "@sxo/* 未安装" };
     }

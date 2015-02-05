@@ -28,16 +28,7 @@ export type AdapterDefinition = {
 };
 
 export function defineSolverAdapter(definition: AdapterDefinition): SolverAdapter {
-    const {
-        implementationId,
-        hasSolver,
-        runnerReady,
-        blockedReason,
-        collectEnvironment,
-        benchProblem,
-        runCorrectness,
-        prepare,
-    } = definition;
+    const { implementationId, hasSolver, runnerReady, blockedReason, collectEnvironment, benchProblem, runCorrectness, prepare } = definition;
 
     return {
         implementationId,
@@ -76,10 +67,7 @@ export function defineSolverAdapter(definition: AdapterDefinition): SolverAdapte
             });
 
             const finishedAt = new Date().toISOString();
-            const status =
-                measurement.stability === "stable" && measurement.publishedValueMs !== null
-                    ? "passed"
-                    : "failed";
+            const status = measurement.stability === "stable" && measurement.publishedValueMs !== null ? "passed" : "failed";
 
             const result: RunResult = {
                 runId: "",
@@ -88,10 +76,7 @@ export function defineSolverAdapter(definition: AdapterDefinition): SolverAdapte
                 mode: "benchmark",
                 status,
                 cases: [],
-                diagnostics:
-                    measurement.stability !== "stable"
-                        ? [`measurement ${measurement.stability}`]
-                        : [],
+                diagnostics: measurement.stability !== "stable" ? [`measurement ${measurement.stability}`] : [],
                 toolchain: { implementationId, adapterVersion: ADAPTER_VERSION },
                 startedAt,
                 finishedAt,

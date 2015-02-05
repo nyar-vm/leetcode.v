@@ -15,9 +15,7 @@ function firstEnv(...keys: string[]): { key: string; value: string } | null {
 }
 
 /** `null` = 不限制（全量）。 */
-export function parseBatchLimit(
-    options: { defaultLimit?: number; fallbackKeys?: string[] } = {},
-): number | null {
+export function parseBatchLimit(options: { defaultLimit?: number; fallbackKeys?: string[] } = {}): number | null {
     const { defaultLimit = DEFAULT_BATCH_LIMIT, fallbackKeys = [] } = options;
 
     if (process.env.LEETCODE_BATCH_ALL === "1" || process.env.LEETCODE_BATCH_ALL === "true") {
@@ -44,10 +42,7 @@ export function parseBatchLimit(
     return Math.floor(parsed);
 }
 
-export function problemsForBatch<T>(
-    problems: readonly T[],
-    options?: { defaultLimit?: number; fallbackKeys?: string[] },
-): T[] {
+export function problemsForBatch<T>(problems: readonly T[], options?: { defaultLimit?: number; fallbackKeys?: string[] }): T[] {
     const limit = parseBatchLimit(options);
     if (limit === null) {
         return [...problems];

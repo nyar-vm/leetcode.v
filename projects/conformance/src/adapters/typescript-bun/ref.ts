@@ -24,14 +24,7 @@ export function benchBunSolverViaSpawn(
     iterations = BUN_BENCH_PARAMS.iterations,
     warmup = BUN_BENCH_PARAMS.warmup,
 ): number {
-    const result = spawnBunSolver([
-        "--bench",
-        problemRoot,
-        "--iterations",
-        String(iterations),
-        "--warmup",
-        String(warmup),
-    ]);
+    const result = spawnBunSolver(["--bench", problemRoot, "--iterations", String(iterations), "--warmup", String(warmup)]);
     const stderr = `${result.stderr}${result.stdout}`.trim();
     if (result.status !== 0) {
         throw new Error(stderr || "bun bench failed");
@@ -53,9 +46,7 @@ export function benchBunSolverViaSpawn(
     return runtimeMs;
 }
 
-export async function runBunReference(
-    problem: ProblemDefinition,
-): Promise<{ ok: boolean; stderr: string }> {
+export async function runBunReference(problem: ProblemDefinition): Promise<{ ok: boolean; stderr: string }> {
     if (!bunRunnerReady()) {
         return { ok: false, stderr: bunSkipReason() ?? "Bun 未安装" };
     }

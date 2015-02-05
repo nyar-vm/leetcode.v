@@ -13,11 +13,7 @@ import { problemsForBatch } from "../src/planning/batch-limit.ts";
 
 import { probeValkyrieProblem } from "../src/adapters/valkyrie-node/matrix.ts";
 
-import {
-    pythonRefReady,
-    pythonSkipReason,
-    runPythonSolver as runPythonReference,
-} from "../src/adapters/python/ref.ts";
+import { pythonRefReady, pythonSkipReason, runPythonSolver as runPythonReference } from "../src/adapters/python/ref.ts";
 
 import { valkyrieRunnerReady } from "../src/adapters/valkyrie-node/valkyrie.ts";
 
@@ -30,21 +26,15 @@ describe("Python 实现完备性（LeetCodeDataset）", () => {
     const ready = pythonRefReady();
 
     for (const problem of BATCH_PROBLEMS) {
-        it.skipIf(!ready)(
-            `${problem.id} canonical solution 通过数据集测试`,
-            { timeout: 5 * 60 * 1000 },
-            () => {
-                const result = runPythonReference(problem);
+        it.skipIf(!ready)(`${problem.id} canonical solution 通过数据集测试`, { timeout: 5 * 60 * 1000 }, () => {
+            const result = runPythonReference(problem);
 
-                if (!result.ok) {
-                    throw new Error(
-                        result.stderr || pythonSkipReason() || "python reference failed",
-                    );
-                }
+            if (!result.ok) {
+                throw new Error(result.stderr || pythonSkipReason() || "python reference failed");
+            }
 
-                expect(result.ok).toBe(true);
-            },
-        );
+            expect(result.ok).toBe(true);
+        });
     }
 });
 
@@ -52,26 +42,22 @@ describe("Valkyrie 完备性矩阵", () => {
     const ready = valkyrieRunnerReady();
 
     for (const problem of BATCH_PROBLEMS) {
-        it.skipIf(!ready)(
-            `${problem.id} legion build 必须通过`,
-            { timeout: 10 * 60 * 1000 },
-            () => {
-                const projectPath = legionProjectDir(LEETCODE_ROOT, problem);
+        it.skipIf(!ready)(`${problem.id} legion build 必须通过`, { timeout: 10 * 60 * 1000 }, () => {
+            const projectPath = legionProjectDir(LEETCODE_ROOT, problem);
 
-                const outDir = mkdtempSync(join(tmpdir(), `legion-matrix-${problem.id}-`));
+            const outDir = mkdtempSync(join(tmpdir(), `legion-matrix-${problem.id}-`));
 
-                try {
-                    const row = probeValkyrieProblem(problem, projectPath, outDir);
+            try {
+                const row = probeValkyrieProblem(problem, projectPath, outDir);
 
-                    expect(row.buildStatus, row.buildError ?? "build failed").toBe(0);
+                expect(row.buildStatus, row.buildError ?? "build failed").toBe(0);
 
-                    if (V_STRICT) {
-                        expect(row.testStatus, row.testError ?? "test failed").toBe(0);
-                    }
-                } finally {
-                    rmSync(outDir, { recursive: true, force: true });
+                if (V_STRICT) {
+                    expect(row.testStatus, row.testError ?? "test failed").toBe(0);
                 }
-            },
-        );
+            } finally {
+                rmSync(outDir, { recursive: true, force: true });
+            }
+        });
     }
 });

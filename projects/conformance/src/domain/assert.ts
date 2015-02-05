@@ -11,21 +11,15 @@ export function assertTestCase(index: number, expected: unknown, run: () => unkn
         } catch (err) {
             const actual = err instanceof Error ? `Error: ${err.message}` : `Error: ${String(err)}`;
             if (actual !== expected) {
-                throw new Error(
-                    `tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
-                );
+                throw new Error(`tests[${index}]: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`);
             }
             return;
         }
-        throw new Error(
-            `tests[${index}]: expected ${JSON.stringify(expected)}, no exception raised`,
-        );
+        throw new Error(`tests[${index}]: expected ${JSON.stringify(expected)}, no exception raised`);
     }
     const actual = normalizeTsTestResult(run());
     const normalized = normalizeTsTestResult(expected);
     if (JSON.stringify(actual) !== JSON.stringify(normalized)) {
-        throw new Error(
-            `tests[${index}]: expected ${JSON.stringify(normalized)}, got ${JSON.stringify(actual)}`,
-        );
+        throw new Error(`tests[${index}]: expected ${JSON.stringify(normalized)}, got ${JSON.stringify(actual)}`);
     }
 }

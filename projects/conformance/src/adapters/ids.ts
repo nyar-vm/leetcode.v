@@ -1,11 +1,5 @@
 /** 适配器注册 ID；与 dashboard 语言键分离，Node/Bun 为独立 runtime 身份。 */
-export type ImplementationId =
-    | "python"
-    | "typescript-node"
-    | "typescript-bun"
-    | "valkyrie-node"
-    | "wolfram-sxo"
-    | "matlab-sxo";
+export type ImplementationId = "python" | "typescript-node" | "typescript-bun" | "valkyrie-node" | "wolfram-sxo" | "matlab-sxo";
 
 export const ALL_IMPLEMENTATION_IDS: ImplementationId[] = [
     "python",

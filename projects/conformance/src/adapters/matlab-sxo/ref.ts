@@ -9,17 +9,11 @@ export async function runMatlabSxoSolverOnce(problemRoot: string): Promise<void>
     return runSxoSolverOnce(problemRoot, MATLAB_SXO_RUNNER);
 }
 
-export async function benchMatlabSxoSolverInProcess(
-    problemRoot: string,
-    iterations: number,
-    warmup: number,
-): Promise<number> {
+export async function benchMatlabSxoSolverInProcess(problemRoot: string, iterations: number, warmup: number): Promise<number> {
     return benchSxoSolverInProcess(problemRoot, iterations, warmup, MATLAB_SXO_RUNNER);
 }
 
-export async function runMatlabSxoReference(
-    problem: ProblemDefinition,
-): Promise<{ ok: boolean; stderr: string }> {
+export async function runMatlabSxoReference(problem: ProblemDefinition): Promise<{ ok: boolean; stderr: string }> {
     if (!sxoRunnerReady()) {
         return { ok: false, stderr: sxoSkipReason() ?? "@sxo/* 未安装" };
     }

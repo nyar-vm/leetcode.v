@@ -1,11 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-    jsonToMatlab,
-    jsonToWolfram,
-    parseMatlabSurface,
-    parseWolframSurface,
-} from "../src/adapters/shared/sxo-json.ts";
+import { jsonToMatlab, jsonToWolfram, parseMatlabSurface, parseWolframSurface } from "../src/adapters/shared/sxo-json.ts";
 
 describe("sxo-json marshalling", () => {
     it("round-trips Wolfram scalars and lists", () => {

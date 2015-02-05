@@ -58,12 +58,7 @@ function measurementWithSamples(sampleMs: number[]): MeasurementOutcome {
     };
 }
 
-function benchmarkRecord(input: {
-    problemId: string;
-    runId: string;
-    sourceDigest: string;
-    sampleMs: number[];
-}): RunRecord {
+function benchmarkRecord(input: { problemId: string; runId: string; sourceDigest: string; sampleMs: number[] }): RunRecord {
     const measurement = measurementWithSamples(input.sampleMs);
     const finishedAt = new Date().toISOString();
     return {
@@ -117,9 +112,7 @@ describe("cache partial rerun e2e", () => {
     });
 
     it("keeps both consecutive run directories with distinct raw samples", async () => {
-        const { writeRunRecord, readRunRecord, readIndex } = await import(
-            "../src/reporting/cache/store.ts"
-        );
+        const { writeRunRecord, readRunRecord, readIndex } = await import("../src/reporting/cache/store.ts");
 
         writeRunRecord(
             benchmarkRecord({
@@ -144,10 +137,7 @@ describe("cache partial rerun e2e", () => {
         expect(second?.measurement?.rawSamples).toHaveLength(3);
         expect(first?.measurement?.publishedValueMs).not.toBe(second?.measurement?.publishedValueMs);
 
-        const attemptsText = readFileSync(
-            join(cacheRoot, "runs", "run-second", "attempts.jsonl"),
-            "utf8",
-        );
+        const attemptsText = readFileSync(join(cacheRoot, "runs", "run-second", "attempts.jsonl"), "utf8");
         expect(attemptsText.trim().split("\n")).toHaveLength(3);
 
         const index = readIndex();
@@ -156,12 +146,8 @@ describe("cache partial rerun e2e", () => {
     });
 
     it("merges partial rerun into current index without dropping other problems", async () => {
-        const { writeRunRecord, listCurrentRunRecords } = await import(
-            "../src/reporting/cache/store.ts"
-        );
-        const { projectLanguageReport } = await import(
-            "../src/reporting/dashboard-projection.ts"
-        );
+        const { writeRunRecord, listCurrentRunRecords } = await import("../src/reporting/cache/store.ts");
+        const { projectLanguageReport } = await import("../src/reporting/dashboard-projection.ts");
 
         writeRunRecord(
             benchmarkRecord({
@@ -202,12 +188,8 @@ describe("cache partial rerun e2e", () => {
     });
 
     it("marks stale cache rows as not sourceCurrent in dashboard projection", async () => {
-        const { writeRunRecord, listCurrentRunRecords } = await import(
-            "../src/reporting/cache/store.ts"
-        );
-        const { projectLanguageReport } = await import(
-            "../src/reporting/dashboard-projection.ts"
-        );
+        const { writeRunRecord, listCurrentRunRecords } = await import("../src/reporting/cache/store.ts");
+        const { projectLanguageReport } = await import("../src/reporting/dashboard-projection.ts");
 
         const problem = PROBLEMS.find((item) => item.id === "two-sum");
         expect(problem).toBeDefined();
@@ -240,9 +222,7 @@ describe("cache partial rerun e2e", () => {
 
     it("writes dashboard json that reflects merged current cache after partial rerun", async () => {
         const { writeRunRecord } = await import("../src/reporting/cache/store.ts");
-        const { writeDashboardProjection } = await import(
-            "../src/reporting/dashboard-projection.ts"
-        );
+        const { writeDashboardProjection } = await import("../src/reporting/dashboard-projection.ts");
 
         writeRunRecord(
             benchmarkRecord({

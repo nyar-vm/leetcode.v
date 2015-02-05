@@ -25,9 +25,7 @@ describe("cache store", () => {
     });
 
     it("writes run record and preserves history on partial rerun", async () => {
-        const { writeRunRecord, readRunRecord, readIndex } = await import(
-            "../src/reporting/cache/store.ts"
-        );
+        const { writeRunRecord, readRunRecord, readIndex } = await import("../src/reporting/cache/store.ts");
 
         const base: RunRecord = {
             manifest: {

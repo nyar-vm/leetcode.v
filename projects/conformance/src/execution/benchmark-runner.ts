@@ -13,11 +13,7 @@ import type { MeasurementPlan } from "../domain/measurement.ts";
 
 const ADAPTER_VERSION = "0.2.0";
 
-export async function runBenchmark(
-    request: RunRequest,
-    problem: ProblemSpec,
-    executionNonce: string,
-): Promise<RunRecord> {
+export async function runBenchmark(request: RunRequest, problem: ProblemSpec, executionNonce: string): Promise<RunRecord> {
     const adapter = await getAdapter(request.implementationId);
     const problemRoot = problemDir(LEETCODE_ROOT, problem);
     const env = adapter.describeEnvironment();
@@ -25,25 +21,14 @@ export async function runBenchmark(
 
     if (!env.ready) {
         return persistRecord(
-            blockedRecord(
-                request,
-                problem,
-                env.blockedReason ?? "adapter not ready",
-                plan,
-                executionNonce,
-            ),
+            blockedRecord(request, problem, env.blockedReason ?? "adapter not ready", plan, executionNonce),
             env,
             plan,
             executionNonce,
         );
     }
     if (!adapter.discover(problemRoot)) {
-        return persistRecord(
-            blockedRecord(request, problem, "solver not found", plan, executionNonce),
-            env,
-            plan,
-            executionNonce,
-        );
+        return persistRecord(blockedRecord(request, problem, "solver not found", plan, executionNonce), env, plan, executionNonce);
     }
 
     const prepare = await adapter.prepare(problem, problemRoot);
@@ -65,10 +50,7 @@ export async function runBenchmark(
                     ...correctness,
                     mode: "benchmark",
                     status: correctness.status === "blocked" ? "blocked" : "failed",
-                    blockedReason:
-                        correctness.status === "blocked"
-                            ? correctness.blockedReason
-                            : "correctness must pass before benchmark",
+                    blockedReason: correctness.status === "blocked" ? correctness.blockedReason : "correctness must pass before benchmark",
                 },
             },
             env,
@@ -90,12 +72,7 @@ export async function runBenchmark(
     );
 }
 
-function persistRecord(
-    record: RunRecord,
-    env: AdapterEnvironment,
-    plan: MeasurementPlan | undefined,
-    executionNonce: string,
-): RunRecord {
+function persistRecord(record: RunRecord, env: AdapterEnvironment, plan: MeasurementPlan | undefined, executionNonce: string): RunRecord {
     record.manifest.runId = buildRunId({
         problemId: record.manifest.problemId,
         implementationId: record.manifest.implementationId,
@@ -118,11 +95,7 @@ function buildManifest(
     plan: RunRequest["measurementPlan"],
     executionNonce: string,
 ): RunRecord["manifest"] {
-    const sourceDigest = problemSourceDigest(
-        problem.id,
-        request.implementationId,
-        problem.tests,
-    );
+    const sourceDigest = problemSourceDigest(problem.id, request.implementationId, problem.tests);
     return {
         runId: "",
         problemId: problem.id,

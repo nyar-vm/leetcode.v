@@ -9,13 +9,7 @@ import { PYTHON_BENCH_PARAMS } from "../../planning/bench-params.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
 import { loadMetadata, resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
 
-const RUNNER = join(
-    LEETCODE_ROOT_FROM_PACKAGE,
-    "projects",
-    "conformance",
-    "scripts",
-    "run_v_solver.ts",
-);
+const RUNNER = join(LEETCODE_ROOT_FROM_PACKAGE, "projects", "conformance", "scripts", "run_v_solver.ts");
 
 function spawnVSolver(problemRoot: string): { status: number | null; stderr: string } {
     const result = spawnSync(process.execPath, ["--import", "tsx", RUNNER, problemRoot], {

@@ -11,11 +11,7 @@ import type { RunRecord } from "../reporting/cache/types.ts";
 
 const ADAPTER_VERSION = "0.2.0";
 
-export async function runCorrectness(
-    request: RunRequest,
-    problem: ProblemSpec,
-    executionNonce: string,
-): Promise<RunRecord> {
+export async function runCorrectness(request: RunRequest, problem: ProblemSpec, executionNonce: string): Promise<RunRecord> {
     const adapter = await getAdapter(request.implementationId);
     const problemRoot = problemDir(LEETCODE_ROOT, problem);
     const env = adapter.describeEnvironment();
@@ -29,24 +25,13 @@ export async function runCorrectness(
     }
 
     if (!adapter.discover(problemRoot)) {
-        return persistRecord(
-            statusRecord(request, problem, "blocked", "solver not found", [], executionNonce),
-            env,
-            executionNonce,
-        );
+        return persistRecord(statusRecord(request, problem, "blocked", "solver not found", [], executionNonce), env, executionNonce);
     }
 
     const prepare = await adapter.prepare(problem, problemRoot);
     if (!prepare.ok) {
         return persistRecord(
-            statusRecord(
-                request,
-                problem,
-                "failed",
-                undefined,
-                [prepare.error ?? "prepare failed"],
-                executionNonce,
-            ),
+            statusRecord(request, problem, "failed", undefined, [prepare.error ?? "prepare failed"], executionNonce),
             env,
             executionNonce,
         );
@@ -63,11 +48,7 @@ export async function runCorrectness(
     );
 }
 
-function persistRecord(
-    record: RunRecord,
-    env: AdapterEnvironment,
-    executionNonce: string,
-): RunRecord {
+function persistRecord(record: RunRecord, env: AdapterEnvironment, executionNonce: string): RunRecord {
     record.manifest.runId = buildRunId({
         problemId: record.manifest.problemId,
         implementationId: record.manifest.implementationId,
@@ -111,17 +92,8 @@ function statusRecord(
     return { manifest: buildManifest(request, problem, result, executionNonce), result };
 }
 
-function buildManifest(
-    request: RunRequest,
-    problem: ProblemSpec,
-    result: RunResult,
-    executionNonce: string,
-): RunRecord["manifest"] {
-    const sourceDigest = problemSourceDigest(
-        problem.id,
-        request.implementationId,
-        problem.tests,
-    );
+function buildManifest(request: RunRequest, problem: ProblemSpec, result: RunResult, executionNonce: string): RunRecord["manifest"] {
+    const sourceDigest = problemSourceDigest(problem.id, request.implementationId, problem.tests);
     return {
         runId: "",
         problemId: problem.id,

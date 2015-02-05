@@ -23,10 +23,7 @@ function median(values: number[]): number {
 async function loadTsCandidate(problemRoot: string) {
     const metadata = loadProblemMetadata(problemRoot);
     const entry = requireInvoke(metadata, "typescript");
-    const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<
-        string,
-        unknown
-    >;
+    const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<string, unknown>;
     const candidate = makeTsCandidate(entry, mod);
     return { tests: metadata.tests, candidate };
 }
@@ -38,11 +35,7 @@ export async function runBunSolverOnce(problemRoot: string): Promise<void> {
     }
 }
 
-export async function benchBunSolverInProcess(
-    problemRoot: string,
-    iterations: number,
-    warmup: number,
-): Promise<number> {
+export async function benchBunSolverInProcess(problemRoot: string, iterations: number, warmup: number): Promise<number> {
     const { tests, candidate } = await loadTsCandidate(problemRoot);
 
     const runAll = () => {

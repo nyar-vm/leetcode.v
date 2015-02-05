@@ -34,10 +34,7 @@ export function pythonSkipReason(): string | null {
 }
 
 export function hasPythonSolver(problemRoot: string): boolean {
-    return (
-        existsSync(pythonProjectManifestPath(problemRoot)) &&
-        existsSync(pythonSolverPath(problemRoot))
-    );
+    return existsSync(pythonProjectManifestPath(problemRoot)) && existsSync(pythonSolverPath(problemRoot));
 }
 
 export function runPythonSolver(problem: ProblemDefinition): { ok: boolean; stderr: string } {

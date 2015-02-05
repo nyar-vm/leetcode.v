@@ -11,11 +11,7 @@ export type ValkyrieMatrixRow = {
     testError: string | null;
 };
 
-export function probeValkyrieProblem(
-    problem: ProblemDefinition,
-    projectPath: string,
-    outDir: string,
-): ValkyrieMatrixRow {
+export function probeValkyrieProblem(problem: ProblemDefinition, projectPath: string, outDir: string): ValkyrieMatrixRow {
     const build = legionBuild(projectPath, outDir);
     const test = legionTest(projectPath);
 

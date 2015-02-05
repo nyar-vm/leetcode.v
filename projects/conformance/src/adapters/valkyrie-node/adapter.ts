@@ -26,13 +26,7 @@ export const valkyrieNodeAdapter = defineSolverAdapter({
     async runCorrectness(problem, problemRoot) {
         const startedAt = new Date().toISOString();
         if (!hasValkyrieSolver(problemRoot)) {
-            return runResultFromReference(
-                problem,
-                "valkyrie-node",
-                { ok: false, stderr: "solver not found" },
-                startedAt,
-                "solver not found",
-            );
+            return runResultFromReference(problem, "valkyrie-node", { ok: false, stderr: "solver not found" }, startedAt, "solver not found");
         }
         const ref = await runVReference({ id: problem.id, title: problem.title });
         return runResultFromReference(problem, "valkyrie-node", ref, startedAt);

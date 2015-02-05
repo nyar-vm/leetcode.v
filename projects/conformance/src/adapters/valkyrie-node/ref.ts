@@ -3,24 +3,14 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import {
-    NODE_WASM_TARGET,
-    resolveArtifactDir,
-    resolveNodeEntry,
-} from "@valkyrie-language/vcc/testing";
+import { NODE_WASM_TARGET, resolveArtifactDir, resolveNodeEntry } from "@valkyrie-language/vcc/testing";
 
 import type { ProblemDefinition } from "../../catalog/index.ts";
 import { problemDir, valkyrieProjectDir } from "../../catalog/index.ts";
 import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
 import { spawnLegion, valkyrieRunnerReady } from "./valkyrie.ts";
 
-const RUN_V_SOLVER = join(
-    LEETCODE_ROOT_FROM_PACKAGE,
-    "projects",
-    "conformance",
-    "scripts",
-    "run_v_solver.ts",
-);
+const RUN_V_SOLVER = join(LEETCODE_ROOT_FROM_PACKAGE, "projects", "conformance", "scripts", "run_v_solver.ts");
 
 export type TestCase = { args: Record<string, unknown>; expected: unknown };
 
@@ -98,10 +88,7 @@ export function resolveWasmExportSymbol(invokeEntry: string): string {
     return trimmed;
 }
 
-export function wasmInvokeBlockedReason(
-    wasmPath: string,
-    invokeEntry?: string,
-): string | null {
+export function wasmInvokeBlockedReason(wasmPath: string, invokeEntry?: string): string | null {
     if (!valkyrieRunnerReady()) {
         return "legion 未就绪";
     }
@@ -119,10 +106,7 @@ export function wasmInvokeBlockedReason(
         }
         return null;
     }
-    const callable = exports.filter(
-        (name) =>
-            name !== "main" && name !== "_start" && name !== "memory" && !name.startsWith("cabi_"),
-    );
+    const callable = exports.filter((name) => name !== "main" && name !== "_start" && name !== "memory" && !name.startsWith("cabi_"));
     if (callable.length === 0) {
         return `wasm 缺少可 invoke 的导出符号（现有：${exports.join(", ") || "无"})`;
     }
@@ -165,9 +149,7 @@ export async function runVSolverOnce(problemRoot: string): Promise<void> {
     }
 }
 
-export async function runVReference(
-    problem: ProblemDefinition,
-): Promise<{ ok: boolean; stderr: string }> {
+export async function runVReference(problem: ProblemDefinition): Promise<{ ok: boolean; stderr: string }> {
     const root = problemDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
     try {
         await runVSolverOnce(root);

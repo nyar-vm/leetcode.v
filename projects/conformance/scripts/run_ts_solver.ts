@@ -14,11 +14,7 @@ async function main(): Promise<number> {
     }
 
     if (benchMode) {
-        const runtimeMs = await benchTsSolverInProcess(
-            problemDir,
-            TYPESCRIPT_BENCH_PARAMS.iterations,
-            TYPESCRIPT_BENCH_PARAMS.warmup,
-        );
+        const runtimeMs = await benchTsSolverInProcess(problemDir, TYPESCRIPT_BENCH_PARAMS.iterations, TYPESCRIPT_BENCH_PARAMS.warmup);
         console.log(JSON.stringify({ runtimeMs }));
         return 0;
     }

@@ -12,11 +12,7 @@ export type RunIdInputs = {
 };
 
 /** 与 benchmark/correctness manifest 一致的题目源码摘要。 */
-export function problemSourceDigest(
-    problemId: string,
-    implementationId: string,
-    tests: unknown[],
-): string {
+export function problemSourceDigest(problemId: string, implementationId: string, tests: unknown[]): string {
     return digestSource([problemId, implementationId, JSON.stringify(tests)]);
 }
 

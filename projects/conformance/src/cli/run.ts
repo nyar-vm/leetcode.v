@@ -1,11 +1,6 @@
 import { runBenchmark } from "../execution/benchmark-runner.ts";
 import { runCorrectness } from "../execution/correctness-runner.ts";
-import {
-    implementationsToRun,
-    parseImplementationIds,
-    planBenchmarkRuns,
-    planCorrectnessRuns,
-} from "../planning/run-plan.ts";
+import { implementationsToRun, parseImplementationIds, planBenchmarkRuns, planCorrectnessRuns } from "../planning/run-plan.ts";
 import { writeAllDashboardProjections } from "../reporting/dashboard-projection.ts";
 import type { ImplementationId } from "../adapters/ids.ts";
 
@@ -14,10 +9,7 @@ export type CliMode = "benchmark" | "correctness";
 export async function runCli(mode: CliMode): Promise<{ paths: string[] }> {
     const selection = parseImplementationIds();
     const implementationIds = implementationsToRun(selection);
-    const plans =
-        mode === "benchmark"
-            ? planBenchmarkRuns(implementationIds)
-            : planCorrectnessRuns(implementationIds);
+    const plans = mode === "benchmark" ? planBenchmarkRuns(implementationIds) : planCorrectnessRuns(implementationIds);
 
     for (const plan of plans) {
         if (mode === "benchmark") {
@@ -27,10 +19,7 @@ export async function runCli(mode: CliMode): Promise<{ paths: string[] }> {
         }
     }
 
-    const paths =
-        mode === "benchmark"
-            ? writeAllDashboardProjections(implementationIds as ImplementationId[])
-            : [];
+    const paths = mode === "benchmark" ? writeAllDashboardProjections(implementationIds as ImplementationId[]) : [];
 
     return { paths };
 }

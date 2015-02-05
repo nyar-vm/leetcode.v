@@ -35,10 +35,7 @@ export function bunExecutable(): string {
 }
 
 function probeBun(exe: string): { ok: boolean; version: string | null } {
-    const useShell =
-        exe === "bun" ||
-        exe.endsWith(".CMD") ||
-        (process.platform === "win32" && exe.endsWith(".bin/bun"));
+    const useShell = exe === "bun" || exe.endsWith(".CMD") || (process.platform === "win32" && exe.endsWith(".bin/bun"));
     const result = spawnSync(exe, ["--version"], {
         encoding: "utf8",
         shell: useShell,
@@ -71,10 +68,7 @@ export function spawnBunSolver(args: string[]): {
     stderr: string;
 } {
     const exe = bunExecutable();
-    const useShell =
-        exe === "bun" ||
-        exe.endsWith(".CMD") ||
-        (process.platform === "win32" && exe.endsWith(".bin/bun"));
+    const useShell = exe === "bun" || exe.endsWith(".CMD") || (process.platform === "win32" && exe.endsWith(".bin/bun"));
     const result = spawnSync(exe, [BUN_SOLVER_SCRIPT, ...args], {
         encoding: "utf8",
         cwd: PACKAGE_ROOT,

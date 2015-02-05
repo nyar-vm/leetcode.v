@@ -17,13 +17,7 @@ export const typescriptBunAdapter = defineSolverAdapter({
     async runCorrectness(problem, problemRoot) {
         const startedAt = new Date().toISOString();
         if (!hasReadyTsSolver(problemRoot)) {
-            return runResultFromReference(
-                problem,
-                "typescript-bun",
-                { ok: false, stderr: "solver not found" },
-                startedAt,
-                "solver not found",
-            );
+            return runResultFromReference(problem, "typescript-bun", { ok: false, stderr: "solver not found" }, startedAt, "solver not found");
         }
         const ref = await runBunReference({ id: problem.id, title: problem.title });
         return runResultFromReference(problem, "typescript-bun", ref, startedAt);

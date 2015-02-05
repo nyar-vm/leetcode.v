@@ -44,10 +44,7 @@ export function hasReadyTsSolver(problemRoot: string): boolean {
 }
 
 /** 解析 `Solution().twoSum` 等 LeetCode 风格入口。 */
-export function makeTsCandidate(
-    entryPoint: string,
-    mod: Record<string, unknown>,
-): (args: Record<string, unknown>) => unknown {
+export function makeTsCandidate(entryPoint: string, mod: Record<string, unknown>): (args: Record<string, unknown>) => unknown {
     const expr = entryPoint.trim();
     const classMethod = expr.match(/^Solution\(\)\.(\w+)$/);
     if (classMethod) {
@@ -57,9 +54,7 @@ export function makeTsCandidate(
             throw new Error("solution.ts 缺少 export class Solution");
         }
         return (args) => {
-            const instance = new (
-                Solution as new () => Record<string, (...values: unknown[]) => unknown>
-            )();
+            const instance = new (Solution as new () => Record<string, (...values: unknown[]) => unknown>)();
             const fn = instance[method];
             if (typeof fn !== "function") {
                 throw new Error(`Solution 缺少方法 ${method}`);
@@ -77,10 +72,7 @@ export function makeTsCandidate(
 async function loadTsCandidate(problemRoot: string) {
     const metadata = loadProblemMetadata(problemRoot);
     const entry = requireInvoke(metadata, "typescript");
-    const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<
-        string,
-        unknown
-    >;
+    const mod = (await import(pathToFileURL(tsSolverPath(problemRoot)).href)) as Record<string, unknown>;
     const candidate = makeTsCandidate(entry, mod);
     return { tests: metadata.tests, candidate };
 }
@@ -96,11 +88,7 @@ export async function runTsSolverOnce(problemRoot: string, _problemId?: string):
 /**
  * 单进程内预热后只对 metadata.tests 全量循环计时（不含每次冷启动 Node/tsx）。
  */
-export async function benchTsSolverInProcess(
-    problemRoot: string,
-    iterations: number,
-    warmup: number,
-): Promise<number> {
+export async function benchTsSolverInProcess(problemRoot: string, iterations: number, warmup: number): Promise<number> {
     const { tests, candidate } = await loadTsCandidate(problemRoot);
 
     const runAll = () => {
@@ -123,9 +111,7 @@ export async function benchTsSolverInProcess(
     return median(samples);
 }
 
-export async function runTsReference(
-    problem: ProblemDefinition,
-): Promise<{ ok: boolean; stderr: string }> {
+export async function runTsReference(problem: ProblemDefinition): Promise<{ ok: boolean; stderr: string }> {
     const root = problemDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
     if (!hasTsSolver(root)) {
         return { ok: false, stderr: `missing ${tsSolverPath(root)}` };

@@ -18,13 +18,7 @@ export const wolframSxoAdapter = defineSolverAdapter({
     async runCorrectness(problem, problemRoot) {
         const startedAt = new Date().toISOString();
         if (!hasWolframSxoSolver(problemRoot)) {
-            return runResultFromReference(
-                problem,
-                "wolfram-sxo",
-                { ok: false, stderr: "solver not found" },
-                startedAt,
-                "solver not found",
-            );
+            return runResultFromReference(problem, "wolfram-sxo", { ok: false, stderr: "solver not found" }, startedAt, "solver not found");
         }
         const ref = await runWolframSxoReference({ id: problem.id, title: problem.title });
         return runResultFromReference(problem, "wolfram-sxo", ref, startedAt);

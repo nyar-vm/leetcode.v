@@ -1,11 +1,4 @@
-import {
-    appendFileSync,
-    existsSync,
-    mkdirSync,
-    readFileSync,
-    renameSync,
-    writeFileSync,
-} from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 import { CONFORMANCE_CACHE_ROOT } from "../../domain/paths.ts";
@@ -44,18 +37,10 @@ export function appendAttempt(runId: string, attempt: AttemptRecord): void {
 export function writeRunRecord(record: RunRecord, markCurrent = true): void {
     const dir = runDir(record.manifest.runId);
     mkdirSync(dir, { recursive: true });
-    writeFileSync(
-        join(dir, "manifest.json"),
-        `${JSON.stringify(record.manifest, null, 2)}\n`,
-        "utf8",
-    );
+    writeFileSync(join(dir, "manifest.json"), `${JSON.stringify(record.manifest, null, 2)}\n`, "utf8");
     writeFileSync(join(dir, "result.json"), `${JSON.stringify(record.result, null, 2)}\n`, "utf8");
     if (record.measurement) {
-        writeFileSync(
-            join(dir, "measurement.json"),
-            `${JSON.stringify(record.measurement, null, 2)}\n`,
-            "utf8",
-        );
+        writeFileSync(join(dir, "measurement.json"), `${JSON.stringify(record.measurement, null, 2)}\n`, "utf8");
         const attemptsPath = join(dir, "attempts.jsonl");
         for (const attempt of record.measurement.attempts) {
             appendFileSync(attemptsPath, `${JSON.stringify(attempt)}\n`, "utf8");
@@ -63,11 +48,7 @@ export function writeRunRecord(record: RunRecord, markCurrent = true): void {
     }
 
     const index = readIndex();
-    const key = indexKey(
-        record.manifest.problemId,
-        record.manifest.implementationId,
-        record.manifest.mode,
-    );
+    const key = indexKey(record.manifest.problemId, record.manifest.implementationId, record.manifest.mode);
     if (markCurrent) {
         for (const [entryKey, entry] of Object.entries(index.entries)) {
             if (entryKey === key) {
@@ -103,11 +84,7 @@ export function readRunRecord(runId: string): RunRecord | null {
     return { manifest, result, measurement };
 }
 
-export function resolveCurrentRunId(
-    problemId: string,
-    implementationId: string,
-    mode: "correctness" | "benchmark",
-): string | null {
+export function resolveCurrentRunId(problemId: string, implementationId: string, mode: "correctness" | "benchmark"): string | null {
     const index = readIndex();
     const entry = index.entries[indexKey(problemId, implementationId, mode)];
     return entry?.current ? entry.runId : null;
