@@ -111,10 +111,7 @@ export function chartLegend(theme: ThemeMode): EChartsOption["legend"] {
     };
 }
 
-export function chartTooltip(
-    theme: ThemeMode,
-    trigger: "item" | "axis" = "item",
-): EChartsOption["tooltip"] {
+export function chartTooltip(theme: ThemeMode, trigger: "item" | "axis" = "item"): EChartsOption["tooltip"] {
     const ui = getChartUi(theme);
     return {
         trigger,
@@ -139,11 +136,7 @@ export function categoryAxis(theme: ThemeMode, name?: string): EChartsOption["xA
     };
 }
 
-export function valueAxis(
-    theme: ThemeMode,
-    name?: string,
-    formatter?: string,
-): EChartsOption["yAxis"] {
+export function valueAxis(theme: ThemeMode, name?: string, formatter?: string): EChartsOption["yAxis"] {
     const ui = getChartUi(theme);
     return {
         type: "value",

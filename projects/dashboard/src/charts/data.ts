@@ -1,9 +1,5 @@
 import type { EnrichedBenchRow } from "../types/bench";
-import {
-    computeLanguageStats,
-    countTimedLanguages,
-    RUNTIME_LANGUAGES,
-} from "../utils/languageStats";
+import { computeLanguageStats, countTimedLanguages, RUNTIME_LANGUAGES } from "../utils/languageStats";
 
 function jitterForKey(key: string): number {
     let hash = 0;

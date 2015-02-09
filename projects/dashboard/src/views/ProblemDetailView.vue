@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-    AlertTriangle,
-    BookOpen,
-    ChevronLeft,
-    ExternalLink,
-    FileCode2,
-    Filter,
-    Search,
-    Timer,
-} from "@lucide/vue";
+import { AlertTriangle, BookOpen, ChevronLeft, ExternalLink, FileCode2, Filter, Search, Timer } from "@lucide/vue";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 

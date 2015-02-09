@@ -30,30 +30,20 @@ function createBenchReport() {
     const report = ref<BenchReport | null>(null);
 
     const rowCount = computed(() => report.value?.rows.length ?? 0);
-    const errorCount = computed(
-        () => report.value?.rows.filter((row) => row.error !== null).length ?? 0,
-    );
+    const errorCount = computed(() => report.value?.rows.filter((row) => row.error !== null).length ?? 0);
     const okCount = computed(() => rowCount.value - errorCount.value);
 
     async function loadCached() {
-        const [python, typescript, typescriptBun, valkyrie, wolframSxo, matlabSxo] =
-            await Promise.all([
-                fetchJson(benchmarkPythonUrl),
-                fetchJson(benchmarkTypeScriptUrl),
-                fetchJson(benchmarkTypeScriptBunUrl),
-                fetchJson(benchmarkValkyrieUrl),
-                fetchJson(benchmarkWolframSxoUrl),
-                fetchJson(benchmarkMatlabSxoUrl),
-            ]);
+        const [python, typescript, typescriptBun, valkyrie, wolframSxo, matlabSxo] = await Promise.all([
+            fetchJson(benchmarkPythonUrl),
+            fetchJson(benchmarkTypeScriptUrl),
+            fetchJson(benchmarkTypeScriptBunUrl),
+            fetchJson(benchmarkValkyrieUrl),
+            fetchJson(benchmarkWolframSxoUrl),
+            fetchJson(benchmarkMatlabSxoUrl),
+        ]);
 
-        const merged = mergeLanguageBenchReports(
-            python,
-            typescript,
-            valkyrie,
-            wolframSxo,
-            matlabSxo,
-            typescriptBun,
-        );
+        const merged = mergeLanguageBenchReports(python, typescript, valkyrie, wolframSxo, matlabSxo, typescriptBun);
         if (merged) {
             report.value = merged;
             return;

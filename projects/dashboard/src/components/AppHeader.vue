@@ -17,9 +17,7 @@ const pageTitle = computed(() => {
     return typeof route.meta.title === "string" ? route.meta.title : "看板";
 });
 
-const pageSubtitle = computed(() =>
-    typeof route.meta.subtitle === "string" ? route.meta.subtitle : "",
-);
+const pageSubtitle = computed(() => (typeof route.meta.subtitle === "string" ? route.meta.subtitle : ""));
 </script>
 
 <template>

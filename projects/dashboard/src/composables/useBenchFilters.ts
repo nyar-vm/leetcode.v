@@ -14,14 +14,7 @@ import {
 import { fastestRuntimeMs, runtimeRatio } from "../utils/format";
 
 const DIFFICULTIES: Difficulty[] = ["Easy", "Medium", "Hard"];
-const TS_V_SORT_KEYS: SortKey[] = [
-    "id",
-    "title",
-    "difficulty",
-    "tsRuntimeMs",
-    "vRuntimeMs",
-    "ratio",
-];
+const TS_V_SORT_KEYS: SortKey[] = ["id", "title", "difficulty", "tsRuntimeMs", "vRuntimeMs", "ratio"];
 const FULL_SORT_KEYS: SortKey[] = [
     "id",
     "title",
@@ -55,9 +48,7 @@ function parseList(value: unknown): string[] {
 }
 
 function parseDifficulty(value: unknown): Difficulty[] {
-    return parseList(value).filter((item): item is Difficulty =>
-        DIFFICULTIES.includes(item as Difficulty),
-    );
+    return parseList(value).filter((item): item is Difficulty => DIFFICULTIES.includes(item as Difficulty));
 }
 
 function parseStatus(value: unknown, mode: BenchFilterMode): BenchStatus {
@@ -196,10 +187,7 @@ function sortRows(rows: EnrichedBenchRow[], sort: SortKey, sortDesc: boolean): E
     return sorted;
 }
 
-export function filtersFromRoute(
-    route: ReturnType<typeof useRoute>,
-    mode: BenchFilterMode,
-): BenchFilters {
+export function filtersFromRoute(route: ReturnType<typeof useRoute>, mode: BenchFilterMode): BenchFilters {
     return {
         query: typeof route.query.q === "string" ? route.query.q : "",
         difficulties: parseDifficulty(route.query.difficulty),
@@ -294,16 +282,10 @@ export function useBenchFilters(rows: () => EnrichedBenchRow[], mode: BenchFilte
                     return false;
                 }
             }
-            if (
-                filters.value.difficulties.length > 0 &&
-                !filters.value.difficulties.includes(row.difficulty as Difficulty)
-            ) {
+            if (filters.value.difficulties.length > 0 && !filters.value.difficulties.includes(row.difficulty as Difficulty)) {
                 return false;
             }
-            if (
-                filters.value.tags.length > 0 &&
-                !filters.value.tags.some((tag) => row.tags.includes(tag))
-            ) {
+            if (filters.value.tags.length > 0 && !filters.value.tags.some((tag) => row.tags.includes(tag))) {
                 return false;
             }
             return matchesStatus(row, filters.value.status, mode);

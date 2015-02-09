@@ -91,10 +91,7 @@ type MatlabSxoBenchReport = {
     rows: RuntimeBenchRow[];
 };
 
-function mergeErrors(
-    left: string | null | undefined,
-    right: string | null | undefined,
-): string | null {
+function mergeErrors(left: string | null | undefined, right: string | null | undefined): string | null {
     const a = left ?? null;
     const b = right ?? null;
     if (a && b) {
@@ -294,14 +291,7 @@ export function mergeLanguageBenchReports(
             matlabSxo?.generatedAt,
             typescriptBun?.generatedAt,
         ),
-        ready: Boolean(
-            python?.ready ||
-                typescript?.ready ||
-                valkyrie?.ready ||
-                wolframSxo?.ready ||
-                matlabSxo?.ready ||
-                typescriptBun?.ready,
-        ),
+        ready: Boolean(python?.ready || typescript?.ready || valkyrie?.ready || wolframSxo?.ready || matlabSxo?.ready || typescriptBun?.ready),
         benchTarget,
         catalogTotal:
             python?.catalogTotal ??
@@ -368,9 +358,7 @@ export function mergeLanguageBenchReports(
 }
 
 /** 旧版合并快照缺字段时补齐。 */
-export function normalizeLegacyBenchRow(
-    row: Partial<BenchRow> & Pick<BenchRow, "id" | "title">,
-): BenchRow {
+export function normalizeLegacyBenchRow(row: Partial<BenchRow> & Pick<BenchRow, "id" | "title">): BenchRow {
     return {
         id: row.id,
         title: row.title,

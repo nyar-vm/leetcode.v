@@ -1,13 +1,7 @@
 import type { EnrichedBenchRow } from "../types/bench";
 import { formatMs } from "./format";
 
-export type RuntimeLanguageId =
-    | "python"
-    | "typescript"
-    | "typescript-bun"
-    | "valkyrie"
-    | "wolfram-sxo"
-    | "matlab-sxo";
+export type RuntimeLanguageId = "python" | "typescript" | "typescript-bun" | "valkyrie" | "wolfram-sxo" | "matlab-sxo";
 
 export type RuntimeLanguage = {
     id: RuntimeLanguageId;
@@ -142,8 +136,7 @@ export function winnersForRow(row: EnrichedBenchRow): RuntimeLanguageId[] {
 }
 
 export function comparableRowCount(rows: EnrichedBenchRow[]): number {
-    return rows.filter((row) => winnersForRow(row).length > 0 && countTimedLanguages(row) >= 2)
-        .length;
+    return rows.filter((row) => winnersForRow(row).length > 0 && countTimedLanguages(row) >= 2).length;
 }
 
 export function sumCompileMs(rows: EnrichedBenchRow[]): number | null {
@@ -175,17 +168,12 @@ export function sumRuntimeMs(rows: EnrichedBenchRow[]): number | null {
 }
 
 export function countTimedLanguages(row: EnrichedBenchRow): number {
-    return RUNTIME_LANGUAGES.filter((language) => validRuntime(language.readRuntime(row)) !== null)
-        .length;
+    return RUNTIME_LANGUAGES.filter((language) => validRuntime(language.readRuntime(row)) !== null).length;
 }
 
 export function computeLanguageStats(rows: EnrichedBenchRow[]): LanguageStat[] {
-    const winCounts = new Map<RuntimeLanguageId, number>(
-        RUNTIME_LANGUAGES.map((language) => [language.id, 0]),
-    );
-    const samples = new Map<RuntimeLanguageId, number[]>(
-        RUNTIME_LANGUAGES.map((language) => [language.id, []]),
-    );
+    const winCounts = new Map<RuntimeLanguageId, number>(RUNTIME_LANGUAGES.map((language) => [language.id, 0]));
+    const samples = new Map<RuntimeLanguageId, number[]>(RUNTIME_LANGUAGES.map((language) => [language.id, []]));
 
     for (const row of rows) {
         for (const winner of winnersForRow(row)) {
@@ -218,9 +206,7 @@ export function computeLanguageStats(rows: EnrichedBenchRow[]): LanguageStat[] {
 }
 
 export function leadingLanguage(stats: LanguageStat[]): LanguageStat | null {
-    const ranked = [...stats]
-        .filter((item) => item.winCount > 0)
-        .sort((left, right) => right.winCount - left.winCount);
+    const ranked = [...stats].filter((item) => item.winCount > 0).sort((left, right) => right.winCount - left.winCount);
     if (!ranked.length) {
         return null;
     }

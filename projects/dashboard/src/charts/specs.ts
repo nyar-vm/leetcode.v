@@ -16,10 +16,7 @@ import {
 
 const LANGUAGE_ORDER = Object.keys(languageColor);
 
-export function statusDonutOption(
-    data: { label: string; count: number }[],
-    theme: ThemeMode,
-): EChartsOption | null {
+export function statusDonutOption(data: { label: string; count: number }[], theme: ThemeMode): EChartsOption | null {
     if (!data.length) {
         return null;
     }
@@ -53,10 +50,7 @@ export function statusDonutOption(
     };
 }
 
-export function languageWinBarOption(
-    data: { language: string; winCount: number }[],
-    theme: ThemeMode,
-): EChartsOption | null {
+export function languageWinBarOption(data: { language: string; winCount: number }[], theme: ThemeMode): EChartsOption | null {
     if (!data.length || data.every((item) => item.winCount === 0)) {
         return null;
     }
@@ -118,9 +112,7 @@ export function languageViolinOption(
     }
 
     const ui = getChartUi(theme);
-    const languages = LANGUAGE_ORDER.filter((label) =>
-        data.some((item) => item.language === label),
-    );
+    const languages = LANGUAGE_ORDER.filter((label) => data.some((item) => item.language === label));
 
     return {
         title: chartTitle("分布 · ln(ms)", theme),
@@ -168,9 +160,7 @@ export function languageViolinOption(
     };
 }
 
-function buildEcdfSeries(
-    data: { language: string; logMs: number; runtimeMs: number; title: string }[],
-) {
+function buildEcdfSeries(data: { language: string; logMs: number; runtimeMs: number; title: string }[]) {
     const grouped = new Map<string, typeof data>();
     for (const item of data) {
         const list = grouped.get(item.language) ?? [];

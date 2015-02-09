@@ -30,9 +30,7 @@ function renderKatex(tex: string, displayMode: boolean): string {
 
 function renderMath(markdown: string): string {
     let next = markdown.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => renderKatex(tex.trim(), true));
-    next = next.replace(/(?<![\\$])\$([^$\n]+?)\$(?!\$)/g, (_, tex) =>
-        renderKatex(tex.trim(), false),
-    );
+    next = next.replace(/(?<![\\$])\$([^$\n]+?)\$(?!\$)/g, (_, tex) => renderKatex(tex.trim(), false));
     return next;
 }
 

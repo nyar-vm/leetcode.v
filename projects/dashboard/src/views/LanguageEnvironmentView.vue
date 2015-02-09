@@ -87,10 +87,7 @@ function typescriptCard(env: TypeScriptBenchEnvironment | null, ready: boolean):
     };
 }
 
-function typescriptBunCard(
-    env: TypeScriptBunBenchEnvironment | null,
-    ready: boolean,
-): EnvCard | null {
+function typescriptBunCard(env: TypeScriptBunBenchEnvironment | null, ready: boolean): EnvCard | null {
     if (!env) {
         return null;
     }
@@ -197,14 +194,7 @@ const cards = computed(() => {
 const missingLanguages = computed(() => {
     const env = environments.value;
     if (!env) {
-        return [
-            "Python",
-            "TypeScript",
-            "TypeScript (Bun)",
-            "Valkyrie",
-            "Wolfram (Sxo)",
-            "MATLAB (Sxo)",
-        ];
+        return ["Python", "TypeScript", "TypeScript (Bun)", "Valkyrie", "Wolfram (Sxo)", "MATLAB (Sxo)"];
     }
     const missing: string[] = [];
     if (!env.python) {
