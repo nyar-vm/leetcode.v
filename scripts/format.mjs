@@ -6,21 +6,21 @@
  *   pnpm fmt
  *   pnpm fmt:check
  */
-import { spawnSync } from "node:child_process";
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const biomeCli = join(dirname(require.resolve("@biomejs/biome/package.json")), "bin", "biome");
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const biomeCli = join(dirname(require.resolve('@biomejs/biome/package.json')), 'bin', 'biome');
 
-const checkOnly = process.argv.includes("--check");
-const args = ["format", ...(checkOnly ? [] : ["--write"]), "."];
+const checkOnly = process.argv.includes('--check');
+const args = ['format', ...(checkOnly ? [] : ['--write']), '.'];
 
 const result = spawnSync(process.execPath, [biomeCli, ...args], {
     cwd: root,
-    stdio: "inherit",
+    stdio: 'inherit',
 });
 
 if (result.error) {

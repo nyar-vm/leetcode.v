@@ -32,80 +32,80 @@ export type HostEnvironment = {
 };
 
 export type PythonBenchEnvironment = {
-    language: "python";
+    language: 'python';
     runtimeVersion: string;
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type TypeScriptBenchEnvironment = {
-    language: "typescript";
+    language: 'typescript';
     nodeVersion: string;
     tsxVersion: string | null;
-    runner: "tsx";
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    runner: 'tsx';
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type TypeScriptBunBenchEnvironment = {
-    language: "typescript-bun";
+    language: 'typescript-bun';
     bunVersion: string | null;
     runnerReady: boolean;
     skipReason: string | null;
-    runner: "bun";
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    runner: 'bun';
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type ValkyrieBenchEnvironment = {
-    language: "valkyrie";
+    language: 'valkyrie';
     legionVersion: string | null;
     legionRoute: string | null;
     benchTarget: string;
     runnerReady: boolean;
     skipReason: string | null;
-    compileMetric: "compile";
-    runtimeMetric: "runtime";
-    runtimeStatus: "pending-invoke-harness";
-    aggregation: "median";
+    compileMetric: 'compile';
+    runtimeMetric: 'runtime';
+    runtimeStatus: 'pending-invoke-harness';
+    aggregation: 'median';
     compileRuns: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type WolframSxoBenchEnvironment = {
-    language: "wolfram-sxo";
+    language: 'wolfram-sxo';
     sxoMathematicaVersion: string | null;
     runnerReady: boolean;
     skipReason: string | null;
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type MatlabSxoBenchEnvironment = {
-    language: "matlab-sxo";
+    language: 'matlab-sxo';
     sxoMatlabVersion: string | null;
     runnerReady: boolean;
     skipReason: string | null;
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
@@ -150,25 +150,25 @@ export type EnrichedBenchRow = BenchRow & {
     tags: string[];
 };
 
-export type Difficulty = "Easy" | "Medium" | "Hard";
+export type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
-export type BenchStatus = "all" | "ok" | "error" | "v-faster" | "ts-faster" | "missing";
+export type BenchStatus = 'all' | 'ok' | 'error' | 'v-faster' | 'ts-faster' | 'missing';
 
 export type SortKey =
-    | "id"
-    | "title"
-    | "difficulty"
-    | "pyRuntimeMs"
-    | "tsRuntimeMs"
-    | "tbRuntimeMs"
-    | "vCompileMs"
-    | "vRuntimeMs"
-    | "wlRuntimeMs"
-    | "mlRuntimeMs"
-    | "ratio"
-    | "fastest";
+    | 'id'
+    | 'title'
+    | 'difficulty'
+    | 'pyRuntimeMs'
+    | 'tsRuntimeMs'
+    | 'tbRuntimeMs'
+    | 'vCompileMs'
+    | 'vRuntimeMs'
+    | 'wlRuntimeMs'
+    | 'mlRuntimeMs'
+    | 'ratio'
+    | 'fastest';
 
-export type BenchFilterMode = "full" | "ts-v";
+export type BenchFilterMode = 'full' | 'ts-v';
 
 export const DEFAULT_PAGE_SIZE = 20;
 export const PAGE_SIZE_OPTIONS = [10, 20, 50, 100] as const;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Database } from "@lucide/vue";
+import { Database } from '@lucide/vue';
 
-import AppIcon from "./AppIcon.vue";
+import AppIcon from './AppIcon.vue';
 
 defineProps<{
     title: string;

@@ -1,9 +1,9 @@
-import { createHash } from "node:crypto";
+import { createHash } from 'node:crypto';
 
 export type RunIdInputs = {
     problemId: string;
     implementationId: string;
-    mode: "correctness" | "benchmark";
+    mode: 'correctness' | 'benchmark';
     sourceDigest: string;
     adapterVersion: string;
     toolchainKey: string;
@@ -17,16 +17,16 @@ export function problemSourceDigest(problemId: string, implementationId: string,
 }
 
 export function digestSource(parts: string[]): string {
-    const hash = createHash("sha256");
+    const hash = createHash('sha256');
     for (const part of parts) {
         hash.update(part);
-        hash.update("\0");
+        hash.update('\0');
     }
-    return hash.digest("hex").slice(0, 16);
+    return hash.digest('hex').slice(0, 16);
 }
 
 export function buildRunId(inputs: RunIdInputs): string {
-    const hash = createHash("sha256");
+    const hash = createHash('sha256');
     const payload = [
         inputs.problemId,
         inputs.implementationId,
@@ -36,7 +36,7 @@ export function buildRunId(inputs: RunIdInputs): string {
         inputs.toolchainKey,
         inputs.measurementPlanKey,
         inputs.executionNonce,
-    ].join("|");
+    ].join('|');
     hash.update(payload);
-    return hash.digest("hex").slice(0, 20);
+    return hash.digest('hex').slice(0, 20);
 }

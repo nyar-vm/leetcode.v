@@ -1,8 +1,8 @@
-﻿import type { ProblemDefinition } from "../../catalog/index.ts";
-import { problemDir } from "../../catalog/index.ts";
-import { TYPESCRIPT_BENCH_PARAMS } from "../../planning/bench-params.ts";
-import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
-import { benchTsSolverInProcess, hasTsSolver } from "./ref.ts";
+﻿import type { ProblemDefinition } from '../../catalog/index.ts';
+import { problemDir } from '../../catalog/index.ts';
+import { TYPESCRIPT_BENCH_PARAMS } from '../../planning/bench-params.ts';
+import { LEETCODE_ROOT_FROM_PACKAGE } from '../../domain/paths.ts';
+import { benchTsSolverInProcess, hasTsSolver } from './ref.ts';
 
 export async function benchTsProblem(
     problem: ProblemDefinition,

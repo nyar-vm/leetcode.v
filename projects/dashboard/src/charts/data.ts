@@ -1,5 +1,5 @@
-import type { EnrichedBenchRow } from "../types/bench";
-import { computeLanguageStats, countTimedLanguages, RUNTIME_LANGUAGES } from "../utils/languageStats";
+import type { EnrichedBenchRow } from '../types/bench';
+import { computeLanguageStats, countTimedLanguages, RUNTIME_LANGUAGES } from '../utils/languageStats';
 
 function jitterForKey(key: string): number {
     let hash = 0;
@@ -39,26 +39,26 @@ export function languageLogSamples(rows: EnrichedBenchRow[]): LanguageLogSample[
     }
     return samples;
 }
-export type RowStatus = "error" | "complete" | "partial" | "empty";
+export type RowStatus = 'error' | 'complete' | 'partial' | 'empty';
 
 export function rowStatus(row: EnrichedBenchRow): RowStatus {
     if (row.error) {
-        return "error";
+        return 'error';
     }
     if (countTimedLanguages(row) === 3) {
-        return "complete";
+        return 'complete';
     }
     if (countTimedLanguages(row) > 0) {
-        return "partial";
+        return 'partial';
     }
-    return "empty";
+    return 'empty';
 }
 
 const statusLabels: Record<RowStatus, string> = {
-    error: "错误",
-    complete: "全语言计时",
-    partial: "部分计时",
-    empty: "无计时",
+    error: '错误',
+    complete: '全语言计时',
+    partial: '部分计时',
+    empty: '无计时',
 };
 
 export function statusBreakdown(rows: EnrichedBenchRow[]) {

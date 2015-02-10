@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Filter, Search, SlidersHorizontal, Tag, X } from "@lucide/vue";
+import { Filter, Search, SlidersHorizontal, Tag, X } from '@lucide/vue';
 
-import { computed } from "vue";
+import { computed } from 'vue';
 
-import type { BenchFilterMode, BenchStatus, Difficulty } from "../types/bench";
-import AppIcon from "./AppIcon.vue";
+import type { BenchFilterMode, BenchStatus, Difficulty } from '../types/bench';
+import AppIcon from './AppIcon.vue';
 
 const props = withDefaults(
     defineProps<{
@@ -20,36 +20,36 @@ const props = withDefaults(
         activeFilterCount: number;
     }>(),
     {
-        variant: "ts-v",
+        variant: 'ts-v',
     },
 );
 
 const emit = defineEmits<{
-    "update:query": [value: string];
+    'update:query': [value: string];
     toggleDifficulty: [value: Difficulty];
     toggleTag: [value: string];
     setStatus: [value: BenchStatus];
     clear: [];
 }>();
 
-const difficultyOptions: Difficulty[] = ["Easy", "Medium", "Hard"];
+const difficultyOptions: Difficulty[] = ['Easy', 'Medium', 'Hard'];
 
 const statusOptions = computed(() => {
-    if (props.variant === "full") {
+    if (props.variant === 'full') {
         return [
-            { value: "all" as BenchStatus, label: "全部" },
-            { value: "ok" as BenchStatus, label: "无错误" },
-            { value: "error" as BenchStatus, label: "有错误" },
-            { value: "missing" as BenchStatus, label: "缺计时" },
+            { value: 'all' as BenchStatus, label: '全部' },
+            { value: 'ok' as BenchStatus, label: '无错误' },
+            { value: 'error' as BenchStatus, label: '有错误' },
+            { value: 'missing' as BenchStatus, label: '缺计时' },
         ];
     }
     return [
-        { value: "all" as BenchStatus, label: "全部" },
-        { value: "ok" as BenchStatus, label: "无错误" },
-        { value: "error" as BenchStatus, label: "有错误" },
-        { value: "v-faster" as BenchStatus, label: "V 更快" },
-        { value: "ts-faster" as BenchStatus, label: "TS 更快" },
-        { value: "missing" as BenchStatus, label: "缺数据" },
+        { value: 'all' as BenchStatus, label: '全部' },
+        { value: 'ok' as BenchStatus, label: '无错误' },
+        { value: 'error' as BenchStatus, label: '有错误' },
+        { value: 'v-faster' as BenchStatus, label: 'V 更快' },
+        { value: 'ts-faster' as BenchStatus, label: 'TS 更快' },
+        { value: 'missing' as BenchStatus, label: '缺数据' },
     ];
 });
 </script>

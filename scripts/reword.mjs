@@ -23,13 +23,13 @@
  *   4. node scripts/reword.mjs --dry-run --file reword.pending.txt --base origin/dev
  *   5. node scripts/reword.mjs --file reword.pending.txt --base origin/dev
  */
-import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync, unlinkSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const statePath = join(root, ".git", "reword-state.json");
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const statePath = join(root, '.git', 'reword-state.json');
 
 const HELP = `reword.mjs — batch reword commit messages (UTF-8 safe)
 
@@ -50,8 +50,8 @@ Examples:
 /** @param {string[]} argv */
 function parseArgs(argv) {
     const opts = {
-        file: "",
-        base: "origin/dev",
+        file: '',
+        base: 'origin/dev',
         dryRun: false,
         lint: false,
         lintLog: false,
@@ -59,17 +59,17 @@ function parseArgs(argv) {
     };
     for (let i = 0; i < argv.length; i++) {
         const arg = argv[i];
-        if (arg === "--help" || arg === "-h") {
+        if (arg === '--help' || arg === '-h') {
             opts.help = true;
-        } else if (arg === "--file") {
-            opts.file = argv[++i] ?? "";
-        } else if (arg === "--base") {
-            opts.base = argv[++i] ?? "";
-        } else if (arg === "--dry-run") {
+        } else if (arg === '--file') {
+            opts.file = argv[++i] ?? '';
+        } else if (arg === '--base') {
+            opts.base = argv[++i] ?? '';
+        } else if (arg === '--dry-run') {
             opts.dryRun = true;
-        } else if (arg === "--lint") {
+        } else if (arg === '--lint') {
             opts.lint = true;
-        } else if (arg === "--lint-log") {
+        } else if (arg === '--lint-log') {
             opts.lintLog = true;
         } else {
             console.error(`reword: unknown argument: ${arg}`);
@@ -82,7 +82,7 @@ function parseArgs(argv) {
 /** @param {string} text */
 function parseMessageFile(text) {
     return text
-        .replace(/\r\n/g, "\n")
+        .replace(/\r\n/g, '\n')
         .split(/\n---\n/)
         .map((block) => block.trim())
         .filter(Boolean);
@@ -93,9 +93,9 @@ function parseMessageFile(text) {
  * @returns {{ subject: string, body: string }}
  */
 function splitMessage(raw) {
-    const lines = raw.split("\n");
-    const subject = (lines[0] ?? "").trim();
-    const body = lines.slice(1).join("\n").trim();
+    const lines = raw.split('\n');
+    const subject = (lines[0] ?? '').trim();
+    const body = lines.slice(1).join('\n').trim();
     return { subject, body };
 }
 
@@ -110,7 +110,7 @@ const MILESTONE = /\b(phase\s*[-_]?\s*\d|m\d|s\d|a\d|f\d|gate[- ]?\d)\b/i;
 const BARE_TS = /\bTS\b(?![a-z])/;
 
 /** @param {string} raw @param {string} [label] */
-function lintMessage(raw, label = "message") {
+function lintMessage(raw, label = 'message') {
     const errors = [];
     const { subject, body } = splitMessage(raw);
     const full = body ? `${subject}\n${body}` : subject;
@@ -122,7 +122,7 @@ function lintMessage(raw, label = "message") {
     if (!EMOJI_START.test(subject)) {
         errors.push(`${label}: subject must start with a real gitmoji character`);
     }
-    if (subject.endsWith(".")) {
+    if (subject.endsWith('.')) {
         errors.push(`${label}: subject must not end with a period`);
     }
     if (/[;；]/.test(full)) {
@@ -142,29 +142,29 @@ function lintMessage(raw, label = "message") {
 
 /** @param {string[]} args */
 function git(...args) {
-    const result = spawnSync("git", args, { cwd: root, encoding: "utf8" });
+    const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' });
     if (result.status !== 0) {
-        const detail = (result.stderr || result.stdout || "").trim();
-        throw new Error(detail || `git ${args.join(" ")} failed`);
+        const detail = (result.stderr || result.stdout || '').trim();
+        throw new Error(detail || `git ${args.join(' ')} failed`);
     }
-    return (result.stdout ?? "").trimEnd();
+    return (result.stdout ?? '').trimEnd();
 }
 
 function assertCleanWorktree() {
-    const status = git("status", "--porcelain");
+    const status = git('status', '--porcelain');
     if (status) {
-        throw new Error("working tree is not clean. Commit or stash changes before reword.");
+        throw new Error('working tree is not clean. Commit or stash changes before reword.');
     }
 }
 
 /** @param {string} base */
 function listCommits(base) {
-    const out = git("log", "--reverse", "--format=%H %s", `${base}..HEAD`);
+    const out = git('log', '--reverse', '--format=%H %s', `${base}..HEAD`);
     if (!out) {
         return [];
     }
-    return out.split("\n").map((line) => {
-        const space = line.indexOf(" ");
+    return out.split('\n').map((line) => {
+        const space = line.indexOf(' ');
         return { hash: line.slice(0, space), subject: line.slice(space + 1) };
     });
 }
@@ -175,7 +175,7 @@ function readMessagesFile(path) {
     if (!existsSync(abs)) {
         throw new Error(`message file not found: ${path}`);
     }
-    const messages = parseMessageFile(readFileSync(abs, "utf8"));
+    const messages = parseMessageFile(readFileSync(abs, 'utf8'));
     if (messages.length === 0) {
         throw new Error(`no commit blocks in ${path}`);
     }
@@ -211,7 +211,7 @@ function planReword(base, messages, dryRun) {
     }
 
     if (dryRun) {
-        console.log("dry-run: no rebase performed");
+        console.log('dry-run: no rebase performed');
         return;
     }
 }
@@ -221,11 +221,11 @@ function runReword(base, messages) {
     planReword(base, messages, false);
     assertCleanWorktree();
 
-    writeFileSync(statePath, JSON.stringify({ index: 0, messages }, null, 2), "utf8");
+    writeFileSync(statePath, JSON.stringify({ index: 0, messages }, null, 2), 'utf8');
 
     // Copy editor into .git so rebase steps before this script exists can still invoke it.
-    const editorCopy = join(root, ".git", "reword-editor.mjs");
-    writeFileSync(editorCopy, readFileSync(join(root, "scripts", "reword.mjs"), "utf8"), "utf8");
+    const editorCopy = join(root, '.git', 'reword-editor.mjs');
+    writeFileSync(editorCopy, readFileSync(join(root, 'scripts', 'reword.mjs'), 'utf8'), 'utf8');
 
     const node = process.execPath;
     const env = {
@@ -234,10 +234,10 @@ function runReword(base, messages) {
         GIT_EDITOR: `"${node}" "${editorCopy}" --commit-editor`,
     };
 
-    const result = spawnSync("git", ["rebase", "-i", base], {
+    const result = spawnSync('git', ['rebase', '-i', base], {
         cwd: root,
         env,
-        stdio: "inherit",
+        stdio: 'inherit',
         shell: true,
     });
 
@@ -255,24 +255,24 @@ function runReword(base, messages) {
 
 /** @param {string} todoPath */
 function sequenceEditor(todoPath) {
-    const lines = readFileSync(todoPath, "utf8").split(/\r?\n/);
-    const next = lines.map((line) => (line.startsWith("pick ") ? `reword ${line.slice(5)}` : line)).join("\n");
-    writeFileSync(todoPath, `${next}\n`, "utf8");
+    const lines = readFileSync(todoPath, 'utf8').split(/\r?\n/);
+    const next = lines.map((line) => (line.startsWith('pick ') ? `reword ${line.slice(5)}` : line)).join('\n');
+    writeFileSync(todoPath, `${next}\n`, 'utf8');
 }
 
 /** @param {string} editPath */
 function commitEditor(editPath) {
     if (!existsSync(statePath)) {
-        throw new Error("reword state file missing (.git/reword-state.json)");
+        throw new Error('reword state file missing (.git/reword-state.json)');
     }
-    const state = JSON.parse(readFileSync(statePath, "utf8"));
+    const state = JSON.parse(readFileSync(statePath, 'utf8'));
     const { index, messages } = state;
     if (index >= messages.length) {
         throw new Error(`commit editor index ${index} out of range (${messages.length})`);
     }
-    writeFileSync(editPath, formatMessage(messages[index]), "utf8");
+    writeFileSync(editPath, formatMessage(messages[index]), 'utf8');
     state.index = index + 1;
-    writeFileSync(statePath, JSON.stringify(state, null, 2), "utf8");
+    writeFileSync(statePath, JSON.stringify(state, null, 2), 'utf8');
 }
 
 function lintLog(base) {
@@ -283,7 +283,7 @@ function lintLog(base) {
     }
     let failed = 0;
     for (const { hash, subject } of commits) {
-        const raw = git("log", "-1", "--format=%B", hash);
+        const raw = git('log', '-1', '--format=%B', hash);
         const errors = lintMessage(raw.trimEnd(), hash.slice(0, 8));
         if (errors.length === 0) {
             continue;
@@ -303,11 +303,11 @@ function lintLog(base) {
 
 function main() {
     const argv = process.argv.slice(2);
-    if (argv[0] === "--sequence-editor" && argv[1]) {
+    if (argv[0] === '--sequence-editor' && argv[1]) {
         sequenceEditor(argv[1]);
         return;
     }
-    if (argv[0] === "--commit-editor" && argv[1]) {
+    if (argv[0] === '--commit-editor' && argv[1]) {
         commitEditor(argv[1]);
         return;
     }
@@ -324,7 +324,7 @@ function main() {
     }
 
     if (!opts.file) {
-        console.error("reword: --file is required unless using --lint-log");
+        console.error('reword: --file is required unless using --lint-log');
         console.error(HELP);
         process.exit(1);
     }

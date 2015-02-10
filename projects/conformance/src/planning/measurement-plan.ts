@@ -1,4 +1,4 @@
-import type { MeasurementPlan } from "../domain/measurement.ts";
+import type { MeasurementPlan } from '../domain/measurement.ts';
 
 const DIFFICULTY_BUDGET: Record<string, { timeoutMs: number; timeBudgetMs: number }> = {
     Easy: { timeoutMs: 30_000, timeBudgetMs: 120_000 },
@@ -8,12 +8,12 @@ const DIFFICULTY_BUDGET: Record<string, { timeoutMs: number; timeBudgetMs: numbe
 };
 
 /** 按题目难度选择初始预算；实际次数由执行器按波动与预算动态决定。 */
-export function defaultMeasurementPlan(difficulty: string, boundary: MeasurementPlan["boundary"] = "metadata-tests"): MeasurementPlan {
+export function defaultMeasurementPlan(difficulty: string, boundary: MeasurementPlan['boundary'] = 'metadata-tests'): MeasurementPlan {
     const budget = DIFFICULTY_BUDGET[difficulty] ?? DIFFICULTY_BUDGET.Unknown;
     return {
         boundary,
         difficulty,
-        inputScale: "medium",
+        inputScale: 'medium',
         timeoutMs: budget.timeoutMs,
         timeBudgetMs: budget.timeBudgetMs,
         warmupRuns: 3,

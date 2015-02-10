@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { EChartsOption } from "echarts";
-import { computed } from "vue";
-import VChart from "vue-echarts";
+import type { EChartsOption } from 'echarts';
+import { computed } from 'vue';
+import VChart from 'vue-echarts';
 
-import { registerEcharts } from "../charts/register";
+import { registerEcharts } from '../charts/register';
 
 registerEcharts();
 
@@ -13,11 +13,11 @@ const props = withDefaults(
         height?: string;
     }>(),
     {
-        height: "280px",
+        height: '280px',
     },
 );
 
-const style = computed(() => ({ height: props.height, width: "100%" }));
+const style = computed(() => ({ height: props.height, width: '100%' }));
 </script>
 
 <template>

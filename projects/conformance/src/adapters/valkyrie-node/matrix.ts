@@ -1,5 +1,5 @@
-import type { ProblemDefinition } from "../../catalog/index.ts";
-import { formatLegionError, legionBuild, legionTest } from "./valkyrie.ts";
+import type { ProblemDefinition } from '../../catalog/index.ts';
+import { formatLegionError, legionBuild, legionTest } from './valkyrie.ts';
 
 export type ValkyrieMatrixRow = {
     id: string;
@@ -21,8 +21,8 @@ export function probeValkyrieProblem(problem: ProblemDefinition, projectPath: st
         testStatus: test.status,
         buildRoute: build.route,
         testRoute: test.route,
-        buildError: build.status === 0 ? null : formatLegionError("legion build", build),
-        testError: test.status === 0 ? null : formatLegionError("legion test", test),
+        buildError: build.status === 0 ? null : formatLegionError('legion build', build),
+        testError: test.status === 0 ? null : formatLegionError('legion test', test),
     };
 }
 

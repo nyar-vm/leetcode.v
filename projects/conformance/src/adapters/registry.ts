@@ -1,41 +1,41 @@
-import type { SolverAdapter } from "../domain/adapter.ts";
-import { ALL_IMPLEMENTATION_IDS, type ImplementationId } from "./ids.ts";
-import { problemDir } from "../catalog/index.ts";
-import { LEETCODE_ROOT } from "../domain/paths.ts";
-import { hasPythonSolver, pythonRefReady } from "./python/ref.ts";
-import { hasReadyTsSolver } from "./typescript-node/ref.ts";
-import { bunRunnerReady } from "./typescript-bun/bridge.ts";
-import { hasValkyrieSolver, valkyrieRunnerReady } from "./valkyrie-node/valkyrie.ts";
-import { hasWolframSxoSolver, hasMatlabSxoSolver } from "./shared/sxo-solver-shared.ts";
-import { sxoRunnerReady } from "./shared/sxo-bridge.ts";
+import type { SolverAdapter } from '../domain/adapter.ts';
+import { ALL_IMPLEMENTATION_IDS, type ImplementationId } from './ids.ts';
+import { problemDir } from '../catalog/index.ts';
+import { LEETCODE_ROOT } from '../domain/paths.ts';
+import { hasPythonSolver, pythonRefReady } from './python/ref.ts';
+import { hasReadyTsSolver } from './typescript-node/ref.ts';
+import { bunRunnerReady } from './typescript-bun/bridge.ts';
+import { hasValkyrieSolver, valkyrieRunnerReady } from './valkyrie-node/valkyrie.ts';
+import { hasWolframSxoSolver, hasMatlabSxoSolver } from './shared/sxo-solver-shared.ts';
+import { sxoRunnerReady } from './shared/sxo-bridge.ts';
 
 type AdapterLoader = () => Promise<SolverAdapter>;
 
 const ADAPTER_LOADERS: Record<ImplementationId, AdapterLoader> = {
-    python: () => import("./python/adapter.ts").then((module) => module.pythonAdapter),
-    "typescript-node": () => import("./typescript-node/adapter.ts").then((module) => module.typescriptNodeAdapter),
-    "typescript-bun": () => import("./typescript-bun/adapter.ts").then((module) => module.typescriptBunAdapter),
-    "valkyrie-node": () => import("./valkyrie-node/adapter.ts").then((module) => module.valkyrieNodeAdapter),
-    "wolfram-sxo": () => import("./wolfram-sxo/adapter.ts").then((module) => module.wolframSxoAdapter),
-    "matlab-sxo": () => import("./matlab-sxo/adapter.ts").then((module) => module.matlabSxoAdapter),
+    python: () => import('./python/adapter.ts').then((module) => module.pythonAdapter),
+    'typescript-node': () => import('./typescript-node/adapter.ts').then((module) => module.typescriptNodeAdapter),
+    'typescript-bun': () => import('./typescript-bun/adapter.ts').then((module) => module.typescriptBunAdapter),
+    'valkyrie-node': () => import('./valkyrie-node/adapter.ts').then((module) => module.valkyrieNodeAdapter),
+    'wolfram-sxo': () => import('./wolfram-sxo/adapter.ts').then((module) => module.wolframSxoAdapter),
+    'matlab-sxo': () => import('./matlab-sxo/adapter.ts').then((module) => module.matlabSxoAdapter),
 };
 
 const DISCOVER: Record<ImplementationId, (problemRoot: string) => boolean> = {
     python: hasPythonSolver,
-    "typescript-node": hasReadyTsSolver,
-    "typescript-bun": hasReadyTsSolver,
-    "valkyrie-node": hasValkyrieSolver,
-    "wolfram-sxo": hasWolframSxoSolver,
-    "matlab-sxo": hasMatlabSxoSolver,
+    'typescript-node': hasReadyTsSolver,
+    'typescript-bun': hasReadyTsSolver,
+    'valkyrie-node': hasValkyrieSolver,
+    'wolfram-sxo': hasWolframSxoSolver,
+    'matlab-sxo': hasMatlabSxoSolver,
 };
 
 const RUNNER_READY: Record<ImplementationId, () => boolean> = {
     python: pythonRefReady,
-    "typescript-node": () => true,
-    "typescript-bun": bunRunnerReady,
-    "valkyrie-node": valkyrieRunnerReady,
-    "wolfram-sxo": sxoRunnerReady,
-    "matlab-sxo": sxoRunnerReady,
+    'typescript-node': () => true,
+    'typescript-bun': bunRunnerReady,
+    'valkyrie-node': valkyrieRunnerReady,
+    'wolfram-sxo': sxoRunnerReady,
+    'matlab-sxo': sxoRunnerReady,
 };
 
 const adapterCache = new Map<ImplementationId, Promise<SolverAdapter>>();

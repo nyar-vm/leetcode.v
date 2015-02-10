@@ -1,20 +1,20 @@
-import { computed, inject, provide, ref, type InjectionKey } from "vue";
+import { computed, inject, provide, ref, type InjectionKey } from 'vue';
 
-export type ThemeMode = "light" | "dark";
+export type ThemeMode = 'light' | 'dark';
 
-export const THEME_STORAGE_KEY = "leetcode-bench-theme";
+export const THEME_STORAGE_KEY = 'leetcode-bench-theme';
 
-const themeKey: InjectionKey<ReturnType<typeof createTheme>> = Symbol("theme");
+const themeKey: InjectionKey<ReturnType<typeof createTheme>> = Symbol('theme');
 
 function readTheme(): ThemeMode {
-    if (typeof window === "undefined") {
-        return "dark";
+    if (typeof window === 'undefined') {
+        return 'dark';
     }
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored === "light" || stored === "dark") {
+    if (stored === 'light' || stored === 'dark') {
         return stored;
     }
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 }
 
 export function applyTheme(mode: ThemeMode) {
@@ -29,7 +29,7 @@ export function initTheme() {
 function createTheme() {
     const theme = ref<ThemeMode>(readTheme());
 
-    const isDark = computed(() => theme.value === "dark");
+    const isDark = computed(() => theme.value === 'dark');
 
     function setTheme(mode: ThemeMode) {
         theme.value = mode;
@@ -38,7 +38,7 @@ function createTheme() {
     }
 
     function toggleTheme() {
-        setTheme(theme.value === "dark" ? "light" : "dark");
+        setTheme(theme.value === 'dark' ? 'light' : 'dark');
     }
 
     return { theme, isDark, setTheme, toggleTheme };
@@ -53,7 +53,7 @@ export function provideTheme() {
 export function useTheme() {
     const state = inject(themeKey);
     if (!state) {
-        throw new Error("useTheme must be used inside provideTheme");
+        throw new Error('useTheme must be used inside provideTheme');
     }
     return state;
 }

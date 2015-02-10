@@ -1,4 +1,4 @@
-export type BenchLanguage = "python" | "typescript" | "typescript-bun" | "valkyrie" | "wolfram-sxo" | "matlab-sxo";
+export type BenchLanguage = 'python' | 'typescript' | 'typescript-bun' | 'valkyrie' | 'wolfram-sxo' | 'matlab-sxo';
 
 export type HostEnvironment = {
     platform: string;
@@ -8,54 +8,54 @@ export type HostEnvironment = {
 };
 
 export type PythonBenchEnvironment = {
-    language: "python";
+    language: 'python';
     runtimeVersion: string;
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type TypeScriptBenchEnvironment = {
-    language: "typescript";
+    language: 'typescript';
     nodeVersion: string;
     tsxVersion: string | null;
-    runner: "tsx";
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    runner: 'tsx';
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type TypeScriptBunBenchEnvironment = {
-    language: "typescript-bun";
+    language: 'typescript-bun';
     bunVersion: string | null;
     runnerReady: boolean;
     skipReason: string | null;
-    runner: "bun";
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    runner: 'bun';
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type ValkyrieBenchEnvironment = {
-    language: "valkyrie";
+    language: 'valkyrie';
     legionVersion: string | null;
     legionRoute: string | null;
     benchTarget: string;
     runnerReady: boolean;
     skipReason: string | null;
-    compileMetric: "compile";
-    runtimeMetric: "runtime";
-    runtimeStatus: "blocked-stub-wasm" | "ready";
-    aggregation: "median";
+    compileMetric: 'compile';
+    runtimeMetric: 'runtime';
+    runtimeStatus: 'blocked-stub-wasm' | 'ready';
+    aggregation: 'median';
     compileRuns: number;
     warmup: number;
     host: HostEnvironment;
@@ -98,7 +98,7 @@ export type ValkyrieBenchRow = LanguageBenchRowBase & {
 };
 
 export type PythonBenchReport = {
-    language: "python";
+    language: 'python';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -107,7 +107,7 @@ export type PythonBenchReport = {
 };
 
 export type TypeScriptBenchReport = {
-    language: "typescript";
+    language: 'typescript';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -116,7 +116,7 @@ export type TypeScriptBenchReport = {
 };
 
 export type TypeScriptBunBenchReport = {
-    language: "typescript-bun";
+    language: 'typescript-bun';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -125,7 +125,7 @@ export type TypeScriptBunBenchReport = {
 };
 
 export type ValkyrieBenchReport = {
-    language: "valkyrie";
+    language: 'valkyrie';
     generatedAt: string;
     ready: boolean;
     benchTarget: string;
@@ -135,26 +135,26 @@ export type ValkyrieBenchReport = {
 };
 
 export type WolframSxoBenchEnvironment = {
-    language: "wolfram-sxo";
+    language: 'wolfram-sxo';
     sxoMathematicaVersion: string | null;
     runnerReady: boolean;
     skipReason: string | null;
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
 };
 
 export type MatlabSxoBenchEnvironment = {
-    language: "matlab-sxo";
+    language: 'matlab-sxo';
     sxoMatlabVersion: string | null;
     runnerReady: boolean;
     skipReason: string | null;
-    metric: "runtime";
-    timingScope: "in-process-metadata-tests";
-    aggregation: "median";
+    metric: 'runtime';
+    timingScope: 'in-process-metadata-tests';
+    aggregation: 'median';
     iterations: number;
     warmup: number;
     host: HostEnvironment;
@@ -169,7 +169,7 @@ export type MatlabSxoBenchRow = LanguageBenchRowBase & {
 };
 
 export type WolframSxoBenchReport = {
-    language: "wolfram-sxo";
+    language: 'wolfram-sxo';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -178,7 +178,7 @@ export type WolframSxoBenchReport = {
 };
 
 export type MatlabSxoBenchReport = {
-    language: "matlab-sxo";
+    language: 'matlab-sxo';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -195,10 +195,10 @@ export type LanguageBenchReport =
     | MatlabSxoBenchReport;
 
 export const BENCH_JSON_FILES: Record<BenchLanguage, string> = {
-    python: "benchmark-python.json",
-    typescript: "benchmark-typescript.json",
-    "typescript-bun": "benchmark-typescript-bun.json",
-    valkyrie: "benchmark-valkyrie.json",
-    "wolfram-sxo": "benchmark-wolfram-sxo.json",
-    "matlab-sxo": "benchmark-matlab-sxo.json",
+    python: 'benchmark-python.json',
+    typescript: 'benchmark-typescript.json',
+    'typescript-bun': 'benchmark-typescript-bun.json',
+    valkyrie: 'benchmark-valkyrie.json',
+    'wolfram-sxo': 'benchmark-wolfram-sxo.json',
+    'matlab-sxo': 'benchmark-matlab-sxo.json',
 };

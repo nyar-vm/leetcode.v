@@ -1,12 +1,12 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto';
 
-import type { RunRequest } from "../domain/run.ts";
-import type { ImplementationId } from "../adapters/ids.ts";
-import { ALL_IMPLEMENTATION_IDS, BENCH_LANGUAGE_TO_IMPLEMENTATION } from "../adapters/ids.ts";
-import { DEFAULT_BENCH_LANGUAGES } from "../adapters/languages.ts";
-import { selectedProblems, toProblemSpec } from "./problem-selection.ts";
-import { hasSolver } from "../adapters/registry.ts";
-import { defaultMeasurementPlan } from "./measurement-plan.ts";
+import type { RunRequest } from '../domain/run.ts';
+import type { ImplementationId } from '../adapters/ids.ts';
+import { ALL_IMPLEMENTATION_IDS, BENCH_LANGUAGE_TO_IMPLEMENTATION } from '../adapters/ids.ts';
+import { DEFAULT_BENCH_LANGUAGES } from '../adapters/languages.ts';
+import { selectedProblems, toProblemSpec } from './problem-selection.ts';
+import { hasSolver } from '../adapters/registry.ts';
+import { defaultMeasurementPlan } from './measurement-plan.ts';
 
 export type PlannedRun = {
     request: RunRequest;
@@ -14,10 +14,10 @@ export type PlannedRun = {
     executionNonce: string;
 };
 
-export function parseImplementationIds(): ImplementationId[] | "all" {
+export function parseImplementationIds(): ImplementationId[] | 'all' {
     const raw = process.env.LEETCODE_BENCH_LANG?.trim().toLowerCase();
-    if (!raw || raw === "all") {
-        return "all";
+    if (!raw || raw === 'all') {
+        return 'all';
     }
     const parts = raw
         .split(/[,;]/)
@@ -32,8 +32,8 @@ export function parseImplementationIds(): ImplementationId[] | "all" {
     });
 }
 
-export function implementationsToRun(selection: ImplementationId[] | "all"): ImplementationId[] {
-    if (selection === "all") {
+export function implementationsToRun(selection: ImplementationId[] | 'all'): ImplementationId[] {
+    if (selection === 'all') {
         return DEFAULT_BENCH_LANGUAGES.map((lang) => BENCH_LANGUAGE_TO_IMPLEMENTATION[lang] as ImplementationId);
     }
     return selection;
@@ -52,7 +52,7 @@ export function planBenchmarkRuns(implementationIds: ImplementationId[]): Planne
                 request: {
                     problemId: problem.id,
                     implementationId,
-                    mode: "benchmark",
+                    mode: 'benchmark',
                     measurementPlan: defaultMeasurementPlan(spec.difficulty),
                 },
                 problem: spec,
@@ -76,7 +76,7 @@ export function planCorrectnessRuns(implementationIds: ImplementationId[]): Plan
                 request: {
                     problemId: problem.id,
                     implementationId,
-                    mode: "correctness",
+                    mode: 'correctness',
                 },
                 problem: spec,
                 executionNonce: randomUUID(),

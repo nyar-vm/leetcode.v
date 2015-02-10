@@ -1,21 +1,21 @@
-import { spawnSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { pathToFileURL } from "node:url";
+import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-import { NODE_WASM_TARGET, resolveArtifactDir, resolveNodeEntry } from "@valkyrie-language/vcc/testing";
+import { NODE_WASM_TARGET, resolveArtifactDir, resolveNodeEntry } from '@valkyrie-language/vcc/testing';
 
-import type { ProblemDefinition } from "../../catalog/index.ts";
-import { problemDir, valkyrieProjectDir } from "../../catalog/index.ts";
-import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
-import { spawnLegion, valkyrieRunnerReady } from "./valkyrie.ts";
+import type { ProblemDefinition } from '../../catalog/index.ts';
+import { problemDir, valkyrieProjectDir } from '../../catalog/index.ts';
+import { LEETCODE_ROOT_FROM_PACKAGE } from '../../domain/paths.ts';
+import { spawnLegion, valkyrieRunnerReady } from './valkyrie.ts';
 
-const RUN_V_SOLVER = join(LEETCODE_ROOT_FROM_PACKAGE, "projects", "conformance", "scripts", "run_v_solver.ts");
+const RUN_V_SOLVER = join(LEETCODE_ROOT_FROM_PACKAGE, 'projects', 'conformance', 'scripts', 'run_v_solver.ts');
 
 export type TestCase = { args: Record<string, unknown>; expected: unknown };
 
 export function vBuildDir(problem: ProblemDefinition): string {
-    return join(LEETCODE_ROOT_FROM_PACKAGE, ".cache", `${problem.id}-bench-node`);
+    return join(LEETCODE_ROOT_FROM_PACKAGE, '.cache', `${problem.id}-bench-node`);
 }
 
 export function resolveVBuildArtifacts(problem: ProblemDefinition) {
@@ -31,25 +31,25 @@ export function loadMetadata(problemRoot: string): {
     tests: TestCase[];
     invoke: { valkyrie?: string; typescript?: string };
 } {
-    const meta = JSON.parse(readFileSync(join(problemRoot, "metadata.json"), "utf8")) as {
+    const meta = JSON.parse(readFileSync(join(problemRoot, 'metadata.json'), 'utf8')) as {
         tests?: TestCase[];
         invoke?: { valkyrie?: string; typescript?: string };
     };
     const tests = meta.tests;
     if (!tests?.length) {
-        throw new Error("metadata.tests 为空");
+        throw new Error('metadata.tests 为空');
     }
     const entry = meta.invoke?.valkyrie ?? meta.invoke?.typescript;
     if (!entry) {
-        throw new Error("metadata.invoke.valkyrie 或 invoke.typescript 缺失");
+        throw new Error('metadata.invoke.valkyrie 或 invoke.typescript 缺失');
     }
     return { tests, invoke: { valkyrie: entry, typescript: meta.invoke?.typescript } };
 }
 
 /** 解析 wasm 导出符号列表（`legion spy wasm --list`）。 */
 export function listWasmExports(wasmPath: string): string[] {
-    const outcome = spawnLegion(["spy", "wasm", wasmPath, "--list"]);
-    const text = `${outcome.stdout ?? ""}${outcome.stderr ?? ""}`;
+    const outcome = spawnLegion(['spy', 'wasm', wasmPath, '--list']);
+    const text = `${outcome.stdout ?? ''}${outcome.stderr ?? ''}`;
     const exports: string[] = [];
     for (const line of text.split(/\r?\n/)) {
         const match = line.match(/^\s*func\s+(\S+)\s*:/);
@@ -68,7 +68,7 @@ export function isStubWasmArtifact(wasmPath: string): boolean {
             return false;
         }
         const exports = listWasmExports(wasmPath);
-        return exports.length <= 1 && exports.every((name) => name === "main" || name === "_start");
+        return exports.length <= 1 && exports.every((name) => name === 'main' || name === '_start');
     } catch {
         return true;
     }
@@ -90,25 +90,25 @@ export function resolveWasmExportSymbol(invokeEntry: string): string {
 
 export function wasmInvokeBlockedReason(wasmPath: string, invokeEntry?: string): string | null {
     if (!valkyrieRunnerReady()) {
-        return "legion 未就绪";
+        return 'legion 未就绪';
     }
     if (isStubWasmArtifact(wasmPath)) {
         return (
-            "wasm 仅为空壳 main（题解未编入可执行 MIR）。需上游：package 构建编译 entry solution.v、" +
-            "导出 invoke 符号，并在 node glue 提供 callExport / JSON invoke（见 backlog V-017）"
+            'wasm 仅为空壳 main（题解未编入可执行 MIR）。需上游：package 构建编译 entry solution.v、' +
+            '导出 invoke 符号，并在 node glue 提供 callExport / JSON invoke（见 backlog V-017）'
         );
     }
     const exports = listWasmExports(wasmPath);
     if (invokeEntry) {
         const expected = resolveWasmExportSymbol(invokeEntry);
         if (!exports.includes(expected)) {
-            return `wasm 缺少 metadata.invoke 声明的导出 ${expected}（现有：${exports.join(", ") || "无"}）`;
+            return `wasm 缺少 metadata.invoke 声明的导出 ${expected}（现有：${exports.join(', ') || '无'}）`;
         }
         return null;
     }
-    const callable = exports.filter((name) => name !== "main" && name !== "_start" && name !== "memory" && !name.startsWith("cabi_"));
+    const callable = exports.filter((name) => name !== 'main' && name !== '_start' && name !== 'memory' && !name.startsWith('cabi_'));
     if (callable.length === 0) {
-        return `wasm 缺少可 invoke 的导出符号（现有：${exports.join(", ") || "无"})`;
+        return `wasm 缺少可 invoke 的导出符号（现有：${exports.join(', ') || '无'})`;
     }
     return null;
 }
@@ -116,19 +116,19 @@ export function wasmInvokeBlockedReason(wasmPath: string, invokeEntry?: string):
 export async function runVSolverOnce(problemRoot: string): Promise<void> {
     const blocked = (() => {
         try {
-            const metaPath = join(problemRoot, "metadata.json");
-            const slug = JSON.parse(readFileSync(metaPath, "utf8")).id as string;
+            const metaPath = join(problemRoot, 'metadata.json');
+            const slug = JSON.parse(readFileSync(metaPath, 'utf8')).id as string;
             const artifacts = resolveVBuildArtifacts({ id: slug } as ProblemDefinition);
             if (!artifacts) {
-                return "未找到 legion build 产物（先跑 legion build --target node）";
+                return '未找到 legion build 产物（先跑 legion build --target node）';
             }
             const { tests, invoke } = loadMetadata(problemRoot);
             const entry = invoke.valkyrie ?? invoke.typescript;
             if (!entry) {
-                return "metadata.invoke.valkyrie 或 invoke.typescript 缺失";
+                return 'metadata.invoke.valkyrie 或 invoke.typescript 缺失';
             }
             if (tests.length === 0) {
-                return "metadata.tests 为空";
+                return 'metadata.tests 为空';
             }
             return wasmInvokeBlockedReason(artifacts.entry.legionWasm, entry);
         } catch (err) {
@@ -139,13 +139,13 @@ export async function runVSolverOnce(problemRoot: string): Promise<void> {
         throw new Error(blocked);
     }
 
-    const result = spawnSync(process.execPath, ["--import", "tsx", RUN_V_SOLVER, problemRoot], {
-        encoding: "utf8",
-        cwd: join(LEETCODE_ROOT_FROM_PACKAGE, "projects", "conformance"),
+    const result = spawnSync(process.execPath, ['--import', 'tsx', RUN_V_SOLVER, problemRoot], {
+        encoding: 'utf8',
+        cwd: join(LEETCODE_ROOT_FROM_PACKAGE, 'projects', 'conformance'),
     });
-    const stderr = `${result.stderr ?? ""}${result.stdout ?? ""}`.trim();
+    const stderr = `${result.stderr ?? ''}${result.stdout ?? ''}`.trim();
     if (result.status !== 0) {
-        throw new Error(stderr || "run_v_solver failed");
+        throw new Error(stderr || 'run_v_solver failed');
     }
 }
 
@@ -153,7 +153,7 @@ export async function runVReference(problem: ProblemDefinition): Promise<{ ok: b
     const root = problemDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
     try {
         await runVSolverOnce(root);
-        return { ok: true, stderr: "" };
+        return { ok: true, stderr: '' };
     } catch (err) {
         return { ok: false, stderr: String(err) };
     }
@@ -164,5 +164,5 @@ export function valkyrieProjectPath(problem: ProblemDefinition): string {
 }
 
 export function vSolverModuleUrl(problemRoot: string): string {
-    return pathToFileURL(join(problemRoot, "solvers", "valkyrie", "solution.v")).href;
+    return pathToFileURL(join(problemRoot, 'solvers', 'valkyrie', 'solution.v')).href;
 }

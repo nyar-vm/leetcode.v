@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 
 const requireFromHere = createRequire(import.meta.url);
 
@@ -17,11 +17,11 @@ function tryPackageVersion(name: string): string | null {
         let dir = dirname(entry);
         for (let depth = 0; depth < 4; depth += 1) {
             try {
-                const pkg = JSON.parse(readFileSync(join(dir, "package.json"), "utf8")) as {
+                const pkg = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8')) as {
                     name?: string;
                     version?: string;
                 };
-                if (pkg.name === name && typeof pkg.version === "string") {
+                if (pkg.name === name && typeof pkg.version === 'string') {
                     return pkg.version;
                 }
             } catch {
@@ -36,19 +36,19 @@ function tryPackageVersion(name: string): string | null {
 }
 
 export function sxoPackagesStatus(): SxoPackageStatus {
-    const mathematicaVersion = tryPackageVersion("@sxo/mathematica");
-    const matlabVersion = tryPackageVersion("@sxo/matlab");
+    const mathematicaVersion = tryPackageVersion('@sxo/mathematica');
+    const matlabVersion = tryPackageVersion('@sxo/matlab');
     const installed = mathematicaVersion !== null && matlabVersion !== null;
     let skipReason: string | null = null;
     if (!installed) {
         const missing: string[] = [];
         if (!mathematicaVersion) {
-            missing.push("@sxo/mathematica");
+            missing.push('@sxo/mathematica');
         }
         if (!matlabVersion) {
-            missing.push("@sxo/matlab");
+            missing.push('@sxo/matlab');
         }
-        skipReason = `缺少 ${missing.join("、")}（在仓库根或 projects/conformance 运行 pnpm install）`;
+        skipReason = `缺少 ${missing.join('、')}（在仓库根或 projects/conformance 运行 pnpm install）`;
     }
     return { installed, mathematicaVersion, matlabVersion, skipReason };
 }
@@ -70,7 +70,7 @@ export type MatlabEvaluator = {
 };
 
 export async function createWolframEvaluator(): Promise<WolframEvaluator> {
-    const mod = (await import("@sxo/mathematica")) as {
+    const mod = (await import('@sxo/mathematica')) as {
         Mathematica: {
             create: (options?: { autoSimplify?: boolean }) => {
                 evaluate: (input: string) => { toWolfram: () => string };
@@ -86,7 +86,7 @@ export async function createWolframEvaluator(): Promise<WolframEvaluator> {
 }
 
 export async function createMatlabEvaluator(): Promise<MatlabEvaluator> {
-    const mod = (await import("@sxo/matlab")) as {
+    const mod = (await import('@sxo/matlab')) as {
         Matlab: {
             create: (options?: { autoSimplify?: boolean }) => {
                 evaluate: (input: string) => { toMatlab: () => string };

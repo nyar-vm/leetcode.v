@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Trophy } from "@lucide/vue";
-import { computed } from "vue";
+import { Trophy } from '@lucide/vue';
+import { computed } from 'vue';
 
-import type { EnrichedBenchRow } from "../types/bench";
-import { computeLanguageStats, formatStatMs, leadingLanguage } from "../utils/languageStats";
-import AppIcon from "./AppIcon.vue";
+import type { EnrichedBenchRow } from '../types/bench';
+import { computeLanguageStats, formatStatMs, leadingLanguage } from '../utils/languageStats';
+import AppIcon from './AppIcon.vue';
 
 const props = defineProps<{
     rows: EnrichedBenchRow[];

@@ -1,8 +1,8 @@
-import type { ProblemSpec } from "../domain/problem.ts";
-import { LEETCODE_ROOT } from "../domain/paths.ts";
-import { loadProblemMetadata } from "../domain/metadata.ts";
-import { problemsForBatch } from "../planning/batch-limit.ts";
-import { PROBLEMS, problemDir } from "../catalog/index.ts";
+import type { ProblemSpec } from '../domain/problem.ts';
+import { LEETCODE_ROOT } from '../domain/paths.ts';
+import { loadProblemMetadata } from '../domain/metadata.ts';
+import { problemsForBatch } from '../planning/batch-limit.ts';
+import { PROBLEMS, problemDir } from '../catalog/index.ts';
 
 const problemMetaById = new Map(PROBLEMS.map((problem) => [problem.id, problem]));
 
@@ -14,7 +14,7 @@ export function toProblemSpec(problem: (typeof PROBLEMS)[number]): ProblemSpec {
         id: problem.id,
         title: problem.title,
         questionId: meta?.questionId ?? 0,
-        difficulty: meta?.difficulty ?? "Unknown",
+        difficulty: meta?.difficulty ?? 'Unknown',
         tags: meta?.tags ?? [],
         tests: metadata.tests,
         invoke: metadata.invoke,
@@ -40,7 +40,7 @@ export function selectedProblems(): (typeof PROBLEMS)[number][] {
     if (idFilter) {
         return applyIdFilter([...PROBLEMS]);
     }
-    return problemsForBatch(PROBLEMS, { fallbackKeys: ["LEETCODE_BENCH_LIMIT"] });
+    return problemsForBatch(PROBLEMS, { fallbackKeys: ['LEETCODE_BENCH_LIMIT'] });
 }
 
 export function metaForProblem(problem: (typeof PROBLEMS)[number]) {
@@ -48,7 +48,7 @@ export function metaForProblem(problem: (typeof PROBLEMS)[number]) {
     return {
         title: problem.title,
         questionId: meta?.questionId ?? 0,
-        difficulty: meta?.difficulty ?? "Unknown",
+        difficulty: meta?.difficulty ?? 'Unknown',
         tags: meta?.tags ?? [],
     };
 }

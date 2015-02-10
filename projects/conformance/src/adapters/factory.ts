@@ -1,12 +1,12 @@
-import type { ProblemDefinition } from "../catalog/index.ts";
-import type { SolverAdapter, AdapterEnvironment } from "../domain/adapter.ts";
-import type { ProblemSpec } from "../domain/problem.ts";
-import type { RunResult } from "../domain/result.ts";
-import type { MeasurementOutcome, MeasurementPlan } from "../domain/measurement.ts";
-import { runAdaptiveMeasurement } from "../execution/measurement-runner.ts";
-import type { ImplementationId } from "./ids.ts";
+import type { ProblemDefinition } from '../catalog/index.ts';
+import type { SolverAdapter, AdapterEnvironment } from '../domain/adapter.ts';
+import type { ProblemSpec } from '../domain/problem.ts';
+import type { RunResult } from '../domain/result.ts';
+import type { MeasurementOutcome, MeasurementPlan } from '../domain/measurement.ts';
+import { runAdaptiveMeasurement } from '../execution/measurement-runner.ts';
+import type { ImplementationId } from './ids.ts';
 
-const ADAPTER_VERSION = "0.2.0";
+const ADAPTER_VERSION = '0.2.0';
 
 export type BenchProblemOutcome = {
     runtimeMs?: number | null;
@@ -42,7 +42,7 @@ export function defineSolverAdapter(definition: AdapterDefinition): SolverAdapte
                 return prepare(problem, problemRoot);
             }
             if (!runnerReady()) {
-                return { ok: false, error: blockedReason?.() ?? "runner not ready" };
+                return { ok: false, error: blockedReason?.() ?? 'runner not ready' };
             }
             return { ok: true };
         },
@@ -60,23 +60,23 @@ export function defineSolverAdapter(definition: AdapterDefinition): SolverAdapte
                     throw new Error(outcome.error);
                 }
                 const ms = outcome.runtimeMs ?? outcome.compileMs;
-                if (typeof ms !== "number" || !Number.isFinite(ms) || ms <= 0) {
-                    throw new Error("invalid benchmark sample");
+                if (typeof ms !== 'number' || !Number.isFinite(ms) || ms <= 0) {
+                    throw new Error('invalid benchmark sample');
                 }
                 return ms;
             });
 
             const finishedAt = new Date().toISOString();
-            const status = measurement.stability === "stable" && measurement.publishedValueMs !== null ? "passed" : "failed";
+            const status = measurement.stability === 'stable' && measurement.publishedValueMs !== null ? 'passed' : 'failed';
 
             const result: RunResult = {
-                runId: "",
+                runId: '',
                 problemId: problem.id,
                 implementationId,
-                mode: "benchmark",
+                mode: 'benchmark',
                 status,
                 cases: [],
-                diagnostics: measurement.stability !== "stable" ? [`measurement ${measurement.stability}`] : [],
+                diagnostics: measurement.stability !== 'stable' ? [`measurement ${measurement.stability}`] : [],
                 toolchain: { implementationId, adapterVersion: ADAPTER_VERSION },
                 startedAt,
                 finishedAt,
@@ -90,7 +90,7 @@ export function defineSolverAdapter(definition: AdapterDefinition): SolverAdapte
             return {
                 implementationId,
                 ready,
-                blockedReason: ready ? null : (blockedReason?.() ?? "runner not ready"),
+                blockedReason: ready ? null : (blockedReason?.() ?? 'runner not ready'),
                 details: collectEnvironment(),
             };
         },

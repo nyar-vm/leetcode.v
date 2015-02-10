@@ -1,5 +1,5 @@
 /** 运行终态；`blocked` 必须有机器可读原因，不计入通过率。 */
-export type RunStatus = "passed" | "failed" | "blocked";
+export type RunStatus = 'passed' | 'failed' | 'blocked';
 
 export type CaseResult = {
     index: number;
@@ -23,7 +23,7 @@ export type RunResult = {
     runId: string;
     problemId: string;
     implementationId: string;
-    mode: "correctness" | "benchmark";
+    mode: 'correctness' | 'benchmark';
     status: RunStatus;
     blockedReason?: string;
     cases: CaseResult[];

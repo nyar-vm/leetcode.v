@@ -1,5 +1,5 @@
-import katex from "katex";
-import { marked } from "marked";
+import katex from 'katex';
+import { marked } from 'marked';
 
 const codePlaceholders: string[] = [];
 
@@ -13,7 +13,7 @@ function protectCode(markdown: string): string {
 }
 
 function restoreCode(markdown: string): string {
-    return markdown.replace(/@@CODE(\d+)@@/g, (_, index) => codePlaceholders[Number(index)] ?? "");
+    return markdown.replace(/@@CODE(\d+)@@/g, (_, index) => codePlaceholders[Number(index)] ?? '');
 }
 
 function renderKatex(tex: string, displayMode: boolean): string {
@@ -21,7 +21,7 @@ function renderKatex(tex: string, displayMode: boolean): string {
         return katex.renderToString(tex, {
             displayMode,
             throwOnError: false,
-            strict: "ignore",
+            strict: 'ignore',
         });
     } catch {
         return displayMode ? `$$${tex}$$` : `$${tex}$`;
@@ -36,9 +36,9 @@ function renderMath(markdown: string): string {
 
 /** 详情页已有标题时去掉 readme 首行 H1。 */
 export function stripReadmeTitle(markdown: string): string {
-    const lines = markdown.split("\n");
-    if (lines[0]?.startsWith("# ")) {
-        return lines.slice(1).join("\n").trimStart();
+    const lines = markdown.split('\n');
+    if (lines[0]?.startsWith('# ')) {
+        return lines.slice(1).join('\n').trimStart();
     }
     return markdown;
 }
@@ -46,10 +46,10 @@ export function stripReadmeTitle(markdown: string): string {
 const renderer = new marked.Renderer();
 
 renderer.link = ({ href, title, text }) => {
-    const safeHref = href ?? "#";
-    const external = safeHref.startsWith("http");
-    const titleAttr = title ? ` title="${title}"` : "";
-    const rel = external ? ' rel="noreferrer" target="_blank"' : "";
+    const safeHref = href ?? '#';
+    const external = safeHref.startsWith('http');
+    const titleAttr = title ? ` title="${title}"` : '';
+    const rel = external ? ' rel="noreferrer" target="_blank"' : '';
     return `<a href="${safeHref}"${titleAttr}${rel}>${text}</a>`;
 };
 

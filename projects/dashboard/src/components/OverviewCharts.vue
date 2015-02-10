@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { BarChart3 } from "@lucide/vue";
-import { computed } from "vue";
+import { BarChart3 } from '@lucide/vue';
+import { computed } from 'vue';
 
-import { languageLogSamples, languageWinCounts, statusBreakdown } from "../charts/data";
-import { languageWinBarOption, statusDonutOption } from "../charts/specs";
-import { useTheme } from "../composables/useTheme";
-import type { EnrichedBenchRow } from "../types/bench";
-import { RUNTIME_LANGUAGES } from "../utils/languageStats";
-import AppIcon from "./AppIcon.vue";
-import EChart from "./EChart.vue";
+import { languageLogSamples, languageWinCounts, statusBreakdown } from '../charts/data';
+import { languageWinBarOption, statusDonutOption } from '../charts/specs';
+import { useTheme } from '../composables/useTheme';
+import type { EnrichedBenchRow } from '../types/bench';
+import { RUNTIME_LANGUAGES } from '../utils/languageStats';
+import AppIcon from './AppIcon.vue';
+import EChart from './EChart.vue';
 
 const { theme } = useTheme();
 const props = defineProps<{ rows: EnrichedBenchRow[] }>();

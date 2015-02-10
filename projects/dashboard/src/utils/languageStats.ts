@@ -1,7 +1,7 @@
-import type { EnrichedBenchRow } from "../types/bench";
-import { formatMs } from "./format";
+import type { EnrichedBenchRow } from '../types/bench';
+import { formatMs } from './format';
 
-export type RuntimeLanguageId = "python" | "typescript" | "typescript-bun" | "valkyrie" | "wolfram-sxo" | "matlab-sxo";
+export type RuntimeLanguageId = 'python' | 'typescript' | 'typescript-bun' | 'valkyrie' | 'wolfram-sxo' | 'matlab-sxo';
 
 export type RuntimeLanguage = {
     id: RuntimeLanguageId;
@@ -12,39 +12,39 @@ export type RuntimeLanguage = {
 
 export const RUNTIME_LANGUAGES: RuntimeLanguage[] = [
     {
-        id: "python",
-        label: "Python",
-        color: "#fbbf24",
+        id: 'python',
+        label: 'Python',
+        color: '#fbbf24',
         readRuntime: (row) => row.pyRuntimeMs,
     },
     {
-        id: "typescript",
-        label: "TypeScript",
-        color: "#5b8cff",
+        id: 'typescript',
+        label: 'TypeScript',
+        color: '#5b8cff',
         readRuntime: (row) => row.tsRuntimeMs,
     },
     {
-        id: "typescript-bun",
-        label: "TypeScript (Bun)",
-        color: "#a78bfa",
+        id: 'typescript-bun',
+        label: 'TypeScript (Bun)',
+        color: '#a78bfa',
         readRuntime: (row) => row.tbRuntimeMs,
     },
     {
-        id: "valkyrie",
-        label: "V (wasm)",
-        color: "#34d399",
+        id: 'valkyrie',
+        label: 'V (wasm)',
+        color: '#34d399',
         readRuntime: (row) => row.vRuntimeMs,
     },
     {
-        id: "wolfram-sxo",
-        label: "Wolfram (Sxo)",
-        color: "#f472b6",
+        id: 'wolfram-sxo',
+        label: 'Wolfram (Sxo)',
+        color: '#f472b6',
         readRuntime: (row) => row.wlRuntimeMs,
     },
     {
-        id: "matlab-sxo",
-        label: "MATLAB (Sxo)",
-        color: "#fb923c",
+        id: 'matlab-sxo',
+        label: 'MATLAB (Sxo)',
+        color: '#fb923c',
         readRuntime: (row) => row.mlRuntimeMs,
     },
 ];
@@ -68,9 +68,9 @@ function validRuntime(ms: number | null): number | null {
 }
 
 export const RUNTIME_RANK_LABELS: Record<1 | 2 | 3, string> = {
-    1: "金",
-    2: "银",
-    3: "铜",
+    1: '金',
+    2: '银',
+    3: '铜',
 };
 
 export type RankedRuntime = {
@@ -89,7 +89,7 @@ export function topRuntimesForRow(row: EnrichedBenchRow, limit = 3): RankedRunti
         color: language.color,
         ms: validRuntime(language.readRuntime(row)),
     }))
-        .filter((item): item is Omit<RankedRuntime, "rank"> & { ms: number } => item.ms !== null)
+        .filter((item): item is Omit<RankedRuntime, 'rank'> & { ms: number } => item.ms !== null)
         .sort((left, right) => left.ms - right.ms)
         .slice(0, limit);
 
@@ -218,7 +218,7 @@ export function leadingLanguage(stats: LanguageStat[]): LanguageStat | null {
 
 export function formatStatMs(value: number | null): string {
     if (value === null || !Number.isFinite(value)) {
-        return "—";
+        return '—';
     }
     return `${formatMs(value)} ms`;
 }

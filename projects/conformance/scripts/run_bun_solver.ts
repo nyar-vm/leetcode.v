@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /** 在 Bun 进程内加载 solvers/typescript/solution.ts 并执行 metadata.tests。 */
-import { BUN_BENCH_PARAMS } from "../src/planning/bench-params.ts";
-import { benchBunSolverInProcess, runBunSolverOnce } from "../src/adapters/typescript-bun/runtime.ts";
+import { BUN_BENCH_PARAMS } from '../src/planning/bench-params.ts';
+import { benchBunSolverInProcess, runBunSolverOnce } from '../src/adapters/typescript-bun/runtime.ts';
 
 function parseCount(value: string | undefined, flag: string): number {
     const parsed = Number(value);
@@ -14,27 +14,27 @@ function parseCount(value: string | undefined, flag: string): number {
 async function main(): Promise<number> {
     const args = process.argv.slice(2);
     let index = 0;
-    const benchMode = args[0] === "--bench";
+    const benchMode = args[0] === '--bench';
     if (benchMode) {
         index = 1;
     }
     const problemDir = args[index];
     if (!problemDir) {
-        console.error("usage: bun run scripts/run_bun_solver.ts <problem-dir>");
-        console.error("       bun run scripts/run_bun_solver.ts --bench <problem-dir>");
+        console.error('usage: bun run scripts/run_bun_solver.ts <problem-dir>');
+        console.error('       bun run scripts/run_bun_solver.ts --bench <problem-dir>');
         return 2;
     }
 
     let iterations = BUN_BENCH_PARAMS.iterations;
     let warmup = BUN_BENCH_PARAMS.warmup;
     if (benchMode) {
-        const iterFlag = args.indexOf("--iterations");
+        const iterFlag = args.indexOf('--iterations');
         if (iterFlag >= 0) {
-            iterations = parseCount(args[iterFlag + 1], "--iterations");
+            iterations = parseCount(args[iterFlag + 1], '--iterations');
         }
-        const warmupFlag = args.indexOf("--warmup");
+        const warmupFlag = args.indexOf('--warmup');
         if (warmupFlag >= 0) {
-            warmup = parseCount(args[warmupFlag + 1], "--warmup");
+            warmup = parseCount(args[warmupFlag + 1], '--warmup');
         }
     }
 

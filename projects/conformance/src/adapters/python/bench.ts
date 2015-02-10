@@ -1,10 +1,10 @@
-import { spawnSync } from "node:child_process";
+import { spawnSync } from 'node:child_process';
 
-import type { ProblemDefinition } from "../../catalog/index.ts";
-import { problemDir } from "../../catalog/index.ts";
-import { PYTHON_BENCH_PARAMS } from "../../planning/bench-params.ts";
-import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
-import { hasPythonSolver, pythonSolverDir, PYTHON_BENCH_CHECKER } from "./ref.ts";
+import type { ProblemDefinition } from '../../catalog/index.ts';
+import { problemDir } from '../../catalog/index.ts';
+import { PYTHON_BENCH_PARAMS } from '../../planning/bench-params.ts';
+import { LEETCODE_ROOT_FROM_PACKAGE } from '../../domain/paths.ts';
+import { hasPythonSolver, pythonSolverDir, PYTHON_BENCH_CHECKER } from './ref.ts';
 
 /** 单 Python 进程内预热后只对 metadata.tests 全量循环计时（对齐 TS）。 */
 export function benchPythonProblem(
@@ -19,22 +19,22 @@ export function benchPythonProblem(
     }
 
     const result = spawnSync(
-        "python",
-        [PYTHON_BENCH_CHECKER, root, "--bench", "--iterations", String(iterations), "--warmup", String(warmup)],
+        'python',
+        [PYTHON_BENCH_CHECKER, root, '--bench', '--iterations', String(iterations), '--warmup', String(warmup)],
         {
-            encoding: "utf8",
+            encoding: 'utf8',
             cwd: pythonSolverDir(root),
         },
     );
 
-    const stderr = `${result.stderr ?? ""}${result.stdout ?? ""}`.trim();
+    const stderr = `${result.stderr ?? ''}${result.stdout ?? ''}`.trim();
     if (result.status !== 0) {
-        throw new Error(stderr || "python bench failed");
+        throw new Error(stderr || 'python bench failed');
     }
 
-    const line = (result.stdout ?? "").trim().split(/\r?\n/).at(-1);
+    const line = (result.stdout ?? '').trim().split(/\r?\n/).at(-1);
     if (!line) {
-        throw new Error("python bench returned empty output");
+        throw new Error('python bench returned empty output');
     }
 
     let parsed: { medianMs?: unknown };
@@ -45,7 +45,7 @@ export function benchPythonProblem(
     }
 
     const medianMs = parsed.medianMs;
-    if (typeof medianMs !== "number" || !Number.isFinite(medianMs) || medianMs <= 0) {
+    if (typeof medianMs !== 'number' || !Number.isFinite(medianMs) || medianMs <= 0) {
         throw new Error(`python bench returned invalid medianMs: ${String(medianMs)}`);
     }
 

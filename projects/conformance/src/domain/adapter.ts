@@ -1,6 +1,6 @@
-import type { ProblemSpec } from "./problem.ts";
-import type { RunResult } from "./result.ts";
-import type { MeasurementOutcome, MeasurementPlan } from "./measurement.ts";
+import type { ProblemSpec } from './problem.ts';
+import type { RunResult } from './result.ts';
+import type { MeasurementOutcome, MeasurementPlan } from './measurement.ts';
 
 export type AdapterEnvironment = {
     implementationId: string;

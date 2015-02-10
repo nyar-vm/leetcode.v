@@ -1,4 +1,4 @@
-import { computed, inject, provide, ref, type InjectionKey } from "vue";
+import { computed, inject, provide, ref, type InjectionKey } from 'vue';
 
 import {
     benchmarkLegacyUrl,
@@ -8,11 +8,11 @@ import {
     benchmarkTypeScriptUrl,
     benchmarkValkyrieUrl,
     benchmarkWolframSxoUrl,
-} from "../config";
-import type { BenchReport } from "../types/bench";
-import { mergeLanguageBenchReports, normalizeLegacyBenchReport } from "./mergeBenchReports";
+} from '../config';
+import type { BenchReport } from '../types/bench';
+import { mergeLanguageBenchReports, normalizeLegacyBenchReport } from './mergeBenchReports';
 
-const benchReportKey: InjectionKey<ReturnType<typeof createBenchReport>> = Symbol("benchReport");
+const benchReportKey: InjectionKey<ReturnType<typeof createBenchReport>> = Symbol('benchReport');
 
 async function fetchJson<T>(url: string): Promise<T | null> {
     try {
@@ -73,7 +73,7 @@ export function provideBenchReport() {
 export function useBenchReport() {
     const state = inject(benchReportKey);
     if (!state) {
-        throw new Error("useBenchReport must be used inside provideBenchReport");
+        throw new Error('useBenchReport must be used inside provideBenchReport');
     }
     return state;
 }

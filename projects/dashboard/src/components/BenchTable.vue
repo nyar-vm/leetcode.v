@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ArrowDown, ArrowUp, ArrowUpDown } from "@lucide/vue";
+import { ArrowDown, ArrowUp, ArrowUpDown } from '@lucide/vue';
 
-import type { EnrichedBenchRow, SortKey } from "../types/bench";
-import { formatMs, ratioLabel, runtimeRatio } from "../utils/format";
-import AppIcon from "./AppIcon.vue";
-import DifficultyBadge from "./DifficultyBadge.vue";
+import type { EnrichedBenchRow, SortKey } from '../types/bench';
+import { formatMs, ratioLabel, runtimeRatio } from '../utils/format';
+import AppIcon from './AppIcon.vue';
+import DifficultyBadge from './DifficultyBadge.vue';
 
 const props = defineProps<{
     rows: EnrichedBenchRow[];
@@ -16,13 +16,13 @@ const emit = defineEmits<{
     sort: [key: SortKey];
 }>();
 
-const columns: { key: SortKey; label: string; align?: "right" }[] = [
-    { key: "id", label: "题目" },
-    { key: "difficulty", label: "难度" },
-    { key: "pyRuntimeMs", label: "Python (ms)", align: "right" },
-    { key: "tsRuntimeMs", label: "TS (ms)", align: "right" },
-    { key: "vRuntimeMs", label: "V (wasm) (ms)", align: "right" },
-    { key: "ratio", label: "TS / V", align: "right" },
+const columns: { key: SortKey; label: string; align?: 'right' }[] = [
+    { key: 'id', label: '题目' },
+    { key: 'difficulty', label: '难度' },
+    { key: 'pyRuntimeMs', label: 'Python (ms)', align: 'right' },
+    { key: 'tsRuntimeMs', label: 'TS (ms)', align: 'right' },
+    { key: 'vRuntimeMs', label: 'V (wasm) (ms)', align: 'right' },
+    { key: 'ratio', label: 'TS / V', align: 'right' },
 ];
 
 function sortIcon(key: SortKey) {
@@ -34,10 +34,10 @@ function sortIcon(key: SortKey) {
 
 function ratioClass(row: EnrichedBenchRow): string {
     const ratio = runtimeRatio(row);
-    if (ratio === null) return "";
-    if (ratio < 1) return "v-win";
-    if (ratio > 1) return "ts-win";
-    return "";
+    if (ratio === null) return '';
+    if (ratio < 1) return 'v-win';
+    if (ratio > 1) return 'ts-win';
+    return '';
 }
 </script>
 

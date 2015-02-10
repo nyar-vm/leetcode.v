@@ -1,4 +1,4 @@
-import type { AttemptRecord, BenchmarkSample, MeasurementOutcome, MeasurementPlan } from "../domain/measurement.ts";
+import type { AttemptRecord, BenchmarkSample, MeasurementOutcome, MeasurementPlan } from '../domain/measurement.ts';
 
 function median(values: number[]): number {
     if (values.length === 0) {
@@ -39,12 +39,12 @@ export async function runAdaptiveMeasurement(plan: MeasurementPlan, sampleFn: Sa
         }
         const warmup = attempt <= plan.warmupRuns;
         let durationMs = 0;
-        let status: AttemptRecord["status"] = "ok";
+        let status: AttemptRecord['status'] = 'ok';
         const diagnostics: string[] = [];
         try {
             durationMs = await sampleFn(attempt, warmup);
         } catch (err) {
-            status = "error";
+            status = 'error';
             diagnostics.push(String(err));
         }
 
@@ -52,8 +52,8 @@ export async function runAdaptiveMeasurement(plan: MeasurementPlan, sampleFn: Sa
             attempt,
             boundary: plan.boundary,
             durationMs,
-            discarded: warmup || status !== "ok",
-            discardReason: warmup ? "warmup" : status !== "ok" ? status : undefined,
+            discarded: warmup || status !== 'ok',
+            discardReason: warmup ? 'warmup' : status !== 'ok' ? status : undefined,
         };
         rawSamples.push(sample);
         attempts.push({
@@ -74,22 +74,22 @@ export async function runAdaptiveMeasurement(plan: MeasurementPlan, sampleFn: Sa
         }
     }
 
-    let stability: MeasurementOutcome["stability"] = "insufficient";
+    let stability: MeasurementOutcome['stability'] = 'insufficient';
     let publishedValueMs: number | null = null;
     if (validDurations.length >= plan.minValidSamples) {
         const spread = relativeSpread(validDurations);
         if (spread <= plan.maxRelativeSpread) {
-            stability = "stable";
+            stability = 'stable';
             publishedValueMs = median(validDurations);
         } else {
-            stability = "unstable";
+            stability = 'unstable';
         }
     }
 
     return {
         plan,
         attempts,
-        aggregation: "median",
+        aggregation: 'median',
         publishedValueMs,
         stability,
         rawSamples,

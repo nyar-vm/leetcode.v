@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /** 加载 solvers/typescript/<project>/solution.ts 并执行 metadata.tests。 */
-import { benchTsSolverInProcess, runTsSolverOnce } from "../src/adapters/typescript-node/ref.ts";
-import { TYPESCRIPT_BENCH_PARAMS } from "../src/planning/bench-params.ts";
+import { benchTsSolverInProcess, runTsSolverOnce } from '../src/adapters/typescript-node/ref.ts';
+import { TYPESCRIPT_BENCH_PARAMS } from '../src/planning/bench-params.ts';
 
 async function main(): Promise<number> {
     const args = process.argv.slice(2);
-    const benchMode = args[0] === "--bench";
+    const benchMode = args[0] === '--bench';
     const problemDir = benchMode ? args[1] : args[0];
     if (!problemDir) {
-        console.error("usage: run_ts_solver.ts <problem-dir>");
-        console.error("       run_ts_solver.ts --bench <problem-dir>");
+        console.error('usage: run_ts_solver.ts <problem-dir>');
+        console.error('       run_ts_solver.ts --bench <problem-dir>');
         return 2;
     }
 

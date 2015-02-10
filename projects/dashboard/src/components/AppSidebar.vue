@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ArrowLeftRight, Gauge, LayoutDashboard, Server, Table2 } from "@lucide/vue";
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { ArrowLeftRight, Gauge, LayoutDashboard, Server, Table2 } from '@lucide/vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-import AppIcon from "./AppIcon.vue";
-import ThemeToggle from "./ThemeToggle.vue";
+import AppIcon from './AppIcon.vue';
+import ThemeToggle from './ThemeToggle.vue';
 
 const route = useRoute();
 
 const navItems = [
-    { to: "/", label: "概览", icon: LayoutDashboard, exact: true },
-    { to: "/benchmarks", label: "全量对比", icon: Table2, exact: true },
-    { to: "/benchmarks/ts-v", label: "V / TS 对比", icon: ArrowLeftRight, exact: true },
-    { to: "/environment", label: "语言环境", icon: Server, exact: true },
+    { to: '/', label: '概览', icon: LayoutDashboard, exact: true },
+    { to: '/benchmarks', label: '全量对比', icon: Table2, exact: true },
+    { to: '/benchmarks/ts-v', label: 'V / TS 对比', icon: ArrowLeftRight, exact: true },
+    { to: '/environment', label: '语言环境', icon: Server, exact: true },
 ];
 
 const activePath = computed(() => route.path);

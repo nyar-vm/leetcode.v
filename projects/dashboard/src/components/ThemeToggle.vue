@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { Moon, Sun } from "@lucide/vue";
-import { computed } from "vue";
+import { Moon, Sun } from '@lucide/vue';
+import { computed } from 'vue';
 
-import { useTheme } from "../composables/useTheme";
-import AppIcon from "./AppIcon.vue";
+import { useTheme } from '../composables/useTheme';
+import AppIcon from './AppIcon.vue';
 
 const { theme, toggleTheme } = useTheme();
 
-const label = computed(() => (theme.value === "dark" ? "浅色模式" : "深色模式"));
-const icon = computed(() => (theme.value === "dark" ? Sun : Moon));
+const label = computed(() => (theme.value === 'dark' ? '浅色模式' : '深色模式'));
+const icon = computed(() => (theme.value === 'dark' ? Sun : Moon));
 </script>
 
 <template>

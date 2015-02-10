@@ -11,39 +11,39 @@
  *
  * 未在命令行指定的项仍可读环境变量（CI / 脚本兼容）。
  */
-import { spawnSync } from "node:child_process";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { spawnSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const conformanceRoot = join(root, "projects", "conformance");
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const conformanceRoot = join(root, 'projects', 'conformance');
 
 const LANGUAGE_ALIASES = {
-    python: "python",
-    py: "python",
-    typescript: "typescript",
-    ts: "typescript",
-    "typescript-bun": "typescript-bun",
-    "ts-bun": "typescript-bun",
-    bun: "typescript-bun",
-    valkyrie: "valkyrie",
-    v: "valkyrie",
-    "wolfram-sxo": "wolfram-sxo",
-    wolfram: "wolfram-sxo",
-    wl: "wolfram-sxo",
-    "matlab-sxo": "matlab-sxo",
-    matlab: "matlab-sxo",
-    m: "matlab-sxo",
+    python: 'python',
+    py: 'python',
+    typescript: 'typescript',
+    ts: 'typescript',
+    'typescript-bun': 'typescript-bun',
+    'ts-bun': 'typescript-bun',
+    bun: 'typescript-bun',
+    valkyrie: 'valkyrie',
+    v: 'valkyrie',
+    'wolfram-sxo': 'wolfram-sxo',
+    wolfram: 'wolfram-sxo',
+    wl: 'wolfram-sxo',
+    'matlab-sxo': 'matlab-sxo',
+    matlab: 'matlab-sxo',
+    m: 'matlab-sxo',
 };
 
 const RUNNERS = {
-    all: "src/cli/run.ts",
-    python: "src/cli/run.ts",
-    typescript: "src/cli/run.ts",
-    "typescript-bun": "src/cli/run.ts",
-    valkyrie: "src/cli/run.ts",
-    "wolfram-sxo": "src/cli/run.ts",
-    "matlab-sxo": "src/cli/run.ts",
+    all: 'src/cli/run.ts',
+    python: 'src/cli/run.ts',
+    typescript: 'src/cli/run.ts',
+    'typescript-bun': 'src/cli/run.ts',
+    valkyrie: 'src/cli/run.ts',
+    'wolfram-sxo': 'src/cli/run.ts',
+    'matlab-sxo': 'src/cli/run.ts',
 };
 
 function usage() {
@@ -92,7 +92,7 @@ function parseCount(value, flag) {
 
 function takeValue(args, index, flag) {
     const value = args[index + 1];
-    if (value === undefined || value.startsWith("-")) {
+    if (value === undefined || value.startsWith('-')) {
         throw new Error(`${flag} 需要参数值`);
     }
     return value;
@@ -100,7 +100,7 @@ function takeValue(args, index, flag) {
 
 function parseArgv(argv) {
     const args = argv.slice(2);
-    let mode = "all";
+    let mode = 'all';
     let help = false;
     let count = null;
     let all = false;
@@ -109,7 +109,7 @@ function parseArgv(argv) {
     let lang = null;
 
     let index = 0;
-    if (args[0] && !args[0].startsWith("-")) {
+    if (args[0] && !args[0].startsWith('-')) {
         const maybeLang = args[0].trim().toLowerCase();
         if (maybeLang in LANGUAGE_ALIASES) {
             mode = normalizeLanguage(maybeLang);
@@ -120,27 +120,27 @@ function parseArgv(argv) {
     for (let i = index; i < args.length; i += 1) {
         const token = args[i];
         switch (token) {
-            case "--help":
-            case "-h":
+            case '--help':
+            case '-h':
                 help = true;
                 break;
-            case "--count":
-            case "-n":
+            case '--count':
+            case '-n':
                 count = parseCount(takeValue(args, i, token), token);
                 i += 1;
                 break;
-            case "--all":
+            case '--all':
                 all = true;
                 break;
-            case "--id":
+            case '--id':
                 id = takeValue(args, i, token);
                 i += 1;
                 break;
-            case "--ids":
+            case '--ids':
                 ids = takeValue(args, i, token);
                 i += 1;
                 break;
-            case "--lang":
+            case '--lang':
                 lang = takeValue(args, i, token);
                 i += 1;
                 break;
@@ -150,13 +150,13 @@ function parseArgv(argv) {
     }
 
     if (all && count !== null) {
-        throw new Error("--all 与 --count 不能同时使用");
+        throw new Error('--all 与 --count 不能同时使用');
     }
     if (id && ids) {
-        throw new Error("--id 与 --ids 不能同时使用");
+        throw new Error('--id 与 --ids 不能同时使用');
     }
-    if (lang && mode !== "all") {
-        throw new Error("单语言脚本不需要 --lang");
+    if (lang && mode !== 'all') {
+        throw new Error('单语言脚本不需要 --lang');
     }
 
     return { mode, help, count, all, id, ids, lang };
@@ -166,7 +166,7 @@ function applyCliEnv(baseEnv, options) {
     const env = { ...baseEnv };
 
     if (options.all) {
-        env.LEETCODE_BATCH_ALL = "1";
+        env.LEETCODE_BATCH_ALL = '1';
         delete env.LEETCODE_BENCH_LIMIT;
         delete env.LEETCODE_BATCH_LIMIT;
     } else if (options.count !== null) {
@@ -191,10 +191,10 @@ function applyCliEnv(baseEnv, options) {
 
 function runBenchmark(mode, env) {
     const runner = join(conformanceRoot, RUNNERS[mode]);
-    const result = spawnSync(process.execPath, ["--import", "tsx", runner], {
+    const result = spawnSync(process.execPath, ['--import', 'tsx', runner], {
         cwd: conformanceRoot,
         env,
-        stdio: "inherit",
+        stdio: 'inherit',
     });
 
     if (result.error) {

@@ -1,8 +1,8 @@
-import { spawnSync } from "node:child_process";
-import { createRequire } from "node:module";
-import os from "node:os";
+import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+import os from 'node:os';
 
-import { WASM_NODE_BENCH_TARGET } from "@valkyrie-language/vcc/benchmark";
+import { WASM_NODE_BENCH_TARGET } from '@valkyrie-language/vcc/benchmark';
 
 import type {
     HostEnvironment,
@@ -12,32 +12,32 @@ import type {
     TypeScriptBunBenchEnvironment,
     ValkyrieBenchEnvironment,
     WolframSxoBenchEnvironment,
-} from "./schema.ts";
+} from './schema.ts';
 import {
     BUN_BENCH_PARAMS,
     PYTHON_BENCH_PARAMS,
     SXO_BENCH_PARAMS,
     TYPESCRIPT_BENCH_PARAMS,
     VALKYRIE_BENCH_PARAMS,
-} from "../planning/bench-params.ts";
-import { bunRunnerReady, bunSkipReason, bunVersion } from "../adapters/typescript-bun/bridge.ts";
-import { sxoPackagesStatus, sxoRunnerReady, sxoSkipReason } from "../adapters/shared/sxo-bridge.ts";
-import { spawnLegion, valkyrieRunnerReady, valkyrieSkipReason } from "../adapters/valkyrie-node/valkyrie.ts";
+} from '../planning/bench-params.ts';
+import { bunRunnerReady, bunSkipReason, bunVersion } from '../adapters/typescript-bun/bridge.ts';
+import { sxoPackagesStatus, sxoRunnerReady, sxoSkipReason } from '../adapters/shared/sxo-bridge.ts';
+import { spawnLegion, valkyrieRunnerReady, valkyrieSkipReason } from '../adapters/valkyrie-node/valkyrie.ts';
 
 const requireFromHere = createRequire(import.meta.url);
 
 function packageVersion(name: string): string | null {
     try {
         const version = requireFromHere(`${name}/package.json`).version;
-        return typeof version === "string" ? version : null;
+        return typeof version === 'string' ? version : null;
     } catch {
         return null;
     }
 }
 
 function probeCommand(command: string, args: string[]): string | null {
-    const result = spawnSync(command, args, { encoding: "utf8" });
-    const text = `${result.stdout ?? ""}${result.stderr ?? ""}`.trim();
+    const result = spawnSync(command, args, { encoding: 'utf8' });
+    const text = `${result.stdout ?? ''}${result.stderr ?? ''}`.trim();
     if (result.status !== 0 || !text) {
         return null;
     }
@@ -54,9 +54,9 @@ export function collectHostEnvironment(): HostEnvironment {
 }
 
 export function collectPythonBenchEnvironment(): PythonBenchEnvironment {
-    const runtimeVersion = probeCommand("python", ["--version"]) ?? "unknown";
+    const runtimeVersion = probeCommand('python', ['--version']) ?? 'unknown';
     return {
-        language: "python",
+        language: 'python',
         runtimeVersion,
         host: collectHostEnvironment(),
         ...PYTHON_BENCH_PARAMS,
@@ -64,9 +64,9 @@ export function collectPythonBenchEnvironment(): PythonBenchEnvironment {
 }
 
 export function collectTypeScriptBenchEnvironment(): TypeScriptBenchEnvironment {
-    const tsxVersion = packageVersion("tsx");
+    const tsxVersion = packageVersion('tsx');
     return {
-        language: "typescript",
+        language: 'typescript',
         nodeVersion: process.version,
         tsxVersion: tsxVersion ? `tsx ${tsxVersion}` : null,
         host: collectHostEnvironment(),
@@ -76,7 +76,7 @@ export function collectTypeScriptBenchEnvironment(): TypeScriptBenchEnvironment 
 
 export function collectTypeScriptBunBenchEnvironment(): TypeScriptBunBenchEnvironment {
     return {
-        language: "typescript-bun",
+        language: 'typescript-bun',
         bunVersion: bunVersion(),
         runnerReady: bunRunnerReady(),
         skipReason: bunSkipReason(),
@@ -88,7 +88,7 @@ export function collectTypeScriptBunBenchEnvironment(): TypeScriptBunBenchEnviro
 export function collectWolframSxoBenchEnvironment(): WolframSxoBenchEnvironment {
     const status = sxoPackagesStatus();
     return {
-        language: "wolfram-sxo",
+        language: 'wolfram-sxo',
         sxoMathematicaVersion: status.mathematicaVersion,
         runnerReady: sxoRunnerReady(),
         skipReason: sxoSkipReason(),
@@ -100,7 +100,7 @@ export function collectWolframSxoBenchEnvironment(): WolframSxoBenchEnvironment 
 export function collectMatlabSxoBenchEnvironment(): MatlabSxoBenchEnvironment {
     const status = sxoPackagesStatus();
     return {
-        language: "matlab-sxo",
+        language: 'matlab-sxo',
         sxoMatlabVersion: status.matlabVersion,
         runnerReady: sxoRunnerReady(),
         skipReason: sxoSkipReason(),
@@ -115,14 +115,14 @@ export function collectValkyrieBenchEnvironment(): ValkyrieBenchEnvironment {
     let legionRoute: string | null = null;
 
     if (valkyrieRunnerReady()) {
-        const versionOutcome = spawnLegion(["--version"]);
+        const versionOutcome = spawnLegion(['--version']);
         legionRoute = versionOutcome.route;
-        const text = `${versionOutcome.stdout ?? ""}${versionOutcome.stderr ?? ""}`.trim();
+        const text = `${versionOutcome.stdout ?? ''}${versionOutcome.stderr ?? ''}`.trim();
         legionVersion = text.split(/\r?\n/)[0]?.trim() || null;
     }
 
     return {
-        language: "valkyrie",
+        language: 'valkyrie',
         legionVersion,
         legionRoute,
         benchTarget,

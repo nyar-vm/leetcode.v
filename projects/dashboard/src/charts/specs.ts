@@ -1,6 +1,6 @@
-import type { EChartsOption } from "echarts";
+import type { EChartsOption } from 'echarts';
 
-import type { ThemeMode } from "../composables/useTheme";
+import type { ThemeMode } from '../composables/useTheme';
 import {
     chartGrid,
     chartLegend,
@@ -12,7 +12,7 @@ import {
     linearGradient,
     statusColor,
     valueAxis,
-} from "./theme";
+} from './theme';
 
 const LANGUAGE_ORDER = Object.keys(languageColor);
 
@@ -22,18 +22,18 @@ export function statusDonutOption(data: { label: string; count: number }[], them
     }
     const ui = getChartUi(theme);
     return {
-        title: chartTitle("跑测状态", theme),
+        title: chartTitle('跑测状态', theme),
         tooltip: chartTooltip(theme),
-        legend: { ...chartLegend(theme), orient: "horizontal" },
+        legend: { ...chartLegend(theme), orient: 'horizontal' },
         series: [
             {
-                type: "pie",
-                radius: ["42%", "68%"],
-                center: ["50%", "52%"],
+                type: 'pie',
+                radius: ['42%', '68%'],
+                center: ['50%', '52%'],
                 avoidLabelOverlap: true,
                 itemStyle: {
                     borderRadius: 4,
-                    borderColor: theme === "dark" ? "#151d2a" : "#ffffff",
+                    borderColor: theme === 'dark' ? '#151d2a' : '#ffffff',
                     borderWidth: 2,
                 },
                 label: { color: ui.muted, fontSize: 11 },
@@ -57,17 +57,17 @@ export function languageWinBarOption(data: { language: string; winCount: number 
     const sorted = [...data].sort((left, right) => right.winCount - left.winCount);
     return {
         title: {
-            ...chartTitle("第一名数量", theme),
+            ...chartTitle('第一名数量', theme),
             padding: [0, 0, 10, 0],
         },
         tooltip: {
             ...chartTooltip(theme),
             formatter: (params) => {
                 const item = Array.isArray(params) ? params[0] : params;
-                if (!item || typeof item !== "object" || !("name" in item)) {
-                    return "";
+                if (!item || typeof item !== 'object' || !('name' in item)) {
+                    return '';
                 }
-                return `${String(item.name)}<br/>胜场 ${String(item.value ?? "")}`;
+                return `${String(item.name)}<br/>胜场 ${String(item.value ?? '')}`;
             },
         },
         grid: {
@@ -82,14 +82,14 @@ export function languageWinBarOption(data: { language: string; winCount: number 
             data: sorted.map((item) => item.language),
         },
         yAxis: {
-            ...valueAxis(theme, "胜场"),
-            nameLocation: "middle",
+            ...valueAxis(theme, '胜场'),
+            nameLocation: 'middle',
             nameGap: 48,
             nameRotate: 90,
         },
         series: [
             {
-                type: "bar",
+                type: 'bar',
                 barMaxWidth: 52,
                 data: sorted.map((item) => ({
                     value: item.winCount,
@@ -115,13 +115,13 @@ export function languageViolinOption(
     const languages = LANGUAGE_ORDER.filter((label) => data.some((item) => item.language === label));
 
     return {
-        title: chartTitle("分布 · ln(ms)", theme),
+        title: chartTitle('分布 · ln(ms)', theme),
         tooltip: {
             ...chartTooltip(theme),
             formatter: (params) => {
                 const item = Array.isArray(params) ? params[0] : params;
-                if (!item || typeof item !== "object" || !("data" in item)) {
-                    return "";
+                if (!item || typeof item !== 'object' || !('data' in item)) {
+                    return '';
                 }
                 const point = item.data as { title: string; runtimeMs: number; logMs: number };
                 return `${point.title}<br/>${String(item.seriesName)}<br/>${point.runtimeMs.toFixed(2)} ms · ln ${point.logMs.toFixed(3)}`;
@@ -133,7 +133,7 @@ export function languageViolinOption(
         },
         grid: chartGrid(44, 48),
         xAxis: {
-            ...valueAxis(theme, "ln(ms)"),
+            ...valueAxis(theme, 'ln(ms)'),
             scale: true,
         },
         yAxis: {
@@ -142,7 +142,7 @@ export function languageViolinOption(
         },
         series: languages.map((language) => ({
             name: language,
-            type: "scatter",
+            type: 'scatter',
             symbolSize: data.filter((item) => item.language === language).length >= 2 ? 9 : 12,
             itemStyle: {
                 color: languageColor[language] ?? ui.muted,
@@ -168,7 +168,7 @@ function buildEcdfSeries(data: { language: string; logMs: number; runtimeMs: num
         grouped.set(item.language, list);
     }
 
-    const series: EChartsOption["series"] = [];
+    const series: EChartsOption['series'] = [];
     for (const language of LANGUAGE_ORDER) {
         const items = grouped.get(language);
         if (!items?.length) {
@@ -182,8 +182,8 @@ function buildEcdfSeries(data: { language: string; logMs: number; runtimeMs: num
         }));
         series.push({
             name: language,
-            type: "line",
-            step: "end",
+            type: 'line',
+            step: 'end',
             showSymbol: true,
             symbolSize: 6,
             lineStyle: { width: 2 },
@@ -207,13 +207,13 @@ export function languageEcdfOption(
     }
 
     return {
-        title: chartTitle("ECDF · ln(ms)", theme),
+        title: chartTitle('ECDF · ln(ms)', theme),
         tooltip: {
             ...chartTooltip(theme),
             formatter: (params) => {
                 const item = Array.isArray(params) ? params[0] : params;
-                if (!item || typeof item !== "object" || !("data" in item)) {
-                    return "";
+                if (!item || typeof item !== 'object' || !('data' in item)) {
+                    return '';
                 }
                 const point = item.data as {
                     title: string;
@@ -227,11 +227,11 @@ export function languageEcdfOption(
         legend: chartLegend(theme),
         grid: chartGrid(44, 48),
         xAxis: {
-            ...valueAxis(theme, "ln(ms)"),
+            ...valueAxis(theme, 'ln(ms)'),
             scale: true,
         },
         yAxis: {
-            ...valueAxis(theme, "累计比例", (value) => `${Math.round(Number(value) * 100)}%`),
+            ...valueAxis(theme, '累计比例', (value) => `${Math.round(Number(value) * 100)}%`),
             min: 0,
             max: 1,
         },

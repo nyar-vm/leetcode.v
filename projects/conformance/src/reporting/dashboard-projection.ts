@@ -1,15 +1,15 @@
-import { mkdirSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 
-import { BENCH_PUBLIC_DIR, LEETCODE_ROOT } from "../domain/paths.ts";
-import { loadProblemMetadata } from "../domain/metadata.ts";
-import { PROBLEMS, problemDir } from "../catalog/index.ts";
-import type { ImplementationId } from "../adapters/ids.ts";
-import { DASHBOARD_BENCH_FILES, IMPLEMENTATION_TO_BENCH_LANGUAGE } from "../adapters/ids.ts";
-import { listCurrentRunRecords } from "./cache/store.ts";
-import type { RunRecord } from "./cache/types.ts";
-import { problemSourceDigest } from "./cache/run-id.ts";
-import { metaForProblem } from "../planning/problem-selection.ts";
+import { BENCH_PUBLIC_DIR, LEETCODE_ROOT } from '../domain/paths.ts';
+import { loadProblemMetadata } from '../domain/metadata.ts';
+import { PROBLEMS, problemDir } from '../catalog/index.ts';
+import type { ImplementationId } from '../adapters/ids.ts';
+import { DASHBOARD_BENCH_FILES, IMPLEMENTATION_TO_BENCH_LANGUAGE } from '../adapters/ids.ts';
+import { listCurrentRunRecords } from './cache/store.ts';
+import type { RunRecord } from './cache/types.ts';
+import { problemSourceDigest } from './cache/run-id.ts';
+import { metaForProblem } from '../planning/problem-selection.ts';
 
 export type LanguageBenchReport = {
     language: string;
@@ -24,7 +24,7 @@ const problemById = new Map(PROBLEMS.map((problem) => [problem.id, problem]));
 const catalogOrder = new Map(PROBLEMS.map((problem, index) => [problem.id, index]));
 
 function recordsForImplementation(records: RunRecord[], implementationId: ImplementationId): RunRecord[] {
-    return records.filter((record) => record.manifest.implementationId === implementationId && record.manifest.mode === "benchmark");
+    return records.filter((record) => record.manifest.implementationId === implementationId && record.manifest.mode === 'benchmark');
 }
 
 function resolveSourceCurrent(problemId: string, implementationId: ImplementationId, recordDigest: string): boolean {
@@ -46,7 +46,7 @@ function buildRow(problem: (typeof PROBLEMS)[number], record: RunRecord): Record
         runId: record.manifest.runId,
         sourceDigest: record.manifest.sourceDigest,
         sourceCurrent: resolveSourceCurrent(problem.id, implementationId, record.manifest.sourceDigest),
-        error: record.result.blockedReason ?? (record.result.diagnostics.join("; ") || null),
+        error: record.result.blockedReason ?? (record.result.diagnostics.join('; ') || null),
     };
     const measurement = record.measurement;
     if (measurement) {
@@ -94,7 +94,7 @@ export function writeDashboardProjection(implementationId: ImplementationId): st
     const report = projectLanguageReport(implementationId, records);
     const outPath = join(BENCH_PUBLIC_DIR, DASHBOARD_BENCH_FILES[implementationId]);
     mkdirSync(dirname(outPath), { recursive: true });
-    writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+    writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
     return outPath;
 }
 
@@ -105,7 +105,7 @@ export function writeAllDashboardProjections(implementationIds: ImplementationId
         const report = projectLanguageReport(id, records);
         const outPath = join(BENCH_PUBLIC_DIR, DASHBOARD_BENCH_FILES[id]);
         mkdirSync(dirname(outPath), { recursive: true });
-        writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+        writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
         paths.push(outPath);
     }
     return paths;

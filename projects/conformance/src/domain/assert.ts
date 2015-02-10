@@ -5,7 +5,7 @@ export function normalizeTsTestResult(value: unknown): unknown {
 
 /** metadata 中 `expected: "Error: ..."` 表示应抛出异常且消息匹配。 */
 export function assertTestCase(index: number, expected: unknown, run: () => unknown): void {
-    if (typeof expected === "string" && expected.startsWith("Error:")) {
+    if (typeof expected === 'string' && expected.startsWith('Error:')) {
         try {
             run();
         } catch (err) {

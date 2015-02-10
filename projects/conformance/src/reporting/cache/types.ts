@@ -1,11 +1,11 @@
-import type { MeasurementOutcome } from "../../domain/measurement.ts";
-import type { RunResult } from "../../domain/result.ts";
+import type { MeasurementOutcome } from '../../domain/measurement.ts';
+import type { RunResult } from '../../domain/result.ts';
 
 export type RunManifest = {
     runId: string;
     problemId: string;
     implementationId: string;
-    mode: "correctness" | "benchmark";
+    mode: 'correctness' | 'benchmark';
     createdAt: string;
     sourceDigest: string;
     adapterVersion: string;
@@ -24,7 +24,7 @@ export type IndexEntry = {
     runId: string;
     createdAt: string;
     sourceDigest: string;
-    status: RunResult["status"];
+    status: RunResult['status'];
     current: boolean;
 };
 
@@ -34,6 +34,6 @@ export type ConformanceIndex = {
 };
 
 /** `problemId:implementationId:mode` */
-export function indexKey(problemId: string, implementationId: string, mode: "correctness" | "benchmark"): string {
+export function indexKey(problemId: string, implementationId: string, mode: 'correctness' | 'benchmark'): string {
     return `${problemId}:${implementationId}:${mode}`;
 }

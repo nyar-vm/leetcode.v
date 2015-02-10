@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { AlertTriangle, BookOpen, ChevronLeft, ExternalLink, FileCode2, Filter, Search, Timer } from "@lucide/vue";
-import { computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { AlertTriangle, BookOpen, ChevronLeft, ExternalLink, FileCode2, Filter, Search, Timer } from '@lucide/vue';
+import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-import AppIcon from "../components/AppIcon.vue";
-import DifficultyBadge from "../components/DifficultyBadge.vue";
-import EmptyState from "../components/EmptyState.vue";
-import MarkdownContent from "../components/MarkdownContent.vue";
-import { useBenchReport } from "../composables/useBenchReport";
-import { useProblemReadme } from "../composables/useProblemReadme";
-import { enrichBenchRow, leetcodeUrl } from "../composables/useProblemCatalog";
-import { formatMs, ratioLabel, runtimeRatio } from "../utils/format";
+import AppIcon from '../components/AppIcon.vue';
+import DifficultyBadge from '../components/DifficultyBadge.vue';
+import EmptyState from '../components/EmptyState.vue';
+import MarkdownContent from '../components/MarkdownContent.vue';
+import { useBenchReport } from '../composables/useBenchReport';
+import { useProblemReadme } from '../composables/useProblemReadme';
+import { enrichBenchRow, leetcodeUrl } from '../composables/useProblemCatalog';
+import { formatMs, ratioLabel, runtimeRatio } from '../utils/format';
 
 const route = useRoute();
 const router = useRouter();

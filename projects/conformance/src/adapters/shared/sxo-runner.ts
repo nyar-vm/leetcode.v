@@ -1,10 +1,10 @@
-import { median } from "@valkyrie-language/vcc/benchmark";
+import { median } from '@valkyrie-language/vcc/benchmark';
 
-import { assertTestCase } from "../../domain/assert.ts";
-import type { TestCase } from "../../domain/metadata.ts";
-import { createMatlabEvaluator, createWolframEvaluator } from "./sxo-bridge.ts";
-import { parseMatlabSurface, parseWolframSurface } from "./sxo-json.ts";
-import { buildMatlabProgram, buildWolframProgram, loadSxoSolverBundle, type SxoDialect } from "./sxo-solver-shared.ts";
+import { assertTestCase } from '../../domain/assert.ts';
+import type { TestCase } from '../../domain/metadata.ts';
+import { createMatlabEvaluator, createWolframEvaluator } from './sxo-bridge.ts';
+import { parseMatlabSurface, parseWolframSurface } from './sxo-json.ts';
+import { buildMatlabProgram, buildWolframProgram, loadSxoSolverBundle, type SxoDialect } from './sxo-solver-shared.ts';
 
 export type SxoEvaluator = {
     evaluate(program: string): string;
@@ -65,14 +65,14 @@ export async function benchSxoSolverInProcess(
 }
 
 export const WOLFRAM_SXO_RUNNER: SxoDialectRunner = {
-    dialect: "wolfram-sxo",
+    dialect: 'wolfram-sxo',
     createEvaluator: createWolframEvaluator,
     buildProgram: buildWolframProgram,
     parseSurface: parseWolframSurface,
 };
 
 export const MATLAB_SXO_RUNNER: SxoDialectRunner = {
-    dialect: "matlab-sxo",
+    dialect: 'matlab-sxo',
     createEvaluator: createMatlabEvaluator,
     buildProgram: buildMatlabProgram,
     parseSurface: parseMatlabSurface,

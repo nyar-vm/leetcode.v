@@ -1,6 +1,6 @@
 /** catalog 批量 SXO 题解正文（与 Python/TS 同算法；evaluate 失败记入 gap）。 */
 
-function body(symbol, wolfram, matlab, gap = "S-004", overrides = {}) {
+function body(symbol, wolfram, matlab, gap = 'S-004', overrides = {}) {
     return {
         wolfram,
         matlab,
@@ -11,7 +11,7 @@ function body(symbol, wolfram, matlab, gap = "S-004", overrides = {}) {
 }
 
 const REGISTRY = {
-    "two-sum": (s) =>
+    'two-sum': (s) =>
         body(
             s,
             `${s}[nums_, target_] := Module[{n = Length[nums]},
@@ -36,11 +36,11 @@ const REGISTRY = {
     end
     out = [];
 end`,
-            "S-006",
-            { gapMatlab: "S-008" },
+            'S-006',
+            { gapMatlab: 'S-008' },
         ),
 
-    "palindrome-number": (s) =>
+    'palindrome-number': (s) =>
         body(
             s,
             `${s}[x_] := If[x < 0 || (x != 0 && Mod[x, 10] == 0), False, IntegerDigits[x] === Reverse[IntegerDigits[x]]]`,
@@ -52,11 +52,11 @@ end`,
     str = num2str(x);
     y = strcmp(str, str(end:-1:1));
 end`,
-            "S-009",
-            { gapMatlab: "S-011" },
+            'S-009',
+            { gapMatlab: 'S-011' },
         ),
 
-    "reverse-integer": (s) =>
+    'reverse-integer': (s) =>
         body(
             s,
             `${s}[x_] := Module[{mi = -2147483648, mx = 2147483647, n = x, ans = 0},
@@ -85,11 +85,11 @@ end`,
         n = floor((n - rem) / 10);
     end
 end`,
-            "S-009",
-            { gapMatlab: "S-011" },
+            'S-009',
+            { gapMatlab: 'S-011' },
         ),
 
-    "container-with-most-water": (s) =>
+    'container-with-most-water': (s) =>
         body(
             s,
             `${s}[height_] := Module[{l = 1, r = Length[height], ans = 0},
@@ -113,11 +113,11 @@ end`,
         end
     end
 end`,
-            "S-006",
-            { gapMatlab: "S-008" },
+            'S-006',
+            { gapMatlab: 'S-008' },
         ),
 
-    "integer-to-roman": (s) =>
+    'integer-to-roman': (s) =>
         body(
             s,
             `${s}[num_] := Module[{n = num, vals = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}, syms = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}, out = ""},
@@ -142,11 +142,11 @@ end`,
         end
     end
 end`,
-            "S-010",
-            { gapMatlab: "S-010" },
+            'S-010',
+            { gapMatlab: 'S-010' },
         ),
 
-    "roman-to-integer": (s) =>
+    'roman-to-integer': (s) =>
         body(
             s,
             `${s}[s_] := Module[{d = <|"I" -> 1, "V" -> 5, "X" -> 10, "L" -> 50, "C" -> 100, "D" -> 500, "M" -> 1000|>, chars = Characters[s], n = Length[chars], sum = d[chars[[n]]], i = 1},
@@ -172,11 +172,11 @@ end`,
         end
     end
 end`,
-            "S-010",
-            { gapMatlab: "S-016" },
+            'S-010',
+            { gapMatlab: 'S-016' },
         ),
 
-    "longest-common-prefix": (s) =>
+    'longest-common-prefix': (s) =>
         body(
             s,
             `${s}[strs_] := Module[{first = strs[[1]], i = 1, n = Length[first]},
@@ -201,11 +201,11 @@ end`,
     end
     y = first;
 end`,
-            "S-010",
-            { gapMatlab: "S-010" },
+            'S-010',
+            { gapMatlab: 'S-010' },
         ),
 
-    "3sum": (s) =>
+    '3sum': (s) =>
         body(
             s,
             `${s}[nums_] := Module[{a = Sort[nums], n = Length[a], ans = {}, i = 1},
@@ -264,11 +264,11 @@ end`,
         i = i + 1;
     end
 end`,
-            "S-013",
-            { gapMatlab: "S-013" },
+            'S-013',
+            { gapMatlab: 'S-013' },
         ),
 
-    "valid-parentheses": (s) =>
+    'valid-parentheses': (s) =>
         body(
             s,
             `${s}[s_] := Module[{stk = {}, chars = Characters[s], pairs = {"()", "[]", "{}"}, i = 1, n = Length[chars]},
@@ -298,35 +298,35 @@ end`,
     end
     y = isempty(stk);
 end`,
-            "S-010",
-            { gapMatlab: "S-011" },
+            'S-010',
+            { gapMatlab: 'S-011' },
         ),
 };
 
 function gapFromTags(tags) {
     const t = tags ?? [];
-    if (t.includes("String") || t.includes("Trie")) {
-        return "S-010";
+    if (t.includes('String') || t.includes('Trie')) {
+        return 'S-010';
     }
-    if (t.some((x) => x.includes("Linked List"))) {
-        return "S-012";
+    if (t.some((x) => x.includes('Linked List'))) {
+        return 'S-012';
     }
-    if (t.includes("Sorting") || t.includes("Two Pointers") || t.includes("Binary Search")) {
-        return "S-013";
+    if (t.includes('Sorting') || t.includes('Two Pointers') || t.includes('Binary Search')) {
+        return 'S-013';
     }
-    if (t.includes("Matrix") || t.includes("Simulation")) {
-        return "S-014";
+    if (t.includes('Matrix') || t.includes('Simulation')) {
+        return 'S-014';
     }
-    if (t.includes("Backtracking") || t.includes("Recursion")) {
-        return "S-015";
+    if (t.includes('Backtracking') || t.includes('Recursion')) {
+        return 'S-015';
     }
-    if (t.includes("Hash Table")) {
-        return "S-016";
+    if (t.includes('Hash Table')) {
+        return 'S-016';
     }
-    if (t.includes("Dynamic Programming") || t.includes("Regular Expression")) {
-        return "S-017";
+    if (t.includes('Dynamic Programming') || t.includes('Regular Expression')) {
+        return 'S-017';
     }
-    return "S-004";
+    return 'S-004';
 }
 
 function defaultBodies(symbol, metadata) {

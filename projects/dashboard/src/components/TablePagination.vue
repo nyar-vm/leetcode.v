@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ChevronLeft, ChevronRight, Rows3 } from "@lucide/vue";
-import { computed } from "vue";
+import { ChevronLeft, ChevronRight, Rows3 } from '@lucide/vue';
+import { computed } from 'vue';
 
-import { PAGE_SIZE_OPTIONS } from "../types/bench";
-import AppIcon from "./AppIcon.vue";
+import { PAGE_SIZE_OPTIONS } from '../types/bench';
+import AppIcon from './AppIcon.vue';
 
 const props = defineProps<{
     page: number;
@@ -15,8 +15,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    "update:page": [value: number];
-    "update:pageSize": [value: number];
+    'update:page': [value: number];
+    'update:pageSize': [value: number];
 }>();
 
 const pageItems = computed(() => {
@@ -32,12 +32,12 @@ const pageItems = computed(() => {
     if (page < totalPages - 1) items.add(page + 2);
 
     const sorted = [...items].sort((left, right) => left - right);
-    const result: Array<number | "gap"> = [];
+    const result: Array<number | 'gap'> = [];
     for (let index = 0; index < sorted.length; index += 1) {
         const current = sorted[index];
         const previous = sorted[index - 1];
         if (index > 0 && current - previous > 1) {
-            result.push("gap");
+            result.push('gap');
         }
         result.push(current);
     }

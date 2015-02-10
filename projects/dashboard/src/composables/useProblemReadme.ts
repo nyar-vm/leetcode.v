@@ -1,4 +1,4 @@
-import { type MaybeRefOrGetter, ref, toValue, watch } from "vue";
+import { type MaybeRefOrGetter, ref, toValue, watch } from 'vue';
 
 async function loadReadme(id: string): Promise<string> {
     const mod = await import(`../../../problems/${id}/readme.md?render`);
@@ -23,7 +23,7 @@ export function useProblemReadme(problemId: MaybeRefOrGetter<string>) {
             try {
                 content.value = await loadReadme(id);
             } catch {
-                error.value = "未找到题解 readme";
+                error.value = '未找到题解 readme';
             } finally {
                 loading.value = false;
             }

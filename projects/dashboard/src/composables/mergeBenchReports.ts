@@ -7,7 +7,7 @@ import type {
     TypeScriptBunBenchEnvironment,
     ValkyrieBenchEnvironment,
     WolframSxoBenchEnvironment,
-} from "../types/bench";
+} from '../types/bench';
 
 type RuntimeBenchRow = {
     id: string;
@@ -37,7 +37,7 @@ type ValkyrieBenchRow = {
 };
 
 type PythonBenchReport = {
-    language: "python";
+    language: 'python';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -46,7 +46,7 @@ type PythonBenchReport = {
 };
 
 type TypeScriptBenchReport = {
-    language: "typescript";
+    language: 'typescript';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -55,7 +55,7 @@ type TypeScriptBenchReport = {
 };
 
 type TypeScriptBunBenchReport = {
-    language: "typescript-bun";
+    language: 'typescript-bun';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -64,7 +64,7 @@ type TypeScriptBunBenchReport = {
 };
 
 type ValkyrieBenchReport = {
-    language: "valkyrie";
+    language: 'valkyrie';
     generatedAt: string;
     ready: boolean;
     benchTarget: string;
@@ -74,7 +74,7 @@ type ValkyrieBenchReport = {
 };
 
 type WolframSxoBenchReport = {
-    language: "wolfram-sxo";
+    language: 'wolfram-sxo';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -83,7 +83,7 @@ type WolframSxoBenchReport = {
 };
 
 type MatlabSxoBenchReport = {
-    language: "matlab-sxo";
+    language: 'matlab-sxo';
     generatedAt: string;
     ready: boolean;
     catalogTotal: number;
@@ -171,7 +171,7 @@ export function mergeLanguageBenchReports(
         return null;
     }
 
-    const benchTarget = valkyrie?.benchTarget ?? "node";
+    const benchTarget = valkyrie?.benchTarget ?? 'node';
     const byId = new Map<string, BenchRow>();
 
     for (const row of python?.rows ?? []) {
@@ -358,7 +358,7 @@ export function mergeLanguageBenchReports(
 }
 
 /** 旧版合并快照缺字段时补齐。 */
-export function normalizeLegacyBenchRow(row: Partial<BenchRow> & Pick<BenchRow, "id" | "title">): BenchRow {
+export function normalizeLegacyBenchRow(row: Partial<BenchRow> & Pick<BenchRow, 'id' | 'title'>): BenchRow {
     return {
         id: row.id,
         title: row.title,
@@ -373,7 +373,7 @@ export function normalizeLegacyBenchRow(row: Partial<BenchRow> & Pick<BenchRow, 
         wlRuntimeMs: row.wlRuntimeMs ?? null,
         mlRuntimeMs: row.mlRuntimeMs ?? null,
         legionRoute: row.legionRoute ?? null,
-        benchTarget: row.benchTarget ?? "node",
+        benchTarget: row.benchTarget ?? 'node',
         pyError: row.pyError ?? null,
         tsError: row.tsError ?? null,
         tbError: row.tbError ?? null,

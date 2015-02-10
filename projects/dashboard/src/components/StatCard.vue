@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import AppIcon from "./AppIcon.vue";
+import AppIcon from './AppIcon.vue';
 
 defineProps<{
     label: string;
     value: string | number;
     hint?: string;
-    tone?: "default" | "success" | "warning" | "danger";
+    tone?: 'default' | 'success' | 'warning' | 'danger';
     icon?: Component;
 }>();
 </script>

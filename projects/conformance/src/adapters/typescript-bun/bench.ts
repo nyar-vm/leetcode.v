@@ -1,9 +1,9 @@
-import type { ProblemDefinition } from "../../catalog/index.ts";
-import { problemDir } from "../../catalog/index.ts";
-import { BUN_BENCH_PARAMS } from "../../planning/bench-params.ts";
-import { benchBunSolverViaSpawn } from "./ref.ts";
-import { hasReadyTsSolver } from "./ref.ts";
-import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
+import type { ProblemDefinition } from '../../catalog/index.ts';
+import { problemDir } from '../../catalog/index.ts';
+import { BUN_BENCH_PARAMS } from '../../planning/bench-params.ts';
+import { benchBunSolverViaSpawn } from './ref.ts';
+import { hasReadyTsSolver } from './ref.ts';
+import { LEETCODE_ROOT_FROM_PACKAGE } from '../../domain/paths.ts';
 
 export function benchBunProblem(
     problem: ProblemDefinition,

@@ -10,12 +10,12 @@
 
 export const DEFAULT_BATCH_LIMIT = 50;
 
-const ALL_TOKENS = new Set(["all", "0", "infinity", "inf", "*"]);
+const ALL_TOKENS = new Set(['all', '0', 'infinity', 'inf', '*']);
 
 function firstEnv(...keys) {
     for (const key of keys) {
         const value = process.env[key];
-        if (value !== undefined && value !== "") {
+        if (value !== undefined && value !== '') {
             return { key, value };
         }
     }
@@ -26,11 +26,11 @@ function firstEnv(...keys) {
 export function parseBatchLimit(options = {}) {
     const { defaultLimit = DEFAULT_BATCH_LIMIT, fallbackKeys = [] } = options;
 
-    if (process.env.LEETCODE_BATCH_ALL === "1" || process.env.LEETCODE_BATCH_ALL === "true") {
+    if (process.env.LEETCODE_BATCH_ALL === '1' || process.env.LEETCODE_BATCH_ALL === 'true') {
         return null;
     }
 
-    const hit = firstEnv("LEETCODE_BATCH_LIMIT", ...fallbackKeys);
+    const hit = firstEnv('LEETCODE_BATCH_LIMIT', ...fallbackKeys);
     if (!hit) {
         return defaultLimit;
     }
@@ -59,7 +59,7 @@ export function listProblemSlugs(problemsDir, readdirSync, existsSync, limit = p
         return [];
     }
     const all = readdirSync(problemsDir, { withFileTypes: true })
-        .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
+        .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
         .map((entry) => entry.name)
         .sort();
     if (limit === null) {
@@ -69,6 +69,6 @@ export function listProblemSlugs(problemsDir, readdirSync, existsSync, limit = p
 }
 
 export function logBatchLimit(action, picked, total) {
-    const mode = picked === total ? "全量" : `限流 ${picked}/${total}`;
+    const mode = picked === total ? '全量' : `限流 ${picked}/${total}`;
     console.log(`[batch] ${action}：${mode}（全量请设 LEETCODE_BATCH_ALL=1）`);
 }

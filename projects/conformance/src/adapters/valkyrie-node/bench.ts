@@ -1,15 +1,15 @@
-import { mkdirSync } from "node:fs";
-import { join } from "node:path";
+import { mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 
-import { median } from "@valkyrie-language/vcc/benchmark";
+import { median } from '@valkyrie-language/vcc/benchmark';
 
-import type { ProblemDefinition } from "../../catalog/index.ts";
-import { problemDir, valkyrieProjectDir } from "../../catalog/index.ts";
-import { LEETCODE_ROOT_FROM_PACKAGE } from "../../domain/paths.ts";
-import { VALKYRIE_BENCH_PARAMS } from "../../planning/bench-params.ts";
-import { benchVRuntimeProblem } from "./runtime-bench.ts";
-import { loadMetadata, resolveVBuildArtifacts, wasmInvokeBlockedReason } from "./ref.ts";
-import { formatLegionError, legionBuild, valkyrieRunnerReady, valkyrieSkipReason } from "./valkyrie.ts";
+import type { ProblemDefinition } from '../../catalog/index.ts';
+import { problemDir, valkyrieProjectDir } from '../../catalog/index.ts';
+import { LEETCODE_ROOT_FROM_PACKAGE } from '../../domain/paths.ts';
+import { VALKYRIE_BENCH_PARAMS } from '../../planning/bench-params.ts';
+import { benchVRuntimeProblem } from './runtime-bench.ts';
+import { loadMetadata, resolveVBuildArtifacts, wasmInvokeBlockedReason } from './ref.ts';
+import { formatLegionError, legionBuild, valkyrieRunnerReady, valkyrieSkipReason } from './valkyrie.ts';
 
 export type ValkyrieBenchResult = {
     vCompileMs: number | null;
@@ -38,7 +38,7 @@ export function benchValkyrieProblem(
     }
 
     const projectDir = valkyrieProjectDir(LEETCODE_ROOT_FROM_PACKAGE, problem);
-    const outDir = join(LEETCODE_ROOT_FROM_PACKAGE, ".cache", `${problem.id}-bench-node`);
+    const outDir = join(LEETCODE_ROOT_FROM_PACKAGE, '.cache', `${problem.id}-bench-node`);
     mkdirSync(outDir, { recursive: true });
 
     let legionRoute: string | null = null;
@@ -51,7 +51,7 @@ export function benchValkyrieProblem(
                 vCompileMs: null,
                 vRuntimeMs: null,
                 legionRoute,
-                error: formatLegionError("legion build", warm),
+                error: formatLegionError('legion build', warm),
             };
         }
     }
@@ -66,7 +66,7 @@ export function benchValkyrieProblem(
                 vCompileMs: null,
                 vRuntimeMs: null,
                 legionRoute,
-                error: formatLegionError("legion build", build),
+                error: formatLegionError('legion build', build),
             };
         }
         compileSamples.push(performance.now() - start);
@@ -91,7 +91,7 @@ export function benchValkyrieProblem(
             }
         }
     } else {
-        runtimeError = "legion build 产物缺失";
+        runtimeError = 'legion build 产物缺失';
     }
 
     return {

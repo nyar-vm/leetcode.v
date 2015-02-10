@@ -1,10 +1,10 @@
-import type { BenchRow, EnrichedBenchRow } from "../types/bench";
+import type { BenchRow, EnrichedBenchRow } from '../types/bench';
 
 export function enrichBenchRow(row: BenchRow): EnrichedBenchRow {
     return {
         ...row,
         questionId: row.questionId ?? 0,
-        difficulty: row.difficulty ?? "Unknown",
+        difficulty: row.difficulty ?? 'Unknown',
         tags: row.tags ?? [],
     };
 }

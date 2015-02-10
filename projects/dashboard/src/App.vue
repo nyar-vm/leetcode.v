@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted } from 'vue';
 
-import AppHeader from "./components/AppHeader.vue";
-import AppSidebar from "./components/AppSidebar.vue";
-import { provideBenchReport } from "./composables/useBenchReport";
-import { provideTheme } from "./composables/useTheme";
+import AppHeader from './components/AppHeader.vue';
+import AppSidebar from './components/AppSidebar.vue';
+import { provideBenchReport } from './composables/useBenchReport';
+import { provideTheme } from './composables/useTheme';
 
 provideTheme();
 const { loadCached } = provideBenchReport();

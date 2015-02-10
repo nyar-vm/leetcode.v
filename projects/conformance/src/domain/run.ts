@@ -1,6 +1,6 @@
-import type { MeasurementPlan } from "./measurement.ts";
+import type { MeasurementPlan } from './measurement.ts';
 
-export type RunMode = "correctness" | "benchmark";
+export type RunMode = 'correctness' | 'benchmark';
 
 /** 一次运行的请求合同。 */
 export type RunRequest = {

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 
-import BenchTable from "../components/BenchTable.vue";
-import EmptyState from "../components/EmptyState.vue";
-import FilterPanel from "../components/FilterPanel.vue";
-import TablePagination from "../components/TablePagination.vue";
-import { useBenchReport } from "../composables/useBenchReport";
-import { useBenchFilters } from "../composables/useBenchFilters";
-import { allTags, enrichBenchRows } from "../composables/useProblemCatalog";
+import BenchTable from '../components/BenchTable.vue';
+import EmptyState from '../components/EmptyState.vue';
+import FilterPanel from '../components/FilterPanel.vue';
+import TablePagination from '../components/TablePagination.vue';
+import { useBenchReport } from '../composables/useBenchReport';
+import { useBenchFilters } from '../composables/useBenchFilters';
+import { allTags, enrichBenchRows } from '../composables/useProblemCatalog';
 
 const { report } = useBenchReport();
 
@@ -28,7 +28,7 @@ const {
     setPage,
     setPageSize,
     clearFilters,
-} = useBenchFilters(() => enrichedRows.value, "ts-v");
+} = useBenchFilters(() => enrichedRows.value, 'ts-v');
 </script>
 
 <template>

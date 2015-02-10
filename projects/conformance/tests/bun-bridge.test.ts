@@ -1,9 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from 'vitest';
 
-import { bunRunnerReady, bunVersion } from "../src/adapters/typescript-bun/bridge.ts";
+import { bunRunnerReady, bunVersion } from '../src/adapters/typescript-bun/bridge.ts';
 
-describe("bun-bridge", () => {
-    it("reports bun readiness after pnpm install", () => {
+describe('bun-bridge', () => {
+    it('reports bun readiness after pnpm install', () => {
         if (!bunRunnerReady()) {
             expect(bunVersion()).toBeNull();
             return;

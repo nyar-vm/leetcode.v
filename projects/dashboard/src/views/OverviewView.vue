@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ArrowRight, Cog, LayoutList, Sparkles, Timer, Trophy, Users, XCircle } from "@lucide/vue";
-import { computed, defineAsyncComponent } from "vue";
+import { ArrowRight, Cog, LayoutList, Sparkles, Timer, Trophy, Users, XCircle } from '@lucide/vue';
+import { computed, defineAsyncComponent } from 'vue';
 
-import AppIcon from "../components/AppIcon.vue";
-import EmptyState from "../components/EmptyState.vue";
-import LanguageScoreboard from "../components/LanguageScoreboard.vue";
-import StatCard from "../components/StatCard.vue";
-import { useBenchReport } from "../composables/useBenchReport";
-import { enrichBenchRows } from "../composables/useProblemCatalog";
-import { formatMs } from "../utils/format";
+import AppIcon from '../components/AppIcon.vue';
+import EmptyState from '../components/EmptyState.vue';
+import LanguageScoreboard from '../components/LanguageScoreboard.vue';
+import StatCard from '../components/StatCard.vue';
+import { useBenchReport } from '../composables/useBenchReport';
+import { enrichBenchRows } from '../composables/useProblemCatalog';
+import { formatMs } from '../utils/format';
 import {
     comparableRowCount,
     computeLanguageStats,
@@ -17,9 +17,9 @@ import {
     sumCompileMs,
     sumRuntimeMs,
     topRuntimesForRow,
-} from "../utils/languageStats";
+} from '../utils/languageStats';
 
-const OverviewCharts = defineAsyncComponent(() => import("../components/OverviewCharts.vue"));
+const OverviewCharts = defineAsyncComponent(() => import('../components/OverviewCharts.vue'));
 
 const { report, rowCount, errorCount } = useBenchReport();
 
@@ -29,16 +29,16 @@ const comparableCount = computed(() => comparableRowCount(rows.value));
 const leader = computed(() => leadingLanguage(languageStats.value));
 const compileDuration = computed(() => {
     const ms = sumCompileMs(rows.value);
-    return ms === null ? "—" : `${formatMs(ms)} ms`;
+    return ms === null ? '—' : `${formatMs(ms)} ms`;
 });
 const runtimeDuration = computed(() => {
     const ms = sumRuntimeMs(rows.value);
-    return ms === null ? "—" : `${formatMs(ms)} ms`;
+    return ms === null ? '—' : `${formatMs(ms)} ms`;
 });
 
 const leaderLabel = computed(() => {
     if (!leader.value) {
-        return "—";
+        return '—';
     }
     return `${leader.value.label} · ${leader.value.winCount}`;
 });

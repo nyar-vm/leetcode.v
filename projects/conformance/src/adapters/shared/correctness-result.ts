@@ -1,8 +1,8 @@
-import type { ImplementationId } from "../ids.ts";
-import type { ProblemSpec } from "../../domain/problem.ts";
-import type { RunResult } from "../../domain/result.ts";
+import type { ImplementationId } from '../ids.ts';
+import type { ProblemSpec } from '../../domain/problem.ts';
+import type { RunResult } from '../../domain/result.ts';
 
-const ADAPTER_VERSION = "0.2.0";
+const ADAPTER_VERSION = '0.2.0';
 
 export function runResultFromReference(
     problem: ProblemSpec,
@@ -12,17 +12,17 @@ export function runResultFromReference(
     blockedReason?: string,
 ): RunResult {
     const finishedAt = new Date().toISOString();
-    const status = ref.ok ? "passed" : blockedReason ? "blocked" : "failed";
+    const status = ref.ok ? 'passed' : blockedReason ? 'blocked' : 'failed';
     return {
-        runId: "",
+        runId: '',
         problemId: problem.id,
         implementationId,
-        mode: "correctness",
+        mode: 'correctness',
         status,
         blockedReason: ref.ok ? undefined : blockedReason,
         cases: problem.tests.map((test, index) => ({
             index,
-            status: ref.ok ? "passed" : status === "blocked" ? "blocked" : "failed",
+            status: ref.ok ? 'passed' : status === 'blocked' ? 'blocked' : 'failed',
             expected: test.expected,
         })),
         diagnostics: ref.ok ? [] : [ref.stderr],
