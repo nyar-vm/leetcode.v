@@ -149,27 +149,27 @@ pnpm dashboard        # 看板 dev
 
 ### 批量 reword（`scripts/reword.mjs`）
 
-修正已提交但 message 不合规的 commit（如缺反引号、subject 带句号、误用 `TS`）：
+修正已提交但 message 不合规的 commit（如缺反引号、subject 带句号、误用 `TS`、重复 subject）：
 
 ```text
-# 1. 查看待改范围
-git log --oneline origin/dev..HEAD
+# 1. 导出 hash 映射模板（只保留要改的块，删掉其余）
+node scripts/reword.mjs --export --base origin/dev
 
-# 2. 按从旧到新顺序写消息块（块间单独一行 ---），保存为 reword.pending.txt（勿提交，已 gitignore）
+# 2. 编辑 reword.pending.txt：每个块 = 完整 hash + 新 message，块间单独一行 ---
 #    格式见 scripts/reword.example.txt
 
 # 3. 校验
-node scripts/reword.mjs --lint --file reword.pending.txt
+node scripts/reword.mjs --lint --file reword.pending.txt --base origin/dev
 node scripts/reword.mjs --lint-log --base origin/dev
 
-# 4. 预览
+# 4. 预览（只列出文件中命中的 commit，不会整段历史错位）
 node scripts/reword.mjs --dry-run --file reword.pending.txt --base origin/dev
 
 # 5. 执行（工作区须干净）
 node scripts/reword.mjs --file reword.pending.txt --base origin/dev
 ```
 
-`--base` 默认为 `origin/dev`。reword 会改写历史，仅对 **未推送** 或已协商的 `dev` 分支使用，禁止对 `master` force-push。
+`--base` 默认为 `origin/dev`。reword 会改写历史，仅对 **未推送** 或已协商的 `dev` 分支使用，禁止对 `master` force-push。旧版按顺序写 N 条 message 的格式仍可读，但已弃用，优先用 `--export` 的 hash 映射。
 
 ## 代理检索纪律
 
