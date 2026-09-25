@@ -1,1 +1,1 @@
-isPalindrome[x_] := If[x < 0 || (x != 0 && Mod[x, 10] == 0), False, IntegerDigits[x] === Reverse[IntegerDigits[x]]]
+isPalindrome[x_] := Module[{n = x, rev = 0, orig = x}, If[x < 0 || (x != 0 && Mod[x, 10] == 0) || Mod[x, 1] != 0, False, (While[n != 0, rev = rev * 10 + Mod[n, 10]; n = Quotient[n - Mod[n, 10], 10]]; orig == rev)]]

@@ -10,7 +10,7 @@
 
 | 语言 | 测例全绿 | 失败 |
 |------|----------|------|
-| Wolfram (Sxo) | 1 | 49 |
+| Wolfram (Sxo) | 2 | 48 |
 | MATLAB (Sxo) | 1 | 49 |
 
 ## Gap 频次（失败题）
@@ -20,7 +20,7 @@
 | S-004 | 2 | 循环 / 控制流 evaluate 未稳定（总类） |
 | S-006 | 1 | Wolfram `Do` / `Return` / 嵌套循环 |
 | S-008 | 1 | MATLAB `function` + `for` + `return` |
-| S-009 | 2 | Wolfram `:=` 用户函数求值为 `Null` |
+| S-009 | 1 | Wolfram `:=` 用户函数 + 标量 `While`（`palindrome-number` 余 7 大浮点测例见 S-018） |
 | S-010 | 34 | 字符串 Part / 字符访问 |
 | S-011 | 3 | MATLAB 用户函数体 `error node` |
 | S-012 | 12 | 链表（数组模拟） |
@@ -40,9 +40,9 @@
 | 4 | `median-of-two-sorted-arrays` | fail | fail | S-013 | S-013 | Error: term_not_json_surface:unevaluated_application head=extension argc=2 |
 | 5 | `longest-palindromic-substring` | fail | fail | S-010 | S-010 | Error: term_not_json_surface:unevaluated_application head=extension argc=1 |
 | 6 | `zigzag-conversion` | fail | fail | S-010 | S-010 | Error: term_not_json_surface:unevaluated_application head=extension argc=2 |
-| 7 | `reverse-integer` | fail | fail | S-009 | S-011 | Error: ATHENA_UNSUPPORTED_OPERATION details={backend=athena-vm, component=execut |
+| 7 | `reverse-integer` | pass | fail |  | S-011 |  |
 | 8 | `string-to-integer-atoi` | fail | fail | S-010 | S-010 | Error: term_not_json_surface:unevaluated_application head=extension argc=1 |
-| 9 | `palindrome-number` | fail | fail | S-009 | S-011 | Error: ATHENA_UNSUPPORTED_OPERATION details={backend=athena-vm, component=execut |
+| 9 | `palindrome-number` | partial | fail | S-018 | S-011 | 54/61 绿。7 测例为大浮点 `bindJson` VM 失败 |
 | 10 | `regular-expression-matching` | fail | fail | S-010 | S-010 | Error: term_not_json_surface:unevaluated_application head=extension argc=2 |
 | 11 | `container-with-most-water` | fail | fail | S-006 | S-008 | Error: term_not_json_surface:unevaluated_application head=extension argc=2 |
 | 12 | `integer-to-roman` | fail | fail | S-010 | S-010 | Error: mathematica(ast): error node |

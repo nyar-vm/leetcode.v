@@ -12,7 +12,7 @@
 | S-006 | Wolfram `Module` + 嵌套 `Do` + `Return` 早退 | done | `two-sum` | `@sxo/mathematica` / `sxo-dialect-mathematica` | `two-sum` 全测例绿（HostSession + 本地 native） |
 | S-007 | Wolfram 嵌套 `Table` / `Flatten` 配对枚举 | open | `two-sum` 备选扫描 | Athena VM | `ATHENA_UNSUPPORTED_OPERATION` op=234 |
 | S-008 | MATLAB `function` 内嵌套 `for` + `return` | done | `two-sum` | `@sxo/matlab` / `sxo-dialect-matlab` | `two-sum` 全测例绿 |
-| S-009 | Wolfram `:=` 用户函数在 harness 单次 evaluate 中求值为 `Null` | partial | `reverse-integer`、`palindrome-number` | `@sxo/mathematica` | `two-sum` 已绿；标量 `While` 题仍 `ATHENA_UNSUPPORTED_OPERATION` |
+| S-009 | Wolfram `:=` 用户函数 + 标量 `While`/`Module` | partial | `reverse-integer`（绿）、`palindrome-number`（54/61） | `@sxo/mathematica` `@0.0.7` | 大浮点 `bindJson` 测例仍 `ATHENA_UNSUPPORTED_OPERATION`（见 S-018） |
 | S-010 | 字符串 `Characters` / `StringTake` / `strlength` | open | `longest-common-prefix`、`valid-parentheses` | `@sxo/mathematica` / `@sxo/matlab` | 字符级 Part 与拼接 |
 | S-011 | MATLAB 用户 `function` 体（含 `while`） | open | 标量 / 数组题 | `@sxo/matlab` | `reverse-integer` 等仍 `error node` |
 | S-012 | 链表（数组模拟下标） | open | `add-two-numbers` 等 | dialect | batch 多题 `term_not_json_surface` 或求值未绿 |
@@ -31,7 +31,7 @@ catalog 前 N 题批量写入 `solvers/wolfram-sxo` / `matlab-sxo` 后，逐题 
 
 生成：`node scripts/sxo-batch-rollout.mjs`（默认 N=50，可用 `LEETCODE_BATCH_LIMIT` 覆盖）。本地需 `pnpm run link:sxo` + `sxo-framework` `pnpm run build:native`。
 
-最新（2026-09-25）：catalog 前 50 题 **Wolfram 2 / MATLAB 1 全绿**（`two-sum`、`container-with-most-water`）。
+最新（2026-09-25）：catalog 前 50 题 **Wolfram 3+ / MATLAB 1 全绿**（`two-sum`、`container-with-most-water`、`reverse-integer`；`palindrome-number` 54/61）。conformance 依赖 **npm `@sxo/*` `^0.0.7`**。
 
 ## 看板与 bench
 
