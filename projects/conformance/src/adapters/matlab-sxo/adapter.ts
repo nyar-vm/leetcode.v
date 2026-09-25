@@ -1,12 +1,15 @@
 import { collectMatlabSxoBenchEnvironment } from '../../reporting/environment.ts';
+import type { ProblemSpec } from '../../domain/problem.ts';
+import type { MeasurementPlan } from '../../domain/measurement.ts';
 import { defineSolverAdapter } from '../factory.ts';
 import { runResultFromReference } from '../shared/correctness-result.ts';
+import { invokeSxoFixedBenchmark } from '../shared/sxo-fixed-benchmark.ts';
 import { sxoRunnerReady, sxoSkipReason } from '../shared/sxo-bridge.ts';
 import { hasMatlabSxoSolver } from '../shared/sxo-solver-shared.ts';
 import { benchMatlabSxoProblem } from './bench.ts';
 import { runMatlabSxoReference } from './ref.ts';
 
-export const matlabSxoAdapter = defineSolverAdapter({
+const base = defineSolverAdapter({
     implementationId: 'matlab-sxo',
     hasSolver: hasMatlabSxoSolver,
     runnerReady: sxoRunnerReady,
@@ -24,3 +27,10 @@ export const matlabSxoAdapter = defineSolverAdapter({
         return runResultFromReference(problem, 'matlab-sxo', ref, startedAt);
     },
 });
+
+export const matlabSxoAdapter = {
+    ...base,
+    invokeBenchmark(problem: ProblemSpec, problemRoot: string, plan: MeasurementPlan) {
+        return invokeSxoFixedBenchmark('matlab-sxo', problem, benchMatlabSxoProblem, plan);
+    },
+};

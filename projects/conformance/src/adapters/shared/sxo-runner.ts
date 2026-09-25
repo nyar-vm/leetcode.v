@@ -60,13 +60,7 @@ function assertSxoTestCase(index: number, expected: unknown, args: Record<string
     }
 }
 
-function runHarnessCase(
-    evaluator: SxoHarnessEvaluator,
-    source: string,
-    symbol: string,
-    args: Record<string, unknown>,
-): unknown {
-    evaluator.evaluateDefinition(source);
+function runHarnessInvoke(evaluator: SxoHarnessEvaluator, symbol: string, args: Record<string, unknown>): unknown {
     const argNames = Object.keys(args);
     for (const name of argNames) {
         evaluator.bindJson(name, args[name]);
@@ -74,13 +68,36 @@ function runHarnessCase(
     return evaluator.invoke(symbol, argNames);
 }
 
+function runHarnessCase(
+    evaluator: SxoHarnessEvaluator,
+    source: string,
+    symbol: string,
+    args: Record<string, unknown>,
+): unknown {
+    evaluator.evaluateDefinition(source);
+    return runHarnessInvoke(evaluator, symbol, args);
+}
+
+async function runAllTests(
+    runner: SxoDialectRunner,
+    source: string,
+    symbol: string,
+    tests: { args: Record<string, unknown>; expected: unknown }[],
+    assert: boolean,
+): Promise<void> {
+    const evaluator = await runner.createEvaluator();
+    evaluator.evaluateDefinition(source);
+    for (const [index, case_] of tests.entries()) {
+        const actual = runHarnessInvoke(evaluator, symbol, case_.args);
+        if (assert) {
+            assertSxoTestCase(index, case_.expected, case_.args, actual);
+        }
+    }
+}
+
 export async function runSxoSolverOnce(problemRoot: string, runner: SxoDialectRunner): Promise<void> {
     const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, runner.dialect);
-    for (const [index, case_] of tests.entries()) {
-        const evaluator = await runner.createEvaluator();
-        const actual = runHarnessCase(evaluator, source, symbol, case_.args);
-        assertSxoTestCase(index, case_.expected, case_.args, actual);
-    }
+    await runAllTests(runner, source, symbol, tests, true);
 }
 
 export async function benchSxoSolverInProcess(
@@ -92,15 +109,14 @@ export async function benchSxoSolverInProcess(
     const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, runner.dialect);
 
     const runAll = async () => {
-        for (const [index, case_] of tests.entries()) {
-            const evaluator = await runner.createEvaluator();
-            const actual = runHarnessCase(evaluator, source, symbol, case_.args);
-            assertSxoTestCase(index, case_.expected, case_.args, actual);
-        }
+        await runAllTests(runner, source, symbol, tests, true);
     };
 
     for (let i = 0; i < warmup; i++) {
         await runAll();
+        if (warmup > 1) {
+            console.error(`[sxo-bench] warmup ${i + 1}/${warmup}`);
+        }
     }
 
     const samples: number[] = [];
@@ -108,6 +124,7 @@ export async function benchSxoSolverInProcess(
         const start = performance.now();
         await runAll();
         samples.push(performance.now() - start);
+        console.error(`[sxo-bench] sample ${i + 1}/${iterations} ${samples.at(-1)!.toFixed(0)}ms`);
     }
 
     return median(samples);

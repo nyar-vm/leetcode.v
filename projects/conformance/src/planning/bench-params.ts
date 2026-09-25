@@ -39,10 +39,11 @@ export const VALKYRIE_BENCH_PARAMS = {
 };
 
 export const SXO_BENCH_PARAMS = {
-    iterations: 50,
-    warmup: 5,
+    /** 每题 metadata.tests 较多且 N-API 重；低于 Python 的 50 迭代以免 bench 看似挂起。 */
+    iterations: 10,
+    warmup: 2,
     aggregation: 'median' as const,
     metric: 'runtime' as const,
-    /** 单 Node 进程内复用 @sxo/* frontend，只计 metadata.tests 循环。 */
+    /** 单 Node 进程内复用 `HostSession`，只计 metadata.tests 循环。 */
     timingScope: 'in-process-metadata-tests' as const,
 };
