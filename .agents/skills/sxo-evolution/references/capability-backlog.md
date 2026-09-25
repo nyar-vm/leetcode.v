@@ -7,7 +7,7 @@
 | S-001 | leetcode conformance harness（Wolfram / MATLAB sxo） | done | batch 公平对比、看板 **(Sxo)** 列 | `leetcode.v` `conformance` + `@sxo/*` | `HostSession` load → bind → invoke；`bench:wolfram-sxo` / `bench:matlab-sxo` |
 | S-002 | harness JSON ↔ `TermId`（N-API 边界） | done | `metadata.tests` 标量、null、一维 `number[]` | `sxo-napi` `json.rs` + `HostSession` | **主契约**：`bindJson` / `termToJson`；`sxo-json.ts` 仅表面显示，**不再**用于测例实参 |
 | S-003 | 数组 Part / 下标读取 | partial | `two-sum` | `@sxo/mathematica` | `{3,3}[[1]]` → `3`、`Length[{3,3}]` → `2` 可用 |
-| S-004 | 循环与早退（Medium 题骨架） | open | 双指针、嵌套扫描 | dialect lowering + matrix | 见 batch gap；`container-with-most-water` 等仍阻塞 |
+| S-004 | 循环与早退（Medium 题骨架） | partial | 双指针、嵌套扫描 | `SemanticOperator::Max`/`Min` + dialect | Wolfram `container-with-most-water` 全测例绿；MATLAB 仍受 S-011 `while` 阻塞 |
 | S-005 | Windows native optional dep 一键可装 | open | 本机 bench CI | `@sxo/sxo-win32-x64` | 与 `loadNative()` 诊断对齐 |
 | S-006 | Wolfram `Module` + 嵌套 `Do` + `Return` 早退 | done | `two-sum` | `@sxo/mathematica` / `sxo-dialect-mathematica` | `two-sum` 全测例绿（HostSession + 本地 native） |
 | S-007 | Wolfram 嵌套 `Table` / `Flatten` 配对枚举 | open | `two-sum` 备选扫描 | Athena VM | `ATHENA_UNSUPPORTED_OPERATION` op=234 |
@@ -31,7 +31,7 @@ catalog 前 N 题批量写入 `solvers/wolfram-sxo` / `matlab-sxo` 后，逐题 
 
 生成：`node scripts/sxo-batch-rollout.mjs`（默认 N=50，可用 `LEETCODE_BATCH_LIMIT` 覆盖）。本地需 `pnpm run link:sxo` + `sxo-framework` `pnpm run build:native`。
 
-最新（2026-09-25）：catalog 前 50 题 **Wolfram 1 / MATLAB 1 全绿**（`two-sum`）。
+最新（2026-09-25）：catalog 前 50 题 **Wolfram 2 / MATLAB 1 全绿**（`two-sum`、`container-with-most-water`）。
 
 ## 看板与 bench
 
