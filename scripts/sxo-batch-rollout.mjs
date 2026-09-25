@@ -29,10 +29,11 @@ const writeOnly = process.argv.includes('--write-only');
 function loadCatalogProblems() {
     const text = readFileSync(CATALOG_PATH, 'utf8');
     const problems = [];
-    const re = /{\s*id:\s*"([^"]+)",\s*title:\s*"([^"]+)",\s*questionId:\s*(\d+),/g;
+    const re =
+        /{\s*id:\s*(['"])([^'"]+)\1,\s*title:\s*(['"])([^'"]+)\3,\s*questionId:\s*(\d+),/g;
     let m;
     while ((m = re.exec(text)) !== null) {
-        problems.push({ id: m[1], title: m[2], questionId: Number(m[3]) });
+        problems.push({ id: m[2], title: m[4], questionId: Number(m[5]) });
     }
     return problems;
 }
