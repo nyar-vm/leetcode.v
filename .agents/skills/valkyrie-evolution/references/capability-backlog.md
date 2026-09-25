@@ -20,7 +20,7 @@
 
 ### V-011–V-013 专家评估后的工作包（2026-09-23）
 
-- **U-W1 / V-011，owner: nyar-language：** 保留三种 sum 身份，规范核对缺省 tag、显式 tag 混用与重值诊断；验证 GADT、match 穷尽性和跨包 tag 表。`nyar-vm.rs` `dev` 已落地：named `union` AST 拒绝、三种 sum 重名诊断、`resolve_sum_variant_tag` 统一校验与 layout、跨包 `imported_semantic_exports` 判别校验与 layout（`sum_discriminator_tests` 13 例）、GADT 变体 `result_type` 与穷尽性 lib 回归（`nominal_contract_tests` 5 例）。`--test valkyrie` 集成 harness 仍 open，端到端 runtime 验收未闭合。
+- **U-W1 / V-011，owner: nyar-language：** 保留三种 sum 身份，规范核对缺省 tag、显式 tag 混用与重值诊断；验证 GADT、match 穷尽性和跨包 tag 表。`nyar-vm.rs` `dev` 已落地：named `union` AST 拒绝、三种 sum 重名诊断、`resolve_sum_variant_tag` 统一校验与 layout、跨包 `imported_semantic_exports` 判别校验与 layout（`sum_discriminator_tests` 13 例 + `spec::nominal` 3 例）、GADT 变体 `result_type` 与穷尽性 lib 回归（`nominal_contract_tests` 5 例）、`--test valkyrie` 已恢复编译且 `spec::nominal` 37 例全过。全量 valkyrie 仍有 74 例失败（多为 control flow / MIR smoke，非 U-W1 合同）。端到端 Node runtime 验收未闭合。
 - **U-W2 / V-011，owner: core：** Option/Result 暂保留显式 tag；待 U-W1 和 Node runtime 验证后再评估移除，零回归为门禁。
 - **U-W3 / V-012，owner: nyar-language + Representation Planner：** named union 身份、活跃成员检查和无 GC ref 的固定 overlay 布局；错误成员读取须诊断失败。
 - **U-W4 / V-012，owner: nyar-emitter：** 各 target 先对无合同的 untagged union fail-fast；Wasm 编码仅在 U-W3 语义、布局及 GC trace 合同完整后实施。
