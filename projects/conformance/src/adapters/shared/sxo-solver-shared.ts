@@ -72,18 +72,26 @@ export function loadSxoSolverBundle(problemRoot: string, dialect: SxoDialect) {
     return { tests: metadata.tests, symbol, source };
 }
 
+function ensureStatementTerminator(source: string): string {
+    const trimmed = source.trimEnd();
+    if (trimmed.endsWith(';')) {
+        return trimmed;
+    }
+    return `${trimmed};`;
+}
+
 export function buildWolframProgram(source: string, symbol: string, args: Record<string, unknown>): string {
     const argList = Object.values(args)
         .map((value) => jsonToWolfram(value))
         .join(', ');
-    return `${source.trim()}\n\n${symbol}[${argList}]`;
+    return `${ensureStatementTerminator(source.trim())}\n\n${symbol}[${argList}]`;
 }
 
 export function buildMatlabProgram(source: string, symbol: string, args: Record<string, unknown>): string {
     const argList = Object.values(args)
         .map((value) => jsonToMatlab(value))
         .join(', ');
-    return `${source.trim()}\n\n${symbol}(${argList})`;
+    return `${ensureStatementTerminator(source.trim())}\n\n${symbol}(${argList})`;
 }
 
 export function runSxoTests(tests: TestCase[], evaluateCase: (args: Record<string, unknown>) => unknown): void {
