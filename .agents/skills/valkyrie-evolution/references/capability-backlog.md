@@ -20,7 +20,7 @@
 
 ### V-011–V-013 专家评估后的工作包（2026-09-23）
 
-- **U-W1 / V-011，owner: nyar-language：** 保留三种 sum 身份，规范核对缺省 tag、显式 tag 混用与重值诊断；验证 GADT、match 穷尽性和跨包 tag 表。当前已有声明索引 fallback，尚无端到端通过证据。
+- **U-W1 / V-011，owner: nyar-language：** 保留三种 sum 身份，规范核对缺省 tag、显式 tag 混用与重值诊断；验证 GADT、match 穷尽性和跨包 tag 表。`nyar-vm.rs` `dev` 已落地：named `union` AST 拒绝、三种 sum 重名诊断、`resolve_sum_variant_tag` 统一校验与 layout、lib 回归 9 例（`sum_discriminator_tests`）。GADT / 跨包 tag 表与 `--test valkyrie` 集成 harness 仍 open。
 - **U-W2 / V-011，owner: core：** Option/Result 暂保留显式 tag；待 U-W1 和 Node runtime 验证后再评估移除，零回归为门禁。
 - **U-W3 / V-012，owner: nyar-language + Representation Planner：** named union 身份、活跃成员检查和无 GC ref 的固定 overlay 布局；错误成员读取须诊断失败。
 - **U-W4 / V-012，owner: nyar-emitter：** 各 target 先对无合同的 untagged union fail-fast；Wasm 编码仅在 U-W3 语义、布局及 GC trace 合同完整后实施。
