@@ -6,8 +6,6 @@ import { problemDir } from '../../catalog/index.ts';
 import { assertTestCase } from '../../domain/assert.ts';
 import { loadProblemMetadata, requireInvoke, type TestCase } from '../../domain/metadata.ts';
 import { LEETCODE_ROOT_FROM_PACKAGE } from '../../domain/paths.ts';
-import { jsonToMatlab, jsonToWolfram } from '../shared/sxo-json.ts';
-
 export type SxoDialect = 'wolfram-sxo' | 'matlab-sxo';
 
 export type { TestCase };
@@ -70,28 +68,6 @@ export function loadSxoSolverBundle(problemRoot: string, dialect: SxoDialect) {
         throw new Error(`${dialect} 解处于阻塞状态`);
     }
     return { tests: metadata.tests, symbol, source };
-}
-
-function ensureStatementTerminator(source: string): string {
-    const trimmed = source.trimEnd();
-    if (trimmed.endsWith(';')) {
-        return trimmed;
-    }
-    return `${trimmed};`;
-}
-
-export function buildWolframProgram(source: string, symbol: string, args: Record<string, unknown>): string {
-    const argList = Object.values(args)
-        .map((value) => jsonToWolfram(value))
-        .join(', ');
-    return `${ensureStatementTerminator(source.trim())}\n\n${symbol}[${argList}]`;
-}
-
-export function buildMatlabProgram(source: string, symbol: string, args: Record<string, unknown>): string {
-    const argList = Object.values(args)
-        .map((value) => jsonToMatlab(value))
-        .join(', ');
-    return `${ensureStatementTerminator(source.trim())}\n\n${symbol}(${argList})`;
 }
 
 export function runSxoTests(tests: TestCase[], evaluateCase: (args: Record<string, unknown>) => unknown): void {

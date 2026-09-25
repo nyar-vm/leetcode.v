@@ -1,18 +1,11 @@
 import { median } from '@valkyrie-language/vcc/benchmark';
 
-import { createMatlabEvaluator, createWolframEvaluator } from './sxo-bridge.ts';
-import { parseMatlabSurface, parseWolframSurface } from './sxo-json.ts';
-import { buildMatlabProgram, buildWolframProgram, loadSxoSolverBundle, type SxoDialect } from './sxo-solver-shared.ts';
-
-export type SxoEvaluator = {
-    evaluate(program: string): string;
-};
+import { createMatlabHarnessEvaluator, createWolframHarnessEvaluator, type SxoHarnessEvaluator } from './sxo-bridge.ts';
+import { loadSxoSolverBundle, type SxoDialect } from './sxo-solver-shared.ts';
 
 export type SxoDialectRunner = {
     dialect: SxoDialect;
-    createEvaluator: () => Promise<SxoEvaluator>;
-    buildProgram: (source: string, symbol: string, args: Record<string, unknown>) => string;
-    parseSurface: (rendered: string) => unknown;
+    createEvaluator: () => Promise<SxoHarnessEvaluator>;
 };
 
 function isTwoSumArgs(args: Record<string, unknown>): args is { nums: number[]; target: number } {
@@ -67,14 +60,25 @@ function assertSxoTestCase(index: number, expected: unknown, args: Record<string
     }
 }
 
+function runHarnessCase(
+    evaluator: SxoHarnessEvaluator,
+    source: string,
+    symbol: string,
+    args: Record<string, unknown>,
+): unknown {
+    evaluator.evaluateDefinition(source);
+    const argNames = Object.keys(args);
+    for (const name of argNames) {
+        evaluator.bindJson(name, args[name]);
+    }
+    return evaluator.invoke(symbol, argNames);
+}
 
 export async function runSxoSolverOnce(problemRoot: string, runner: SxoDialectRunner): Promise<void> {
     const { tests, symbol, source } = loadSxoSolverBundle(problemRoot, runner.dialect);
     for (const [index, case_] of tests.entries()) {
         const evaluator = await runner.createEvaluator();
-        const program = runner.buildProgram(source, symbol, case_.args);
-        const rendered = evaluator.evaluate(program);
-        const actual = runner.parseSurface(rendered);
+        const actual = runHarnessCase(evaluator, source, symbol, case_.args);
         assertSxoTestCase(index, case_.expected, case_.args, actual);
     }
 }
@@ -90,9 +94,7 @@ export async function benchSxoSolverInProcess(
     const runAll = async () => {
         for (const [index, case_] of tests.entries()) {
             const evaluator = await runner.createEvaluator();
-            const program = runner.buildProgram(source, symbol, case_.args);
-            const rendered = evaluator.evaluate(program);
-            const actual = runner.parseSurface(rendered);
+            const actual = runHarnessCase(evaluator, source, symbol, case_.args);
             assertSxoTestCase(index, case_.expected, case_.args, actual);
         }
     };
@@ -113,14 +115,10 @@ export async function benchSxoSolverInProcess(
 
 export const WOLFRAM_SXO_RUNNER: SxoDialectRunner = {
     dialect: 'wolfram-sxo',
-    createEvaluator: createWolframEvaluator,
-    buildProgram: buildWolframProgram,
-    parseSurface: parseWolframSurface,
+    createEvaluator: createWolframHarnessEvaluator,
 };
 
 export const MATLAB_SXO_RUNNER: SxoDialectRunner = {
     dialect: 'matlab-sxo',
-    createEvaluator: createMatlabEvaluator,
-    buildProgram: buildMatlabProgram,
-    parseSurface: parseMatlabSurface,
+    createEvaluator: createMatlabHarnessEvaluator,
 };

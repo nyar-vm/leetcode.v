@@ -22,7 +22,7 @@ const CONFORMANCE_ROOT = join(LEETCODE_ROOT, 'projects', 'conformance');
 const PROBLEMS_ROOT = join(LEETCODE_ROOT, 'projects', 'problems');
 const REPORT_DIR = join(CONFORMANCE_ROOT, 'reports');
 const GAP_PATH = join(REPORT_DIR, 'sxo-batch-gap.md');
-const CATALOG_PATH = join(CONFORMANCE_ROOT, 'src', 'catalog.generated.ts');
+const CATALOG_PATH = join(CONFORMANCE_ROOT, 'src', 'catalog', 'generated.ts');
 
 const writeOnly = process.argv.includes('--write-only');
 

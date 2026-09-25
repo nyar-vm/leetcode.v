@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 
+import type { NativeHostSession } from '@sxo/core';
+
 const requireFromHere = createRequire(import.meta.url);
 
 export type SxoPackageStatus = {
@@ -61,42 +63,38 @@ export function sxoSkipReason(): string | null {
     return sxoPackagesStatus().skipReason;
 }
 
-export type WolframEvaluator = {
-    evaluate(program: string): string;
+export type SxoHarnessEvaluator = {
+    evaluateDefinition(source: string): void;
+    bindJson(name: string, value: unknown): void;
+    invoke(symbol: string, argNames: string[]): unknown;
 };
 
-export type MatlabEvaluator = {
-    evaluate(program: string): string;
-};
+async function loadHostSession(dialect: 'mathematica' | 'matlab'): Promise<NativeHostSession> {
+    const { loadNative } = await import('@sxo/core');
+    const { HostSession } = loadNative();
+    return new HostSession(dialect);
+}
 
-export async function createWolframEvaluator(): Promise<WolframEvaluator> {
-    const mod = (await import('@sxo/mathematica')) as {
-        Mathematica: {
-            create: (options?: { autoSimplify?: boolean }) => {
-                evaluate: (input: string) => { toWolfram: () => string };
-            };
-        };
-    };
-    const frontend = mod.Mathematica.create({ autoSimplify: false });
+function harnessEvaluator(session: NativeHostSession): SxoHarnessEvaluator {
     return {
-        evaluate(program: string): string {
-            return frontend.evaluate(program).toWolfram();
+        evaluateDefinition(source: string): void {
+            session.evaluateDefinition(source, { strategy: 'none' });
+        },
+        bindJson(name: string, value: unknown): void {
+            session.bindJson(name, JSON.stringify(value));
+        },
+        invoke(symbol: string, argNames: string[]): unknown {
+            const expr = session.invoke(symbol, argNames, { strategy: 'none' });
+            const json = session.termToJson(expr);
+            return JSON.parse(json) as unknown;
         },
     };
 }
 
-export async function createMatlabEvaluator(): Promise<MatlabEvaluator> {
-    const mod = (await import('@sxo/matlab')) as {
-        Matlab: {
-            create: (options?: { autoSimplify?: boolean }) => {
-                evaluate: (input: string) => { toMatlab: () => string };
-            };
-        };
-    };
-    const frontend = mod.Matlab.create({ autoSimplify: false });
-    return {
-        evaluate(program: string): string {
-            return frontend.evaluate(program).toMatlab();
-        },
-    };
+export async function createWolframHarnessEvaluator(): Promise<SxoHarnessEvaluator> {
+    return harnessEvaluator(await loadHostSession('mathematica'));
+}
+
+export async function createMatlabHarnessEvaluator(): Promise<SxoHarnessEvaluator> {
+    return harnessEvaluator(await loadHostSession('matlab'));
 }
