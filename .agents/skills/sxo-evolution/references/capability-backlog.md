@@ -21,7 +21,7 @@
 | S-015 | 回溯 / 递归 DFS | open | `generate-parentheses` 等 | Athena VM | 深度与组合枚举 |
 | S-016 | 哈希 / `Association` / `containers.Map` | open | `roman-to-integer`、`group-anagrams` | frontend | 映射构造与查表 |
 | S-017 | 正则 / 通配 / DP 表 | open | `regular-expression-matching` 等 | dialect | Hard 题簇 |
-| S-018 | harness `termToJson` 结果投影 | open | 多数 batch 题 | `sxo-napi` `json.rs` | `term_not_json_surface`：引擎结果非标量/扁平 `number[]` 时断言失败 |
+| S-018 | harness `termToJson` 结果投影 | partial | 多数 batch 题 | `sxo-napi` `json.rs` | 错误细分 `unevaluated_application`；根因多为上游未求值，非 JSON 类型缺失 |
 
 ## 批量补题 Gap 报告
 
@@ -72,7 +72,7 @@ Flatten[Table[{i-1,j-1},{i,1,2},{j,2,2}],1]
 ## 上游验收标准（切片完成后）
 
 1. `two-sum`：`metadata.tests` 全绿（**已达成**）。
-2. `pnpm bench:wolfram-sxo --id two-sum` / `pnpm bench:matlab-sxo --id two-sum` 写出非空 `runtimeMs`。
+2. **`two-sum` bench 已绿**：Wolfram ~13.6s / MATLAB ~13.9s 每轮（80 测例）；`SXO_BENCH_PARAMS` 10 迭代 + 2 warmup，stderr 有 `[sxo-bench]` 进度。
 3. 看板 **语言综合成绩** 中 Wolfram (Sxo) / MATLAB (Sxo) **有效样本 ≥ 1**（**已具备 `two-sum`**，随题解扩面再涨）。
 
 ## 新增条目模板

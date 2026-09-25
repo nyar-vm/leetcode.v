@@ -102,6 +102,9 @@ function classifyGap(dialect, err) {
         return null;
     }
     const e = err.toLowerCase();
+    if (e.includes('term_not_json_surface')) {
+        return 'S-018';
+    }
     if (e.includes('未安装') || e.includes('@sxo')) {
         return 'S-005';
     }
@@ -198,6 +201,7 @@ function renderGapMarkdown(rows, batchSize, generatedAt) {
         'S-015': '回溯 / 递归 / DFS',
         'S-016': '哈希 / 关联结构',
         'S-017': '正则 / 通配 / DP 表',
+        'S-018': 'harness `termToJson` 投影（多为未求值 `Application`）',
     };
     for (const [id, count] of hist) {
         lines.push(`| ${id} | ${count} | ${gapNotes[id] ?? '见逐题表'} |`);
